@@ -21,5 +21,8 @@ JMapper specifically allows:
  * many to one 
 
 * to perform recursive mapping (mapped objects into other objects) 
+
 * to configure the mapping using the annotation and / or xml
-* to write quick and simple xml configuration file through a series of utility methods
+
+* to write quick and simple xml configuration file through a series of 
+utility methods
