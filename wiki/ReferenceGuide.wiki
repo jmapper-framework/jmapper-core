@@ -36,4 +36,4 @@ class Destination{                      class Source{
     // getter and setter...                 // getter and setter...
 }                                       }
 }}}
-As mentioned in the introduction JMapper allows you to configure the mapping using both annotation that XML. In the next chapter we will learn to configure classes with annotation and especially with '@JMap'.
+As mentioned in the introduction JMapper allows you to configure the mapping using both annotation that XML. In the next chapter we will learn to configure classes with annotation and especially with {{{@JMap}}}.
