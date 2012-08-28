@@ -84,3 +84,32 @@ new JMapper <Destination, Source>(Destination.class, Source.class, ChooseConfig.
 }}}
 ||{{{ChooseConfig.SOURCE}}}||it evaluates the configuration of Source||
 ||{{{ChooseConfig.DESTINATION}}}||it evaluates the configuration of Destination||
+
+= Implicit relations = 
+== Many to One ==
+== One to Many ==
+= @JMap variables =
+== Value ==
+== Value and Classes ==
+== Attributes ==
+== Attributes and Classes ==
+== Classes ==
+= Explicit relations =
+= RelationalJMapper =
+== Many to One ==
+== One to Many ==
+= Design by contract =
+= Enrichment =
+== NullPointerControl ==
+== MappingType ==
+== GetDestination method ==
+== ManyToOne and OneToMany method ==
+= Implicit conversions =
+= About raw types =
+= Paths editing =
+= JMapper Configuration =
+= Spring Configuration =
+= Maven Configuration =
+= Installation command =
+= Xml Configuration =
+
