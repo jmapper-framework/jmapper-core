@@ -1,3 +1,5 @@
+<wiki:toc max_depth="1" />
+
 = Overview of JMapper Framework =
 
 Add your content here.
