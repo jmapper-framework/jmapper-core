@@ -63,9 +63,10 @@ Once set up, we go immediately to a practical example:
 {{{
 Source source = new Source("id", "sourceField", "other");
 
-JMapper <Destination, Souce> jmapper = new JMapper<Destination, Source>(Destination.class, Source.class);
+JMapper <Destination, Souce> jmapper = new JMapper <Destination, Source>(Destination.class, Source.class);
 
 Destination destination = jmapper.getDestination(source);
 
 System.out.println(destination);
 }}}
+The class will be using is JMapper, takes as input two classes: the first from the left, belonging to the Destination and the second to Source, then just invoke the method getDestination passing an instance of Source to create an instance of Destination.
