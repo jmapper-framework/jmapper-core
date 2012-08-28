@@ -11,7 +11,7 @@ As the rule may seem elementary, enclose in a single framework a potentially unl
 JMapper aims not only coverage requirements but also to make it as easy as possible to use, all with performance equivalent or superior to the static mapping. 
   
 JMapper specifically allows: 
- *- to perform complex mapping (Collection, Map, Array, InnerClass, etc...) 
+ *- to perform complex mapping (Collection, Map, Array, inner classes, etc...) 
    *- to manage implicit and explicit relationships of various types: 
    *- one to one 
    *- one to many 
