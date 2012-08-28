@@ -58,3 +58,14 @@ class Destination{
 }}}
 Only the configured fields will be considered in the mapping.
 Without value (eg id), it indicates that the names of the target field and the mapped field are equal. If the names are different, you must define the value (eg sourceField).
+
+Once set up, we go immediately to a practical example:
+{{{
+Source source = new Source("id", "sourceField", other");
+
+JMapper <Destination, Souce> jmapper = new JMapper<Destination, Source>(Destination.class, Source.class);
+
+Destination destination = jmapper.getDestination(source);
+
+System.out.println(destination);
+}}}
