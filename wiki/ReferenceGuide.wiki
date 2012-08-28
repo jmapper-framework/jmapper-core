@@ -61,7 +61,7 @@ Without value (eg id), it indicates that the names of the target field and the m
 
 Once set up, we go immediately to a practical example:
 {{{
-Source source = new Source("id", "sourceField", other");
+Source source = new Source("id", "sourceField", "other");
 
 JMapper <Destination, Souce> jmapper = new JMapper<Destination, Source>(Destination.class, Source.class);
 
