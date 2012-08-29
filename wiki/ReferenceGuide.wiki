@@ -186,3 +186,12 @@ JMapper<Destination3, Source> jmapper3 = new JMapper<Destination3, Source>(Desti
 Destination3 destination3 = jmapper3.getDestination(source);
 }}}
 then, as in the many to one, with a single configuration, you can interface a Source class with several Destination classes.
+
+= @JMap variables =
+
+The cases just described are common but not fully satisfy the need.
+For this reason, the annotation @JMap has two other parameters, and are *attributes* and *classes* both vectors.
+attributes contains the identifiers of the target fields, classes their classes.
+In summary, the parameters that the annotation makes available are three:
+value, attributes and classes.
+In the next chapters we will see what combinations of these three parameters are allowed and their usefulness.
