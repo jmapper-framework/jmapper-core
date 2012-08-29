@@ -176,13 +176,13 @@ class Destination3{
 Sample code:
 {{{
 Source source = new Source("id", "sourceField", "other");
-JMapper<Destination1, Source> jmapper = new JMapper<Destination1, Source>(Destination.class, Source1.class);
-Destination1 destination1 = jmapper.getDestination(source);
+JMapper<Destination1, Source> jmapper1 = new JMapper<Destination1, Source>(Destination.class, Source.class);
+Destination1 destination1 = jmapper1.getDestination(source);
 
-JMapper<Destination2, Source> jmapper = new JMapper<Destination2, Source>(Destination.class, Source.class);
-Destination2 destination2 = jmapper.getDestination(source);
+JMapper<Destination2, Source> jmapper2 = new JMapper<Destination2, Source>(Destination.class, Source.class);
+Destination2 destination2 = jmapper2.getDestination(source);
 
-JMapper<Destination3, Source> jmapper = new JMapper<Destination3, Source>(Destination3.class, Source.class);
-Destination3 destination3 = jmapper.getDestination(source);
+JMapper<Destination3, Source> jmapper3 = new JMapper<Destination3, Source>(Destination3.class, Source.class);
+Destination3 destination3 = jmapper3.getDestination(source);
 }}}
 then, as in the many to one, with a single configuration, you can interface a Source class with several Destination classes.
