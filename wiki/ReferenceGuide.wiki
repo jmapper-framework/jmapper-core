@@ -264,3 +264,10 @@ class AnnotatedClass{
     // getter and setter...                
 }                                     
 }}}
+RelationalJMapper takes as input only the configured class:
+{{{
+RelationalJMapper<AnnotatedClass> rm = new RelationalJMapper<AnnotatedClass>(AnnotatedClass.class);
+}}}
+
+== Many to One ==
+== One to Many ==
