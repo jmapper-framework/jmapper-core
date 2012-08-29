@@ -124,5 +124,18 @@ class Destination{                      class Source2{
                                             // getter and setter...  
                                         }                                
 }}}
+Sample code:
+{{{
+Source1 source1 = new Source1("id1", "sourceField1", "other1");
+JMapper<Destination, Source1> jmapper = new JMapper<Destination, Source1>(Destination.class, Source1.class);
+Destination destination = jmapper.getDestination(source1);
 
+Source2 source2 = new Source2("id2", "sourceField2", "other2");
+JMapper<Destination, Source2> jmapper = new JMapper<Destination, Source2>(Destination.class, Source2.class);
+Destination destination = jmapper.getDestination(source2);
+
+Source3 source3 = new Source3("id3", "sourceField3", "other3");
+JMapper<Destination, Source3> jmapper = new JMapper<Destination, Source3>(Destination.class, Source3.class);
+Destination destination = jmapper.getDestination(source3);
+}}}
 == One to Many ==
