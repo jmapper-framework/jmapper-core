@@ -241,3 +241,26 @@ The equality of the mapped field and the target field can be specified with an e
 @JMap(attributes = {"field1", "", "field3"}
          classes = {Source1.class, Source2.class, Source3.class})
 }}}
+
+= Explicit Relations = 
+
+In this first part we have seen how JMapper will define relations one-to-many and many-to-one with a single configuration, this approach is useful when you are not aware of classes that may use them, but this way the developer is bound to instantiate whenever JMapper passing in input both classes.
+
+To overcome this, the framework exposes the RelationalJMapper class.
+To take advantage of this, you must define, for each mapped field, the target classes of the mapping, as shown below.
+{{{
+class AnnotatedClass{                      
+    
+    @JMap(attributes = {"field1Class1", "field1Class2", "field1Class3"}
+          classes    = {Class1.class, Class2.class, Class3.class})
+    private String field1;                      
+    @JMap(attributes = {"field2Class1", "field2Class2", "field2Class3"}
+          classes    = {Class1.class, Class2.class, Class3.class})
+    private String field2;       
+    @JMap(attributes = {"field3Class1", "field3Class2", "field3Class3"}
+          classes    = {Class1.class, Class2.class, Class3.class})
+    private String field3;                  
+
+    // getter and setter...                
+}                                     
+}}}
