@@ -220,10 +220,12 @@ If the identifier of the target field is identical to that of the mapped field, 
 @JMap(classes = {Source1.class, Source2.class, Source3.class})
 }}}
 
-== Valued and Classes ==
+== Value and Classes ==
 
 This combination allows you to limit the association between the mapped field and the target field to a defined set of classes.
-{{{@JMap(value = "destinationField", classes = {Destination.class})}}}
+{{{
+@JMap(value = "destinationField", classes = {Destination.class})
+}}}
 
 == Attributes and Classes ==
 
