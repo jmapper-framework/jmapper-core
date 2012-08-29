@@ -226,3 +226,8 @@ To clarify the association between the mapped field and other fields belonging t
          classes = {Source1.class, Source2.class, Source3.class})
 }}}
 In this specific example JMapper recognizes the association that exists between the mapped field with the field "field1" of the Source class, with the field "field2" of the Source2 class and with the field "field3" of the Source3 class.
+The equality of the mapped field and the target field can be specified with an empty string "". For example:
+{{{
+@JMap(attributes = {"field1", "", "field3"}
+         classes = {Source1.class, Source2.class, Source3.class})
+}}}
