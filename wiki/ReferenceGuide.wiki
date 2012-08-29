@@ -86,5 +86,13 @@ new JMapper <Destination, Source>(Destination.class, Source.class, ChooseConfig.
 ||{{{ChooseConfig.DESTINATION}}}||it evaluates the configuration of Destination||
 
 = Implicit relations = 
+
+Mapping a class with another in this way is simple and intuitive, also observing the previous configurations, show an important feature: they are not declared classes, allowing various features such as one to many and many-to-one implicit relationships.
+These features allow to greatly reduce the amount of configurations in case you want to map an object with many others.
+
 == Many to One ==
+
+The Many to One relationship is obtained when Destination is configured, giving the possibility to different Source classes, to instantiate it.
+The following example will clarify any doubt.
+
 == One to Many ==
