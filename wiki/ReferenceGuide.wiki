@@ -93,6 +93,36 @@ These features allow to greatly reduce the amount of configurations in case you 
 == Many to One ==
 
 The Many to One relationship is obtained when Destination is configured, giving the possibility to different Source classes, to instantiate it.
+
 The following example will clarify any doubt.
+{{{
+                                        class Source1{
+    
+                                            private String id;
+                                            private String sourceField;
+                                            private String other;
+                     
+                                            // getter and setter...  
+                                        }    
+ 
+class Destination{                      class Source2{
+    @JMap
+    private String id;                      private String id;
+    @Jmap("sourceField")                    private String sourceField;
+    private String destinationField;        private String other;
+    private String other;                   
+                                            // getter and setter...  
+    // getter and setter...             }    
+}   
+
+                                        class Source3{
+     
+                                            private String id;
+                                            private String sourceField;
+                                            private String other;
+                     
+                                            // getter and setter...  
+                                        }                                
+}}}
 
 == One to Many ==
