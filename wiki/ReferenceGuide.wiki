@@ -1,7 +1,5 @@
 #labels Featured
 <wiki:toc max_depth="2" />
-<g:plusone size="medium"></g:plusone>
-#sidebar TableOfContents
 
 = Overview of JMapper Framework =
 
@@ -274,3 +272,4 @@ RelationalJMapper<AnnotatedClass> rm = new RelationalJMapper<AnnotatedClass>(Ann
 
 == Many to One ==
 == One to Many ==
+<g:plusone size="medium"></g:plusone>
