@@ -18,15 +18,19 @@ This enumeration allows you to define which mode of mapping to apply.
 This feature is useful when you want to enrich destination.
 It can be used for both instances.
 The values of {{{MappingType }}} are:
+
 ||{{{MappingType .ALL_FIELDS}}}||all fields will be included in the mapping||
 ||{{{MappingType .ONLY_VALUED_FIELDS}}}||only valued fields will be included in the mapping||
 ||{{{MappingType .ONLY_NULL_FIELDS}}}||only null fields will be included in the mapping||
+
 the possible combinations are summarized in the following table:
+
 {{{
 destinationField = "DESTINATION"
 sourceField = "SOURCE"
 }}}
-||Destination MappingType||Source MappingType||Destination field final value||
+
+||Destination !MappingType||Source !MappingType||Destination field final value||
 ||ALL_FIELDS||ALL_FIELDS||"SOURCE"||
 ||ALL_FIELDS||ALL_FIELDS||"SOURCE"||
 ||ALL_FIELDS||ALL_FIELDS||"SOURCE"||
