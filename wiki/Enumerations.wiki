@@ -2,6 +2,15 @@
 
 = Enumerations =
 
+There are two enumerations that help the developer to simplify the work and they are: {{{NullPointerControl}}} and {{{MappingType}}}.
+This enumerations are passed as input to {{{getDestination}}} method.
+
 == !NullPointerControl ==
+This enumeration verifies that the objects passed in input are valued, if not, a null will be returned.
+The values of {{{NullPointerControl}}} are:
+||{{{NullPointerControl.DESTINATION}}}||only destination will be controlled||
+||{{{NullPointerControl.SOURCE}}}||only source will be controlled||
+||{{{NullPointerControl.ALL}}}||both instances will be checked||
+||{{{NullPointerControl.NOT_ANY}}}||neither||
 
 == !MappingType ==
