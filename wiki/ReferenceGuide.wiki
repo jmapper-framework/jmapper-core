@@ -1,4 +1,3 @@
-#labels Featured
 #sidebar TableOfContents
 
 = Overview of JMapper Framework =
