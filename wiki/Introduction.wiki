@@ -76,7 +76,7 @@ The annotations, as mentioned previously, can be used in both classes, the resul
 
 = JMapper constructors =
 
-If both classes are configured, the framework will consider the configuration of the Destination Class. If you want to define which configuration to be analyzed, simply pass to the constructor the ChooseConfig enumeration.
+If both classes are configured, the framework will consider the configuration of the Destination Class. If you want to define which configuration to be analyzed, simply pass to the constructor the {{{ChooseConfig}}} enumeration.
 {{{
 new JMapper <Destination, Source>(Destination.class, Source.class, ChooseConfig.SOURCE);
 }}}
