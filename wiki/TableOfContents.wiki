@@ -1,1 +1,4 @@
 * [Introduction Introduction]
+* [ImplicitRelations Implicit relations]
+* [JMapVariables @JMap variables]
+* [ExplicitRelations Explicit relations]
