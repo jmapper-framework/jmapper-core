@@ -9,6 +9,6 @@
    * [JMapVariables#Value Value]
    * [JMapVariables#Attributes Attributes]
    * [JMapVariables#Classes Classes]
-   * [JMapVariables#Value_and_classes Value and Classes]
-   * [JMapVariables#Attributes_and_classes Attributes and Classes]
+   * [JMapVariables#Value_and_Classes Value and Classes]
+   * [JMapVariables#Attributes_and_Classes Attributes and Classes]
  * [ExplicitRelations Explicit relations]
