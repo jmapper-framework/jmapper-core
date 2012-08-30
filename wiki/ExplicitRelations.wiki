@@ -51,3 +51,35 @@ AnnotatedClass [field1=field1Class2, field2=field2Class2, field3=field3Class2]
 AnnotatedClass [field1=field1Class3, field2=field2Class3, field3=field3Class3]
 }}}
 == One to Many ==
+The method OneToMany instead allows us to define the configured class, passed to the constructor, as a source class and the target classes as destination classes.
+AnnotatedClass in this example is the Source class and classes Class1, Class2 and Class3 are classes Destination, is still required to explain the instance to be created and you can do the following:
+{{{
+relationalJMapper.setDestinationClass(Class1.class)
+                 .oneToMany(annotatedClass);
+}}}
+Sample code:
+{{{
+AnnotatedClass annotatedClass = new AnnotatedClass("field1", "field2", "field3");
+RelationalJMapper<AnnotatedClass> rm = new RelationalJMapper<AnnotatedClass>(AnnotatedClass.class);
+
+Class1 class1 = rm.setDestinationClass(Class1.class)
+                  .oneToMany(annotatedClass);
+
+System.out.println(class1);
+
+Class2 class2 = rm.setDestinationClass(Class2.class)
+                  .oneToMany(annotatedClass);
+
+System.out.println(class2);
+
+Class3 class3 = rm.setDestinationClass(Class3.class)
+                  .oneToMany(annotatedClass);
+
+System.out.println(class3);
+}}}
+Outout:
+{{{
+Class1[field1Class1=field1, field2Class1=field2, field3Class1=field3]
+Class2[field1Class2=field1, field2Class2=field2, field3Class2=field3]
+Class3[field1Class3=field1, field2Class3=field2, field3Class3=field3]
+}}}
