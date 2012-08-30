@@ -1,3 +1,7 @@
-#summary This page describe the getDestination method
+#summary This page describe the enumerations
 
-= !GetDestination method =
+= Enumerations =
+
+== NullPointerControl ==
+
+== MappingType ==
