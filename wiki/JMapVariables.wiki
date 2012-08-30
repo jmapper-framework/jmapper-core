@@ -1,0 +1,54 @@
+= @JMap variables =
+
+The cases just described are common but not fully satisfy the need.
+For this reason, the annotation @JMap has two other parameters, and are *attributes* and *classes* both vectors.
+
+attributes contains the identifiers of the target fields, classes their classes.
+
+In summary, the parameters that the annotation makes available are three:
+value, attributes and classes.
+In the next chapters we will see what combinations of these three parameters are allowed and their usefulness.
+
+== Value ==
+
+Value is the default parameter that you may omit to write, if used alone.
+{{{
+@JMap("targetFieldName") or @JMap(value = "targetFieldName")
+}}}
+
+== Attributes ==
+
+Can associate the mapped field to different target field.
+{{{
+@JMap(attributes = {"field1", "field2", "field3"})
+}}}
+This configuration may lead to undesirable results in the case there are multiple matches between the identifiers declared in attributes and the fields of the target class, in this case JMapper considers valid the first field that respects the correspondence. This use is recommended only if you are certain of the uniqueness of the identifiers defined.
+
+== Classes ==
+
+If the identifier of the target field is identical to that of the mapped field, and you want to limit the association to a defined set of classes, just use classes.
+{{{
+@JMap(classes = {Source1.class, Source2.class, Source3.class})
+}}}
+
+== Value and Classes ==
+
+This combination allows you to limit the association between the mapped field and the target field to a defined set of classes.
+{{{
+@JMap(value = "destinationField", classes = {Destination.class})
+}}}
+
+== Attributes and Classes ==
+
+To clarify the association between the mapped field and other fields belonging to different classes, you can simply make a joint use of attributes and classes.
+{{{
+@JMap(attributes = {"field1", "field2", "field3"}
+         classes = {Source1.class, Source2.class, Source3.class})
+}}}
+In this specific example JMapper recognizes the association that exists between the mapped field with the field "field1" of the Source class, with the field "field2" of the Source2 class and with the field "field3" of the Source3 class.
+
+The equality of the mapped field and the target field can be specified with an empty string "". For example:
+{{{
+@JMap(attributes = {"field1", "", "field3"}
+         classes = {Source1.class, Source2.class, Source3.class})
+}}}
