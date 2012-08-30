@@ -15,5 +15,5 @@
    * [ExplicitRelations#Many_to_One Many to One]
    * [ExplicitRelations#One_to_Many One to Many]
  * [Enumerations Enumerations]
-   * [Enumerations #NullPointerControl NullPointerControl]
-   * [Enumerations #MappingType MappingType]
+   * [Enumerations#NullPointerControl NullPointerControl]
+   * [Enumerations#MappingType MappingType]
