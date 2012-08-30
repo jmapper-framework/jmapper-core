@@ -26,4 +26,6 @@ RelationalJMapper<AnnotatedClass> rm = new RelationalJMapper<AnnotatedClass>(Ann
 }}}
 
 == Many to One ==
+Using the method ManyToOne will indicate to the framework that the configured class, passed to the constructor, is the destination class, while target classes become the sources.
+
 == One to Many ==
