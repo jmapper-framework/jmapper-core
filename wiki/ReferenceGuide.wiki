@@ -1,4 +1,6 @@
 #labels Featured
+#sidebar TableOfContents
+
 = Overview of JMapper Framework =
 
 Currently, there are many frameworks that can significantly reduce the workload, leading mainly two major benefits: *robustness* and *productivity*. 
