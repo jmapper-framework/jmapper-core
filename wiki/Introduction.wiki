@@ -1,0 +1,84 @@
+= Overview of JMapper Framework =
+
+Currently, there are many frameworks that can significantly reduce the workload, leading mainly two major benefits: *robustness* and *productivity*. 
+Among the most important we can mention Hibernate, Spring, Struts, and other more recent as Vaadin, Spring Roo, Grails ..., thanks to them the mechanical work is reduced to a minimum. 
+However, none of these automates a common feature, present in all J2EE applications, the *mapping*. 
+The mapping is a mechanical operation that almost 100%, in medium to large applications, including development, testing and bug fixing, reaches a weight is certainly not negligible. 
+As the rule may seem elementary, enclose in a single framework a potentially unlimited number of combinations, mapping recursive addition of logic and other features, makes its implementation very complex and questionable compromises, such as poor performance, covering a limited features, etc... . 
+
+JMapper aims not only coverage requirements but also to make it as easy as possible to use, all with performance equivalent or superior to the static mapping. 
+  
+JMapper specifically allows: 
+ *- to perform complex mapping (Collection, Map, Array, inner classes, etc...) 
+   *- to manage implicit and explicit relationships of various types: 
+   *- one to one 
+   *- one to many 
+   *- many to one 
+ *- to perform recursive mapping (mapped objects into other objects) 
+ *- to configure the mapping using the annotation and / or xml
+ *- to write quick and simple xml configuration file through a series of utility methods
+
+= Preface =
+
+Before describing the features of the framework is good to do a little introduction: the *Destination* is the instance that captures the data, the *Source* is the instance that contains the data, the goal is to get the Destination starting from the Source.
+The configurations are associated with the instance variables and may be present in the Destination and Source, then we will call *target field* the  recipient field and *mapped field* the configured field.
+As a prerequisite classes used for mapping must comply with the Javabean conventions http://en.wikipedia.org/wiki/JavaBean.
+below shows the classes that will be used in the following examples:
+{{{
+class Destination{                      class Source{
+
+    private String id;                      private String id;
+    private String destinationField;        private String sourceField;
+    private String other;                   private String other;
+
+    // getter and setter...                 // getter and setter...
+}                                       }
+}}}
+As mentioned in the introduction, JMapper allows you to configure the mapping using both annotations and XML. In the next chapter we will learn to configure classes with annotation and especially with {{{@JMap}}}.
+
+*IMPORTANT!* _the XML configuration has greater visibility of the equivalent annotation_
+
+= @JMap =
+
+The annotation used to configure the single field is {{{@JMap}}}, it has several parameters, including: value.
+Value is the default parameter of the annotation and therefore it is not necessary to explain it if used individually.
+{{{
+class Destination{                      
+    
+    @JMap 
+    private String id;                      
+    @JMap("sourceField") 
+    private String destinationField;       
+    private String other;                  
+
+    // getter and setter...                
+}                                     
+}}}
+Only the configured fields will be considered in the mapping.
+Without value (eg id), it indicates that the names of the target field and the mapped field are equal. If the names are different, you must define the value (eg sourceField).
+
+Once set up, we go immediately to a practical example:
+{{{
+Source source = new Source("id", "sourceField", "other");
+
+JMapper <Destination, Souce> jmapper = new JMapper <Destination, Source>(Destination.class, Source.class);
+
+Destination destination = jmapper.getDestination(source);
+
+System.out.println(destination);
+}}}
+The class will be using is JMapper, takes as input two classes: the first from the left, belonging to the Destination and the second to Source, then just invoke the method getDestination passing an instance of Source to create an instance of Destination.
+The output below shows the fields of the bean destination.
+{{{
+Destination [id=id, destinationField=source field, other=null]
+}}}
+The annotations, as mentioned previously, can be used in both classes, the result that is obtained is the same.
+
+= JMapper constructors =
+
+If both classes are configured, the framework will consider the configuration of the Destination Class. If you want to define which configuration to be analyzed, simply pass to the constructor the ChooseConfig enumeration.
+{{{
+new JMapper <Destination, Source>(Destination.class, Source.class, ChooseConfig.SOURCE);
+}}}
+||{{{ChooseConfig.SOURCE}}}||it evaluates the configuration of Source||
+||{{{ChooseConfig.DESTINATION}}}||it evaluates the configuration of Destination||
