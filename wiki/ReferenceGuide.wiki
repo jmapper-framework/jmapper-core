@@ -1,5 +1,5 @@
 #labels Featured
-<wiki:toc max_depth="2" />
+||<wiki:toc max_depth="2" />||
 
 = Overview of JMapper Framework =
 
@@ -271,5 +271,5 @@ RelationalJMapper<AnnotatedClass> rm = new RelationalJMapper<AnnotatedClass>(Ann
 }}}
 
 == Many to One ==
-== One to Many ==
+== One to Many ==||
 <g:plusone size="medium"></g:plusone>
