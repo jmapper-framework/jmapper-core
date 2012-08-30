@@ -1,5 +1,7 @@
 #labels Featured
 <wiki:toc max_depth="2" />
+<g:plusone size="medium"></g:plusone>
+#sidebar TableOfContents
 
 = Overview of JMapper Framework =
 
