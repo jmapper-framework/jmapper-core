@@ -14,3 +14,8 @@ The values of {{{NullPointerControl}}} are:
 ||{{{NullPointerControl.NOT_ANY}}}||neither||
 
 == !MappingType ==
+This enumeration allows you to define which mode of mapping to apply. It can be used for both instances.
+The values of {{{MappingType }}} are:
+||{{{MappingType .ALL_FIELDS}}}||only source will be controlled||
+||{{{MappingType .ONLY_VALUED_FIELDS}}}||both instances will be checked||
+||{{{MappingType .ONLY_NULL_FIELDS}}}||neither||
