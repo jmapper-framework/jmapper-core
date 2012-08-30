@@ -1,3 +1,4 @@
+#summary This page describes the JMap annotation in its entirety
 = @JMap variables =
 
 The cases just described are common but not fully satisfy the need.
