@@ -1,3 +1,5 @@
+#summary This page describes how to obtain an implicit relationship between different classes
+
 = Implicit relations = 
 
 Mapping a class with another in this way is simple and intuitive, also observing the previous configurations, show an important feature: they are not declared classes, allowing various features such as one to many and many-to-one implicit relationships.
