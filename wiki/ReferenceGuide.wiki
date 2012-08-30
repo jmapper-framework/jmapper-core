@@ -1,7 +1,5 @@
 #labels Featured
-||<wiki:toc max_depth="2" />||
-
-= Overview of JMapper Framework =
+||<wiki:toc max_depth="2" />||= Overview of JMapper Framework =
 
 Currently, there are many frameworks that can significantly reduce the workload, leading mainly two major benefits: *robustness* and *productivity*. 
 Among the most important we can mention Hibernate, Spring, Struts, and other more recent as Vaadin, Spring Roo, Grails ..., thanks to them the mechanical work is reduced to a minimum. 
@@ -271,5 +269,6 @@ RelationalJMapper<AnnotatedClass> rm = new RelationalJMapper<AnnotatedClass>(Ann
 }}}
 
 == Many to One ==
-== One to Many ==||
+== One to Many ==
+||
 <g:plusone size="medium"></g:plusone>
