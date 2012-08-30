@@ -48,7 +48,7 @@ sourceField = "SOURCE"
 
 ||Destination !MappingType||Source !MappingType||Destination field final value||
 ||ALL_FIELDS||ALL_FIELDS||"SOURCE"||
-||ONLY_VALUED_FIELDS||ALL_FIELDS||null||
+||ONLY_VALUED_FIELDS||ALL_FIELDS||{{{null}}}||
 ||ONLY_NULL_FIELDS||ALL_FIELDS||"SOURCE"||
 ||ALL_FIELDS||ONLY_VALUED_FIELDS||"SOURCE"||
 ||ONLY_VALUED_FIELDS||ONLY_VALUED_FIELDS||null||
