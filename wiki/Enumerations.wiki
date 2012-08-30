@@ -17,6 +17,9 @@ The values of {{{NullPointerControl}}} are:
 This enumeration allows you to define which mode of mapping to apply. 
 This feature is useful when you want to enrich destination.
 It can be used for both instances.
+
+*IMPORTANT!* _you can not apply these mapping types to primitive variables, because they can not be null_
+
 The values of {{{MappingType }}} are:
 
 ||{{{MappingType .ALL_FIELDS}}}||all fields will be included in the mapping||
