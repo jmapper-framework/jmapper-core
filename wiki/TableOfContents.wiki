@@ -19,4 +19,4 @@
    * [Enumerations#MappingType MappingType]
  * [getDestination GetDestination]
    * [getDestination#Creation_signatures Creation signatures]
-   * [getDestination#Enrichment_signatures enrichment signatures]
+   * [getDestination#Enrichment_signatures Enrichment signatures]
