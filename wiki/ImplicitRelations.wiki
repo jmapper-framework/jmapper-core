@@ -2,7 +2,7 @@
 
 = Implicit relations = 
 
-Mapping a class with another in this way is simple and intuitive, also observing the previous configurations, show an important feature: they are not declared classes, allowing various features such as one to many and many-to-one implicit relationships.
+Mapping a class with another in this way is simple and intuitive, also observing the previous configurations, show an important feature: they are not declared classes, allowing various features such as one to many and many to one implicit relationships.
 These features allow to greatly reduce the amount of configurations in case you want to map an object with many others.
 
 == Many to One ==
