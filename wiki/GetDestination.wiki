@@ -1,7 +1,0 @@
-#summary This page describe the enumerations
-
-= Enumerations =
-
-== NullPointerControl ==
-
-== MappingType ==
