@@ -33,7 +33,7 @@ destinationField = "DESTINATION"
 sourceField = "SOURCE"
 }}}
 
-||Destination !MappingType||Source !MappingType||Destination field final value||
+||Destination !MappingType||Source !MappingType||Destination field||
 ||{{{ALL_FIELDS}}}||{{{ALL_FIELDS}}}||{{{"SOURCE"}}}||
 ||{{{ONLY_VALUED_FIELDS}}}||{{{ALL_FIELDS}}}||{{{"SOURCE"}}}||
 ||{{{ONLY_NULL_FIELDS}}}||{{{ALL_FIELDS}}}||{{{"DESTINATION"}}}||
@@ -49,7 +49,7 @@ destinationField = null
 sourceField = "SOURCE"
 }}}
 
-||Destination !MappingType||Source !MappingType||Destination field final value||
+||Destination !MappingType||Source !MappingType||Destination field||
 ||{{{ALL_FIELDS}}}||{{{ALL_FIELDS}}}||{{{"SOURCE"}}}||
 ||{{{ONLY_VALUED_FIELDS}}}||{{{ALL_FIELDS}}}||{{{null}}}||
 ||{{{ONLY_NULL_FIELDS}}}||{{{ALL_FIELDS}}}||{{{"SOURCE"}}}||
@@ -65,7 +65,7 @@ destinationField = "DESTINATION"
 sourceField = null
 }}}
 
-||Destination !MappingType||Source !MappingType||Destination field final value||
+||Destination !MappingType||Source !MappingType||Destination field||
 ||{{{ALL_FIELDS}}}||{{{ALL_FIELDS}}}||{{{null}}}||
 ||{{{ONLY_VALUED_FIELDS}}}||{{{ALL_FIELDS}}}||{{{null}}}||
 ||{{{ONLY_NULL_FIELDS}}}||{{{ALL_FIELDS}}}||{{{"DESTINATION"}}}||
