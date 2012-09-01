@@ -2,12 +2,12 @@
 
 = !GetDestination method =
 
-The method getDestination has several signatures that use the NullPointerControl and MappingType enumerations.
+The method getDestination has several signatures that use the {{{NullPointerControl}}} and {{{MappingType}}} enumerations.
 These signatures allow both creation and enrichment of the destination instance.
 
 == Creation signatures ==
 
-the methods described here, allow the creation of the destination instance using the enumerations NullPointerControl and MappingType.
+The methods described here, allow the creation of the destination instance using the enumerations {{{NullPointerControl}}} and {{{MappingType}}}.
 {{{
 jmapper.getDestination(source);
 }}}
@@ -41,3 +41,36 @@ Default parameters:
 ||Source {{{MappingType}}}||{{{mtSource}}}||
 
 == Enrichment signatures ==
+
+The methods described here, allow the enrichment of the destination instance using the enumerations {{{NullPointerControl}}} and {{{MappingType}}}.
+{{{
+jmapper.getDestination(destination, source);
+}}}
+Default parameters:
+||{{{NullPointerControl}}}||{{{SOURCE}}}||
+||Destination {{{MappingType}}}||{{{ALL_FIELDS}}}||
+||Source {{{MappingType}}}||{{{ALL_FIELDS}}}||
+
+{{{
+jmapper.getDestinationWithoutControl(destination, source);
+}}}
+Default parameters:
+||{{{NullPointerControl}}}||{{{NOT_ANY}}}||
+||Destination {{{MappingType}}}||{{{ALL_FIELDS}}}||
+||Source {{{MappingType}}}||{{{ALL_FIELDS}}}||
+
+{{{
+jmapper.getDestination(destination, source, mtDestination, mtSource);
+}}}
+Default parameters:
+||{{{NullPointerControl}}}||{{{SOURCE}}}||
+||Destination {{{MappingType}}}||{{{mtDestination}}}||
+||Source {{{MappingType}}}||{{{mtSource}}}||
+
+{{{
+jmapper.getDestination(destination, source, nullPointerControl, mtDestination, mtSource);
+}}}
+Default parameters:
+||{{{NullPointerControl}}}||{{{nullPointerControl}}}||
+||Destination {{{MappingType}}}||{{{mtDestination}}}||
+||Source {{{MappingType}}}||{{{mtSource}}}||
