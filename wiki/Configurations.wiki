@@ -1,0 +1,38 @@
+#summary this page describes all configurations.
+
+= Configurations =
+
+All configurations on JMapper are contained in this page.
+
+== Spring configuration =
+
+Example of JMapper configuration:
+{{{
+<bean id="jmapper" class="it.avutils.jmapper.JMapper">
+   <constructor-arg><value>bean.Destination</value></constructor-arg>
+   <constructor-arg><value>bean.Source</value></constructor-arg>
+</bean>
+}}}
+Example of RelationalJMapper configuration:
+{{{
+<bean id="relationalJmapper" class="it.avutils.jmapper.RelationalJMapper">
+   <constructor-arg><value>bean.ConfiguredBean</value></constructor-arg>
+</bean>
+}}}
+
+== Maven configuration ==
+
+currently the jar is not present in the maven repository, then you must install it locally.
+
+=== installation command ===
+
+{{{mvn install:install-file -Dfile="location of the jar\jmapper-core-1.0.0.jar" -DgroupId=it.avutils.jmapper -DartifactId=jmapper-core -Dversion=1.0.0 -Dpackaging=jar}}}
+
+=== dependency ===
+{{{
+<dependency>
+   <groupId>it.avutils.jmapper</groupId>
+   <artifactId>core</artifactId>
+   <version>1.0.0</version>
+</dependency>
+}}}
