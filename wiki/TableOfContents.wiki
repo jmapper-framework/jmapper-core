@@ -23,3 +23,6 @@
  * [manyToOne ManyToOne]
    * [manyToOne#Creation_signatures Creation signatures]
    * [manyToOne#Enrichment_signatures Enrichment signatures]
+ * [oneToMany OneToMany]
+   * [oneToMany#Creation_signatures Creation signatures]
+   * [oneToMany#Enrichment_signatures Enrichment signatures]
