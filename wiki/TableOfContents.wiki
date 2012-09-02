@@ -20,3 +20,6 @@
  * [getDestination GetDestination]
    * [getDestination#Creation_signatures Creation signatures]
    * [getDestination#Enrichment_signatures Enrichment signatures]
+ * [manyToOne ManyToOne]
+   * [manyToOne#Creation_signatures Creation signatures]
+   * [manyToOne#Enrichment_signatures Enrichment signatures]
