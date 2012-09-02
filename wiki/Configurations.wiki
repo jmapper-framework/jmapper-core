@@ -27,7 +27,8 @@ currently the jar is not present in the maven repository, then you must install 
 === installation command ===
 
 {{{
-mvn install:install-file -Dfile="location of the jar\jmapper-core-1.0.0.jar" -DgroupId=it.avutils.jmapper -DartifactId=jmapper-core -Dversion=1.0.0 -Dpackaging=jar
+mvn install:install-file -Dfile="jar location\jmapper-core-1.0.0.jar" 
+-DgroupId=it.avutils.jmapper -DartifactId=jmapper-core -Dversion=1.0.0 -Dpackaging=jar
 }}}
 
 === dependency ===
