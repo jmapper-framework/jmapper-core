@@ -27,8 +27,12 @@ currently the jar is not present in the maven repository, then you must install 
 === installation command ===
 
 {{{
-mvn install:install-file -Dfile="jar location\jmapper-core-1.0.0.jar" 
--DgroupId=it.avutils.jmapper -DartifactId=jmapper-core -Dversion=1.0.0 -Dpackaging=jar
+mvn install:install-file 
+-Dfile="jar location\jmapper-core-1.0.0.jar" 
+-DgroupId=it.avutils.jmapper 
+-DartifactId=jmapper-core 
+-Dversion=1.0.0 
+-Dpackaging=jar
 }}}
 
 === dependency ===
@@ -39,3 +43,15 @@ mvn install:install-file -Dfile="jar location\jmapper-core-1.0.0.jar"
    <version>1.0.0</version>
 </dependency>
 }}}
+
+== Files configuration ==
+
+=== JMapper configuration ===
+Per agire sui file java relativi alle classi configurate è necessario indicare al framework qual'è il folder che li contiene, di default la cartella di partenza è la root dell'applicazione, nel caso in cui si voglia limitare l'azione ad un package ed ai sui eventuali subpackage, basterà creare il file jmapper.cfg.properties posizionandolo nella root dell'applicazione, con la seguente coppia chiave = valore ad esempio:
+path.root = com.myapplication.bean, in alternativa si può definire esplicitamente il percorso al file.
+Ecco come definire il path al file di configurazione:
+{{{
+Path.setCfg("file location/fileName.properties");
+}}} 
+
+=== XML ===
