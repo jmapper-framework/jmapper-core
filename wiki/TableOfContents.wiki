@@ -33,3 +33,4 @@
  * [MavenConfiguration Maven configuration]
  * [JMapperConfiguration JMapper configuration]
  * [XmlConfiguration XML configuration]
+ * [PathsEditing Paths editing]
