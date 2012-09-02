@@ -31,3 +31,5 @@
  * [RawTypes About raw types]
  * [SpringConfiguration Spring configuration]
  * [MavenConfiguration Maven configuration]
+ * [JMapperConfiguration JMapper configuration]
+ * [XmlConfiguration XML configuration]
