@@ -26,3 +26,4 @@
  * [oneToMany OneToMany]
    * [oneToMany#Creation_signatures Creation signatures]
    * [oneToMany#Enrichment_signatures Enrichment signatures]
+ * [implicitConversions Implicit conversions]
