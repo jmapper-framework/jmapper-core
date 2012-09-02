@@ -1,0 +1,12 @@
+#summary implicit conversions are performed between primitive fields and / or wrapper
+
+= Implicit conversions =
+
+JMapper allows to perform mapping between primitive and / or wrapper types, such as from String to Integer and vice versa. Here are the conventions used to handle all those conversions that are uncommon:
+||*Conversion*||*Result*||
+||Boolean -> Number||1 if Boolean is True, 0 if false||
+||Boolean -> Char||T if Boolean is True, F if false||
+||String -> Char||is taken the first character||
+||Number -> boolean||false if Number is equal to 0, true all other cases||
+||Char -> Boolean||true if Char is equal to T, false if Char is equal to F, null all other cases||
+||Char -> boolean||true if Char is equal to T, false all other cases||
