@@ -1,0 +1,3 @@
+#summary description of the Xml configuration.
+
+= XML configuration =
