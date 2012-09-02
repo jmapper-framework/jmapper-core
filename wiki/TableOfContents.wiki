@@ -28,3 +28,5 @@
    * [oneToMany#Enrichment_signatures Enrichment signatures]
  * [ImplicitConversions Implicit conversions]
  * [RawTypes About raw types]
+ * [SpringConfiguration Spring configuration]
+ * [MavenConfiguration Maven configuration]
