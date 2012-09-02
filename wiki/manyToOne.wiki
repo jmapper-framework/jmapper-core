@@ -10,7 +10,7 @@ These signatures allow both creation and enrichment of the destination instance.
 The methods described here, allow the creation of the destination instance.
 
 {{{
-jmapper.getDestination(source);
+relationalJMapper.manyToOne(source);
 }}}
 Default parameters:
 ||{{{NullPointerControl}}}||{{{SOURCE}}}||
@@ -18,7 +18,7 @@ Default parameters:
 ||Source {{{MappingType}}}||{{{ALL_FIELDS}}}||
 
 {{{
-jmapper.getDestinationWithoutControl(source);
+relationalJMapper.manyToOneWithoutControl(source);
 }}}
 Default parameters:
 ||{{{NullPointerControl}}}||{{{NOT_ANY}}}||
@@ -26,7 +26,7 @@ Default parameters:
 ||Source {{{MappingType}}}||{{{ALL_FIELDS}}}||
 
 {{{
-jmapper.getDestination(source, mtSource);
+relationalJMapper.manyToOne(source, mtSource);
 }}}
 Default parameters:
 ||{{{NullPointerControl}}}||{{{SOURCE}}}||
@@ -34,7 +34,7 @@ Default parameters:
 ||Source {{{MappingType}}}||{{{mtSource}}}||
 
 {{{
-jmapper.getDestination(source, nullPointerControl, mtSource);
+relationalJMapper.manyToOne(source, nullPointerControl, mtSource);
 }}}
 Default parameters:
 ||{{{NullPointerControl}}}||{{{nullPointerControl}}}||
@@ -43,17 +43,17 @@ Default parameters:
 
 == Enrichment signatures ==
 
-The methods described here, allow the enrichment of the destination instance using the enumerations {{{NullPointerControl}}} and {{{MappingType}}}.
+The methods described here, allow the enrichment of the destination instance.
 {{{
-jmapper.getDestination(destination, source);
+relationalJMapper.manyToOne(destination, source);
 }}}
 Default parameters:
-||{{{NullPointerControl}}}||{{{SOURCE}}}||
+||{{{NullPointerControl}}}||{{{ALL}}}||
 ||Destination {{{MappingType}}}||{{{ALL_FIELDS}}}||
 ||Source {{{MappingType}}}||{{{ALL_FIELDS}}}||
 
 {{{
-jmapper.getDestinationWithoutControl(destination, source);
+relationalJMapper.manyToOneWithoutControl(destination, source);
 }}}
 Default parameters:
 ||{{{NullPointerControl}}}||{{{NOT_ANY}}}||
@@ -61,15 +61,15 @@ Default parameters:
 ||Source {{{MappingType}}}||{{{ALL_FIELDS}}}||
 
 {{{
-jmapper.getDestination(destination, source, mtDestination, mtSource);
+relationalJMapper.manyToOne(destination, source, mtDestination, mtSource);
 }}}
 Default parameters:
-||{{{NullPointerControl}}}||{{{SOURCE}}}||
+||{{{NullPointerControl}}}||{{{ALL}}}||
 ||Destination {{{MappingType}}}||{{{mtDestination}}}||
 ||Source {{{MappingType}}}||{{{mtSource}}}||
 
 {{{
-jmapper.getDestination(destination, source, nullPointerControl, mtDestination, mtSource);
+relationalJMapper.manyToOne(destination, source, nullPointerControl, mtDestination, mtSource);
 }}}
 Default parameters:
 ||{{{NullPointerControl}}}||{{{nullPointerControl}}}||
