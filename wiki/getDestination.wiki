@@ -7,7 +7,7 @@ These signatures allow both creation and enrichment of the destination instance.
 
 == Creation signatures ==
 
-The methods described here, allow the creation of the destination instance using the enumerations {{{NullPointerControl}}} and {{{MappingType}}}.
+The methods described here, allow the creation of the destination instance.
 {{{
 jmapper.getDestination(source);
 }}}
@@ -42,7 +42,7 @@ Default parameters:
 
 == Enrichment signatures ==
 
-The methods described here, allow the enrichment of the destination instance using the enumerations {{{NullPointerControl}}} and {{{MappingType}}}.
+The methods described here, allow the enrichment of the destination instance.
 {{{
 jmapper.getDestination(destination, source);
 }}}
