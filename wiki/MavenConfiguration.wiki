@@ -1,0 +1,23 @@
+#summary Description of Maven configuration.
+
+= Maven configuration =
+
+Currently JMapper is not present in the Maven repository, so you must install it locally.
+
+== Installation command ==
+{{{
+mvn install:install-file 
+-Dfile="jar location\jmapper-core-1.0.0.jar"
+-DgroupId=it.avutils.jmapper
+-DartifactId=jmapper-core
+-Dversion=1.0.0
+-Dpackaging=jar
+}}}
+== Dependency ==
+{{{
+<dependency>
+   <groupId>it.avutils.jmapper</groupId>
+   <artifactId>core</artifactId>
+   <version>1.0.0</version>
+</dependency>
+}}}
