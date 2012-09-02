@@ -47,7 +47,7 @@ The methods described here, allow the enrichment of the destination instance.
 jmapper.getDestination(destination, source);
 }}}
 Default parameters:
-||{{{NullPointerControl}}}||{{{SOURCE}}}||
+||{{{NullPointerControl}}}||{{{ALL}}}||
 ||Destination {{{MappingType}}}||{{{ALL_FIELDS}}}||
 ||Source {{{MappingType}}}||{{{ALL_FIELDS}}}||
 
@@ -63,7 +63,7 @@ Default parameters:
 jmapper.getDestination(destination, source, mtDestination, mtSource);
 }}}
 Default parameters:
-||{{{NullPointerControl}}}||{{{SOURCE}}}||
+||{{{NullPointerControl}}}||{{{ALL}}}||
 ||Destination {{{MappingType}}}||{{{mtDestination}}}||
 ||Source {{{MappingType}}}||{{{mtSource}}}||
 
