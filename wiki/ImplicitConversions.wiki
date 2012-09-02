@@ -1,4 +1,4 @@
-#summary implicit conversions are performed between primitive fields and / or wrapper
+#summary implicit conversions are performed between primitive and / or wrapper fields
 
 = Implicit conversions =
 
