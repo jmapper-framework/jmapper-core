@@ -1,0 +1,17 @@
+#summary examples of Spring configurations.
+
+= Spring configuration =
+
+Example of JMapper configuration:
+{{{
+<bean id="jmapper" class="it.avutils.jmapper.JMapper">
+   <constructor-arg><value>bean.Destination</value></constructor-arg>
+   <constructor-arg><value>bean.Source</value></constructor-arg>
+</bean>
+}}}
+Example of RelationalJMapper configuration:
+{{{
+<bean id="relationalJmapper" class="it.avutils.jmapper.RelationalJMapper">
+   <constructor-arg><value>bean.ConfiguredBean</value></constructor-arg>
+</bean>
+}}}
