@@ -24,20 +24,85 @@ addAttributes lets you add one or more attributes to an existing class in the xm
 {{{
          String[] attributes = {"field2Class1","field2Class2","field2Class3"};
          Class<?>[]  classes = {Class1.class,Class2.class,Class3.class};
-         Attribute attribute = new Attribute("field", attributes, classes);
+         Attribute attribute = new Attribute("field2", attributes, classes);
 
          xmlHandler.addAttributes(AnnotatedClass.class, attribute);
 }}}
 == deleteAttributes ==
+
+deleteAttributes eliminates attributes related to a class, specifying their names.
+{{{
+         xmlHandler.deleteAttributes(AnnotatedClass.class, "field2");
+}}}
 == addClass ==
+
+addClass allows you to add, into the file configuration, the class passed in input, it's also necessary  passing at least one attribute.
+{{{
+         String[] attributes = {"field2Class1","field2Class2","field2Class3"};
+         Class<?>[]  classes = {Class1.class,Class2.class,Class3.class};
+         Attribute attribute = new Attribute("field2", attributes, classes);
+
+         xmlHandler.addClass(AnnotatedClass.class, attribute);
+}}}
+
 == deleteClass ==
+
+deleteClass eliminates a class.
+{{{
+         xmlHandler.deleteClass(AnnotatedClass.class);
+}}}
+
 == overrideClass ==
+
+Override the class replacing attributes with those passed to the method.
+{{{
+         String[] attributes = {"field1Class1","field1Class2","field1Class3"};
+         Class<?>[]  classes = {Class1.class,Class2.class,Class3.class};
+         Attribute attribute = new Attribute("field1", attributes, classes);
+
+         xmlHandler.overrideClass(AnnotatedClass.class, attribute);
+}}}
+
 == addAnnotatedClass ==
+
+addAnnotatedClass allows you to add in the xml configuration file to one or more classes annotated passed as input to the method, not specifying any class the same will be done for all classes configured with annotation.
+{{{
+         xmlHandler.addAnnotatedClass(AnnotatedClass.class);
+}}}
 == addAnnotatedClassAll ==
+
+Same logic as the previous method with the difference that the function will be effective even for the innerClass present.
+
 == deleteAnnotatedClasses ==
+
+deleteAnnotatedClasses eliminates from xml file all the annotated classes.
+{{{
+         xmlHandler.deleteAnnotatedClasses();
+}}}
 == overrideAnnotatedClass ==
+
+OverrideAnnotatedClass allows you to update the xml configuration starting from the annotation of the classes passed as input, not specifying any parameters the same will be done for all annotated classes.
+{{{
+         xmlHandler.overrideAnnotatedClass(AnnotatedClass.class);
+}}}
+
 == overrideAnnotatedClassAll ==
+
+Same logic as the previous method with the difference that the function will be effective even for the innerClass present.
+
 == fromXmlToAnnotation ==
+
+This method allows to annotate a class starting from its xml configuration.
+Not defining any class will be executed the same for all the classes present in the xml configuration file.
+{{{
+         xmlHandler.fromXmlToAnnotation(AnnotatedClass.class);
+}}}
 == fromXmlToAnnotationAll ==
+Same logic as the previous method with the difference that the function will be effective even for the innerClass present.
 == cleanAnnotatedClass ==
+This method eliminates the annotations from classes, without parameters will do the same for all annotated classes.
+{{{
+         xmlHandler.cleanAnnotatedClass(AnnotatedClass.class);
+}}}
 == cleanAnnotatedClassAll ==
+Same logic as the previous method with the difference that the function will be effective even for the innerClass present.
