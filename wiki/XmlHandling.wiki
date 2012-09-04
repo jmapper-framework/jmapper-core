@@ -19,6 +19,15 @@ Most of its methods use a java bean *{{{Attribute}}}*:
 The Attribute reflects the parameters of the @JMap annotation plus a string: name, the name of the current attribute.
 
 == addAttributes ==
+
+addAttributes lets you add one or more attributes to an existing class in the xml configuration file.
+{{{
+         String[] attributes = {"field2Class1","field2Class2","field2Class3"};
+         Class<?>[]  classes = {"field2Class1","field2Class2","field2Class3"};
+         Attribute attribute = new Attribute("field", attributes, classes);
+
+
+}}}
 == deleteAttributes ==
 == addClass ==
 == deleteClass ==
