@@ -19,23 +19,46 @@ The XML follows the pattern below:
                                        0..1\
                                           value
 }}}
+Here's an example of AnnotatedClass in xml format:
 {{{
-
-                          jmapper
-                           1 |
-                             |  
-                        1..* |
-                           class
-                           1 |
-                             |  
-                        1..* |
-                         attribute
-                       1 /  1|    1\
-                        /    |      \
-                   0..1/ 0..1|   0..1\
-                   value attributes classes
-                           1 |       1 |
-                             |         |
-                        1..* |    1..* | 
-                         attribute   class
+<jmapper>
+  <class name='it.jmapper.bean.AnnotatedClass'>
+    <attribute name='field1'>
+      <attributes>
+        <attribute name='field1Class1' />
+        <attribute name='field1Class2' />
+        <attribute name='field1Class3' />
+      </attributes>
+      <classes>
+        <class name='it.jmapper.bean.Class1' />
+        <class name='it.jmapper.bean.Class2' />
+        <class name='it.jmapper.bean.Class3' />
+      </classes>
+    </attribute>
+    <attribute name='field2'>
+      <attributes>
+        <attribute name='field2Class1' />
+        <attribute name='field2Class2' />
+        <attribute name='field2Class3' />
+      </attributes>
+      <classes>
+        <class name='it.jmapper.bean.Class1' />
+        <class name='it.jmapper.bean.Class2' />
+        <class name='it.jmapper.bean.Class3' />
+      </classes>
+    </attribute>
+    <attribute name='field3'>
+      <attributes>
+        <attribute name='field3Class1' />
+        <attribute name='field3Class2' />
+        <attribute name='field3Class3' />
+      </attributes>
+      <classes>
+        <class name='it.jmapper.bean.Class1' />
+        <class name='it.jmapper.bean.Class2' />
+        <class name='it.jmapper.bean.Class3' />
+      </classes>
+    </attribute>
+  </class>
+</jmapper>
 }}}
