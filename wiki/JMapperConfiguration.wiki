@@ -2,4 +2,6 @@
 
 = JMapper configuration =
 
-to allow JMapper to act on the sources you need to create the jmapper.cfg.properties file in the application root  with the following path.root = package pair, the package specifies the folder that contains the sources.
+The standard behavior of JMapper is to find the configured sources starting from the application root, to specify the package you need to create the jmapper.cfg.properties file in the application root with the following pair: path.root = package.
+For example:
+{{{path.root = com.myapplication.bean}}}
