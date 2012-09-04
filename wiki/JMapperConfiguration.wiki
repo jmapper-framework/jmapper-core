@@ -8,4 +8,6 @@ to limit the search to a package and its subpackages, you need to create the *jm
 
 For example:
 
-{{{path.root = com.myapplication.bean}}}
+{{{
+path.root = com.myapplication.bean
+}}}
