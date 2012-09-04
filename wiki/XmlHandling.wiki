@@ -17,3 +17,18 @@ Most of its methods use a java bean *{{{Attribute}}}*:
          }
 }}}
 The Attribute reflects the parameters of the @JMap annotation plus a string: name, the name of the current attribute.
+
+== addAttributes ==
+== deleteAttributes ==
+== addClass ==
+== deleteClass ==
+== overrideClass ==
+== addAnnotatedClass ==
+== addAnnotatedClassAll ==
+== deleteAnnotatedClasses ==
+== overrideAnnotatedClass ==
+== overrideAnnotatedClassAll ==
+== fromXmlToAnnotation ==
+== fromXmlToAnnotationAll ==
+== cleanAnnotatedClass ==
+== cleanAnnotatedClassAll ==
