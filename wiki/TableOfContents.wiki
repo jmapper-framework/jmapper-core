@@ -28,7 +28,6 @@
    * [oneToMany#Enrichment_signatures Enrichment signatures]
  * [DesignByContract Design by contract]
  * [RawTypes About raw types]
-
  * [ImplicitConversions Implicit conversions]
  * [ExplicitConversions Explicit conversions]
  * [Configurations Configurations]
