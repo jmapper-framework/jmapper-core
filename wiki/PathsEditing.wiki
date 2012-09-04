@@ -6,8 +6,12 @@ If you have the need to define a path external to application  for the configura
 
 Definition of the path to the configuration file:
 
-{{{Path.setCfg("path/cfg.properties");}}}
+{{{
+Path.setCfg("path/cfg.properties");
+}}}
 
 Definition of the path to the XML file:
 
-{{{Path.setXml("path/jmapper.xml");}}}
+{{{
+Path.setXml("path/jmapper.xml");
+}}}
