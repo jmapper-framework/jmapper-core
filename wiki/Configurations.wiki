@@ -1,0 +1,5 @@
+#summary summary of the configurations.
+
+= Configurations =
+
+This part of wiki contains all the configurations to use with: Maven, Spring and others JMapper settings.
