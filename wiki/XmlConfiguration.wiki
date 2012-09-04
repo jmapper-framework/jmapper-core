@@ -5,3 +5,23 @@
 The annotations are easy to use, minimize setup time, but you must necessarily put hands to manipulate the code, for this reason, the framework also handles the configuration in XML format.
 
 The XML follows the pattern below:
+{{{
+
+                          jmapper
+                           1 |
+                             |  
+                        1..* |
+                           class
+                           1 |
+                             |  
+                        1..* |
+                         attribute
+                       1 /  1|    1\
+                        /    |      \
+                   0..1/ 0..1|   0..1\
+                   value attributes classes
+                           1 |       1 |
+                             |         |
+                        1..* |    1..* | 
+                         attribute   class
+}}}
