@@ -28,10 +28,12 @@
    * [oneToMany#Enrichment_signatures Enrichment signatures]
  * [DesignByContract Design by contract]
  * [RawTypes About raw types]
+
  * [ImplicitConversions Implicit conversions]
  * [ExplicitConversions Explicit conversions]
- * [SpringConfiguration Spring configuration]
- * [MavenConfiguration Maven configuration]
- * [JMapperConfiguration JMapper configuration]
- * [XmlConfiguration XML configuration]
- * [PathsEditing Paths editing]
+ * Configurations
+   * [XmlConfiguration XML configuration]
+   * [JMapperConfiguration JMapper configuration]
+   * [SpringConfiguration Spring configuration]
+   * [MavenConfiguration Maven configuration]
+   * [PathsEditing Paths editing]
