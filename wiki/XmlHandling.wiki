@@ -1,0 +1,3 @@
+#summary XmlHandler for an easy manipulation of the xml file.
+
+= Xml handling =
