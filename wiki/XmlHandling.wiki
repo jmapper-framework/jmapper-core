@@ -2,7 +2,7 @@
 
 = Xml handling =
 
-As can be compact configuration in XML format, there is always the possibility of error-prone typing it, to reset these risks and speed up its completion, the framework exposes the class *{{{XmlHandler}}}* that has a number of utility methods.
+As it may be compact, the configuration in XML format, there is always the possibility of error-prone writing it, to eliminate these risks and speed up its completion, the framework exposes the class *{{{XmlHandler}}}* that has a number of utility methods
 
 Most of its methods use a java bean *{{{Attribute}}}*:
 {{{
