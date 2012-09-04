@@ -6,6 +6,18 @@ The annotations are easy to use, minimize setup time, but you must necessarily p
 
 The XML follows the pattern below:
 {{{
+                                                  1 1..*
+                                          classes ------ class
+                                          /0..1
+                                         /
+          1 1..*       1 1..*          1/1  0..1            1 1..* 
+  jmapper ------ class ------ attribute -------- attributes ------ attribute
+                                       1\
+                                         \
+                                          \0..1
+                                          value
+}}}
+{{{
 
                           jmapper
                            1 |
