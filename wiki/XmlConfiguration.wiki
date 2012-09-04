@@ -1,3 +1,7 @@
 #summary description of the Xml configuration.
 
 = XML configuration =
+
+The annotations are easy to use, minimize setup time, but you must necessarily put hands to manipulate the code, for this reason, the framework also handles the configuration in XML format.
+
+The XML follows the pattern below:
