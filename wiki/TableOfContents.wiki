@@ -31,7 +31,7 @@
 
  * [ImplicitConversions Implicit conversions]
  * [ExplicitConversions Explicit conversions]
- * Configurations
+ * [Configurations]
    * [XmlConfiguration XML configuration]
    * [JMapperConfiguration JMapper configuration]
    * [SpringConfiguration Spring configuration]
