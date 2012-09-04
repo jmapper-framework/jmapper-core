@@ -4,7 +4,7 @@
 
 The standard behavior of JMapper is to find the configured sources starting from the application root. 
 
-to limit the search to a package and its subpackages, you need to create the jmapper.cfg.properties file in the application root with the following pair: path.root = package.
+to limit the search to a package and its subpackages, you need to create the *jmapper.cfg.properties* file in the application root with the following pair: path.root = package.
 
 For example:
 
