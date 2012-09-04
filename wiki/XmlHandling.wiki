@@ -81,7 +81,7 @@ deleteAnnotatedClasses eliminates from xml file all the annotated classes.
 }}}
 == overrideAnnotatedClass ==
 
-OverrideAnnotatedClass allows you to update the xml configuration starting from the annotation of the classes passed as input, not specifying any parameters the same will be done for all annotated classes.
+overrideAnnotatedClass allows you to update the xml configuration starting from the annotation of the classes passed as input, not specifying any parameters the same will be done for all annotated classes.
 {{{
          xmlHandler.overrideAnnotatedClass(AnnotatedClass.class);
 }}}
