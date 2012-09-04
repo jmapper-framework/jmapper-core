@@ -23,10 +23,10 @@ The Attribute reflects the parameters of the @JMap annotation plus a string: nam
 addAttributes lets you add one or more attributes to an existing class in the xml configuration file.
 {{{
          String[] attributes = {"field2Class1","field2Class2","field2Class3"};
-         Class<?>[]  classes = {"field2Class1","field2Class2","field2Class3"};
+         Class<?>[]  classes = {Class1.class,Class2.class,Class3.class};
          Attribute attribute = new Attribute("field", attributes, classes);
 
-
+         xmlHandler.addAttributes(AnnotatedClass.class, attribute);
 }}}
 == deleteAttributes ==
 == addClass ==
