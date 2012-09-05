@@ -62,15 +62,22 @@ below the sample code:
        ExampleBusiness exampleBusiness;
 
        public PivotO executes(PivotI pivotI){
-            
+           
+           // mapping
            BoI boI = rmI.manyToOne(pivotI);
-           
+
+           // logic
            BoO boO = exampleBusiness.executes(boI);
-           
+
+           // mapping
            PivotO pivotO = rmO.setDestinationClass(PivotO.class)
                               .oneToMany(boO);
 
            return pivotO;
+
+           // if you prefer inline expression:
+           // return rmO.setDestinationClass(PivotO.class)
+                     // .oneToMany(exampleBusiness.executes(rmI.manyToOne(pivotI)));
        }      
    }
    
@@ -81,12 +88,15 @@ below the sample code:
        ExampleDAO exampleDao;
 
        public BoO executes(BoI boI){
-            
+           
+           // mapping
            DtoI dtoI = rmI.setDestinationClass(DtoI.class)
                           .oneToMany(boI);
            
+           // logic
            DtoO dtoO = exampleDao.executes(dtoI);
            
+           // mapping
            BoO boO = rmO.manyToOne(dtoO);
 
            return boO;
