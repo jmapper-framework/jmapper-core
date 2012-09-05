@@ -9,8 +9,11 @@ These signatures allow both creation and enrichment of the destination instance.
 
 The methods described here, allow the creation of the destination instance.
 
+it is necessary to declare the target class for the use of these methods.
+
 {{{
-relationalJMapper.oneToMany(source);
+relationalJMapper.setDestinationClass(Class1.class)
+                 .oneToMany(source);
 }}}
 Default parameters:
 ||{{{NullPointerControl}}}||{{{SOURCE}}}||
@@ -18,7 +21,8 @@ Default parameters:
 ||Source {{{MappingType}}}||{{{ALL_FIELDS}}}||
 
 {{{
-relationalJMapper.oneToManyWithoutControl(source);
+relationalJMapper.setDestinationClass(Class1.class)
+                 .oneToManyWithoutControl(source);
 }}}
 Default parameters:
 ||{{{NullPointerControl}}}||{{{NOT_ANY}}}||
@@ -26,7 +30,8 @@ Default parameters:
 ||Source {{{MappingType}}}||{{{ALL_FIELDS}}}||
 
 {{{
-relationalJMapper.oneToMany(source, mtSource);
+relationalJMapper.setDestinationClass(Class1.class)
+                 .oneToMany(source, mtSource);
 }}}
 Default parameters:
 ||{{{NullPointerControl}}}||{{{SOURCE}}}||
@@ -44,6 +49,8 @@ Default parameters:
 == Enrichment signatures ==
 
 The methods described here, allow the enrichment of the destination instance.
+
+Do not need to declare the class of destination because the destination is passed as input.
 {{{
 relationalJMapper.oneToMany(destination, source);
 }}}
