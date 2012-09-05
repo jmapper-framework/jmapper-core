@@ -76,9 +76,9 @@ below the sample code:
            return pivotO;
 
            /* if you prefer inline expression:
+
               return rmO.setDestinationClass(PivotO.class)
-                         .oneToMany(exampleBusiness.executes(rmI.manyToOne(pivotI)));
-           */
+                        .oneToMany(exampleBusiness.executes(rmI.manyToOne(pivotI)));*/
        }      
    }
    
