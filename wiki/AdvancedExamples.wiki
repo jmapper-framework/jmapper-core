@@ -8,3 +8,15 @@ We will see now some very interesting examples of use, which makes the code more
 
 A classic example is a web application that consists of three layers: facade, business and data access.
 Each layer has two bean, one input and one output.
+{{{
+             ____________       ____________       ____________
+      PivotI |          | BoI   |          | DtoI  |          |
+      ------>|  Facade  |------>| Business |------>|  Data    |
+             |          |       |          |       |  Access  |
+      PivotO |  Layer   | BoO   | Layer    | DtoO  |  Layer   |
+      <------|          |<------|          |<------|          |
+             |__________|       |__________|       |__________|
+             
+
+
+}}}
