@@ -8,6 +8,7 @@ We will see now some very interesting examples of use, which makes the code more
 
 A classic example is a web application that consists of three layers: facade, business and data access.
 Each layer has two bean, one of input and one of output.
+||
 {{{
              ____________       ____________       ____________
       PivotI |          | BoI   |          | DtoI  |          |
@@ -17,6 +18,7 @@ Each layer has two bean, one of input and one of output.
       <------|          |<------|          |<------|          |
              |__________|       |__________|       |__________|
 }}}
+||
 In the architecture of this type, for each service you need to implement four mapping: {{{PivotI -> BoI -> DtoI}}} and {{{DtoO -> BoO -> PivotO}}}.
 
 With Jmapper you need to configure only the two business objects, with the surrounding objects.
