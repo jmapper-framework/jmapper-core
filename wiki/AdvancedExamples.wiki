@@ -20,8 +20,19 @@ Each layer has two bean, one of input and one of output.
 In the architecture of this type, for each service you need to implement four mapping: {{{PivotI -> BoI -> DtoI}}} and {{{DtoO -> BoO -> PivotO}}}.
 
 With Jmapper you need to configure only the two business objects, with the surrounding objects.
+<table><tr><td>{{{
+   class PivotI{
+       String pivotIfield;
+   }
+}}}</td><td>
 {{{
-   class PivotI{      class BoI{              
-        String id;         @JMap Integer id;
-   }                  } 
-}}}
+   class BoI{              
+       @JMap(attributes={"pivotIid", "dtoIfield"}
+             classes   ={PivotI.class, DtoI.class}) 
+       Integer boIfield; 
+}}}</td><td>
+{{{
+   class DtoI{
+       Integer dtoIfield;
+   }
+}}}</td></tr></table>
