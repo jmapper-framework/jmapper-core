@@ -108,3 +108,4 @@ below the sample code:
 
    }
 }}}
+Two Configurations and two instances of RelationalJMapper is all you need.
