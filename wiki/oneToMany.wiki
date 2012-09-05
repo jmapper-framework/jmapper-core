@@ -8,8 +8,7 @@ These signatures allow both creation and enrichment of the destination instance.
 == Creation signatures ==
 
 The methods described here, allow the creation of the destination instance.
-
-it is necessary to declare the target class for the use of these methods.
+It is necessary to declare the target class for the use of these methods.
 
 {{{
 relationalJMapper.setDestinationClass(Class1.class)
@@ -49,8 +48,7 @@ Default parameters:
 == Enrichment signatures ==
 
 The methods described here, allow the enrichment of the destination instance.
-
-Do not need to declare the class of destination because the destination is passed as input.
+Do not need to declare the target class, because the destination is passed as input.
 {{{
 relationalJMapper.oneToMany(destination, source);
 }}}
