@@ -73,6 +73,7 @@ below the sample code:
 
            // mapping
            PivotO pivotO = rmO.setDestinationClass(PivotO.class).oneToMany(boO);
+           
            return pivotO;
        }      
    }
@@ -87,6 +88,7 @@ below the sample code:
            
            // mapping
            DtoI dtoI = rmI.setDestinationClass(DtoI.class).oneToMany(boI);
+
            // logic
            DtoO dtoO = exampleDao.executes(dtoI);
            
