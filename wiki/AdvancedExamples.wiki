@@ -30,6 +30,7 @@ With Jmapper you need to configure only the two business objects, with the surro
        @JMap(attributes={"pivotIfield", "dtoIfield"}
              classes   ={PivotI.class,  DtoI.class}) 
        Integer boIfield; 
+   }
 
    class DtoI{
        Integer dtoIfield;
@@ -45,9 +46,58 @@ With Jmapper you need to configure only the two business objects, with the surro
        @JMap(attributes={"pivotOfield", "dtoOfield"}
              classes   ={PivotO.class,  DtoO.class}) 
        Integer boOfield; 
+   }
 
    class DtoO{
        Integer dtoOfield;
    }
 }}}
 </td></tr></table>
+below the sample code:
+{{{
+   class ExampleFacade{
+       
+       RelationalJMapper<BoI> rmI;
+       RelationalJMapper<BoO> rmO;
+       ExampleBusiness exampleBusiness;
+
+       public PivotO executes(PivotI pivotI){
+            
+           BoI boI = rmI.manyToOne(pivotI);
+           
+           BoO boO = exampleBusiness.executes(boI);
+           
+           PivotO pivotO = rmO.setDestinationClass(PivotO.class)
+                              .oneToMany(boO);
+
+           return pivotO;
+       }      
+   }
+   
+   class ExampleBusiness{
+
+       RelationalJMapper<BoI> rmI;
+       RelationalJMapper<BoO> rmO;
+       ExampleDAO exampleDao;
+
+       public BoO executes(BoI boI){
+            
+           DtoI dtoI = rmI.setDestinationClass(DtoI.class)
+                          .oneToMany(boI);
+           
+           DtoO dtoO = exampleDao.executes(dtoI);
+           
+           BoO boO = rmO.manyToOne(dtoO);
+
+           return boO;
+       }      
+   }
+
+   class ExampleDao{
+
+       public DtoO executes(DtoI dtoI){
+           // some operations
+           return dtoO;
+       }
+   }
+}}}
