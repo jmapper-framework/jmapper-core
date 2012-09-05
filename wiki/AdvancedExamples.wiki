@@ -17,4 +17,4 @@ Each layer has two bean, one of input and one of output.
       <------|          |<------|          |<------|          |
              |__________|       |__________|       |__________|
 }}}
-In the architecture of this type, for each service you need to implement four mapping: PivotI -> BoI -> DtoI and DtoO -> BoO -> PivotO.
+In the architecture of this type, for each service you need to implement four mapping: {{{PivotI -> BoI -> DtoI}}} and {{{DtoO -> BoO -> PivotO}}}.
