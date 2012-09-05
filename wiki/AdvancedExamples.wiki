@@ -35,7 +35,7 @@ With Jmapper you need to configure only the two business objects, with the surro
        Integer dtoIfield;
    }
 }}}
-
+</td><td>
 {{{
    class PivotO{
        String pivotOfield;
@@ -49,4 +49,5 @@ With Jmapper you need to configure only the two business objects, with the surro
    class DtoO{
        Integer dtoOfield;
    }
-}}}</td></tr></table>
+}}}
+</td></tr></table>
