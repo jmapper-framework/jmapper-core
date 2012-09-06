@@ -117,4 +117,38 @@ Standard solutions can be:
  * use *instanceof* to identify class type
  * pass, as input to the method, the values ​to handle
 
-Any solution that you can design, you will always have the need to change the code for every little request.
+Any solution that you can design, you will always have the need to change the code for every little request. with JMapper becomes:
+<table width = "100%"><tr><td>
+{{{
+class Service1{
+
+    CommonLogic cl;
+    
+    public void executes(Service1I service1I){
+        cl.(service1I);
+    }
+}
+}}}
+</td><td>
+{{{
+class Service2{
+
+    CommonLogic cl;
+    
+    public void executes(Service2I service2I){
+        cl.(service2I);
+    }
+}
+}}}
+</td><td>
+{{{
+class Service3{
+
+    CommonLogic cl;
+    
+    public void executes(Service3I service3I){
+        cl.(service3I);
+    }
+}
+}}}
+</td></tr></table>
