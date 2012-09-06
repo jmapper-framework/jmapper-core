@@ -240,10 +240,10 @@ class CommonLogic{
     }
 }
 }}}
-</td><td width="66%">
+</td><td width="66%" align ="center">
 The conversions between different structures are performed implicitly, including the conversion of their elements.
 
-*Elegant, concise and high performance all in one project 
+*Elegant, concise and high performance all in one project*
 
-                        <h4>JMapper</h4>*
+                        <h4><b>JMapper</b></h4>
 </td></tr></table>
