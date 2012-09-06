@@ -8,7 +8,7 @@ We will see now some very interesting examples of use, which makes the code more
 
 A classic example is a web application that consists of three layers: facade, business and data access.
 Each layer has two bean, one of input and one of output.
-<table width="100%"><tr><td  width="100%" align="center">
+<table width="100%"><tr><td align="center">
 {{{
              ____________       ____________       ____________
       PivotI |          | BoI   |          | DtoI  |          |
@@ -56,7 +56,7 @@ With Jmapper you need to configure only the two business objects, with the surro
 }}}
 </td></tr></table>
 below the sample code:
-<table width = "100%"><tr><td width="100%">
+<table width = "100%"><tr><td align="center">
 {{{
    class ExampleFacade{
        
