@@ -178,6 +178,7 @@ class Service3I{
 }
 }}}
 </td></tr></table>
+<table width="100%"><tr><td width="33%">
 {{{
 class CommonLogicI{
 
@@ -185,8 +186,9 @@ class CommonLogicI{
 
 }
 }}}
-jmapper.xml:
+</td><td width="66%">
 {{{
+Xml configuration:
 <jmapper>
   <class name='com.myapplication.CommonLogicI'>
     <attribute name='ids'>
@@ -204,6 +206,7 @@ jmapper.xml:
   </class>
 </jmapper>
 }}}
+</td></tr></table>
 {{{
 class CommonLogic{
     
