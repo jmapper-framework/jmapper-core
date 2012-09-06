@@ -225,6 +225,7 @@ class Service3{
 }
 }}}
 </td></tr></table>
+!CommonLogic implementation:
 <table width ="100%"><tr><td width ="33%">
 {{{
 class CommonLogic{
