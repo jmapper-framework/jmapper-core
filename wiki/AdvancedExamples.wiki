@@ -192,33 +192,33 @@ Xml configuration:
 {{{
 class Service1{
 
-    CommonLogic cl;
+   CommonLogic cl;
     
-    public void executes(Service1I service1I){
-        cl.idControl(service1I);
-    }
+   public void executes(Service1I service1I){
+      cl.idControl(service1I);
+   }
 }
 }}}
 </td><td width = "33%">
 {{{
 class Service2{
 
-    CommonLogic cl;
+   CommonLogic cl;
     
-    public void executes(Service2I service2I){
-        cl.idControl(service2I);
-    }
+   public void executes(Service2I service2I){
+      cl.idControl(service2I);
+   }
 }
 }}}
 </td><td width = "33%">
 {{{
 class Service3{
 
-    CommonLogic cl;
+   CommonLogic cl;
     
-    public void executes(Service3I service3I){
-        cl.idControl(service3I);
-    }
+   public void executes(Service3I service3I){
+      cl.idControl(service3I);
+   }
 }
 }}}
 </td></tr></table>
@@ -226,12 +226,12 @@ class Service3{
 {{{
 class CommonLogic{
     
-    RelationalJMapper<CommonLogicI> rm;
+   RelationalJMapper<CommonLogicI> rm;
 
-    public void idControl(Object source){
+   public void idControl(Object source){
 
-        CommonLogicI clI = rm.manyToOne(source);
-        someOperations(clI);
+      CommonLogicI clI = rm.manyToOne(source);
+      someOperations(clI);
 
     }
 }
