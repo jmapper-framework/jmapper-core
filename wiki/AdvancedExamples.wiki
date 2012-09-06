@@ -180,11 +180,22 @@ class Service3I{
 </td></tr></table>
 <table width="100%"><tr><td width="33%">
 {{{
+
+
 class CommonLogicI{
 
    List<Integer> ids;
 
 }
+
+
+
+
+
+
+
+
+
 }}}
 </td><td width="66%">
 {{{
