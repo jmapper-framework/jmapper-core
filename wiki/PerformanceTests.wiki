@@ -41,3 +41,18 @@ Mapping between collections with the same items but different structures ({{{Lis
 ||mapping||mean||standard deviation||
 ||static||164.124 ps (CI deltas: -1.697 ps, +2.069 ps) ||758.374 ns (CI deltas: -115.668 ns, +160.554 ns)||
 ||dynamic||157.973 ps (CI deltas: -1.232 ps, +1.557 ps)||558.779 ns (CI deltas: -100.508 ns, +127.997 ns)||
+
+Mapping between collections to convert ({{{List<String> <-> Set<Integer>}}})
+||mapping||mean||standard deviation||
+||static||25.492 ps (CI deltas: -208.432 fs, +274.701 fs)||192.671 ns (CI deltas: -37.621 ns, +55.091 ns)||
+||dynamic||22.665 ps (CI deltas: -199.980 fs, +273.326 fs)||264.898 ns (CI deltas: -61.959 ns, +101.369 ns)||
+
+Mapping between maps with the same items but different structures  ({{{Map<String, String> <-> SortedMap<String, String>}}})
+||mapping||mean||standard deviation||
+||static||65.715 ps (CI deltas: -482.950 fs, +638.210 fs)||317.208 ns (CI deltas: -65.186 ns, +82.966 ns)||
+||dynamic||65.653 ps (CI deltas: -492.875 fs, +560.095 fs)||301.149 ns (CI deltas: -43.988 ns, +67.963 ns)||
+
+Mapping between maps to convert ({{{Map<String, Integer> <-> SortedMap<Integer, String>}}})
+||mapping||mean||standard deviation||
+||static||81.435 ps (CI deltas: -630.198 fs, +848.006 fs)||414.311 ns (CI deltas: -87.921 ns, +140.424 ns)||
+||dynamic||90.518 ps (CI deltas: -3.702 ps, +14.551 ps)||3.777 us (CI deltas: -3.220 us, +4.951 us)||
