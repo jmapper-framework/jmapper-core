@@ -231,7 +231,7 @@ class CommonLogic{
 
    public void idControl(Object source){
 
-      CommonLogicI clI = rm.manyToOne(source);
+      CommonLogicI clI=rm.manyToOne(source);
       someOperations(clI);
 
     }
