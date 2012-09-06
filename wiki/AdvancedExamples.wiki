@@ -143,8 +143,7 @@ class Service3I{
 
 }
 }}}
-</td></tr></table>
-<table width="100%"><tr><td width="33%">
+</td></tr><tr><td width="33%">
 {{{
 
 
@@ -188,8 +187,7 @@ Xml configuration:
 </jmapper>
 }}}
 </td></tr></table>
-<table width = "100%"><tr><td width = "50%">
-<table><tr>
+<table width = "100%"><tr><td width = "33%">
 {{{
 class Service1{
 
@@ -200,7 +198,7 @@ class Service1{
     }
 }
 }}}
-</tr><tr>
+</td><td width = "33%">
 {{{
 class Service2{
 
@@ -211,7 +209,7 @@ class Service2{
     }
 }
 }}}
-</tr><tr>
+</td><td width = "33%">
 {{{
 class Service3{
 
@@ -222,7 +220,7 @@ class Service3{
     }
 }
 }}}
-</tr></table></td><td width ="50%">
+</td></tr><tr><td width ="33%">
 {{{
 class CommonLogic{
     
@@ -236,4 +234,4 @@ class CommonLogic{
     }
 }
 }}}
-</td></tr></table>
+</td><td width="66%">Prova</td></table>
