@@ -220,7 +220,8 @@ class Service3{
     }
 }
 }}}
-</td></tr><tr><td width ="33%">
+</td></tr>
+<tr><td width ="33%">
 {{{
 class CommonLogic{
     
@@ -234,4 +235,8 @@ class CommonLogic{
     }
 }
 }}}
-</td><td width="66%">Prova</td></table>
+</td><td width="66%">
+{{{
+ asd
+}}}
+</td></table>
