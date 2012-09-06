@@ -166,7 +166,7 @@ class CommonLogicI{
 
 
 }}}
-</td><td width="66%">
+</td><td></td><td width="66%">
 {{{
 Xml configuration:
 <jmapper>
@@ -235,8 +235,8 @@ class CommonLogic{
     }
 }
 }}}
-</td><td width="66%">
+</td><td></td><td width="66%">
 {{{
  asd
 }}}
-</td></table>
+</td></tr></table>
