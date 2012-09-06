@@ -152,3 +152,29 @@ class Service3{
 }
 }}}
 </td></tr></table>
+Input objects:
+<table width = "100%"><tr><td>
+{{{
+class Service1I{
+
+   List<String> customersIds;
+
+}
+}}}
+</td><td>
+{{{
+class Service2I{
+
+   Set<Integer> companyIds;
+
+}
+}}}
+</td><td>
+{{{
+class Service1I{
+
+   TreeSet<String> supplierIds;
+
+}
+}}}
+</td></tr></table>
