@@ -54,7 +54,7 @@ With Jmapper you need to configure only the two business objects, with the surro
        Integer dtoOfield;
    }
 }}}
-</td></tr><tr>
+</td></tr></table>
 below the sample code:
 {{{
    class ExampleFacade{
@@ -108,7 +108,6 @@ below the sample code:
 
    }
 }}}
-</tr></table>
 *Two Configurations and two instances of RelationalJMapper is all you need*.
 
 == common logic for different objects ==
@@ -118,7 +117,8 @@ Standard solutions can be:
  * use *instanceof* to identify class type
  * pass, as input to the method, the values ​to handle
 
-Any solution that you can design, you will always have the need to change the code for every little request. with JMapper becomes:
+Any solution that you can design, you will always have the need to change the code for every little request. With JMapper becomes:
+
 Input objects:
 <table width = "100%"><tr><td width = "33%">
 {{{
