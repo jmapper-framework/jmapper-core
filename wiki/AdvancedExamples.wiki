@@ -108,4 +108,13 @@ below the sample code:
 
    }
 }}}
-Two Configurations and two instances of RelationalJMapper is all you need.
+*Two Configurations and two instances of RelationalJMapper is all you need*.
+
+== common logic for different objects ==
+
+You may have the need to apply a common logic in most parts of the web application, using different objects as input.
+Standard solutions can be:
+ * use *instanceof* to identify class type
+ * pass, as input to the method, the values ​to handle
+
+Any solution that you can design, you will always have the need to change the code for every little request.
