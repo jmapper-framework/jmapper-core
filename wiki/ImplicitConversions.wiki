@@ -12,10 +12,14 @@ JMapper allows to perform mapping between primitive and / or wrapper types, such
 ||Char -> boolean||true if Char is equal to T, false all other cases||
 
 Also converts the collections and maps including their objects, for example:
- * from interface to implementation and vice versa: {{{List <-> ArrayList}}}
- * between different interfaces: {{{List<->Set, Map <-> SortedMap}}}
- * between different implementations: {{{ArrayList <-> HashSet, HashMap <-> TreeMap}}}
- * a combination of the two previous: {{{List <-> HashSet, HashMap <-> SortedMap}}}
+ * from interface to implementation and vice versa: 
+   {{{List <-> ArrayList}}}
+ * between different interfaces: 
+   {{{List<->Set, Map <-> SortedMap}}}
+ * between different implementations: 
+   {{{ArrayList <-> HashSet, HashMap <-> TreeMap}}}
+ * a combination of the two previous: 
+   {{{List <-> HashSet, HashMap <-> SortedMap}}}
  * conversion of primitive/wrapper items: 
-{{{List<String> <-> HashSet<Integer>, HashMap<Integer, String> <-> SortedMap<String, Integer>}}}
+   {{{List<String> <-> HashSet<Integer>, HashMap<Integer, String> <-> SortedMap<String, Integer>}}}
   
