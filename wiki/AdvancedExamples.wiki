@@ -8,7 +8,7 @@ We will see now some very interesting examples of use, which makes the code more
 
 A classic example is a web application that consists of three layers: facade, business and data access.
 Each layer has two bean, one of input and one of output.
-<table width="100%"><tr><td align="center">
+<table><tr><td align="center">
 {{{
              ____________       ____________       ____________
       PivotI |          | BoI   |          | DtoI  |          |
@@ -125,7 +125,7 @@ class Service1{
     CommonLogic cl;
     
     public void executes(Service1I service1I){
-        cl.(service1I);
+        cl.idControl(service1I);
     }
 }
 }}}
@@ -136,7 +136,7 @@ class Service2{
     CommonLogic cl;
     
     public void executes(Service2I service2I){
-        cl.(service2I);
+        cl.idControl(service2I);
     }
 }
 }}}
@@ -147,7 +147,7 @@ class Service3{
     CommonLogic cl;
     
     public void executes(Service3I service3I){
-        cl.(service3I);
+        cl.idControl(service3I);
     }
 }
 }}}
@@ -171,10 +171,49 @@ class Service2I{
 }}}
 </td><td width = "33%">
 {{{
-class Service1I{
+class Service3I{
 
    TreeSet<String> supplierIds;
 
 }
 }}}
 </td></tr></table>
+{{{
+class CommonLogicI{
+
+   List<Integer> ids;
+
+}
+}}}
+jmapper.xml:
+{{{
+<jmapper>
+  <class name='com.myapplication.CommonLogicI'>
+    <attribute name='ids'>
+      <attributes>
+        <attribute name='customersIds' />
+        <attribute name='companyIds' />
+        <attribute name='supplierIds' />
+      </attributes>
+      <classes>
+        <class name='com.myapplication.Service1I' />
+        <class name='com.myapplication.Service2I' />
+        <class name='com.myapplication.Service3I' />
+      </classes>
+    </attribute>
+  </class>
+</jmapper>
+}}}
+{{{
+class CommonLogic{
+    
+    RelationalJMapper<CommonLogicI> rm;
+
+    public void idControl(Object source){
+
+        CommonLogicI clI = rm.manyToOne(source);
+        someOperations(clI);
+
+    }
+}
+}}}
