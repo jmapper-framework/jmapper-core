@@ -144,7 +144,7 @@ class Service3I{
 }
 }}}
 </td></tr></table>
-<table><tr><td width="33%">
+<table  width ="100%"><tr><td width="33%">
 {{{
 
 
