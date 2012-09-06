@@ -24,20 +24,20 @@ Below are the results accompanied by a brief description.
 
 Mapping between primitive and wrapper types ({{{int <-> Integer}}})
 ||mapping||mean||standard deviation||
-||static||158.094 fs (CI deltas: -897.636 as, +1.591 fs)||13.358 ns (CI deltas: -4.451 ns, +10.788 ns)||
-||dynamic||160.068 fs (CI deltas: -2.345 fs, +6.515 fs)||41.242 ns (CI deltas: -24.152 ns, +45.822 ns)||
+||static||158.094 fs (CI deltas: -897.636 as, +1.591 fs)||13.358 ns (CI deltas: -4.451 ns, +10.788 ns) ||
+||dynamic||160.068 fs (CI deltas: -2.345 fs, +6.515 fs) ||41.242 ns (CI deltas: -24.152 ns, +45.822 ns)||
 
 Mapping between equal Arrays ({{{String[] <-> String[]}}})
 ||mapping||mean||standard deviation||
-||static||115.899 fs (CI deltas: -1.507 fs, +1.942 fs)||27.709 ns (CI deltas: -5.182 ns, +6.500 ns)||
+||static||115.899 fs (CI deltas: -1.507 fs, +1.942 fs) ||27.709 ns (CI deltas: -5.182 ns, +6.500 ns)||
 ||dynamic||116.097 fs (CI deltas: -1.594 fs, +2.215 fs)||21.411 ns (CI deltas: -4.498 ns, +9.111 ns)||
 
 Mapping between Array to convert ({{{String[] <-> Integer[]}}})
 ||mapping||mean||standard deviation||
-||static||707.309 fs (CI deltas: -5.970 fs, +7.097 fs)||37.094 ns (CI deltas: -5.323 ns, +10.031 ns)||
-||dynamic||698.158 fs (CI deltas: -4.053 fs, +4.980 fs)||25.677 ns (CI deltas: -4.191 ns, +7.743 ns)||
+||static||707.309 fs (CI deltas: -5.970 fs, +7.097 fs) ||37.094 ns (CI deltas: -5.323 ns, +10.031 ns)||
+||dynamic||698.158 fs (CI deltas: -4.053 fs, +4.980 fs)||25.677 ns (CI deltas: -4.191 ns, +7.743 ns) ||
 
 Mapping between collections with the same items but different structures ({{{List<String> <-> Set<String>}}})
 ||mapping||mean||standard deviation||
-||static||164.124 ps (CI deltas: -1.697 ps, +2.069 ps)||758.374 ns (CI deltas: -115.668 ns, +160.554 ns)||
+||static||164.124 ps (CI deltas: -1.697 ps, +2.069 ps) ||758.374 ns (CI deltas: -115.668 ns, +160.554 ns)||
 ||dynamic||157.973 ps (CI deltas: -1.232 ps, +1.557 ps)||558.779 ns (CI deltas: -100.508 ns, +127.997 ns)||
