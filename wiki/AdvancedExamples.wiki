@@ -245,5 +245,5 @@ The conversions between different structures are performed implicitly, including
 
 *Elegant, concise and high performance all in one project*
 
-                        <h4><b>JMapper</b></h4>
+                        <h2><b>JMapper</b></h2>
 </td></tr></table>
