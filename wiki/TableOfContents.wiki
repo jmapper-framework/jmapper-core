@@ -38,3 +38,4 @@
  * [DesignByContract Design by contract]
  * [RawTypes About raw types]
  * [AdvancedExamples Advanced examples]
+ * [PerformanceTests Performance tests]
