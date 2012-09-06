@@ -3,12 +3,8 @@
 = Performance tests =
 
 JMapper uses the Javassist framework for writing dynamic bytecode, so the generated mapping is equivalent to mapping written statically.
-
 Performance tests are the most difficult to make, because you have to consider different parameters so that the data obtained are real, such as:
  * JVM warmup: Running the code will initially be slow and will go worse and worse until you reach the steady state.
-
  * Class loading: The first time you start a benchmark all classes used must be charged.
-
  * Just In Time Compiler: when the JVM identifies a hot part of the code is compiled into machine language.
-
  * Garbage collector, a garbage collection can be invoked during the execution of the benchmark, greatly increasing the time.
