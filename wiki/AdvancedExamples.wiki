@@ -8,7 +8,7 @@ We will see now some very interesting examples of use, which makes the code more
 
 A classic example is a web application that consists of three layers: facade, business and data access.
 Each layer has two bean, one of input and one of output.
-<table width="100%"><tr><td  align="center">
+<table width="100%"><tr><td  width="100%" align="center">
 {{{
              ____________       ____________       ____________
       PivotI |          | BoI   |          | DtoI  |          |
@@ -22,7 +22,7 @@ Each layer has two bean, one of input and one of output.
 In the architecture of this type, for each service you need to implement four mapping: {{{PivotI -> BoI -> DtoI}}} and {{{DtoO -> BoO -> PivotO}}}.
 
 With Jmapper you need to configure only the two business objects, with the surrounding objects.
-<table width = "100%"><tr><td>
+<table width = "100%"><tr><td width="50%">
 {{{
    class PivotI{
        String pivotIfield;
@@ -38,7 +38,7 @@ With Jmapper you need to configure only the two business objects, with the surro
        Integer dtoIfield;
    }
 }}}
-</td><td>
+</td><td width="50%">
 {{{
    class PivotO{
        String pivotOfield;
@@ -56,6 +56,7 @@ With Jmapper you need to configure only the two business objects, with the surro
 }}}
 </td></tr></table>
 below the sample code:
+<table width = "100%"><tr><td width="100%">
 {{{
    class ExampleFacade{
        
@@ -108,6 +109,7 @@ below the sample code:
 
    }
 }}}
+</td></tr></table>
 *Two Configurations and two instances of RelationalJMapper is all you need*.
 
 == common logic for different objects ==
@@ -118,7 +120,7 @@ Standard solutions can be:
  * pass, as input to the method, the values ​to handle
 
 Any solution that you can design, you will always have the need to change the code for every little request. with JMapper becomes:
-<table width = "100%"><tr><td>
+<table width = "100%"><tr><td width = "33%">
 {{{
 class Service1{
 
@@ -129,7 +131,7 @@ class Service1{
     }
 }
 }}}
-</td><td>
+</td><td width = "33%">
 {{{
 class Service2{
 
@@ -140,7 +142,7 @@ class Service2{
     }
 }
 }}}
-</td><td>
+</td><td width = "33%">
 {{{
 class Service3{
 
@@ -153,7 +155,7 @@ class Service3{
 }}}
 </td></tr></table>
 Input objects:
-<table width = "100%"><tr><td>
+<table width = "100%"><tr><td width = "33%">
 {{{
 class Service1I{
 
@@ -161,7 +163,7 @@ class Service1I{
 
 }
 }}}
-</td><td>
+</td><td width = "33%">
 {{{
 class Service2I{
 
@@ -169,7 +171,7 @@ class Service2I{
 
 }
 }}}
-</td><td>
+</td><td width = "33%">
 {{{
 class Service1I{
 
