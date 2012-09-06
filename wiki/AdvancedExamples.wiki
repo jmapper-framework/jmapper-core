@@ -9,7 +9,7 @@ We will see now some very interesting examples of use, which makes the code more
 A classic example is a web application that consists of three layers: facade, business and data access.
 Each layer has two bean, one of input and one of output.
 <table><tr><td align="center">
-{{{
+{{{                                                                                                       
              ____________       ____________       ____________
       PivotI |          | BoI   |          | DtoI  |          |
       ------>|  Facade  |------>| Business |------>|  Data    |
@@ -118,40 +118,6 @@ Standard solutions can be:
  * pass, as input to the method, the values ​to handle
 
 Any solution that you can design, you will always have the need to change the code for every little request. with JMapper becomes:
-<table width = "100%"><tr><td width = "33%">
-{{{
-class Service1{
-
-    CommonLogic cl;
-    
-    public void executes(Service1I service1I){
-        cl.idControl(service1I);
-    }
-}
-}}}
-</td><td width = "33%">
-{{{
-class Service2{
-
-    CommonLogic cl;
-    
-    public void executes(Service2I service2I){
-        cl.idControl(service2I);
-    }
-}
-}}}
-</td><td width = "33%">
-{{{
-class Service3{
-
-    CommonLogic cl;
-    
-    public void executes(Service3I service3I){
-        cl.idControl(service3I);
-    }
-}
-}}}
-</td></tr></table>
 Input objects:
 <table width = "100%"><tr><td width = "33%">
 {{{
@@ -222,6 +188,41 @@ Xml configuration:
 </jmapper>
 }}}
 </td></tr></table>
+<table width = "100%"><tr><td width = "50%">
+<table><tr>
+{{{
+class Service1{
+
+    CommonLogic cl;
+    
+    public void executes(Service1I service1I){
+        cl.idControl(service1I);
+    }
+}
+}}}
+</tr><tr>
+{{{
+class Service2{
+
+    CommonLogic cl;
+    
+    public void executes(Service2I service2I){
+        cl.idControl(service2I);
+    }
+}
+}}}
+</tr><tr>
+{{{
+class Service3{
+
+    CommonLogic cl;
+    
+    public void executes(Service3I service3I){
+        cl.idControl(service3I);
+    }
+}
+}}}
+</tr></table></td><td width ="50%">
 {{{
 class CommonLogic{
     
@@ -235,3 +236,4 @@ class CommonLogic{
     }
 }
 }}}
+</td></tr></table>
