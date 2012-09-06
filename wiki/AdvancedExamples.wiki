@@ -145,6 +145,7 @@ class Service3I{
 }
 }}}
 </td></tr></table>
+As you can see, the fields have different structures, JMapper handles all implicitly.
 <table  width ="100%"><tr><td width="33%">
 {{{
 
@@ -189,6 +190,7 @@ Xml configuration:
 </jmapper>
 }}}
 </td></tr></table>
+service implementations:
 <table width = "100%"><tr><td width = "33%">
 {{{
 class Service1{
