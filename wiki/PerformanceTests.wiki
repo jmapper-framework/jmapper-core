@@ -10,3 +10,19 @@ Performance tests are the most difficult to make, because you have to consider d
  * *Garbage collector*: a garbage collection can be invoked during the execution of the benchmark, greatly increasing the time.
 
 All these variables are very well managed by the framework Benchmark downloaded at: http://www.ellipticgroup.com/html/benchmarkingArticle.html.
+
+== Hardware == 
+
+The tests were carried out on a machine with the following features:
+ * processor: Intel(R) Core(TM) i5-2520M CPU @ 2,50GHz 773MHz
+ * RAM: 2,94GB
+ * OS: XP sp3
+ * JVM: 1.6.0
+
+== Results ==
+Below are the results accompanied by a brief description.
+
+Mapping between primitive and wrapper types ({{{int <-> Integer}}})
+||mapping||mean||standard deviation||
+||static||158.094 fs (CI deltas: -897.636 as, +1.591 fs)||13.358 ns (CI deltas: -4.451 ns, +10.788 ns)||
+||dynamic||160.068 fs (CI deltas: -2.345 fs, +6.515 fs)||41.242 ns (CI deltas: -24.152 ns, +45.822 ns)||
