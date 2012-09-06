@@ -16,5 +16,6 @@ Also converts the collections and maps including their objects, for example:
  * between different interfaces: {{{List<->Set, Map <-> SortedMap}}}
  * between different implementations: {{{ArrayList <-> HashSet, HashMap <-> TreeMap}}}
  * a combination of the two previous: {{{List <-> HashSet, HashMap <-> SortedMap}}}
- * conversion of primitive/wrapper items: {{{List<String> <-> HashSet<Integer>, HashMap<Integer, String> <-> SortedMap<String, Integer>}}}
+ * conversion of primitive/wrapper items: {{{List<String> <-> HashSet<Integer>, 
+                                             HashMap<Integer, String> <-> SortedMap<String, Integer>}}}
   
