@@ -47,8 +47,10 @@ Value is the default parameter of the annotation and therefore it is not necessa
 {{{
 class Destination{                      
     
+    /* implicit mapping when mapped field name and target field name match */
     @JMap 
     private String id;                      
+    /* explicit mapping when mapped field name and target field name don't match */
     @JMap("sourceField") 
     private String destinationField;       
     private String other;                  
@@ -56,9 +58,6 @@ class Destination{
     // getter and setter...                
 }                                     
 }}}
-Only the configured fields will be considered in the mapping.
-Without value (eg id), it indicates that the names of the target field and the mapped field are equal. If the names are different, you must define the value (eg sourceField).
-
 Once set up, we go immediately to a practical example:
 {{{
 Source source = new Source("id", "sourceField", "other");
