@@ -31,7 +31,6 @@
    * [JMapperConfiguration JMapper configuration]
    * [SpringConfiguration Spring configuration]
    * [MavenConfiguration Maven configuration]
-   * [PathsEditing Paths editing]
  * [XmlHandling Xml handling]
  * [ImplicitConversions Implicit conversions]
  * [ExplicitConversions Explicit conversions]
