@@ -1,4 +1,4 @@
-#summary introduction to the JMapper framework
+#summary introduction to JMapper framework
 
 = Overview of JMapper Framework =
 
