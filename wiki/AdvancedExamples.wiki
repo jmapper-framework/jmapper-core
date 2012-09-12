@@ -242,7 +242,7 @@ class CommonLogic{
     }
 }
 }}}
-</td><td width="66%" align ="center" BGCOLOR="#ffff00">
+</td><td width="40%" align ="center">
 <h4>The conversions between different structures are performed implicitly, including the conversion of their elements.
 
 *Elegance, high performance and robustness all in one project*</h4>
