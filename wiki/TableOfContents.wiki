@@ -31,6 +31,8 @@
    * [SpringConfiguration Spring configuration]
    * [MavenConfiguration Maven configuration]
  * [XmlHandling Xml handling]
+   * [XmlHandling#Constructors Constructors]
+   * [XmlHandling#Methods Methods]
  * [ImplicitConversions Implicit conversions]
  * [ExplicitConversions Explicit conversions]
  * [DesignByContract Design by contract]
