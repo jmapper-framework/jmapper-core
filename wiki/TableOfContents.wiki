@@ -28,7 +28,6 @@
    * [oneToMany#Enrichment_signatures Enrichment signatures]
  * [Configurations Configurations]
    * [XmlConfiguration XML configuration]
-   * [JMapperConfiguration JMapper configuration]
    * [SpringConfiguration Spring configuration]
    * [MavenConfiguration Maven configuration]
  * [XmlHandling Xml handling]
