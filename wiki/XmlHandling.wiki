@@ -10,7 +10,7 @@ The empty constructor defines a jmapper.xml file positioned at the application r
 
 If there is a xml file and you want to handle it, pass it to the constructor, as follows: {{{new XmlHandler("jmapper.xml")}}}. 
 
-*IMPORTANT!* _In this case, you do not need to declare the full path but only the file name, JMapper find it in the application recursively._
+*IMPORTANT!* _In this case, you do not need to declare the full path but only the file name, JMapper find it, in the application, recursively._
 
 == Methods ==
 
