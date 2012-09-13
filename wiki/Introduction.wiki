@@ -88,7 +88,7 @@ if you wrote the xml, you have to pass the path to the constructor, as below:
 {{{
 new JMapper <Destination, Source>(Destination.class, Source.class, "com/myapplication/xml/jmapper.xml");
 }}}
-*Remember* _the xml file must be accessible from your classpath at runtime, if you include it in an archive.If you want define an external path, you need to add this prefix:_ {{{"file:"}}} _for example:_ {{{"file:/C:/path/jmapper.xml"}}}
+*Remember* _the xml file must be accessible from your classpath at runtime.If you want define an external path, you need to add this prefix:_ {{{"file:"}}} _for example:_ {{{"file:/C:/path/jmapper.xml"}}}
 
 Below the constructor complete with all parameters:
 {{{
