@@ -6,11 +6,11 @@ As it may be compact, the configuration in XML format, there is always the possi
 
 == Constructors ==
 
-The empty constructor defines a jmapper.xml file positioned at the application root {{{new XmlHandler()}}}.
+The empty constructor defines a jmapper.xml file positioned at the application root: {{{new XmlHandler()}}}.
 
 If there is a xml file and you want to handle it, pass it to the constructor, as follows: {{{new XmlHandler("jmapper.xml")}}}. 
 
-*IMPORTANT!* _In this case, you do not need to declare the full path but only the file name, JMapper find it, in the application, recursively._
+*IMPORTANT!* _In this case, you do not need to declare the full path but only the file name, JMapper find it recursively, in the application._
 
 == Methods ==
 
