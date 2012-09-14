@@ -236,7 +236,10 @@ class CommonLogic{
 
    public void idControl(Object source){
 
+      // mapping
       CommonLogicI clI=rm.manyToOne(source);
+
+      // logic
       someOperations(clI);
 
     }
