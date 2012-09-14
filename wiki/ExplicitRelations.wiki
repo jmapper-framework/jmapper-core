@@ -31,7 +31,7 @@ and the path of xml configuration file if it's defined:
 RelationalJMapper<AnnotatedClass> rm = new RelationalJMapper<AnnotatedClass>(AnnotatedClass.class,"com/myapplication/jmapper.xml");
 }}}
 == Many to One ==
-Using the manyToOne method will indicate to the framework that the configured class, passed to the constructor, is the destination class, while target classes become the sources.
+Using the manyToOne method will indicate to the framework that the configured class is the destination class, while target classes become the sources.
 In {{{AnnotatedClass}}} eg the target classes are Class1, Class2 and Class3, then passing an instance belonging to one of them, the method returns an instance of {{{AnnotatedClass}}}.
 {{{
 AnnotatedClass manyToOne = null;
@@ -56,8 +56,8 @@ AnnotatedClass [field1=field1Class2, field2=field2Class2, field3=field3Class2]
 AnnotatedClass [field1=field1Class3, field2=field2Class3, field3=field3Class3]
 }}}
 == One to Many ==
-The method oneToMany instead allows us to define the configured class, passed to the constructor, as a source class and the target classes as destination classes.
-{{{AnnotatedClass}}} in this example is the Source class and classes Class1, Class2 and Class3 are classes Destination, is still required to explain the instance to be created and you can do the following:
+The method oneToMany instead allows us to define the configured class as a source class and the target classes as destination classes.
+{{{AnnotatedClass}}} in this example is the Source class and classes Class1, Class2 and Class3 are classes Destination, it is still required, to explain the instance to be created, call the setDestination method to define the target class, as follows:
 {{{
 relationalJMapper.setDestinationClass(Class1.class)
                  .oneToMany(annotatedClass);
