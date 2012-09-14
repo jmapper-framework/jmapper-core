@@ -1,5 +1,0 @@
-#summary IJMapper and IRelationalJMapper interfaces.
-
-= Design by contract =
-
-In order to make the code independent from the concrete classes (JMapper and  RelationalJMapper), the framework exposes interfaces: *IJMapper* and *IRelationalJMapper*, which respectively define the contracts for JMapper and  RelationalJMapper classes.
