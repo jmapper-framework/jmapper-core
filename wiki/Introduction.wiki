@@ -8,9 +8,9 @@ However, none of these automates a common feature, present in all J2EE applicati
 The mapping is a mechanical operation that almost 100%, in medium to large applications, including development, testing and bug fixing, reaches a weight that is certainly not negligible. 
 As the rule may seem elementary, enclose in a single framework a potentially unlimited number of combinations, recursive mapping, addition of logic and other features, makes its implementation very complex with questionable compromises, such as poor performance, covering a limited features, etc... . 
 
-JMapper aims not only coverage requirements but also to make it as easy as possible to use, all with performance equivalent or superior to the static mapping. 
+JMapper aims not only to coverage all requirements but also to make it as easy as possible to use, that's all with performance equivalent or higher to static mapping. 
   
-JMapper specifically allows: 
+JMapper allows: 
  *- to perform complex mapping (Collection, Map, Array, inner classes, etc...) 
  *- to manage implicit and explicit relationships of various types: 
    *- one to one 
@@ -18,7 +18,7 @@ JMapper specifically allows:
    *- many to one 
  *- to perform recursive mapping (mapped objects into other objects) 
  *- to configure the mapping using the annotation and / or xml
- *- to write quick and simple xml configuration file through a series of utility methods
+ *- to write quick and simple xml configuration file, through a series of utility methods
 
 = Preface =
 
