@@ -1,5 +1,0 @@
-#summary how to execute mapping between raw types.
-
-= About raw types =
-
-Also you can perform mapping between raw types, operations not allowed are those that provide conversion or recursive mapping.
