@@ -43,7 +43,7 @@ As mentioned in the introduction, JMapper allows you to configure the mapping us
 = @JMap =
 
 The annotation used to configure the single field is {{{@JMap}}}, it has several parameters, including: value.
-Value is the default parameter of the annotation and therefore it is not necessary to explain it if used individually.
+Value is the default parameter of the annotations and therefore isn't necessary to explain it if used individually.
 {{{
 class Destination{                      
     
