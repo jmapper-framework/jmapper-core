@@ -1,0 +1,5 @@
+#summary more informations of JMapper .
+
+= About raw types =
+
+Also you can perform mapping between raw types, operations not allowed are those that provide conversion or recursive mapping.
