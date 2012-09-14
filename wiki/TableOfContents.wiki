@@ -35,7 +35,6 @@
    * [XmlHandling#Methods Methods]
  * [ImplicitConversions Implicit conversions]
  * [ExplicitConversions Explicit conversions]
- * [DesignByContract Design by contract]
- * [RawTypes About raw types]
+ * [MoreInformations More informations]
  * [AdvancedExamples Advanced examples]
  * [PerformanceTests Performance tests]
