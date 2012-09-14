@@ -2,7 +2,7 @@
 
 = Xml handling =
 
-As it may be compact, the configuration in XML format, there is always the possibility of error-prone writing it, to eliminate these risks and speed up its completion, the framework exposes the class *{{{XmlHandler}}}* 
+As it may be compact, the configuration in XML format, there is always the possibility of error-prone writing it, to eliminate these risks and speed up its completion, the framework exposes the class *{{{XmlHandler}}}*.
 
 == Constructors ==
 
@@ -10,7 +10,7 @@ The empty constructor defines a jmapper.xml file positioned at the application r
 
 If there is a xml file and you want to handle it, pass it to the constructor, as follows: {{{new XmlHandler("jmapper.xml")}}}. 
 
-*IMPORTANT!* _In this case, you do not need to declare the full path but only the file name, JMapper find it recursively, in the application._
+*IMPORTANT!* _In this case, you do not need to declare the full path but only the file name, JMapper find it recursively._
 
 == Methods ==
 
