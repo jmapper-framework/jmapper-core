@@ -119,7 +119,7 @@ Standard solutions can be:
  * use *instanceof* to identify class type
  * pass, as input to the method, the values ​to handle
 
-Any solution that you can design, you will always have the need to change the code for every little request. With JMapper becomes:
+Any solution you can design will always have the need to change the code for every change request. With JMapper becomes:
 
 Input objects:
 <table width = "100%"><tr><td width = "33%">
