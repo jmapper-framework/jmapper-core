@@ -54,7 +54,6 @@ With Jmapper you need to configure only the two business objects, with the surro
 }}}
 </td></tr></table>
 below the sample code:
-<table width><tr><td>
 {{{
    class ExampleFacade{
        
@@ -107,7 +106,6 @@ below the sample code:
 
    }
 }}}
-</td></tr></table>
 *Two Configurations and two instances of RelationalJMapper is all you need*.
 
 == common logic for different objects ==
