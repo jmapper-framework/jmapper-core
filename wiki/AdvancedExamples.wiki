@@ -115,19 +115,19 @@ below the sample code:
 == common logic for different objects ==
 
 You may have the need to apply a common logic in most parts of the web application, using different objects as input.
-<table width = "100%"><tr><td>
+<table width = "100%"><tr><td align="center">
 {{{                                                                                                       
-              ____________   ___________   ___________
-             |            | |           | |           |
-             |  ServiceI  | | Service2I | | Service3I |
-             |____________| |___________| |___________|  
-                       \          |          /
-                        \         |         /
-                         \        |        /
-                          V_______V_______V
-                         |                |  
-                         |  CommonLogicI  |         
-                         |________________|
+              ____________    ___________    ___________
+             |            |  |           |  |           |
+             |  Service   |  | Service2  |  | Service3  |
+             |____________|  |___________|  |___________|  
+                       \           |          /
+                ServiceI\      Service2I     / Service3I
+                         \         |        /
+                          V________V_______V
+                          |                |  
+                          |  CommonLogicI  |         
+                          |________________|
 }}}
 </td></tr></table>
 Standard solutions can be:
