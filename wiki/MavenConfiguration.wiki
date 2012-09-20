@@ -14,11 +14,22 @@ mvn install:install-file
 -Dpackaging=jar
 }}}
 == Dependency ==
+JMapper requires the slf4j and log4j dependencies to handle exceptions.
 {{{
 <dependency>
    <groupId>it.avutils.jmapper</groupId>
    <artifactId>core</artifactId>
    <version>1.0.0</version>
+</dependency>
+<dependency> 
+   <groupId>org.slf4j</groupId>
+   <artifactId>slf4j-log4j12</artifactId>
+   <version>1.6.6</version>
+</dependency>
+<dependency>
+   <groupId>log4j</groupId>
+   <artifactId>log4j</artifactId>
+   <version>1.2.17</version>
 </dependency>
 }}}
 
