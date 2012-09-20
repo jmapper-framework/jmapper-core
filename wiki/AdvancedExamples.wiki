@@ -115,7 +115,7 @@ below the sample code:
 == common logic for different objects ==
 
 You may have the need to apply a common logic in most parts of the web application, using different objects as input.
-<table width = "100%"><tr><td align="center">
+<table width = "88%"><tr><td align="center">
 {{{                                                                                                       
               ____________    ___________    ___________
              |            |  |           |  |           |
