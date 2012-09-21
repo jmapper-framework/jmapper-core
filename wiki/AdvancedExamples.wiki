@@ -121,7 +121,7 @@ You may have the need to apply a common logic in most parts of the web applicati
                          \         |        /
                           V________V_______V
                           |                |  
-                          |  CommonLogicI  |         
+                          |  CommonLogic   |         
                           |________________|
 }}}
 Standard solutions can be:
