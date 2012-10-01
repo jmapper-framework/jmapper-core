@@ -8,13 +8,13 @@ Example of JMapper configuration:
    <constructor-arg><value>bean.Destination</value></constructor-arg>
    <constructor-arg><value>bean.Source</value></constructor-arg>
    <constructor-arg><value>ChooseConfig.SOURCE</value></constructor-arg>
-   <constructor-arg><value>"com/myapplication/xml/jmapper.xml"</value></constructor-arg>
+   <constructor-arg><value>com/myapplication/xml/jmapper.xml</value></constructor-arg>
 </bean>
 }}}
 Example of RelationalJMapper configuration:
 {{{
 <bean id="relationalJmapper" class="it.avutils.jmapper.RelationalJMapper">
    <constructor-arg><value>bean.ConfiguredBean</value></constructor-arg>
-   <constructor-arg><value>"com/myapplication/xml/jmapper.xml"</value></constructor-arg>
+   <constructor-arg><value>com/myapplication/xml/jmapper.xml</value></constructor-arg>
 </bean>
 }}}
