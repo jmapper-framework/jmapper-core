@@ -2,7 +2,7 @@
 
 = Implicit conversions =
 
-JMapper allows to perform mapping between primitive and / or wrapper types, such as from String to Integer and vice versa. Below are represented the conventions used to handle all those conversions that are uncommon:
+JMapper allows to perform mapping between primitive and / or wrapper types, such as from String to Integer and vice versa. Below are represented the conventions used to handle all those *conversions* that are *uncommon*:
 ||*Conversion*||*Result*||
 ||Boolean -> Number||1 if Boolean is true, 0 if false||
 ||Boolean -> Character/char||T if Boolean is true, F if false||
