@@ -74,6 +74,7 @@ This is the xml configuration that belong to Destination class:
   </class>
 </jmapper>
 }}}
+For writing automated XML, read the XML handling section.
 
 = Example =
 
