@@ -62,3 +62,4 @@ Here's an example of {{{AnnotatedClass}}} in xml format:
   </class>
 </jmapper>
 }}}
+The combinations between value, attributes and classes are the same of JMap annotation, if you want create this mapping file with utility methods, see the Xml handling paragraph.
