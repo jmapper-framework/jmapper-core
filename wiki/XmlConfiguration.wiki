@@ -19,7 +19,7 @@ The XML follows the pattern below:
                                            \
                                           value
 }}}
-Here's an example of {{{AnnotatedClass}}} in xml format:
+Here's an example of {{{AnnotatedClass}}} (described in Explicit relations paragraph) in xml format:
 {{{
 <jmapper>
   <class name='it.jmapper.bean.AnnotatedClass'>
