@@ -1,10 +1,11 @@
 #summary description of the Xml configuration.
 
-= XML configuration =
+= XML format =
 
 The annotations are easy to use, minimize setup time, but you must necessarily put hands to manipulate the code, for this reason, the framework also handles the configuration in XML format.
 
-The XML follows the pattern below:
+The xml follows the @JMap criteria: the combinations between value, attributes and classes are the same. 
+The xml configuration follows the pattern below:
 {{{
                                                       1..*
                                           attributes ------ attribute
@@ -19,47 +20,24 @@ The XML follows the pattern below:
                                            \
                                           value
 }}}
-Here's an example of {{{AnnotatedClass}}} (described in Explicit relations paragraph) in xml format:
+There's an example:
 {{{
 <jmapper>
-  <class name='it.jmapper.bean.AnnotatedClass'>
+  <class name='com.myapplication.bean.ExampleClass'>
     <attribute name='field1'>
+      <value name='field1Class1'/>
       <attributes>
         <attribute name='field1Class1' />
         <attribute name='field1Class2' />
         <attribute name='field1Class3' />
       </attributes>
       <classes>
-        <class name='it.jmapper.bean.Class1' />
-        <class name='it.jmapper.bean.Class2' />
-        <class name='it.jmapper.bean.Class3' />
-      </classes>
-    </attribute>
-    <attribute name='field2'>
-      <attributes>
-        <attribute name='field2Class1' />
-        <attribute name='field2Class2' />
-        <attribute name='field2Class3' />
-      </attributes>
-      <classes>
-        <class name='it.jmapper.bean.Class1' />
-        <class name='it.jmapper.bean.Class2' />
-        <class name='it.jmapper.bean.Class3' />
-      </classes>
-    </attribute>
-    <attribute name='field3'>
-      <attributes>
-        <attribute name='field3Class1' />
-        <attribute name='field3Class2' />
-        <attribute name='field3Class3' />
-      </attributes>
-      <classes>
-        <class name='it.jmapper.bean.Class1' />
-        <class name='it.jmapper.bean.Class2' />
-        <class name='it.jmapper.bean.Class3' />
+        <class name='com.myapplication.bean.Class1' />
+        <class name='com.myapplication.bean.Class2' />
+        <class name='com.myapplication.bean.Class3' />
       </classes>
     </attribute>
   </class>
 </jmapper>
 }}}
-The combinations between value, attributes and classes are the same of JMap annotation, if you want create this mapping file with utility methods, see the Xml handling paragraph.
+If you want create this mapping file with utility methods, see the XML handling paragraph.
