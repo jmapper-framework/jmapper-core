@@ -40,7 +40,7 @@ As mentioned in the introduction, JMapper allows you to configure the mapping us
 
 *IMPORTANT!* _the XML configuration has greater visibility of the equivalent annotation_
 
-= @JMap =
+= Annotated configuration =
 
 The annotation used to configure the single field is {{{@JMap}}}, it has several parameters, including: value.
 Value is the default parameter of the annotations and therefore isn't necessary to explain it if used individually.
@@ -58,6 +58,25 @@ class Destination{
     // getter and setter...                
 }                                     
 }}}
+
+= XML configuration =
+
+This is the xml configuration that belong to Destination class:
+{{{
+<jmapper>
+  <class name="it.jmapper.bean.Destination">
+    <attribute name="id">
+      <value name="id"/>
+    </attribute>
+    <attribute name="destinationField">
+      <value name="sourceField"/>
+    </attribute>
+  </class>
+</jmapper>
+}}}
+
+= Example =
+
 Once set up, we go immediately to a practical example:
 {{{
 Source source = new Source("id", "sourceField", "other");
