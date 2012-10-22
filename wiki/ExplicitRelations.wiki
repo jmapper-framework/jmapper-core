@@ -32,7 +32,7 @@ RelationalJMapper<AnnotatedClass> rm = new RelationalJMapper<AnnotatedClass>(Ann
 }}}
 == Many to One ==
 Using the manyToOne method will indicate to the framework that the configured class is the destination class, while target classes become the sources.
-In {{{AnnotatedClass}}} eg the target classes are Class1, Class2 and Class3, then passing an instance belonging to one of them, the method returns an instance of {{{AnnotatedClass}}}.
+In {{{AnnotatedClass}}} eg the source classes are Class1, Class2 and Class3, then passing an instance belonging to one of them, the method returns an instance of {{{AnnotatedClass}}}.
 {{{
 AnnotatedClass manyToOne = null;
 RelationalJMapper<AnnotatedClass> rm = new RelationalJMapper<AnnotatedClass>(AnnotatedClass.class);
