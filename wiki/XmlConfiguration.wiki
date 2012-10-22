@@ -41,3 +41,5 @@ There's an example:
 </jmapper>
 }}}
 If you want create this mapping file with utility methods, see the XML handling paragraph.
+
+For more information see JMapper constructors paragraph.
