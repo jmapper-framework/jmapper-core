@@ -1,6 +1,6 @@
  * [Introduction Introduction]
    * [Introduction#Preface Preface]
-   * [Introduction#Annotated_configuration Annotated annotation]
+   * [Introduction#Annotated_configuration Annotated configuration]
    * [Introduction#XML_configuration XML configuration]
    * [Introduction#JMapper_constructors JMapper constructors]
  * [ImplicitRelations Implicit relations]
