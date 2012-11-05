@@ -48,7 +48,8 @@ Default parameters:
 == Enrichment signatures ==
 
 The methods described here, allow the enrichment of the destination instance.
-Do not need to declare the target class, because the destination is passed as input.
+
+*Do not need to declare the destination class*, because it's passed as input.
 {{{
 relationalJMapper.oneToMany(destination, source);
 }}}
