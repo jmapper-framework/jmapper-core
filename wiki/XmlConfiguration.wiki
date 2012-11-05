@@ -42,4 +42,4 @@ There's an example:
 }}}
 If you want create this mapping file with utility methods, see the [XmlHandling XML handling] paragraph.
 
-For more information see JMapper constructors paragraph.
+For more information see [Introduction#JMapper_constructors JMapper constructors] paragraph.
