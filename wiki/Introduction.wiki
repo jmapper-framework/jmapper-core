@@ -93,7 +93,8 @@ The output below shows the fields of the destination bean .
 {{{
 Destination [id="id", destinationField="source field", other=null]
 }}}
-The annotations can be used in both classes, the result is the same.
+
+*IMPORTANT!* _the configuration can be written in both classes, the result is the same_
 
 = JMapper constructors =
 
