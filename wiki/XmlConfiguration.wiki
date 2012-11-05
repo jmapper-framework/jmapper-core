@@ -40,6 +40,6 @@ There's an example:
   </class>
 </jmapper>
 }}}
-If you want create this mapping file with utility methods, see the XML handling paragraph.
+If you want create this mapping file with utility methods, see the [XmlHandling XML handling] paragraph.
 
 For more information see JMapper constructors paragraph.
