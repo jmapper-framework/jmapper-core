@@ -2,8 +2,8 @@
 
 = Design by contract =
 
-In order to make the code independent from the concrete classes (JMapper and  RelationalJMapper), the framework exposes interfaces: *IJMapper* and *IRelationalJMapper*, which respectively define the contracts for JMapper and  RelationalJMapper classes.
+In order to make the code independent from the concrete classes (JMapper and  RelationalJMapper), the framework exposes the interfaces: *IJMapper* and *IRelationalJMapper*, which respectively define the contracts for JMapper and  RelationalJMapper classes.
 
 = About raw types =
 
-Also you can perform mapping between raw types, operations not allowed are those that provide conversion or recursive mapping.
+Also you can perform mapping between raw types, operations not allowed are those that provide implicit conversion or recursive mapping.
