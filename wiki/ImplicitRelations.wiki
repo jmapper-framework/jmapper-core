@@ -94,10 +94,11 @@ class Destination3{
 Sample code:
 {{{
 Source source = new Source("id", "sourceField", "other");
+
 JMapper<Destination1, Source> jmapper1 = new JMapper<Destination1, Source>(Destination.class, Source.class);
 Destination1 destination1 = jmapper1.getDestination(source);
 
-JMapper<Destination2, Source> jmapper2 = new JMapper<Destination2, Source>(Destination.class, Source.class);
+JMapper<Destination2, Source> jmapper2 = new JMapper<Destination2, Source>(Destination2.class, Source.class);
 Destination2 destination2 = jmapper2.getDestination(source);
 
 JMapper<Destination3, Source> jmapper3 = new JMapper<Destination3, Source>(Destination3.class, Source.class);
