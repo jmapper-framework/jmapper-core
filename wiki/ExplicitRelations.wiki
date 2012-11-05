@@ -49,11 +49,11 @@ Class3 class3 = new Class3("field1Class3","field2Class3","field3Class3");
 manyToOne = rm.manyToOne(class3);
 System.out.println(manyToOne);
 }}}
-Outout:
+Output:
 {{{
-AnnotatedClass [field1=field1Class1, field2=field2Class1, field3=field3Class1]
-AnnotatedClass [field1=field1Class2, field2=field2Class2, field3=field3Class2]
-AnnotatedClass [field1=field1Class3, field2=field2Class3, field3=field3Class3]
+AnnotatedClass [field1="field1Class1", field2="field2Class1", field3="field3Class1"]
+AnnotatedClass [field1="field1Class2", field2="field2Class2", field3="field3Class2"]
+AnnotatedClass [field1="field1Class3", field2="field2Class3", field3="field3Class3"]
 }}}
 == One to Many ==
 The method oneToMany instead allows us to define the configured class as a source class and the target classes as destination classes.
@@ -82,9 +82,9 @@ Class3 class3 = rm.setDestinationClass(Class3.class)
 
 System.out.println(class3);
 }}}
-Outout:
+Output:
 {{{
-Class1[field1Class1=field1, field2Class1=field2, field3Class1=field3]
-Class2[field1Class2=field1, field2Class2=field2, field3Class2=field3]
-Class3[field1Class3=field1, field2Class3=field2, field3Class3=field3]
+Class1[field1Class1="field1", field2Class1="field2", field3Class1="field3"]
+Class2[field1Class2="field1", field2Class2="field2", field3Class2="field3"]
+Class3[field1Class3="field1", field2Class3="field2", field3Class3="field3"]
 }}}
