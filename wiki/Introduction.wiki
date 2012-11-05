@@ -23,7 +23,7 @@ JMapper allows:
 = Preface =
 
 Before describing the features of the framework is good to do a little introduction: the *Destination* is the instance that captures the data, the *Source* is the instance that contains the data, the goal is to get the Destination starting from the Source.
-The configurations are associated with the instance variables and may be present in the Destination and Source, then we will call *target field* the  recipient field and *mapped field* the configured field.
+The configurations are associated with the instance variables and may be present in the Destination and Source, then we will call *target field* the target field of the configuration and *mapped field* the field that contains the configuration.
 As a prerequisite classes used for mapping must comply with the Javabean conventions http://en.wikipedia.org/wiki/JavaBean.
 below shows the classes that will be used in the following examples:
 {{{
