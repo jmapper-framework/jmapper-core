@@ -95,7 +95,7 @@ Sample code:
 {{{
 Source source = new Source("id", "sourceField", "other");
 
-JMapper<Destination1, Source> jmapper1 = new JMapper<Destination1, Source>(Destination.class, Source.class);
+JMapper<Destination1, Source> jmapper1 = new JMapper<Destination1, Source>(Destination1.class, Source.class);
 Destination1 destination1 = jmapper1.getDestination(source);
 
 JMapper<Destination2, Source> jmapper2 = new JMapper<Destination2, Source>(Destination2.class, Source.class);
