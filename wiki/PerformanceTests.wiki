@@ -9,7 +9,7 @@ Performance tests are the most difficult to make, because you have to consider d
  * *Just In Time Compiler*: when the JVM identifies a hot part of the code is compiled into machine language.
  * *Garbage collector*: a garbage collection can be invoked during the execution of the benchmark, greatly increasing the time.
 
-All these variables are very well managed by the framework Benchmark downloaded at: http://www.ellipticgroup.com/html/benchmarkingArticle.html.
+All these variables are very well managed by the library Benchmark downloaded at: http://www.ellipticgroup.com/html/benchmarkingArticle.html.
 
 == Hardware == 
 
