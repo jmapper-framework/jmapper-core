@@ -4,7 +4,7 @@
 
 In this first part we have seen how JMapper will define relations one-to-many and many-to-one with a single configuration, this approach is useful when you are not aware of classes that may use them, but this way the developer is bound to instantiate whenever JMapper passing in input both classes.
 
-To overcome this, the framework exposes the RelationalJMapper class.
+To overcome this, the framework exposes the *RelationalJMapper* class.
 To take advantage of this, you must define, for each mapped field, the target classes of the mapping, as shown below.
 {{{
 class AnnotatedClass{                      
