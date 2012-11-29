@@ -67,8 +67,9 @@ relationalJMapper.setDestinationClass(Class1.class)
 }}}
 Sample code:
 {{{
-AnnotatedClass annotatedClass = new AnnotatedClass("field1", "field2", "field3");
 RelationalJMapper<AnnotatedClass> rm = new RelationalJMapper<AnnotatedClass>(AnnotatedClass.class);
+
+AnnotatedClass annotatedClass = new AnnotatedClass("field1", "field2", "field3");
 
 Class1 class1 = rm.setDestinationClass(Class1.class)
                   .oneToMany(annotatedClass);
