@@ -38,7 +38,8 @@ Default parameters:
 ||Source {{{MappingType}}}||{{{mtSource}}}||
 
 {{{
-relationalJMapper.oneToMany(source, nullPointerControl, mtSource);
+relationalJMapper.setDestinationClass(Class1.class)
+                 .oneToMany(source, nullPointerControl, mtSource);
 }}}
 Default parameters:
 ||{{{NullPointerControl}}}||{{{nullPointerControl}}}||
