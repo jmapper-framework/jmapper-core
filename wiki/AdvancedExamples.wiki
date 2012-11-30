@@ -1,6 +1,6 @@
 #summary some usage examples of JMapper.
 
-= Advanced examples =
+= Advanced relational examples =
 
 We will see now some very interesting examples of use, which makes the code more concise and elegant.
 
