@@ -1,0 +1,183 @@
+package it.avutils.jmapper.operations.${folder};
+
+import static it.avutils.jmapper.utils.ClassesManager.getFieldValue;
+import static it.avutils.jmapper.utils.GeneralUtility.newLine;
+import java.lang.reflect.Field;
+import it.avutils.jmapper.bean.${fromClass};
+import it.avutils.jmapper.enums.ConversionTypes;
+import it.avutils.jmapper.operations.AOperation;
+import it.avutils.jmapper.operations.info.InfoOperation;
+
+public class ${testName}Test extends AOperation<${operationType}>{
+
+	@Override
+	protected Field getDField() throws NoSuchFieldException {
+		return ${fromClass}.class.getDeclaredField("${dFieldName}");
+	}
+
+	@Override
+	protected Field getSField() throws NoSuchFieldException {
+		return ${fromClass}.class.getDeclaredField("${sFieldName}");
+	}
+
+	@Override
+	protected ${operationType} getOperationIstance() {
+		return new ${operationType}();
+	}
+	
+	@Override
+	protected InfoOperation getInfoOperation() {
+		return new InfoOperation().setConversionType(ConversionTypes.${conversionType});
+	}
+	
+	@Override
+	protected void AllAll() {
+		
+		expected = "   if(source.get${sFieldNameUp}()!=null){"+
+		 newLine + "   destination.set${dFieldNameUp}(source.get${sFieldNameUp}());"+
+		 newLine + "   }else{"+
+		 newLine + "   destination.set${dFieldNameUp}(null);"+
+		 newLine + "   }"+newLine;
+		
+		actual   = operation.write(newInstance).toString();
+		verify();
+		
+		Integer i =  (Integer) getFieldValue(operation,"count");
+		
+		expected = "   if(destination.get${dFieldNameUp}()!=null){"+
+		 newLine + "   if(source.get${sFieldNameUp}()!=null){"+
+		 newLine + "   java.lang.String[] dep"+i+" = destination.get${dFieldNameUp}();"+
+		 newLine + "   java.lang.String[] newDestination"+i+" = new java.lang.String[dep"+i+".length + source.get${sFieldNameUp}().length];"+
+		 newLine + "   int counter"+i+" = 0;"+
+		 newLine + "   for(int index"+i+" = dep"+i+".length-1;index"+i+" >=0;index"+i+"--){"+
+		 newLine + "   newDestination"+i+"[counter"+i+"++] = dep"+i+"[index"+i+"];"+
+		 newLine + "   }"+
+		 newLine + "   for(int index"+i+" = source.get${sFieldNameUp}().length-1;index"+i+" >=0;index"+i+"--){"+
+		 newLine + "   newDestination"+i+"[counter"+i+"++] = source.get${sFieldNameUp}()[index"+i+"];"+
+		 newLine + "   }"+
+		 newLine + "   destination.set${dFieldNameUp}(newDestination"+i+");"+
+		 newLine + "   }else{"+
+		 newLine + "   destination.set${dFieldNameUp}(null);"+
+		 newLine + "   }"+
+		 newLine + "   }else{"+
+		 newLine + "   if(source.get${sFieldNameUp}()!=null){"+
+		 newLine + "   destination.set${dFieldNameUp}(source.get${sFieldNameUp}());"+
+		 newLine + "   }else{"+
+		 newLine + "   destination.set${dFieldNameUp}(null);"+
+		 newLine + "   }"+
+		 newLine + "   }"+newLine;
+		
+		actual   = operation.write(enrichment).toString();
+		verify();
+	}
+
+	@Override
+	protected void AllValued() {
+		
+		expected = "   if(source.get${sFieldNameUp}()!=null){"+
+		 newLine + "   destination.set${dFieldNameUp}(source.get${sFieldNameUp}());"+
+		 newLine + "   }"+newLine;
+		
+		actual	 = operation.write(newInstance).toString();
+		verify();
+		
+		Integer i =  (Integer) getFieldValue(operation,"count");
+		
+		expected = "   if(source.get${sFieldNameUp}()!=null){"+
+		 newLine + "   if(destination.get${dFieldNameUp}()!=null){"+
+		 newLine + "   java.lang.String[] dep"+i+" = destination.get${dFieldNameUp}();"+
+		 newLine + "   java.lang.String[] newDestination"+i+" = new java.lang.String[dep"+i+".length + source.get${sFieldNameUp}().length];"+
+		 newLine + "   int counter"+i+" = 0;"+
+		 newLine + "   for(int index"+i+" = dep"+i+".length-1;index"+i+" >=0;index"+i+"--){"+
+		 newLine + "   newDestination"+i+"[counter"+i+"++] = dep"+i+"[index"+i+"];"+
+		 newLine + "   }"+
+		 newLine + "   for(int index"+i+" = source.get${sFieldNameUp}().length-1;index"+i+" >=0;index"+i+"--){"+
+		 newLine + "   newDestination"+i+"[counter"+i+"++] = source.get${sFieldNameUp}()[index"+i+"];"+
+		 newLine + "   }"+
+		 newLine + "   destination.set${dFieldNameUp}(newDestination"+i+");"+
+		 newLine + "   }else{"+
+		 newLine + "   destination.set${dFieldNameUp}(source.get${sFieldNameUp}());"+
+		 newLine + "   }"+
+		 newLine + "   }"+newLine;
+		
+		actual	 = operation.write(enrichment).toString();
+		verify();
+	}
+
+	@Override
+	protected void ValuedAll() {
+
+		Integer i =  (Integer) getFieldValue(operation,"count");
+		
+		expected = "   if(destination.get${dFieldNameUp}()!=null){"+
+		 newLine + "   if(source.get${sFieldNameUp}()!=null){"+
+		 newLine + "   java.lang.String[] dep"+i+" = destination.get${dFieldNameUp}();"+
+		 newLine + "   java.lang.String[] newDestination"+i+" = new java.lang.String[dep"+i+".length + source.get${sFieldNameUp}().length];"+
+		 newLine + "   int counter"+i+" = 0;"+
+		 newLine + "   for(int index"+i+" = dep"+i+".length-1;index"+i+" >=0;index"+i+"--){"+
+		 newLine + "   newDestination"+i+"[counter"+i+"++] = dep"+i+"[index"+i+"];"+
+		 newLine + "   }"+
+		 newLine + "   for(int index"+i+" = source.get${sFieldNameUp}().length-1;index"+i+" >=0;index"+i+"--){"+
+		 newLine + "   newDestination"+i+"[counter"+i+"++] = source.get${sFieldNameUp}()[index"+i+"];"+
+		 newLine + "   }"+
+		 newLine + "   destination.set${dFieldNameUp}(newDestination"+i+");"+
+		 newLine + "   }else{"+
+		 newLine + "   destination.set${dFieldNameUp}(null);"+
+		 newLine + "   }"+
+		 newLine + "   }"+newLine;
+		
+		actual	 = operation.write(enrichment).toString();
+		verify();	
+	}
+
+	@Override
+	protected void ValuedValued() {
+
+		Integer i =  (Integer) getFieldValue(operation,"count");
+		
+		expected = "   if(destination.get${dFieldNameUp}()!=null){"+
+		 newLine + "   if(source.get${sFieldNameUp}()!=null){"+
+		 newLine + "   java.lang.String[] dep"+i+" = destination.get${dFieldNameUp}();"+
+		 newLine + "   java.lang.String[] newDestination"+i+" = new java.lang.String[dep"+i+".length + source.get${sFieldNameUp}().length];"+
+		 newLine + "   int counter"+i+" = 0;"+
+		 newLine + "   for(int index"+i+" = dep"+i+".length-1;index"+i+" >=0;index"+i+"--){"+
+		 newLine + "   newDestination"+i+"[counter"+i+"++] = dep"+i+"[index"+i+"];"+
+		 newLine + "   }"+
+		 newLine + "   for(int index"+i+" = source.get${sFieldNameUp}().length-1;index"+i+" >=0;index"+i+"--){"+
+		 newLine + "   newDestination"+i+"[counter"+i+"++] = source.get${sFieldNameUp}()[index"+i+"];"+
+		 newLine + "   }"+
+		 newLine + "   destination.set${dFieldNameUp}(newDestination"+i+");"+
+		 newLine + "   }"+
+		 newLine + "   }"+newLine;
+		
+		actual	 = operation.write(enrichment).toString();
+		verify();	
+	}
+
+	@Override
+	protected void ValuedNull() {
+		
+		expected = "   if(destination.get${dFieldNameUp}()!=null){"+
+	     newLine + "   if(source.get${sFieldNameUp}()==null){"+
+	     newLine + "   destination.set${dFieldNameUp}(null);"+
+	     newLine + "   }"+
+	     newLine + "   }"+newLine;
+		
+		actual	 = operation.write(enrichment).toString();
+		verify();		
+	}
+
+	@Override
+	protected void NullValued() {
+		
+		expected = "   if(destination.get${dFieldNameUp}()==null){"+
+		 newLine + "   if(source.get${sFieldNameUp}()!=null){"+
+		 newLine + "   destination.set${dFieldNameUp}(source.get${sFieldNameUp}());"+
+		 newLine + "   }"+
+		 newLine + "   }"+newLine;
+		
+		actual	 = operation.write(enrichment).toString();
+		verify();		
+	}
+
+}

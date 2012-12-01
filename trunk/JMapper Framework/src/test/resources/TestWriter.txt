@@ -1,0 +1,31 @@
+package it.avutils.jmapper
+
+
+import groovy.text.SimpleTemplateEngine
+
+class TestWriter {
+
+	static main(args) {
+		
+		def folder 	   = 'complex'
+		def testName   = 'MapConversion3'
+		def dFieldName = 'aDConversionMap2'
+		def sFieldName = 'aSConversionMap2'
+		def fromClass  = 'ComplexClass'
+		def operationType  = 'MapOperation'
+		
+		new SimpleTemplateEngine()
+		      .createTemplate(new File("src/test/resources/mapOperationTest.template"))
+			  .make(['folder':folder,
+				  	 'testName':testName,
+					 'operationType':operationType,
+					 'dFieldName':dFieldName,
+					 'sFieldName':sFieldName,
+					 'dFieldNameUp':dFieldName[0].toUpperCase()+dFieldName[1..-1],
+					 'sFieldNameUp':sFieldName[0].toUpperCase()+sFieldName[1..-1],
+					 'fromClass':fromClass])
+			  .writeTo(new FileWriter("src/test/java/it/avutils/jmapper/operations/${folder}/${testName}Test.java"))
+		
+	}
+
+}
