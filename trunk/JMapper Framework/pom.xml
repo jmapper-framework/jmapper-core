@@ -1,0 +1,148 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>it.avutils.jmapper</groupId>
+  <artifactId>jmapper-core</artifactId>
+  <version>1.1.0</version>
+ 
+  <name>JMapper Framework</name>
+  
+  <description>
+  JMapper is a framework that permits to write dynamic mapping, bringing several advantages as:
+  		1 - considerable reduction of the amount of code
+  		2 - considerable reduction of development time
+  		3 - increase the robustness of the application
+		4 - increase of the performance
+		5 - create and enrich target objects
+        6 - apply a specific logic to the mapping (only valued fields, only null fields, etc..)
+        7 - automated management of the XML file
+		8 - possibility of implementing the 1 to N and N to 1 relationships
+  </description>
+
+  <packaging>jar</packaging>
+
+  <url>http://code.google.com/p/jmapper-framework/</url> 
+    
+  <inceptionYear>2012</inceptionYear>
+  
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  
+  <developers>
+  	<developer>
+  		<name>Alessandro Vurro</name>
+  		<email>alessandro.vurro@gmail.com</email>
+  		<roles><role>project leader</role></roles>
+  	</developer>
+  </developers>
+  
+  <scm>
+    <url>http://svn.apache.org/viewcvs.cgi/maven</url>
+    <connection>http://svn.apache.org/viewcvs.cgi/maven</connection>
+  </scm>
+  
+  
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  
+	<build>
+		<resources>
+			<resource>
+				<directory>src/test/resources</directory>
+				<excludes>
+					<exclude>**/*.*</exclude>
+				</excludes>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
+	
+		<plugins>
+	       <plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-compiler-plugin</artifactId>
+			    <version>2.0.2</version>
+			    <configuration>
+			        <source>1.5</source>
+			        <target>1.5</target>
+			    </configuration>
+			</plugin>
+			
+			<plugin>
+			  <groupId>org.apache.maven.plugins</groupId>
+			  <artifactId>maven-source-plugin</artifactId>
+			  <version>2.1.2</version>
+			  <executions>
+			    <execution>
+			      <id>attach-sources</id>
+			      <goals>
+			        <goal>jar</goal>
+			      </goals>
+			    </execution>
+			  </executions>
+			</plugin>
+			
+			<plugin>
+			  <groupId>org.apache.maven.plugins</groupId>
+			  <artifactId>maven-javadoc-plugin</artifactId>
+			  <version>2.8.1</version>
+			  <executions>
+			    <execution>
+			      <id>attach-javadocs</id>
+			      <goals>
+			        <goal>jar</goal>
+			      </goals>
+			    </execution>
+			  </executions>
+			</plugin>
+		</plugins>
+	</build>
+
+  <dependencies>
+    <dependency>
+      	<groupId>junit</groupId>
+      	<artifactId>junit</artifactId>
+      	<version>3.8.1</version>
+      	<scope>test</scope>
+    </dependency>
+    
+    <dependency>
+		<groupId>commons-collections</groupId>
+		<artifactId>commons-collections</artifactId>
+		<version>3.2.1</version>
+	</dependency>
+	
+ 		<!-- Con la 3.17 ho problemi di generazione -->
+  		<!-- <version>3.17.0.GA</version> -->
+
+	<dependency>
+		<groupId>org.javassist</groupId>
+		<artifactId>javassist</artifactId>
+		<version>3.16.1-GA</version>
+	</dependency>
+	<dependency>
+	  <groupId>org.slf4j</groupId>
+	  <artifactId>slf4j-api</artifactId>
+	  <version>1.6.6</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>com.thoughtworks.xstream</groupId>
+		<artifactId>xstream</artifactId>
+		<version>1.4.2</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>net.sf.kxml</groupId>
+		<artifactId>kxml2</artifactId>
+		<version>2.3.0</version>
+	</dependency>
+  </dependencies>
+  
+</project>
