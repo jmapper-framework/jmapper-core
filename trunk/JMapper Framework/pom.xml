@@ -1,12 +1,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>7</version>
+  </parent>
+  
   <modelVersion>4.0.0</modelVersion>
-
   <groupId>it.avutils.jmapper</groupId>
   <artifactId>jmapper-core</artifactId>
-  <version>1.1.0</version>
- 
+  <packaging>jar</packaging>
   <name>JMapper Framework</name>
+  <version>1.1.0</version>
   
   <description>
   JMapper is a framework that permits to write dynamic mapping, bringing several advantages as:
@@ -19,12 +24,8 @@
         7 - automated management of the XML file
 		8 - possibility of implementing the 1 to N and N to 1 relationships
   </description>
-
-  <packaging>jar</packaging>
-
+  
   <url>http://code.google.com/p/jmapper-framework/</url> 
-    
-  <inceptionYear>2012</inceptionYear>
   
   <licenses>
     <license>
@@ -34,47 +35,54 @@
     </license>
   </licenses>
   
+  <scm>
+    <connection>scm:svn:http://jmapper-framework.googlecode.com/svn/trunk</connection>
+    <developerConnection>scm:svn:https://jmapper-framework.googlecode.com/svn/trunk</developerConnection>
+    <url>http://jmapper-framework.googlecode.com/svn/trunk</url>
+  </scm>
+  
   <developers>
   	<developer>
+  		<id>alessandro.vurro</id>
   		<name>Alessandro Vurro</name>
   		<email>alessandro.vurro@gmail.com</email>
   		<roles><role>project leader</role></roles>
   	</developer>
   </developers>
   
-  <scm>
-    <url>http://svn.apache.org/viewcvs.cgi/maven</url>
-    <connection>http://svn.apache.org/viewcvs.cgi/maven</connection>
-  </scm>
+  <profiles>
+    <profile>
+      <id>release-sign-artifacts</id>
+      <activation>
+        <property>
+          <name>performRelease</name>
+          <value>true</value>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.1</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
   
-  
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-  
-	<build>
-		<resources>
-			<resource>
-				<directory>src/test/resources</directory>
-				<excludes>
-					<exclude>**/*.*</exclude>
-				</excludes>
-				<filtering>false</filtering>
-			</resource>
-		</resources>
-	
+  <build>
 		<plugins>
 	       <plugin>
-			    <groupId>org.apache.maven.plugins</groupId>
-			    <artifactId>maven-compiler-plugin</artifactId>
-			    <version>2.0.2</version>
-			    <configuration>
-			        <source>1.5</source>
-			        <target>1.5</target>
-			    </configuration>
-			</plugin>
-			
-			<plugin>
 			  <groupId>org.apache.maven.plugins</groupId>
 			  <artifactId>maven-source-plugin</artifactId>
 			  <version>2.1.2</version>
@@ -82,7 +90,7 @@
 			    <execution>
 			      <id>attach-sources</id>
 			      <goals>
-			        <goal>jar</goal>
+			        <goal>jar-no-fork</goal>
 			      </goals>
 			    </execution>
 			  </executions>
@@ -91,7 +99,7 @@
 			<plugin>
 			  <groupId>org.apache.maven.plugins</groupId>
 			  <artifactId>maven-javadoc-plugin</artifactId>
-			  <version>2.8.1</version>
+			  <version>2.7</version>
 			  <executions>
 			    <execution>
 			      <id>attach-javadocs</id>
@@ -102,8 +110,8 @@
 			  </executions>
 			</plugin>
 		</plugins>
-	</build>
-
+  </build>
+  
   <dependencies>
     <dependency>
       	<groupId>junit</groupId>
@@ -118,14 +126,12 @@
 		<version>3.2.1</version>
 	</dependency>
 	
- 		<!-- Con la 3.17 ho problemi di generazione -->
-  		<!-- <version>3.17.0.GA</version> -->
-
-	<dependency>
+ 	<dependency>
 		<groupId>org.javassist</groupId>
 		<artifactId>javassist</artifactId>
 		<version>3.16.1-GA</version>
 	</dependency>
+	
 	<dependency>
 	  <groupId>org.slf4j</groupId>
 	  <artifactId>slf4j-api</artifactId>
@@ -144,5 +150,8 @@
 		<version>2.3.0</version>
 	</dependency>
   </dependencies>
-  
-</project>
+   
+</project>  
+ 
+
+
