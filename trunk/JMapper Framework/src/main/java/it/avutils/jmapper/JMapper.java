@@ -13,34 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-//TODO Wiki --> descrivere gestione delle conversioni esplicite statiche
-//		 		quindi il tutto si risolve dicendo nel wiki che nel caso in cui ci fossero piu metodi statici 
-//		 		con lo stesso nome, verrà considerato solo il primo trovato
-//TODO Wiki --> i nullPointer ottenuti da un errore nella conversione non sono possono essere gestiti dal framework, bisogna fare attenzione
-//TODO Wiki --> scrivere che XmlHandler non gestisce la trasformazione da annotation a xml e viceversa dei metodi di conversione
-//TODO Wiki --> scrivere che i set per i campi del source sono opzionali (dalla versione 1.1.0 in poi)
-//TODO Wiki --> è obbligatorio nelle conversioni in xml definire il nome al metodo
-//TODO Wiki --> scrivere che con la conversione statica in xml si possono utilizzare anche i placeholder del tipo e del nome
-//              del campo, ma questi saranno sostituiti solamente nel primo match effettuato e riutilizzati in tutti gli altri casi
-//TODO Wiki --> è possibile configurare una classe in xml/annotation e scrivere le conversioni in xml/annotation nell'altra e viceversa
-//TODO Wiki --> le conversioni esplicite sono cercate indipendentemente dalla natura e posizione della configurazione.
-//              se è esplicitata una configurazione, parte nel cercare i metodi da quest'ultima, controllando prima l'xml e poi el annotation
-//
-//TODO da implementare --> @JMap su classe, indica che tutti i campi hanno la stessa configurazione
-//                         da gestire anche in XmlHandler
-//TODO da implementare --> conversione Array <-> List 
-//    String[] <-> List<String>  STRUTTURALE
-//    String[] <-> List<Integer> STRUTTURALE E DI ITEM,
-//    Target[] <-> List<Mapped>  STRUTTURALE E RICORSIVA
-
-//TODO da implementare --> permettere di configurare un campo con altri, tutti appartenenti alla stessa classe
-//                         questo mapping ha senso in caso di conversione esplicita, attualmente l'unico modo
-//						   per applicare questa logica è quello di configurare i diversi campi verso l'unico interessato
-//                         non permettendo di usare RelationalJMapper
-//TODO da implementare --> permettere nella conversione dinamica di elaborare dati prima della scrittura del mapping
-//                         ad esempio se il nome del campo è 1field e voglio poter scrivere map.put("1",... lo devo poter fare
-//                         senza dover generare a runtime il codice map.put(1field.subString(1),...
-//TODO da implementare --> @JMappingType su campo, definizione del mappingType per ogni campo
 package it.avutils.jmapper;
 
 import static it.avutils.jmapper.dsl.MapperBuilder.from;
