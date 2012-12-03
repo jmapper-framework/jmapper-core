@@ -323,7 +323,8 @@ public class MappingBuilder {
     /**
 	 * This method finds the xml configuration, returns null if there are no.
 	 * @param cc Configuration to check
-	 * return ChooseConfig configuration found
+	 * @param xml xml object
+     * return ChooseConfig configuration found
 	 */
 	private ChooseConfig searchXmlConfig(ChooseConfig cc, XML xml){
 		if(xml.getXmlPath() == null) return null;
@@ -362,6 +363,6 @@ public class MappingBuilder {
 	/**@return the mapper class name */
 	public String   getMapperName() {return mapperName; }
 	
-	/**@param the mapper class name */
+	/**@param name the mapper class name */
 	public MappingBuilder setMapperName(String name){mapperName = name;return this;}
 }
