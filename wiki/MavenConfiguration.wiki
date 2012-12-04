@@ -2,7 +2,7 @@
 
 = Maven configuration =
 
-Currently JMapper is not present in the Maven repository, so you must install it locally.
+Currently JMapper is not present in the Maven repository, i'm waiting for project creation ([https://issues.sonatype.org/browse/OSSRH-4837 Sonatype ticket]), so you must install it locally.
 
 == Installation command ==
 {{{
