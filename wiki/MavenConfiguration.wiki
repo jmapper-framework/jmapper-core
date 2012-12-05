@@ -18,7 +18,7 @@ JMapper requires the slf4j and log4j dependencies to handle exceptions.
 {{{
 <dependency>
    <groupId>it.avutils.jmapper</groupId>
-   <artifactId>core</artifactId>
+   <artifactId>jmapper-core</artifactId>
    <version>1.0.0</version>
 </dependency>
 <dependency> 
