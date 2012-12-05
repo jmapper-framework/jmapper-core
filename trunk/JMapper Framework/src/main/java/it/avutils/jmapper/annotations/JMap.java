@@ -23,7 +23,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * JMap is the annotation that allows you to assign the current field with others, 
+ * JMap is the annotation that allows you to assign the current field with another, 
  * it has three fields: value, attributes and classes.<br>
  * Value identifies the target field name.<br>
  * Attributes identifies a list of target fields name.<br>
