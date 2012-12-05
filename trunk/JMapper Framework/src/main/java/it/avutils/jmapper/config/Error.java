@@ -86,7 +86,7 @@ public final class Error {
 	 * @param additionalInformation additional information relative to the javassist exception
 	 */
 	public static void bodyContainsIllegalCode(Method method, Exception additionalInformation){
-		throw new ConversionBodyIllegalCodeException(message(conversionBodyIllegalCode,method.getClazz().getSimpleName(),method.getName().split("\\$")[1],""+additionalInformation.getMessage()));
+		throw new ConversionBodyIllegalCodeException(message(conversionBodyIllegalCode,method.getClazz().getSimpleName(),method.getOriginalName().split("\\$")[1],""+additionalInformation.getMessage()));
 	}
 	/**
 	 * Thrown when javassist don't find classes.

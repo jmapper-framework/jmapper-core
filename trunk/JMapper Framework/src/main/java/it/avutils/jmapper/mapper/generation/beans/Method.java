@@ -29,6 +29,8 @@ public class Method {
 	private Class<?> returnType;
 	/** method parameters */
 	private Class<?>[] parameters;
+	/** original conversione method name */
+	private String originalName;
 	/** method name */
 	private String name;
 	/** body of the method */
@@ -36,6 +38,12 @@ public class Method {
 	/** class to which it belongs */
 	private Class<?> clazz;
 	
+	public String getOriginalName() {
+		return originalName;
+	}
+	public void setOriginalName(String originalName) {
+		this.originalName = originalName;
+	}
 	public String getBody() {
 		return body;
 	}
@@ -70,12 +78,6 @@ public class Method {
 		this.clazz = clazz;
 	}
 	public Method() {}
-	@Override
-	public String toString() {
-		return "Method [returnType=" + returnType + ", parameters="
-				+ Arrays.toString(parameters) + ", name=" + name + ", body="
-				+ body+"]";
-	}
 	public Method(Class<?> returnType, Class<?>[] parameters, String name) {
 		super();
 		this.returnType = returnType;
@@ -105,6 +107,11 @@ public class Method {
 			return false;
 		return true;
 	}
-	
-	
+	@Override
+	public String toString() {
+		return "Method [returnType=" + returnType + ", parameters="
+				+ Arrays.toString(parameters) + ", originalName="
+				+ originalName + ", name=" + name + ", body=" + body
+				+ ", clazz=" + clazz + "]";
+	}
 }
