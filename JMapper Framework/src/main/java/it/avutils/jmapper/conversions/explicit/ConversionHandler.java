@@ -98,6 +98,9 @@ public class ConversionHandler {
 			case TWO: methodToGenerate.setParameters(new Class<?>[]{destinationClass,sourceClass}); break;
 		}
 		
+		// setting of conversion method name 
+		methodToGenerate.setOriginalName(definedName());
+		
 		// Method name definition
 		switch (methodDefined.getType()) {
 			case STATIC:  methodToGenerate.setName(definedName());break;
@@ -134,7 +137,7 @@ public class ConversionHandler {
 	 */
 	private String error(){
 		Map<String, List<ConversionMethod>> conversions = xml.conversionsLoad();
-		return "it.avutils.jmapper.config.Error.illegalCode(e,\""+ methodToGenerate.getName()+"\",\""+configClass.getSimpleName()+"\""
+		return "it.avutils.jmapper.config.Error.illegalCode(e,\""+ methodToGenerate.getOriginalName()+"\",\""+configClass.getSimpleName()+"\""
 			+ (!conversions.isEmpty() && conversions.get(configClass.getName())!=null?", \"" + xml.getXmlPath()+"\"":"")+");";
 	}
 	
