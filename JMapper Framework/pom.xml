@@ -36,9 +36,9 @@
   </licenses>
   
   <scm>
-    <connection>scm:svn:http://jmapper-framework.googlecode.com/svn/trunk</connection>
-    <developerConnection>scm:svn:https://jmapper-framework.googlecode.com/svn/trunk</developerConnection>
-    <url>http://jmapper-framework.googlecode.com/svn/trunk</url>
+    <connection>scm:svn:http://jmapper-framework.googlecode.com/svn/tags/jmapper-core-1.1.0</connection>
+    <developerConnection>scm:svn:https://jmapper-framework.googlecode.com/svn/tags/jmapper-core-1.1.0</developerConnection>
+    <url>http://jmapper-framework.googlecode.com/svn/tags/jmapper-core-1.1.0</url>
   </scm>
   
   <developers>
