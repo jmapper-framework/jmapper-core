@@ -20,12 +20,12 @@ import static it.avutils.jmapper.util.AutoBoxing.boxingOperations;
 import static it.avutils.jmapper.util.AutoBoxing.unBoxingOperations;
 import static it.avutils.jmapper.util.GeneralUtility.collectionIsAssignableFrom;
 import static it.avutils.jmapper.util.GeneralUtility.enrichList;
-import static it.avutils.jmapper.util.GeneralUtility.toList;
 import static it.avutils.jmapper.util.GeneralUtility.getMethod;
 import static it.avutils.jmapper.util.GeneralUtility.implementationClass;
 import static it.avutils.jmapper.util.GeneralUtility.isAccessModifier;
 import static it.avutils.jmapper.util.GeneralUtility.mSet;
 import static it.avutils.jmapper.util.GeneralUtility.mapIsAssignableFrom;
+import static it.avutils.jmapper.util.GeneralUtility.toList;
 import it.avutils.jmapper.annotations.JMap;
 import it.avutils.jmapper.config.Error;
 import it.avutils.jmapper.enums.ChooseConfig;
@@ -36,7 +36,6 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Utility class that allows you to manage classes.
