@@ -1,0 +1,174 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>7</version>
+  </parent>
+  
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.googlecode.jmapper-framework</groupId>
+  <artifactId>jmapper-core</artifactId>
+  <packaging>jar</packaging>
+  <name>JMapper Framework</name>
+  <version>1.1.0</version>
+  
+  <description>
+  JMapper is a framework that permits to write dynamic mapping, bringing several advantages as:
+  		1 - considerable reduction of the amount of code
+  		2 - considerable reduction of development time
+  		3 - increase the robustness of the application
+		4 - increase of the performance
+		5 - create and enrich target objects
+        6 - apply a specific logic to the mapping (only valued fields, only null fields, etc..)
+        7 - automated management of the XML file
+		8 - possibility of implementing the 1 to N and N to 1 relationships
+  </description>
+  
+  <url>http://code.google.com/p/jmapper-framework/</url> 
+  
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  
+  <scm>
+    <connection>scm:svn:http://jmapper-framework.googlecode.com/svn/tags/jmapper-core-1.1.0</connection>
+    <developerConnection>scm:svn:https://jmapper-framework.googlecode.com/svn/tags/jmapper-core-1.1.0</developerConnection>
+    <url>http://jmapper-framework.googlecode.com/svn/tags/jmapper-core-1.1.0</url>
+  </scm>
+  
+  <developers>
+  	<developer>
+  		<id>alessandro.vurro</id>
+  		<name>Alessandro Vurro</name>
+  		<email>alessandro.vurro@gmail.com</email>
+  		<roles><role>project leader</role></roles>
+  	</developer>
+  </developers>
+  
+  <profiles>
+    <profile>
+      <id>release-sign-artifacts</id>
+      <activation>
+        <property>
+          <name>performRelease</name>
+          <value>true</value>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+	      <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.1</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+  
+  <build>
+		<plugins>
+		    <plugin>
+	          <groupId>org.apache.maven.plugins</groupId>
+	          <artifactId>maven-release-plugin</artifactId>
+	          <version>2.3.2</version>
+	          <configuration>
+	            <tagBase>https://jmapper-framework.googlecode.com/svn/tags</tagBase>
+	            <remoteTagging>true</remoteTagging>
+	          </configuration>
+	        </plugin>
+            <plugin>
+			  <groupId>org.apache.maven.plugins</groupId>
+			  <artifactId>maven-compiler-plugin</artifactId>
+			  <configuration>
+			     <source>1.5</source>
+			     <target>1.5</target>
+			  </configuration>
+		    </plugin>
+	        <plugin>
+			  <groupId>org.apache.maven.plugins</groupId>
+			  <artifactId>maven-source-plugin</artifactId>
+			  <version>2.1.2</version>
+			  <executions>
+			    <execution>
+			      <id>attach-sources</id>
+			      <goals>
+			        <goal>jar-no-fork</goal>
+			      </goals>
+			    </execution>
+			  </executions>
+			</plugin>
+			
+			<plugin>
+			  <groupId>org.apache.maven.plugins</groupId>
+			  <artifactId>maven-javadoc-plugin</artifactId>
+			  <version>2.7</version>
+			  <executions>
+			    <execution>
+			      <id>attach-javadocs</id>
+			      <goals>
+			        <goal>jar</goal>
+			      </goals>
+			    </execution>
+			  </executions>
+			</plugin>
+		</plugins>
+  </build>
+  
+  <dependencies>
+    <dependency>
+      	<groupId>junit</groupId>
+      	<artifactId>junit</artifactId>
+      	<version>3.8.1</version>
+      	<scope>test</scope>
+    </dependency>
+    
+    <dependency>
+		<groupId>commons-collections</groupId>
+		<artifactId>commons-collections</artifactId>
+		<version>3.2.1</version>
+	</dependency>
+	
+ 	<dependency>
+		<groupId>org.javassist</groupId>
+		<artifactId>javassist</artifactId>
+		<version>3.16.1-GA</version>
+	</dependency>
+	
+	<dependency>
+	  <groupId>org.slf4j</groupId>
+	  <artifactId>slf4j-api</artifactId>
+	  <version>1.6.6</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>com.thoughtworks.xstream</groupId>
+		<artifactId>xstream</artifactId>
+		<version>1.4.2</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>net.sf.kxml</groupId>
+		<artifactId>kxml2</artifactId>
+		<version>2.3.0</version>
+	</dependency>
+  </dependencies>
+   
+</project>  
+ 
+
+
