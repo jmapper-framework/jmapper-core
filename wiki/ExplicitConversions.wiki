@@ -69,7 +69,7 @@ relations expressed:
 The conversion instead is defined for the relation:
  * Source.id -> Destination.other
 
-So in this case the conversion will never be applied, the same happens also for the configuration in XML format.<br>
+So in this case the conversion will never be applied, the same happens also for the configuration in XML format.
 The conversion method may have *one or two parameters*, depends on the logic that must be applied. A single input parameter indicates the source field, two parameters indicate the destination field and source field, this case comes in handy when you want to act on a destination field already defined.
 
 java example:
@@ -90,7 +90,8 @@ XML example:
 </jmapper>
 }}}
 *IMPORTANT!* _The conversion, once satisfied the relationship, replaces the basis mapping of the framework, even in those cases where the destination field is null_
-The generated code is surrounded by a Try-Catch inserted with the aim of managing all the errors generated at runtime, such as NullPointerException.
+
+The generated code is surrounded by a Try-Catch inserted with the aim of managing all the errors generated at runtime, such as !NullPointerException.<br>
 The conversions can be of two types: *static* and *dynamic*.
 the method is static when it is used in all the defined relationships, is dynamic when the method's body change according the relationship that must be satisfied.
  
