@@ -1,5 +1,5 @@
 #summary This page describes the JMap annotation in its entirety
-= @JMap variables =
+= @JMap =
 
 The cases just described are common but not fully satisfy the need.
 For this reason, the annotation @JMap has two other parameters, and they are *attributes* and *classes* both vectors.
