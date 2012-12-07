@@ -276,7 +276,7 @@ Example:
 @JMapConversion(from={"anInteger"}, to={"aString"}, type=Type.DYNAMIC)
 Public static String conversion(){
  return "${destination.type} result = ${source} == 2?\"${source.name}\":\"${destination.name}\";"
-     +  "\n return result + ${destination};";
+     +  "return result + ${destination};";
 }
 }}}
 Method created at runtime:
@@ -410,7 +410,7 @@ XML configuration:
     </conversion>
     <conversion name="fromAllToMap" to="map" type="DYNAMIC">
 	    ${destination}.put("${source.name}",${source});
-        return ${destination};
+            return ${destination};
     </conversion>
   </class>
 </jmapper>
