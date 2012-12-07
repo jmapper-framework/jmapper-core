@@ -15,7 +15,8 @@ class Destination{                      class Source{
     private String destinationField;        private String sourceField;
     private String other;                   private String other;
 
-    // getter and setter...                 @JMapConversion
+    // getter and setter...                 
+                                            @JMapConversion
 					    public String conversion(String str){
 						return str;
 					    }
@@ -63,11 +64,11 @@ Assuming to initialize the JMapper class in the following way:
 JMapper jmapper = new JMapper(Destination.class, Source.class);
 }}}
 relations expressed:
-*  Source.id -> Destination.id
-*  Source.sourceField -> Destination.destinationField
+* Source.id -> Destination.id
+* Source.sourceField -> Destination.destinationField
 
 The conversion instead is defined for the relation:
-*  Source.id -> Destination.other
+* Source.id -> Destination.other
 
 So in this case the conversion will never be applied, the same happens also for the configuration in XML format.<br>
 The conversion method may have *one or two parameters*, depends on the logic that must be applied. A single input parameter indicates the source field, two parameters indicate the destination field and source field, this case comes in handy when you want to act on a destination field already defined.
