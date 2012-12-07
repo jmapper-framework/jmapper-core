@@ -2,24 +2,12 @@
 
 = Maven configuration =
 
-Currently JMapper is not present in the Maven repository, i'm waiting for project creation ([https://issues.sonatype.org/browse/OSSRH-4837 Sonatype ticket]), so you must install it locally.
-
-== Installation command ==
-{{{
-mvn install:install-file 
--Dfile="jar location\jmapper-core-1.0.0.jar"
--DgroupId=it.avutils.jmapper
--DartifactId=jmapper-core
--Dversion=1.0.0
--Dpackaging=jar
-}}}
-== Dependency ==
 JMapper requires the slf4j and log4j dependencies to handle exceptions.
 {{{
 <dependency>
-   <groupId>it.avutils.jmapper</groupId>
+   <groupId>com.googlecode.jmapper-framework</groupId>
    <artifactId>jmapper-core</artifactId>
-   <version>1.0.0</version>
+   <version>1.1.0</version>
 </dependency>
 <dependency> 
    <groupId>org.slf4j</groupId>
@@ -48,7 +36,7 @@ These are the libraries to add if you do not use Maven:
    <dependency>
  	<groupId>javassist</groupId>
  	<artifactId>javassist</artifactId>
-  	<version>3.12.1.GA</version>
+  	<version>3.16.1.GA</version>
    </dependency>
 	
    <dependency>
