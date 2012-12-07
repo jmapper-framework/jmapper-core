@@ -14,11 +14,11 @@ The xml configuration follows the pattern below:
                                          /
            1..*         1..*            /  0..1            1..* 
   jmapper ------ class ------ attribute --------- classes ------ class
-                                        \
-                                         \
-                                     0..1 \
-                                           \
-                                          value
+                      \                  \
+                       \                  \
+                   0..* \             0..1 \
+                         \                  \
+                      conversion           value
 }}}
 There's an example:
 {{{
@@ -37,6 +37,9 @@ There's an example:
         <class name='com.myapplication.bean.Class3' />
       </classes>
     </attribute>
+    <conversion name="firstConversion" from="field1" to="field1Class1" type="STATIC">
+        return ${source};
+    </conversion>
   </class>
 </jmapper>
 }}}
