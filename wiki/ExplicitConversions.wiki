@@ -105,7 +105,7 @@ JMapConversion has three parameters: from, to and type.
 ||String[] from||names of the source fields||ALL||
 ||String[] to||names of the destination fields||ALL||
 ||Type type||conversion type||STATIC||
- 
+
 The parameters from and to indicate which fields will be part of the conversion.
 The *from* indicates the source, the *to* indicates the recipient, the default value for each is ALL.
 ALL indicates that the conversion is to be applied to all related fields.
