@@ -183,7 +183,7 @@ destination.setAString(destination.conversion(destination.getAString(),source.ge
  
 === In XML ===
 
-Consists in the definition of the <conversion> node, whose value is the body of the method to create, to refer to the source field and destination field you must use the following placeholders:
+Consists in the definition of the conversion node, whose value is the body of the method to create, to refer to the source field and destination field you must use the following placeholders:
  * ${source} to refer to the source field
  * ${destination} to refer to the destination field
 
