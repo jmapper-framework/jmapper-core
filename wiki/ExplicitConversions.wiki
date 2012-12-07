@@ -154,8 +154,8 @@ In case there are any static methods with the same name, will be considered only
 ===	In annotation ===
 
 Consists in the definition of the conversion method using the following conventions:
-*- the input field to the method must be the same type of the source fields 
-*- the output field to the method must be the same type of destination fields
+ * the input field to the method must be the same type of the source fields 
+ * the output field to the method must be the same type of destination fields
 
 Example:
 {{{
@@ -184,8 +184,8 @@ destination.setAString(destination.conversion(destination.getAString(),source.ge
 === In XML ===
 
 Consists in the definition of the <conversion> node, whose value is the body of the method to create, to refer to the source field and destination field you must use the following placeholders:
-•	${source} to refer to the source field
-•	${destination} to refer to the destination field
+ * ${source} to refer to the source field
+ * ${destination} to refer to the destination field
 
 Example:
 {{{
@@ -267,9 +267,9 @@ destination.setD3(destination.fromS3toD3());
 === In annotation ===
 
 Consists in the definition of the conversion method using the following conventions:
-*- the method must be: public static
-*- should not receive input parameters
-*- must return a string containing the dynamic mapping
+ * the method must be: public static
+ * should not receive input parameters
+ * must return a string containing the dynamic mapping
 
 Example:
 {{{
@@ -317,7 +317,6 @@ dest.setAString(dest.fromAnIntegertoAString(dest.getAString(),source.getAnIntege
 La conversione dinamica apre scenari interessanti. 
 Permette di effettuare introspezione evitando l’uso delle Reflection, guadagnandoci non solo in performance ma anche in leggibilità del codice. Inoltre la possibilità di esternalizzare l’xml, permette di adeguare a proprio piacimento la logica senza dover apportare modifiche al codice, aumentando così notevolmente le potenzialità del framework.
 
-
 === 1° Scenario ===
 
 We have a properties file and want to load properties in a bean.
@@ -328,7 +327,7 @@ framework = JMapper
 version = 1.1.0
 label = dynamic conversion test
 }}}
-javaa beans:
+java beans:
 {{{
 class Destination{             class Source{
 
@@ -345,7 +344,6 @@ class Destination{             class Source{
        				          					     
 }			     			   }
 }}}        
-
 Methods created at runtime:
 {{{
 public String fromPropertiestoAuthor(Properties source){
@@ -377,8 +375,8 @@ In the case of addition or removal of properties from the file, just add or remo
 === 2° Scenario ===
 
 We have a HashMap that has the pair <"name field", value field> and a bean with different fields, we want to do the following:
-*- load bean from HashMap
-*- load HashMap from bean
+ * load bean from HashMap
+ * load HashMap from bean
 
 The classes are:
 {{{
@@ -465,5 +463,5 @@ destination.setMap(fromPurchasetoMap(destination.getMap(),source.getPurchase()))
 == Overall ==
 
 Despite the potential of dynamic conversion are so high, the performances aren't affected, since the code continues to be generated at runtime and therefore equivalent to the static code, also increasing advantages such as:
-*- reducing the amount of code ->  increase the readability
-*- development simplified -> easier maintenance
+ * reducing the amount of code ->  increase the readability
+ * development simplified -> easier maintenance
