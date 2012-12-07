@@ -105,8 +105,7 @@ JMapConversion has three parameters: from, to and type.
 ||String[] to||names of the destination fields||ALL||
 ||Type type||conversion type||STATIC||
  
-The parameters from and to indicate which fields will be part of the conversion, the *from* indicates the source, the *to* indicates the recipient, the default value for each is ALL, ALL indicates that the conversion is to be applied to all related fields.
-the *Type* is an enumeration of @JMapConversion that allows you to define the conversion modes, and has only two values: STATIC and DYNAMIC, the default value of type is STATIC.
+The parameters from and to indicate which fields will be part of the conversion, the *from* indicates the source, the *to* indicates the recipient, the default value for each is ALL, ALL indicates that the conversion is to be applied to all related fields. The *Type* is an enumeration of @JMapConversion that allows you to define the conversion modes and has only two values: STATIC and DYNAMIC, the default value of type is STATIC.
 Conversion modes are detailed in the following paragraphs.
 
 == XML's general instructions ==
