@@ -99,7 +99,8 @@ the method is static when it is used in all the defined relationships, is dynami
 
 The annotation that allows us to perform explicit conversion is the *@JMapConversion*.<br>
 JMapConversion has three parameters: from, to and type.
- 
+
+
 ||Field||Description||default value||
 ||String[] from||names of the source fields||ALL||
 ||String[] to||names of the destination fields||ALL||
