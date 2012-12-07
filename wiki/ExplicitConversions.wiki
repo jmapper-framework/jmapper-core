@@ -16,11 +16,11 @@ class Destination{                      class Source{
     private String other;                   private String other;
 
     // getter and setter...                 @JMapConversion
-											public String conversion(String str){
-												return str;
-										    }
+					    public String conversion(String str){
+						return str;
+					    }
 
-											// getter and setter...
+					    // getter and setter...
 }                                       }
 }}}
 And an example in XML:
