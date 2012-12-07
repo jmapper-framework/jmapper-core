@@ -1,5 +1,466 @@
-#summary Explicit conversions allow you to define a specific logic.
+#summary description of the explicit conversions.
 
-= Explicit conversions =
+= Explicit conversion =
 
-This feature will be introduced in the 1.1.0 version of the framework.
+In this section the conversion is synthesized, each argument is detailed in the following chapters.<br>
+Explicit conversion allows you to define your own control logic and / or processing data belonging to the source fields and thus assign them to the destination fields.
+you can define conversions through the use of methods and you can do it in java, using the annotation *@JMapConversion* and in xml format using the node *<conversion>*.
+
+Conversions can be written in the Destination or Source, regardless the configuration's location, follows an example of conversion in annotation:
+{{{
+class Destination{                      class Source{
+    @JMap
+    private String id;                      private String id;
+    @JMap("sourceField")
+    private String destinationField;        private String sourceField;
+    private String other;                   private String other;
+
+    // getter and setter...                 @JMapConversion
+											public String conversion(String str){
+												return str;
+										    }
+
+											// getter and setter...
+}                                       }
+}}}
+And an example in XML:
+{{{
+<jmapper>
+  <class name="com.application.Destination">
+    <attribute name="id">
+      <value name="id"/>
+    </attribute>
+    <attribute name="destinationField">
+      <value name="sourceField"/>
+    </attribute>
+  </class>
+  <class name="com.application.Source">
+    <conversion name="conversion">
+		return str;
+    </conversion>
+  </class>
+</jmapper>
+}}}
+You can also do a combination of the two previous examples: configuration with annotations and conversions in xml format or vice versa.<br>
+conversion between the two fields is applied only when there is a relationship between them, expressed with annotations or XML, follows an example of *not applied* conversion:
+{{{
+class Destination{                  class Source{
+    @JMap
+    private String id;                  private String id;
+    @JMap("sourceField")
+    private String destinationField;    private String sourceField;
+    private String other;               private String other;
+
+    // getter and setter...             @JMapConversion(from={"id"}, to={"other"})
+										public String conversion(String str){
+											return str;
+										}
+
+										// getter and setter...
+}                                   }
+}}}
+Assuming to initialize the JMapper class in the following way:
+{{{
+JMapper jmapper = new JMapper(Destination.class, Source.class);
+}}}
+relations expressed:
+*- Source.id -> Destination.id
+*- Source.sourceField -> Destination.destinationField
+
+The conversion instead is defined for the relation:
+*- Source.id -> Destination.other
+
+So in this case the conversion will never be applied, the same happens also for the configuration in XML format.<br>
+The conversion method may have *one or two parameters*, depends on the logic that must be applied. A single input parameter indicates the source field, two parameters indicate the destination field and source field, this case comes in handy when you want to act on a destination field already defined.
+
+java example:
+{{{
+@JMapConversion(from={"sourceField"}, to={"destinationField"})
+public String conversion(String destinationField, String sourceField){
+   return destinationField +" "+sourceField+" converted";
+}
+}}}
+XML example:
+{{{
+<jmapper>
+  <class name="com.application.Source">
+    <conversion name="conversion" from="sourceField" to="destinationField">
+	return ${destination}+" "+${source}+" converted";
+    </conversion>
+  </class>
+</jmapper>
+}}}
+*IMPORTANT!* _The conversion, once satisfied the relationship, replaces the basis mapping of the framework, even in those cases where the destination field is null_
+The generated code is surrounded by a Try-Catch inserted with the aim of managing all the errors generated at runtime, such as NullPointerException.
+The conversions can be of two types: *static* and *dynamic*.
+the method is static when it is used in all the defined relationships, is dynamic when the method's body change according the relationship that must be satisfied.
+ 
+== Annotation's general instructions ==
+
+The annotation that allows us to perform explicit conversion is the *@JMapConversion*.
+JMapConversion has three parameters: from, to and type.
+ 
+||Field||Description||default value||
+||String[] from||names of the source fields||ALL||
+||String[] to||names of the destination fields||ALL||
+||Type type||conversion type||STATIC||
+ 
+The parameters from and to indicate which fields will be part of the conversion, the *from* indicates the source, the *to* indicates the recipient, the default value for each is ALL, ALL indicates that the conversion is to be applied to all related fields.
+the *Type* is an enumeration of @JMapConversion that allows you to define the conversion modes, and has only two values: STATIC and DYNAMIC, the default value of type is STATIC.
+Conversion modes are detailed in the following paragraphs.
+
+== XML's general instructions ==
+
+In the xml definition the conversion is defined using the *<conversion>* node, whose attributes are: name, from, to and type.
+
+
+||Attribute||Description||default value||
+||name||method name||undefined||
+||from||names of the source fields (separated by commas:"field","field2")||ALL||
+||to||names of the destination fields(separated by commas:"field","field2")||ALL||
+||type||conversion type||STATIC||
+
+The *name* attribute permits to define a name to the current conversion method, this attribute is mandatory.
+The parameters from and to indicate which fields will be part of the conversion, the *from* indicates the source, the *to* indicates the recipient, the default value for each is ALL, ALL indicates that the conversion is to be applied to all related fields.
+the *Type* is an enumeration of @JMapConversion that allows you to define the conversion modes, and has only two values: STATIC and DYNAMIC, the default value of type is STATIC.
+Conversion modes are detailed in the following paragraphs.
+
+*IMPORTANT!* _The code must be written according to the specifications java 1.4._
+
+== Static conversion ==
+
+A conversion is called static when it's used in all the defined relationships.
+Suppose we have two classes: Destination and Source, both with 3 fields of type String: d1, d2 and d3 for Destination and s1, s2, and s3 for Source and that you have configured s1 with d1, d2 with d3 and s2 with s3.
+We want to define a conversion to be applied to all relationships, then the method will be defined (eg in annotation):
+{{{
+// you can obtain the same result writing @JMapConversion without parameters
+@JMapConversion(from={"s1,s2,s3"}, to={"d1,d2,d3"}, type=Type.STATIC)
+public String conversion(String source){
+   return source + " converted";
+}
+}}}
+Assuming that the method is defined in the Destination, the mapping generated at runtime will be as follows:
+{{{
+destination.setD1(destination.conversion(source.getS1()));
+destination.setD2(destination.conversion(source.getS2()));
+destination.setD3(destination.conversion(source.getS3()));
+}}}
+This conversion is the most common and also the most useful, allows to pool a manipulation that can affect more data.
+In case there are any static methods with the same name, will be considered only the first one that meets the requirements.
+ 
+===	In annotation ===
+
+Consists in the definition of the conversion method using the following conventions:
+*- the input field to the method must be the same type of the source fields 
+*- the output field to the method must be the same type of destination fields
+
+Example:
+{{{
+@JMapConversion(from={"anInteger"}, to={"aString"}, type=Type.STATIC)
+public String conversion(Integer anInteger){
+   return anInteger.toString();
+}
+}}}
+Assuming that the method is defined in the Destination, JMapper generate the following mapping:
+{{{
+destination.setAString(destination.conversion(source.getAnInteger()));
+}}}
+If you want act even on the present value of the destination field, just add an input parameter, keeping in mind that the first field on the left is the destination and the second is the source:
+{{{
+@JMapConversion(from={"anInteger"}, to={"aString"}, type=Type.STATIC)
+public String conversion(String aString, Integer anInteger){
+   if(aString == null) aString = "initialized";
+   return aString + anInteger;
+}
+}}}
+The generated mapping will be as follows:
+{{{
+destination.setAString(destination.conversion(destination.getAString(),source.getAnInteger()));
+}}}
+ 
+=== In XML ===
+
+Consists in the definition of the <conversion> node, whose value is the body of the method to create, to refer to the source field and destination field you must use the following placeholders:
+•	${source} to refer to the source field
+•	${destination} to refer to the destination field
+
+Example:
+{{{
+<conversion name="conversion" from="anInteger" to="aString" type="STATIC">
+   return ${source}.toString();
+</conversion>
+}}}
+Method created at runtime:
+{{{
+public String conversion(Integer source){
+   return source.toString();
+}
+}}}
+Mapping generated:
+{{{
+destination.setAString(destination.conversion(source.getAnInteger()));
+}}}
+If you want to act even on the destination, just use the placeholder: ${destination}.
+{{{
+<conversion name="conversion" from="sourceField" to="destinationField">
+   return ${destination}+" "+${source}+" converted";
+</conversion>
+}}}
+Method created at runtime:
+{{{
+public String conversion(String destination, Integer source){
+   return destination +" "+ source +" converted";
+}
+}}}
+Mapping generated:
+{{{
+destination.setAString(destination.conversion(destination.getAString(),source.getAnInteger()));
+}}}
+ 
+== Dynamic conversion ==
+
+For dynamic conversion we means a method whose body is adapted to every relationship. 
+The conversion method defined, both in java that in xml, is always one, but at runtime will be created a number of conversions equal to the number of relations.
+The dynamic conversion allows to pool the basic logic varying only some values 
+The placeholders that can be used both in java that in xml are as follows:
+
+||Placeholder||Description||
+||${source}||source reference||
+||${destination}||destination reference||
+||${source.type}||source type||
+||${destination.type}||destination type||
+||${source.name}||source name||
+||${destination.name}||destination name||
+
+annotation example:
+{{{
+@JMapConversion(from={"s1,s2,s3"}, to={"d1,d2,d3"}, type=Type.DYNAMIC)
+public static String conversion(){
+   return "return \"${destination.name} ${source.name}\";";
+}
+}}}
+Method created at runtime:
+{{{
+public String FROMs1TOd1(){
+   return "d1 s1";
+}
+
+public String FROMs2TOd2(){
+   return "d2 s2";
+}
+
+public String FROMs3TOd3(){
+   return "d3 s3";
+}
+}}}
+As you can see, the methods do not take input data because there is no reference to variables using the placeholder ${source} and ${destination}.
+Assuming that the method is defined in the Destination, JMapper generate the following mapping:
+{{{
+destination.setD1(destination.fromS1toD1());
+destination.setD2(destination.fromS2toD2());
+destination.setD3(destination.fromS3toD3());
+}}}
+ 
+=== In annotation ===
+
+Consists in the definition of the conversion method using the following conventions:
+*- the method must be: public static
+*- should not receive input parameters
+*- must return a string containing the dynamic mapping
+
+Example:
+{{{
+@JMapConversion(from={"anInteger"}, to={"aString"}, type=Type.DYNAMIC)
+Public static String conversion(){
+ return "${destination.type} result = ${source} == 2?\"${source.name}\":\"${destination.name}\";"
+     +  "\n return result + ${destination};";
+}
+}}}
+Method created at runtime:
+{{{
+public String FROManIntegerTOaString(String destination,Integer source){
+   String result = source == 2? "anInteger":"aString";
+   return result + destination;
+}
+}}}
+Assuming that the method is defined in the Destination, JMapper generate the following mapping:
+{{{
+dest.setAString(dest.fromAnIntegertoAString(dest.getAString(),source.getAnInteger()));
+}}}
+
+=== In XML ===
+
+The placeholders can also be used in xml, the above example is repeated in xml format:
+{{{
+<conversion name="conversion" from="anInteger" to="aString" type="DYNAMIC">
+   ${destination.type} result = ${source} == 2?"${source.name}":"${destination.name}";
+   return result + ${destination};
+</conversion>
+}}}
+Method created at runtime:
+{{{
+public String FROManIntegerTOaString(String destination,Integer source){
+   String result = source == 2? "anInteger":"aString";
+   return result + destination;
+}
+}}}
+Mapping generated:
+{{{
+dest.setAString(dest.fromAnIntegertoAString(dest.getAString(),source.getAnInteger()));
+}}}
+ 
+== Examples of use ==
+
+La conversione dinamica apre scenari interessanti. 
+Permette di effettuare introspezione evitando l’uso delle Reflection, guadagnandoci non solo in performance ma anche in leggibilità del codice. Inoltre la possibilità di esternalizzare l’xml, permette di adeguare a proprio piacimento la logica senza dover apportare modifiche al codice, aumentando così notevolmente le potenzialità del framework.
+
+
+=== 1° Scenario ===
+
+We have a properties file and want to load properties in a bean.
+properties file:
+{{{
+author = Alessandro Vurro
+framework = JMapper
+version = 1.1.0
+label = dynamic conversion test
+}}}
+javaa beans:
+{{{
+class Destination{             class Source{
+
+  @JMap("properties")
+  private String author;         private Properties properties;
+  @JMap("properties")
+  private String framework;      @JMapConversion(from={"properties"}, type=Type.DYNAMIC)
+  @JMap("properties")	         public static String conversion(){
+  private String version;           return "return (String) ${source}.get(\"${destination.name}\");"; 
+  @JMap("properties")            } 
+  private String label;        
+
+  // getter and setter...      // getter and setter...
+       				          					     
+}			     			   }
+}}}        
+
+Methods created at runtime:
+{{{
+public String fromPropertiestoAuthor(Properties source){
+   return source.get("author");
+}
+
+public String fromPropertiestoFramework(Properties source){
+   return source.get("framework");
+}
+
+public String fromPropertiestoVersion(Properties source){
+   return source.get("version");
+}
+
+public String fromPropertiestoAuthor(Properties source){
+   return source.get("label");
+}
+}}}
+mapping generated:
+{{{
+destination.setAuthor(fromPropertiestoAuthor(source.getProperties()));
+destination.setFramework(fromPropertiestoFramework(source.getProperties()));
+destination.setVersion(fromPropertiestoVersion(source.getProperties()));
+destination.setLabel(fromPropertiestoLabel(source.getProperties()));
+}}}
+
+In the case of addition or removal of properties from the file, just add or remove the field from the Destination class.
+
+=== 2° Scenario ===
+
+We have a HashMap that has the pair <"name field", value field> and a bean with different fields, we want to do the following:
+*- load bean from HashMap
+*- load HashMap from bean
+
+The classes are:
+{{{
+class Destination{             class Source{
+   
+    private String  id;            private HashMap<String, Object> map;
+    private Integer quantity;    
+    private Date    purchase;   
+                                  
+    // getter and setter...        // getter and setter...
+       				          					     
+}			                   }   
+}}}
+XML configuration:
+{{{
+<jmapper>
+  <class name="com.application.Destination">
+    <attribute name="id">
+      <value name="map"/>
+    </attribute>
+    <attribute name="quantity">
+      <value name="map"/>
+    </attribute>
+    <attribute name="purchase">
+      <value name="map"/>
+    </attribute>
+  </class>
+  <class name="com.application.Source">
+    <conversion name="fromMapToAll" from="map" type="DYNAMIC">
+	    return (${destination.type}) ${source}.get("${destination.name}");
+    </conversion>
+    <conversion name="fromAllToMap" to="map" type="DYNAMIC">
+	    ${destination}.put("${source.name}",${source});
+        return ${destination};
+    </conversion>
+  </class>
+</jmapper>
+}}}
+Methods generated at runtime:
+{{{
+public String fromMaptoId(HashMap source){
+   return (String) source.get("id");
+}
+
+public Integer fromMaptoQuantity(HashMap source){
+   return (Integer) source.get("quantity");
+}
+
+public Date fromMaptoPurchase(HashMap source){
+   return (Date) source.get("purchase");
+}
+
+public String fromPropertiestoAuthor(Properties source){
+   return source.get("label");
+}
+
+public HashMap fromIdtoMap(HashMap destination, String source){
+   destination.put("id",source);
+   return destination;
+}
+
+public HashMap fromQuantitytoMap(HashMap destination, Integer source){
+   destination.put("quantity",source);
+   return destination;
+}
+public HashMap fromPurchasetoMap(HashMap destination, Date source){
+   destination.put("purchase",source);
+   return destination;
+}
+}}}
+So in case we want to fill the bean starting from HashMap the mapping used will be:
+{{{
+destination.setId(fromMaptoId(source.getMap()));
+destination.setQuantity(fromMaptoQuantity(source.getMap()));
+destination.setPurchase(fromMaptoPurchase(source.getMap()));
+}}}
+Instead, the mapping used to populate the HashMap from bean:
+{{{
+destination.setMap(fromIdtoMap(destination.getMap(),source.getId()));
+destination.setMap(fromQuantitytoMap(destination.getMap(),source.getQuantity()));
+destination.setMap(fromPurchasetoMap(destination.getMap(),source.getPurchase()));
+}}}
+
+== Overall ==
+
+Despite the potential of dynamic conversion are so high, the performances aren't affected, since the code continues to be generated at runtime and therefore equivalent to the static code, also increasing advantages such as:
+*- reducing the amount of code ->  increase the readability
+*- development simplified -> easier maintenance
