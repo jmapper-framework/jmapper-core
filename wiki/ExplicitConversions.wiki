@@ -15,13 +15,12 @@ class Destination{                      class Source{
     private String destinationField;        private String sourceField;
     private String other;                   private String other;
 
-    // getter and setter...                 
                                             @JMapConversion
 					    public String conversion(String str){
 						return str;
 					    }
 
-					    // getter and setter...
+   // getter and setter...                  // getter and setter...
 }                                       }
 }}}
 And an example in XML:
@@ -52,11 +51,11 @@ class Destination{                  class Source{
     private String destinationField;    private String sourceField;
     private String other;               private String other;
 
-    // getter and setter...             @JMapConversion(from={"id"}, to={"other"})
+                                        @JMapConversion(from={"id"}, to={"other"})
 				        public String conversion(String str){
 					   return str;
 					}
-					// getter and setter...
+    // getter and setter... 		// getter and setter...
 }                                   }
 }}}
 Assuming to initialize the JMapper class in the following way:
