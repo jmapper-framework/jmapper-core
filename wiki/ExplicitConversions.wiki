@@ -374,9 +374,9 @@ In the case of addition or removal of properties from the file, just add or remo
 
 === 2° Scenario ===
 
-We have a HashMap that has the pair <"name field", value field> and a bean with different fields, we want to do the following:
- * load bean from HashMap
- * load HashMap from bean
+We have a !HashMap that has the pair <"name field", value field> and a bean with different fields, we want to do the following:
+ * load bean from !HashMap
+ * load !HashMap from bean
 
 The classes are:
 {{{
