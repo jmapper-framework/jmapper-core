@@ -6,7 +6,7 @@
  * [ImplicitRelations Implicit relations]
    * [ImplicitRelations#Many_to_One Many to One]
    * [ImplicitRelations#One_to_Many One to Many]
- * [JMapVariables JMap variables]
+ * [JMapVariables @JMap]
    * [JMapVariables#Value Value]
    * [JMapVariables#Attributes Attributes]
    * [JMapVariables#Classes Classes]
