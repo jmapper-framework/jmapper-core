@@ -4,7 +4,7 @@
 
 As it may be compact, the configuration in XML format, there is always the possibility of error-prone writing it, to eliminate these risks and speed up its completion, the framework exposes the class *{{{XmlHandler}}}*.
 
-_XmlHandler handles the configuration but not the conversions_
+_!XmlHandler handles the configuration but not the conversions_
 
 == Constructors ==
 
