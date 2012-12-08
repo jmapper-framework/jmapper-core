@@ -38,4 +38,5 @@
  * [ExplicitConversions Explicit conversions]
  * [MoreInformations More informations]
  * [AdvancedExamples Advanced relational examples]
+ * [AdvancedConversionExamples Advanced conversion examples]
  * [PerformanceTests Performance tests]
