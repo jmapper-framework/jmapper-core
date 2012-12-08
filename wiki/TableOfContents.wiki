@@ -36,6 +36,8 @@
    * [XmlHandling#Methods Methods]
  * [ImplicitConversions Implicit conversions]
  * [ExplicitConversions Explicit conversions]
+   * [ExplicitConversions#Static_conversion Static conversion]
+   * [ExplicitConversions#Dynamic_conversion Dynamic conversion]
  * [MoreInformations More informations]
  * [AdvancedExamples Advanced relational examples]
  * [AdvancedConversionExamples Advanced conversion examples]
