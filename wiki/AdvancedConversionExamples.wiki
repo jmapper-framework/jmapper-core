@@ -75,7 +75,11 @@ class Destination{             class Source{
   // getter and setter...      // getter and setter...
        				          					     
 }			     			   }
-}}}        
+}}}
+_@JMap allows you to configure a field with only another and not simultaneously with more fields. For this reason you have configured the fields of Destination.
+
+For this purpose will be introduced the @JMultiMap in the next release._
+
 Methods created at runtime:
 {{{
 public String fromPropertiestoAuthor(Properties source){
