@@ -1,0 +1,199 @@
+#summary advanced conversion examples.
+ 
+= Advanced Conversion examples =
+
+The dynamic conversion opens interesting scenarios.
+Allows you to going in introspection avoiding the use of Reflection, an advantage not only in performance but also in code readability. 
+Furthermore, the possibility to outsource the xml, permits to make changes without touch the code, thus greatly increasing the potential of the framework.
+
+== 1° Scenario ==
+This example shows the use of static conversions.
+We want transform Strings to Dates.
+{{{
+class Dates {                 class Strings{
+
+   @JMap Date startDate;         String startDate;
+   @JMap Date endDate;           String endDate; 
+
+   // getter and setter..        // getter and setter..
+}                             }
+}}}
+XML configuration:
+{{{
+<jmapper>
+  <class name="it.jmapper.bean.Dates">
+    <attribute name="startDate">
+      <value name="startDate"/>
+    </attribute>
+    <attribute name="endDate">
+      <value name="endDate"/>
+    </attribute>
+  </class>
+  <class name="it.jmapper.bean.Strings">
+    <!-- in this case we use default values -->
+    <conversion name="toDate">
+    	return new java.text.SimpleDateFormat("dd/MM/yyyy").parse(${source});
+    </conversion>
+  </class>
+</jmapper>
+}}}
+Methods created at runtime:
+{{{
+public Date toDate(String source){
+   return new java.text.SimpleDateFormat("dd/MM/yyyy").parse(source);
+}
+}}}
+mapping generated:
+{{{
+destination.setStartDate(toDate(source.getStartDate()));
+destination.setEndDate(toDate(source.getEndDate()));
+}}}
+
+== 2° Scenario ==
+
+We have a properties file and want to load properties in a bean.
+properties file:
+{{{
+author = Alessandro Vurro
+framework = JMapper
+version = 1.1.0
+label = dynamic conversion test
+}}}
+java beans:
+{{{
+class Destination{             class Source{
+
+  @JMap("properties")
+  private String author;         private Properties properties;
+  @JMap("properties")
+  private String framework;      @JMapConversion(from={"properties"}, type=Type.DYNAMIC)
+  @JMap("properties")	         public static String conversion(){
+  private String version;           return "return (String) ${source}.get(\"${destination.name}\");"; 
+  @JMap("properties")            } 
+  private String label;        
+
+  // getter and setter...      // getter and setter...
+       				          					     
+}			     			   }
+}}}        
+Methods created at runtime:
+{{{
+public String fromPropertiestoAuthor(Properties source){
+   return source.get("author");
+}
+
+public String fromPropertiestoFramework(Properties source){
+   return source.get("framework");
+}
+
+public String fromPropertiestoVersion(Properties source){
+   return source.get("version");
+}
+
+public String fromPropertiestoAuthor(Properties source){
+   return source.get("label");
+}
+}}}
+mapping generated:
+{{{
+destination.setAuthor(fromPropertiestoAuthor(source.getProperties()));
+destination.setFramework(fromPropertiestoFramework(source.getProperties()));
+destination.setVersion(fromPropertiestoVersion(source.getProperties()));
+destination.setLabel(fromPropertiestoLabel(source.getProperties()));
+}}}
+
+In the case of addition or removal of properties from the file, just add or remove the field from the Destination class.
+
+== 3° Scenario ==
+
+We have a !HashMap that has the pair <"name field", value field> and a bean with different fields, we want to do the following:
+ * load bean from !HashMap
+ * load !HashMap from bean
+
+The classes are:
+{{{
+class Destination{             class Source{
+   
+    private String  id;            private HashMap<String, Object> map;
+    private Integer quantity;    
+    private Date    purchase;   
+                                  
+    // getter and setter...        // getter and setter...
+       				          					     
+}			                   }   
+}}}
+XML configuration:
+{{{
+<jmapper>
+  <class name="com.application.Destination">
+    <attribute name="id">
+      <value name="map"/>
+    </attribute>
+    <attribute name="quantity">
+      <value name="map"/>
+    </attribute>
+    <attribute name="purchase">
+      <value name="map"/>
+    </attribute>
+  </class>
+  <class name="com.application.Source">
+    <conversion name="fromMapToAll" from="map" type="DYNAMIC">
+	    return (${destination.type}) ${source}.get("${destination.name}");
+    </conversion>
+    <conversion name="fromAllToMap" to="map" type="DYNAMIC">
+	    ${destination}.put("${source.name}",${source});
+            return ${destination};
+    </conversion>
+  </class>
+</jmapper>
+}}}
+Methods generated at runtime:
+{{{
+public String fromMaptoId(HashMap source){
+   return (String) source.get("id");
+}
+
+public Integer fromMaptoQuantity(HashMap source){
+   return (Integer) source.get("quantity");
+}
+
+public Date fromMaptoPurchase(HashMap source){
+   return (Date) source.get("purchase");
+}
+
+public String fromPropertiestoAuthor(Properties source){
+   return source.get("label");
+}
+
+public HashMap fromIdtoMap(HashMap destination, String source){
+   destination.put("id",source);
+   return destination;
+}
+
+public HashMap fromQuantitytoMap(HashMap destination, Integer source){
+   destination.put("quantity",source);
+   return destination;
+}
+public HashMap fromPurchasetoMap(HashMap destination, Date source){
+   destination.put("purchase",source);
+   return destination;
+}
+}}}
+So in case we want to fill the bean starting from HashMap the mapping used will be:
+{{{
+destination.setId(fromMaptoId(source.getMap()));
+destination.setQuantity(fromMaptoQuantity(source.getMap()));
+destination.setPurchase(fromMaptoPurchase(source.getMap()));
+}}}
+Instead, the mapping used to populate the HashMap from bean:
+{{{
+destination.setMap(fromIdtoMap(destination.getMap(),source.getId()));
+destination.setMap(fromQuantitytoMap(destination.getMap(),source.getQuantity()));
+destination.setMap(fromPurchasetoMap(destination.getMap(),source.getPurchase()));
+}}}
+
+== Overall ==
+
+Despite the potential of dynamic conversion are so high, the performances aren't affected, since the code continues to be generated at runtime and therefore equivalent to the static code, also increasing advantages such as:
+ * reducing the amount of code ->  increase the readability
+ * development simplified -> easier maintenance
