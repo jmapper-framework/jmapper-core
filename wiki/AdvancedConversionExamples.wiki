@@ -76,9 +76,9 @@ class Destination{             class Source{
        				          					     
 }			     			   }
 }}}
-_@JMap allows you to configure a field with only another and not simultaneously with more fields. For this reason you have configured the fields of Destination.
+_@JMap allows you to configure a field with only another and not simultaneously with more fields.<br>For this reason we have configured the fields of Destination._
 
-For this purpose will be introduced the @JMultiMap in the next release._
+_For this purpose will be introduced the @JMultiMap in the next release._
 
 Methods created at runtime:
 {{{
