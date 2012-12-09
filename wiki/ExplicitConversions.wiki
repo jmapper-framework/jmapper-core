@@ -131,7 +131,7 @@ The parameters from and to indicate which fields will be part of the conversion,
 the *Type* is an enumeration of @JMapConversion that allows you to define the conversion modes, and has only two values: STATIC and DYNAMIC, the default value of type is STATIC.
 Conversion modes are detailed in the following paragraphs.
 
-*IMPORTANT!* _The code must be written according to the [http://www.csg.ci.i.u-tokyo.ac.jp/~chiba/javassist/tutorial/tutorial2.html#limit javassist specifications]._
+*IMPORTANT!* _The code must be written according the [http://www.csg.ci.i.u-tokyo.ac.jp/~chiba/javassist/tutorial/tutorial2.html#limit javassist specifications]._
 
 == Static conversion ==
 
