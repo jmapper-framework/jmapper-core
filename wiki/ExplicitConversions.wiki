@@ -91,9 +91,10 @@ XML example:
   </class>
 </jmapper>
 }}}
-*IMPORTANT!* _The conversion, once satisfied the relationship, replaces the basis mapping of the framework, even in those cases where the destination field is null_
+*IMPORTANT!* _The conversion, once satisfied the relationship, replaces the basis mapping of the framework_
 
-The generated code is surrounded by a Try-Catch inserted with the aim of managing all the errors generated at runtime, such as !NullPointerException.<br>
+The generated code is surrounded by a Try-Catch inserted with the aim of managing all the errors generated at runtime, such as !NullPointerException.
+
 The conversions can be of two types: *static* and *dynamic*.
 the method is static when it is used in all the defined relationships, is dynamic when the method's body change according the relationship that must be satisfied.
  
