@@ -227,8 +227,7 @@ destination.setAString(destination.conversion(destination.getAString(),source.ge
 
 For dynamic conversion we means a method whose body is adapted to every relationship. 
 The conversion method defined, both in java that in xml, is always one, but at runtime will be created a number of conversions equal to the number of relations.
-The dynamic conversion allows to pool the basic logic varying only some values 
-The placeholders that can be used both in java that in xml are as follows:
+The dynamic conversion allows to pool the basic logic varying only some values.<br>The placeholders that can be used both in java that in xml are as follows:
 
 ||Placeholder||Description||
 ||${source}||source reference||
