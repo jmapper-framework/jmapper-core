@@ -14,11 +14,11 @@ The xml configuration follows the pattern below:
                                          /
            1..*         1..*            /  0..1            1..* 
   jmapper ------ class ------ attribute --------- classes ------ class
-                      \                  \
-                       \                  \
-                   0..* \             0..1 \
-                         \                  \
-                      conversion           value
+                      \                 \
+                       \                 \
+                   0..* \            0..1 \
+                         \                 \
+                      conversion          value
 }}}
 There's an example:
 {{{
