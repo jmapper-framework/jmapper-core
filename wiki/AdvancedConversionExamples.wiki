@@ -215,11 +215,13 @@ map.put("quantity", 10);
 map.put("purchase", new Date());
 
 RelationalJMapper<Destination> mapper = new RelationalJMapper<Destination>(Destination.class,"xml/dynamicConversion.xml");
-		
-Destination manyToOne = mapper.manyToOne(new Source(map));
+
+Source source = new Source(map);
+Destination manyToOne = mapper.manyToOne(source);
 System.out.println(manyToOne);
-		
-Source oneToMany = mapper2.oneToMany(new Source5(new HashMap<String, Object>()),manyToOne);
+
+Source empty = new Source(new HashMap<String, Object>());
+Source oneToMany = mapper.oneToMany(empty,manyToOne);
 System.out.println(oneToMany);	
 }}}
 output:
@@ -232,6 +234,7 @@ Destination:
 Source:
  map = {purchase=Tue Dec 11 15:41:06 CET 2012, quantity=10, id=JMapper Framework v.1.1.0}
 }}}
+In this example we use RelationalJMapper, as you can see in the oneToMany example we pass as input an empty destination instance (Source class in this case become a destination), because the conversion method uses a reference to destination.
 == Overall ==
 
 Despite the potential of dynamic conversion are so high, the performances aren't affected, since the code continues to be generated at runtime and therefore equivalent to the static code, also increasing advantages such as:
