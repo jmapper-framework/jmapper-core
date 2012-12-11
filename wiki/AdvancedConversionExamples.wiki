@@ -21,14 +21,6 @@ class Dates {                 class Strings{
 XML configuration:
 {{{
 <jmapper>
-  <class name="it.jmapper.bean.Dates">
-    <attribute name="startDate">
-      <value name="startDate"/>
-    </attribute>
-    <attribute name="endDate">
-      <value name="endDate"/>
-    </attribute>
-  </class>
   <class name="it.jmapper.bean.Strings">
     <!-- in this case we use default values -->
     <conversion name="toDate">
@@ -37,7 +29,7 @@ XML configuration:
   </class>
 </jmapper>
 }}}
-Methods created at runtime:
+In this example we use annotated configuration with conversion in xml format.<br>Methods created at runtime:
 {{{
 public Date toDate(String source){
    return new java.text.SimpleDateFormat("dd/MM/yyyy").parse(source);
@@ -48,7 +40,16 @@ mapping generated:
 destination.setStartDate(toDate(source.getStartDate()));
 destination.setEndDate(toDate(source.getEndDate()));
 }}}
-
+example code:
+{{{
+JMapper<Dates, Strings> mapper = new JMapper<Dates, Strings>(Dates.class, Strings.class);
+Dates destination = mapper.getDestination(new Strings("01/01/2012", "01/01/2013"));
+System.out.println(destination);
+}}}
+output:
+{{{
+Dates [startDate=Tue Jan 01 00:00:00 CET 2013, endDate=Wed Jan 01 00:00:00 CET 2014]
+}}}
 == 2° Scenario ==
 
 We have a properties file and want to load properties in a bean.
