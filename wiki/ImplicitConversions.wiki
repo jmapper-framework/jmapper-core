@@ -21,6 +21,6 @@ Also it converts the collections and maps including their objects, for example:
  * a combination of the two previous: 
    {{{List <-> HashSet, HashMap <-> SortedMap}}}
  * conversion of primitive/wrapper items: 
-   {{{List<String> <-> HashSet<Integer>
-      HashMap<Integer, String> <-> SortedMap<String, Integer>}}}
+   {{{List<String> <-> HashSet<Integer>}}}
+   {{{HashMap<Integer, String> <-> SortedMap<String, Integer>}}}
   
