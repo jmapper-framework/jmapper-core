@@ -24,11 +24,11 @@ class AnnotatedClass{
 }}}
 RelationalJMapper takes as input only the configured class:
 {{{
-RelationalJMapper<AnnotatedClass> rm = new RelationalJMapper<AnnotatedClass>(AnnotatedClass.class);
+new RelationalJMapper<AnnotatedClass>(AnnotatedClass.class);
 }}}
 and the path of xml configuration file if it's defined:
 {{{
-RelationalJMapper<AnnotatedClass> rm = new RelationalJMapper<AnnotatedClass>(AnnotatedClass.class,"com/myapplication/jmapper.xml");
+new RelationalJMapper<AnnotatedClass>(AnnotatedClass.class,"com/myapplication/jmapper.xml");
 }}}
 == Many to One ==
 Using the manyToOne method will indicate to the framework that the configured class is the destination class, while target classes become the sources.
@@ -58,6 +58,7 @@ AnnotatedClass [field1="field1Class1", field2="field2Class1", field3="field3Clas
 AnnotatedClass [field1="field1Class2", field2="field2Class2", field3="field3Class2"]
 AnnotatedClass [field1="field1Class3", field2="field2Class3", field3="field3Class3"]
 }}}
+For more informations read [manyToOne ManyToOne] section
 == One to Many ==
 The method oneToMany instead allows us to define the configured class as a source class and the target classes as destination classes.
 {{{AnnotatedClass}}} in this example is the Source class and classes Class1, Class2 and Class3 are Destinations, it is still required, to explain the instance to be created, call the setDestinationClass method to define the target class, as follows:
@@ -92,3 +93,4 @@ Class1[field1Class1="field1", field2Class1="field2", field3Class1="field3"]
 Class2[field1Class2="field1", field2Class2="field2", field3Class2="field3"]
 Class3[field1Class3="field1", field2Class3="field2", field3Class3="field3"]
 }}}
+For more informations read [oneToMany OneToMany] section
