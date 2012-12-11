@@ -106,7 +106,20 @@ destination.setFramework(fromPropertiestoFramework(source.getProperties()));
 destination.setVersion(fromPropertiestoVersion(source.getProperties()));
 destination.setLabel(fromPropertiestoLabel(source.getProperties()));
 }}}
-
+example code:
+{{{
+JMapper<Destination,Source> mapper = new JMapper<Destination,Source>(Destination.class, Source.class);
+Destination destination = mapper.getDestination(new Source(properties));
+System.out.println(destination);
+}}}
+output:
+{{{
+Destination:
+ author = Alessandro Vurro
+ framework = JMapper
+ version = 1.1.0
+ label = dynamic conversion test
+}}}
 In the case of addition or removal of properties from the file, just add or remove the field from the Destination class.
 
 == 3° Scenario ==
