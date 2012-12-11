@@ -13,17 +13,17 @@ JMapper allows to perform mapping between primitive and / or wrapper types, such
 
 Also it converts the collections and maps including their objects, for example:
  * from interface to implementation and vice versa: 
-   {{{List}}} *<->* {{{ArrayList}}}
+   {{{List}}} <-> {{{ArrayList}}}
  * between different interfaces: 
-   {{{List}}} *<->* {{{Set}}}<br>
-   {{{Map}}} *<->* {{{SortedMap}}}
+   {{{List}}} <-> {{{Set}}}<br>
+   {{{Map}}} <-> {{{SortedMap}}}
  * between different implementations: 
-   {{{ArrayList}}} *<->* {{{HashSet}}}<br>
-   {{{HashMap}}} *<->* {{{TreeMap}}}
+   {{{ArrayList}}} <-> {{{HashSet}}}<br>
+   {{{HashMap}}} <-> {{{TreeMap}}}
  * a combination of the two previous: 
-   {{{List}}} *<->* {{{HashSet}}}<br>
-   {{{HashMap}}} *<->* {{{SortedMap}}}
+   {{{List}}} <-> {{{HashSet}}}<br>
+   {{{HashMap}}} <-> {{{SortedMap}}}
  * conversion of primitive/wrapper items: 
-   {{{List<String>}}} *<->* {{{HashSet<Integer>}}}<br>
-   {{{HashMap<Integer, String>}}} *<->* {{{SortedMap<String, Integer>}}}
+   {{{List<String>}}} <-> {{{HashSet<Integer>}}}<br>
+   {{{HashMap<Integer, String>}}} <-> {{{SortedMap<String, Integer>}}}
   
