@@ -2,8 +2,8 @@
 
 = Enumerations =
 
-There are two enumerations that help the developer to simplify the work and they are: {{{NullPointerControl}}} and {{{MappingType}}}.
-This enumerations are passed as input to {{{getDestination}}}, {{{manyToOne}}} and {{{oneToMany}}} methods.
+There are two enumerations that help the developer to simplify the work and they are: {{{NullPointerControl}}} and {{{MappingType}}}.<br>
+This enumerations are passed as input to *{{{getDestination}}}*,* {{{manyToOne}}}* and *{{{oneToMany}}}* methods.
 
 == !NullPointerControl ==
 This enumeration verifies that the objects passed in input are valued, if not, a null will be returned.
