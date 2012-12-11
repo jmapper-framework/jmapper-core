@@ -201,7 +201,7 @@ destination.setId(fromMaptoId(source.getMap()));
 destination.setQuantity(fromMaptoQuantity(source.getMap()));
 destination.setPurchase(fromMaptoPurchase(source.getMap()));
 }}}
-Instead, the mapping used to populate the HashMap from bean:
+Instead, the mapping used to populate the !HashMap from bean:
 {{{
 destination.setMap(fromIdtoMap(destination.getMap(),source.getId()));
 destination.setMap(fromQuantitytoMap(destination.getMap(),source.getQuantity()));
