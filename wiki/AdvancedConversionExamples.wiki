@@ -195,7 +195,7 @@ public HashMap fromPurchasetoMap(HashMap destination, Date source){
    return destination;
 }
 }}}
-So in case we want to fill the bean starting from HashMap the mapping used will be:
+So in case we want to fill the bean starting from !HashMap the mapping used will be:
 {{{
 destination.setId(fromMaptoId(source.getMap()));
 destination.setQuantity(fromMaptoQuantity(source.getMap()));
@@ -214,7 +214,8 @@ map.put("id", "JMapper Framework v.1.1.0");
 map.put("quantity", 10);
 map.put("purchase", new Date());
 
-RelationalJMapper<Destination> mapper = new RelationalJMapper<Destination>(Destination.class,"xml/dynamicConversion.xml");
+RelationalJMapper<Destination> mapper;
+mapper = new RelationalJMapper<Destination>(Destination.class,"xml/dynamicConversion.xml");
 
 Source source = new Source(map);
 Destination manyToOne = mapper.manyToOne(source);
