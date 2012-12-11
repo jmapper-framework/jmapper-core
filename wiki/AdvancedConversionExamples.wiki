@@ -120,7 +120,7 @@ Destination:
  version = 1.1.0
  label = dynamic conversion test
 }}}
-In the case of addition or removal of properties from the file, just add or remove the field from the Destination class.
+In the case of addition or removal of properties from the file, just add or remove the field from Destination class.
 
 == 3° Scenario ==
 
@@ -153,8 +153,6 @@ XML configuration:
     <attribute name="purchase">
       <value name="map"/>
     </attribute>
-  </class>
-  <class name="com.application.Source">
     <conversion name="fromMapToAll" from="map" type="DYNAMIC">
 	    return (${destination.type}) ${source}.get("${destination.name}");
     </conversion>
@@ -209,7 +207,31 @@ destination.setMap(fromIdtoMap(destination.getMap(),source.getId()));
 destination.setMap(fromQuantitytoMap(destination.getMap(),source.getQuantity()));
 destination.setMap(fromPurchasetoMap(destination.getMap(),source.getPurchase()));
 }}}
+example code:
+{{{
+HashMap<String, Object> map = new HashMap<String, Object>();
+map.put("id", "JMapper Framework v.1.1.0");
+map.put("quantity", 10);
+map.put("purchase", new Date());
 
+RelationalJMapper<Destination> mapper = new RelationalJMapper<Destination>(Destination.class,"xml/dynamicConversion.xml");
+		
+Destination manyToOne = mapper.manyToOne(new Source(map));
+System.out.println(manyToOne);
+		
+Source oneToMany = mapper2.oneToMany(new Source5(new HashMap<String, Object>()),manyToOne);
+System.out.println(oneToMany);	
+}}}
+output:
+{{{
+Destination:
+ id = JMapper Framework v.1.1.0
+ quantity = 10
+ purchase = Tue Dec 11 15:41:06 CET 2012
+
+Source:
+ map = {purchase=Tue Dec 11 15:41:06 CET 2012, quantity=10, id=JMapper Framework v.1.1.0}
+}}}
 == Overall ==
 
 Despite the potential of dynamic conversion are so high, the performances aren't affected, since the code continues to be generated at runtime and therefore equivalent to the static code, also increasing advantages such as:
