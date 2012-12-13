@@ -78,7 +78,7 @@ JMapper AbsentRelationshipException: there isn't relationship between Target4 Cl
 }}}
 == Value and Classes ==
 
-This combination allows you to limit the association between the mapped field and the target field to a defined set of classes.
+This combination allows you to limit the association between the mapped field and the target field to a defined set of classes, declaring the target field name.
 {{{
 @JMap(value = "destinationField", classes = {Destination.class})
 }}}
