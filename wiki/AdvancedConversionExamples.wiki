@@ -1,6 +1,6 @@
 #summary advanced conversion examples.
  
-= Advanced Conversion examples =
+= Conversion examples =
 
 The dynamic conversion opens interesting scenarios.
 Allows you to going in introspection avoiding the use of Reflection, an advantage not only in performance but also in code readability. 
