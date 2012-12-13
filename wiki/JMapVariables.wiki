@@ -60,9 +60,9 @@ Classes is used when you want to limit the association to a defined set of class
 }}}
 For example, we have the following classes:
 {{{
-   class Destination4 {        class Source{
+   class Target4 {        class Source{
 
-                                   @JMap(classes={Source1.class,Destination2.class, Destination3.class})
+                                   @JMap(classes={Target1.class, Target2.class, Target3.class})
        String field;               String field;
 
        // getter and setter..      // getter and setter.. 
@@ -70,11 +70,11 @@ For example, we have the following classes:
 }}}
 Code:
 {{{
-new JMapper<Destination4, Source>(Destination4.class, Source.class);
+new JMapper<Target4, Source>(Target4.class, Source.class);
 }}}
 Output:
 {{{
-JMapper AbsentRelationshipException: there isn't relationship between Destination4 Class and Source Class
+JMapper AbsentRelationshipException: there isn't relationship between Target4 Class and Source Class
 }}}
 == Value and Classes ==
 
