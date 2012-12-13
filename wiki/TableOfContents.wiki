@@ -39,8 +39,8 @@
      * [ExplicitConversions#Static_conversion Static conversion]
      * [ExplicitConversions#Dynamic_conversion Dynamic conversion]
  * Examples
-   * [AdvancedExamples Advanced relational examples]
-   * [AdvancedConversionExamples Advanced conversion examples]
+   * [AdvancedExamples Relational examples]
+   * [AdvancedConversionExamples Conversion examples]
  * [XmlHandling Xml handling]
    * [XmlHandling#Constructors Constructors]
    * [XmlHandling#Methods Methods]
