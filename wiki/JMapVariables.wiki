@@ -27,7 +27,7 @@ With attributes you can associate more target fields to a mapped field.
 @JMap(attributes = {"field1", "field2", "field3"})
 }}}
 This configuration may lead to undesirable results in the case there are multiple matches between the identifiers declared in attributes and the fields of the target class, in this case JMapper considers valid the first field that respects the correspondence. This use is recommended only if you are certain of the uniqueness of the identifiers defined.<br>
-For example, classes:
+For example, we have the following classes:
 {{{
 class Destination {          class Source {
 
@@ -54,11 +54,28 @@ Destination[dField3=null, dField2=null, dField1="sField1"]
 }}}
 == Classes ==
 
-If the identifier of the target field is identical to that of the mapped field, and you want to limit the association to a defined set of classes, just use classes.
+Classes is used when you want to limit the association to a defined set of classes, without value and attributes, you indicates to JMapper that the identifier of target field is the same of mapped field.
 {{{
 @JMap(classes = {Source1.class, Source2.class, Source3.class})
 }}}
+For example, we have the following classes:
+{{{
+   class Destination4 {        class Source{
 
+                                   @JMap(classes={Source1.class,Destination2.class, Destination3.class})
+       String field;               String field;
+
+       // getter and setter..      // getter and setter.. 
+   }                           }
+}}}
+Code:
+{{{
+new JMapper<Destination4, Source>(Destination4.class, Source.class);
+}}}
+Output:
+{{{
+JMapper AbsentRelationshipException: there isn't relationship between Destination4 Class and Source Class
+}}}
 == Value and Classes ==
 
 This combination allows you to limit the association between the mapped field and the target field to a defined set of classes.
