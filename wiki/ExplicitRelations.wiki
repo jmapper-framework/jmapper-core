@@ -28,7 +28,7 @@ new RelationalJMapper<AnnotatedClass>(AnnotatedClass.class);
 }}}
 and the path of xml configuration file if it's defined:
 {{{
-new RelationalJMapper<AnnotatedClass>(AnnotatedClass.class,"com/myapplication/jmapper.xml");
+new RelationalJMapper<AnnotatedClass>(AnnotatedClass.class,"xml/jmapper.xml");
 }}}
 == Many to One ==
 Using the manyToOne method will indicate to the framework that the configured class is the destination class, while target classes become the sources.
