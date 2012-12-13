@@ -10,7 +10,7 @@ In summary, the parameters that the annotation makes available are three:
 value, attributes and classes.
 In the next chapters we will see what combinations of these three parameters are allowed and their usefulness.
 
-*IMPORTANT!* _With @JMap annotation or !<attribute> node, you can only define a 1 to 1 relation between fields._ 
+*IMPORTANT!* _With {{{@JMap}}} annotation or {{{<attribute>}}} node, you can only define a 1 to 1 relation between fields._ 
 
 == Value ==
 
