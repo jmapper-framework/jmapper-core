@@ -60,7 +60,7 @@ Classes is used when you want to limit the association to a defined set of class
 }}}
 For example, we have the following classes:
 {{{
-   class Target4 {        class Source{
+   class Target4 {             class Source{
 
                                    @JMap(classes={Target1.class, Target2.class, Target3.class})
        String field;               String field;
