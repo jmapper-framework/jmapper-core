@@ -74,7 +74,7 @@ new JMapper<Target4, Source>(Target4.class, Source.class);
 }}}
 Output:
 {{{
-JMapper AbsentRelationshipException: there isn't relationship between Target4 Class and Source Class
+"JMapper AbsentRelationshipException: there isn't relationship between Target4 Class and Source Class"
 }}}
 == Value and Classes ==
 
