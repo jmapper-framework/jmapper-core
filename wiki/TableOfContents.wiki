@@ -34,10 +34,11 @@
  * [XmlHandling Xml handling]
    * [XmlHandling#Constructors Constructors]
    * [XmlHandling#Methods Methods]
- * [ImplicitConversions Implicit conversions]
- * [ExplicitConversions Explicit conversions]
-   * [ExplicitConversions#Static_conversion Static conversion]
-   * [ExplicitConversions#Dynamic_conversion Dynamic conversion]
+ * Conversions
+   * [ImplicitConversions Implicit conversions]
+   * [ExplicitConversions Explicit conversions]
+     * [ExplicitConversions#Static_conversion Static conversion]
+     * [ExplicitConversions#Dynamic_conversion Dynamic conversion]
  * [MoreInformations More informations]
  * Examples
    * [AdvancedExamples Advanced relational examples]
