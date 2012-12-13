@@ -31,7 +31,7 @@ For example, classes:
 {{{
 class Destination {          class Source {
 
-   String dField3;              @JMap(attributes={"dField1,dField2,dField3"})
+   String dField3;              @JMap(attributes={"dField1","dField2","dField3"})
    String dField2;              String sField1; 
    String dField1;
 
