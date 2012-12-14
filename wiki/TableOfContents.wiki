@@ -10,6 +10,9 @@
    * [JMapVariables#Value_and_Classes Value and Classes]
    * [JMapVariables#Attributes_and_Classes Attributes and Classes]
  * [XmlConfiguration XML format]
+ * [XmlHandling Xml handling]
+   * [XmlHandling#Constructors Constructors]
+   * [XmlHandling#Methods Methods]
  * Relations
    * [ImplicitRelations Implicit relations]
      * [ImplicitRelations#Many_to_One Many to One]
@@ -17,6 +20,11 @@
    * [ExplicitRelations Explicit relations]
      * [ExplicitRelations#Many_to_One Many to One]
      * [ExplicitRelations#One_to_Many One to Many]
+ * Conversions
+   * [ImplicitConversions Implicit conversions]
+   * [ExplicitConversions Explicit conversions]
+     * [ExplicitConversions#Static_conversion Static conversion]
+     * [ExplicitConversions#Dynamic_conversion Dynamic conversion]
  * [Enumerations Enumerations]
    * [Enumerations#NullPointerControl NullPointerControl]
    * [Enumerations#MappingType MappingType]
@@ -30,19 +38,11 @@
    * [oneToMany OneToMany]
      * [oneToMany#Creation_signatures Creation signatures]
      * [oneToMany#Enrichment_signatures Enrichment signatures]
- * Configurations
-   * [SpringConfiguration Spring configuration]
-   * [MavenConfiguration Maven configuration]
- * Conversions
-   * [ImplicitConversions Implicit conversions]
-   * [ExplicitConversions Explicit conversions]
-     * [ExplicitConversions#Static_conversion Static conversion]
-     * [ExplicitConversions#Dynamic_conversion Dynamic conversion]
  * Examples
    * [AdvancedExamples Relational examples]
    * [AdvancedConversionExamples Conversion examples]
- * [XmlHandling Xml handling]
-   * [XmlHandling#Constructors Constructors]
-   * [XmlHandling#Methods Methods]
+ * Configurations
+   * [SpringConfiguration Spring configuration]
+   * [MavenConfiguration Maven configuration]
  * [MoreInformations More informations]
  * [PerformanceTests Performance tests]
