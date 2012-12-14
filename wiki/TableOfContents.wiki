@@ -25,10 +25,10 @@
    * [ExplicitConversions Explicit conversions]
      * [ExplicitConversions#Static_conversion Static conversion]
      * [ExplicitConversions#Dynamic_conversion Dynamic conversion]
- * [Enumerations Enumerations]
-   * [Enumerations#NullPointerControl NullPointerControl]
-   * [Enumerations#MappingType MappingType]
  * Methods
+   * [Enumerations Enumerations]
+     * [Enumerations#NullPointerControl NullPointerControl]
+     * [Enumerations#MappingType MappingType]
    * [getDestination GetDestination]
      * [getDestination#Creation_signatures Creation signatures]
      * [getDestination#Enrichment_signatures Enrichment signatures]
