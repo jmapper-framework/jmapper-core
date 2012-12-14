@@ -43,6 +43,4 @@ There's an example:
   </class>
 </jmapper>
 }}}
-If you want create this mapping file with utility methods, see the [XmlHandling XML handling] paragraph. For more informations about conversion node see [ExplicitConversions explicit conversions] section.
-
-For more information see [Introduction#JMapper_constructors JMapper constructors] paragraph.
+If you want create this mapping file with utility methods, see the [XmlHandling XML handling] paragraph.<br>For more informations about conversion node see [ExplicitConversions explicit conversions] section.<br>For more information see [Introduction#JMapper_constructors JMapper constructors] paragraph.
