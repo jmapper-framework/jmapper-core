@@ -77,7 +77,7 @@ class Destination{             class Source{
 
   // getter and setter...      // getter and setter...
        				          					     
-}			     			   }
+}			       }
 }}}
 _@JMap allows you to configure a field with only another and not simultaneously with more fields.<br>For this reason we have configured the fields of Destination._
 
