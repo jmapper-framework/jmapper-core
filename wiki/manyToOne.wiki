@@ -2,7 +2,7 @@
 
 = !ManyToOne method =
 
-The method manyToOne has several signatures that use the {{{NullPointerControl}}} and {{{MappingType}}} enumerations.
+The method manyToOne belongs to RelationalJMapper and has several signatures that use the {{{NullPointerControl}}} and {{{MappingType}}} enumerations.
 These signatures allow both creation and enrichment of the destination instance.
 
 == Creation signatures ==
