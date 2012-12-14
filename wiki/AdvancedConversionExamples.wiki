@@ -54,7 +54,7 @@ Dates [startDate=Tue Jan 01 00:00:00 CET 2013, endDate=Wed Jan 01 00:00:00 CET 2
 }}}
 == 2° Scenario ==
 
-We have a properties file and want to load properties in a bean.
+We have a properties file that we want to load in a bean.
 properties file:
 {{{
 author = Alessandro Vurro
