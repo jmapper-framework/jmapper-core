@@ -140,7 +140,7 @@ class Destination{             class Source{
                                   
     // getter and setter...        // getter and setter...
        				          					     
-}			                   }   
+}			       }   
 }}}
 XML configuration:
 {{{
@@ -240,6 +240,6 @@ Source:
 In this example we use RelationalJMapper, as you can see in the oneToMany example we pass as input an empty destination instance (Source class in this case become a destination), because the conversion method uses a reference to destination.
 == Overall ==
 
-Despite the potential of dynamic conversion are so high, the performances aren't affected, since the code continues to be generated at runtime and therefore equivalent to the static code, also increasing advantages such as:
+Despite the potential of dynamic conversion are so high, the performance  isn't affected, since the code continues to be generated at runtime and therefore equivalent to the static code, also increasing advantages such as:
  * reducing the amount of code ->  increase the readability
  * development simplified -> easier maintenance
