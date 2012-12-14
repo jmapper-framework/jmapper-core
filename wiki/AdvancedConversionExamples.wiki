@@ -29,7 +29,9 @@ XML configuration:
   </class>
 </jmapper>
 }}}
-In this example we use annotated configuration with conversion in xml format.<br>Methods created at runtime:
+
+_In this example we use annotated configuration with conversion in xml format._
+<br>Method created at runtime:
 {{{
 public Date toDate(String source){
    return new java.text.SimpleDateFormat("dd/MM/yyyy").parse(source);
