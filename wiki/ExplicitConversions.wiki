@@ -126,7 +126,10 @@ In the xml definition the conversion is defined using the *<**conversion**>* nod
 ||to||names of the destination fields(separated by commas:"field","field2")||ALL||
 ||type||conversion type||STATIC||
 
-The *name* attribute permits to define a name to the current conversion method, this attribute is mandatory.
+The *name* attribute permits to define a name to the current conversion method, this attribute is *mandatory*.
+
+*IMPORTANT!* _make sure the name is unique for proper operation._
+
 The parameters from and to indicate which fields will be part of the conversion, the *from* indicates the source, the *to* indicates the recipient, the default value for each is ALL, ALL indicates that the conversion is to be applied to all related fields.
 the *Type* is an attribute that allows you to define the conversion modes, and has only two values: STATIC and DYNAMIC, the default value of type is STATIC.
 Conversion modes are detailed in the following paragraphs.
