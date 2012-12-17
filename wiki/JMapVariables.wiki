@@ -1,7 +1,7 @@
 #summary This page describes the JMap annotation in its entirety
 = @JMap =
 
-The cases just described are common but not fully satisfy the need.
+The cases described in the introduction are common but not fully satisfy the need.
 For this reason, the annotation @JMap has two other parameters, and they are *attributes* and *classes* both vectors.
 
 attributes contains the identifiers of the target fields, classes their classes.
