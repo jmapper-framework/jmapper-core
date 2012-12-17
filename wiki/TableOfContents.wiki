@@ -29,7 +29,7 @@
      * [ExplicitConversions#Dynamic_conversion Dynamic conversion]
  * Examples
    * [AdvancedExamples Relational examples]
-   * [AdvancedConversionExamples Conversion examples]
+   * [AdvancedConversionExamples Explicit conversion examples]
  * Configurations
    * [SpringConfiguration Spring configuration]
    * [MavenConfiguration Maven configuration]
