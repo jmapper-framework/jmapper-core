@@ -74,7 +74,7 @@ class Eggs extends Item {         class Detergents extends Item {
                                      @JMapConversion(from="cl")
                                      public String conversion(Integer cl){
                                         if(cl <=750) return "small package";
-                                        if(cl >=1500) return "large package"
+                                        if(cl >=1500) return "large package";
                                         return "normal package";
    }
 
@@ -107,7 +107,7 @@ XML example:
       </attribute>
       <conversion name="fromCl" from="cl">
          if(${source}<=750) return "small package";
-         if(${source}>=1500) return "large package"
+         if(${source}>=1500) return "large package";
          return "normal package";
       </conversion>
    </class>
