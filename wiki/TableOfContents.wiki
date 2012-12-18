@@ -28,8 +28,8 @@
      * [ExplicitConversions#Static_conversion Static conversion]
      * [ExplicitConversions#Dynamic_conversion Dynamic conversion]
  * Examples
-   * [AdvancedExamples Relational examples]
-   * [AdvancedConversionExamples Explicit conversion examples]
+   * [AdvancedExamples Relational mapping]
+   * [AdvancedConversionExamples Explicit conversion]
  * Configurations
    * [SpringConfiguration Spring configuration]
    * [MavenConfiguration Maven configuration]
