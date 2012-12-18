@@ -1,0 +1,115 @@
+#summary inheritance examples.
+
+= Inheritance =
+
+With JMapper you can apply inheritance both with configurations and conversions. The purpose is to share the configurations/conversions that are common between more beans.
+
+== Configuration ==
+
+When you have a complex hierarchy, where there are two or more level of inheritance, it is useful configure the common fields just one time.<br>
+Annotation example:
+{{{
+class Item {
+
+   @JMap String id;
+   @JMap String description;
+
+   // getter and setter..
+
+}
+
+class Eggs extends Item {         class Detergents extends Item {
+
+   @JMap Date expirationDate;        @JMap Integer cl;
+ 
+   // getter and setter              // getter and setter    
+
+}                                 }
+}}}
+XML example:
+{{{
+<jmapper>
+   <class name="package.Item">
+      <attribute name="id">
+         <value name="id"/>
+      </attribute>
+      <attribute name ="description">
+         <value name="description"/>
+      </attribute>
+   </class>
+   <class name="package.Eggs">
+      <attribute name ="expirationDate">
+         <value name="expirationDate"/>
+      </attribute>
+   </class>
+   <class name="package.Detergents">
+      <attribute name ="cl">
+         <value name="cl"/>
+      </attribute>
+   </class>
+</jmapper>
+}}}
+== Conversion ==
+
+The same logic can be applied for the conversions definition.<br>
+Annotation example:
+{{{
+class Item {
+
+   @JMap String id;
+   @JMap String description;
+
+   @JMapConversion(from="description")
+   public String conversion(String description){
+      return description + " information added";
+   }
+   // getter and setter..
+
+}
+
+class Eggs extends Item {         class Detergents extends Item {
+
+   @JMap Date expirationDate;        @JMap Integer cl;
+ 
+                                     @JMapConversion(from="cl")
+                                     public String conversion(Integer cl){
+                                        if(cl <=750) return "small package";
+                                        if(cl >=1500) return "large package"
+                                        return "normal package";
+   }
+
+   // getter and setter              // getter and setter    
+
+}                                 }
+}}}
+XML example:
+{{{
+<jmapper>
+   <class name="package.Item">
+      <attribute name="id">
+         <value name="id"/>
+      </attribute>
+      <attribute name ="description">
+         <value name="description"/>
+      </attribute>
+      <conversion name="fromDescription" from="description">
+         return ${source} + " information added";
+      </conversion>
+   </class>
+   <class name="package.Eggs">
+      <attribute name ="expirationDate">
+         <value name="expirationDate"/>
+      </attribute>
+   </class>
+   <class name="package.Detergents">
+      <attribute name ="cl">
+         <value name="cl"/>
+      </attribute>
+      <conversion name="fromCl" from="cl">
+         if(${source}<=750) return "small package";
+         if(${source}>=1500) return "large package"
+         return "normal package";
+      </conversion>
+   </class>
+</jmapper>
+}}}
