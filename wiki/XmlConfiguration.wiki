@@ -43,4 +43,5 @@ There's an example:
   </class>
 </jmapper>
 }}}
+Each class can have many attributes, each of them reflects the annotation @JMap, infact they have a node with value name, a list of attributes and a list of classes, the name of the configured attribute is defined in the name.<br>
 If you want create this mapping file with utility methods, see the [XmlHandling XML handling] section.<br>For more informations about conversion node see [ExplicitConversions explicit conversions] section.<br>See also [Introduction#JMapper_constructors JMapper constructors] paragraph.
