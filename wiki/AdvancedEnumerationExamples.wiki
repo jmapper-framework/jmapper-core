@@ -47,3 +47,14 @@ Destination[ name="empty", age=27, company="Altran"]
 the possible combinations of mapping are nine, try yourself to explore the other combinations.
 
 == !NullPointerControl ==
+
+You can check the source using NullPointerControl enumeration.<br>
+This enumeration avoids an explicit control, as shows by the following example:
+{{{
+Source source = null;
+
+Destination destination = mapper.getDestination(source, NullPointerControl.SOURCE);
+}}}
+Destination value: {{{null}}}<br>
+No error is launched, the mapping isn't executed instead, a null is returned.<br>
+For more information see the section.
