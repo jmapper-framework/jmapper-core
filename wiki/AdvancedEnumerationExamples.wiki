@@ -8,8 +8,8 @@ The classes used are:
 class Destination {              class Source {
 
    @JMap String name;               String name;
-   @JMap int age;                   int age;
-   @JMap int salary;                int salary;
+   @JMap Integer age;               Integer age;
+   @JMap String company;            String company;
 
    // getter and setter..           // getter and setter..
 
@@ -19,6 +19,31 @@ And the mapper used is created as follows:
 {{{
 JMapper<Destination, Source> mapper = new JMapper<Destination, Source>(Destination.class, Source.class);
 }}}
-== MappingType ==
 
-== NullPointerControl ==
+== !MappingType ==
+
+In this example you will see a case where you need to take only the valued fields:
+{{{
+Destination destination = new Destination("empty", null, "Altran");
+Source source = new Source("Alessandro", 27, null);
+
+Destination result = mapper.getDestination(destination, source, MappingType.ALL_FIELDS, MappingType.ONLY_VALUED_FIELDS);
+}}}
+result:
+{{{
+Destination[ name="Alessandro", age=27, company="Altran"]
+}}}
+If you want to value the empty fields:
+{{{
+Destination destination = new Destination("empty", null, "Altran");
+Source source = new Source("Alessandro", 27, null);
+
+Destination result = mapper.getDestination(destination, source, MappingType.ONLY_NULL_FIELDS, MappingType.ALL_FIELDS);
+}}}
+result:
+{{{
+Destination[ name="empty", age=27, company="Altran"]
+}}}
+the possible combinations of mapping are nine, try yourself to explore the other combinations.
+
+== !NullPointerControl ==
