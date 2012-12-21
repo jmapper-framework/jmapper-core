@@ -2,7 +2,7 @@
 
 = Enumerations usage =
 
-The following examples show the usage of the enumerations: NullPointerControl and MappingType.<br>
+The following examples show the usage of the enumerations: !NullPointerControl and !MappingType.<br>
 The classes used are:
 {{{
 class Destination {              class Source {
@@ -33,7 +33,7 @@ result:
 {{{
 Destination[ name="Alessandro", age=27, company="Altran"]
 }}}
-If you want to value the empty fields:
+If you want to fill the empty fields:
 {{{
 Destination destination = new Destination("empty", null, "Altran");
 Source source = new Source("Alessandro", 27, null);
@@ -54,7 +54,7 @@ This enumeration avoids an explicit control, as shows by the following example:
 {{{
 Source source = null;
 
-Destination destination = mapper.getDestination(source, NullPointerControl.SOURCE);
+Destination destination = mapper.getDestination(source, NullPointerControl.SOURCE, MappingType.ALL_FIELDS);
 
 assertNull(destination);
 }}}
