@@ -24,25 +24,25 @@ JMapper<Destination, Source> mapper = new JMapper<Destination, Source>(Destinati
 
 In this example you will see a case where you need to take only the valued fields:
 {{{
-Destination destination = new Destination("empty", null, "Altran");
+Destination destination = new Destination("empty", null, "Google");
 Source source = new Source("Alessandro", 27, null);
 
 Destination result = mapper.getDestination(destination, source, MappingType.ALL_FIELDS, MappingType.ONLY_VALUED_FIELDS);
 }}}
 result:
 {{{
-Destination[ name="Alessandro", age=27, company="Altran"]
+Destination[ name="Alessandro", age=27, company="Google"]
 }}}
 If you want to fill the empty fields:
 {{{
-Destination destination = new Destination("empty", null, "Altran");
+Destination destination = new Destination("empty", null, "Google");
 Source source = new Source("Alessandro", 27, null);
 
 Destination result = mapper.getDestination(destination, source, MappingType.ONLY_NULL_FIELDS, MappingType.ALL_FIELDS);
 }}}
 result:
 {{{
-Destination[ name="empty", age=27, company="Altran"]
+Destination[ name="empty", age=27, company="Google"]
 }}}
 the possible combinations of mapping are many, try yourself to explore the other combinations.<br>
 For more information see the [Enumerations enumerations] section.
