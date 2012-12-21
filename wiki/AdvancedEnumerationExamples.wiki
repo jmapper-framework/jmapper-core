@@ -44,7 +44,7 @@ result:
 {{{
 Destination[ name="empty", age=27, company="Altran"]
 }}}
-the possible combinations of mapping are nine, try yourself to explore the other combinations.<br>
+the possible combinations of mapping are many, try yourself to explore the other combinations.<br>
 For more information see the [Enumerations enumerations] section.
 
 == !NullPointerControl ==
