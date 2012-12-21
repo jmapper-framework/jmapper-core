@@ -30,7 +30,7 @@ XML configuration:
 </jmapper>
 }}}
 
-_In this example we use annotated configuration with conversion in xml format._
+_In this example we use annotated configurations and conversion in xml format._
 <br>Method created at runtime:
 {{{
 public Date toDate(String source){
