@@ -61,7 +61,7 @@ class Destination{
 
 = XML configuration =
 
-This is the xml configuration that belong to Destination class:
+this is the xml configuration equivalent to the previous one written with annotation:
 {{{
 <jmapper>
   <class name="it.jmapper.bean.Destination">
