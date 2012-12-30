@@ -7,3 +7,7 @@ In order to make the code independent from the concrete classes (JMapper and  Re
 = About raw types =
 
 Also you can perform mapping between raw types, operations not allowed are those that provide implicit conversion or recursive mapping.
+
+= Utility classes =
+
+There are two classes that can help you in everyday situations and they are: !GeneralUtility and !ClassesManager, by a look.
