@@ -33,7 +33,7 @@ result:
 {{{
 Destination[ name="Alessandro", age=27, company="Google"]
 }}}
-If you want to fill the empty fields:
+If you want to fill null fields:
 {{{
 Destination destination = new Destination("empty", null, "Google");
 Source source = new Source("Alessandro", 27, null);
