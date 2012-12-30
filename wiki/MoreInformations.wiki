@@ -10,4 +10,4 @@ Also you can perform mapping between raw types, operations not allowed are those
 
 = Utility classes =
 
-There are two classes that can help you in everyday situations and they are: !GeneralUtility and !ClassesManager, by a look.
+There are two classes that can help you in everyday situations and they are: *!GeneralUtility* and *!ClassesManager*, by a look.
