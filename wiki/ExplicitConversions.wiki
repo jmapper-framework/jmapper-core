@@ -209,7 +209,7 @@ public String conversion(Integer source){
 }}}
 Mapping generated:
 {{{
-destination.setAString(destination.conversion(source.getAnInteger()));
+destination.setAString(conversion(source.getAnInteger()));
 }}}
 If you want to act even on the destination, just use the placeholder: ${destination}.
 {{{
@@ -225,7 +225,7 @@ public String conversion(String destination, Integer source){
 }}}
 Mapping generated:
 {{{
-destination.setAString(destination.conversion(destination.getAString(),source.getAnInteger()));
+destination.setAString(conversion(destination.getAString(),source.getAnInteger()));
 }}}
  
 == Dynamic conversion ==
@@ -264,11 +264,11 @@ public String FROMs3TOd3(){
 }
 }}}
 As you can see, the methods do not take input data because there is no reference to variables using the placeholder ${source} and ${destination}.
-Assuming that the method is defined in the Destination, JMapper generate the following mapping:
+JMapper generate the following mapping:
 {{{
-destination.setD1(destination.fromS1toD1());
-destination.setD2(destination.fromS2toD2());
-destination.setD3(destination.fromS3toD3());
+destination.setD1(fromS1toD1());
+destination.setD2(fromS2toD2());
+destination.setD3(fromS3toD3());
 }}}
  
 === In annotation ===
@@ -293,9 +293,9 @@ public String FROManIntegerTOaString(String destination,Integer source){
    return result + destination;
 }
 }}}
-Assuming that the method is defined in the Destination, JMapper generate the following mapping:
+JMapper generate the following mapping:
 {{{
-dest.setAString(dest.fromAnIntegertoAString(dest.getAString(),source.getAnInteger()));
+dest.setAString(fromAnIntegertoAString(dest.getAString(),source.getAnInteger()));
 }}}
 
 === In XML ===
@@ -316,5 +316,5 @@ public String FROManIntegerTOaString(String destination,Integer source){
 }}}
 Mapping generated:
 {{{
-dest.setAString(dest.fromAnIntegertoAString(dest.getAString(),source.getAnInteger()));
+dest.setAString(fromAnIntegertoAString(dest.getAString(),source.getAnInteger()));
 }}}
