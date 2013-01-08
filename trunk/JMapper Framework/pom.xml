@@ -11,18 +11,15 @@
   <artifactId>jmapper-core</artifactId>
   <packaging>jar</packaging>
   <name>JMapper Framework</name>
-  <version>1.2.0-SNAPSHOT</version>
+  <version>1.1.1-SNAPSHOT</version>
   
   <description>
   JMapper is a framework that permits to write dynamic mapping, bringing several advantages as:
-  		1 - considerable reduction of the amount of code
-  		2 - considerable reduction of development time
-  		3 - increase the robustness of the application
-		4 - increase of the performance
-		5 - create and enrich target objects
-        6 - apply a specific logic to the mapping (only valued fields, only null fields, etc..)
-        7 - automated management of the XML file
-		8 - possibility of implementing the 1 to N and N to 1 relationships
+  create and enrich target objects,
+  apply a specific logic to the mapping (only valued fields, only null fields, etc..),
+  automated management of the XML file,
+  possibility of implementing the 1 to N and N to 1 relationships,
+  explicit conversions
   </description>
   
   <url>http://code.google.com/p/jmapper-framework/</url> 
