@@ -13,23 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package it.avutils.jmapper.operations.recursive;
 
 import static it.avutils.jmapper.enums.MappingType.ALL_FIELDS;
+import static it.avutils.jmapper.util.ClassesManager.getArrayItemClass;
 import static it.avutils.jmapper.util.ClassesManager.getCollectionItemClass;
 import static it.avutils.jmapper.util.GeneralUtility.newLine;
 import it.avutils.jmapper.mapper.generation.MappingBuilder;
+
 /**
  * This Class represents the mappings between mapped Collections.
  * @author Alessandro Vurro
  *
  */
-public class MappedCollectionOperation extends ARecursiveOperation {
+public class MappedListArrayOperation extends ARecursiveOperation{
 
 	@Override
 	protected Object getSourceConverted() {
-		return "collectionOfDestination"+count;
+		return "listArrayOfDestination"+count;
 	}
 	
 	@Override
@@ -50,7 +51,7 @@ public class MappedCollectionOperation extends ARecursiveOperation {
 		String itemDName = "objectOfDestination"+count;
 		
 		Class<?> itemDClass = getCollectionItemClass(destinationField);
-		Class<?> itemSClass = getCollectionItemClass(sourceField);
+		Class<?> itemSClass = getArrayItemClass(sourceField);
 		
 		MappingBuilder mapper = new MappingBuilder(itemDClass, itemSClass, itemDName, itemDName, itemSName, configChosen, xml,methodsToGenerate);
 		
@@ -58,9 +59,9 @@ public class MappedCollectionOperation extends ARecursiveOperation {
 		String itemSType = itemSClass.getName();
 		
 		return write(	"   ",newInstance(destList),
-			  newLine , "   Object[] ",sourceList," = ",getSource(),".toArray();",
+			  newLine , "   ",itemSType,"[] ",sourceList," = ",getSource(),";",
 			  newLine , "   for(int ",i," = ",sourceList,".length-1;",i," >=0;",i,"--){",
-			  newLine , "   ",itemSType," ",itemSName," = (",itemSType,") ",sourceList,"[",i,"];",
+			  newLine , "   ",itemSType," ",itemSName," = ",sourceList,"[",i,"];",
 			  newLine , 	mapper.mapping(newInstance, ALL_FIELDS, getMts()),
 			  newLine , "   ",destList,".add(",itemDName,");",
 			  newLine , "   }",
@@ -72,5 +73,4 @@ public class MappedCollectionOperation extends ARecursiveOperation {
 	 *  Count is shared between all operation of this type, 
 	 *  it's static for ensure the uniqueness
 	 */ 
-	private static int count = 0;
-}
+	private static int count = 0;}

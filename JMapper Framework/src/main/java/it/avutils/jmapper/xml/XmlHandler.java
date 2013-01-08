@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 Alessandro Vurro.
+ * Copyright (C) 2013 Alessandro Vurro.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,6 +55,9 @@ public class XmlHandler {
 	
 	/**
 	 * Xml File is handled at development time from xmlPath.
+	 * You must define only the file name, JMapper finds it recursively.
+	 * For example: if you have a file situated in the xml folder ("xml/mapper.xml")
+	 * you must instantiate XmlHandler as follows: new XmlHandler("mapper.xml");  
 	 * @param xmlPath xml path
 	 */
 	public XmlHandler(String xmlPath) {

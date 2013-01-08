@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 Alessandro Vurro.
+ * Copyright (C) 2013 Alessandro Vurro.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ import it.avutils.jmapper.exception.ConversionParameterException;
 import it.avutils.jmapper.exception.DynamicConversionBodyException;
 import it.avutils.jmapper.exception.DynamicConversionMethodException;
 import it.avutils.jmapper.exception.DynamicConversionParameterException;
+import it.avutils.jmapper.util.ClassesManager;
 import it.avutils.jmapper.util.XML;
 import it.avutils.jmapper.xml.XmlConverter;
 import java.lang.reflect.Field;
@@ -94,7 +95,6 @@ public class ConversionReader {
 			else{
 				if(existsXml(sourceClass))      { membership = Membership.SOURCE;       return true;}
 				if(existsXml(destinationClass)) { membership = Membership.DESTINATION;  return true;}}
-			return false;
 		}
 		configurationType = ConfigurationType.ANNOTATION;
 		if(config == ChooseConfig.DESTINATION){
@@ -147,8 +147,8 @@ public class ConversionReader {
 	 * @return true if an xml conversion exists, false otherwise
 	 */
 	private boolean existsXml(Class<?> clazz){
-		List<ConversionMethod> conversions = xml.conversionsLoad().get(clazz.getName());
-		if(conversions == null) return false;
+		List<ConversionMethod> conversions = ClassesManager.getConversionMethods(clazz, xml);
+		if(conversions.isEmpty()) return false;
 		return (method = verifyConversionExistence(conversions))!= null;
 	}
 	

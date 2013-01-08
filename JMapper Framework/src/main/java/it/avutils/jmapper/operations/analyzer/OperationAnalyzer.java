@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 Alessandro Vurro.
+ * Copyright (C) 2013 Alessandro Vurro.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,6 +44,7 @@ public final class OperationAnalyzer {
 	private final ObjectAnalyzer objectAnalyzer;
 	private final CollectionAnalyzer collectionAnalyzer;
 	private final MapAnalyzer mapAnalyzer;
+	private final ArrayListAnalyzer arrayListAnalyzer;
 	
 	public OperationAnalyzer(XML aXml) {
 		xml = aXml;
@@ -52,6 +53,7 @@ public final class OperationAnalyzer {
 		objectAnalyzer = new ObjectAnalyzer(xml);
 		collectionAnalyzer = new CollectionAnalyzer(xml);
 		mapAnalyzer = new MapAnalyzer(xml);
+		arrayListAnalyzer = new ArrayListAnalyzer(xml);
 	}
 	
 	/**
@@ -76,6 +78,8 @@ public final class OperationAnalyzer {
 		if(areCollections(dClass,sClass))  	   return collectionAnalyzer .getInfoOperation(destination, source);
 		// MAPS OPERATION
 		if(areMaps(dClass,sClass))		       return mapAnalyzer		 .getInfoOperation(destination, source);
+		// ARRAY <-> LIST OPERATION
+		if(areArrayAndList(dClass, sClass))    return arrayListAnalyzer  .getInfoOperation(destination, source);
 		
 		// if the operation has not been identified
 		return new InfoOperation().setInstructionType(OperationType.UNDEFINED);
@@ -93,13 +97,17 @@ public final class OperationAnalyzer {
 				||	(isBasic(dClass) && isBasic(sClass));
 	}
 	
-	private boolean areArrays(Class<?> dClass,Class<?> sClass){
+	private boolean areArrays(Class<?> dClass, Class<?> sClass){
 		return dClass.isArray() && sClass.isArray();
 	}
-	private boolean areCollections(Class<?> dClass,Class<?> sClass){
+	private boolean areCollections(Class<?> dClass, Class<?> sClass){
 		return collectionIsAssignableFrom(dClass) && collectionIsAssignableFrom(sClass);
 	}
-	private boolean areMaps(Class<?> dClass,Class<?> sClass){
+	private boolean areMaps(Class<?> dClass, Class<?> sClass){
 		return mapIsAssignableFrom(dClass) &&  mapIsAssignableFrom(sClass);
+	}
+	private boolean areArrayAndList(Class<?> dClass, Class<?> sClass){
+		return (dClass.isArray() && collectionIsAssignableFrom(sClass)) 
+			|| (sClass.isArray() && collectionIsAssignableFrom(dClass));
 	}
 }

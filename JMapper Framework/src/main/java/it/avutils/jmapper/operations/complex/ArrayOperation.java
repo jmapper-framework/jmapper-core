@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 Alessandro Vurro.
+ * Copyright (C) 2013 Alessandro Vurro.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,19 +32,16 @@ public class ArrayOperation extends AComplexOperation {
 		return "arrayOfDestination"+count;
 	}
 	
-		
 	@Override
 	protected StringBuilder existingField() {
-		
-		Class<?> itemDClass = getArrayItemClass(destinationField);
-		
-		Object destClass = itemDClass.getName();
+
+		Object destClass = getArrayItemClass(destinationField).getName();
 		Object destArray = getSourceTreated();
 		Object newArray	 = "newDestination"+count;
 		Object depArray  = "dep"+count;
 		Object i     = "index"  +count;
 		Object index = "counter"+count;
-		
+
 		return write(   "   ",destClass,"[] ",depArray," = ",getDestination(),";",
 			  newLine , "   ",destClass,"[] ",newArray," = new ",destClass,"[",depArray,".length + ",destArray,".length];",
 			  newLine , "   int ",index," = 0;",
@@ -55,36 +52,34 @@ public class ArrayOperation extends AComplexOperation {
 			  newLine , "   ",newArray,"[",index,"++] = ",destArray,"[",i,"];",
 			  newLine , "   }",
 			  newLine ,     setDestination(newArray));
-		
+
 	}
 
 	@Override
 	protected StringBuilder fieldToCreate() {
 		return setDestination(getSourceTreated());
 	}
-	
+
 	@Override
 	protected StringBuilder sharedCode(StringBuilder content) {
-		
-		if(!theSourceIsToBeConverted()){
-			count++; 
-			return content;
-		}
-		
+
 		Class<?> itemDClass = getArrayItemClass(destinationField);
 		Class<?> itemSClass = getArrayItemClass(sourceField);
-		
+
 		Object destination 	 = getSourceConverted();
 		Object source   = "arrayOfSource"+count;
 		Object itemSName = "objectOfSoure"+count;
 		Object itemDName   = "objectOfDestination"+count;
-		
+
 		Object i = "index"+count++;
 		Object itemS = itemSClass.getName();
 		Object itemD = itemDClass.getName();
-		
+
 		Object conversion = applyImplicitConversion(info.getConversionType(), itemDClass, itemSClass, itemSName);
+
+		if(conversion.equals(itemSName))return content;
 		
+
 		return write(   "   ",itemS,"[] ",source," = ",getSource(),";",
 			  newLine , "   ",itemD,"[] ",destination," = new ",itemD,"[",source,".length];",
 			  newLine , "   for(int ",i," = ",source,".length-1;",i," >=0;",i,"--){",
@@ -94,11 +89,10 @@ public class ArrayOperation extends AComplexOperation {
 			  newLine , "   }",
 			  newLine , 	content , newLine);
 	}
-	
+
 	/** the count is used to differentiate local variables in case of recursive mappings.
 	 *  Count is shared between all operation of this type, 
 	 *  it's static for ensure the uniqueness
 	 */ 
 	private static int count = 0;
-
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 Alessandro Vurro.
+ * Copyright (C) 2013 Alessandro Vurro.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,8 +18,7 @@ package it.avutils.jmapper.config;
 
 import static it.avutils.jmapper.constants.Constants.DEFAULT_FIELD_VALUE;
 import static it.avutils.jmapper.constants.Constants.THE_FIELD_IS_NOT_CONFIGURED;
-import static it.avutils.jmapper.util.ClassesManager.existField;
-import static it.avutils.jmapper.util.ClassesManager.isMappedInXML;
+import static it.avutils.jmapper.util.ClassesManager.*;
 import static it.avutils.jmapper.util.GeneralUtility.toList;
 import it.avutils.jmapper.annotations.JMap;
 import it.avutils.jmapper.constants.Constants;
@@ -144,14 +143,14 @@ public final class ConfigReader {
 	public String retrieveTargetFieldName(final Field field){
 		
 		// If configuredClass exists in XML configuration file
-		if(isMappedInXML(configuredClass, xml)){
-			
+		for (Class<?> clazz : getAllsuperclasses(configuredClass)){
+		  if(isMappedInXML(clazz, xml)){
 			// loads all configured attributes 
-			for(Attribute xmlField :xml.attributesLoad().get(configuredClass.getName())){
+			for(Attribute xmlField :xml.attributesLoad().get(clazz.getName())){
 				
 				// verifies that exists the attribute written in XML in the configured Class
-				if(!existField(configuredClass,xmlField.getName()))	
-					Error.attributeAbsent(configuredClass, xmlField);
+				if(!existField(clazz,xmlField.getName()))	
+					Error.attributeAbsent(clazz, xmlField);
 				
 				// if the field given in input isn't equal to xmlField continue with the cycle
 				if(!xmlField.getName().equals(field.getName())) continue;
@@ -174,14 +173,16 @@ public final class ConfigReader {
 				if(value==null&&attributes.isEmpty())value=DEFAULT_FIELD_VALUE;
 				
 				// loaded all variables, calculates and returns the correspondence
-				return getValue(attributes, classes, value, field.getName(), configuredClass, targetClass);
+				return getValue(attributes, classes, value, field.getName(), clazz, targetClass);
 			}
-			
-			return THE_FIELD_IS_NOT_CONFIGURED;
+		  }
+		}
 		
-		// if the XML configuration doesn't exist, checks the annotation existence
-		}else{
-			
+		// if class is configured in xml the annotated configuration is not searched
+		// if it has a configured superclass it's ignored, the priority is valid only for principal class
+		if(isMappedInXML(configuredClass, xml))return THE_FIELD_IS_NOT_CONFIGURED;
+		
+		    // if the XML configuration doesn't exist, checks the annotation existence
 			JMap jmap = field.getAnnotation(JMap.class);
 			if(jmap==null) return THE_FIELD_IS_NOT_CONFIGURED;
 			
@@ -199,6 +200,6 @@ public final class ConfigReader {
 			
 			// loaded all variables, calculates and returns the correspondence
 			return getValue(attributes, classes, value, field.getName(), configuredClass, targetClass);
-		}
+		
 	}
 }

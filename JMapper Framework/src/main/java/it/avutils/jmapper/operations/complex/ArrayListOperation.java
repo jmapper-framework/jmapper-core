@@ -13,40 +13,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package it.avutils.jmapper.operations.complex;
 
-package it.avutils.jmapper.operations.recursive;
-
-import static it.avutils.jmapper.util.ClassesManager.getArrayItemClass;
+import static it.avutils.jmapper.util.ClassesManager.*;
 import static it.avutils.jmapper.util.GeneralUtility.newLine;
-import it.avutils.jmapper.enums.MappingType;
-import it.avutils.jmapper.mapper.generation.MappingBuilder;
 
 /**
- * This Class represents the mappings between mapped Arrays.
+ * This Class represents the mappings between Arrays as destination fields and Lists as source fields.
  * @author Alessandro Vurro
  *
  */
-public class MappedArrayOperation extends ARecursiveOperation {
+public class ArrayListOperation extends AComplexOperation {
 
+	/** @return Returns the name of the object shared between existingField and fieldToCreate methods.*/
 	@Override
-	protected Object getSourceConverted() {
-		return "arrayOfDestination"+count;
+	protected Object getSourceConverted(){
+		return "arrayListOfDestination"+count;
 	}
 	
 	@Override
 	protected StringBuilder existingField() {
-		
-		Class<?> itemDClass = getArrayItemClass(destinationField);
-		
-		Object destinationObjClass = itemDClass.getName();
-		Object newArray		  = "newDestination"+count;
-		Object depArray 	  = "dep"+count;
-		Object destArray 	  = getSourceConverted();
+
+        Object destClass = getArrayItemClass(destinationField).getName();
+		Object destArray = getSourceConverted();
+		Object newArray	 = "newDestination"+count;
+		Object depArray  = "dep"+count;
 		Object i     = "index"  +count;
 		Object index = "counter"+count;
-		
-		return write(   "   ",destinationObjClass,"[] ",depArray," = ",getDestination(),";",
-			  newLine , "   ",destinationObjClass,"[] ",newArray," = new ",destinationObjClass,"[",depArray,".length + ",destArray,".length];",
+
+		return write(   "   ",destClass,"[] ",depArray," = ",getDestination(),";",
+			  newLine , "   ",destClass,"[] ",newArray," = new ",destClass,"[",depArray,".length + ",destArray,".length];",
 			  newLine , "   int ",index," = 0;",
 			  newLine , "   for(int ",i," = ",depArray,".length-1;",i," >=0;",i,"--){",
 			  newLine , "   ",newArray,"[",index,"++] = ",depArray,"[",i,"];",
@@ -61,34 +57,37 @@ public class MappedArrayOperation extends ARecursiveOperation {
 	protected StringBuilder fieldToCreate() {
 		return setDestination(getSourceConverted());
 	}
-	
+
 	@Override
 	protected StringBuilder sharedCode(StringBuilder content) {
-		
+
 		Class<?> itemDClass = getArrayItemClass(destinationField);
-		Class<?> itemSClass = getArrayItemClass(sourceField);
-		
+		Class<?> itemSClass = getCollectionItemClass(sourceField);
+
 		Object destination 	 = getSourceConverted();
-		Object source   = "arrayOfSource"+count;
-		String itemSName = "objectOfSoure"+count;
-		String itemDName   = "objectOfDestination"+count;
+		Object source   = "sourceArray"+count;
+		Object itemSName = "sourceItem"+count;
+		Object itemDName   = "destinationItem"+count;
+
+		Object i = "index"+count++;
+		Object itemS = itemSClass.getName();
+		Object itemD = itemDClass.getName();
+
+		Object conversion = applyImplicitConversion(info.getConversionType(), itemDClass, itemSClass, itemSName);
 		
-		String i = "index"+count++;
-		String itemSType = itemSClass.getName();
-		String itemDType = itemDClass.getName();
+		if(conversion.equals(itemSName))
+			return write("   ",itemD,"[] ",destination," = (",itemD,"[])",getSource(),".toArray(new ",itemD,"[",getSource(),".size()]);",
+			             newLine , content , newLine);
 		
-		MappingBuilder mapper = new MappingBuilder(itemDClass, itemSClass, itemDName, itemDName, itemSName, configChosen, xml,methodsToGenerate); 
-		
-		return write(   "   ",itemSType,"[] ",source," = ",getSource(),";",
-			  newLine , "   ",itemDType,"[] ",destination," = new ",itemDType,"[",source,".length];",
+		return write(   "   Object[] ",source," = ",getSource(),".toArray();",
+			  newLine , "   ",itemD,"[] ",destination," = new ",itemD,"[",source,".length];",
 			  newLine , "   for(int ",i," = ",source,".length-1;",i," >=0;",i,"--){",
-			  newLine , "   ",itemSType," ",itemSName," = (",itemSType,") ",source,"[",i,"];",
-			  newLine , 	mapper.mapping(newInstance, MappingType.ALL_FIELDS, getMts()),
+			  newLine , "   ",itemS," ",itemSName," = (",itemS,") ",source,"[",i,"];",
+			  newLine , "   ",itemD," ",itemDName," = " ,conversion,";",
 			  newLine , "   ",destination,"[",i,"] = ",itemDName,";",
 			  newLine , "   }",
-			  newLine , 	content, newLine);	
+			  newLine , 	content , newLine);
 	}
-
 	/** the count is used to differentiate local variables in case of recursive mappings.
 	 *  Count is shared between all operation of this type, 
 	 *  it's static for ensure the uniqueness

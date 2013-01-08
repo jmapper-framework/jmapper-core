@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 Alessandro Vurro.
+ * Copyright (C) 2013 Alessandro Vurro.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,14 +35,18 @@ import it.avutils.jmapper.mapper.generation.beans.Method;
 import it.avutils.jmapper.operations.AGeneralOperation;
 import it.avutils.jmapper.operations.analyzer.OperationAnalyzer;
 import it.avutils.jmapper.operations.complex.AComplexOperation;
+import it.avutils.jmapper.operations.complex.ArrayListOperation;
 import it.avutils.jmapper.operations.complex.ArrayOperation;
 import it.avutils.jmapper.operations.complex.CollectionOperation;
 import it.avutils.jmapper.operations.complex.ConversionOperation;
+import it.avutils.jmapper.operations.complex.ListArrayOperation;
 import it.avutils.jmapper.operations.complex.MapOperation;
 import it.avutils.jmapper.operations.info.InfoOperation;
 import it.avutils.jmapper.operations.recursive.ARecursiveOperation;
+import it.avutils.jmapper.operations.recursive.MappedArrayListOperation;
 import it.avutils.jmapper.operations.recursive.MappedArrayOperation;
 import it.avutils.jmapper.operations.recursive.MappedCollectionOperation;
+import it.avutils.jmapper.operations.recursive.MappedListArrayOperation;
 import it.avutils.jmapper.operations.recursive.MappedMapOperation;
 import it.avutils.jmapper.operations.recursive.ObjectOperation;
 import it.avutils.jmapper.operations.simple.ASimpleOperation;
@@ -198,7 +202,11 @@ public final class OperationHandler {
 			case BASIC_CONVERSION:             return new BasicConversion();
 			case OBJECT:					   return new ObjectOperation();
 			case ARRAY: 					   return new ArrayOperation();
+			case ARRAY_LIST:				   return new ArrayListOperation();
+			case LIST_ARRAY:			       return new ListArrayOperation();
 			case ARRAY_WITH_MAPPED_ITEMS:	   return new MappedArrayOperation();
+			case ARRAY_LIST_WITH_MAPPED_ITEMS: return new MappedArrayListOperation();
+			case LIST_ARRAY_WITH_MAPPED_ITEMS: return new MappedListArrayOperation();
 			case COLLECTION: 				   return new CollectionOperation();
 			case COLLECTION_WITH_MAPPED_ITEMS: return new MappedCollectionOperation();
 			case MAP:	     				   return new MapOperation();

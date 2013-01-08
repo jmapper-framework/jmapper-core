@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 Alessandro Vurro.
+ * Copyright (C) 2013 Alessandro Vurro.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -84,9 +84,6 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 
 	/** Configured Class*/
 	private Class<T> configuredClass;
-	
-	/** Class of Destination Class, for oneToMany purpose */
-	private Class<?> destinationClass;
 	
 	/** map that has the target class names as keys and relative JMapper as values */
 	private final HashMap<String,JMapper> relationalOneToManyMapper;
@@ -194,16 +191,6 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	}
 	
 	/**
-	 * This method permits to define the destination Class, only for oneToMany methods.
-	 * @param destinationClass Target Class to be created
-	 * @return this instance of RelationJMapper
-	 */
-	public <S> RelationalJMapper<T> setDestinationClass(final Class<S> destinationClass) {
-		this.destinationClass 	  = destinationClass;
-		return this;
-	}	
-	
-	/**
 	 * Returns a new instance of Class given as input, managing also the exception.
 	 * @param exception exception to handle
 	 * @param clazz class to instantiate
@@ -223,8 +210,7 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	 */
 	private <I> I destinationClassControl(Exception exception, Class<I> clazz){
 		try{
-			if(destinationClass == null)
-				throw new IllegalArgumentException("it's mandatory define the destination class before to use the onetToMany methods");
+			if(clazz == null)throw new IllegalArgumentException("it's mandatory define the destination class");
 		}catch (Exception e) {JmapperLog.ERROR(e);return null;}
 		return newInstance(exception,clazz);
 	}
@@ -436,14 +422,15 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	 * <td><code>MappingType</code> of Source</td><td><code>ALL_FIELDS<code></td>
 	 * </tr>
 	 * </table>
+	 * @param destinationClass class to create
 	 * @param source instance of Configured Class that contains the data
 	 * @return new instance of Target Class
 	 * @see NullPointerControl
 	 * @see MappingType
 	 */
-	public <D> D oneToMany(final T source) {
+	public <D> D oneToMany(Class<D> destinationClass, final T source) {
 		try{ return this.<D,T>getJMapper(relationalOneToManyMapper,destinationClass).getDestination(source); }
-		catch (Exception e) { return (D) this.destinationClassControl(e,this.destinationClass); }
+		catch (Exception e) { return (D) this.destinationClassControl(e,destinationClass); }
 	}
 	
 	
@@ -463,9 +450,9 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	 * @see NullPointerControl
 	 * @see MappingType
 	 */
-	public <D> D oneToManyWithoutControl(final T source) {
+	public <D> D oneToManyWithoutControl(Class<D> destinationClass, final T source) {
 		try{ return this.<D,T>getJMapper(relationalOneToManyMapper,destinationClass).getDestinationWithoutControl(source); }
-		catch (Exception e) { return (D) this.destinationClassControl(e,this.destinationClass); }
+		catch (Exception e) { return (D) this.destinationClassControl(e,destinationClass); }
 	}
 	
 	/**
@@ -525,15 +512,16 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	 * <td><code>MappingType</code> of Source</td><td>mtSource</td>
 	 * </tr>
 	 * </table>
+	 * @param destinationClass class to create
 	 * @param source instance of Configured Class that contains the data
 	 * @param mtSource type of mapping of source instance
 	 * @return new instance of Target Class
 	 * @see NullPointerControl
 	 * @see MappingType
 	 */
-	public <D> D oneToMany(final T source,final MappingType mtSource) {
+	public <D> D oneToMany(Class<D> destinationClass, final T source,final MappingType mtSource) {
 		try{ return this.<D,T>getJMapper(relationalOneToManyMapper,destinationClass).getDestination(source,mtSource); }
-		catch (Exception e) { return (D) this.destinationClassControl(e,this.destinationClass); }
+		catch (Exception e) { return (D) this.destinationClassControl(e,destinationClass); }
 	}
 	
 	/**
@@ -554,9 +542,9 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	 * @see NullPointerControl
 	 * @see MappingType
 	 */
-	public <D> D oneToMany(final T source,final NullPointerControl nullPointerControl,final MappingType mtSource) {
+	public <D> D oneToMany(Class<D> destinationClass, final T source,final NullPointerControl nullPointerControl,final MappingType mtSource) {
 		try{ return this.<D,T>getJMapper(relationalOneToManyMapper,destinationClass).getDestination(source,nullPointerControl,mtSource); }
-		catch (Exception e) { return (D) this.destinationClassControl(e,this.destinationClass); }
+		catch (Exception e) { return (D) this.destinationClassControl(e,destinationClass); }
 	}
 	
 	/**

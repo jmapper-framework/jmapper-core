@@ -41,6 +41,23 @@ public class OperationAnalyzerTest extends TestCase {
 		verifyConversionType(ConversionType.FromIntegerToString, "strArray", "integerArray");
 		
 	}
+	
+	public void testArrayListInstruction() throws ClassNotFoundException{
+	
+		verifyInstructionType(OperationType.ARRAY_LIST, "strArray", "aList2");
+		verifyConversionType(ConversionType.ABSENT, "strArray", "aList2");
+		
+		verifyInstructionType(OperationType.LIST_ARRAY, "aList2", "strArray");
+		verifyConversionType(ConversionType.ABSENT, "aList2", "strArray");
+		
+		verifyConversionType(ConversionType.FromStringToint, "intArray", "aList2");
+		verifyConversionType(ConversionType.FromintToString, "aList2", "intArray");
+		
+		verifyInstructionType(OperationType.LIST_ARRAY_WITH_MAPPED_ITEMS, "aLinkedList2", "mappedArray");
+		verifyInstructionType(OperationType.ARRAY_LIST_WITH_MAPPED_ITEMS, "mappedArray", "aLinkedList2");
+		
+	}
+	
 	public void testCollectionInstruction() throws ClassNotFoundException{
 		
 		// if destination field is assignable from source field

@@ -13,24 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package it.avutils.jmapper.operations.recursive;
 
 import static it.avutils.jmapper.util.ClassesManager.getArrayItemClass;
+import static it.avutils.jmapper.util.ClassesManager.getCollectionItemClass;
 import static it.avutils.jmapper.util.GeneralUtility.newLine;
 import it.avutils.jmapper.enums.MappingType;
 import it.avutils.jmapper.mapper.generation.MappingBuilder;
 
 /**
- * This Class represents the mappings between mapped Arrays.
+ * This Class represents the mappings between a mapped/target Array and a mapped/target Collection.
  * @author Alessandro Vurro
  *
  */
-public class MappedArrayOperation extends ARecursiveOperation {
+public class MappedArrayListOperation extends ARecursiveOperation {
 
 	@Override
 	protected Object getSourceConverted() {
-		return "arrayOfDestination"+count;
+		return "arrayListOfDestination"+count;
 	}
 	
 	@Override
@@ -66,10 +66,10 @@ public class MappedArrayOperation extends ARecursiveOperation {
 	protected StringBuilder sharedCode(StringBuilder content) {
 		
 		Class<?> itemDClass = getArrayItemClass(destinationField);
-		Class<?> itemSClass = getArrayItemClass(sourceField);
+		Class<?> itemSClass = getCollectionItemClass(sourceField);
 		
 		Object destination 	 = getSourceConverted();
-		Object source   = "arrayOfSource"+count;
+		Object source   = "arrayListOfSource"+count;
 		String itemSName = "objectOfSoure"+count;
 		String itemDName   = "objectOfDestination"+count;
 		
@@ -79,7 +79,7 @@ public class MappedArrayOperation extends ARecursiveOperation {
 		
 		MappingBuilder mapper = new MappingBuilder(itemDClass, itemSClass, itemDName, itemDName, itemSName, configChosen, xml,methodsToGenerate); 
 		
-		return write(   "   ",itemSType,"[] ",source," = ",getSource(),";",
+		return write(   "   Object[] ",source," = ",getSource(),".toArray();",
 			  newLine , "   ",itemDType,"[] ",destination," = new ",itemDType,"[",source,".length];",
 			  newLine , "   for(int ",i," = ",source,".length-1;",i," >=0;",i,"--){",
 			  newLine , "   ",itemSType," ",itemSName," = (",itemSType,") ",source,"[",i,"];",

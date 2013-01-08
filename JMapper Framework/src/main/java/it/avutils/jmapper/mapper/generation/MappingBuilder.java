@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 Alessandro Vurro.
+ * Copyright (C) 2013 Alessandro Vurro.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -92,20 +92,22 @@ public class MappingBuilder {
 	 * @see MappingType
 	 */
 	private String wrapMapping(boolean makeDest,NullPointerControl npc,MappingType mtd,MappingType mts){	
-		String str;
-		if(makeDest)str ="   "+source.getName()     +" "+stringOfGetSource+" = ("+source.getName()+") $1;"+newLine;
-		else		str ="   "+destination.getName()+" "+stringOfGetDestination+" = ("+destination.getName()+") $1;"+
-				newLine +"   "+source.getName()     +" "+stringOfGetSource+" = ("+source.getName()+") $2;"+newLine;
-								  
+		String sClass = source.getName();
+		String dClass = destination.getName();
+		
+		String str = (makeDest?"   "+sClass+" "+stringOfGetSource     +" = ("+sClass+") $1;"
+				              :"   "+dClass+" "+stringOfGetDestination+" = ("+dClass+") $1;"+newLine+
+				               "   "+sClass+" "+stringOfGetSource     +" = ("+sClass+") $2;")+newLine;
+
 		switch(npc){
 		  case SOURCE: 	    str +="if("+stringOfGetSource+"!=null){"     +newLine; break;
 		  case DESTINATION: str +="if("+stringOfGetDestination+"!=null){"+newLine; break;
 		  case ALL:	        str +="if("+stringOfGetSource+"!=null && "+stringOfGetDestination+"!=null){"+newLine;break;
 		}
-										  
+
 		str +=     mapping(makeDest,mtd,mts)          + newLine
 			+  "   return "+stringOfSetDestination+";"+ newLine;
-							  
+
 		return (npc != NOT_ANY) ? str +=  "}"             + newLine
 				                      +   " return null;" + newLine
 				                : str;

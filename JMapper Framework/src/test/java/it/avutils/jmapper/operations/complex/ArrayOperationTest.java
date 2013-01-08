@@ -43,7 +43,7 @@ public class ArrayOperationTest extends AOperation<ArrayOperation>{
 		actual   = operation.write(newInstance).toString();
 		verify();
 		
-		Integer i =  (Integer) getFieldValue(operation,"count");
+		Integer i =  getFieldValue(operation,"count");
 		
 		expected = "   if(destination.getStringArray()!=null){"+
 		 newLine + "   if(source.getStringArray2()!=null){"+
