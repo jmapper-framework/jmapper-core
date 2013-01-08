@@ -13,30 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package it.avutils.jmapper.operations.analyzer;
 
 import static it.avutils.jmapper.conversions.implicit.analyzer.ConversionAnalyzer.getConversionType;
 import static it.avutils.jmapper.enums.ConversionType.ABSENT;
 import static it.avutils.jmapper.enums.ConversionType.UNDEFINED;
-import static it.avutils.jmapper.enums.OperationType.COLLECTION;
-import static it.avutils.jmapper.enums.OperationType.COLLECTION_WITH_MAPPED_ITEMS;
+import static it.avutils.jmapper.enums.OperationType.ARRAY_LIST;
+import static it.avutils.jmapper.enums.OperationType.ARRAY_LIST_WITH_MAPPED_ITEMS;
+import static it.avutils.jmapper.enums.OperationType.LIST_ARRAY;
+import static it.avutils.jmapper.enums.OperationType.LIST_ARRAY_WITH_MAPPED_ITEMS;
 import static it.avutils.jmapper.util.ClassesManager.areMappedObjects;
 import static it.avutils.jmapper.util.ClassesManager.configChosen;
 import static it.avutils.jmapper.util.ClassesManager.getCollectionItemClass;
-import static it.avutils.jmapper.util.ClassesManager.isAddAllPermitted;
+import static it.avutils.jmapper.util.ClassesManager.isAssignableFrom;
 import static it.avutils.jmapper.util.GeneralUtility.areBasic;
+import static it.avutils.jmapper.util.GeneralUtility.collectionIsAssignableFrom;
 import it.avutils.jmapper.operations.info.InfoOperation;
 import it.avutils.jmapper.util.XML;
-
 import java.lang.reflect.Field;
+
 /**
- * This Class analyzes operations between Collections.
+ * This Class analyzes operations between Arrays and Collections..
  * @author Alessandro Vurro
  *
  */
-public final class CollectionAnalyzer {
-	
+public class ArrayListAnalyzer {
+
 	/** xml object */
 	private final XML xml;
 	
@@ -44,9 +46,10 @@ public final class CollectionAnalyzer {
 	 * Takes as input an xml object that represents the xml configuration.
 	 * @param aXml xml object
 	 */
-	public CollectionAnalyzer(XML aXml) {
+	public ArrayListAnalyzer(XML aXml) {
 		xml = aXml;
 	}
+
 	/**
 	 * This method calculates and returns information relating the operation to be performed.
 	 * @param destination destination field to be analyzed
@@ -55,27 +58,42 @@ public final class CollectionAnalyzer {
 	 */
 	public InfoOperation getInfoOperation(final Field destination, final Field source) {
 		
-		InfoOperation operation = new InfoOperation().setInstructionType(COLLECTION)
-				 									 .setConversionType(UNDEFINED);
+		Class<?> dClass = destination.getType();
+		Class<?> sClass = source.getType();
+		Class<?> dItem = null;
+		Class<?> sItem = null;
 		
-		// if basic mapping is possible
-		if(isAddAllPermitted(destination, source))
-			return operation.setConversionType(ABSENT);
+		InfoOperation operation = new InfoOperation().setConversionType(UNDEFINED);
 		
-		// from this point we know that the list items are different
-		Class<?> dItem = getCollectionItemClass(destination);
-		Class<?> sItem = getCollectionItemClass(source);
+		// Array[] = Collection<>
+		if(dClass.isArray() && collectionIsAssignableFrom(sClass)){
+			dItem = dClass.getComponentType();
+			sItem = getCollectionItemClass(source);
+			operation.setInstructionType(ARRAY_LIST);
+
+            if(areMappedObjects(dItem,sItem,xml))
+				return operation.setInstructionType(ARRAY_LIST_WITH_MAPPED_ITEMS)
+						        .setConfigChosen(configChosen(dItem,sItem,xml));
+		}
 		
-		// if list items are basic type
-		if(areBasic(dItem,sItem))	
-			return operation.setConversionType(getConversionType(dItem, sItem));
+		// Collection<> = Array[]
+		if(collectionIsAssignableFrom(dClass) && sClass.isArray()){
+			dItem = getCollectionItemClass(destination);
+			sItem = sClass.getComponentType();
+			operation.setInstructionType(LIST_ARRAY);
 			
-		// If list items are mapped
-		if(areMappedObjects(dItem,sItem,xml))
-			return operation.setInstructionType(COLLECTION_WITH_MAPPED_ITEMS)
-						    .setConfigChosen(configChosen(dItem,sItem,xml));
-		
+            if(areMappedObjects(dItem,sItem,xml))
+				return operation.setInstructionType(LIST_ARRAY_WITH_MAPPED_ITEMS)
+						        .setConfigChosen(configChosen(dItem,sItem,xml));
+		}
+
+		if(isAssignableFrom(dItem,sItem))
+			return operation.setConversionType (ABSENT);
+
+		// if components are primitive or wrapper types, apply implicit conversion
+		if(areBasic(dItem,sItem))
+			return operation.setConversionType(getConversionType(dItem, sItem));
+				
 		return operation;
 	}
-
 }

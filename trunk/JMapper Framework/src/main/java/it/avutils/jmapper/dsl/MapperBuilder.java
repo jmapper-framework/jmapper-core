@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 Alessandro Vurro.
+ * Copyright (C) 2013 Alessandro Vurro.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,10 +56,6 @@ public class MapperBuilder {
 	/** @return the generated mapper class */
 	public <D,S> Class<IMapper<D,S>> generate() throws NotFoundException, Exception{
 		
-		/* List of methods to generate.
-		 * ConversionHandler returns the methods to create, but there is the probability
-		 * that a static method is used in different cases. 
-		 * In this way the static method will be loaded only one time */
 		Set<Method> methodsToGenerate = new HashSet<Method>();
 		
 		Class<IMapper<D,S>> mapperClass = (Class<IMapper<D,S>>) generateMapperClass

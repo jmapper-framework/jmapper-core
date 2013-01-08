@@ -13,66 +13,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package it.avutils.jmapper.operations.complex;
 
+import static it.avutils.jmapper.util.ClassesManager.getArrayItemClass;
 import static it.avutils.jmapper.util.ClassesManager.getCollectionItemClass;
-import static it.avutils.jmapper.util.ClassesManager.isAssignableFrom;
 import static it.avutils.jmapper.util.GeneralUtility.listIsAssignableFrom;
 import static it.avutils.jmapper.util.GeneralUtility.newLine;
 import static it.avutils.jmapper.util.GeneralUtility.sortedSetIsAssignableFrom;
+
 /**
- * This Class represents the mappings between Collections.
+ * This Class represents the mappings between Lists as destination fields and Arrays as source fields.
  * @author Alessandro Vurro
  *
  */
-public class CollectionOperation extends AComplexOperation {
-	
+public class ListArrayOperation extends AComplexOperation{
+
+	/** @return Returns the name of the object shared between existingField and fieldToCreate methods.*/
 	@Override
-	protected Object getSourceConverted() {
-		return "collectionOfDestination"+count;
+	protected Object getSourceConverted(){
+		return "listArrayOfDestination"+count;
 	}
 	
 	@Override
 	protected StringBuilder existingField() {
-		return write("   ",getDestination(),".addAll(",getSourceTreated(),");");
+		return write("   ",getDestination(),".addAll(",getSourceConverted(),");");
 	}
 
 	@Override
 	protected StringBuilder fieldToCreate() {
-		
-		// if it is to be converted
-		if(theSourceIsToBeConverted()) 
-			  return setDestination(getSourceTreated());
-		
-		// if it is allowed to make a direct assignment
-		else if(isAssignableFrom(destinationField,sourceField))
-			  return setDestination(getSource());
-		
-		// in all those cases in which it is necessary to convert the structure
-		else{
-			  Object list = "complexCollection"+count;
-			  StringBuilder sb = new StringBuilder();
-			  
-			  // optimization applied to class type
-			 if(   listIsAssignableFrom(getDestinationClass()) 
-				|| sortedSetIsAssignableFrom(getDestinationClass()))
-							write(sb,"   ",newInstance(list,getSource()),newLine);
-			 
-			 else           write(sb,"   ",newInstance(list)                ,newLine
-					                ,"   ",list,".addAll(",getSource(),");" ,newLine);
-			
-			 return write(sb,setDestination(list));
-		}
+		return setDestination(getSourceConverted());
 	}
 
 	@Override
 	protected StringBuilder sharedCode(StringBuilder content) {
 		
-		if(!theSourceIsToBeConverted()){count++; return content;}
-		
 		Class<?> dItemType = getCollectionItemClass(destinationField);
-		Class<?> sItemType = getCollectionItemClass(sourceField);
+		Class<?> sItemType = getArrayItemClass(sourceField);
 		
 		Object dList = getSourceConverted();
 		Object sList = "collectionOfSource"+count;
@@ -85,8 +61,21 @@ public class CollectionOperation extends AComplexOperation {
 
 		Object conversion = applyImplicitConversion(info.getConversionType(), dItemType, sItemType, sName);
 		
+		if(conversion.equals(sName)){
+			StringBuilder sb = new StringBuilder();
+			// optimization applied to class type
+			 if(   listIsAssignableFrom(getDestinationClass())
+				|| sortedSetIsAssignableFrom(getDestinationClass()))
+							write(sb,"   ",newInstance(dList,"java.util.Arrays#asList("+getSource()+")"),newLine);
+			 
+			 else           write(sb,"   ",newInstance(dList),newLine
+					             ,"   ",dList,".addAll(java.util.Arrays#asList(",getSource(),"));" ,newLine);
+			 
+			 return write(sb,content);
+		}
+		
 		return write(   "   ",newInstance(dList),
-			  newLine , "   Object[] ",sList," = ",getSource(),".toArray();",
+			  newLine , "   ",sItem,"[] ",sList," = ",getSource(),";",
 			  newLine , "   for(int ",i," = ",sList,".length-1;",i," >=0;",i,"--){",
 			  newLine , "   ",sItem," ",sName," = (",sItem,") ",sList,"[",i,"];",
 			  newLine , "   ",dItem," ",dName," = ", conversion ,";",
@@ -94,7 +83,6 @@ public class CollectionOperation extends AComplexOperation {
 			  newLine , "   }",
 			  newLine , 	content , newLine);
 	}
-	
 	/** the count is used to differentiate local variables in case of recursive mappings.
 	 *  Count is shared between all operation of this type, 
 	 *  it's static for ensure the uniqueness

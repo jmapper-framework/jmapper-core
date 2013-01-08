@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 Alessandro Vurro.
+ * Copyright (C) 2013 Alessandro Vurro.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,8 +29,14 @@ public enum OperationType {
 	// collections with basic items
 	COLLECTION,
 	
-	// array of primitime or wrapper types
+	// arrays of primitive or wrapper types
 	ARRAY,
+	
+	// destination field is an array, source field is a list
+	ARRAY_LIST,
+	
+	// destination field is a list, source field is an array
+	LIST_ARRAY,
 	
 	// maps with a basic pairs
 	MAP,
@@ -38,8 +44,14 @@ public enum OperationType {
 	// objects that are mapped
 	OBJECT,
 	
-	// array with mapped items
+	// arrays with mapped items
 	ARRAY_WITH_MAPPED_ITEMS,
+	
+	// destination field is an array with mapped items, source field is a list with mapped items
+	ARRAY_LIST_WITH_MAPPED_ITEMS,
+	
+	// destination field is a list with mapped items, source field is an array with mapped items
+	LIST_ARRAY_WITH_MAPPED_ITEMS,
 	
 	// collections with mapped items
 	COLLECTION_WITH_MAPPED_ITEMS,
@@ -61,6 +73,8 @@ public enum OperationType {
 	public boolean isMapped(){ return this == OBJECT 
 								   || this == COLLECTION_WITH_MAPPED_ITEMS  
 								   || this == ARRAY_WITH_MAPPED_ITEMS 
+								   || this == ARRAY_LIST_WITH_MAPPED_ITEMS
+								   || this == LIST_ARRAY_WITH_MAPPED_ITEMS
 								   || this == MAP_WITH_MAPPED_ITEMS;}
 	 
 	 public boolean isBetweenMappedObjects(){return this == OBJECT;}
@@ -71,6 +85,8 @@ public enum OperationType {
 			 						 || this == MAP  
 			 						 || this == COLLECTION
 			 						 || this == ARRAY
+			 						 || this == ARRAY_LIST
+			 						 || this == LIST_ARRAY
 			 						 || this == CONVERSION;}
 	 
 	 public boolean isConversion(){ return this == CONVERSION || this == BASIC_CONVERSION; }

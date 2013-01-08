@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 Alessandro Vurro.
+ * Copyright (C) 2013 Alessandro Vurro.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -66,13 +66,6 @@ import it.avutils.jmapper.enums.NullPointerControl;
  */
 public interface IRelationalJMapper<T> {
 
-	/**
-	 * This method permits to define the destination Class, only for oneToMany methods.
-	 * @param destinationClass Target Class to be created
-	 * @return this instance of RelationJMapper
-	 */
-	public <S> IRelationalJMapper<T> setDestinationClass(final Class<S> destinationClass);
-	
 	/**
 	 * This method returns a new instance of Configured Class with this setting:
 	 * <table>
@@ -244,12 +237,13 @@ public interface IRelationalJMapper<T> {
 	 * <td><code>MappingType</code> of Source</td><td><code>ALL_FIELDS<code></td>
 	 * </tr>
 	 * </table>
+	 * @param destinationClass class to create 
 	 * @param source instance of Configured Class that contains the data
 	 * @return new instance of Target Class
 	 * @see NullPointerControl
 	 * @see MappingType
 	 */
-	public <D> D oneToMany(final T source);
+	public <D> D oneToMany(Class<D> destinationClass, final T source);
 	
 	/**
 	 * This method returns a new instance of Target Class with this setting:
@@ -267,7 +261,7 @@ public interface IRelationalJMapper<T> {
 	 * @see NullPointerControl
 	 * @see MappingType
 	 */
-	public <D> D oneToManyWithoutControl(final T source);
+	public <D> D oneToManyWithoutControl(Class<D> destinationClass, final T source);
 	
 	/**
 	 * This Method returns the destination given in input enriched with data contained in source given in input<br>
@@ -326,7 +320,7 @@ public interface IRelationalJMapper<T> {
 	 * @see NullPointerControl
 	 * @see MappingType
 	 */
-	public <D> D oneToMany(final T source,final MappingType mtSource);
+	public <D> D oneToMany(Class<D> destinationClass, final T source,final MappingType mtSource);
 	
 	/**
 	 * This method returns a new instance of Target Class with this setting:
@@ -346,7 +340,7 @@ public interface IRelationalJMapper<T> {
 	 * @see NullPointerControl
 	 * @see MappingType
 	 */
-	public <D> D oneToMany(final T source,final NullPointerControl nullPointerControl,final MappingType mtSource);
+	public <D> D oneToMany(Class<D> destinationClass, final T source,final NullPointerControl nullPointerControl,final MappingType mtSource);
 	
 	/**
 	 * This Method returns the destination given in input enriched with data contained in source given in input<br>

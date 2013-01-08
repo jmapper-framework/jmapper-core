@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 Alessandro Vurro.
+ * Copyright (C) 2013 Alessandro Vurro.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -69,7 +69,7 @@ public final class Error {
 	 * @param className class name
 	 */
 	public static void illegalCode(Exception e, String methodName, String className){
-		throw new IllegalCodeException(message(nullPointer,methodName.split("\\$")[1],className,e.getClass().getSimpleName(),""+e.getMessage()));
+		throw new IllegalCodeException(message(nullPointer,methodName,className,e.getClass().getSimpleName(),""+e.getMessage()));
 	}
 	/**
 	 * Thrown when the explicit conversion method defined has a null pointer.
@@ -77,7 +77,7 @@ public final class Error {
 	 * @param path xml path file
 	 */
 	public static void illegalCode(Exception e, String methodName, String className, String path){
-		throw new IllegalCodeException(message(nullPointerPath,methodName.split("\\$")[1],className,path,e.getClass().getSimpleName(),""+e.getMessage()));
+		throw new IllegalCodeException(message(nullPointerPath,methodName,className,path,e.getClass().getSimpleName(),""+e.getMessage()));
 	}
 	
 	/**
@@ -86,7 +86,7 @@ public final class Error {
 	 * @param additionalInformation additional information relative to the javassist exception
 	 */
 	public static void bodyContainsIllegalCode(Method method, Exception additionalInformation){
-		throw new ConversionBodyIllegalCodeException(message(conversionBodyIllegalCode,method.getClazz().getSimpleName(),method.getOriginalName().split("\\$")[1],""+additionalInformation.getMessage()));
+		throw new ConversionBodyIllegalCodeException(message(conversionBodyIllegalCode,method.getClazz().getSimpleName(),method.getOriginalName(),""+additionalInformation.getMessage()));
 	}
 	/**
 	 * Thrown when javassist don't find classes.
@@ -166,33 +166,36 @@ public final class Error {
 	}
 	/**
 	 * Thrown if attribute is present in the xml file.
+	 * @param path xml path
 	 * @param attributeName attribute present
 	 * @param aClass attribute's class
 	 */
-	public static void xmlAttributeInexistent(String attributeName, Class<?> aClass){
-		throw new XmlMappingAttributeDoesNotExistException (message(xmlMappingAttributeDoesNotExistException2,attributeName,aClass.getSimpleName()));
+	public static void xmlAttributeInexistent(String path, String attributeName, Class<?> aClass){
+		throw new XmlMappingAttributeDoesNotExistException (message(xmlMappingAttributeDoesNotExistException2,attributeName,aClass.getSimpleName(),path));
 	}
 	/**
 	 * Thrown if attribute is present in the xml file.
+	 * @param path xml path
 	 * @param attribute attribute present
 	 * @param aClass attribute's class
 	 */
-	public static void xmlAttributeExistent(Attribute attribute, Class<?> aClass){
-		throw new XmlMappingAttributeExistException (message(xmlMappingAttributeExistException2,attribute.getName(),aClass.getSimpleName()));
+	public static void xmlAttributeExistent(String path, Attribute attribute, Class<?> aClass){
+		throw new XmlMappingAttributeExistException (message(xmlMappingAttributeExistException2,attribute.getName(),aClass.getSimpleName(),path));
 	}
 	/**
 	 * Thrown if class isn't present in xml file.
+	 * @param path xml path
 	 * @param aClass Class analyzed
 	 */
-	public static void xmlClassInexistent(Class<?> aClass){
-		throw new XmlMappingClassDoesNotExistException (message(xmlMappingClassDoesNotExistException1,aClass.getSimpleName()));
+	public static void xmlClassInexistent(String path, Class<?> aClass){
+		throw new XmlMappingClassDoesNotExistException (message(xmlMappingClassDoesNotExistException1,path,aClass.getSimpleName()));
 	}
 	/**
 	 * Thrown if class is present in xml file.
 	 * @param aClass Class analyzed
 	 */
-	public static void xmlClassExistent(Class<?> aClass){
-		throw new XmlMappingClassExistException (message(xmlMappingClassExistException1,aClass.getSimpleName()));
+	public static void xmlClassExistent(String path, Class<?> aClass){
+		throw new XmlMappingClassExistException (message(xmlMappingClassExistException1,aClass.getSimpleName(),path));
 	}
 	
 	/**

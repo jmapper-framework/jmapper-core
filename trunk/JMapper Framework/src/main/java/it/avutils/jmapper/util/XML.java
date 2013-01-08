@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 Alessandro Vurro.
+ * Copyright (C) 2013 Alessandro Vurro.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -206,7 +206,7 @@ public final class XML {
 	 */
 	public XML deleteClass(Class<?> aClass){
 		boolean isRemoved = xmlJmapper.classes.remove(new XmlClass(aClass.getName()));
-		if(!isRemoved)Error.xmlClassInexistent(aClass);
+		if(!isRemoved)Error.xmlClassInexistent(this.xmlPath,aClass);
 		return this;
 	}
 	
@@ -220,7 +220,7 @@ public final class XML {
 		checksAttributesExistence(aClass,attributes);
 		
 		for (Attribute attribute : attributes) {
-			if(attributeExists(aClass,attribute)) Error.xmlAttributeExistent(attribute, aClass);
+			if(attributeExists(aClass,attribute)) Error.xmlAttributeExistent(this.xmlPath,attribute, aClass);
 			findXmlClass(aClass).attributes.add(XmlConverter.toXmlAttribute(attribute));
 		}
 		return this;
@@ -244,7 +244,7 @@ public final class XML {
 				if(xmlAttribute.name.equals(attributeName))
 					attribute = xmlAttribute;
 			
-			if(attribute == null) Error.xmlAttributeInexistent(attributeName,aClass);
+			if(attribute == null) Error.xmlAttributeInexistent(this.xmlPath,attributeName,aClass);
 				
 			findXmlClass(aClass).attributes.remove(attribute);
 		}
@@ -281,7 +281,7 @@ public final class XML {
 	 * @return this instance of XML
 	 */
 	private XML checksAttributesExistence(Class<?> aClass,String[] attributes){
-		if(!classExists(aClass)) Error.xmlClassInexistent(aClass);
+		if(!classExists(aClass)) Error.xmlClassInexistent(this.xmlPath,aClass);
 		for (String attributeName : attributes) 
 			try{ 				 aClass.getDeclaredField(attributeName);		  }
 			catch (Exception e){ Error.attributeInexistent(attributeName, aClass);}
@@ -293,7 +293,7 @@ public final class XML {
 	 * @return this instance of XML
 	 */
 	private XML checksClassAbsence(Class<?> aClass){
-		if(classExists(aClass))Error.xmlClassExistent(aClass);
+		if(classExists(aClass))Error.xmlClassExistent(this.xmlPath,aClass);
 		return this;
 	}
 	/**

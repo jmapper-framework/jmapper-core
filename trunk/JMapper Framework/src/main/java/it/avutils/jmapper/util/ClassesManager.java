@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 Alessandro Vurro.
+ * Copyright (C) 2013 Alessandro Vurro.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,6 +28,7 @@ import static it.avutils.jmapper.util.GeneralUtility.mapIsAssignableFrom;
 import static it.avutils.jmapper.util.GeneralUtility.toList;
 import it.avutils.jmapper.annotations.JMap;
 import it.avutils.jmapper.config.Error;
+import it.avutils.jmapper.conversions.explicit.ConversionMethod;
 import it.avutils.jmapper.enums.ChooseConfig;
 import it.avutils.jmapper.xml.Attribute;
 
@@ -36,6 +37,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Utility class that allows you to manage classes.
@@ -375,12 +377,27 @@ public final class ClassesManager {
 	 * @return true if the class is configured in annotation, false otherwise
 	 */
 	public static boolean isMappedInAnnotation(Class<?> aClass){
-		
 		for (Field it : aClass.getDeclaredFields()) 
 			if(it.getAnnotation(JMap.class)!=null) 
 				return true;
 		
 		return false;
+	}
+	
+	/**
+	 * Returns a list with the class passed in input plus his superclasses.
+	 * @param aClass class to check
+	 * @return a classes list
+	 */
+	public static List<Class<?>> getAllsuperclasses(Class<?> aClass){
+		List<Class<?>> result = new ArrayList<Class<?>>();
+		result.add(aClass);
+		Class<?> superclass = aClass.getSuperclass();
+		while(superclass != Object.class){
+			result.add(superclass);
+			superclass = superclass.getSuperclass();
+		}
+		return result;
 	}
 	
 	/**
@@ -401,23 +418,51 @@ public final class ClassesManager {
 	}
 	
 	/**
+	 * Returns the conversions method belonging to clazz.
+	 * @param clazz class to check
+	 * @param xml xml object
+	 * @return the conversion method list
+	 */
+	public static List<ConversionMethod> getConversionMethods (Class<?> clazz, XML xml){
+		List<ConversionMethod> conversions = new ArrayList<ConversionMethod>();
+		Map<String, List<ConversionMethod>> conversionsMap = xml.conversionsLoad();
+		for (Class<?> classToCheck : getAllsuperclasses(clazz)){
+			List<ConversionMethod> methods = conversionsMap.get(classToCheck.getName());
+			if(methods != null)conversions.addAll(methods);
+		}
+		return conversions;
+	}
+	
+	/**
 	 * Returns all methods that belongs to aClass.
 	 * @param aClass class to check
 	 * @return list of methods
 	 */
 	public static List<Method> getAllMethods(Class<?> aClass){
 		List<Method> listOfMethods = toList(aClass.getDeclaredMethods());
-		
 		Class<?> superclass = aClass.getSuperclass();
+		
 		while(superclass != Object.class){
-			for (Method superclassMethod : superclass.getDeclaredMethods()) 
-				for (Method method : listOfMethods) 
-					if(!method.getName().equals(superclassMethod.getName()))
-						listOfMethods.add(superclassMethod);
+			listOfMethods = getMethods(listOfMethods, superclass);
 			superclass = superclass.getSuperclass();
 		}
 		
 		return listOfMethods;
+	}
+	
+	/**
+	 * Used in a recursive context, retuns a list with the existingMethod plus eventually classToCheck's methods
+	 * @param existingMethods list of existing methods
+	 * @param classToCheck class to check
+	 * @return an enriched list
+	 */
+	private static List<Method> getMethods(List<Method> existingMethods, Class<?> classToCheck){
+		List<Method> result = new ArrayList<Method>(existingMethods);
+		for (Method methodToCheck : classToCheck.getDeclaredMethods()) 
+			for (Method method : existingMethods) 
+				if(!method.getName().equals(methodToCheck.getName()))
+					result.add(methodToCheck);
+		return result;
 	}
 	
 	/**
@@ -588,10 +633,11 @@ public final class ClassesManager {
 	 * @param fieldName
 	 * @return the value of a field from an object
 	 */
-	public static Object getFieldValue(Object obj,String fieldName){
+	@SuppressWarnings("unchecked")
+	public static <T> T getFieldValue(Object obj,String fieldName){
 		try {	Field field = obj.getClass().getDeclaredField(fieldName);
 				field.setAccessible(true);
-				return field.get(obj);
+				return (T) field.get(obj);
 		} catch (Exception e) { return null;}
 	}
 	

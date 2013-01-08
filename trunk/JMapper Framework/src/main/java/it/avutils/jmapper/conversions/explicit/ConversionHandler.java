@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 Alessandro Vurro.
+ * Copyright (C) 2013 Alessandro Vurro.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -98,8 +98,8 @@ public class ConversionHandler {
 			case TWO: methodToGenerate.setParameters(new Class<?>[]{destinationClass,sourceClass}); break;
 		}
 		
-		// setting of conversion method name 
-		methodToGenerate.setOriginalName(definedName());
+		// setting of conversion method name
+		methodToGenerate.setOriginalName(methodDefined.getName());
 		
 		// Method name definition
 		switch (methodDefined.getType()) {
@@ -123,7 +123,6 @@ public class ConversionHandler {
 		}
 		
 		// Method body definition
-		
 		body += methodDefined.getContent();
 		for (Entry<String, String> pair : placeholders.entrySet()) 
 			body = body.replaceAll(pair.getKey(), pair.getValue());

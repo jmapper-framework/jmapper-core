@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 Alessandro Vurro.
+ * Copyright (C) 2013 Alessandro Vurro.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,11 +25,12 @@ import it.avutils.jmapper.enums.NullPointerControl;
 import it.avutils.jmapper.mapper.IMapper;
 import javassist.NotFoundException;
 
+
 /**
  * JMapper takes as input two classes, Destination and Source.<br>
  * For Destination, we mean the instance that will be created or enhanced.<br>
  * For Source, we mean the instance containing the data.<br>
- * To execute the mapping, we must before configure one class beetween Destination and Source.<br><br>
+ * To execute the mapping, we must before configure one class between Destination and Source.<br><br>
  * for example:
  * <pre><code>
  * class Destination {

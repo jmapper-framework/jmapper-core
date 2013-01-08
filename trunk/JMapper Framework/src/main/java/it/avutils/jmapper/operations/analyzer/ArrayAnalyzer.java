@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 Alessandro Vurro.
+ * Copyright (C) 2013 Alessandro Vurro.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,8 @@ import static it.avutils.jmapper.enums.ConversionType.UNDEFINED;
 import static it.avutils.jmapper.enums.OperationType.ARRAY;
 import static it.avutils.jmapper.enums.OperationType.ARRAY_WITH_MAPPED_ITEMS;
 import static it.avutils.jmapper.util.ClassesManager.areMappedObjects;
+import static it.avutils.jmapper.util.ClassesManager.configChosen;
+import static it.avutils.jmapper.util.ClassesManager.isAssignableFrom;
 import static it.avutils.jmapper.util.GeneralUtility.areBasic;
 import it.avutils.jmapper.operations.info.InfoOperation;
 import it.avutils.jmapper.util.XML;
@@ -64,14 +66,18 @@ public final class ArrayAnalyzer {
 		Class<?> dComponentType = destination.getType().getComponentType();
 		Class<?> sComponentType = source.getType().getComponentType();
 		
+		if(isAssignableFrom(dComponentType,sComponentType))
+			return operation.setConversionType (ABSENT);
+		
 		// if components are primitive or wrapper types, apply implicit conversion
 		if(areBasic(dComponentType,sComponentType))
 			return operation.setConversionType(getConversionType(dComponentType, sComponentType));
 				
 		// if components are mapped objects
 		if(areMappedObjects(dComponentType,sComponentType,xml))
-			return operation.setInstructionType(ARRAY_WITH_MAPPED_ITEMS);
-		
+			return operation.setInstructionType(ARRAY_WITH_MAPPED_ITEMS)
+					        .setConfigChosen(configChosen(dComponentType,sComponentType,xml));
+
 		return operation;
 	}
 
