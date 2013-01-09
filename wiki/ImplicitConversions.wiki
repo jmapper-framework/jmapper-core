@@ -12,25 +12,33 @@ JMapper allows to perform implicitly mapping between primitive and / or wrapper 
 ||Character/char -> boolean||true if Char is equal to T, false all other cases||
 
 It also converts the arrays, collections and maps including their objects, for example:
- * from interface to implementation and vice versa: 
+ * from interface to implementation and vice versa
    {{{List <--> ArrayList}}}
- * between different interfaces: 
+ * between different interfaces
    {{{List <--> Set}}}<br>
    {{{Map <--> SortedMap}}}
- * between different implementations: 
+ * between different implementations
    {{{ArrayList <--> HashSet}}}<br>
    {{{HashMap <--> TreeMap}}}
- * a combination of the two previous: 
+ * a combination of the two previous
    {{{List <--> HashSet}}}<br>
    {{{HashMap <--> SortedMap}}}
- * conversion of primitive/wrapper items: 
+ * conversion of primitive/wrapper items
    {{{List<String> <--> HashSet<Integer>}}}<br>
    {{{HashMap<Integer, String> <--> SortedMap<String, Integer>}}}
- * conversion of mapped items: 
+ * conversion of mapped items
    {{{List<TargetObj> <--> HashSet<ConfigObj>}}}<br>
    {{{HashMap<Integer, ConfigObj> <--> SortedMap<String, TargetObj>}}}
- * conversion of primitive/wrapper arrays: 
+ * conversion of primitive/wrapper arrays
    {{{String[] <--> Integer[]}}}
- * conversion of mapped arrays: 
+ * conversion of mapped arrays
    {{{TargetObj[] <--> ConfigObj[]}}}
+
+ * conversion between arrays and collections:
+   * structural
+     {{{String[] <--> List<String>}}}
+   * with different primitive/wrapper types
+     {{{String[] <--> List<Integer>}}}
+   * with configured items
+     {{{TargetObj[] <--> List<ConfigObj>}}}
  
