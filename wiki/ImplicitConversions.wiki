@@ -34,7 +34,7 @@ It also converts the arrays, collections and maps including their objects, for e
  * conversion of mapped arrays
    {{{TargetObj[] <--> ConfigObj[]}}}
 
- * conversion between arrays and collections:
+ * conversion between arrays and collections (since 1.1.1 version):
    * structural
      {{{String[] <--> List<String>}}}
    * with different primitive/wrapper types
