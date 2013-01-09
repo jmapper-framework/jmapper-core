@@ -61,10 +61,9 @@ AnnotatedClass [field1="field1Class3", field2="field2Class3", field3="field3Clas
 For more informations read [manyToOne ManyToOne] section
 == One to Many ==
 The method oneToMany instead allows us to define the configured class as a source class and the target classes as destination classes.
-{{{AnnotatedClass}}} in this example is the Source class and classes Class1, Class2 and Class3 are Destinations, it is still required, to explain the instance to be created, call the setDestinationClass method to define the target class, as follows:
+{{{AnnotatedClass}}} in this example is the Source class and classes Class1, Class2 and Class3 are Destinations, it is still required, to explain the instance to be created, as follows:
 {{{
-relationalJMapper.setDestinationClass(Class1.class)
-                 .oneToMany(annotatedClass);
+relationalJMapper.oneToMany(Class1.class, annotatedClass);
 }}}
 Sample code:
 {{{
@@ -72,18 +71,15 @@ RelationalJMapper<AnnotatedClass> rm = new RelationalJMapper<AnnotatedClass>(Ann
 
 AnnotatedClass annotatedClass = new AnnotatedClass("field1", "field2", "field3");
 
-Class1 class1 = rm.setDestinationClass(Class1.class)
-                  .oneToMany(annotatedClass);
+Class1 class1 = rm.oneToMany(Class1.class, annotatedClass);
 
 System.out.println(class1);
 
-Class2 class2 = rm.setDestinationClass(Class2.class)
-                  .oneToMany(annotatedClass);
+Class2 class2 = rm.oneToMany(Class2.class, annotatedClass);
 
 System.out.println(class2);
 
-Class3 class3 = rm.setDestinationClass(Class3.class)
-                  .oneToMany(annotatedClass);
+Class3 class3 = rm.oneToMany(Class3.class, annotatedClass);
 
 System.out.println(class3);
 }}}
