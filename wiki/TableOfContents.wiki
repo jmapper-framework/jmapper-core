@@ -29,7 +29,7 @@
      * [ExplicitConversions#Dynamic_conversion Dynamic conversion]
  * Examples
    * [AdvancedEnumerationExamples Enumerations usage]
-   * [AdvancedInheritanceExamples inheritance examples]
+   * [AdvancedInheritanceExamples Inherited configurations]
    * [AdvancedExamples Relational mapping]
    * [AdvancedConversionExamples Explicit conversion]
  * Configurations
