@@ -2,7 +2,7 @@
 
 = Maven configuration =
 
-JMapper requires the slf4j and log4j dependencies to handle exceptions.
+JMapper uses Slf4j for logging, for the dependences resolution see [http://www.slf4j.org/ slf4j.org], fast configuration:
 {{{
 <dependency>
    <groupId>com.googlecode.jmapper-framework</groupId>
