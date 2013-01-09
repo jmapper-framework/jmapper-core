@@ -11,8 +11,7 @@ The methods described here, allow the creation of the destination instance.
 It is necessary to declare the target class for the use of these methods.
 
 {{{
-relationalJMapper.setDestinationClass(Class1.class)
-                 .oneToMany(source);
+relationalJMapper.oneToMany(Class1.class, source);
 }}}
 Default parameters:
 ||{{{NullPointerControl}}}||{{{SOURCE}}}||
@@ -20,8 +19,7 @@ Default parameters:
 ||Source {{{MappingType}}}||{{{ALL_FIELDS}}}||
 
 {{{
-relationalJMapper.setDestinationClass(Class1.class)
-                 .oneToManyWithoutControl(source);
+relationalJMapper.oneToManyWithoutControl(Class1.class, source);
 }}}
 Default parameters:
 ||{{{NullPointerControl}}}||{{{NOT_ANY}}}||
@@ -29,8 +27,7 @@ Default parameters:
 ||Source {{{MappingType}}}||{{{ALL_FIELDS}}}||
 
 {{{
-relationalJMapper.setDestinationClass(Class1.class)
-                 .oneToMany(source, mtSource);
+relationalJMapper.oneToMany(Class1.class, source, mtSource);
 }}}
 Default parameters:
 ||{{{NullPointerControl}}}||{{{SOURCE}}}||
@@ -38,8 +35,7 @@ Default parameters:
 ||Source {{{MappingType}}}||{{{mtSource}}}||
 
 {{{
-relationalJMapper.setDestinationClass(Class1.class)
-                 .oneToMany(source, nullPointerControl, mtSource);
+relationalJMapper.oneToMany(Class1.class, source, nullPointerControl, mtSource);
 }}}
 Default parameters:
 ||{{{NullPointerControl}}}||{{{nullPointerControl}}}||
