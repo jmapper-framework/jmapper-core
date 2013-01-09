@@ -70,7 +70,7 @@ below the sample code:
            BoO boO = exampleBusiness.executes(boI);
 
            // mapping
-           PivotO pivotO = rmO.setDestinationClass(PivotO.class).oneToMany(boO);
+           PivotO pivotO = rmO.oneToMany(PivotO.class, boO);
            
            return pivotO;
        }      
@@ -85,7 +85,7 @@ below the sample code:
        public BoO executes(BoI boI){
            
            // mapping
-           DtoI dtoI = rmI.setDestinationClass(DtoI.class).oneToMany(boI);
+           DtoI dtoI = rmI.oneToMany(DtoI.class, boI);
 
            // logic
            DtoO dtoO = exampleDao.executes(dtoI);
