@@ -27,13 +27,13 @@
    * [ExplicitConversions Explicit conversions]
      * [ExplicitConversions#Static_conversion Static conversion]
      * [ExplicitConversions#Dynamic_conversion Dynamic conversion]
+ * Configurations
+   * [SpringConfiguration Spring configuration]
+   * [MavenConfiguration Maven configuration]
  * Examples
    * [AdvancedEnumerationExamples Enumerations usage]
    * [AdvancedInheritanceExamples Inherited configurations]
    * [AdvancedExamples Relational mapping]
    * [AdvancedConversionExamples Explicit conversion]
- * Configurations
-   * [SpringConfiguration Spring configuration]
-   * [MavenConfiguration Maven configuration]
  * [MoreInformations More informations]
  * [PerformanceTests Performance tests]
