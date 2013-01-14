@@ -148,12 +148,21 @@ XML configuration:
   <class name="com.application.Destination">
     <attribute name="id">
       <value name="map"/>
+      <classes>
+         <class name="com.application.Source"/>
+      </classes>
     </attribute>
     <attribute name="quantity">
       <value name="map"/>
+      <classes>
+         <class name="com.application.Source"/>
+      </classes>
     </attribute>
     <attribute name="purchase">
       <value name="map"/>
+      <classes>
+         <class name="com.application.Source"/>
+      </classes>
     </attribute>
     <conversion name="fromMapToAll" from="map" type="DYNAMIC">
 	    return (${destination.type}) ${source}.get("${destination.name}");
