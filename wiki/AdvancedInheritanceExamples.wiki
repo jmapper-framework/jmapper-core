@@ -2,7 +2,7 @@
 
 = Inheritance =
 
-With JMapper you can apply inheritance both with configurations and conversions. The purpose is to share the configurations/conversions that are common between more beans.
+With JMapper you can apply inheritance to configurations and conversions. The purpose is to share the configurations/conversions that are common between more beans.
 
 == Configuration ==
 
