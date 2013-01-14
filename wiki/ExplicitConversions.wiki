@@ -6,7 +6,7 @@ In this section the conversion is synthesized, each argument is detailed in the 
 Explicit conversion allows you to define your own control logic and / or processing data belonging to the source fields and assign them to the destination fields.
 you can define conversions through the use of methods and you can do it in java, using the annotation *@JMapConversion* and in xml format using the node *<**conversion**>*.
 
-*IMPORTANT!* _the XML conversion has greater visibility of the equivalent in java_
+*IMPORTANT!* _the XML conversion has greater visibility of the equivalent in java and if no xml conversion was found, will be done a search by annotated conversion_
 
 Conversions can be written in the Destination or Source, regardless the configuration's location, follows an example of conversion in annotation:
 {{{
