@@ -6,10 +6,10 @@ In order to make the code independent from the concrete classes (JMapper and  Re
 
 = About raw types =
 
-Also you can perform mapping between raw types, operations allowed are implicit structural conversions (implementations/interface-implementation/interfaces):
-{{{ArrayList <--> Set}}}
-{{{SortedMap <--> HashMap}}}
-{{{List <--> Set}}}
+Also you can perform mapping between raw types, operations allowed are implicit structural conversions (implementations/interface-implementation/interfaces):<br />
+{{{ArrayList <--> Set}}}<br />
+{{{SortedMap <--> HashMap}}}<br />
+{{{List <--> Set}}}<br />
 
 For the framework  is impossible to know the type of the internal objects, for this reason they must be equal.
 
