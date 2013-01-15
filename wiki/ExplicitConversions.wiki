@@ -22,7 +22,7 @@ class Destination{                      class Source{
 						return str;
 					    }
 
-   // getter and setter...                  // getter and setter...
+   // getters and setters...                // getters and setters...
 }                                       }
 }}}
 And an example in XML:
@@ -57,7 +57,7 @@ class Destination{                  class Source{
 				        public String conversion(String str){
 					   return str;
 					}
-    // getter and setter... 		// getter and setter...
+    // getters and setters... 	        // getters and setters...
 }                                   }
 }}}
 Assuming to initialize the JMapper class in the following way:
