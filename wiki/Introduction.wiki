@@ -33,7 +33,7 @@ class Destination{                      class Source{
     private String destinationField;        private String sourceField;
     private String other;                   private String other;
 
-    // getter and setter...                 // getter and setter...
+    // getters and setters...               // getters and setters...
 }                                       }
 }}}
 As mentioned in the introduction, JMapper allows you to configure the mapping using both annotations and XML. In the next chapter we will learn to configure classes with annotation and especially with {{{@JMap}}}.
@@ -55,7 +55,7 @@ class Destination{
     private String destinationField;       
     private String other;                  
 
-    // getter and setter...                
+    // getters and setters...                
 }                                     
 }}}
 
