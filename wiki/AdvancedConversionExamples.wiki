@@ -75,7 +75,7 @@ class Destination{             class Source{
   @JMap("properties")            } 
   private String label;        
 
-  // getters and settesr...      // getter and setter...
+  // getters and setters...      // getter and setter...
        				          					     
 }			       }
 }}}
