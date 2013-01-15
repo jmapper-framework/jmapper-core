@@ -15,7 +15,7 @@ class Dates {                 class Strings{
    @JMap Date startDate;         String startDate;
    @JMap Date endDate;           String endDate; 
 
-   // getter and setter..        // getter and setter..
+   // getters and setters..      // getters and setters..
 }                             }
 }}}
 XML configuration:
@@ -75,7 +75,7 @@ class Destination{             class Source{
   @JMap("properties")            } 
   private String label;        
 
-  // getter and setter...        // getter and setter...
+  // getters and settesr...      // getter and setter...
        				          					     
 }			       }
 }}}
@@ -138,7 +138,7 @@ class Destination{             class Source{
     private Integer quantity;    
     private Date    purchase;   
                                   
-    // getter and setter...        // getter and setter...
+    // getters and setters...      // getter and setter...
        				          					     
 }			       }   
 }}}
