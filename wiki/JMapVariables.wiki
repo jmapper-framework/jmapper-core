@@ -35,7 +35,7 @@ class Destination {          class Source {
    String dField2;              String sField1; 
    String dField1;
 
-   //getter and setter..        //getter and setter..
+   //getters and setters..      //getter and setter..
 }                            }
 }}}
 Code:
