@@ -24,7 +24,7 @@ Most of its methods use a java bean *{{{Attribute}}}*:
                String[] attributes;
                Class<?>[] classes;
     
-               // getter and setter...
+               // getters and setters...
          }
 }}}
 The Attribute reflects the parameters of the @JMap annotation plus a string: name, the name of the current attribute.
