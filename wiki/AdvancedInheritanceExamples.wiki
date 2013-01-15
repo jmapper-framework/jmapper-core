@@ -14,7 +14,7 @@ class Item {
    @JMap String id;
    @JMap String description;
 
-   // getter and setter..
+   // getters and setters..
 
 }
 
@@ -63,7 +63,7 @@ class Item {
    public String conversion(String description){
       return description + " information added";
    }
-   // getter and setter..
+   // getters and setters..
 
 }
 
