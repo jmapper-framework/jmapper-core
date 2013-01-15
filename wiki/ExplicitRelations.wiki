@@ -19,7 +19,7 @@ class AnnotatedClass{
           classes    = {Class1.class, Class2.class, Class3.class})
     private String field3;                  
 
-    // getter and setter...                
+    // getters and setters...                
 }                                     
 }}}
 RelationalJMapper takes as input only the configured class:
