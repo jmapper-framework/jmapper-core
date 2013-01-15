@@ -6,7 +6,12 @@ In order to make the code independent from the concrete classes (JMapper and  Re
 
 = About raw types =
 
-Also you can perform mapping between raw types, operations not allowed are those that provide implicit conversion or recursive mapping.
+Also you can perform mapping between raw types, operations allowed are implicit structural conversions (implementations/interface-implementation/interfaces):
+{{{ArrayList <--> Set}}}
+{{{SortedMap <--> HashMap}}}
+{{{List <--> Set}}}
+
+For the framework  is impossible to know the type of the internal objects, for this reason they must be equal.
 
 = Utility classes =
 
