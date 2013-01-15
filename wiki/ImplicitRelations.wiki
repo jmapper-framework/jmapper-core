@@ -17,7 +17,7 @@ The following example will clarify any doubt:
                                             private String sourceField;
                                             private String other;
                      
-                                            // getter and setter...  
+                                            // getters and setters...  
                                         }    
  
 class Destination{                      class Source2{
@@ -26,8 +26,8 @@ class Destination{                      class Source2{
     @Jmap("sourceField")                    private String sourceField;
     private String destinationField;        private String other;
     private String other;                   
-                                            // getter and setter...  
-    // getter and setter...             }    
+                                            // getters and setters...  
+    // getters and setters...           }    
 }   
 
                                         class Source3{
@@ -36,7 +36,7 @@ class Destination{                      class Source2{
                                             private String sourceField;
                                             private String other;
                      
-                                            // getter and setter...  
+                                            // getters and setters...  
                                         }                                
 }}}
 Sample code:
@@ -70,7 +70,7 @@ class Destination1{
     private String destinationField;       
     private String other;                   
                                                              
-    // getter and setter...                                        
+    // getters and setters...                                        
 }                                            
                                            
 class Destination2{                     class Source{
@@ -79,8 +79,8 @@ class Destination2{                     class Source{
     private String destinationField;        @JMap("destinationField")
     private String other;                   private String sourceField;
                                             private String other;                   
-    // getter and setter...                                        
-}                                           // getter and setter...  
+    // getters and setters...                                        
+}                                           // getters and setters...  
                                         }    
 class Destination3{                      
                                          
@@ -88,7 +88,7 @@ class Destination3{
     private String destinationField;    
     private String other;               
                                                        
-    // getter and setter...                                        
+    // getters and setters...                                        
 }                                                                  
 }}}
 Sample code:
