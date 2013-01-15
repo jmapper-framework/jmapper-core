@@ -11,7 +11,7 @@ class Destination {              class Source {
    @JMap Integer age;               Integer age;
    @JMap String company;            String company;
 
-   // getter and setter..           // getter and setter..
+   // getters and setters..         // getters and setters..
 
 }                                }
 }}}
