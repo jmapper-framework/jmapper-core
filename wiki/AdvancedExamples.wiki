@@ -188,17 +188,17 @@ class CommonLogicI{
 {{{
 Xml configuration:
 <jmapper>
-  <class name='com.myapplication.CommonLogicI'>
-    <attribute name='ids'>
+  <class name="com.myapplication.CommonLogicI">
+    <attribute name="ids">
       <attributes>
-        <attribute name='customersIds' />
-        <attribute name='companyIds' />
-        <attribute name='supplierIds' />
+        <attribute name="customersIds" />
+        <attribute name="companyIds" />
+        <attribute name="supplierIds" />
       </attributes>
       <classes>
-        <class name='com.myapplication.Service1I' />
-        <class name='com.myapplication.Service2I' />
-        <class name='com.myapplication.Service3I' />
+        <class name="com.myapplication.Service1I" />
+        <class name="com.myapplication.Service2I" />
+        <class name="com.myapplication.Service3I" />
       </classes>
     </attribute>
   </class>
