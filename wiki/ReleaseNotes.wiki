@@ -5,15 +5,10 @@
 With this released the features added are:
 
 *[AdvancedInheritanceExamples Inherited configuration]*<br/>
-
 Now we can define a common configuration/conversions in the superclass, less code, less redundance and less maintenance.
-
-*[ImplicitConversions Implicit conversion between arrays and collections]* <br/>
-
-With this features we can configure arrays with collections and vice versa, with any type of items (primitive, wrapper and mapped).
+*[ImplicitConversions Implicit conversion between arrays and collections]* <br/>With this features we can configure arrays with collections and vice versa, with any type of items (primitive, wrapper and mapped).
 
 *[oneToMany OneToMany method changed]*<br/>
-
 To prevent unexpected behavior in case of singleton pattern usage in multi-threaded environment, the definition of the target class will be done through the passage of the class as input to the method. 
 
 == 1.1.0 - 8 December 2012 ==
