@@ -1,6 +1,6 @@
 = Release Notes =
 
-== 1.1.0 - 9 January 2013 ==
+== 1.1.1 - 9 January 2013 ==
 
 With this released the features added are:
 
