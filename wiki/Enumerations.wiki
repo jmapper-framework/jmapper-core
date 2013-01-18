@@ -75,3 +75,7 @@ sourceField = null
 ||{{{ALL_FIELDS}}}||{{{ONLY_NULL_FIELDS}}}||{{{null}}}||
 ||{{{ONLY_VALUED_FIELDS}}}||{{{ONLY_NULL_FIELDS}}}||{{{null}}}||
 ||{{{ONLY_NULL_FIELDS}}}||{{{ONLY_NULL_FIELDS}}}||{{{"DESTINATION"}}}||
+
+= Examples =
+
+To better understand its use see the [AdvancedEnumerationExamples  enumeration usage] page.
