@@ -62,11 +62,5 @@ These are the libraries to add if you do not use Maven:
 	<artifactId>xstream</artifactId>
 	<version>1.4.2</version>
    </dependency>
-	
-   <dependency>
-	<groupId>net.sf.kxml</groupId>
-	<artifactId>kxml2</artifactId>
-	<version>2.3.0</version>
-   </dependency>
 </dependencies>
 }}}
