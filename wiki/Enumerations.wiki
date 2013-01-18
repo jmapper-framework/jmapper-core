@@ -3,7 +3,7 @@
 = Enumerations =
 
 There are two enumerations that help the developer to simplify the work and they are: {{{NullPointerControl}}} and {{{MappingType}}}.<br>
-This enumerations are passed as input to [getDestination getDestination], [manyToOne manyToOne] and [oneToMany oneToMany] methods.
+This enumerations allow you to control instances in input and apply a logical mapping specification.<br>They are passed as input to [getDestination getDestination], [manyToOne manyToOne] and [oneToMany oneToMany] methods.
 
 == !NullPointerControl ==
 This enumeration verifies that the objects passed in input are valued, if not, a null will be returned.
