@@ -86,7 +86,7 @@ class Bean {
       
 === XML format ===
        
-The tag to use is:{{{<global>}}}.<br/>It has the same structure of {{{<attribute>}}} node, but without the attribute name and with a more node: {{{<excluded>}}}.<br/>Considering the class written in advance, see the following examples.
+The tag to use is:{{{<global>}}}.<br>It has the same structure of {{{<attribute>}}} node, but without the attribute name and with a more node: {{{<excluded>}}}.<br>Considering the class written in advance, see the following examples.
            
 ==== 1° example ====
            
