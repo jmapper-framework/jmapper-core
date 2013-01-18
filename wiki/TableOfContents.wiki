@@ -38,5 +38,6 @@
      * [AdvancedConversionExamples Explicit conversion]
    * [MoreInformations More informations]
    * [PerformanceTests Performance tests]
+ * [FutureRelease Future Release]
  * [ReleaseNotes Release Notes]
  * [Support Support]
