@@ -1,18 +1,18 @@
-#features of the next release.
+# features of the next release.
 
 = In the next release =
 
 == Global Mapping ==
   
-In some cases we have the need to map two fields with the same name or several fields toward the same field.<br/>Currently the only mode to do this is configure each field creating much redundance.<br/>To avoid it, will be introduced the global mapping.<br/>In this case is the class to be mapped.
+In some cases we have the need to map two fields with the same name or several fields toward the same field.<br/>Currently the only mode to do this is configure each field creating much redundance.<br/>To avoid it, will be introduced the global mapping.
         
 === Annotation ===
        
-The annotation to use is {{{@JGlobalMap}}}, it has the same parameters of {{{@JMap}}} with more one: {{{excluded}}}, with it we can exclude the  fields which do not fall in this mapping.
+The annotation to use is {{{@JGlobalMap}}} and must be applied to the class, it has the same parameters of {{{@JMap}}} with more one: {{{excluded}}}, with it we can exclude the  fields which do not fall in this mapping.
            
 ==== 1° example ====
            
-With @JMap
+With @JMap:
 {{{
 class Bean {
            
@@ -26,7 +26,7 @@ class Bean {
   //getters and setters..
 }
 }}}           
-With @JGlobalMap
+With @JGlobalMap:
 {{{
 @JGlobalMap(value="properties",excluded={"field3"})
 class Bean {
@@ -38,9 +38,10 @@ class Bean {
    //getters and setters..
 }
 }}}  
+
 ==== 2° example ====
            
-With @JMap
+With @JMap:
 {{{
 class Bean {
            
@@ -54,10 +55,10 @@ class Bean {
    //getters and setters..
 }
 }}}           
-With @JGlobalMap
+With @JGlobalMap:
 {{{
 @JGlobalMap(excluded={"field3"})
-class Esempio {
+class Bean {
            
     String field1;
     String field2;
@@ -68,11 +69,11 @@ class Esempio {
 }}}
            
 @JGlobalMap has greater visibility of @JMap, if a field is not configured with @JGlobalMap JMapper checks if it is configured with @JMap.
-           
-For example
+
+For example:
 {{{
 @JGlobalMap(excluded={"field3"})
-class Esempio {
+class Bean {
            
     String field1;
     String field2;
@@ -85,14 +86,14 @@ class Esempio {
       
 === XML format ===
        
-The tag to use is:{{{<global>}}}.<br/> It has the same structure of {{{<attribute>}}} node, but without the attribute name and with a more node: {{{<excluded>}}}.<br/>Considering the class written in advance, see the following examples
+The tag to use is:{{{<global>}}}.<br/>It has the same structure of {{{<attribute>}}} node, but without the attribute name and with a more node: {{{<excluded>}}}.<br/>Considering the class written in advance, see the following examples.
            
 ==== 1° example ====
            
-With {{{<attribute>}}}
+With {{{<attribute>}}}:
 {{{
 <jmapper>
-   <class name="className">
+   <class name="Bean">
       <attribute name ="field1">
          <value name ="field1"/>
       </attribute>
@@ -102,10 +103,10 @@ With {{{<attribute>}}}
    </class>
 </jmapper>
 }}}
-With {{{<global>}}}
+With {{{<global>}}}:
 {{{
 <jmapper>
-   <class name="className">
+   <class name="Bean">
       <global>
          <excluded>
             <attribute name ="field3"/>
@@ -117,10 +118,10 @@ With {{{<global>}}}
 
 ==== 2° example ====
            
-With {{{<attribute>}}}
+With {{{<attribute>}}}:
 {{{
 <jmapper>
-   <class name="className">
+   <class name="Bean">
       <attribute name ="field1">
          <value name ="properties"/>
       </attribute>
@@ -130,10 +131,10 @@ With {{{<attribute>}}}
    </class>
 </jmapper>
 }}}
-With {{{<global>}}}
+With {{{<global>}}}:
 {{{
 <jmapper>
-   <class name="className">
+   <class name="Bean">
       <global>
          <value name ="properties"/>
          <excluded>
@@ -144,11 +145,11 @@ With {{{<global>}}}
 </jmapper>
 }}}            
 {{{<global>}}} has greater visibility of {{{<attribute>}}}, if a field is not configured with {{{<global>}}} JMapper checks if it is configured with {{{<attribute>}}}.
-           
-For example
+
+For example:
 {{{
 <jmapper>
-   <class name="className">
+   <class name="Bean">
       <global>
          <value name = "properties"/>
             <excluded>
