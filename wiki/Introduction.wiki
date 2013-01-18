@@ -9,17 +9,17 @@ JMapper aims not only to coverage all requirements but also to make it as easy a
 
 JMapper allows: 
  *- to create and enrich target objects
- *- to apply a specific logic to the mapping
+ *- to apply a [Enumerations specific logic] to the mapping
  *- to perform complex mapping (Collection, Map, Array, inner classes, etc...) 
  *- to perform recursive mapping (mapped objects into other objects) 
- *- to manage implicit and explicit relationships of various types: 
+ *- to manage [ImplicitRelations implicit] and [ExplicitRelations explicit] relationships of various types: 
    *- one to one 
    *- one to many 
    *- many to one 
- *- to implement explicit conversions
+ *- to implement [ExplicitConversions explicit conversions]
  *- to configure the mapping using the annotation and / or xml
  *- to apply [AdvancedInheritanceExamples inherited configurations]
- *- to write quick and simple xml configuration file, through a series of utility methods
+ *- to write quick and simple xml configuration file, through a series of [XmlHandling utility methods]
 
 = Preface =
 
