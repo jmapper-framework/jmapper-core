@@ -165,4 +165,4 @@ For example:
 
 == Packaging renamed ==
 
-The package names will be changed from it.avutils.'*' to com.googlecode.'*'
+The package names will be changed from it.avutils.{{{*}}} to com.googlecode.{{{*}}}
