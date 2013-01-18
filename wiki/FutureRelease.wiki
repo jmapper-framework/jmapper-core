@@ -162,3 +162,7 @@ For example:
    </class>
 </jmapper>
 }}}
+
+== Packaging renamed ==
+
+The package names will be changed from it.avutils.'*' to com.googlecode.'*'
