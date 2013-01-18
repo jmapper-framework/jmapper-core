@@ -21,7 +21,18 @@ JMapper uses slf4j for logging, for the dependences resolution see [http://www.s
 </dependency>
 }}}
 
-== Libraries ==
+= Diy installation =
+
+how to install the jar manually:
+{{{
+mvn install:install-file 
+-Dfile=<path-to-file> 
+-DgroupId=com.googlecode.jmapper-framework
+-DartifactId=jmapper-core 
+-Dversion=1.1.1
+}}}
+
+= Libraries =
 
 These are the libraries to add if you do not use Maven:
 
