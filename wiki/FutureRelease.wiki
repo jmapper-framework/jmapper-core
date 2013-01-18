@@ -4,9 +4,7 @@
 
 == Global Mapping ==
   
-In some cases we have the need to map two fields with the same name or several fields toward the same field.
-Currently the only mode to do this is configure each field creating much redundance.
-To avoid it, will be introduced the global mapping.
+In some cases we have the need to map two fields with the same name or several fields toward the same field.<br>Currently the only mode to do this is configure each field creating much redundance.<br>To avoid it, will be introduced the global mapping.
         
 === Annotation ===
        
@@ -95,12 +93,12 @@ The tag to use is:{{{<global>}}}.<br/>It has the same structure of {{{<attribute
 With {{{<attribute>}}}:
 {{{
 <jmapper>
-   <class name="Bean">
-      <attribute name ="field1">
-         <value name ="field1"/>
+   <class name = "Bean">
+      <attribute name = "field1">
+         <value name = "field1"/>
       </attribute>
-      <attribute name ="field2">
-         <value name ="field2"/>
+      <attribute name = "field2">
+         <value name = "field2"/>
       </attribute>
    </class>
 </jmapper>
@@ -108,10 +106,10 @@ With {{{<attribute>}}}:
 With {{{<global>}}}:
 {{{
 <jmapper>
-   <class name="Bean">
+   <class name = "Bean">
       <global>
          <excluded>
-            <attribute name ="field3"/>
+            <attribute name = "field3"/>
          </excluded>
       </global>
    </class>
@@ -123,12 +121,12 @@ With {{{<global>}}}:
 With {{{<attribute>}}}:
 {{{
 <jmapper>
-   <class name="Bean">
-      <attribute name ="field1">
-         <value name ="properties"/>
+   <class name = "Bean">
+      <attribute name = "field1">
+         <value name = "properties"/>
       </attribute>
-      <attribute name ="field2">
-         <value name ="properties"/>
+      <attribute name = "field2">
+         <value name = "properties"/>
       </attribute>
    </class>
 </jmapper>
@@ -136,11 +134,11 @@ With {{{<attribute>}}}:
 With {{{<global>}}}:
 {{{
 <jmapper>
-   <class name="Bean">
+   <class name = "Bean">
       <global>
-         <value name ="properties"/>
+         <value name = "properties"/>
          <excluded>
-            <attribute name ="field3"/>
+            <attribute name = "field3"/>
          </excluded>
       </global>
    </class>
@@ -149,10 +147,9 @@ With {{{<global>}}}:
 {{{<global>}}} has greater visibility of {{{<attribute>}}}, if a field is not configured with {{{<global>}}} JMapper checks if it is configured with {{{<attribute>}}}.
 
 For example:
-<code language="xml">
 {{{
 <jmapper>
-   <class name="Bean">
+   <class name = "Bean">
       <global>
          <value name = "properties"/>
             <excluded>
@@ -165,4 +162,3 @@ For example:
    </class>
 </jmapper>
 }}}
-</code>
