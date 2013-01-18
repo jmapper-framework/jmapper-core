@@ -149,6 +149,7 @@ With {{{<global>}}}:
 {{{<global>}}} has greater visibility of {{{<attribute>}}}, if a field is not configured with {{{<global>}}} JMapper checks if it is configured with {{{<attribute>}}}.
 
 For example:
+<code language="xml">
 {{{
 <jmapper>
    <class name="Bean">
@@ -164,3 +165,4 @@ For example:
    </class>
 </jmapper>
 }}}
+</code>
