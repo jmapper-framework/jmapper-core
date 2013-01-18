@@ -16,6 +16,7 @@ JMapper allows:
    *- one to one 
    *- one to many 
    *- many to one 
+ *- to implement explicit conversions
  *- to configure the mapping using the annotation and / or xml
  *- to apply inherited configurations
  *- to write quick and simple xml configuration file, through a series of utility methods
