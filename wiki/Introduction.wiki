@@ -6,15 +6,18 @@ Currently, there are many frameworks that can significantly reduce the workload,
 As the rule may seem elementary, enclose in a single framework a potentially unlimited number of combinations, recursive mapping, addition of logic and other features, makes its implementation very complex with questionable compromises, such as poor performance, covering a limited features, etc... . 
 
 JMapper aims not only to coverage all requirements but also to make it as easy as possible to use, that's all with performance equivalent or higher to static mapping. 
-  
+
 JMapper allows: 
+ *- to create and enrich target objects
+ *- to apply a specific logic to the mapping
  *- to perform complex mapping (Collection, Map, Array, inner classes, etc...) 
+ *- to perform recursive mapping (mapped objects into other objects) 
  *- to manage implicit and explicit relationships of various types: 
    *- one to one 
    *- one to many 
    *- many to one 
- *- to perform recursive mapping (mapped objects into other objects) 
  *- to configure the mapping using the annotation and / or xml
+ *- to apply inherited configurations
  *- to write quick and simple xml configuration file, through a series of utility methods
 
 = Preface =
