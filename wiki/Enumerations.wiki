@@ -6,17 +6,14 @@ There are two enumerations that help the developer to simplify the work and they
 This enumerations allow you to control instances in input and apply a logical mapping specification.<br>They are passed as input to [getDestination getDestination], [manyToOne manyToOne] and [oneToMany oneToMany] methods.
 
 == !NullPointerControl ==
-This enumeration verifies that the objects passed in input are valued, if not, a null will be returned.
-The values of {{{NullPointerControl}}} are:
+This enumeration verifies that the objects passed in input are valued, if not, a null will be returned.<br>The values of {{{NullPointerControl}}} are:
 ||{{{NullPointerControl.DESTINATION}}}||only destination will be controlled||
 ||{{{NullPointerControl.SOURCE}}}||only source will be controlled||
 ||{{{NullPointerControl.ALL}}}||both instances will be checked||
 ||{{{NullPointerControl.NOT_ANY}}}||neither||
 
 == !MappingType ==
-This enumeration allows you to define which mode of mapping to apply. 
-This feature is useful when you want to enrich destination.
-It can be used for both instances.
+This enumeration allows you to define which mode of mapping to apply.<br>This feature is useful when you want to enrich destination.<br>It can be used for both instances.
 
 *IMPORTANT!* _JMapper not apply these mapping types to primitive variables, because they can not be null_
 
