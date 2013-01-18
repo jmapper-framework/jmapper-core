@@ -15,7 +15,7 @@ To prevent unexpected behavior in case of singleton pattern usage in multi-threa
 
 == 1.1.0 - 8 December 2012 ==
 
-Explicit conversions added.<br/>This feature permits to apply a specific logic as a simple conversion or to insert a condition, both in XML that in java.<br/>For more information see [ExplicitConversions explicit conversions] page.
+*[ExplicitConversions Explicit conversions]* added.<br/>This feature permits to apply a specific logic as a simple conversion or to insert a condition, both in XML that in java.
 
 == 1.0.0 - 12 September 2012 ==
 
