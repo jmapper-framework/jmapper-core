@@ -2,6 +2,8 @@
 
 = In the next release =
 
+1.1.2 release is scheduled for the first week of February.
+
 == Global Mapping ==
   
 In some cases we have the need to map two fields with the same name or several fields toward the same field.<br>Currently the only mode to do this is configure each field creating much redundance.<br>To avoid it, will be introduced the global mapping.
@@ -166,3 +168,7 @@ For example:
 == Packaging renamed ==
 
 The package names will be changed from it.avutils.{{{*}}} to com.googlecode.{{{*}}}
+
+== maven pom adjustment ==
+
+Some dependencies will be deleted as redundant.
