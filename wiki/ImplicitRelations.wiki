@@ -23,7 +23,7 @@ The following example will clarify any doubt:
 class Destination{                      class Source2{
     @JMap
     private String id;                      private String id;
-    @Jmap("sourceField")                    private String sourceField;
+    @JMap("sourceField")                    private String sourceField;
     private String destinationField;        private String other;
     private String other;                   
                                             // getters and setters...  
