@@ -89,8 +89,8 @@ Destination destination = jmapper.getDestination(source);
 
 System.out.println(destination);
 }}}
-The class to use is JMapper, takes as input two classes: the first from the left, belonging to the Destination and the second to Source, then just invoke the method [getDestination getDestination] passing an instance of Source to create an instance of Destination.
-The output below shows the fields of the destination bean .
+The class to use is JMapper, takes as input two classes: the first from the left, belonging to the Destination and the second to Source, then just invoke the method [getDestination getDestination] passing an instance of Source to create an instance of Destination.<br>
+The output below shows the fields of the destination bean.
 {{{
 Destination [id="id", destinationField="source field", other=null]
 }}}
@@ -99,7 +99,7 @@ Destination [id="id", destinationField="source field", other=null]
 
 = JMapper constructors =
 
-If both classes are configured, the framework will consider the configuration of the Destination Class. If you want to define which configuration to be analyzed, simply pass to the constructor the {{{ChooseConfig}}} enumeration.
+If both classes are configured, the framework will consider the configuration of the Destination Class. If you want to define which configuration to be analyze, simply pass to the constructor the {{{ChooseConfig}}} enumeration.
 {{{
 new JMapper <Destination, Source>(Destination.class, Source.class, ChooseConfig.SOURCE);
 }}}
