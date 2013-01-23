@@ -2,7 +2,7 @@
 = @JMap =
 
 The cases described in the introduction are common but not fully satisfy the needs.
-For this reason, the annotation @JMap has two other parameters, and they are *attributes* and *classes* both vectors.
+For this reason, the annotation @JMap has two other parameters, and they are *attributes* and *classes* both arrays.
 
 attributes contains the identifiers of the target fields, classes their classes.
 
