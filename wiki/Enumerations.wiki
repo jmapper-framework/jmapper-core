@@ -13,7 +13,7 @@ This enumeration verifies that the objects passed in input are valued, if not, a
 ||{{{NullPointerControl.NOT_ANY}}}||neither||
 
 == !MappingType ==
-This enumeration allows you to define which mode of mapping to apply.<br>This feature is useful when you want to enrich destination.<br>It can be used for both instances.
+This enumeration allows you to define which mode of mapping to apply.<br>This feature is useful when you want to enrich destination.<br>!MappingType can be used for both instances.
 
 *IMPORTANT!* _JMapper not apply these mapping types to primitive variables, because they can not be null_
 
