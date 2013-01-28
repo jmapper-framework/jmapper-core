@@ -188,10 +188,10 @@ import javassist.NotFoundException;
 /*
  *  Multiple Mapping
  *  
- *  	Con la classe RelationalJMapper si ha la possibilit‡ di implementare una relazione 1 a N o N a 1 tra
+ *  	Con la classe RelationalJMapper si ha la possibilit√† di implementare una relazione 1 a N o N a 1 tra
  *      la classe configurata e quelle target.
- *      Ma la relazione che c'Ë tra i campi della classe configurata e i campi delle classi target Ë sempre 1 a 1.
- *      CiÚ vuol dire che in caso di conversioni dinamiche non Ë permesso (con la versione 1.1.0) configurare 
+ *      Ma la relazione che c'√® tra i campi della classe configurata e i campi delle classi target √® sempre 1 a 1.
+ *      Ci√≤ vuol dire che in caso di conversioni dinamiche non √® permesso (con la versione 1.1.0) configurare 
  *      direttamente un campo con N altri, ma invece bisogna configurare gli N campi verso il campo interessato.
  *      
  *      Quindi abbiamo potenzialmente due situazioni: 
@@ -200,7 +200,7 @@ import javassist.NotFoundException;
  
  *      CASO
  *      
- *          L'intento Ë quello di configurare 1 campo verso N altri, questo ha senso solo in caso di conversione dinamica
+ *          L'intento √® quello di configurare 1 campo verso N altri, questo ha senso solo in caso di conversione dinamica
  *          
  *          ANNOTATION
  *          
@@ -214,7 +214,7 @@ import javassist.NotFoundException;
  *          @JMultiMap permette di configurare un campo contemporaneamente con N altri. Omettendo la targetClass si indica
  *          al framework di considerare quella in input al costruttore, omettendo gli attributes si indica al framework che
  *          tutti i campi della classe target sono coinvolti.
- *          Nel caso in cui ci sia l'esigenza di dichiarare il multimapping verso altri campi di altre classi baster‡
+ *          Nel caso in cui ci sia l'esigenza di dichiarare il multimapping verso altri campi di altre classi baster√†
  *          usare l'annotation @JMultiMaps es:
  *          
  *      	class Esempio {
@@ -229,7 +229,7 @@ import javassist.NotFoundException;
  *          
  *          XML
  *          
- *          Per esprimere lo stesso concetto in xml si utilizzer‡ il nodo multiAttribute, es:
+ *          Per esprimere lo stesso concetto in xml si utilizzer√† il nodo multiAttribute, es:
  *          
  * 			<multiAttribute name="">
  *    			<target class="com.myapplication.Target" attributes="field1,field2,field3" />
@@ -238,7 +238,7 @@ import javassist.NotFoundException;
  *          multiAttribute ha un attributo name che corrisponde al nome del campo configurato e N nodi target,
  *          il nodo target rispecchia l'annotation @JMultiMap, ovvero ha un attributo class e un attributo attributes,
  *          che contiene la lista dei campi separati da una virgola.
- *          Per riflettere invece JMultiMaps baster‡ dichiarare piu nodi target. 
+ *          Per riflettere invece JMultiMaps baster√† dichiarare piu nodi target. 
  *          
  *          
  * */
@@ -246,8 +246,8 @@ import javassist.NotFoundException;
 /*
  *  DEFAULT BEHAVIORs
  * 
- *  i comportamenti predefiniti tornano utili in tutti quei casi in cui il comportamento Ë lo stesso in tutti i casi
- *  in cui puÚ verificarsi, come ad esempio la conversione da stringhe a date: in questo modo possiamo centralizzare
+ *  i comportamenti predefiniti tornano utili in tutti quei casi in cui il comportamento √® lo stesso in tutti i casi
+ *  in cui pu√≤ verificarsi, come ad esempio la conversione da stringhe a date: in questo modo possiamo centralizzare
  *  la conversione in un unico metodo.
  *  
  *  @DefaultBehavior
@@ -264,7 +264,7 @@ import javassist.NotFoundException;
  *     }
  *  }
  *  
- *  Oppure quando il campo di destinazione Ë una lista e i campi sorgenti sono oggetti: in questo caso il 
+ *  Oppure quando il campo di destinazione √® una lista e i campi sorgenti sono oggetti: in questo caso il 
  *  comportamento predefinito consisterebbe nel effettuare diversi add.
  *  
  *  @DefaultBehavior
@@ -283,7 +283,7 @@ import javassist.NotFoundException;
  *     }
  *  }
  * 
- *  Lo stesso criterio lo si puÚ usare quando ad essere configurati sono un StringBuilder/StringBuffer con diverse stringhe.
+ *  Lo stesso criterio lo si pu√≤ usare quando ad essere configurati sono un StringBuilder/StringBuffer con diverse stringhe.
  * 
  *  @DefaultBehaviors
  *  class ListBehaviors {
@@ -299,7 +299,7 @@ import javassist.NotFoundException;
  *     }
  *  }
  * 
- *  CosÏ facendo baster‡ configurare i campi senza esplicite conversioni.
+ *  Cos√¨ facendo baster√† configurare i campi senza esplicite conversioni.
  *  
  *  Per usufruire di questa feature bisogna contrassegnare la classe con l'annotation @DefaultBehaviors
  *  e contrassegnare i metodi che creano il destination con @Creation e quelli che lo arricchiscono con @Enrichment
@@ -325,8 +325,10 @@ import javassist.NotFoundException;
  * 
  * flattern
  * */
-//TODO implementare --> mapping con dislivello es: complexObj.name -> info
-//TODO implementare --> custom accessor: dare la possibilit‡ di definire il get e il set del campo
+//TODO implementare --> mapping con dislivello es: complexObj.name -> info 
+//TODO implementare --> mapping sfruttando il regex 
+//TODO implementare --> possibilit√† di definire il template
+//TODO implementare --> custom accessor: dare la possibilit√† di definire il get e il set del campo
 /**
  * JMapper takes as input two classes, Destination and Source.<br>
  * For Destination, we mean the instance that will be created or enhanced.<br>
