@@ -24,7 +24,7 @@ import com.googlecode.jmapper.enums.NullPointerControl;
 import com.googlecode.jmapper.generation.MapperBuilder;
 import javassist.NotFoundException;
 
-/*  Global Mapping
+/*  Global Mapping 
   
        In some cases we have the need to map two fields with the same name or several fields toward the same field.
        Currently the only mode to do this is configure each field creating much redundance. 
