@@ -172,7 +172,3 @@ The package names will be changed from it.avutils.{{{*}}} to com.googlecode.{{{*
 == maven pom adjustment ==
 
 Some dependencies will be deleted as redundant.
-
-== jar with dependencies ==
-
-There will be a downloadable jar with all the dependencies required to use it in independent mode.
