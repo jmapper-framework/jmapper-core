@@ -22,7 +22,7 @@ JMapper<Destination, Source> mapper = new JMapper<Destination, Source>(Destinati
 
 == !MappingType ==
 
-In this example you will see a case where you need to take only the valued fields:
+In this example you will see a case where you need to take only the valued fields of Source:
 {{{
 Destination destination = new Destination("empty", null, "Google");
 Source source = new Source("Alessandro", 27, null);
@@ -33,7 +33,7 @@ result:
 {{{
 Destination[ name="Alessandro", age=27, company="Google"]
 }}}
-If you want to fill null fields:
+If you want just fill null fields of Destination:
 {{{
 Destination destination = new Destination("empty", null, "Google");
 Source source = new Source("Alessandro", 27, null);
