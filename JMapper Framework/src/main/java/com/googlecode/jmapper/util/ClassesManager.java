@@ -34,7 +34,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.googlecode.jmapper.annotations.JGlobalMap;
 import com.googlecode.jmapper.annotations.JMap;
+import com.googlecode.jmapper.annotations.JMultiMap;
+import com.googlecode.jmapper.annotations.JMultiMaps;
 import com.googlecode.jmapper.config.Error;
 import com.googlecode.jmapper.conversions.explicit.ConversionMethod;
 import com.googlecode.jmapper.enums.ChooseConfig;
@@ -378,8 +381,11 @@ public final class ClassesManager {
 	 * @return true if the class is configured in annotation, false otherwise
 	 */
 	public static boolean isMappedInAnnotation(Class<?> aClass){
+		if(aClass.getAnnotation(JGlobalMap.class)!=null) return true;
 		for (Field it : aClass.getDeclaredFields()) 
-			if(it.getAnnotation(JMap.class)!=null) 
+			if(it.getAnnotation(JMap.class)!=null      || 
+			   it.getAnnotation(JMultiMap.class)!=null ||
+			   it.getAnnotation(JMultiMaps.class)!=null) 
 				return true;
 		
 		return false;

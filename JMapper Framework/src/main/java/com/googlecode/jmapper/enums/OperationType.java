@@ -70,7 +70,7 @@ public enum OperationType {
 	
 	public boolean isUndefined(){return this == UNDEFINED;}
 	
-	public boolean isMapped(){ return this == OBJECT 
+	public boolean isRecursive(){ return this == OBJECT 
 								   || this == COLLECTION_WITH_MAPPED_ITEMS  
 								   || this == ARRAY_WITH_MAPPED_ITEMS 
 								   || this == ARRAY_LIST_WITH_MAPPED_ITEMS
@@ -81,7 +81,7 @@ public enum OperationType {
 	 
 	 public boolean isBasic(){	 return this == BASIC_INSTRUCTION || this == BASIC_CONVERSION; }
 	 
-	 public boolean isComplex(){ return isMapped() 
+	 public boolean isComplex(){ return isRecursive() 
 			 						 || this == MAP  
 			 						 || this == COLLECTION
 			 						 || this == ARRAY
@@ -89,5 +89,5 @@ public enum OperationType {
 			 						 || this == LIST_ARRAY
 			 						 || this == CONVERSION;}
 	 
-	 public boolean isConversion(){ return this == CONVERSION || this == BASIC_CONVERSION; }
+	 public boolean isConverted(){ return this == CONVERSION || this == BASIC_CONVERSION; }
 }

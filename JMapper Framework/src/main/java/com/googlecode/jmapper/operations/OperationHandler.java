@@ -34,23 +34,9 @@ import com.googlecode.jmapper.enums.ChooseConfig;
 import com.googlecode.jmapper.enums.OperationType;
 import com.googlecode.jmapper.generation.beans.Method;
 import com.googlecode.jmapper.operations.complex.AComplexOperation;
-import com.googlecode.jmapper.operations.complex.ArrayListOperation;
-import com.googlecode.jmapper.operations.complex.ArrayOperation;
-import com.googlecode.jmapper.operations.complex.CollectionOperation;
-import com.googlecode.jmapper.operations.complex.ConversionOperation;
-import com.googlecode.jmapper.operations.complex.ListArrayOperation;
-import com.googlecode.jmapper.operations.complex.MapOperation;
 import com.googlecode.jmapper.operations.info.InfoOperation;
 import com.googlecode.jmapper.operations.recursive.ARecursiveOperation;
-import com.googlecode.jmapper.operations.recursive.MappedArrayListOperation;
-import com.googlecode.jmapper.operations.recursive.MappedArrayOperation;
-import com.googlecode.jmapper.operations.recursive.MappedCollectionOperation;
-import com.googlecode.jmapper.operations.recursive.MappedListArrayOperation;
-import com.googlecode.jmapper.operations.recursive.MappedMapOperation;
-import com.googlecode.jmapper.operations.recursive.ObjectOperation;
 import com.googlecode.jmapper.operations.simple.ASimpleOperation;
-import com.googlecode.jmapper.operations.simple.BasicConversion;
-import com.googlecode.jmapper.operations.simple.BasicOperation;
 import com.googlecode.jmapper.util.XML;
 
 /**
@@ -143,7 +129,7 @@ public final class OperationHandler {
 														// explicit conversion between complex types
 				                         			   :OperationType.CONVERSION;
 			
-			AGeneralOperation operation = getOperation(operationType);
+			AGeneralOperation operation = OperationFactory.getOperation(operationType);
 
 			if(operationType.isBasic())
 				simpleOperations.add((ASimpleOperation) operation);	
@@ -151,13 +137,13 @@ public final class OperationHandler {
 			if(operationType.isComplex())
 				complexOperations.add(((AComplexOperation) operation).setDestinationClass(defineStructure(destinationField, sourceField)));
 					
-			if(operationType.isMapped())
+			if(operationType.isRecursive())
 				((ARecursiveOperation) operation).setMethodsToGenerate(methodsToGenerate)
 				 							     .setXml(xml)
 				                                 .setConfigChosen(info.getConfigChosen()==null // if both classes are configured
 										                    	  ?configurationChosen		   // returns the configuration chosen
 												                  :info.getConfigChosen());    // else returns the configuration retrieved
-			if(operationType.isConversion()){
+			if(operationType.isConverted()){
 				conversionHandler.analyze(conversionAnalyzer.getMethod())
 				                 .belongTo(conversionAnalyzer.getMembership())
 				                 .withThisConfiguration(conversionAnalyzer.getConfigurationType())
@@ -180,32 +166,7 @@ public final class OperationHandler {
 		if(simpleOperations.isEmpty() && complexOperations.isEmpty())
 				Error.absentRelationship(configuredClass, targetClass);	
 	}
-	
-	/**
-	 * For an instruction type returns an operation.
-	 * @param instructionType
-	 * @return
-	 */
-	private AGeneralOperation getOperation(OperationType instructionType){
-		switch(instructionType){
-			case BASIC_INSTRUCTION:			   return new BasicOperation();
-			case BASIC_CONVERSION:             return new BasicConversion();
-			case OBJECT:					   return new ObjectOperation();
-			case ARRAY: 					   return new ArrayOperation();
-			case ARRAY_LIST:				   return new ArrayListOperation();
-			case LIST_ARRAY:			       return new ListArrayOperation();
-			case ARRAY_WITH_MAPPED_ITEMS:	   return new MappedArrayOperation();
-			case ARRAY_LIST_WITH_MAPPED_ITEMS: return new MappedArrayListOperation();
-			case LIST_ARRAY_WITH_MAPPED_ITEMS: return new MappedListArrayOperation();
-			case COLLECTION: 				   return new CollectionOperation();
-			case COLLECTION_WITH_MAPPED_ITEMS: return new MappedCollectionOperation();
-			case MAP:	     				   return new MapOperation();
-			case MAP_WITH_MAPPED_ITEMS: 	   return new MappedMapOperation();
-			case CONVERSION: 				   return new ConversionOperation();
-			default: return null;
-		}
-	}
-	
+		
 	/**@return list of simple operations */
 	public List<ASimpleOperation> getSimpleOperations()   {	return simpleOperations;	}
 	

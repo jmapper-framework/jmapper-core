@@ -308,6 +308,15 @@ public final class GeneralUtility {
 	}
 	
 	/**
+	 * Returns true if collection is empty, false otherwise.
+	 * @param collection collection to check
+	 * @return true if collection is empty, false otherwise
+	 */
+	public static boolean isEmpty(Collection<?> collection){
+		return collection == null || collection.size() <= 0;
+	}
+	
+	/**
 	 * This method verifies that the line contains all elements.
 	 * @param line line to check
 	 * @param elements elements to check
@@ -316,6 +325,11 @@ public final class GeneralUtility {
 	public static boolean containsAll(String line,String... elements){
 		for (String element : elements) if(!line.contains(element)) return false;
 		return true;
+	}
+	
+	public static <T> boolean isPresent(T[] array, T element){
+		for (T item : array)if(item.equals(element))return true;
+		return false;
 	}
 	
 }

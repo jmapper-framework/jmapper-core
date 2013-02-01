@@ -72,6 +72,7 @@ public abstract class AGeneralOperation extends AGeneralOperationAccessor{
 	 * @param content mapping that will be wrapped with mappingType control
 	 * @return a String that contains a single operation
 	 */
+	@SuppressWarnings("incomplete-switch")
 	protected final StringBuilder addMappingTypeControl(StringBuilder content){
 		
 		StringBuilder sb = new StringBuilder();
@@ -117,6 +118,7 @@ public abstract class AGeneralOperation extends AGeneralOperationAccessor{
 			case MAPPER:      conversionMethod = conversion.getName();						 break;
 			case DESTINATION: conversionMethod = initialDGetPath +"."+ conversion.getName(); break;
 			case SOURCE:      conversionMethod = initialSGetPath +"."+ conversion.getName(); break;
+		    default: break;
 		}
 		
 		switch (conversion.getParameterNumber()) {

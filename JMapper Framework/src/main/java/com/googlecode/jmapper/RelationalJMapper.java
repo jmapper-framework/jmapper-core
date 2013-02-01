@@ -33,6 +33,7 @@ import com.googlecode.jmapper.enums.NullPointerControl;
 import com.googlecode.jmapper.util.XML;
 import com.googlecode.jmapper.xml.Attribute;
 
+//TODO RelationalJMapper --> gestire il carimento delle classi con la global configuration
 /**
  * RelationalJMapper takes as input one configured Class.<br>
  * For configured Class, we mean a Class that contains fields configured with annotation or XML.<br>

@@ -310,6 +310,7 @@ public final class ConversionHandler {
 		case FromdoubleToboolean:		return FromdoubleToboolean(source);
 		case FromCharacterToboolean:	return FromCharacterToboolean(source);
 		case FromcharToboolean:			return FromcharToboolean(source);
+		default: break;
 		}
 		return null;
 	}

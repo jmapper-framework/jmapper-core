@@ -63,6 +63,7 @@ public class XmlConverter {
 	 * @param aClass Class to trasform in XmlClass
 	 * @return a Class converted to XmlClass
 	 */
+	//TODO XmlConverter --> aggiustare per gestire il JGlobalMap
 	public static XmlClass toXmlClass(Class<?> aClass){
 		XmlClass xmlClass = new XmlClass();
 		xmlClass.name = aClass.getName();

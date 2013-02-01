@@ -19,14 +19,13 @@ package com.googlecode.jmapper.util;
 import static com.googlecode.jmapper.util.FilesManager.fullPathOf;
 import static com.googlecode.jmapper.util.FilesManager.readAtDevelopmentTime;
 import static com.googlecode.jmapper.util.FilesManager.readAtRuntime;
-
+import static com.googlecode.jmapper.util.GeneralUtility.isEmpty;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import com.googlecode.jmapper.config.Error;
 import com.googlecode.jmapper.config.JmapperLog;
 import com.googlecode.jmapper.conversions.explicit.ConversionMethod;
@@ -104,15 +103,17 @@ public final class XML {
 		return this;
 	}
 	
+	//TODO per aggiungere il global, basta modificare questa metodo
+	// affinche gestisca anche il global attribute
 	/** @return a Map with class name as key and a list of Attributes as value */
 	public Map<String, List<Attribute>> attributesLoad(){
 		Map<String, List<Attribute>> map = new HashMap<String, List<Attribute>>();
 		
 		try{	// if xml mapping file isn't empty
-				if(xmlJmapper.classes != null && xmlJmapper.classes.size() > 0)
+				if(!isEmpty(xmlJmapper.classes))
 					for (XmlClass xmlClass : xmlJmapper.classes) {
 					   List<Attribute> attributes = new ArrayList<Attribute>();
-					   if(xmlClass.attributes != null && xmlClass.attributes.size()>0)
+					   if(!isEmpty(xmlClass.attributes))
 						 for (XmlAttribute xmlAttribute : xmlClass.attributes)
 							 attributes.add(XmlConverter.toAttribute(xmlAttribute));
 													
@@ -127,10 +128,10 @@ public final class XML {
 		Map<String, List<ConversionMethod>> map = new HashMap<String, List<ConversionMethod>>();
 		
 		try{	// if xml mapping file isn't empty
-				if(xmlJmapper.classes != null && xmlJmapper.classes.size() > 0)
+				if(!isEmpty(xmlJmapper.classes))
 					for (XmlClass xmlClass : xmlJmapper.classes) {
 					   List<ConversionMethod> conversions = new ArrayList<ConversionMethod>();
-					   if(xmlClass.conversions != null && xmlClass.conversions.size()>0)
+					   if(!isEmpty(xmlClass.conversions))
 						 for (XmlConversion xmlConversion : xmlClass.conversions)
 							 try{	 conversions.add(XmlConverter.toConversionMethod(xmlConversion));
 							 }catch (XmlConversionNameException e) {
