@@ -121,6 +121,7 @@ public class ConversionHandler {
 			case ONE: String sType = placeholders.get(sourceTypePattern);
 		  	  		  String sName = placeholders.get(sourcePattern);
 		  	  		  body += sType+" "+sName+" = ("+sType+") $"+count+";"+newLine;
+			default: break;
 		}
 		
 		// Method body definition

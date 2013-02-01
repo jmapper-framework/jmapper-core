@@ -18,12 +18,16 @@ package com.googlecode.jmapper.config;
 
 import static com.googlecode.jmapper.config.Constants.DEFAULT_FIELD_VALUE;
 import static com.googlecode.jmapper.config.Constants.THE_FIELD_IS_NOT_CONFIGURED;
-import static com.googlecode.jmapper.util.ClassesManager.*;
+import static com.googlecode.jmapper.util.ClassesManager.existField;
+import static com.googlecode.jmapper.util.ClassesManager.getAllsuperclasses;
+import static com.googlecode.jmapper.util.ClassesManager.isMappedInXML;
+import static com.googlecode.jmapper.util.GeneralUtility.isPresent;
 import static com.googlecode.jmapper.util.GeneralUtility.toList;
 
 import java.lang.reflect.Field;
 import java.util.List;
 
+import com.googlecode.jmapper.annotations.JGlobalMap;
 import com.googlecode.jmapper.annotations.JMap;
 import com.googlecode.jmapper.util.XML;
 import com.googlecode.jmapper.xml.Attribute;
@@ -183,24 +187,47 @@ public final class ConfigReader {
 		// if it has a configured superclass it's ignored, the priority is valid only for principal class
 		if(isMappedInXML(configuredClass, xml))return THE_FIELD_IS_NOT_CONFIGURED;
 		
-		    // if the XML configuration doesn't exist, checks the annotation existence
-			JMap jmap = field.getAnnotation(JMap.class);
-			if(jmap==null) return THE_FIELD_IS_NOT_CONFIGURED;
+		JGlobalMap jglobalMap = configuredClass.getAnnotation(JGlobalMap.class);
+		//if the field configuration is defined in the global map
+		if(jglobalMap != null && !isPresent(jglobalMap.excluded(), field.getName())){
+			
+			//TODO ConfigReader --> testare il globalMap da solo, con excluded, excluded con campo configurato
+			// globalMap con campi configurati
 			
 			// get the list of target classes
-			List<Class<?>> classes = toList(jmap.classes());
-			
+			List<Class<?>> classes = toList(jglobalMap.classes());
+						
 			// if mapped field hasn't targetClass in classes parameter
 			if(!classes.isEmpty() && !classes.contains(targetClass)) return THE_FIELD_IS_NOT_CONFIGURED;
 			
 			// get the list of target attributes
-			List<String> attributes = toList(jmap.attributes());
-			
-			// get value of configuredField
-			String value = jmap.value();
-			
+			List<String> attributes = toList(jglobalMap.attributes());
+						
+		    // get value of configuredField
+			String value = jglobalMap.value();
+						
 			// loaded all variables, calculates and returns the correspondence
-			return getValue(attributes, classes, value, field.getName(), configuredClass, targetClass);
+			return getValue(attributes, classes, value, field.getName(), configuredClass, targetClass);			
+		}
+		    
+		// if the XML configuration doesn't exist, checks the annotation existence
+		JMap jmap = field.getAnnotation(JMap.class);
+		if(jmap==null) return THE_FIELD_IS_NOT_CONFIGURED;
+			
+		// get the list of target classes
+		List<Class<?>> classes = toList(jmap.classes());
+			
+		// if mapped field hasn't targetClass in classes parameter
+		if(!classes.isEmpty() && !classes.contains(targetClass)) return THE_FIELD_IS_NOT_CONFIGURED;
+			
+		// get the list of target attributes
+		List<String> attributes = toList(jmap.attributes());
+			
+		// get value of configuredField
+		String value = jmap.value();
+			
+		// loaded all variables, calculates and returns the correspondence
+		return getValue(attributes, classes, value, field.getName(), configuredClass, targetClass);
 		
 	}
 }

@@ -104,6 +104,7 @@ public class MapperConstructor {
 		  case SOURCE: 	    str +="if("+stringOfGetSource+"!=null){"     +newLine; break;
 		  case DESTINATION: str +="if("+stringOfGetDestination+"!=null){"+newLine; break;
 		  case ALL:	        str +="if("+stringOfGetSource+"!=null && "+stringOfGetDestination+"!=null){"+newLine;break;
+		  default: break;
 		}
 
 		str +=     mapping(makeDest,mtd,mts)          + newLine

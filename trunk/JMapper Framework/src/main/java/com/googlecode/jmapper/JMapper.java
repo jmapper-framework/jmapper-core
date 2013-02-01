@@ -185,6 +185,13 @@ import javassist.NotFoundException;
            
  * */
 
+/*       REFACTORING del codice
+ * 
+ *        gestire gli analyzer in un vettore e non con una sequenza di if.
+ *        ottimizzare il codice generato, ad es: pre-decremento degli indici (--i) invece del post (i--)
+ * 
+ * */
+
 /*
  *  Multiple Mapping
  *  
@@ -242,6 +249,46 @@ import javassist.NotFoundException;
  *          
  *          
  * */
+
+
+/* 
+ *
+ *  CONFIGURATIONS
+ *  
+ *  configurations permette di definire delle configurazioni ad hoc per il campo, o per l'intera classe.
+ *  configurations è un parametro che sarà aggiunto all'annotation JMap (per la configurazione del campo)
+ *  e all'annotation JGlobalMap (per la configurazione di tutti i campi contemporaneamente)
+ *    
+ *    public @interface JMap {
+ *	     ...
+ *       Configuration[] configurations() default {};
+ *       ...
+ *    }
+ * 
+ * in xml, in aggiunta ai nodi attribute e global:
+ *    
+ *    ...
+ *    <configurations name="TO_COPY, FLATTERN"/>
+ *    ...
+ *    
+ * Configuration è una enumeration che ha i seguenti valori: 
+ *  - NOT_ACCUMULATIVE, in caso di collection o map piene, la destinazione deve
+ *                      acquisire i valori del source senza sommarli.
+ *  - TO_COPY, in caso non si voglia lavorare per riferimento ma per copia
+ *  - NEW_INSTANCE nel caso in cui una delle istanze in input sono nulle ritornare una nuova istanza della classe
+ *                 di destinazione
+ *  - FLATTERN nel caso in cui i nomi dei campi sono identici ma a livelli diversi, permette di applicare automaticamente
+ *             il mapping
+ * 
+ * esempio di utilizzo dell'annotation:
+ * 
+ * @JMap(Configuration.TO_COPY) 
+ * 
+ *  oppure
+ *   
+ * @JMap(configurations={TO_COPY,FLATTERN})
+ * */
+
 
 /*
  *  DEFAULT BEHAVIORs
@@ -305,30 +352,11 @@ import javassist.NotFoundException;
  *  e contrassegnare i metodi che creano il destination con @Creation e quelli che lo arricchiscono con @Enrichment
  * */
 
-/* 
- *  CONFIGURATION
- *  
- *  configuration permette di definire delle configurazioni ad hoc per il campo, sia nel caso in cui fosse di destinazione
- *  sia nel caso in cui sia sorgente
- * 
- *    
- *    public @interface JMapConfiguration {
- *	     String value();
- *	     String[] () default {};
- *    }
- * 
- * @JMapConfiguration({Configurazione})
- * 
- * le configurazioni possono essere: NOT_ACCUMULATIVE, in caso di collection o map piene, la destinazione deve
- * acquisire i valori del source senza sommarli.
- * TO_COPY, in caso non si voglia lavorare per riferimento ma per copia
- * 
- * flattern
- * */
 //TODO implementare --> mapping con dislivello es: complexObj.name -> info 
 //TODO implementare --> mapping sfruttando il regex 
 //TODO implementare --> possibilità di definire il template
 //TODO implementare --> custom accessor: dare la possibilità di definire il get e il set del campo
+
 /**
  * JMapper takes as input two classes, Destination and Source.<br>
  * For Destination, we mean the instance that will be created or enhanced.<br>

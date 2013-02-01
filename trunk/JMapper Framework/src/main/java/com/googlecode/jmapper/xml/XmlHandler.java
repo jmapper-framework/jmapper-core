@@ -31,6 +31,7 @@ import java.util.Map;
 import com.googlecode.jmapper.config.JmapperLog;
 import com.googlecode.jmapper.exceptions.LoadingFileException;
 import com.googlecode.jmapper.util.FilesManager;
+import com.googlecode.jmapper.util.GeneralUtility;
 import com.googlecode.jmapper.util.XML;
 import com.googlecode.jmapper.xml.beans.XmlClass;
 
@@ -283,7 +284,7 @@ public class XmlHandler {
 	}
 
 	private String getClassPath(Class<?> clazz){
-		return getMainClass(clazz).getName().replace('.','\\') + ".java";
+		return getMainClass(clazz).getName().replace(".",GeneralUtility.fileSeparator) + ".java";
 	}
 	
 	private Class<?> getMainClass(Class<?> clazz){
@@ -291,6 +292,7 @@ public class XmlHandler {
 			clazz = clazz.getDeclaringClass();
 		return clazz;
 	}
+	
 	/**
 	 * Adds attributes to the existent Class in the Xml configuration.
 	 * @param aClass Class of the attributes
