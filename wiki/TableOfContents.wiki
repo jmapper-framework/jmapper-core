@@ -28,9 +28,6 @@
      * [ExplicitConversions Explicit conversions]
        * [ExplicitConversions#Static_conversion Static conversion]
        * [ExplicitConversions#Dynamic_conversion Dynamic conversion]
-   * Configurations
-     * [SpringConfiguration Spring configuration]
-     * [MavenConfiguration Maven configuration]
    * Examples
      * [AdvancedEnumerationExamples Enumerations usage]
      * [AdvancedInheritanceExamples Inherited configurations]
@@ -38,6 +35,9 @@
      * [AdvancedConversionExamples Explicit conversion]
    * [MoreInformations More informations]
    * [PerformanceTests Performance tests]
+ * Configurations
+   * [SpringConfiguration Spring configuration]
+   * [MavenConfiguration Maven configuration]
  * [FutureRelease Future Release]
  * [ReleaseNotes Release Notes]
  * [Support Support]
