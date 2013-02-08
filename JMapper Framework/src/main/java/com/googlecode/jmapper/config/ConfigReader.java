@@ -29,8 +29,9 @@ import java.util.List;
 
 import com.googlecode.jmapper.annotations.JGlobalMap;
 import com.googlecode.jmapper.annotations.JMap;
-import com.googlecode.jmapper.util.XML;
 import com.googlecode.jmapper.xml.Attribute;
+import com.googlecode.jmapper.xml.Global;
+import com.googlecode.jmapper.xml.XML;
 
 /**
  * This Class reads the configuration of a specific field (analyzing Annotation AND/OR XML) and finds the target field name.
@@ -150,27 +151,51 @@ public final class ConfigReader {
 		// If configuredClass exists in XML configuration file
 		for (Class<?> clazz : getAllsuperclasses(configuredClass)){
 		  if(isMappedInXML(clazz, xml)){
-			// loads all configured attributes 
-			for(Attribute xmlField :xml.attributesLoad().get(clazz.getName())){
-				
-				// verifies that exists the attribute written in XML in the configured Class
-				if(!existField(clazz,xmlField.getName()))	
-					Error.attributeAbsent(clazz, xmlField);
-				
-				// if the field given in input isn't equal to xmlField continue with the cycle
-				if(!xmlField.getName().equals(field.getName())) continue;
-				
+			
+			Global global = xml.globalsLoad().get(clazz.getName());
+			if(global != null && !isPresent(global.getExcluded(), field.getName())){
 				// get the classes of the xmlField
-				List<Class<?>> classes = toList(xmlField.getClasses());
+				List<Class<?>> classes = toList(global.getClasses());
 				
 				// if mapped field hasn't targetClass in classes parameter
 				if(!classes.isEmpty() && !classes.contains(targetClass)) continue;
 								
 				// get the attributes names of xmlField
-				List<String> attributes = toList(xmlField.getAttributes());
+				List<String> attributes = toList(global.getAttributes());
 				
 				// get value of xmlField
-				String value = xmlField.getValue();
+				String value = global.getValue();
+				
+				// If the Value and Attributes parameters are empty, 
+				// then the name of the target field is equal to the configuredField name, 
+				// therefore we pass the default value we use to indicate equality
+				if(value==null&&attributes.isEmpty())value=DEFAULT_FIELD_VALUE;
+				
+				// loaded all variables, calculates and returns the correspondence
+				return getValue(attributes, classes, value, field.getName(), clazz, targetClass);
+			}
+			  
+			// loads all configured attributes 
+			for(Attribute attribute :xml.attributesLoad().get(clazz.getName())){
+				
+				// verifies that exists the attribute written in XML in the configured Class
+				if(!existField(clazz,attribute.getName()))	
+					Error.attributeAbsent(clazz, attribute);
+				
+				// if the field given in input isn't equal to xmlField continue with the cycle
+				if(!attribute.getName().equals(field.getName())) continue;
+				
+				// get the classes of the xmlField
+				List<Class<?>> classes = toList(attribute.getClasses());
+				
+				// if mapped field hasn't targetClass in classes parameter
+				if(!classes.isEmpty() && !classes.contains(targetClass)) continue;
+								
+				// get the attributes names of xmlField
+				List<String> attributes = toList(attribute.getAttributes());
+				
+				// get value of xmlField
+				String value = attribute.getValue();
 				
 				// If the Value and Attributes parameters are empty, 
 				// then the name of the target field is equal to the configuredField name, 
@@ -190,9 +215,6 @@ public final class ConfigReader {
 		JGlobalMap jglobalMap = configuredClass.getAnnotation(JGlobalMap.class);
 		//if the field configuration is defined in the global map
 		if(jglobalMap != null && !isPresent(jglobalMap.excluded(), field.getName())){
-			
-			//TODO ConfigReader --> testare il globalMap da solo, con excluded, excluded con campo configurato
-			// globalMap con campi configurati
 			
 			// get the list of target classes
 			List<Class<?>> classes = toList(jglobalMap.classes());

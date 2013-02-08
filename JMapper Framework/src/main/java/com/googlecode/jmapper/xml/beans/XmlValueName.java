@@ -16,7 +16,6 @@
 
 package com.googlecode.jmapper.xml.beans;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
 /**
@@ -24,7 +23,6 @@ import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
  * @author Alessandro Vurro
  *
  */
-@XStreamAlias("value")
 public class XmlValueName {
 
 	/** name attribute of value node */

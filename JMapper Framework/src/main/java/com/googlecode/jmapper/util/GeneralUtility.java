@@ -317,6 +317,24 @@ public final class GeneralUtility {
 	}
 	
 	/**
+	 * Returns true if the string is empty, false otherwise.
+	 * @param str string to check
+	 * @return true if the string is empty, false otherwise
+	 */
+	public static boolean isEmpty(String str){
+		return str == null || str.length() <= 0;
+	}
+	
+	/**
+	 * Returns true if the array is empty, false otherwise.
+	 * @param array array to check
+	 * @return true if the string is empty, false otherwise
+	 */
+	public static boolean isEmpty(Object[] array){
+		return array == null || array.length <= 0;
+	}
+	
+	/**
 	 * This method verifies that the line contains all elements.
 	 * @param line line to check
 	 * @param elements elements to check
@@ -327,8 +345,17 @@ public final class GeneralUtility {
 		return true;
 	}
 	
+	/**
+	 * Verifies the presence of the element in array.
+	 * @param array
+	 * @param element
+	 * @return true if element exists in array, false otherwise
+	 */
 	public static <T> boolean isPresent(T[] array, T element){
-		for (T item : array)if(item.equals(element))return true;
+		if(array != null)
+			for (T item : array)
+				if(item.equals(element))
+					return true;
 		return false;
 	}
 	

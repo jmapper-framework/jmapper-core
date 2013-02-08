@@ -18,7 +18,6 @@ package com.googlecode.jmapper.xml;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
-import com.googlecode.jmapper.util.XML;
 
 /**
  * XmlBuilder increases the readability of the code simplifying the XML object creation.

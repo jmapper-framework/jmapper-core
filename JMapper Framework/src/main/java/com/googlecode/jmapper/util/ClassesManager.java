@@ -26,14 +26,13 @@ import static com.googlecode.jmapper.util.GeneralUtility.isAccessModifier;
 import static com.googlecode.jmapper.util.GeneralUtility.mSet;
 import static com.googlecode.jmapper.util.GeneralUtility.mapIsAssignableFrom;
 import static com.googlecode.jmapper.util.GeneralUtility.toList;
-
+import static com.googlecode.jmapper.util.GeneralUtility.isEmpty;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import com.googlecode.jmapper.annotations.JGlobalMap;
 import com.googlecode.jmapper.annotations.JMap;
 import com.googlecode.jmapper.annotations.JMultiMap;
@@ -41,7 +40,7 @@ import com.googlecode.jmapper.annotations.JMultiMaps;
 import com.googlecode.jmapper.config.Error;
 import com.googlecode.jmapper.conversions.explicit.ConversionMethod;
 import com.googlecode.jmapper.enums.ChooseConfig;
-import com.googlecode.jmapper.xml.Attribute;
+import com.googlecode.jmapper.xml.XML;
 
 /**
  * Utility class that allows you to manage classes.
@@ -371,8 +370,8 @@ public final class ClassesManager {
 	 * @return true if the class is configured in xml, false otherwise
 	 */
 	public static boolean isMappedInXML(Class<?> aClass, XML xml){
-		List<Attribute> attributes = xml.attributesLoad().get(aClass.getName());
-		return attributes!= null && !attributes.isEmpty();
+		return xml.globalsLoad().get(aClass.getName())!=null
+			|| !isEmpty(xml.attributesLoad().get(aClass.getName()));
 	}
 	
 	/**

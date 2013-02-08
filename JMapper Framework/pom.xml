@@ -19,7 +19,8 @@
   apply a specific logic to the mapping (only valued fields, only null fields, etc..),
   automated management of the XML file,
   possibility of implementing the 1 to N and N to 1 relationships,
-  explicit conversions
+  define explicit conversions, 
+  define inherited configurations,
   </description>
   
   <url>http://code.google.com/p/jmapper-framework/</url> 
@@ -82,7 +83,6 @@
 		    <plugin>
 	          <groupId>org.apache.maven.plugins</groupId>
 	          <artifactId>maven-release-plugin</artifactId>
-	          <version>2.3.2</version>
 	          <configuration>
 	            <tagBase>https://jmapper-framework.googlecode.com/svn/tags</tagBase>
 	            <remoteTagging>true</remoteTagging>

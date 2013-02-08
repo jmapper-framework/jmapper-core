@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.jmapper.util;
+package com.googlecode.jmapper.xml;
 
 import static com.googlecode.jmapper.util.FilesManager.fullPathOf;
 import static com.googlecode.jmapper.util.FilesManager.readAtDevelopmentTime;
@@ -32,8 +32,7 @@ import com.googlecode.jmapper.conversions.explicit.ConversionMethod;
 import com.googlecode.jmapper.exceptions.XmlConversionNameException;
 import com.googlecode.jmapper.exceptions.XmlConversionParameterException;
 import com.googlecode.jmapper.exceptions.XmlConversionTypeException;
-import com.googlecode.jmapper.xml.Attribute;
-import com.googlecode.jmapper.xml.XmlConverter;
+import com.googlecode.jmapper.util.FilesManager;
 import com.googlecode.jmapper.xml.beans.XmlAttribute;
 import com.googlecode.jmapper.xml.beans.XmlClass;
 import com.googlecode.jmapper.xml.beans.XmlConversion;
@@ -103,8 +102,20 @@ public final class XML {
 		return this;
 	}
 	
-	//TODO per aggiungere il global, basta modificare questa metodo
-	// affinche gestisca anche il global attribute
+	/** @return a Map with class name as key and a the global as value */
+	public Map<String, Global> globalsLoad(){
+		Map<String, Global> map = new HashMap<String, Global>();
+		
+		try{	// if xml mapping file isn't empty
+				if(!isEmpty(xmlJmapper.classes))
+				    for (XmlClass xmlClass : xmlJmapper.classes) 
+					   if(xmlClass.global != null)
+						   map.put(xmlClass.name, XmlConverter.toGlobal(xmlClass.global));
+					   					
+		}catch (Exception e) {JmapperLog.ERROR(e);}
+		return map;
+	}
+	
 	/** @return a Map with class name as key and a list of Attributes as value */
 	public Map<String, List<Attribute>> attributesLoad(){
 		Map<String, List<Attribute>> map = new HashMap<String, List<Attribute>>();
@@ -182,7 +193,7 @@ public final class XML {
 	}
 	
 	/**
-	 * This method adds Class and attributes to xmlJmapper object.<br>
+	 * This method adds aClass with the attributes given as input to XML configuration file.<br>
 	 * It's mandatory define at least one attribute.
 	 * @param aClass Class to adds
 	 * @param attributes attributes of Class
@@ -203,6 +214,45 @@ public final class XML {
 	}
 	
 	/**
+	 * This method adds aClass with this global mapping and attributes to XML configuration file.<br>
+	 * It's mandatory define at least one attribute, global is optional instead.
+	 * @param aClass Class to adds
+	 * @param global global mapping
+	 * @return this instance
+	 */
+	public XML addClass(Class<?> aClass, Global global){
+		checksClassAbsence(aClass);
+		
+		XmlClass xmlClass = new XmlClass();
+		xmlClass.name = aClass.getName();
+		xmlJmapper.classes.add(xmlClass);
+		addGlobal(aClass, global);
+		return this;
+	}
+	
+	/**
+	 * This method adds aClass with this global mapping and attributes to XML configuration file.<br>
+	 * It's mandatory define at least one attribute, global is optional instead.
+	 * @param aClass Class to adds
+	 * @param global global mapping
+	 * @param attributes attributes of Class
+	 * @return this instance
+	 */
+	public XML addClass(Class<?> aClass, Global global, Attribute[] attributes){
+		XmlClass xmlClass = new XmlClass();
+		xmlClass.name = aClass.getName();
+		xmlJmapper.classes.add(xmlClass);
+		
+		if(!isEmpty(attributes)){
+			xmlClass.attributes = new ArrayList<XmlAttribute>();
+			addAttributes(aClass, attributes);
+		}
+		if(global != null)
+			addGlobal(aClass, global);
+		
+		return this;
+	}
+	/**
 	 * This method remove a specific Class from Xml Configuration File
 	 * @param aClass
 	 * @return this instance of XML
@@ -210,6 +260,32 @@ public final class XML {
 	public XML deleteClass(Class<?> aClass){
 		boolean isRemoved = xmlJmapper.classes.remove(new XmlClass(aClass.getName()));
 		if(!isRemoved)Error.xmlClassInexistent(this.xmlPath,aClass);
+		return this;
+	}
+	
+	/**
+	 * This method adds the global to an existing Class.
+	 * @param aClass class to edit
+	 * @param global global to add
+	 * @return this instance of XML
+	 */
+	public XML addGlobal(Class<?> aClass,Global global){
+		checksGlobalAbsence(aClass);
+		findXmlClass(aClass).global = XmlConverter.toXmlGlobal(global);
+		return this;
+	}
+	
+	/**
+	 * This method deletes the global to an existing Class.
+	 * @param aClass class to delete
+	 * @return this instance of XML
+	 */
+	public XML deleteGlobal(Class<?> aClass){
+		checksGlobalExistence(aClass);
+		
+		XmlClass xmlClass = findXmlClass(aClass);
+		if(isEmpty(xmlClass.attributes)) deleteClass(aClass);
+		else 							 xmlClass.global = null;
 		return this;
 	}
 	
@@ -238,7 +314,7 @@ public final class XML {
 	public XML deleteAttributes(Class<?> aClass,String[] attributes){
 		checksAttributesExistence(aClass,attributes);
 		
-		if(findXmlClass(aClass).attributes == null || findXmlClass(aClass).attributes.size()<=1)
+		if(isEmpty(findXmlClass(aClass).attributes) || findXmlClass(aClass).attributes.size()<=1)
 			Error.xmlWrongMethod(aClass);
 		
 		for (String attributeName : attributes) {
@@ -260,6 +336,30 @@ public final class XML {
 	 */
 	private XML addClass(Class<?> aClass){
 		xmlJmapper.classes.add(XmlConverter.toXmlClass(aClass));
+		return this;
+	}
+	
+	/**
+	 * Verifies that the global mapping exist in aClass.
+	 * @param aClass class to check
+	 * @return this intance of XML
+	 */
+	private XML checksGlobalExistence(Class<?> aClass){
+		if(!classExists(aClass)) Error.xmlClassInexistent(this.xmlPath,aClass);
+		if(findXmlClass(aClass).global==null)
+			Error.xmlGlobalInexistent(aClass);
+		return this;
+	}
+	
+	/**
+	 * Verifies that the global mapping exist in aClass.
+	 * @param aClass class to check
+	 * @return this intance of XML
+	 */
+	private XML checksGlobalAbsence(Class<?> aClass){
+		if(!classExists(aClass)) Error.xmlClassInexistent(this.xmlPath,aClass);
+		if(findXmlClass(aClass).global!=null)
+			Error.xmlGlobalExistent(aClass);
 		return this;
 	}
 	

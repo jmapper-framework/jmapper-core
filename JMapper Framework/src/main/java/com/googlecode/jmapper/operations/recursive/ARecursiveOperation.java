@@ -20,7 +20,7 @@ import java.util.Set;
 import com.googlecode.jmapper.enums.ChooseConfig;
 import com.googlecode.jmapper.generation.beans.Method;
 import com.googlecode.jmapper.operations.complex.AComplexOperation;
-import com.googlecode.jmapper.util.XML;
+import com.googlecode.jmapper.xml.XML;
 
 /**
  * This abstract class represents a recursive operation.

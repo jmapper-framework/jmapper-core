@@ -6,7 +6,7 @@ import com.googlecode.jmapper.enums.MappingType;
 import com.googlecode.jmapper.operations.AGeneralOperation;
 import com.googlecode.jmapper.operations.info.InfoOperation;
 import com.googlecode.jmapper.operations.recursive.ARecursiveOperation;
-import com.googlecode.jmapper.util.XML;
+import com.googlecode.jmapper.xml.XML;
 
 import junit.framework.TestCase;
 

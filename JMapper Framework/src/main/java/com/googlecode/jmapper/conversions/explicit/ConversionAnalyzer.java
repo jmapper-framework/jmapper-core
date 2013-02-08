@@ -33,7 +33,7 @@ import com.googlecode.jmapper.exceptions.DynamicConversionBodyException;
 import com.googlecode.jmapper.exceptions.DynamicConversionMethodException;
 import com.googlecode.jmapper.exceptions.DynamicConversionParameterException;
 import com.googlecode.jmapper.util.ClassesManager;
-import com.googlecode.jmapper.util.XML;
+import com.googlecode.jmapper.xml.XML;
 import com.googlecode.jmapper.xml.XmlConverter;
 
 /**

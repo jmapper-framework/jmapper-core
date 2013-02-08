@@ -24,11 +24,11 @@ import static com.googlecode.jmapper.conversions.explicit.ConversionMethod.Param
 import static com.googlecode.jmapper.conversions.explicit.ConversionMethod.ParameterNumber.ZERO;
 import static com.googlecode.jmapper.conversions.explicit.ConversionPlaceholder.destination;
 import static com.googlecode.jmapper.conversions.explicit.ConversionPlaceholder.source;
-
+import static com.googlecode.jmapper.util.GeneralUtility.isEmpty;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-
+import com.googlecode.jmapper.annotations.JGlobalMap;
 import com.googlecode.jmapper.annotations.JMap;
 import com.googlecode.jmapper.annotations.JMapConversion;
 import com.googlecode.jmapper.annotations.JMapConversion.Type;
@@ -48,6 +48,7 @@ import com.googlecode.jmapper.xml.beans.XmlAttributeName;
 import com.googlecode.jmapper.xml.beans.XmlClass;
 import com.googlecode.jmapper.xml.beans.XmlClassName;
 import com.googlecode.jmapper.xml.beans.XmlConversion;
+import com.googlecode.jmapper.xml.beans.XmlGlobal;
 import com.googlecode.jmapper.xml.beans.XmlValueName;
 
 /**
@@ -63,11 +64,14 @@ public class XmlConverter {
 	 * @param aClass Class to trasform in XmlClass
 	 * @return a Class converted to XmlClass
 	 */
-	//TODO XmlConverter --> aggiustare per gestire il JGlobalMap
 	public static XmlClass toXmlClass(Class<?> aClass){
 		XmlClass xmlClass = new XmlClass();
 		xmlClass.name = aClass.getName();
 		xmlClass.attributes = new ArrayList<XmlAttribute>();
+		
+		if(aClass.getAnnotation(JGlobalMap.class) != null)
+			xmlClass.global = toXmlGlobal(aClass);
+		
 		for (Field field : aClass.getDeclaredFields())
 			if(field.getAnnotation(JMap.class) != null)
 				xmlClass.attributes.add(toXmlAttribute(field));
@@ -81,8 +85,8 @@ public class XmlConverter {
 	 * @return a ConversionMethod
 	 */
 	public static ConversionMethod toConversionMethod(XmlConversion xmlConversion){
-		
-		if(xmlConversion.name == null || xmlConversion.name.length() == 0){
+
+		if(isEmpty(xmlConversion.name)){
 			xmlConversion.name = "undefinedName";
 			throw new XmlConversionNameException("it's mandatory define a name");
 		}
@@ -164,6 +168,7 @@ public class XmlConverter {
 		for (int i = 0; i < array.length; i++)array[i] = array[i].trim();
 		return array;
 	}
+	
 	/**
 	 * This method transforms a XmlAttribute into an Attribute.
 	 * @param xmlAttribute
@@ -174,24 +179,123 @@ public class XmlConverter {
 		String value = xmlAttribute.value != null? xmlAttribute.value.name:null;
 		String[] attributes = null;
 		Class<?>[] classes  = null;
-		
-		if(xmlAttribute.attributes != null && !xmlAttribute.attributes.isEmpty()){
+
+		if(!isEmpty(xmlAttribute.attributes)){
 			attributes = new String[xmlAttribute.attributes.size()];
 			for (int i = xmlAttribute.attributes.size(); i --> 0;) 
 				attributes[i] = xmlAttribute.attributes.get(i).name;
 		}
 
-		if(xmlAttribute.classes != null && !xmlAttribute.classes.isEmpty()){
+		if(!isEmpty(xmlAttribute.classes)){
 			classes = new Class<?>[xmlAttribute.classes.size()];
 			for (int i = xmlAttribute.classes.size(); i --> 0;){
-				Class<?> aClass = null;
-				try { 	  		      aClass = Class.forName(xmlAttribute.classes.get(i).name); } 
+				try { 	  		      classes[i] = Class.forName(xmlAttribute.classes.get(i).name); } 
 				catch (Exception e) { Error.classInexistent(xmlAttribute.classes.get(i).name);	}
-				classes[i] = aClass;
 			}
 		}
 		
 		return new Attribute(name, value, attributes, classes);
+	}
+	
+	/**
+	 * This method transforms a XmlGlobal into an Global.
+	 * @param xmlGlobal
+	 * @return an instance of Global
+	 */
+	public static Global toGlobal(XmlGlobal xmlGlobal){
+	
+		String value = xmlGlobal.value != null? xmlGlobal.value.name:null;
+		String[] attributes = null;
+		Class<?>[] classes = null;
+		String[] excluded = null;
+		
+		if(!isEmpty(xmlGlobal.attributes)){
+			attributes = new String[xmlGlobal.attributes.size()];
+			for (int i = xmlGlobal.attributes.size(); i --> 0;) 
+				attributes[i] = xmlGlobal.attributes.get(i).name;
+		}
+
+		if(!isEmpty(xmlGlobal.classes)){
+			classes = new Class<?>[xmlGlobal.classes.size()];
+			for (int i = xmlGlobal.classes.size(); i --> 0;)
+				try { 	  		      classes[i] = Class.forName(xmlGlobal.classes.get(i).name); } 
+				catch (Exception e) { Error.classInexistent(xmlGlobal.classes.get(i).name);	}
+		}
+		
+		if(!isEmpty(xmlGlobal.excluded)){
+			excluded = new String[xmlGlobal.excluded.size()];
+			for (int i = xmlGlobal.excluded.size(); i --> 0;) 
+				excluded[i] = xmlGlobal.excluded.get(i).name;
+		}
+		
+		return new Global(value, attributes, classes, excluded);
+	}
+
+	/**
+	 * Transforms the JGlobalMap annotation to Global bean.
+	 * @param aClass class to check
+	 * @return a new instance of Global Class
+	 */
+	public static Global toGlobal(Class<?> aClass){
+		JGlobalMap globalMap = aClass.getAnnotation(JGlobalMap.class);
+		return new Global(globalMap.value(), globalMap.attributes(), globalMap.classes(), globalMap.excluded());
+	}
+	
+	/**
+	 * This method transforms a JGlobalMap annotation to XmlGlobal.
+	 * @param aClass class to check
+	 * @return a new instance of XmlGlobal
+	 */
+	public static XmlGlobal toXmlGlobal(Class<?> aClass){
+		 JGlobalMap globalMap = aClass.getAnnotation(JGlobalMap.class);
+		 return toXmlGlobal(globalMap.value(), globalMap.attributes(), globalMap.classes(), globalMap.excluded());
+	}
+	
+	/**
+	 * This method transforms a Global bean to an instance of XmlGlobal.
+	 * @param global global to transform
+	 * @return a new instance of XmlGlobal
+	 */
+	public static XmlGlobal toXmlGlobal(Global global){
+		 return toXmlGlobal(global.getValue(), global.getAttributes(), global.getClasses(), global.getExcluded());
+	}
+	
+	/**
+	 * Shared method. Starting from general parameters returns an instance of XmlGlobal.
+	 * @param value name of target field
+	 * @param attributes names of target fields
+	 * @param classes list of target classes
+	 * @param excluded list of excluded fields
+	 * @return a XmlAttribute instance
+	 */
+	private static XmlGlobal toXmlGlobal(String value, String[] attributes, Class<?>[] classes, String[] excluded){
+		
+		XmlGlobal xmlAttribute = new XmlGlobal();
+		
+		if(value != null && value.length()>0){
+			xmlAttribute.value = new XmlValueName();
+			xmlAttribute.value.name = value;
+		}
+		
+		if(!isEmpty(attributes)){
+			xmlAttribute.attributes = new ArrayList<XmlAttributeName>();
+			for (String attribute : attributes)
+				xmlAttribute.attributes.add(new XmlAttributeName(attribute));
+		}
+		
+		if(!isEmpty(classes)){
+			xmlAttribute.classes = new ArrayList<XmlClassName>();
+			for (Class<?> clazz : classes) 
+				xmlAttribute.classes.add(new XmlClassName(clazz.getName()));
+		}
+		
+		if(!isEmpty(excluded)){
+			xmlAttribute.excluded = new ArrayList<XmlAttributeName>();
+			for (String attribute : excluded)
+				xmlAttribute.excluded.add(new XmlAttributeName(attribute));
+		}
+		
+		return xmlAttribute;
 	}
 	
 	/**
@@ -232,13 +336,13 @@ public class XmlConverter {
 			xmlAttribute.value.name = getValue(value,name);
 		}
 
-		if(attributes != null && attributes.length>0){
+		if(!isEmpty(attributes)){
 			xmlAttribute.attributes = new ArrayList<XmlAttributeName>();
 			for (String attribute : attributes)
 				xmlAttribute.attributes.add(new XmlAttributeName(getValue(attribute,name)));
 		}
-		
-		if(classes != null && classes.length>0){
+
+		if(!isEmpty(classes)){
 			xmlAttribute.classes = new ArrayList<XmlClassName>();
 			for (Class<?> clazz : classes) 
 				xmlAttribute.classes.add(new XmlClassName(clazz.getName()));

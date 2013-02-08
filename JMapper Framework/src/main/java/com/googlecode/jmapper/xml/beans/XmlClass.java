@@ -29,11 +29,11 @@ public class XmlClass {
 	/** name attribute of class node */
 	@XStreamAsAttribute
 	public String name;
-	
+	/** global configuration */
+	public XmlGlobal global;
 	/** list of attributes node */
 	@XStreamImplicit(itemFieldName="attribute")
 	public List<XmlAttribute> attributes;
-
 	/** list of conversions node */
 	@XStreamImplicit(itemFieldName="conversion")
 	public List<XmlConversion> conversions;
@@ -51,6 +51,9 @@ public class XmlClass {
 	@Override
 	public String toString() {
 		String str = "";
+		
+		if(global != null)
+			str += "\n      <global>"+global+"\n      </global>";
 		if(attributes != null) for (XmlAttribute it : attributes) 
 			str += "\n      <attribute name=\""+it.name+"\">"+it+"\n      </attribute>";
 				

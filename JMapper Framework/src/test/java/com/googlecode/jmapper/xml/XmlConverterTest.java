@@ -10,6 +10,7 @@ import com.googlecode.jmapper.xml.beans.XmlConversion;
 import com.googlecode.jmapper.bean.AnnotatedClass;
 import com.googlecode.jmapper.bean.ComplexClass;
 import com.googlecode.jmapper.bean.MappedObject;
+import com.googlecode.jmapper.bean.MappedObject3;
 import com.googlecode.jmapper.bean.SimpleClass;
 import junit.framework.TestCase;
 
@@ -47,6 +48,11 @@ public class XmlConverterTest extends TestCase{
 		assertEquals(MappedObject.class.getName(), xmlClass.name);
 		assertEquals("field",xmlClass.attributes.get(0).name);
 		assertEquals("field",xmlClass.attributes.get(0).value.name);
+		
+		XmlClass xmlClass2 = XmlConverter.toXmlClass(MappedObject3.class);
+		assertEquals("properties",xmlClass2.global.value.name);
+		assertEquals("field3",xmlClass2.attributes.get(0).value.name);
+		
 	}
 	
 	public void testToXmlAttribute() throws SecurityException, NoSuchFieldException, ClassNotFoundException{

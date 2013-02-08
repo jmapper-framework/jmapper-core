@@ -32,7 +32,7 @@ import com.googlecode.jmapper.operations.analyzer.CollectionAnalyzer;
 import com.googlecode.jmapper.operations.analyzer.MapAnalyzer;
 import com.googlecode.jmapper.operations.analyzer.ObjectAnalyzer;
 import com.googlecode.jmapper.operations.info.InfoOperation;
-import com.googlecode.jmapper.util.XML;
+import com.googlecode.jmapper.xml.XML;
 
 /**
  * OperationAnalyzer analyzes the fields and returns the informations relating the operation to be performed.

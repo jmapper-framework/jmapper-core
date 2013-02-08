@@ -44,7 +44,7 @@ import com.googlecode.jmapper.operations.AGeneralOperation;
 import com.googlecode.jmapper.operations.OperationHandler;
 import com.googlecode.jmapper.operations.complex.AComplexOperation;
 import com.googlecode.jmapper.operations.simple.ASimpleOperation;
-import com.googlecode.jmapper.util.XML;
+import com.googlecode.jmapper.xml.XML;
 /**
  * MapperConstructor builds all combinations of possible mappings between classes Source and Destination.<br>
  * 

@@ -37,7 +37,7 @@ import com.googlecode.jmapper.operations.complex.AComplexOperation;
 import com.googlecode.jmapper.operations.info.InfoOperation;
 import com.googlecode.jmapper.operations.recursive.ARecursiveOperation;
 import com.googlecode.jmapper.operations.simple.ASimpleOperation;
-import com.googlecode.jmapper.util.XML;
+import com.googlecode.jmapper.xml.XML;
 
 /**
  * OperationHandler creates the operations necessary to execute the mapping.
