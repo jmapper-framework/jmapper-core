@@ -1,0 +1,234 @@
+#summary basic mapping.
+
+= Basic Mapping =
+
+We can define the configuration both in xml and annotations, both modes have the same structure.<br>
+*IMPORTANT!* _With a basic mapping you can only define a 1 to 1 relation between fields._<br>
+the class used as an example is the following:
+{{{
+class MyClass {
+
+    private String field;
+
+    // getter and setter..
+
+}
+}}}
+
+The following will be exhibited various combinations allowed in both modes.
+
+== Value ==
+
+the parameter value permits to define the target field name.
+
+=== Annotation ===
+
+Value is the default parameter for the annotation that you may omit to write, if used alone.
+{{{
+class MyClass {
+
+   @JMap("targetFieldName") // or @JMap(value = "targetFieldName")
+   private String field;
+   
+}
+}}}
+
+=== Xml ===
+
+The equivalent configuration in xml is:
+{{{
+<jmapper>
+   <class name="package.MyClass">
+      <attribute name="field">
+         <value name="targetFieldName"/>
+      </attribute>
+   </class>
+</jmapper>
+}}}
+
+== Attributes ==
+
+With attributes you can associate more target fields to a mapped field.<br>
+With the attributes parameter it's possible define more target fields.<br>
+This is useful when you want associate a field with many other that belong to different classes.<br>
+This configuration may lead to undesirable results in the case there are multiple matches between the identifiers declared in attributes and the fields of the target class, in this case JMapper considers valid the first field that respects the correspondence.<br>
+This use is recommended only if you are certain of the uniqueness of the identifiers defined.<br>
+
+=== Annotation ===
+
+{{{
+class MyClass {
+
+   @JMap(attributes = {"firstField","secondField"})
+   private String field;
+   
+}
+}}}
+To better understand how attributes parameter works see the following example:
+{{{
+class Destination {          class Source {
+
+   String dField3;              @JMap(attributes={"dField1","dField2","dField3"})
+   String dField2;              String sField1; 
+   String dField1;
+
+   //getters and setters..      //getter and setter..
+}                            }
+}}}
+Code:
+{{{
+Source source = new Source("sField1");
+
+JMapper mapper = new JMapper(Destination.class, Source.class);
+
+Destination destination = mapper.getDestination(source);
+
+System.out.println(destination);
+}}}
+Output:
+{{{
+Destination[dField3=null, dField2=null, dField1="sField1"]
+}}}
+The first field of Destination that respects the correspondence is dField1.
+
+=== Xml ===
+
+The equivalent configuration in xml is:
+{{{
+<jmapper>
+   <class name="package.MyClass">
+      <attribute name="field">
+         <attributes>
+             <attribute name="firstField"/>
+             <attribute name="secondField"/>
+         </attributes>
+      </attribute>
+   </class>
+</jmapper>
+}}}
+
+== Classes ==
+
+Classes is used when you want to limit the association to a defined set of classes, without value and attributes, you indicates to JMapper that the identifier of target field is the same of mapped field.
+
+=== Annotation ===
+
+{{{
+class MyClass {
+
+   @JMap(classes = {Source1.class, Source2.class, Source3.class})
+   private String field;
+
+}
+}}}
+For example, we have the following classes:
+{{{
+   class Target4 {             class Source{
+
+                                   @JMap(classes={Target1.class, Target2.class, Target3.class})
+       String field;               String field;
+
+       // getter and setter..      // getter and setter.. 
+   }                           }
+}}}
+Code:
+{{{
+new JMapper<Target4, Source>(Target4.class, Source.class);
+}}}
+Output:
+{{{
+"JMapper AbsentRelationshipException: there isn't relationship between Target4 Class and Source Class"
+}}}
+
+=== Xml ===
+
+The equivalent configuration in xml is:
+{{{
+<jmapper>
+   <class name="package.MyClass">
+      <attribute name="field">
+         <classes>
+             <class name="package.Source1"/>
+             <class name="package.Source2"/>
+             <class name="package.Source3"/>
+         </classes>
+      </attribute>
+   </class>
+</jmapper>
+}}}
+
+== Value and Classes ==
+
+This combination allows you to limit the association between the mapped field and the target field to a defined set of classes, declaring the target field name.
+
+=== Annotation ===
+
+{{{
+class MyClass {
+
+   @JMap(value = "targetField", classes = {Source1.class, Source2.class, Source3.class})
+   private String field;
+
+}
+}}}
+
+=== Xml ===
+
+The equivalent configuration in xml is:
+{{{
+<jmapper>
+   <class name="package.MyClass">
+      <attribute name="field">
+         <value name="targetField"/>
+         <classes>
+             <class name="package.Source1"/>
+             <class name="package.Source2"/>
+             <class name="package.Source3"/>
+         </classes>
+      </attribute>
+   </class>
+</jmapper>
+}}}
+
+== Attributes and Classes ==
+
+To clarify the association between the mapped field and other fields belonging to different classes, you can simply make a joint use of attributes and classes.
+
+=== Annotation ===
+
+{{{
+class MyClass {
+
+   @JMap(attributes = {"field1","field2","field3"}, classes = {Source1.class, Source2.class, Source3.class})
+   private String field;
+
+}
+}}}
+In this specific example JMapper recognizes the association that exists between the mapped field with the field "field1" of the Source class, with the field "field2" of the Source2 class and with the field "field3" of the Source3 class.<br>
+The equality of the mapped field and the target field can be specified with an empty string "". For example:
+{{{
+@JMap(attributes = {"field1", "", "field3"}
+         classes = {Source1.class, Source2.class, Source3.class})
+}}}
+
+=== Xml ===
+
+The equivalent configuration in xml is:
+{{{
+<jmapper>
+   <class name="package.MyClass">
+      <attribute name="field">
+         <attributes>
+             <attribute name="field1"/>
+             <attribute name="field2"/>
+	     <attribute name="field3"/>
+         </attributes>
+         <classes>
+             <class name="package.Source1"/>
+             <class name="package.Source2"/>
+             <class name="package.Source3"/>
+         </classes>
+      </attribute>
+   </class>
+</jmapper>
+}}}
