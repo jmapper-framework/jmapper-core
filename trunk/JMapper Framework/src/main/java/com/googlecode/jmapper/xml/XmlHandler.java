@@ -18,21 +18,17 @@ package com.googlecode.jmapper.xml;
 
 import static com.googlecode.jmapper.util.ClassesManager.isMappedInAnnotation;
 import static com.googlecode.jmapper.util.ClassesManager.isMappedInXML;
-import static com.googlecode.jmapper.util.GeneralUtility.list;
+import static com.googlecode.jmapper.util.GeneralUtility.*;
 import static com.googlecode.jmapper.xml.XmlBuilder.loadXml;
-
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-
 import com.googlecode.jmapper.config.JmapperLog;
 import com.googlecode.jmapper.exceptions.LoadingFileException;
 import com.googlecode.jmapper.util.FilesManager;
 import com.googlecode.jmapper.util.GeneralUtility;
-import com.googlecode.jmapper.util.XML;
 import com.googlecode.jmapper.xml.beans.XmlClass;
 
 /**
@@ -70,12 +66,13 @@ public class XmlHandler {
 	 * @return this instance of XmlHandler
 	 */
 	public XmlHandler cleanAnnotatedClassAll(Class<?>... classes){
-		return cleanAnnotatedClass (true,Arrays.asList(classes));
+		return cleanAnnotatedClass (true,list(classes));
 	}
 	
 	/**
 	 * Cleans up the annotated classes, given as input, from the configuration.<br>
-	 * If the class has inner classes and they are mapped, their configuration will be not removed.
+	 * If the class has inner classes and they are mapped, their configuration will be not removed.<br>
+	 * Global mapping must be inlined.
 	 * @param classes 
 	 * @return this instance of XmlHandler
 	 */
@@ -115,7 +112,7 @@ public class XmlHandler {
 	  return this;
 	}
 	
-    /**
+	/**
      * Add the annotated classes given as input to Xml Configuration.<br>
      * If the class has inner classes and they are mapped, their configuration will be not added too.
 	 * @param classes annotated classes to add to Xml Configuration
@@ -178,11 +175,20 @@ public class XmlHandler {
 		
 			 if(isMappedInAnnotation(clazz) && isMappedInXML(clazz,xml)){
 				 XmlClass xmlClass = XmlConverter.toXmlClass(clazz);
-				 Attribute[] attributes = new Attribute[xmlClass.attributes.size()];
-				 for (int i = xmlClass.attributes.size(); i --> 0;)
-					 attributes[i] = XmlConverter.toAttribute(xmlClass.attributes.get(i));
+				 
+				 Attribute[] attributes = null;
+				 Global global = null;
+				 
+				 if(!isEmpty(xmlClass.attributes)){
+					 attributes = new Attribute[xmlClass.attributes.size()];
+					 for (int i = xmlClass.attributes.size(); i --> 0;)
+						 attributes[i] = XmlConverter.toAttribute(xmlClass.attributes.get(i));
+				 }
+				 
+				 if(xmlClass.global != null)
+					 global = XmlConverter.toGlobal(xmlClass.global); 
 				
-				 overrideClass(clazz, attributes);
+				 overrideClass(clazz, global, attributes);
 			 }
 			 if(overrideAll)
 				 for (Class<?> it : clazz.getClasses())
@@ -254,21 +260,23 @@ public class XmlHandler {
 	 * @return this instance of XmlHandler
 	 */
 	public XmlHandler fromXmlToAnnotation(Class<?>... classes){
-		try{ Map<String, List<Attribute>> xmlClasses = xml.attributesLoad();
+		try{ Map<String, List<Attribute>> xmlAttributes = xml.attributesLoad();
+		     Map<String, Global> xmlGlobal = xml.globalsLoad();
+		     
 		     List<String> simplyClasses = FilesManager.classesPath();
 		
-			for (Class<?> classe : classes) {
+			 for (Class<?> classe : classes) {
 				
 				// if the file isn't present in the xml configuration file
-				if(!xmlClasses.containsKey(classe.getName()))continue;
+				if(!xmlAttributes.containsKey(classe.getName())
+				&& !xmlGlobal    .containsKey(classe.getName()))continue;
 				
 				// recupero il path della classe
 				String path = getElement(simplyClasses,getClassPath(classe));
 				// if the class isn't annotated
 				if(!FilesManager.isFileAnnotated(path,classe))
-					FilesManager.addConfigurationToClass(path,xmlClasses.get(classe.getName()),classe);
-				
-			}
+					FilesManager.addConfigurationToClass(path,xmlGlobal.get(classe.getName()),xmlAttributes.get(classe.getName()),classe);
+			 }
 		}catch (Exception e) {JmapperLog.ERROR(e);}
 		return this;
 	}
@@ -291,10 +299,47 @@ public class XmlHandler {
 		while(clazz.isMemberClass())
 			clazz = clazz.getDeclaringClass();
 		return clazz;
+	} 
+	
+	/**
+	 * Adds global mapping to the existent Class in the Xml configuration.
+	 * @param aClass Class of the attributes
+	 * @param global global mapping to add in the Xml Configuration File
+	 * @return this instance of XmlHandler
+	 */
+	public XmlHandler addGlobal(Class<?> aClass, Global global){
+		try{ xml.addGlobal(aClass, global);
+			 xml.write();
+		}catch (Exception e) {JmapperLog.ERROR(e);}
+		return this;
 	}
 	
 	/**
-	 * Adds attributes to the existent Class in the Xml configuration.
+	 * Deletes the global node from the existent Class in the Xml configuration.
+	 * @param aClass Class to edit
+	 * @return this instance of XmlHandler
+	 */
+	public XmlHandler deleteGlobal(Class<?> aClass){
+		try{ xml.deleteGlobal(aClass);
+			 xml.write();
+		}catch (Exception e) {JmapperLog.ERROR(e);}
+		return this;
+	}
+	
+	/**
+	 * Global mapping ovveride.
+	 * @param aClass class to edit
+	 * @param global global to ovveride
+	 * @return this instance of XmlHandler
+	 */
+	public XmlHandler overrideGlobal(Class<?> aClass, Global global){
+		deleteGlobal(aClass);
+		addGlobal(aClass, global);
+		return this;
+	}
+	
+	/**
+	 * Adds the attributes from the existent Class in the Xml configuration.
 	 * @param aClass Class of the attributes
 	 * @param attributes attributes of the clazz to add in the Xml Configuration File
 	 * @return this instance of XmlHandler
@@ -307,7 +352,7 @@ public class XmlHandler {
 	}
 	
 	/**
-	 * Deletes attributes to the existent Class in the Xml configuration.
+	 * Deletes the attributes from the existent Class in the Xml configuration.
 	 * @param aClass Class of the attributes
 	 * @param attributes attributes of the clazz to delete from Xml Configuration File
 	 * @return this instance of XmlHandler
@@ -339,7 +384,7 @@ public class XmlHandler {
 	 * This method adds a specific Class to Xml Configuration File.<br>
 	 * At least one field name must be configured.
 	 * @param clazz a Class to add in xml configuration 
-	 * @param attributes configured fields of clazz
+	 * @param attributes list of attributes name (equals to write @JMap)
 	 * @return this instance of XmlHandler
 	 */
 	public XmlHandler addClass(Class<?> clazz,String... attributes){
@@ -349,7 +394,25 @@ public class XmlHandler {
 		
 		return addClass(clazz, listAttributes);
 	}
-    /**
+    
+	/**
+	 * This method adds a specific Class with this global mapping and attributes 
+	 * to Xml Configuration File.<br>
+	 * At least one field name must be configured.
+	 * @param clazz a Class to add in xml configuration
+	 * @param global global mapping 
+	 * @param attributes list of attributes name (equals to write @JMap)
+	 * @return this instance of XmlHandler
+	 */
+	public XmlHandler addClass(Class<?> clazz, Global global, String... attributes){
+		Attribute[] listAttributes = new Attribute[attributes.length];
+		for (int i = attributes.length; i --> 0;) 
+			listAttributes[i] = new Attribute(attributes[i]);
+		
+		return addClass(clazz, global, listAttributes);
+	}
+	
+	/**
 	 * This method adds a specific Class to Xml Configuration File.<br>
 	 * At least one field must be configured.
 	 * @param clazz a Class to add in xml configuration 
@@ -363,6 +426,41 @@ public class XmlHandler {
 		return this;
 	}
 
+	/**
+	 * This method adds a specific Class with this global mapping to Xml Configuration File.<br>
+	 * At least one field must be configured.
+	 * @param clazz a Class to add in xml configuration 
+	 * @param global global mapping
+	 * @return this instance of XmlHandler
+	 */
+	public XmlHandler addClass(Class<?> clazz, Global global){
+		try{	xml.addClass(clazz, global);
+			    xml.write();
+		}catch (Exception e) {JmapperLog.ERROR(e);}
+		return this;
+	}
+		
+	/**
+	 * This method adds a specific Class with this global mapping and attributes 
+	 * to Xml Configuration File.<br>
+	 * At least one field must be configured.
+	 * @param clazz a Class to add in xml configuration 
+	 * @param global global mapping
+	 * @param attributes configured fields of clazz
+	 * @return this instance of XmlHandler
+	 */
+	public XmlHandler addClass(Class<?> clazz, Global global, Attribute... attributes){
+		try{	xml.addClass(clazz, global, attributes);
+			    xml.write();
+		}catch (Exception e) {JmapperLog.ERROR(e);}
+		return this;
+	}
+	
+	/**
+	 * Deletes this classes from XML.
+	 * @param classes classes to delete
+	 * @return this instance of XmlHandler
+	 */
 	private XmlHandler deleteClasses(Class<?>... classes){
 		for(Class<?> clazz : classes)
 			if(isMappedInXML(clazz,xml)) xml.deleteClass(clazz);
@@ -396,6 +494,31 @@ public class XmlHandler {
 		return this;
 	}
 	
+	/**
+	 * This method rewrite a configuration of the Class given as input, with this global.
+	 * @param aClass class to edit
+	 * @param global global to override
+	 * @return this instance of XmlHandler
+	 */
+	public XmlHandler overrideClass(Class<?> aClass,Global global){
+		overrideGlobal(aClass, global);
+		return this;
+	}
+	
+	/**
+	 * This method rewrite a configuration of the Class given as input, with this attributes.
+	 * @param aClass a Class to override
+	 * @param global global mapping
+	 * @param attributes attributes of aClass
+	 * @return this instance of XmlHandler
+	 */
+	public XmlHandler overrideClass(Class<?> aClass, Global global, Attribute... attributes){
+		try{ xml.deleteClass(aClass);
+			 xml.addClass(aClass, global, attributes);
+			 xml.write();
+		}catch (Exception e) {JmapperLog.ERROR(e);}
+		return this;
+	}
 	/**
 	 * For debug porpouse
 	 * @return the xml object

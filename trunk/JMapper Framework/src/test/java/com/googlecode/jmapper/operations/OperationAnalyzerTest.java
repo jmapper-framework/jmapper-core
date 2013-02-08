@@ -9,7 +9,7 @@ import com.googlecode.jmapper.enums.ConversionType;
 import com.googlecode.jmapper.enums.OperationType;
 import com.googlecode.jmapper.operations.info.InfoMapOperation;
 import com.googlecode.jmapper.operations.info.InfoOperation;
-import com.googlecode.jmapper.util.XML;
+import com.googlecode.jmapper.xml.XML;
 
 import junit.framework.TestCase;
 

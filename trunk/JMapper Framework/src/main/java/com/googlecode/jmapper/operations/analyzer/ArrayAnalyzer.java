@@ -28,7 +28,7 @@ import static com.googlecode.jmapper.util.GeneralUtility.areBasic;
 import java.lang.reflect.Field;
 
 import com.googlecode.jmapper.operations.info.InfoOperation;
-import com.googlecode.jmapper.util.XML;
+import com.googlecode.jmapper.xml.XML;
 /**
  * This Class analyzes operations between Arrays.
  * 

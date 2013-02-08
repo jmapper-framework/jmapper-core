@@ -41,6 +41,8 @@ public final class Constants {
 	public static final String conversionParameterException = "conversionParameterException";
 	public static final String conversionBodyIllegalCode = "conversionBodyIllegalCode";
 	public static final String noRelationshipException = "noRelationshipException";
+	public static final String xmlMappingGlobalExistException = "xmlMappingGlobalExistException";
+	public static final String xmlMappingGlobalDoesNotExistException = "xmlMappingGlobalDoesNotExistException"; 
 	public static final String xmlMappingClassDoesNotExistException2 = "xmlMappingClassDoesNotExistException2";
 	public static final String undefinedMappingException = "undefinedMappingException";
 	public static final String mappingNotFoundException2 = "mappingNotFoundException2";
@@ -53,6 +55,7 @@ public final class Constants {
 	public static final String mappingErrorException2 = "mappingErrorException2";
 	public static final String mappingErrorException2length = "mappingErrorException2length";
 	public static final String mappingErrorRelationalException2 = "mappingErrorRelationalException2";
+	public static final String mappingErrorRelationalException3 = "mappingErrorRelationalException3";
 	public static final String mappingNotFoundException0 = "mappingNotFoundException0";
 	public static final String malformedBeanException3 = "malformedBeanException3";
 	public static final String malformedBeanException2 = "malformedBeanException2";

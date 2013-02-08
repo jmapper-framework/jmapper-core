@@ -19,7 +19,7 @@ package com.googlecode.jmapper.util;
 import static com.googlecode.jmapper.util.GeneralUtility.containsAll;
 import static com.googlecode.jmapper.util.GeneralUtility.fileSeparator;
 import static com.googlecode.jmapper.util.GeneralUtility.list;
-
+import static com.googlecode.jmapper.util.GeneralUtility.isEmpty;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -36,11 +36,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.googlecode.jmapper.annotations.JGlobalMap;
 import com.googlecode.jmapper.annotations.JMap;
 import com.googlecode.jmapper.config.Error;
 import com.googlecode.jmapper.config.ResourceLoader;
 import com.googlecode.jmapper.exceptions.LoadingFileException;
 import com.googlecode.jmapper.xml.Attribute;
+import com.googlecode.jmapper.xml.Global;
 import com.googlecode.jmapper.xml.beans.XmlJmapper;
 import com.thoughtworks.xstream.XStream;
 
@@ -58,25 +60,27 @@ public class FilesManager {
 	/**
 	 * This method adds the configurations present in the xml file in the Class.
 	 * @param path path of the file that represents the class
+	 * @param global global mapping
 	 * @param attributes attributes of this Class
 	 * @param aClass class to rewrite
 	 * @throws NoSuchFieldException 
 	 * @throws IOException  
 	 */	
-	public static void addConfigurationToClass(String path,List<Attribute> attributes,Class<?> aClass) throws NoSuchFieldException, IOException {
-		writeFile(new File(path),linesToWrite(path, attributes, aClass));
+	public static void addConfigurationToClass(String path,Global global,List<Attribute> attributes,Class<?> aClass) throws NoSuchFieldException, IOException {
+		writeFile(new File(path),linesToWrite(path, global, attributes, aClass));
 	}
 	
 	/**
 	 * This method returns the lines of the file enriched with annotations.
 	 * @param path path of the file that represents the class
+	 * @param global global mapping
 	 * @param attributes attributes of this Class
 	 * @param aClass class to rewrite
 	 * @return list of liness to write
 	 * @throws NoSuchFieldException 
 	 * @throws IOException  
 	 */	
-	private static List<String> linesToWrite(String path,List<Attribute> attributes,Class<?> aClass) throws NoSuchFieldException, IOException {
+	private static List<String> linesToWrite(String path,Global global,List<Attribute> attributes,Class<?> aClass) throws NoSuchFieldException, IOException {
 		
 		// strings used to identify the class
 		String[] classIdentifier = new String[]{"class","{",aClass.getSimpleName()};
@@ -97,19 +101,28 @@ public class FilesManager {
 		List<String> lines = readFile(new File(path));
 		
 		// adds of the JMap import
-		lines = addJMapImport(lines,aClass);
 		
-		// adds of the target classes import
-		lines = addTargetClassesImport(lines, attributes,aClass);
+		if(!isEmpty(attributes)){
+			lines = addImport(lines,aClass, JMap.class);
+			// adds of the target classes import
+			lines = addTargetClassesImport(lines, attributes,aClass);
+		}
+		
+		if(global != null)
+			lines = addImport(lines,aClass, JGlobalMap.class);
 		
 		for (String line : lines) {
 			
 			// If the class declaration has been found
-			if(containsAll(line, classIdentifier))
+			if(containsAll(line, classIdentifier)){
+				// adds the annotation to class
+				if(global != null)
+					linesToWrite.add(toAnnotation(global));
 				classFound = true;
+			}
 			
 			
-			if(classFound && attributes.size() > 0){
+			if(classFound && !isEmpty(attributes)){
 				Attribute remove = null;
 				for (Attribute attribute : attributes) {
 					String name = attribute.getName();
@@ -131,6 +144,60 @@ public class FilesManager {
 	}
 	
 	/**
+	 * This method transforms an Global in an annotation in String format.
+	 * @param global Global mapping to trasform
+	 * @return an annotation in String format
+	 */
+	private static String toAnnotation(Global global){
+		boolean before = false;
+		StringBuilder str = new StringBuilder("@JGlobalMap(");
+		if(global.getValue()!=null){
+			str.append("value=\""+global.getValue()+"\"");
+			before = true;
+		}
+		
+		String[] attributes = global.getAttributes();
+		if(attributes!=null){
+			if(before)str.append(", ");
+			else before = true;
+			str.append("attributes={");
+			for (int i = 0; i < attributes.length; i++) {
+				str.append("\""+attributes[i]+"\"");
+				if(i<attributes.length-1)str.append(", ");
+			}
+			str.append("}");
+		}
+					
+		Class<?>[] classes = global.getClasses();
+		if(classes!=null){
+			if(before)str.append(", ");
+			else before = true;
+			str.append("classes={");
+			for (int i = 0; i < classes.length; i++) {
+				str.append(classes[i].getSimpleName()+".class");
+				if(i<classes.length-1)str.append(", ");
+			}
+			str.append("}");
+		}
+		
+		String[] excluded = global.getExcluded();
+		if(excluded!=null){
+			if(before)str.append(", ");
+			str.append("excluded={");
+			for (int i = 0; i < excluded.length; i++) {
+				str.append("\""+excluded[i]+"\"");
+				if(i<excluded.length-1)str.append(", ");
+			}
+			str.append("}");
+		}
+			
+		str.append(")");
+		// If the brackets are empty, returns @JMap
+		if("@JGlobalMap()".equals(str.toString()))return "@JGlobalMap";
+		return str.toString();
+	}
+	
+	/**
 	 * This method transforms an Attribute in an annotation in String format.
 	 * @param attribute Attribute to trasform
 	 * @return an annotation in String format
@@ -142,6 +209,7 @@ public class FilesManager {
 			str.append("value=\""+attribute.getValue()+"\"");
 			before = true;
 		}
+		
 		String[] attributes = attribute.getAttributes();
 		if(attributes!=null){
 			if(before)str.append(", ");
@@ -225,7 +293,7 @@ public class FilesManager {
 	}
 	
 	/**
-	 * This method rewrite the file without JMap annotations.
+	 * This method rewrite the file without annotations.
 	 * @param file file to rewrite
 	 * @param aClass Class that represent the file
 	 * @param cleanAll true if all annotation should be delete, false otherwise
@@ -249,6 +317,8 @@ public class FilesManager {
 		String[] classIdentifier = new String[]{"class","{",aClass.getSimpleName()};
 		// lines to write
 		List<String> linesToWrite = new ArrayList<String>();
+		// previous line
+		String previousLine = "|insignifant value|";
 		// true if lines belong to aClass
 		boolean classFound = false;
 		// true if annotation is written on more lines
@@ -259,15 +329,41 @@ public class FilesManager {
 		for (String line : readFile(file)) {
 
 			// If the class declaration has been found
-			if(containsAll(line, classIdentifier))
+			if(containsAll(line, classIdentifier)){
 				classFound = true;
+			}
 			
-			// if line contains JMap declaration or JMap configuration is written on more lines
-			if(isToClean(line) || moreLines){
+			// if line contains JGlobalMap configuration or if this annotation is written on more lines
+			if(globalToClean(line) || globalToClean(previousLine) || moreLines){
+				
+				if(cleanAll || classFound){
+					HashMap<String,Object> cleanLine = cleanLine(previousLine,moreLines,JGlobalMap.class);
+					boolean newLine = (Boolean) cleanLine.get("newLine");
+					String result = (String) cleanLine.get("result");
+					
+					if(result != null)
+						linesToWrite.add(result);
+					
+					previousLine = line;
+					moreLines = newLine;
+					if(!newLine) linesToWrite.add(line);
+					continue;
+				}
+				if(globalToClean(previousLine) && !globalToClean(line) && !classFound){
+					linesToWrite.add(previousLine);
+					linesToWrite.add(line);
+					continue;
+				}
+				previousLine = line;
+				continue;
+			}
+			
+			// if line contains JMap configuration or if this annotation is written on more lines
+			if(attributeToClean(line) || moreLines){
 				
 				if(cleanAll || (classFound && annotatedFields > 0)){
 					
-					HashMap<String,Object> cleanLine = cleanLine(line,moreLines);
+					HashMap<String,Object> cleanLine = cleanLine(line,moreLines,JMap.class);
 					boolean newLine = (Boolean) cleanLine.get("newLine");
 					String result = (String) cleanLine.get("result");
 					
@@ -275,7 +371,7 @@ public class FilesManager {
 						linesToWrite.add(result);
 					
 					moreLines = newLine;
-					// coundown is done when we need to clean specific fields
+					// countdown is done when we need to clean specific fields
 					if(!cleanAll && !moreLines && !newLine)annotatedFields--;
 					continue;
 				}
@@ -295,9 +391,10 @@ public class FilesManager {
 	 * This method clean line from annotation.
 	 * @param line line to clean
 	 * @param moreLines true if annotation is written on more lines
+	 * @annotation annotation to remove
 	 * @return an HashMap with two variables: newLine and result
 	 */
-	private static HashMap<String, Object> cleanLine(String line,boolean moreLines){
+	private static HashMap<String, Object> cleanLine(String line,boolean moreLines, Class<?> annotation){
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("newLine", moreLines);
 		map.put("result", null);
@@ -314,7 +411,7 @@ public class FilesManager {
 		}
 		
 		// cleans the line from the annotation
-		String result = subtractJMap(line);
+		String result = subtractAnnotation(line, annotation);
 		// if the line ends with "newLine" the annotation is written on more lines
 		if(result.endsWith("newLine")){
 			map.put("newLine", true);
@@ -326,14 +423,23 @@ public class FilesManager {
 	
 	/**
 	 * @param line line to analyze
-	 * @return true if the line is to clean, false otherwise
+	 * @return true if the line contains a JMap configuration, false otherwise
 	 */
-	private static boolean isToClean(String line){
-		String annotation = "@"+JMap.class.getSimpleName();
-		if(!line.contains(annotation))return false;
+	private static boolean attributeToClean(String line){
+		String jmap = "@"+JMap.class.getSimpleName();
+		if(!line.contains(jmap))return false;
 		return true;
 	}
 
+	/**
+	 * @param line line to analyze
+	 * @return true if the line contains a JGlobalMap configuration, false otherwise
+	 */
+	private static boolean globalToClean(String line){
+		String jglobalmap = "@"+JGlobalMap.class.getSimpleName();
+		if(!line.contains(jglobalmap))return false;
+		return true;
+	}
 	/**
 	 * @param line
 	 * @return a String that contains "newLine" if annotation is written on more lines
@@ -348,10 +454,11 @@ public class FilesManager {
 	/**
 	 * It cleans line from annotation.
 	 * @param line line to analyze
+	 * @param annotation annotation to remove
 	 * @return the line cleaned
 	 */
-	private static String subtractJMap(String line){
-		String jmap = "@"+JMap.class.getSimpleName();
+	private static String subtractAnnotation(String line, Class<?> annotation){
+		String jmap = "@"+annotation.getSimpleName();
 		
 		String result = "";
 		int jmapBegin = line.indexOf(jmap);
@@ -440,17 +547,18 @@ public class FilesManager {
 	 * Adds JMap import to the lines.
 	 * @param lines lines to analyze
 	 * @param aClass Class in question
+	 * @param classToImport class to import
 	 * @return lines enriched
 	 */
-	private static List<String> addJMapImport(List<String> lines,Class<?> aClass){
+	private static List<String> addImport(List<String> lines,Class<?> aClass, Class<?> classToImport){
 
-		if(existImport(lines, JMap.class)) return lines;
+		if(existImport(lines, classToImport)) return lines;
 		
 		List<String> result = new ArrayList<String>();
 		for (String line : lines) {
 			result.add(line);
 			if(!packageFound(line,aClass))continue;
-			result.add("import "+JMap.class.getName()+";");
+			result.add("import "+classToImport.getName()+";");
 		}
 		return result;
 	}
@@ -474,25 +582,29 @@ public class FilesManager {
 	 */
 	private static List<String> deleteImport(List<String> lines){
 		
-		String[] importToDelete = new String[]{"import",JMap.class.getName()+";"};
+		List<String> result = deleteSpecificImport(lines, JMap.class);
+		return deleteSpecificImport(result, JGlobalMap.class);
+		
+	}
+	
+	private static List<String> deleteSpecificImport(List<String> lines, Class<?> annotation){
+		
+		String[] annImport = {"import", annotation.getName()+";"};
 		
 		// verifies the annotation presence
 		boolean isAnnotated = false;
 		for (String line : lines) 
-			if(line.contains("@"+JMap.class.getSimpleName()))
-					isAnnotated = true;
-		
-		// if the class is not annotated, the JMap import will be removed
+			if(line.contains("@"+annotation.getSimpleName()))
+				isAnnotated = true;
+				
+		// if the class is not annotated, the annotations import will be removed
 		if(!isAnnotated){
 			List<String> result = new ArrayList<String>();
 			for (String line : lines) 
-				if(!containsAll(line, importToDelete))
-					result.add(line);
-					
-			return result;
+				if(!containsAll(line, annImport)) result.add(line);
+					return result;
 		}else
 			return lines;
-				
 	}
 	
 	/**
@@ -648,12 +760,15 @@ public class FilesManager {
 		// true if lines belong to aClass
 		boolean classFound = false;
 				
+		String previuosLine = "";
 		for (String line : readFile(file)){
 			// If the class declaration has been found
 			if(containsAll(line, classIdentifier))
 					classFound = true;
-						
-			if(classFound && line.contains("@JMap"))return true;
+
+			if(classFound && 
+			  (previuosLine.contains("@JGlobalMap") || line.contains("@JMap")))return true;
+			previuosLine = line;
 		}
 		return false;
 	}
@@ -664,7 +779,9 @@ public class FilesManager {
 	 * @throws IOException
 	 */
 	private static boolean isFileAnnotated(File file) throws IOException{
-		for (String line : readFile(file))if(line.contains("@JMap"))return true;
+		for (String line : readFile(file))
+			if(line.contains("@JMap") || line.contains("@JGlobalMap"))
+				return true;
 		return false;
 	}
 	

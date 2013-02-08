@@ -41,7 +41,7 @@ public class OperationFactory {
 	/**
 	 * For an instruction type returns an operation.
 	 * @param instructionType
-	 * @return
+	 * @return a new instance of AGeneralOperation
 	 */
 	public static AGeneralOperation getOperation(OperationType instructionType){
 		switch(instructionType){

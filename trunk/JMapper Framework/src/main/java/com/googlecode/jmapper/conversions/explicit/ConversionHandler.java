@@ -36,7 +36,7 @@ import java.util.Map.Entry;
 import com.googlecode.jmapper.enums.ConfigurationType;
 import com.googlecode.jmapper.enums.Membership;
 import com.googlecode.jmapper.generation.beans.Method;
-import com.googlecode.jmapper.util.XML;
+import com.googlecode.jmapper.xml.XML;
 
 /**
  * Conversion Handler transforms the defined conversion method in the final method, 
