@@ -2,7 +2,7 @@
 
 = In the next release =
 
-1.2.0 version is scheduled for the first week of February.
+1.2.0 version is scheduled for the last week of February.
 
 == Global Mapping ==
   
