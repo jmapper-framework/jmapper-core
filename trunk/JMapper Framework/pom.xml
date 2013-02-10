@@ -19,7 +19,7 @@
   apply a specific logic to the mapping (only valued fields, only null fields, etc..),
   automated management of the XML file,
   possibility of implementing the 1 to N and N to 1 relationships,
-  define explicit conversions, 
+  define explicit conversions,
   define inherited configurations,
   </description>
   
