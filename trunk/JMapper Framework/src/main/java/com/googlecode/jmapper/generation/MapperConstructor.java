@@ -79,9 +79,10 @@ public class MapperConstructor {
 
 	/** mapper name */
 	private String mapperName;
+	
 	/**
 	 * This method adds the Null Pointer Control to mapping created by the mapping method.
-	 * wrappedMapping is used to wrap the mapping returned by mapping method. 
+	 * wrapMapping is used to wrap the mapping returned by mapping method. 
 	 * 
 	 * @param makeDest true if destination is a new instance, false otherwise
 	 * @param npc a NullPointerControl chosen
