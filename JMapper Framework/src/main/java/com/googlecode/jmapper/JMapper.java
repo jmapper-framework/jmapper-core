@@ -25,8 +25,6 @@ import com.googlecode.jmapper.generation.MapperBuilder;
 import javassist.NotFoundException;
 
 
-//TODO Wiki --> creare sezione basic mapping, mettendo @JMap e xml a confronto
-//TODO Wiki --> aggiungere sezione global mapping, mettendo @JMap e xml a confronto
 /**
  * JMapper takes as input two classes, Destination and Source.<br>
  * For Destination, we mean the instance that will be created or enhanced.<br>
