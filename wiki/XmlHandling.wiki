@@ -27,7 +27,7 @@ Most of its methods use two java beans: *{{{Attribute}}}* and *{{{Global}}}*:
                // getters and setters...            // getters and setters
          }                                      }
 }}}
-The Attribute reflects the parameters of the @JMap annotation plus a string: name, the name of the current attribute.
+The Attribute reflects the parameters of the @JMap annotation plus a string: name, the name of the current attribute.<br> The Global reflects the parameters of the @JGlobalMap annotation.
 
 
 === addAttributes ===
@@ -38,13 +38,40 @@ addAttributes lets you add one or more attributes to an existing class, in the x
          Class<?>[]  classes = {Class1.class,Class2.class,Class3.class};
          Attribute attribute = new Attribute("field2", attributes, classes);
 
-         xmlHandler.addAttributes(AnnotatedClass.class, attribute);
+         xmlHandler.addAttributes(MyClass.class, attribute);
 }}}
 === deleteAttributes ===
 
 deleteAttributes eliminates attributes related to a class, specifying their names.
 {{{
          xmlHandler.deleteAttributes(AnnotatedClass.class, "field2");
+}}}
+=== addGlobal ===
+
+addGlobal lets you add the global mapping to an existing class, in the xml configuration file.
+{{{
+         String[] excluded = {"field2Class1","field2Class2"};
+         Class<?>[]  classes = {Class1.class,Class2.class,Class3.class};
+         Global global = new Global("field2", classes, excluded);
+
+         xmlHandler.addGlobal(MyClass.class, global);
+}}}
+=== deleteGlobal ===
+
+deleteGlobal eliminates the global configuration related to a class.
+{{{
+         xmlHandler.deleteGlobal(MyClass.class);
+}}}
+
+=== overrideGlobal ===
+
+overrideGlobal lets you to override the global mapping to an existing class, in the xml configuration file.
+{{{
+         String[] excluded = {"field2Class1","field2Class2"};
+         Class<?>[]  classes = {Class1.class,Class2.class,Class3.class};
+         Global global = new Global("field2", classes, excluded);
+
+         xmlHandler.overrideGlobal(MyClass.class, global);
 }}}
 === addClass ===
 
