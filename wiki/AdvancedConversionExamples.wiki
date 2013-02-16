@@ -10,10 +10,11 @@ Furthermore, the possibility to outsource the xml, permits to make changes witho
 This example shows the use of static conversions.
 We want transform Strings to Dates.
 {{{
+@JGlobalMap
 class Dates {                 class Strings{
 
-   @JMap Date startDate;         String startDate;
-   @JMap Date endDate;           String endDate; 
+   Date startDate;         String startDate;
+   Date endDate;           String endDate; 
 
    // getters and setters..      // getters and setters..
 }                             }
@@ -64,24 +65,21 @@ label = dynamic conversion test
 }}}
 java beans:
 {{{
-class Destination{             class Source{
+@JGlobalMap("properties")
+class Destination{                 class Source{
 
-  @JMap("properties")
-  private String author;         private Properties properties;
-  @JMap("properties")
-  private String framework;      @JMapConversion(from={"properties"}, type=Type.DYNAMIC)
-  @JMap("properties")	         public static String conversion(){
-  private String version;           return "return (String) ${source}.get(\"${destination.name}\");"; 
-  @JMap("properties")            } 
-  private String label;        
+  private String author;               private Properties properties;
+  private String framework;      
+  private String version;              @JMapConversion(from={"properties"}, type=Type.DYNAMIC)
+  private String label;                  public static String conversion(){
+                                                       return "return (String) ${source}.get(\"${destination.name}\");"; 
+                                                  } 
 
-  // getters and setters...      // getter and setter...
+  // getters and setters...           // getter and setter...
        				          					     
-}			       }
+}			                    }
 }}}
-_@JMap allows you to configure a field with only another and not simultaneously with more fields.<br>For this reason we have configured the  Destination fields in direction to the Source field._
-
-_For this purpose will be introduced the @JMultiMap soon._
+_@JMap allows you to configure a field with only another and not simultaneously with more fields.<br>For this reason we have configured the  Destination with JGlobalMap in direction to the Source field._
 
 Methods created at runtime:
 {{{
@@ -146,24 +144,12 @@ XML configuration:
 {{{
 <jmapper>
   <class name="com.application.Destination">
-    <attribute name="id">
+    <global>
       <value name="map"/>
       <classes>
          <class name="com.application.Source"/>
-      </classes>
-    </attribute>
-    <attribute name="quantity">
-      <value name="map"/>
-      <classes>
-         <class name="com.application.Source"/>
-      </classes>
-    </attribute>
-    <attribute name="purchase">
-      <value name="map"/>
-      <classes>
-         <class name="com.application.Source"/>
-      </classes>
-    </attribute>
+      </classes>     
+    </global>
     <conversion name="fromMapToAll" from="map" type="DYNAMIC">
 	    return (${destination.type}) ${source}.get("${destination.name}");
     </conversion>
