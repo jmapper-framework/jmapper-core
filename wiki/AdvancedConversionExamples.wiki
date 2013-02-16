@@ -16,7 +16,7 @@ class Dates {                       class Strings{
    Date startDate;                   String startDate;
    Date endDate;                     String endDate; 
 
-   // getters and setters..       // getters and setters..
+   // getters and setters..            // getters and setters..
 }                                    }
 }}}
 XML configuration:
