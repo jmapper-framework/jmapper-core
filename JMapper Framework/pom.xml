@@ -85,7 +85,7 @@
 	          <artifactId>maven-release-plugin</artifactId>
 	          <configuration>
 	            <tagBase>https://jmapper-framework.googlecode.com/svn/tags</tagBase>
-	            <remoteTagging>true</remoteTagging>
+	            <remoteTagging>false</remoteTagging>
 	          </configuration>
 	        </plugin> 
             <plugin>
