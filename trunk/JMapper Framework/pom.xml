@@ -103,6 +103,24 @@
 			    </dependency>
 			  </dependencies>
 	        </plugin>
+	        <plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-scm-plugin</artifactId>
+			    <version>1.3</version>
+			    <configuration>
+			        <providerImplementations>
+			            <svn>javasvn</svn>
+			        </providerImplementations>
+			    </configuration>
+			    <dependencies>
+			        <dependency>
+			            <groupId>com.google.code.maven-scm-provider-svnjava</groupId>
+			            <artifactId>maven-scm-provider-svnjava</artifactId>
+			            <version>1.9</version>
+			        </dependency>
+			    </dependencies>
+			</plugin>
+			<!-- end of Mac os x setting -->
             <plugin>
 			  <groupId>org.apache.maven.plugins</groupId>
 			  <artifactId>maven-compiler-plugin</artifactId>
