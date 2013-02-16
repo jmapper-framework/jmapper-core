@@ -1,8 +1,8 @@
  * JMapper Framework
    * [Introduction Introduction]
    * How to map
-     *[basicMapping Basic Mapping]
-     *[globalMapping Global Mapping]
+     *[BasicMapping Basic Mapping]
+     *[GlobalMapping Global Mapping]
    * [XmlConfiguration XML format]
    * [XmlHandling Xml handling]
    * Relations
