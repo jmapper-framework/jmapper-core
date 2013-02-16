@@ -3,7 +3,6 @@
    * How to map
      * [basicMapping Basic Mapping]
      * [globalMapping Global Mapping]
-   * [XmlConfiguration XML format]
    * [XmlHandling Xml handling]
    * Relations
      * [ImplicitRelations Implicit relations]
