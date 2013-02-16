@@ -72,8 +72,8 @@ class Destination{                 class Source{
   private String framework;      
   private String version;              @JMapConversion(from={"properties"}, type=Type.DYNAMIC)
   private String label;                  public static String conversion(){
-                                                       return "return (String) ${source}.get(\"${destination.name}\");"; 
-                                                  } 
+                                                       return "return (String) ${source}.get(\"${destination.name}\");";
+                                                  }
 
   // getters and setters...           // getter and setter...
        				          					     
