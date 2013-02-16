@@ -1,5 +1,15 @@
 = Release Notes =
 
+== 1.2.0 - 16 February 2013 ==
+
+*[globalMapping Global Mapping]* added.<br/>This feature permits to apply a global mapping avoiding configuration redundancy.
+
+*Packaging renamed*.<br/>
+The package names will be changed from it.avutils.* to com.googlecode.*
+
+*Maven pom adjustment*.<br/>
+Some dependencies will be deleted as redundant.
+
 == 1.1.1 - 9 January 2013 ==
 
 With this released the features added are:
