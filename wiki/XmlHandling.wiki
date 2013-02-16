@@ -15,17 +15,17 @@ The empty constructor defines a jmapper.xml file positioned at the application r
 == Methods ==
 
 {{{XmlHandler}}} has a number of utility methods.
-Most of its methods use a java bean *{{{Attribute}}}*:
+Most of its methods use two java beans: *{{{Attribute}}}* and *{{{Global}}}*:
 {{{
-         class Attribute {
+         class Attribute {                      class Global {
 
-               String name;
-               String value;
-               String[] attributes;
-               Class<?>[] classes;
+               String name;                           String value;
+               String value;                           String[] attributes;
+               String[] attributes;                  Class<?>[] classes;
+               Class<?>[] classes;                 String[] excluded; 
     
-               // getters and setters...
-         }
+               // getters and setters...          // getters and setters
+         }                                             }
 }}}
 The Attribute reflects the parameters of the @JMap annotation plus a string: name, the name of the current attribute.
 
