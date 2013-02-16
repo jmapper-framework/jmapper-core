@@ -11,13 +11,13 @@ This example shows the use of static conversions.
 We want transform Strings to Dates.
 {{{
 @JGlobalMap
-class Dates {                 class Strings{
+class Dates {                       class Strings{
 
-   Date startDate;         String startDate;
-   Date endDate;           String endDate; 
+   Date startDate;                   String startDate;
+   Date endDate;                    String endDate; 
 
    // getters and setters..      // getters and setters..
-}                             }
+}                                         }
 }}}
 XML configuration:
 {{{
