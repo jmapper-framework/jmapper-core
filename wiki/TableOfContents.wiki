@@ -1,6 +1,6 @@
  * JMapper Framework
    * [Introduction Introduction]
-   * [How to map]
+   * How to map
      *[basicMapping Basic Mapping]
      *[globalMapping Global Mapping]
    * [XmlConfiguration XML format]
