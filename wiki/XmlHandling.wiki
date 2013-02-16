@@ -20,9 +20,9 @@ Most of its methods use two java beans: *{{{Attribute}}}* and *{{{Global}}}*:
          class Attribute {                      class Global {
 
                String name;                         String value;
-               String value;                         String[] attributes;
+               String value;                        String[] attributes;
                String[] attributes;                 Class<?>[] classes;
-               Class<?>[] classes;                 String[] excluded; 
+               Class<?>[] classes;                  String[] excluded; 
     
                // getters and setters...          // getters and setters
          }                                             }
