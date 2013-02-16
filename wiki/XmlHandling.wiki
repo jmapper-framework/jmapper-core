@@ -44,7 +44,7 @@ addAttributes lets you add one or more attributes to an existing class, in the x
 
 deleteAttributes eliminates attributes related to a class, specifying their names.
 {{{
-         xmlHandler.deleteAttributes(AnnotatedClass.class, "field2");
+         xmlHandler.deleteAttributes(MyClass.class, "field2");
 }}}
 === addGlobal ===
 
@@ -81,14 +81,14 @@ addClass allows you to add, into the file configuration, the class passed in inp
          Class<?>[]  classes = {Class1.class,Class2.class,Class3.class};
          Attribute attribute = new Attribute("field2", attributes, classes);
 
-         xmlHandler.addClass(AnnotatedClass.class, attribute);
+         xmlHandler.addClass(MyClass.class, attribute);
 }}}
 
 === deleteClass ===
 
 deleteClass eliminates a class.
 {{{
-         xmlHandler.deleteClass(AnnotatedClass.class);
+         xmlHandler.deleteClass(MyClass.class);
 }}}
 
 === overrideClass ===
@@ -99,7 +99,7 @@ Override the class replacing attributes with those passed to the method.
          Class<?>[]  classes = {Class1.class,Class2.class,Class3.class};
          Attribute attribute = new Attribute("field1", attributes, classes);
 
-         xmlHandler.overrideClass(AnnotatedClass.class, attribute);
+         xmlHandler.overrideClass(MyClass.class, attribute);
 }}}
 
 === addAnnotatedClass ===
