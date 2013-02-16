@@ -21,7 +21,7 @@ The following will be exhibited various combinations allowed in both modes.
 
 the parameter value permits to define the target field name.
 
-=== Annotation ===
+==== in Annotation ====
 
 Value is the default parameter for the annotation that you may omit to write, if used alone.
 {{{
@@ -33,7 +33,7 @@ class MyClass {
 }
 }}}
 
-=== Xml ===
+==== in Xml ====
 
 The equivalent configuration in xml is:
 {{{
@@ -54,7 +54,7 @@ This is useful when you want associate a field with many other that belong to di
 This configuration may lead to undesirable results in the case there are multiple matches between the identifiers declared in attributes and the fields of the target class, in this case JMapper considers valid the first field that respects the correspondence.<br>
 This use is recommended only if you are certain of the uniqueness of the identifiers defined.<br>
 
-=== Annotation ===
+==== in Annotation ====
 
 {{{
 class MyClass {
@@ -91,7 +91,7 @@ Destination[dField3=null, dField2=null, dField1="sField1"]
 }}}
 The first field of Destination that respects the correspondence is dField1.
 
-=== Xml ===
+==== in Xml ====
 
 The equivalent configuration in xml is:
 {{{
@@ -111,7 +111,7 @@ The equivalent configuration in xml is:
 
 Classes is used when you want to limit the association to a defined set of classes, without value and attributes, you indicates to JMapper that the identifier of target field is the same of mapped field.
 
-=== Annotation ===
+==== in Annotation ====
 
 {{{
 class MyClass {
@@ -140,7 +140,7 @@ Output:
 "JMapper AbsentRelationshipException: there isn't relationship between Target4 Class and Source Class"
 }}}
 
-=== Xml ===
+==== in Xml ====
 
 The equivalent configuration in xml is:
 {{{
@@ -161,7 +161,7 @@ The equivalent configuration in xml is:
 
 This combination allows you to limit the association between the mapped field and the target field to a defined set of classes, declaring the target field name.
 
-=== Annotation ===
+==== in Annotation ====
 
 {{{
 class MyClass {
@@ -172,7 +172,7 @@ class MyClass {
 }
 }}}
 
-=== Xml ===
+==== in Xml ====
 
 The equivalent configuration in xml is:
 {{{
@@ -194,7 +194,7 @@ The equivalent configuration in xml is:
 
 To clarify the association between the mapped field and other fields belonging to different classes, you can simply make a joint use of attributes and classes.
 
-=== Annotation ===
+==== in Annotation ====
 
 {{{
 class MyClass {
@@ -211,7 +211,7 @@ The equality of the mapped field and the target field can be specified with an e
          classes = {Source1.class, Source2.class, Source3.class})
 }}}
 
-=== Xml ===
+==== in Xml ====
 
 The equivalent configuration in xml is:
 {{{
