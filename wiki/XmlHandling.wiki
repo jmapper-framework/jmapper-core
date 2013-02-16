@@ -25,7 +25,7 @@ Most of its methods use two java beans: *{{{Attribute}}}* and *{{{Global}}}*:
                Class<?>[] classes;                  String[] excluded; 
     
                // getters and setters...            // getters and setters
-         }                                       }
+         }                                      }
 }}}
 The Attribute reflects the parameters of the @JMap annotation plus a string: name, the name of the current attribute.
 
