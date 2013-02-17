@@ -123,7 +123,8 @@ Override the class replacing the actual configuration with a new one given as in
 	 // or
          xmlHandler.overrideClass(MyClass.class, global);
          // or
-         xmlHandler.overrideClass(MyClass.class, global, attribute);}}}
+         xmlHandler.overrideClass(MyClass.class, global, attribute);
+}}}
 
 === addAnnotatedClass ===
 
