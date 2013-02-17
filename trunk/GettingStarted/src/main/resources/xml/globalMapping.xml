@@ -1,0 +1,12 @@
+<jmapper>
+  <class name="com.googlecode.jmapper.bean.GlobalD">
+    <global>
+    	<value name="properties"/>
+    </global>
+  </class>
+  <class name="com.googlecode.jmapper.bean.GlobalS">
+    <conversion name="conversion" from="properties" type="dynamic">
+    	return ((String) ${source}.get("${destination.name}")) + " XML";
+    </conversion>
+  </class>
+</jmapper>

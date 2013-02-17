@@ -1,0 +1,15 @@
+<jmapper>
+  <class name="com.googlecode.jmapper.bean.StaticD">
+    <attribute name="startDate">
+      <value name="startDate"/>
+    </attribute>
+    <attribute name="endDate">
+      <value name="endDate"/>
+    </attribute>
+  </class>
+  <class name="com.googlecode.jmapper.bean.StaticS">
+    <conversion name="toDate">
+    	return new java.text.SimpleDateFormat("MM/dd/yyyy").parse(${source});
+    </conversion>
+  </class>
+</jmapper>
