@@ -1,10 +1,12 @@
 package com.googlecode.jmapper.integrationtest.application;
 
-import it.avutils.jar.example.JarTest;
-import it.avutils.jar.example.bean.Destination;
-import it.avutils.jar.example.bean.Source;
-import it.avutils.jar.example.bean.Source2;
-import it.avutils.jar.example.bean.Source3;
+import junit.framework.TestCase;
+
+import org.apache.log4j.PropertyConfigurator;
+
+import com.googlecode.jmapper.JMapper;
+import com.googlecode.jmapper.enums.MappingType;
+import com.googlecode.jmapper.enums.NullPointerControl;
 import com.googlecode.jmapper.integrationtest.application.bean.Child1;
 import com.googlecode.jmapper.integrationtest.application.bean.Child2;
 import com.googlecode.jmapper.integrationtest.application.bean.ChildConversion;
@@ -15,13 +17,6 @@ import com.googlecode.jmapper.integrationtest.application.bean.Dest;
 import com.googlecode.jmapper.integrationtest.application.bean.Sour;
 import com.googlecode.jmapper.integrationtest.application.bean.Target1;
 import com.googlecode.jmapper.integrationtest.application.bean.Target2;
-import junit.framework.TestCase;
-
-import org.apache.log4j.PropertyConfigurator;
-
-import com.googlecode.jmapper.JMapper;
-import com.googlecode.jmapper.enums.MappingType;
-import com.googlecode.jmapper.enums.NullPointerControl;
 
 public class JMapperTest extends TestCase {
 
@@ -50,22 +45,6 @@ public class JMapperTest extends TestCase {
 		Dest dest = mapper.getDestination(source, NullPointerControl.SOURCE, MappingType.ALL_FIELDS);
 		
 		assertNull(dest);
-	}
-	
-	public void testJMapperWithXML(){
-		JarTest jar = new JarTest();
-		
-		Destination actual = jar.executeMapping(new Source("sourceField","sourceField2","sourceField3"));
-		Destination expected = new Destination("sourceField","sourceField2",null);
-		assertEquals(expected, actual);
-		
-		actual = jar.executeMapping2(new Source2("sourceField","sourceField2","sourceField3"));
-		expected = new Destination(null,"sourceField2","sourceField3");
-		assertEquals(expected, actual);
-
-		actual = jar.executeMapping3(new Source3("sourceField","sourceField2","sourceField3"));
-		expected = new Destination("sourceField",null,"sourceField3");
-		assertEquals(expected, actual);
 	}
 	
 	public void testAttributes(){

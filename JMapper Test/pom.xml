@@ -40,12 +40,6 @@
 	</dependency>
 	
     <dependency> 
-      	<groupId>com.googlecode.jmapper-framework</groupId>
-      	<artifactId>jmapper-jarTest</artifactId>
-      	<version>1.1.2</version>
-    </dependency>
-    
-    <dependency> 
       	<groupId>com.googlecode.performance</groupId>
       	<artifactId>bb</artifactId>
       	<version>1.0.0</version>
