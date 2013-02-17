@@ -23,4 +23,6 @@ Le dipendenze:
 vanno installate, i jar sono scaricabili dal sito:
 http://www.ellipticgroup.com/html/benchmarkingArticle.html
 
-Molti test fanno riferimento al sistema operativo e potrebbero fallire, vanno riadattati.
+Alcuni test fanno riferimento al sistema operativo e potrebbero fallire, vanno riadattati, lo scopo è verificare
+il recupero delle risorse in vari contesti.
+
