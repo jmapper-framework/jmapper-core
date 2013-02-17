@@ -15,24 +15,25 @@ The empty constructor defines a jmapper.xml file positioned at the application r
 == Methods ==
 
 {{{XmlHandler}}} has a number of utility methods.
-Most of its methods use two java beans: *{{{Attribute}}}* and *{{{Global}}}*:
+Most of its methods use two javaBean: *{{{Attribute}}}* and *{{{Global}}}*:
 {{{
-         class Attribute {                      class Global {
+         class Attribute {                  class Global {
 
-               String name;                         String value;
-               String value;                        String[] attributes;
-               String[] attributes;                 Class<?>[] classes;
-               Class<?>[] classes;                  String[] excluded; 
+               String name;                       String value;
+               String value;                      String[] attributes;
+               String[] attributes;               Class<?>[] classes;
+               Class<?>[] classes;                String[] excluded;
     
-               // getters and setters...            // getters and setters
-         }                                      }
+               // getters and setters...          // getters and setters...
+         }                                  }
 }}}
-The Attribute reflects the parameters of the @JMap annotation plus a string: name, the name of the current attribute.<br> The Global reflects the parameters of the @JGlobalMap annotation.
+The Attribute class reflects the parameters of the @JMap annotation plus a string: name, the name of the current attribute.<br>
+The Global class reflects the parameters of the @JGlobalMap.
 
 
 === addAttributes ===
 
-addAttributes lets you add one or more attributes to an existing class, in the xml configuration file.
+addAttributes lets you to add one or more attributes in a class that is present in the xml configuration file.
 {{{
          String[] attributes = {"field2Class1","field2Class2","field2Class3"};
          Class<?>[]  classes = {Class1.class,Class2.class,Class3.class};
@@ -40,71 +41,93 @@ addAttributes lets you add one or more attributes to an existing class, in the x
 
          xmlHandler.addAttributes(MyClass.class, attribute);
 }}}
+
 === deleteAttributes ===
 
-deleteAttributes eliminates attributes related to a class, specifying their names.
+deleteAttributes eliminates attributes related to an existing class specifying their names.
 {{{
          xmlHandler.deleteAttributes(MyClass.class, "field2");
 }}}
+
 === addGlobal ===
 
-addGlobal lets you add the global mapping to an existing class, in the xml configuration file.
+addGlobal permits to add a global mapping in a class that is present in the xml configuration file.
 {{{
-         String[] excluded = {"field2Class1","field2Class2"};
-         Class<?>[]  classes = {Class1.class,Class2.class,Class3.class};
-         Global global = new Global("field2", classes, excluded);
-
+         String[] excluded = {"field1Class1","field1Class2","field1Class3"};
+	 Class<?>[]  globalClasses = {Class1.class,Class2.class,Class3.class};
+	 Global global = new Global("globalMapping", globalClasses, excluded);
+	
          xmlHandler.addGlobal(MyClass.class, global);
 }}}
+
 === deleteGlobal ===
 
-deleteGlobal eliminates the global configuration related to a class.
+deleteGlobal eliminates the global mapping related to an existing class specifying class name.
 {{{
          xmlHandler.deleteGlobal(MyClass.class);
 }}}
 
 === overrideGlobal ===
 
-overrideGlobal lets you to override the global mapping to an existing class, in the xml configuration file.
+overrideGlobal allows you to override an existing global mapping specifying the class name.
 {{{
-         String[] excluded = {"field2Class1","field2Class2"};
-         Class<?>[]  classes = {Class1.class,Class2.class,Class3.class};
-         Global global = new Global("field2", classes, excluded);
-
+         String[] excluded = {"field1Class1","field1Class2","field1Class3"};
+	 Class<?>[]  globalClasses = {Class1.class,Class2.class,Class3.class};
+	 Global global = new Global("globalMapping", globalClasses, excluded);
+	
          xmlHandler.overrideGlobal(MyClass.class, global);
 }}}
+
+
 === addClass ===
 
-addClass allows you to add, into the file configuration, the class passed in input, it's also necessary  passing at least one attribute.
+addClass allows you to add, into the file configuration, the class passed in input.<br>
+There are many signatures of this method:
 {{{
          String[] attributes = {"field2Class1","field2Class2","field2Class3"};
          Class<?>[]  classes = {Class1.class,Class2.class,Class3.class};
          Attribute attribute = new Attribute("field2", attributes, classes);
 
+	 String[] excluded = {"field1Class1","field1Class2","field1Class3"};
+	 Class<?>[]  globalClasses = {Class1.class,Class2.class,Class3.class};
+	 Global global = new Global("globalMapping", globalClasses, excluded);
+		
          xmlHandler.addClass(MyClass.class, attribute);
+	 // or
+         xmlHandler.addClass(MyClass.class, global);
+         // or
+         xmlHandler.addClass(MyClass.class, global, attribute);
+
 }}}
 
 === deleteClass ===
 
-deleteClass eliminates a class.
+Deletes a class present in the Xml file.
 {{{
          xmlHandler.deleteClass(MyClass.class);
 }}}
 
 === overrideClass ===
 
-Override the class replacing attributes with those passed to the method.
+Override the class replacing the actual configuration with a new one given as input.
 {{{
-         String[] attributes = {"field1Class1","field1Class2","field1Class3"};
+         String[] attributes = {"field2Class1","field2Class2","field2Class3"};
          Class<?>[]  classes = {Class1.class,Class2.class,Class3.class};
-         Attribute attribute = new Attribute("field1", attributes, classes);
+         Attribute attribute = new Attribute("field2", attributes, classes);
 
+	 String[] excluded = {"field1Class1","field1Class2","field1Class3"};
+	 Class<?>[]  globalClasses = {Class1.class,Class2.class,Class3.class};
+	 Global global = new Global("globalMapping", globalClasses, excluded);
+		
          xmlHandler.overrideClass(MyClass.class, attribute);
-}}}
+	 // or
+         xmlHandler.overrideClass(MyClass.class, global);
+         // or
+         xmlHandler.overrideClass(MyClass.class, global, attribute);}}}
 
 === addAnnotatedClass ===
 
-addAnnotatedClass allows you to add in the xml configuration file to one or more classes annotated passed as input to the method, not specifying any class the same will be done for all classes configured with annotation.
+addAnnotatedClass allows you to add in the xml configuration file to one or more classes annotated passed as input to the method, not specifying any class the same will be done for all classes configured with annotation ({{{xmlHandler.addAnnotatedClass()}}}).
 {{{
          xmlHandler.addAnnotatedClass(AnnotatedClass.class);
 }}}
@@ -120,26 +143,26 @@ deleteAnnotatedClasses eliminates from xml file all the annotated classes.
 }}}
 === overrideAnnotatedClass ===
 
-overrideAnnotatedClass allows you to update the xml configuration starting from the annotation of the classes passed as input, not specifying any parameters the same will be done for all annotated classes.
+overrideAnnotatedClass allows you to update the xml configuration starting from the annotation of the classes passed as input, not specifying any parameters the same will be done for all annotated classes ({{{xmlHandler.overrideAnnotatedClass()}}}).
 {{{
          xmlHandler.overrideAnnotatedClass(AnnotatedClass.class);
 }}}
 
 === overrideAnnotatedClassAll ===
 
-Same logic as the previous method with the difference that the function will be effective even for the innerClass present.
+Same logic as the previous method with the difference that the function will be effective even for the inner classes present.
 
 === fromXmlToAnnotation ===
 
 This method allows to annotate a class starting from its xml configuration.
-Not defining any class will be executed the same for all the classes present in the xml configuration file.
+Not defining any class will be executed the same for all the classes present in the xml configuration file ({{{xmlHandler.fromXmlToAnnotation()}}}).
 {{{
-         xmlHandler.fromXmlToAnnotation(AnnotatedClass.class);
+         xmlHandler.fromXmlToAnnotation(MyClass.class);
 }}}
 === fromXmlToAnnotationAll ===
 Same logic as the previous method with the difference that the function will be effective even for the innerClass present.
 === cleanAnnotatedClass ===
-This method eliminates the annotations from classes, without parameters will do the same for all annotated classes.
+This method eliminates the annotations from classes, without parameters will do the same for all annotated classes ({{{xmlHandler.cleanAnnotatedClass()}}}).
 {{{
          xmlHandler.cleanAnnotatedClass(AnnotatedClass.class);
 }}}
