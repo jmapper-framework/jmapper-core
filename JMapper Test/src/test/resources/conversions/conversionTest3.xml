@@ -1,0 +1,14 @@
+<jmapper>
+  <class name="com.googlecode.jmapper.integrationtest.conversions.bean.DExplicitConversion4">
+    <attribute name="destList">
+      <value name="sourceList"/>
+    </attribute>
+  </class>
+  <class name="com.googlecode.jmapper.integrationtest.conversions.bean.SExplicitConversion4">
+    <conversion name="xmlConversion">
+      ${destination}.addAll(${source});
+	  ${destination}.add("CONVERTED IN XML");
+		return ${destination};
+    </conversion>
+  </class>
+</jmapper>

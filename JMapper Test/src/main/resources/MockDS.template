@@ -1,0 +1,79 @@
+package it.avutils.jmapper.integrationtest.operations.mock;
+
+import it.avutils.jmapper.integrationtest.mock.IMockDS;
+import it.avutils.jmapper.integrationtest.mock.IObjDS;
+import it.avutils.jmapper.integrationtest.mock.ObjDS;
+import it.avutils.jmapper.integrationtest.operations.bean.${testName}D;
+import it.avutils.jmapper.integrationtest.operations.bean.${testName}S;
+
+public class ${testName}MockDS implements IMockDS<${testName}D, ${testName}S> {
+
+	public IObjDS<${testName}D, ${testName}S> AllAll() {
+		return new ObjDS<${testName}D, ${testName}S>(getDAll(), AllAllOutput(), getSAll());
+	}
+
+	public IObjDS<${testName}D, ${testName}S> AllValued() {
+		return new ObjDS<${testName}D, ${testName}S>(getDAll(), AllValuedOutput(), getSValued());
+	}
+
+	public IObjDS<${testName}D, ${testName}S> ValuedNull() {
+		return new ObjDS<${testName}D, ${testName}S>(getDValued(), ValuedNullOutput(), getSNull());
+	}
+
+	public IObjDS<${testName}D, ${testName}S> ValuedAll() {
+		return new ObjDS<${testName}D, ${testName}S>(getDValued(), ValuedAllOutput(), getSAll());
+	}
+
+	public IObjDS<${testName}D, ${testName}S> ValuedValued() {
+		return new ObjDS<${testName}D, ${testName}S>(getDValued(), ValuedValuedOutput(), getSValued());
+	}
+
+	public IObjDS<${testName}D, ${testName}S> NullValued() {
+		return new ObjDS<${testName}D, ${testName}S>(getDNull(), NullValuedOutput(), getSValued());
+	}
+
+	public IObjDS<${testName}D, ${testName}S> NullInputObject() {
+		return new ObjDS<${testName}D, ${testName}S>(getDAll(), null, getSAll());
+	}
+
+	/************************************ INPUT METHODS ************************************/
+	private ${testName}D getDAll(){
+		return new ${testName}D();
+	}
+	private ${testName}S getSAll(){
+		return new ${testName}S();
+	}
+	private ${testName}D getDValued(){
+		return new ${testName}D();
+	}
+	private ${testName}S getSValued(){
+		return new ${testName}S();
+	}
+	private ${testName}D getDNull(){
+		return new ${testName}D();
+	}
+	private ${testName}S getSNull(){
+		return new ${testName}S();
+	}
+	
+	/************************************ OUTPUT METHODS ************************************/
+	public ${testName}D AllAllOutput(){
+		return new ${testName}D();
+	}
+	public ${testName}D AllValuedOutput(){
+		return new ${testName}D();
+	}
+	public ${testName}D ValuedNullOutput(){
+		return new ${testName}D();
+	}
+	public ${testName}D ValuedAllOutput(){
+		return new ${testName}D();
+	}
+	public ${testName}D ValuedValuedOutput(){
+		return new ${testName}D();
+	}
+	public ${testName}D NullValuedOutput(){
+		return new ${testName}D();
+	}
+
+}
