@@ -1,0 +1,34 @@
+Mapping tra tipi primitivi e wrapper
+
+  static mapping:		first = 306.744 ps, mean = 158.678 fs (CI deltas: -1.986 fs, +3.091 fs), sd = 27.748 ns (CI deltas: -7.468 ns, +15.969 ns) WARNING: EXECUTION TIMES HAVE EXTREME OUTLIERS, SD VALUES MAY BE INACCURATE
+  dynamic mapping:		first = 274.896 ps, mean = 173.483 fs (CI deltas: -2.585 fs, +3.679 fs), sd = 34.886 ns (CI deltas: -8.428 ns, +13.584 ns) WARNING: EXECUTION TIMES HAVE EXTREME OUTLIERS, SD VALUES MAY BE INACCURATE
+
+Mapping tra Array identici
+
+  static mapping:		first = 199.466 ps, mean = 115.899 fs (CI deltas: -1.507 fs, +1.942 fs), sd = 27.709 ns (CI deltas: -5.182 ns, +6.500 ns) WARNING: execution times have mild outliers, SD VALUES MAY BE INACCURATE
+  dynamic mapping:		first = 140.242 ps, mean = 116.097 fs (CI deltas: -1.594 fs, +2.215 fs), sd = 21.411 ns (CI deltas: -4.498 ns, +9.111 ns) WARNING: EXECUTION TIMES HAVE EXTREME OUTLIERS, SD VALUES MAY BE INACCURATE
+
+Mapping tra Array da convertire
+
+  static mapping:		first = 322.948 ps, mean = 707.309 fs (CI deltas: -5.970 fs, +7.097 fs), sd = 37.094 ns (CI deltas: -5.323 ns, +10.031 ns) WARNING: execution times have mild outliers, SD VALUES MAY BE INACCURATE
+  dynamic mapping:		first = 276.012 ps, mean = 698.158 fs (CI deltas: -4.053 fs, +4.980 fs), sd = 25.677 ns (CI deltas: -4.191 ns, +7.743 ns) WARNING: execution times have mild outliers, SD VALUES MAY BE INACCURATE
+
+Mapping tra Collection con stessi item ma strutture diverse
+
+  static mapping:		first = 43.972 ns, mean = 164.124 ps (CI deltas: -1.697 ps, +2.069 ps), sd = 758.374 ns (CI deltas: -115.668 ns, +160.554 ns) WARNING: SD VALUES MAY BE INACCURATE
+  dynamic mapping:		first = 12.236 ns, mean = 157.973 ps (CI deltas: -1.232 ps, +1.557 ps), sd = 558.779 ns (CI deltas: -100.508 ns, +127.997 ns) WARNING: execution times have mild outliers, SD VALUES MAY BE INACCURATE
+
+Mapping tra Collection da convertire
+
+  static mapping:		first = 7.655 ns, mean = 25.492 ps (CI deltas: -208.432 fs, +274.701 fs), sd = 192.671 ns (CI deltas: -37.621 ns, +55.091 ns) WARNING: execution times have mild outliers, SD VALUES MAY BE INACCURATE
+  dynamic mapping:		first = 3.939 ns, mean = 22.665 ps (CI deltas: -199.980 fs, +273.326 fs), sd = 264.898 ns (CI deltas: -61.959 ns, +101.369 ns) WARNING: execution times have mild outliers, SD VALUES MAY BE INACCURATE
+
+Mapping tra Map con stessi item ma strutture diverse
+
+  static mapping:		first = 31.317 ns, mean = 65.715 ps (CI deltas: -482.950 fs, +638.210 fs), sd = 317.208 ns (CI deltas: -65.186 ns, +82.966 ns) WARNING: execution times have mild outliers, SD VALUES MAY BE INACCURATE
+  dynamic mapping:		first = 8.185 ns, mean = 65.653 ps (CI deltas: -492.875 fs, +560.095 fs), sd = 301.149 ns (CI deltas: -43.988 ns, +67.963 ns) WARNING: SD VALUES MAY BE INACCURATE
+
+Mapping tra Map da convertire
+
+  static mapping:		first = 17.348 ns, mean = 81.435 ps (CI deltas: -630.198 fs, +848.006 fs), sd = 414.311 ns (CI deltas: -87.921 ns, +140.424 ns) WARNING: execution times have mild outliers, SD VALUES MAY BE INACCURATE
+  dynamic mapping:		first = 13.521 ns, mean = 90.518 ps (CI deltas: -3.702 ps, +14.551 ps), sd = 3.777 us (CI deltas: -3.220 us, +4.951 us) WARNING: EXECUTION TIMES HAVE EXTREME OUTLIERS, SD VALUES MAY BE INACCURATE

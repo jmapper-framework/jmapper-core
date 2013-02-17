@@ -1,0 +1,26 @@
+<jmapper>
+  <class name="com.googlecode.jmapper.integrationtest.application.bean.Child1">
+    <attribute name="specificField1">
+      <value name="specificField1"/>
+    </attribute>
+    <attribute name="specificField2">
+      <value name="specificField2"/>
+    </attribute>
+  </class>
+  <class name="com.googlecode.jmapper.integrationtest.application.bean.Child2">
+    <attribute name="specificField3">
+      <value name="specificField3"/>
+    </attribute>
+    <attribute name="specificField4">
+      <value name="specificField4"/>
+    </attribute>
+  </class>
+  <class name="com.googlecode.jmapper.integrationtest.application.bean.Parent">
+    <attribute name="commonField1">
+      <value name="commonField1"/>
+    </attribute>
+    <attribute name="commonField2">
+      <value name="commonField2"/>
+    </attribute>
+  </class>
+</jmapper>

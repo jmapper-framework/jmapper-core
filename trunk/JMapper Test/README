@@ -1,0 +1,26 @@
+JMapper Test presenta codice groovy, è pertanto necessario convertire il progetto in groovy.
+
+Le dipendenze:
+
+<dependency> 
+      	<groupId>com.googlecode.performance</groupId>
+      	<artifactId>bb</artifactId>
+      	<version>1.0.0</version>
+    </dependency>
+    
+     <dependency> 
+      	<groupId>com.googlecode.performance</groupId>
+      	<artifactId>mt</artifactId>
+      	<version>1.0.0</version>
+    </dependency>
+    
+     <dependency> 
+      	<groupId>com.googlecode.performance</groupId>
+      	<artifactId>jsci-core</artifactId>
+      	<version>1.0.0</version>
+    </dependency>
+    
+vanno installate, i jar sono scaricabili dal sito:
+http://www.ellipticgroup.com/html/benchmarkingArticle.html
+
+Molti test fanno riferimento al sistema operativo e potrebbero fallire, vanno riadattati.
