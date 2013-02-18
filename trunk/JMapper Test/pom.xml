@@ -30,7 +30,7 @@
     <dependency> 
       	<groupId>com.googlecode.jmapper-framework</groupId>
       	<artifactId>jmapper-core</artifactId>
-      	<version>1.2.0-SNAPSHOT</version>
+      	<version>1.2.1-SNAPSHOT</version>
     </dependency>
      
 	<dependency> 
