@@ -42,7 +42,8 @@ public class RelationalJMapperTest extends TestCase {
 	
 	public void testRelationalJMapperWithXML(){
 		// explicit configuration path
-		RelationalJMapper<AnnotatedClass2> rm = new RelationalJMapper<AnnotatedClass2>(AnnotatedClass2.class,"file:/Users/alessandrovurro/Progetti/Personali/JMapper Tests/src/test/resources/jmapper-test.xml");
+		//TODO JMapper Test -> RelationalJMapperTest -> replace xml path
+		RelationalJMapper<AnnotatedClass2> rm = new RelationalJMapper<AnnotatedClass2>(AnnotatedClass2.class,"file:/path to JMapper Test/src/test/resources/jmapper-test.xml");
 
 		AnnotatedClass2 expected = new AnnotatedClass2(null, "field2Class1", "field3Class1");
 		AnnotatedClass2 actual = rm.manyToOne(new Class1("field1Class1", "field2Class1", "field3Class1"));

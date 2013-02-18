@@ -24,17 +24,24 @@ import com.googlecode.jmapper.enums.ChooseConfig;
 
 public class JMapperExceptionTest extends TestCase {
 
+	ByteArrayOutputStream log;
+	
+	@Override
+	protected void setUp() throws Exception {
+		PropertyConfigurator.configure("log4j.properties");
+		log = new ByteArrayOutputStream();  
+		Logger.getLogger(JMapper.class).addAppender(new WriterAppender(new SimpleLayout(), log));
+	}
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void testConstructorParameters(){
 		
-		PropertyConfigurator.configure("log4j.properties");
-		ByteArrayOutputStream log = new ByteArrayOutputStream();  
-	    Logger.getLogger(JMapper.class).addAppender(new WriterAppender(new SimpleLayout(), log));
 	    
 		Class<?> nullClass = null;
 		Class<?> anInterface = IMapper.class;
 		
 		/********************** NULL CLASSES AS INPUT ****************************/
+		log.reset();
 		new JMapper(nullClass, BeanS.class);
 		assertEquals("ERROR - NullMappedClassException: Destination Class can not be null"+newLine, log.toString());
 		
@@ -89,11 +96,13 @@ public class JMapperExceptionTest extends TestCase {
 
 		/******** CHECK XML CONFIGURATION ****************************************/
 		log.reset();
-		new JMapper<BeanD2,BeanS>(BeanD2.class, BeanS.class,"file:/Users/alessandrovurro/Progetti/Personali/JMapper Tests/src/test/resources/jmapper.xml");
-		assertEquals("ERROR - MappingNotFoundException: the classes: BeanD2 and BeanS aren't configured, verify file:/Users/alessandrovurro/Progetti/Personali/JMapper Tests/src/test/resources/jmapper.xml mapping file"+newLine, log.toString());
+		//TODO JMapper Test -> JMapperExceptionTest -> replace xml path in constructor and assert
+		new JMapper<BeanD2,BeanS>(BeanD2.class, BeanS.class,"file:/path to JMapper Test/src/test/resources/jmapper.xml");
+		assertEquals("ERROR - MappingNotFoundException: the classes: BeanD2 and BeanS aren't configured, verify file:/D:/Workspace/Venere/JMapper Test/src/test/resources/jmapper.xml mapping file"+newLine, log.toString());
 		
 		log.reset();
-		new JMapper<BeanD2,BeanS>(BeanD2.class, BeanS.class,ChooseConfig.DESTINATION,"file:/Users/alessandrovurro/Progetti/Personali/JMapper Tests/src/test/resources/jmapper.xml");
-		assertEquals("ERROR - MappingNotFoundException: BeanD2 isn't configured, verify file:/Users/alessandrovurro/Progetti/Personali/JMapper Tests/src/test/resources/jmapper.xml mapping file"+newLine, log.toString());
+		//TODO JMapper Test -> JMapperExceptionTest -> replace xml path in constructor and assert
+		new JMapper<BeanD2,BeanS>(BeanD2.class, BeanS.class,ChooseConfig.DESTINATION,"file:/path to JMapper Test/src/test/resources/jmapper.xml");
+		assertEquals("ERROR - MappingNotFoundException: BeanD2 isn't configured, verify file:/D:/Workspace/Venere/JMapper Test/src/test/resources/jmapper.xml mapping file"+newLine, log.toString());
 	}
 }
