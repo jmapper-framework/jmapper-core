@@ -1,0 +1,33 @@
+#summary global mapping examples.
+
+= Global Mapping =
+
+The global mapping permits to reduce the configuration in cases that  the fields have the same name or all fields are mapped in direction to one.
+
+== 1° Scenario ==
+
+We have two beans with some variables that have the same names.
+
+{{{
+@JGlobalMap(excluded={"other"})
+class Destination {            class Source {
+
+    String name;                   String name;  
+    Date currentDate;              Date currentDate;
+    Integer value;                 Integer value;
+    String other;                 
+
+    // getters and setters..       // getters and setters..
+}                              }
+}}}
+code:
+{{{
+JMapper<Destination, Source> mapper = new JMapper<Destination, Source>(Destination.class, Source.class);
+Destination destination = mapper.getDestination(new Source("Alessandro",new Date(),5000));
+}}}
+output:
+{{{
+Destination [name="Alessandro", currentDate=, value=5000, other=null]
+}}}
+
+== 2° Scenario ==
