@@ -1,4 +1,8 @@
-JMapper Test presenta codice groovy, è pertanto necessario convertire il progetto in groovy.
+JMapper Test presenta codice groovy, è pertanto necessario installare il plugin:
+	
+	Help -> Install new software -> add	http://groovy.codehaus.org/Eclipse+Plugin
+
+Inseguito al riavvio, click destro su JMapper test -> Configure -> Convert to Groovy Project.
 
 Le dipendenze:
 
@@ -20,9 +24,9 @@ Le dipendenze:
       	<version>1.0.0</version>
     </dependency>
     
-vanno installate, i jar sono scaricabili dal sito:
-http://www.ellipticgroup.com/html/benchmarkingArticle.html
+vanno aggiunte al repository locale, il folder performance è presente nel folder presente nella root 
+della applicazione: "cofig"
 
-Alcuni test fanno riferimento al sistema operativo e potrebbero fallire, vanno riadattati, lo scopo è verificare
-il recupero delle risorse in vari contesti.
+Alcuni test fanno riferimento al sistema operativo e potrebbero fallire, vanno riadattati (sono contrassegnati con i TODO),
+lo scopo è verificare il recupero delle risorse in vari contesti.
 
