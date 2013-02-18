@@ -4,7 +4,9 @@
 
   - verificare che la eliminazione del global dal file avvenga bene anche con le innerclass
   - gestire gli analyzer in un vettore e non con una sequenza di if.
-  - merge di due array ottimizzato
+  - merge di due array ottimizzato:
+ 		int[] result2 = Arrays.copyOf(array, array.length + array2.length);
+		System.arraycopy(array2, 0, result2, array.length, array2.length);  
 
 1.3.0
 
