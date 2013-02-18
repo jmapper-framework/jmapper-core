@@ -17,7 +17,10 @@ package com.googlecode.jmapper.operations.recursive;
 
 import static com.googlecode.jmapper.util.ClassesManager.getArrayItemClass;
 import static com.googlecode.jmapper.util.ClassesManager.getCollectionItemClass;
-import static com.googlecode.jmapper.util.GeneralUtility.newLine;
+import static com.googlecode.jmapper.util.GeneralUtility.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import com.googlecode.jmapper.enums.MappingType;
 import com.googlecode.jmapper.generation.MapperConstructor;
@@ -31,31 +34,33 @@ public class MappedArrayListOperation extends ARecursiveOperation {
 
 	@Override
 	protected Object getSourceConverted() {
-		return "arrayListOfDestination"+count;
+		return c("arrayListOfDestination");
 	}
 	
 	@Override
 	protected StringBuilder existingField() {
 		
-		Class<?> itemDClass = getArrayItemClass(destinationField);
+		Map<String, String> vars = new HashMap<String, String>();
 		
-		Object destinationObjClass = itemDClass.getName();
-		Object newArray		  = "newDestination"+count;
-		Object depArray 	  = "dep"+count;
-		Object destArray 	  = getSourceConverted();
-		Object i     = "index"  +count;
-		Object index = "counter"+count;
+		vars.put("dClass"                  ,getArrayItemClass(destinationField).getName());
+		vars.put("source"                  ,s(getSourceConverted()));
+		vars.put("destination"             ,c("dep"));
+		vars.put("i"                       ,c("index"));
+		vars.put("index"                   ,c("counter"));
+		vars.put("getDestination()"        ,s(getDestination()));
+		vars.put("setDestination(result)"  ,s(setDestination(c("newDestination"))));
+		vars.put("result"                  ,c("newDestination"));
 		
-		return write(   "   ",destinationObjClass,"[] ",depArray," = ",getDestination(),";",
-			  newLine , "   ",destinationObjClass,"[] ",newArray," = new ",destinationObjClass,"[",depArray,".length + ",destArray,".length];",
-			  newLine , "   int ",index," = 0;",
-			  newLine , "   for(int ",i," = ",depArray,".length-1;",i," >=0;",i,"--){",
-			  newLine , "   ",newArray,"[",index,"++] = ",depArray,"[",i,"];",
-			  newLine , "   }",
-			  newLine , "   for(int ",i," = ",destArray,".length-1;",i," >=0;",i,"--){",
-			  newLine , "   ",newArray,"[",index,"++] = ",destArray,"[",i,"];",
-			  newLine , "   }",
-			  newLine ,     setDestination(newArray));
+		return write(replace$("   $dClass[] $destination = $getDestination();"
+				  + newLine + "   $dClass[] $result = new $dClass[$destination.length + $source.length];"
+				  + newLine + "   int $index = 0;"
+				  + newLine + "   for(int $i = $destination.length-1;$i >=0;$i--){"
+				  + newLine + "   $result[$index++] = $destination[$i];"
+				  + newLine + "   }"
+				  + newLine + "   for(int $i = $source.length-1;$i >=0;$i--){"
+				  + newLine + "   $result[$index++] = $source[$i];"
+				  + newLine + "   }"
+				  + newLine + "$setDestination(result)",vars));
 	}
 
 	@Override
@@ -66,28 +71,37 @@ public class MappedArrayListOperation extends ARecursiveOperation {
 	@Override
 	protected StringBuilder sharedCode(StringBuilder content) {
 		
-		Class<?> itemDClass = getArrayItemClass(destinationField);
-		Class<?> itemSClass = getCollectionItemClass(sourceField);
+		Class<?> dArrayClass = getArrayItemClass(destinationField);
+		Class<?> sCollectionClass = getCollectionItemClass(sourceField);
+
+		String sItem = c("objectOfSoure");
+		String dItem = c("objectOfDestination");
 		
-		Object destination 	 = getSourceConverted();
-		Object source   = "arrayListOfSource"+count;
-		String itemSName = "objectOfSoure"+count;
-		String itemDName   = "objectOfDestination"+count;
+		String mapping = s(new MapperConstructor(dArrayClass, sCollectionClass, dItem, dItem, sItem, configChosen, xml,methodsToGenerate)
+									    .mapping(newInstance, MappingType.ALL_FIELDS, getMts())); 
 		
-		String i = "index"+count++;
-		String itemSType = itemSClass.getName();
-		String itemDType = itemDClass.getName();
+		Map<String, String> vars = new HashMap<String, String>();
 		
-		MapperConstructor mapper = new MapperConstructor(itemDClass, itemSClass, itemDName, itemDName, itemSName, configChosen, xml,methodsToGenerate); 
+		vars.put("dClass"                  ,dArrayClass.getName());
+		vars.put("sClass"                  ,sCollectionClass.getName());
+		vars.put("dItem"                   ,dItem);
+		vars.put("sItem"                   ,sItem);
+		vars.put("source"                  ,c("arrayListOfSource"));
+		vars.put("destination"             ,s(getSourceConverted()));
+		vars.put("i"                       ,c("index"));
+		vars.put("getSource()"             ,s(getSource()));
+		vars.put("mapping"                 , mapping);
 		
-		return write(   "   Object[] ",source," = ",getSource(),".toArray();",
-			  newLine , "   ",itemDType,"[] ",destination," = new ",itemDType,"[",source,".length];",
-			  newLine , "   for(int ",i," = ",source,".length-1;",i," >=0;",i,"--){",
-			  newLine , "   ",itemSType," ",itemSName," = (",itemSType,") ",source,"[",i,"];",
-			  newLine , 	mapper.mapping(newInstance, MappingType.ALL_FIELDS, getMts()),
-			  newLine , "   ",destination,"[",i,"] = ",itemDName,";",
-			  newLine , "   }",
-			  newLine , 	content, newLine);	
+		count++;
+		
+		return write(replace$("   Object[] $source = $getSource().toArray();"
+				  + newLine + "   $dClass[] $destination = new $dClass[$source.length];"
+				  + newLine + "   for(int $i = $source.length-1;$i >=0;$i--){"
+				  + newLine + "   $sClass $sItem = ($sClass) $source[$i];"
+				  + newLine + "$mapping"
+				  + newLine + "   $destination[$i] = $dItem;"
+				  + newLine + "   }"
+				  + newLine + content + newLine,vars));	
 	}
 
 	/** the count is used to differentiate local variables in case of recursive mappings.
@@ -95,4 +109,13 @@ public class MappedArrayListOperation extends ARecursiveOperation {
 	 *  it's static for ensure the uniqueness
 	 */ 
 	private static int count = 0;
+	
+	/**
+	 * Appends the count to string.
+	 * @param str
+	 * @return str + count;
+	 */
+	private String c(String str){
+		return str + count;
+	}
 }

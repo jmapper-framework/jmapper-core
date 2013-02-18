@@ -16,15 +16,17 @@
 
 package com.googlecode.jmapper.xml;
 
-import static com.googlecode.jmapper.util.ClassesManager.isMappedInAnnotation;
-import static com.googlecode.jmapper.util.ClassesManager.isMappedInXML;
-import static com.googlecode.jmapper.util.GeneralUtility.*;
+import static com.googlecode.jmapper.util.GeneralUtility.isEmpty;
+import static com.googlecode.jmapper.util.GeneralUtility.list;
 import static com.googlecode.jmapper.xml.XmlBuilder.loadXml;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+
+import com.googlecode.jmapper.annotations.Annotation;
 import com.googlecode.jmapper.config.JmapperLog;
 import com.googlecode.jmapper.exceptions.LoadingFileException;
 import com.googlecode.jmapper.util.FilesManager;
@@ -173,8 +175,8 @@ public class XmlHandler {
 	
 	private void overrideAnnotatedClass(Class<?> clazz,boolean overrideAll){
 		
-			 if(isMappedInAnnotation(clazz) && isMappedInXML(clazz,xml)){
-				 XmlClass xmlClass = XmlConverter.toXmlClass(clazz);
+			 if(Annotation.isMapped(clazz) && xml.isMapped(clazz)){
+				 XmlClass xmlClass = Converter.toXmlClass(clazz);
 				 
 				 Attribute[] attributes = null;
 				 Global global = null;
@@ -182,17 +184,17 @@ public class XmlHandler {
 				 if(!isEmpty(xmlClass.attributes)){
 					 attributes = new Attribute[xmlClass.attributes.size()];
 					 for (int i = xmlClass.attributes.size(); i --> 0;)
-						 attributes[i] = XmlConverter.toAttribute(xmlClass.attributes.get(i));
+						 attributes[i] = Converter.toAttribute(xmlClass.attributes.get(i));
 				 }
 				 
 				 if(xmlClass.global != null)
-					 global = XmlConverter.toGlobal(xmlClass.global); 
+					 global = Converter.toGlobal(xmlClass.global); 
 				
 				 overrideClass(clazz, global, attributes);
 			 }
 			 if(overrideAll)
 				 for (Class<?> it : clazz.getClasses())
-						if(it.isMemberClass() && isMappedInAnnotation(clazz) && isMappedInXML(clazz,xml)) 
+						if(it.isMemberClass() && Annotation.isMapped(clazz) && xml.isMapped(clazz)) 
 							overrideAnnotatedClass(it,true);
 	}
 	
@@ -367,7 +369,7 @@ public class XmlHandler {
 	private XmlHandler addClasses(boolean addAll,Class<?>... classes ){
 		
 		for (Class<?> clazz : classes){
-			if(isMappedInAnnotation(clazz))
+			if(Annotation.isMapped(clazz))
 				xml.addAnnotatedClass(clazz); 
 			
 			if(addAll)
@@ -463,7 +465,7 @@ public class XmlHandler {
 	 */
 	private XmlHandler deleteClasses(Class<?>... classes){
 		for(Class<?> clazz : classes)
-			if(isMappedInXML(clazz,xml)) xml.deleteClass(clazz);
+			if(xml.isMapped(clazz)) xml.deleteClass(clazz);
 		return this;
 	}
 	

@@ -16,6 +16,8 @@
 
 package com.googlecode.jmapper.config;
 
+import static com.googlecode.jmapper.util.GeneralUtility.isNull;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -41,7 +43,7 @@ public class ResourceLoader {
 	    URL result = Thread.currentThread().getContextClassLoader().getResource(resource);
 
 	    // Could not find resource. Try with the classloader that loaded this class.
-	    if (result == null) {
+	    if (isNull(result)) {
 	      ClassLoader classLoader = ResourceLoader.class.getClassLoader();
 	      if (classLoader != null) 
 	        result = classLoader.getResource(resource);
@@ -49,11 +51,11 @@ public class ResourceLoader {
 	    }
 
 	    // Last ditch attempt searching classpath
-	    if (result == null) 
+	    if (isNull(result)) 
 	      result = ClassLoader.getSystemResource(resource);
 	    
 	    // one more time
-	    if (result == null && resource.contains(":")) 
+	    if (isNull(result) && resource.contains(":")) 
 	        result = new URL(resource);
 	    
 	    return result.openStream();

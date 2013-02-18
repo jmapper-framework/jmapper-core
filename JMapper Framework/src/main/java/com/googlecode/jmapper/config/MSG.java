@@ -18,6 +18,7 @@ package com.googlecode.jmapper.config;
 
 import static com.googlecode.jmapper.config.Constants.MSG_FILE;
 import static com.googlecode.jmapper.config.ResourceLoader.loadResource;
+import static com.googlecode.jmapper.util.GeneralUtility.isNull;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,7 +38,7 @@ public enum MSG {
 	private MSG() {
 		properties = new Properties();
 		try{ InputStream stream = loadResource(MSG_FILE);
-			 if(stream == null)Error.fileNotFound();
+			 if(isNull(stream))Error.fileNotFound();
 			
 			 try                   { properties.load (stream);  } 
 			 catch (IOException e) { Error.unableLoadingFile(); }

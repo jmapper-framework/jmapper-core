@@ -26,13 +26,11 @@ import static com.googlecode.jmapper.conversions.explicit.ConversionPlaceholder.
 import static com.googlecode.jmapper.conversions.explicit.ConversionPlaceholder.sourceValue;
 import static com.googlecode.jmapper.enums.ConfigurationType.ANNOTATION;
 import static com.googlecode.jmapper.util.GeneralUtility.newLine;
-
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
 import com.googlecode.jmapper.enums.ConfigurationType;
 import com.googlecode.jmapper.enums.Membership;
 import com.googlecode.jmapper.generation.beans.Method;
@@ -68,7 +66,7 @@ public class ConversionHandler {
 	private Class<?> destinationClass;
 	/** configured class */
 	private Class<?> configClass;
-	
+			
 	/**@return true if the method is to be created, false otherwise */
 	public boolean toBeCreated(){
 		return !(configurationType == ANNOTATION && methodDefined.getType() == STATIC);
@@ -175,33 +173,15 @@ public class ConversionHandler {
 	}
 	
 	/**
-	 * ConversionMethod found.
-	 * @param method conversion method found
+	 * Loads analyzer configurations 
+	 * @param analyzer 
 	 * @return this instance of ConversionHandler
 	 */
-	public ConversionHandler analyze(ConversionMethod method){
-		this.methodDefined = method;
-		return this;
-	}
-	
-	/**
-	 * Definition of the conversion method location.
-	 * @param membership 
-	 * @return this instance of ConversionHandler
-	 */
-	public ConversionHandler belongTo(Membership membership){
-		this.membership = membership;
+	public ConversionHandler load(ConversionAnalyzer analyzer){
+		this.methodDefined = analyzer.getMethod();
+		this.membership = analyzer.getMembership();
 		this.configClass = membership == Membership.DESTINATION?destinationClass:sourceClass;
-		return this;
-	}
-	
-	/**
-	 * ConfigurationType definition.
-	 * @param configurationType configuration type
-	 * @return this instance of ConversionHandler
-	 */
-	public ConversionHandler withThisConfiguration(ConfigurationType configurationType){
-		this.configurationType = configurationType;
+		this.configurationType = analyzer.getConfigurationType();
 		return this;
 	}
 	
@@ -229,6 +209,12 @@ public class ConversionHandler {
 		return this;
 	}
 
+	/** Returns the conversion method
+	 * @return method defined */
+	public ConversionMethod getMethod(){     	     
+		return methodDefined;	                      
+	}
+	
 	/**
 	 * Get the conversion method membership.
 	 * @return membership

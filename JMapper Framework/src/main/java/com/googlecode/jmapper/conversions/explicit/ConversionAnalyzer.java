@@ -15,26 +15,19 @@
  */
 package com.googlecode.jmapper.conversions.explicit;
 
-import static com.googlecode.jmapper.util.ClassesManager.getAllMethods;
+import static com.googlecode.jmapper.enums.ChooseConfig.DESTINATION;
+import static com.googlecode.jmapper.enums.ConfigurationType.ANNOTATION;
+import static com.googlecode.jmapper.enums.ConfigurationType.XML;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.List;
 
+import com.googlecode.jmapper.annotations.Annotation;
 import com.googlecode.jmapper.annotations.JMapConversion;
-import com.googlecode.jmapper.config.Error;
-import com.googlecode.jmapper.config.JmapperLog;
 import com.googlecode.jmapper.enums.ChooseConfig;
 import com.googlecode.jmapper.enums.ConfigurationType;
 import com.googlecode.jmapper.enums.Membership;
-import com.googlecode.jmapper.exceptions.ConversionParameterException;
-import com.googlecode.jmapper.exceptions.DynamicConversionBodyException;
-import com.googlecode.jmapper.exceptions.DynamicConversionMethodException;
-import com.googlecode.jmapper.exceptions.DynamicConversionParameterException;
-import com.googlecode.jmapper.util.ClassesManager;
 import com.googlecode.jmapper.xml.XML;
-import com.googlecode.jmapper.xml.XmlConverter;
 
 /**
  * ConversionAnalyzer analyzes the configuration and returns, if exists, the conversion method found.
@@ -86,16 +79,16 @@ public class ConversionAnalyzer {
 		destinationName = destination.getName();
 		sourceName = source.getName();
 		if(!xml.conversionsLoad().isEmpty()){
-			configurationType = ConfigurationType.XML;
-			if(config == ChooseConfig.DESTINATION){
+			configurationType = XML;
+			if(config == DESTINATION){
 				if(existsXml(destinationClass)) { membership = Membership.DESTINATION;  return true;}
 				if(existsXml(sourceClass))      { membership = Membership.SOURCE;       return true;}}
 			else{
 				if(existsXml(sourceClass))      { membership = Membership.SOURCE;       return true;}
 				if(existsXml(destinationClass)) { membership = Membership.DESTINATION;  return true;}}
 		}
-		configurationType = ConfigurationType.ANNOTATION;
-		if(config == ChooseConfig.DESTINATION){
+		configurationType = ANNOTATION;
+		if(config == DESTINATION){
 			if(existsAnnotation(destinationClass)) { membership = Membership.DESTINATION;  return true;}
 			if(existsAnnotation(sourceClass))      { membership = Membership.SOURCE;       return true;}}
 		else{
@@ -119,24 +112,7 @@ public class ConversionAnalyzer {
 	 * @return true if annotated conversion exists, false otherwise
 	 */
 	private boolean existsAnnotation(Class<?> clazz){
-		List<ConversionMethod> conversions = new ArrayList<ConversionMethod>();
-		
-		try{
-			for(Method method:getAllMethods(clazz))
-				if(method.getAnnotation(JMapConversion.class)!=null)
-					try{   conversions.add(XmlConverter.toConversionMethod(method));
-					}catch (ConversionParameterException e) {
-						Error.wrongParameterNumber(method.getName(),clazz.getSimpleName());
-					}catch (DynamicConversionParameterException e) {
-						Error.parametersUsageNotAllowed(method.getName(), clazz.getSimpleName());
-					}catch (DynamicConversionMethodException e) {
-						Error.incorrectMethodDefinition(method.getName(), clazz.getSimpleName());
-					}catch (DynamicConversionBodyException e) {
-						Error.incorrectBodyDefinition(method.getName(), clazz.getSimpleName());
-					}
-			
-		}catch (Exception e) {JmapperLog.ERROR(e);}
-		return (method = verifyConversionExistence(conversions)) != null;
+		return exists(Annotation.getConversionMethods(clazz));
 	}
 	
 	/**
@@ -145,7 +121,15 @@ public class ConversionAnalyzer {
 	 * @return true if an xml conversion exists, false otherwise
 	 */
 	private boolean existsXml(Class<?> clazz){
-		List<ConversionMethod> conversions = ClassesManager.getConversionMethods(clazz, xml);
+		return exists(xml.getConversionMethods(clazz));
+	}
+	
+	/**
+	 * Verifies the conversion method existence, returns true if exists, false otherwise.
+	 * @param conversions conversion methods
+	 * @return true if conversion method exists, false otherwise
+	 */
+	private boolean exists(List<ConversionMethod> conversions){
 		if(conversions.isEmpty()) return false;
 		return (method = verifyConversionExistence(conversions))!= null;
 	}
@@ -157,7 +141,8 @@ public class ConversionAnalyzer {
 	 */
 	private ConversionMethod verifyConversionExistence(List<ConversionMethod> conversions){
 		for (ConversionMethod method : conversions) 
-			if(isPresentIn(method.getFrom(),sourceName) && isPresentIn(method.getTo(),destinationName))
+			if(isPresentIn(method.getFrom(),sourceName) && 
+			   isPresentIn(method.getTo()  ,destinationName))
 				return method;
 				
 		return null;
@@ -170,7 +155,10 @@ public class ConversionAnalyzer {
 	 * @return true if the field name is contained in the values array, false otherwise
 	 */
 	private boolean isPresentIn(String[] values, String field){
-		for (String value : values)if(value.equalsIgnoreCase(JMapConversion.ALL) || value.equals(field))return true;
+		for (String value : values)
+			if(value.equalsIgnoreCase(JMapConversion.ALL) || value.equals(field))
+				return true;
+		
 		return false;
 	}
 }

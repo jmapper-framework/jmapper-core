@@ -17,15 +17,16 @@
 package com.googlecode.jmapper.operations;
 
 import static com.googlecode.jmapper.config.Constants.THE_FIELD_IS_NOT_CONFIGURED;
-import static com.googlecode.jmapper.util.ClassesManager.defineStructure;
 import static com.googlecode.jmapper.util.ClassesManager.getListOfFields;
 import static com.googlecode.jmapper.util.ClassesManager.retrieveField;
 import static com.googlecode.jmapper.util.ClassesManager.verifiesAccessorMethods;
-import static com.googlecode.jmapper.util.ClassesManager.verifiesGetterMethods;
+import static com.googlecode.jmapper.util.ClassesManager.verifiesGetterMethod;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
 import com.googlecode.jmapper.config.ConfigReader;
 import com.googlecode.jmapper.config.Error;
 import com.googlecode.jmapper.conversions.explicit.ConversionAnalyzer;
@@ -35,7 +36,6 @@ import com.googlecode.jmapper.enums.OperationType;
 import com.googlecode.jmapper.generation.beans.Method;
 import com.googlecode.jmapper.operations.complex.AComplexOperation;
 import com.googlecode.jmapper.operations.info.InfoOperation;
-import com.googlecode.jmapper.operations.recursive.ARecursiveOperation;
 import com.googlecode.jmapper.operations.simple.ASimpleOperation;
 import com.googlecode.jmapper.xml.XML;
 
@@ -73,6 +73,8 @@ public final class OperationHandler {
 	private final ConversionAnalyzer conversionAnalyzer;
 	/** explicit conversion handler */
 	private final ConversionHandler conversionHandler;
+	/** operation factory */
+	private final OperationFactory operationFactory;
 	
 	public OperationHandler(Class<?> aDestinationClass, Class<?> aSourceClass, ChooseConfig aConfigurationChosen, XML aXml) {
 		
@@ -94,6 +96,7 @@ public final class OperationHandler {
 		operationAnalyzer = new OperationAnalyzer(xml);
 		conversionHandler = new ConversionHandler(xml,destinationClass,sourceClass);
 		conversionAnalyzer = new ConversionAnalyzer(xml,configurationChosen,destinationClass,sourceClass);
+		operationFactory = new OperationFactory(xml, configurationChosen, simpleOperations, complexOperations);
 	}
 	
 	/**
@@ -114,7 +117,7 @@ public final class OperationHandler {
 			Field sourceField      = isDestConfigured?targetField:configuredField;
 				
 			verifiesAccessorMethods(destinationClass,destinationField);
-			verifiesGetterMethods(sourceClass,sourceField);
+			verifiesGetterMethod(sourceClass,sourceField);
 			
 			boolean conversionMethodExists = conversionAnalyzer.fieldsToCheck(destinationField,sourceField);
 			
@@ -129,37 +132,18 @@ public final class OperationHandler {
 														// explicit conversion between complex types
 				                         			   :OperationType.CONVERSION;
 			
-			AGeneralOperation operation = OperationFactory.getOperation(operationType);
+			AGeneralOperation operation = operationFactory.get(operationType, destinationField, sourceField, info, methodsToGenerate);
 
-			if(operationType.isBasic())
-				simpleOperations.add((ASimpleOperation) operation);	
-				
-			if(operationType.isComplex())
-				complexOperations.add(((AComplexOperation) operation).setDestinationClass(defineStructure(destinationField, sourceField)));
-					
-			if(operationType.isRecursive())
-				((ARecursiveOperation) operation).setMethodsToGenerate(methodsToGenerate)
-				 							     .setXml(xml)
-				                                 .setConfigChosen(info.getConfigChosen()==null // if both classes are configured
-										                    	  ?configurationChosen		   // returns the configuration chosen
-												                  :info.getConfigChosen());    // else returns the configuration retrieved
-			if(operationType.isConverted()){
-				conversionHandler.analyze(conversionAnalyzer.getMethod())
-				                 .belongTo(conversionAnalyzer.getMembership())
-				                 .withThisConfiguration(conversionAnalyzer.getConfigurationType())
+			if(operationType.isAConversion()){
+				conversionHandler.load(conversionAnalyzer)
 				                 .from(sourceField).to(destinationField);
 				
 				if(conversionHandler.toBeCreated())
 					methodsToGenerate.add(conversionHandler.loadMethod());
 				
-				operation.setConversionMethod(conversionAnalyzer.getMethod())
+				operation.setConversionMethod(conversionHandler.getMethod())
 						 .setMemberShip      (conversionHandler.getMembership());
 			}
-			
-			// common settings
-			operation.setDestinationField(destinationField)
-					 .setSourceField(sourceField)
-					 .setInfoOperation(info);
 		}
 		
 		// checks if there isn't a correspondence between classes

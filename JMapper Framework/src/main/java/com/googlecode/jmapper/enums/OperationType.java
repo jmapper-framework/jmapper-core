@@ -89,5 +89,5 @@ public enum OperationType {
 			 						 || this == LIST_ARRAY
 			 						 || this == CONVERSION;}
 	 
-	 public boolean isConverted(){ return this == CONVERSION || this == BASIC_CONVERSION; }
+	 public boolean isAConversion(){ return this == CONVERSION || this == BASIC_CONVERSION; }
 }

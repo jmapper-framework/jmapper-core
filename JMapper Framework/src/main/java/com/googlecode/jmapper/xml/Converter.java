@@ -52,12 +52,12 @@ import com.googlecode.jmapper.xml.beans.XmlGlobal;
 import com.googlecode.jmapper.xml.beans.XmlValueName;
 
 /**
- * XmlConverter simplifies the manipulation of xml mapping file.
+ * Converter simplifies the manipulation of xml mapping file and annotations.
  * 
  * @author Alessandro Vurro
  *
  */
-public class XmlConverter {
+public class Converter {
 	
 	/**
 	 * This method transforms a Class given in input, into a XmlClass.

@@ -19,7 +19,8 @@ package com.googlecode.jmapper.xml;
 import static com.googlecode.jmapper.util.FilesManager.fullPathOf;
 import static com.googlecode.jmapper.util.FilesManager.readAtDevelopmentTime;
 import static com.googlecode.jmapper.util.FilesManager.readAtRuntime;
-import static com.googlecode.jmapper.util.GeneralUtility.isEmpty;
+import static com.googlecode.jmapper.util.GeneralUtility.*;
+import static com.googlecode.jmapper.util.ClassesManager.*;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
@@ -110,7 +111,7 @@ public final class XML {
 				if(!isEmpty(xmlJmapper.classes))
 				    for (XmlClass xmlClass : xmlJmapper.classes) 
 					   if(xmlClass.global != null)
-						   map.put(xmlClass.name, XmlConverter.toGlobal(xmlClass.global));
+						   map.put(xmlClass.name, Converter.toGlobal(xmlClass.global));
 					   					
 		}catch (Exception e) {JmapperLog.ERROR(e);}
 		return map;
@@ -126,7 +127,7 @@ public final class XML {
 					   List<Attribute> attributes = new ArrayList<Attribute>();
 					   if(!isEmpty(xmlClass.attributes))
 						 for (XmlAttribute xmlAttribute : xmlClass.attributes)
-							 attributes.add(XmlConverter.toAttribute(xmlAttribute));
+							 attributes.add(Converter.toAttribute(xmlAttribute));
 													
 					   map.put(xmlClass.name, attributes);
 					}
@@ -144,7 +145,7 @@ public final class XML {
 					   List<ConversionMethod> conversions = new ArrayList<ConversionMethod>();
 					   if(!isEmpty(xmlClass.conversions))
 						 for (XmlConversion xmlConversion : xmlClass.conversions)
-							 try{	 conversions.add(XmlConverter.toConversionMethod(xmlConversion));
+							 try{	 conversions.add(Converter.toConversionMethod(xmlConversion));
 							 }catch (XmlConversionNameException e) {
 								 Error.xmlConversionNameUndefined(this.xmlPath,xmlClass.name);
 							 }catch (XmlConversionTypeException e) {
@@ -160,6 +161,21 @@ public final class XML {
 		return map;
 	}
 	
+	/**
+	 * Returns the conversions method belonging to clazz.
+	 * @param clazz class to check
+	 * @return the conversion method list
+	 */
+	public List<ConversionMethod> getConversionMethods (Class<?> clazz){
+		List<ConversionMethod> conversions = new ArrayList<ConversionMethod>();
+		Map<String, List<ConversionMethod>> conversionsMap = this.conversionsLoad();
+		for (Class<?> classToCheck : getAllsuperclasses(clazz)){
+			List<ConversionMethod> methods = conversionsMap.get(classToCheck.getName());
+			if(methods != null)conversions.addAll(methods);
+		}
+		return conversions;
+	}
+		
 	/**
 	 * Returns a list with the classes names presents in xml mapping file.
 	 * @return a list with the classes names presents in xml mapping file
@@ -271,7 +287,7 @@ public final class XML {
 	 */
 	public XML addGlobal(Class<?> aClass,Global global){
 		checksGlobalAbsence(aClass);
-		findXmlClass(aClass).global = XmlConverter.toXmlGlobal(global);
+		findXmlClass(aClass).global = Converter.toXmlGlobal(global);
 		return this;
 	}
 	
@@ -300,7 +316,7 @@ public final class XML {
 		
 		for (Attribute attribute : attributes) {
 			if(attributeExists(aClass,attribute)) Error.xmlAttributeExistent(this.xmlPath,attribute, aClass);
-			findXmlClass(aClass).attributes.add(XmlConverter.toXmlAttribute(attribute));
+			findXmlClass(aClass).attributes.add(Converter.toXmlAttribute(attribute));
 		}
 		return this;
 	}
@@ -335,7 +351,7 @@ public final class XML {
 	 * @return this instance of XML
 	 */
 	private XML addClass(Class<?> aClass){
-		xmlJmapper.classes.add(XmlConverter.toXmlClass(aClass));
+		xmlJmapper.classes.add(Converter.toXmlClass(aClass));
 		return this;
 	}
 	
@@ -435,4 +451,13 @@ public final class XML {
 		return null;
 	}
 	
+	/**
+	 * Returns true if the class is configured in xml, false otherwise.
+	 * @param clazz a class
+	 * @return true if the class is configured in xml, false otherwise
+	 */
+	public boolean isMapped(Class<?> clazz){
+		return isNotNull  (globalsLoad().get(clazz.getName()))
+			|| !isEmpty(attributesLoad().get(clazz.getName()));
+	}
 }

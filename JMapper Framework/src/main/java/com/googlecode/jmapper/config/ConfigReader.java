@@ -20,7 +20,8 @@ import static com.googlecode.jmapper.config.Constants.DEFAULT_FIELD_VALUE;
 import static com.googlecode.jmapper.config.Constants.THE_FIELD_IS_NOT_CONFIGURED;
 import static com.googlecode.jmapper.util.ClassesManager.existField;
 import static com.googlecode.jmapper.util.ClassesManager.getAllsuperclasses;
-import static com.googlecode.jmapper.util.ClassesManager.isMappedInXML;
+import static com.googlecode.jmapper.util.GeneralUtility.isNotNull;
+import static com.googlecode.jmapper.util.GeneralUtility.isNull;
 import static com.googlecode.jmapper.util.GeneralUtility.isPresent;
 import static com.googlecode.jmapper.util.GeneralUtility.toList;
 
@@ -34,7 +35,7 @@ import com.googlecode.jmapper.xml.Global;
 import com.googlecode.jmapper.xml.XML;
 
 /**
- * This Class reads the configuration of a specific field (analyzing Annotation AND/OR XML) and finds the target field name.
+ * This Class reads the configuration of a specific field (analyzing XML or annotation) and finds the target field name.
  * 
  * @author Alessandro Vurro
  *
@@ -57,17 +58,17 @@ public final class ConfigReader {
 	/**
 	 * This method compare the name of the target field with the DEFAULT_FIELD_VALUE and returns the final value.
 	 * 
-	 * @param value value of the configuration
-	 * @param name name of the configured field
+	 * @param value configuration parameter
+	 * @param mappedFieldName name of the configured field
 	 * @return the name of target field
 	 * 
 	 * @see Constants#DEFAULT_FIELD_VALUE
 	 */
-	private String getValue(final String value, final String name) {
+	private String getValue(final String value, final String mappedFieldName) {
 		
-		if (value == null) return null;
+		if (isNull(value)) return null;
 		
-		return value.equals(DEFAULT_FIELD_VALUE)?name:value;
+		return value.equals(DEFAULT_FIELD_VALUE)?mappedFieldName:value;
 	}
 	
 	/**
@@ -75,21 +76,18 @@ public final class ConfigReader {
 	 * @param attributes target list of field names
 	 * @param classes list of target classes
 	 * @param value name of target attribute
-	 * @param fieldName name of mapped attribute
+	 * @param mappedFieldName name of mapped attribute
 	 * @param configuredClass configured Class
 	 * @param targetClass target Class
 	 * @return the name of the target field if exist, null otherwise
 	 */
-	private String getValue(final List<String> attributes,final List<Class<?>> classes,String value,final String fieldName,final Class<?> configuredClass,final Class<?> targetClass){
+	private String getValue(final List<String> attributes,final List<Class<?>> classes,String value,final String mappedFieldName,final Class<?> configuredClass,final Class<?> targetClass){
 		
-		String mappedFieldName = fieldName;
-		String targetFieldName = getValue(value,fieldName);
+		String targetFieldName = getValue(value,mappedFieldName);
 		String mappedClassName = configuredClass.getSimpleName();
 		String targetClassName = targetClass.getSimpleName();
 
-		/*	
-		 * 		IF ATTRIBUTES AND CLASSES ARE EMPTY
-		 */ 
+		/* 		IF ATTRIBUTES AND CLASSES ARE EMPTY		 */ 
 		if( attributes.isEmpty() && classes.isEmpty() ){
 			if(existField(targetClass,targetFieldName))
 				return targetFieldName;
@@ -97,9 +95,7 @@ public final class ConfigReader {
 			Error.mapping(mappedFieldName, mappedClassName, targetFieldName, targetClassName);
 		}
 		
-		/*
-		 * 		IF ATTRIBUTES IS EMPTY AND CLASSES NOT
-		 */
+		/* 		IF ATTRIBUTES IS EMPTY AND CLASSES NOT		 */
 		if( attributes.isEmpty() && !classes.isEmpty() ){
 			if(classes.contains(targetClass) && existField(targetClass,targetFieldName)) 
 				return targetFieldName;
@@ -107,9 +103,7 @@ public final class ConfigReader {
 			Error.mapping(mappedFieldName, mappedClassName, targetFieldName, targetClassName);
 		}
 		
-		/*
-		 * 		IF  ATTRIBUTES AND CLASSES ARE VALUED AND THEY HAVE THE SAME LENGTH
-		 */
+		/* 		IF  ATTRIBUTES AND CLASSES ARE VALUED AND THEY HAVE THE SAME LENGTH		 */
 		if( !attributes.isEmpty() && !classes.isEmpty() )
 			if(attributes.size()==classes.size())
 				if(classes.contains(targetClass)){
@@ -126,9 +120,7 @@ public final class ConfigReader {
 			else
 					Error.mapping(mappedFieldName, mappedClassName);
 			
-		/*
-		 * 		IF ATTRIBUTES IS FULL AND CLASSES IS EMPTY
-		 */
+		/* 		IF ATTRIBUTES IS FULL AND CLASSES IS EMPTY		 */
 		if( !attributes.isEmpty() && classes.isEmpty() )
 			for (String str : attributes)
 				// if exist the target field in targetClass 
@@ -150,10 +142,11 @@ public final class ConfigReader {
 		
 		// If configuredClass exists in XML configuration file
 		for (Class<?> clazz : getAllsuperclasses(configuredClass)){
-		  if(isMappedInXML(clazz, xml)){
+		  if(xml.isMapped(clazz)){
 			
 			Global global = xml.globalsLoad().get(clazz.getName());
-			if(global != null && !isPresent(global.getExcluded(), field.getName())){
+			
+			if(isNotNull(global) && !isPresent(global.getExcluded(), field.getName())){
 				// get the classes of the xmlField
 				List<Class<?>> classes = toList(global.getClasses());
 				
@@ -169,7 +162,7 @@ public final class ConfigReader {
 				// If the Value and Attributes parameters are empty, 
 				// then the name of the target field is equal to the configuredField name, 
 				// therefore we pass the default value we use to indicate equality
-				if(value==null&&attributes.isEmpty())value=DEFAULT_FIELD_VALUE;
+				if(isNull(value) && attributes.isEmpty()) value = DEFAULT_FIELD_VALUE;
 				
 				// loaded all variables, calculates and returns the correspondence
 				return getValue(attributes, classes, value, field.getName(), clazz, targetClass);
@@ -200,7 +193,7 @@ public final class ConfigReader {
 				// If the Value and Attributes parameters are empty, 
 				// then the name of the target field is equal to the configuredField name, 
 				// therefore we pass the default value we use to indicate equality
-				if(value==null&&attributes.isEmpty())value=DEFAULT_FIELD_VALUE;
+				if(isNull(value) && attributes.isEmpty()) value = DEFAULT_FIELD_VALUE;
 				
 				// loaded all variables, calculates and returns the correspondence
 				return getValue(attributes, classes, value, field.getName(), clazz, targetClass);
@@ -210,11 +203,11 @@ public final class ConfigReader {
 		
 		// if class is configured in xml the annotated configuration is not searched
 		// if it has a configured superclass it's ignored, the priority is valid only for principal class
-		if(isMappedInXML(configuredClass, xml))return THE_FIELD_IS_NOT_CONFIGURED;
+		if(xml.isMapped(configuredClass))return THE_FIELD_IS_NOT_CONFIGURED;
 		
 		JGlobalMap jglobalMap = configuredClass.getAnnotation(JGlobalMap.class);
 		//if the field configuration is defined in the global map
-		if(jglobalMap != null && !isPresent(jglobalMap.excluded(), field.getName())){
+		if(isNotNull(jglobalMap) && !isPresent(jglobalMap.excluded(), field.getName())){
 			
 			// get the list of target classes
 			List<Class<?>> classes = toList(jglobalMap.classes());
@@ -234,7 +227,7 @@ public final class ConfigReader {
 		    
 		// if the XML configuration doesn't exist, checks the annotation existence
 		JMap jmap = field.getAnnotation(JMap.class);
-		if(jmap==null) return THE_FIELD_IS_NOT_CONFIGURED;
+		if(isNull(jmap)) return THE_FIELD_IS_NOT_CONFIGURED;
 			
 		// get the list of target classes
 		List<Class<?>> classes = toList(jmap.classes());

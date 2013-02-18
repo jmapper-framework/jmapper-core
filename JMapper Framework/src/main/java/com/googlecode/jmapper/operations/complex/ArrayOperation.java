@@ -17,7 +17,10 @@
 package com.googlecode.jmapper.operations.complex;
 
 import static com.googlecode.jmapper.util.ClassesManager.getArrayItemClass;
-import static com.googlecode.jmapper.util.GeneralUtility.newLine;
+import static com.googlecode.jmapper.util.GeneralUtility.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This Class represents the mappings between Arrays.
@@ -29,29 +32,33 @@ public class ArrayOperation extends AComplexOperation {
 	/** @return Returns the name of the object shared between existingField and fieldToCreate methods.*/
 	@Override
 	protected Object getSourceConverted(){
-		return "arrayOfDestination"+count;
+		return c("arrayOfDestination");
 	}
 	
 	@Override
 	protected StringBuilder existingField() {
 
-		Object destClass = getArrayItemClass(destinationField).getName();
-		Object destArray = getSourceTreated();
-		Object newArray	 = "newDestination"+count;
-		Object depArray  = "dep"+count;
-		Object i     = "index"  +count;
-		Object index = "counter"+count;
-
-		return write(   "   ",destClass,"[] ",depArray," = ",getDestination(),";",
-			  newLine , "   ",destClass,"[] ",newArray," = new ",destClass,"[",depArray,".length + ",destArray,".length];",
-			  newLine , "   int ",index," = 0;",
-			  newLine , "   for(int ",i," = ",depArray,".length-1;",i," >=0;",i,"--){",
-			  newLine , "   ",newArray,"[",index,"++] = ",depArray,"[",i,"];",
-			  newLine , "   }",
-			  newLine , "   for(int ",i," = ",destArray,".length-1;",i," >=0;",i,"--){",
-			  newLine , "   ",newArray,"[",index,"++] = ",destArray,"[",i,"];",
-			  newLine , "   }",
-			  newLine ,     setDestination(newArray));
+		Map<String, String> vars = new HashMap<String, String>();
+		
+		vars.put("dClass"                ,getArrayItemClass(destinationField).getName());
+		vars.put("source"                ,s(getSourceTreated()));
+		vars.put("result"                ,c("newDestination"));
+		vars.put("setDestination(result)",s(setDestination(c("newDestination"))));
+		vars.put("destination"           ,c("dep"));
+		vars.put("i"                     ,c("index"));
+		vars.put("y"                     ,c("counter"));
+		vars.put("getDestination()"      ,s(getDestination()));
+		
+		return write(replace$("   $dClass[] $destination = $getDestination();"
+				  + newLine + "   $dClass[] $result = new $dClass[$destination.length + $source.length];"
+				  + newLine + "   int $y = 0;"
+				  + newLine + "   for(int $i = $destination.length-1;$i >=0;$i--){"
+				  + newLine + "   $result[$y++] = $destination[$i];"
+				  + newLine + "   }"
+				  + newLine + "   for(int $i = $source.length-1;$i >=0;$i--){"
+				  + newLine + "   $result[$y++] = $source[$i];"
+				  + newLine + "   }"
+				  + newLine + "$setDestination(result)",vars));
 
 	}
 
@@ -65,29 +72,32 @@ public class ArrayOperation extends AComplexOperation {
 
 		Class<?> itemDClass = getArrayItemClass(destinationField);
 		Class<?> itemSClass = getArrayItemClass(sourceField);
-
-		Object destination 	 = getSourceConverted();
-		Object source   = "arrayOfSource"+count;
-		Object itemSName = "objectOfSoure"+count;
-		Object itemDName   = "objectOfDestination"+count;
-
-		Object i = "index"+count++;
-		Object itemS = itemSClass.getName();
-		Object itemD = itemDClass.getName();
-
-		Object conversion = applyImplicitConversion(info.getConversionType(), itemDClass, itemSClass, itemSName);
-
-		if(conversion.equals(itemSName))return content;
+		Object sItem = "objectOfSoure"+count;
+		Object conversion = applyImplicitConversion(info.getConversionType(), itemDClass, itemSClass, sItem);
+		Map<String, String> vars = new HashMap<String, String>();
 		
+		vars.put("dClass"                ,itemDClass.getName());
+		vars.put("sClass"                ,itemSClass.getName());
+		vars.put("dItem"				 ,c("objectOfDestination"));
+		vars.put("sItem"                 ,s(sItem));
+		vars.put("source"                ,c("arrayOfSource"));
+		vars.put("destination"           ,s(getSourceConverted()));
+		vars.put("i"                     ,c("index"));
+		vars.put("getSource()"           ,s(getSource()));
+		vars.put("conversion"            ,s(conversion));
+		
+		count++;
+		
+		if(conversion.equals(sItem))return content;
 
-		return write(   "   ",itemS,"[] ",source," = ",getSource(),";",
-			  newLine , "   ",itemD,"[] ",destination," = new ",itemD,"[",source,".length];",
-			  newLine , "   for(int ",i," = ",source,".length-1;",i," >=0;",i,"--){",
-			  newLine , "   ",itemS," ",itemSName," = (",itemS,") ",source,"[",i,"];",
-			  newLine , "   ",itemD," ",itemDName," = " ,conversion,";",
-			  newLine , "   ",destination,"[",i,"] = ",itemDName,";",
-			  newLine , "   }",
-			  newLine , 	content , newLine);
+		return write(replace$("   $sClass[] $source = $getSource();"
+				  + newLine + "   $dClass[] $destination = new $dClass[$source.length];"
+				  + newLine + "   for(int $i = $source.length-1;$i >=0;$i--){"
+				  + newLine + "   $sClass $sItem = ($sClass) $source[$i];"
+				  + newLine + "   $dClass $dItem = $conversion;"
+				  + newLine + "   $destination[$i] = $dItem;"
+				  + newLine + "   }"
+				  + newLine + 	content + newLine,vars));
 	}
 
 	/** the count is used to differentiate local variables in case of recursive mappings.
@@ -95,4 +105,13 @@ public class ArrayOperation extends AComplexOperation {
 	 *  it's static for ensure the uniqueness
 	 */ 
 	private static int count = 0;
+	
+	/**
+	 * Appends the count to string.
+	 * @param str
+	 * @return str + count;
+	 */
+	private String c(String str){
+		return str + count;
+	}
 }

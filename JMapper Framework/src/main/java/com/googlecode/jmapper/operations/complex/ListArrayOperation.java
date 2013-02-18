@@ -17,9 +17,10 @@ package com.googlecode.jmapper.operations.complex;
 
 import static com.googlecode.jmapper.util.ClassesManager.getArrayItemClass;
 import static com.googlecode.jmapper.util.ClassesManager.getCollectionItemClass;
-import static com.googlecode.jmapper.util.GeneralUtility.listIsAssignableFrom;
-import static com.googlecode.jmapper.util.GeneralUtility.newLine;
-import static com.googlecode.jmapper.util.GeneralUtility.sortedSetIsAssignableFrom;
+import static com.googlecode.jmapper.util.GeneralUtility.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This Class represents the mappings between Lists as destination fields and Arrays as source fields.
@@ -49,43 +50,62 @@ public class ListArrayOperation extends AComplexOperation{
 		
 		Class<?> dItemType = getCollectionItemClass(destinationField);
 		Class<?> sItemType = getArrayItemClass(sourceField);
+		Object sItem = c("objectOfSource");
+		Object destination = getSourceConverted();
+		Object conversion = applyImplicitConversion(info.getConversionType(), dItemType, sItemType, sItem);
 		
-		Object dList = getSourceConverted();
-		Object sList = "collectionOfSource"+count;
-		Object sName = "objectOfSource"+count;
-		Object dName = "objectOfDestination"+count;
-		Object i     = "index"+count++;
+		Map<String, String> vars = new HashMap<String, String>();
 		
-		Object sItem = sItemType.getName();
-		Object dItem = dItemType.getName();
-
-		Object conversion = applyImplicitConversion(info.getConversionType(), dItemType, sItemType, sName);
+		vars.put("dClass"                  ,dItemType.getName());
+		vars.put("sClass"                  ,sItemType.getName());
+		vars.put("dItem"				   ,c("objectOfDestination"));
+		vars.put("sItem"                   ,s(sItem));
+		vars.put("source"                  ,c("collectionOfSource"));
+		vars.put("destination"             ,s(destination));
+		vars.put("i"                       ,c("index"));
+		vars.put("getSource()"             ,s(getSource()));
+		vars.put("conversion"              ,s(conversion));
+		vars.put("newInstance(destination)",s(newInstance(destination)));
 		
-		if(conversion.equals(sName)){
+		count++;
+		
+		if(conversion.equals(sItem)){
 			StringBuilder sb = new StringBuilder();
+			
 			// optimization applied to class type
-			 if(   listIsAssignableFrom(getDestinationClass())
-				|| sortedSetIsAssignableFrom(getDestinationClass()))
-							write(sb,"   ",newInstance(dList,"java.util.Arrays#asList("+getSource()+")"),newLine);
+			if(         listIsAssignableFrom(getDestinationClass())
+		        || sortedSetIsAssignableFrom(getDestinationClass()))
+				 
+				    write(sb,"   ",newInstance(destination,"java.util.Arrays#asList("+getSource()+")"),newLine);
 			 
-			 else           write(sb,"   ",newInstance(dList),newLine
-					             ,"   ",dList,".addAll(java.util.Arrays#asList(",getSource(),"));" ,newLine);
+			 else   write(sb,"   ",newInstance(destination),newLine,
+					         "   ",destination,".addAll(java.util.Arrays#asList(",getSource(),"));",newLine);
 			 
 			 return write(sb,content);
 		}
 		
-		return write(   "   ",newInstance(dList),
-			  newLine , "   ",sItem,"[] ",sList," = ",getSource(),";",
-			  newLine , "   for(int ",i," = ",sList,".length-1;",i," >=0;",i,"--){",
-			  newLine , "   ",sItem," ",sName," = (",sItem,") ",sList,"[",i,"];",
-			  newLine , "   ",dItem," ",dName," = ", conversion ,";",
-			  newLine , "   ",dList,".add(",dName,");",
-			  newLine , "   }",
-			  newLine , 	content , newLine);
+		return write(replace$("   $newInstance(destination)"
+				  + newLine + "   $sClass[] $source = $getSource();"
+				  + newLine + "   for(int $i = $source.length-1;$i >=0;$i--){"
+				  + newLine + "   $sClass $sItem = ($sClass) $source[$i];"
+				  + newLine + "   $dClass $dItem = $conversion;"
+				  + newLine + "   $destination.add($dItem);"
+				  + newLine + "   }"
+				  + newLine + 	  content + newLine,vars));
 	}
+	
 	/** the count is used to differentiate local variables in case of recursive mappings.
 	 *  Count is shared between all operation of this type, 
 	 *  it's static for ensure the uniqueness
 	 */ 
 	private static int count = 0;
+	
+	/**
+	 * Appends the count to string.
+	 * @param str
+	 * @return str + count;
+	 */
+	private String c(String str){
+		return str + count;
+	}
 }

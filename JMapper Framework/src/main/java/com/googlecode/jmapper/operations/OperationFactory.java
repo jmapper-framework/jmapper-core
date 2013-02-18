@@ -15,21 +15,32 @@
  */
 package com.googlecode.jmapper.operations;
 
+import static com.googlecode.jmapper.util.GeneralUtility.implementationClass;
+import java.lang.reflect.Field;
+import java.util.List;
+import java.util.Set;
+import com.googlecode.jmapper.enums.ChooseConfig;
 import com.googlecode.jmapper.enums.OperationType;
+import com.googlecode.jmapper.generation.beans.Method;
+import com.googlecode.jmapper.operations.complex.AComplexOperation;
 import com.googlecode.jmapper.operations.complex.ArrayListOperation;
 import com.googlecode.jmapper.operations.complex.ArrayOperation;
 import com.googlecode.jmapper.operations.complex.CollectionOperation;
 import com.googlecode.jmapper.operations.complex.ConversionOperation;
 import com.googlecode.jmapper.operations.complex.ListArrayOperation;
 import com.googlecode.jmapper.operations.complex.MapOperation;
+import com.googlecode.jmapper.operations.info.InfoOperation;
+import com.googlecode.jmapper.operations.recursive.ARecursiveOperation;
 import com.googlecode.jmapper.operations.recursive.MappedArrayListOperation;
 import com.googlecode.jmapper.operations.recursive.MappedArrayOperation;
 import com.googlecode.jmapper.operations.recursive.MappedCollectionOperation;
 import com.googlecode.jmapper.operations.recursive.MappedListArrayOperation;
 import com.googlecode.jmapper.operations.recursive.MappedMapOperation;
 import com.googlecode.jmapper.operations.recursive.ObjectOperation;
+import com.googlecode.jmapper.operations.simple.ASimpleOperation;
 import com.googlecode.jmapper.operations.simple.BasicConversion;
 import com.googlecode.jmapper.operations.simple.BasicOperation;
+import com.googlecode.jmapper.xml.XML;
 
 /**
  * Operation Factory.
@@ -38,30 +49,104 @@ import com.googlecode.jmapper.operations.simple.BasicOperation;
  */
 public class OperationFactory {
 
+	private XML xml;
+	private ChooseConfig configurationChosen;
+	private List<ASimpleOperation> simpleOperations;
+	private List<AComplexOperation> complexOperations;
+	
+	public OperationFactory(XML xml, ChooseConfig configurationChosen, List<ASimpleOperation> simpleOperations, List<AComplexOperation> complexOperations) {
+		this.configurationChosen = configurationChosen;
+		this.xml = xml;
+		this.simpleOperations = simpleOperations;
+		this.complexOperations = complexOperations;
+	}
+	
 	/**
-	 * For an instruction type returns an operation.
-	 * @param instructionType
+	 * Returns an operation relative to operation to perform.
+	 * @param operationType operation type
+	 * @param sourceField source field
+	 * @param destinationField destination field
+	 * @param info info operation
+	 * @param methodsToGenerate 
 	 * @return a new instance of AGeneralOperation
 	 */
-	public static AGeneralOperation getOperation(OperationType instructionType){
-		switch(instructionType){
-			case BASIC_INSTRUCTION:			   return new BasicOperation();
-			case BASIC_CONVERSION:             return new BasicConversion();
-			case OBJECT:					   return new ObjectOperation();
-			case ARRAY: 					   return new ArrayOperation();
-			case ARRAY_LIST:				   return new ArrayListOperation();
-			case LIST_ARRAY:			       return new ListArrayOperation();
-			case ARRAY_WITH_MAPPED_ITEMS:	   return new MappedArrayOperation();
-			case ARRAY_LIST_WITH_MAPPED_ITEMS: return new MappedArrayListOperation();
-			case LIST_ARRAY_WITH_MAPPED_ITEMS: return new MappedListArrayOperation();
-			case COLLECTION: 				   return new CollectionOperation();
-			case COLLECTION_WITH_MAPPED_ITEMS: return new MappedCollectionOperation();
-			case MAP:	     				   return new MapOperation();
-			case MAP_WITH_MAPPED_ITEMS: 	   return new MappedMapOperation();
-			case CONVERSION: 				   return new ConversionOperation();
-			default: return null;
+	public AGeneralOperation get(OperationType operationType, Field destinationField, Field sourceField, InfoOperation info, Set<Method> methodsToGenerate){
+		AGeneralOperation operation = null;
+		switch(operationType){
+			case BASIC_INSTRUCTION:			   operation = new BasicOperation();			break;
+			case BASIC_CONVERSION:             operation = new BasicConversion();			break;
+			case OBJECT:					   operation = new ObjectOperation();			break;
+			case ARRAY: 					   operation = new ArrayOperation();			break;
+			case ARRAY_LIST:				   operation = new ArrayListOperation();		break;
+			case LIST_ARRAY:			       operation = new ListArrayOperation();		break;
+			case ARRAY_WITH_MAPPED_ITEMS:	   operation = new MappedArrayOperation();		break;
+			case ARRAY_LIST_WITH_MAPPED_ITEMS: operation = new MappedArrayListOperation();	break;
+			case LIST_ARRAY_WITH_MAPPED_ITEMS: operation = new MappedListArrayOperation();	break;
+			case COLLECTION: 				   operation = new CollectionOperation();		break;
+			case COLLECTION_WITH_MAPPED_ITEMS: operation = new MappedCollectionOperation();	break;
+			case MAP:	     				   operation = new MapOperation();				break;
+			case MAP_WITH_MAPPED_ITEMS: 	   operation = new MappedMapOperation();		break;
+			case CONVERSION: 				   operation = new ConversionOperation();		break;
+			default: break;
 		}
+		
+		if(operationType.isBasic())
+			simpleOperations.add((ASimpleOperation) operation);	
+			
+		if(operationType.isComplex())
+			complexOperations.add(((AComplexOperation) operation).setDestinationClass(defineStructure(destinationField, sourceField)));
+				
+		if(operationType.isRecursive())
+			((ARecursiveOperation) operation).setMethodsToGenerate(methodsToGenerate)
+			 							     .setXml(xml)
+			                                 .setConfigChosen(info.getConfigChosen()==null // if both classes are configured
+									                    	  ?configurationChosen		   // returns the configuration chosen
+											                  :info.getConfigChosen());    // else returns the configuration retrieved
+		// common settings
+		operation.setDestinationField(destinationField)
+				 .setSourceField(sourceField)
+				 .setInfoOperation(info);
+		
+		return operation;
 	}
-
-
+	
+	/**
+	 * This method defines the destination structure for this operation.
+	 * If destination class is an interface, a relative implementation will be found.
+	 * 
+	 * @param destination destination field
+	 * @param source source field
+	 */
+	private Class<?> defineStructure(Field destination, Field source){
+		
+		Class<?> destinationClass = destination.getType();
+		Class<?> sourceClass = source.getType();
+		
+		Class<?> result = null;
+		
+		// if destination is an interface
+		if(destinationClass.isInterface())
+			// if source is an interface
+			if(sourceClass.isInterface())
+					// retrieves the implementation of the destination interface
+					result = (Class<?>) implementationClass.get(destinationClass.getName());
+			// if source is an implementation	
+			else{
+				// retrieves source interface
+				Class<?> sourceInterface = sourceClass.getInterfaces()[0];
+				// if the destination and source interfaces are equal
+				if(destinationClass == sourceInterface)
+					// assigns implementation to destination
+					result = sourceClass;
+				// if they are different
+				else
+					// destination gets the implementation of his interface
+					result = (Class<?>) implementationClass.get(destinationClass.getName());
+			}
+		// if destination is an implementation
+		else
+			result = destinationClass;
+		
+		return result;
+	}	
 }
