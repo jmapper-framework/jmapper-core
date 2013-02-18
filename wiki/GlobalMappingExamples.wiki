@@ -27,7 +27,7 @@ Destination destination = mapper.getDestination(new Source("Alessandro",new Date
 }}}
 output:
 {{{
-Destination [name="Alessandro", currentDate=, value=5000, other=null]
+Destination [name="Alessandro", currentDate=Mon Feb 18 17:56:23 CET 2013, value=5000, other=null]
 }}}
 
 == 2° Scenario ==
