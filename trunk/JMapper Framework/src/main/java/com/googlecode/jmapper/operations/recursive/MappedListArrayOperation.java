@@ -18,7 +18,10 @@ package com.googlecode.jmapper.operations.recursive;
 import static com.googlecode.jmapper.enums.MappingType.ALL_FIELDS;
 import static com.googlecode.jmapper.util.ClassesManager.getArrayItemClass;
 import static com.googlecode.jmapper.util.ClassesManager.getCollectionItemClass;
-import static com.googlecode.jmapper.util.GeneralUtility.newLine;
+import static com.googlecode.jmapper.util.GeneralUtility.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import com.googlecode.jmapper.generation.MapperConstructor;
 
@@ -31,7 +34,7 @@ public class MappedListArrayOperation extends ARecursiveOperation{
 
 	@Override
 	protected Object getSourceConverted() {
-		return "listArrayOfDestination"+count;
+		return c("listArrayOfDestination");
 	}
 	
 	@Override
@@ -46,27 +49,35 @@ public class MappedListArrayOperation extends ARecursiveOperation{
 
 	@Override
 	protected StringBuilder sharedCode(StringBuilder content) {
-		Object destList 	 = getSourceConverted();
-		String sourceList    = "collectionOfSource"+count;
-		String itemSName = "objectOfSoure"+count;
-		String itemDName = "objectOfDestination"+count;
+		String sItem = c("objectOfSoure");
+		String dItem = c("objectOfDestination");
 		
 		Class<?> itemDClass = getCollectionItemClass(destinationField);
 		Class<?> itemSClass = getArrayItemClass(sourceField);
 		
-		MapperConstructor mapper = new MapperConstructor(itemDClass, itemSClass, itemDName, itemDName, itemSName, configChosen, xml,methodsToGenerate);
+		String mapping = s(new MapperConstructor(itemDClass, itemSClass, dItem, dItem, sItem, configChosen, xml,methodsToGenerate)
+						                          .mapping(newInstance, ALL_FIELDS, getMts()));
 		
-		String i = "index"+count++;
-		String itemSType = itemSClass.getName();
+		Map<String, String> vars = new HashMap<String, String>();
 		
-		return write(	"   ",newInstance(destList),
-			  newLine , "   ",itemSType,"[] ",sourceList," = ",getSource(),";",
-			  newLine , "   for(int ",i," = ",sourceList,".length-1;",i," >=0;",i,"--){",
-			  newLine , "   ",itemSType," ",itemSName," = ",sourceList,"[",i,"];",
-			  newLine , 	mapper.mapping(newInstance, ALL_FIELDS, getMts()),
-			  newLine , "   ",destList,".add(",itemDName,");",
-			  newLine , "   }",
-			  newLine , 	content , newLine);
+		vars.put("sClass"				   ,itemSClass.getName());
+		vars.put("newInstance(destination)",s(newInstance(getSourceConverted())));
+		vars.put("destination"             ,s(getSourceConverted()));
+		vars.put("source"                  ,c("collectionOfSource"));
+		vars.put("getSource()"             ,s(getSource()));
+		vars.put("i"                       ,c("index"));
+		vars.put("sItem"				   ,sItem);
+		vars.put("dItem"				   ,dItem);
+		vars.put("mapping"				   ,mapping);
+		
+		return write(replace$("   $newInstance(destination)"
+				  + newLine + "   $sClass[] $source = $getSource();"
+				  + newLine + "   for(int $i = $source.length-1;$i >=0;$i--){"
+				  + newLine + "   $sClass $sItem = $source[$i];"
+				  + newLine + 	  "$mapping"
+				  + newLine + "   $destination.add($dItem);"
+				  + newLine + "   }"
+				  + newLine + 	content + newLine,vars));
 		
 	}
 	
@@ -74,4 +85,14 @@ public class MappedListArrayOperation extends ARecursiveOperation{
 	 *  Count is shared between all operation of this type, 
 	 *  it's static for ensure the uniqueness
 	 */ 
-	private static int count = 0;}
+	private static int count = 0;
+	
+	/**
+	 * Appends the count to string.
+	 * @param str
+	 * @return str + count;
+	 */
+	private String c(String str){
+		return str + count;
+	}
+}

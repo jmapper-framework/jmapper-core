@@ -65,21 +65,21 @@ public abstract class ARecursiveOperation extends AComplexOperation{
 	 * @return the set destination path
 	 */
 	protected String setDName(){
-		return setDestination().toString();
+		return s(setDestination());
 	}
 	
 	/**
 	 * @return the get destination path
 	 */
 	protected String getDName(){
-		return getDestination().toString();
+		return s(getDestination());
 	}
 	
 	/**
 	 * @return the get source path
 	 */
 	protected String getSName(){
-		return getSource().toString();
+		return s(getSource());
 	}
 
 	/**

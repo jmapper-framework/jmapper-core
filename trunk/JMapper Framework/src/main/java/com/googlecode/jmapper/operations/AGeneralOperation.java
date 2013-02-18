@@ -175,24 +175,4 @@ public abstract class AGeneralOperation extends AGeneralOperationAccessor{
 	protected boolean theSourceIsToBeConverted(){
 		return !info.getConversionType().isAbsent();
 	}
-
-	/**
-	 * This method adds to the new StringBuilder the objects.
-	 * @param objects objects to be added to a StringBuilder
-	 * @return the StringBuilder created
-	 */
-	protected final StringBuilder write(final Object... objects){
-		return write(new StringBuilder(), objects);
-	}
-
-	/**
-	 * This method adds to the sb the objects.
-	 * @param sb StringBuilder to be used
-	 * @param objects objects to be added to sb
-	 * @return the sb parameter
-	 */
-	protected final StringBuilder write(StringBuilder sb,final Object... objects){
-		for (Object string : objects)sb.append(string);
-		return sb;
-	}
 }

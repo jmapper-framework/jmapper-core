@@ -34,7 +34,7 @@ public class MapOperation extends AComplexOperation {
 	
 	@Override
 	protected Object getSourceConverted() {
-		return "mapOfDestination"+count;
+		return c("mapOfDestination");
 	}
 	
 	@Override
@@ -55,7 +55,7 @@ public class MapOperation extends AComplexOperation {
 		
 		// in all those cases in which it is necessary to convert the structure
 		else{
-			String map = "complexMap"+count;
+			String map = c("complexMap");
 			return write("   ",newInstance(map)
 			, newLine  , "   ",map,".putAll(",getSource(),");"
 			, newLine  ,       setDestination(map));
@@ -68,8 +68,8 @@ public class MapOperation extends AComplexOperation {
 		if(!theSourceIsToBeConverted()){count++; return content;}
 		
 		Object destMap 	  = getSourceConverted();
-		Object entryList  = "mapOfSource"+count;
-		Object i = "index"+count;
+		Object entryList  = c("mapOfSource");
+		Object i = c("index");
 		
 		Class<?> itemDKClass = getGenericMapKeyItem(destinationField);
 		Class<?> itemSKClass = getGenericMapKeyItem(sourceField);
@@ -81,11 +81,13 @@ public class MapOperation extends AComplexOperation {
 		Object itemSVType = itemSVClass.getName();
 		Object itemDVType = itemDVClass.getName();
 		
-		Object itemSKName = "sourceKeyObj"+count;
-		Object itemDKName = "destinationKeyObj"+count;
-		Object itemSVName = "sourceValueObj"+count;
-		Object itemDVName = "destinationValueObj"+count;		
-		Object entryItem  = "entryItem"+count++;
+		Object itemSKName = c("sourceKeyObj");
+		Object itemDKName = c("destinationKeyObj");
+		Object itemSVName = c("sourceValueObj");
+		Object itemDVName = c("destinationValueObj");		
+		Object entryItem  = c("entryItem");
+		
+		count++;
 
 		InfoMapOperation mapInfo      = (InfoMapOperation) info;
 		StringBuilder keyConversion   = new StringBuilder();
@@ -124,4 +126,13 @@ public class MapOperation extends AComplexOperation {
 	 *  it's static for ensure the uniqueness
 	 */ 
 	private static int count = 0;
+	
+	/**
+	 * Appends the count to string.
+	 * @param str
+	 * @return str + count;
+	 */
+	private String c(String str){
+		return str + count;
+	}
 }

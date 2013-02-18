@@ -21,24 +21,19 @@ import static com.googlecode.jmapper.util.AutoBoxing.unBoxingOperations;
 import static com.googlecode.jmapper.util.GeneralUtility.collectionIsAssignableFrom;
 import static com.googlecode.jmapper.util.GeneralUtility.enrichList;
 import static com.googlecode.jmapper.util.GeneralUtility.getMethod;
-import static com.googlecode.jmapper.util.GeneralUtility.implementationClass;
 import static com.googlecode.jmapper.util.GeneralUtility.isAccessModifier;
 import static com.googlecode.jmapper.util.GeneralUtility.mSet;
 import static com.googlecode.jmapper.util.GeneralUtility.mapIsAssignableFrom;
 import static com.googlecode.jmapper.util.GeneralUtility.toList;
-import static com.googlecode.jmapper.util.GeneralUtility.isEmpty;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import com.googlecode.jmapper.annotations.JGlobalMap;
-import com.googlecode.jmapper.annotations.JMap;
-import com.googlecode.jmapper.annotations.JMultiMap;
-import com.googlecode.jmapper.annotations.JMultiMaps;
+
+import com.googlecode.jmapper.annotations.Annotation;
 import com.googlecode.jmapper.config.Error;
-import com.googlecode.jmapper.conversions.explicit.ConversionMethod;
 import com.googlecode.jmapper.enums.ChooseConfig;
 import com.googlecode.jmapper.xml.XML;
 
@@ -360,36 +355,9 @@ public final class ClassesManager {
 	 * @return true if the class is configured in annotation or xml, false otherwise
 	 */
 	public static boolean isMapped(Class<?> aClass,XML xml){
-		return isMappedInXML(aClass,xml) || isMappedInAnnotation(aClass);
+		return xml.isMapped(aClass) || Annotation.isMapped(aClass);
 	}
-	
-	/**
-	 * Returns true if the class is configured in xml, false otherwise.
-	 * @param aClass a class
-	 * @param xml object
-	 * @return true if the class is configured in xml, false otherwise
-	 */
-	public static boolean isMappedInXML(Class<?> aClass, XML xml){
-		return xml.globalsLoad().get(aClass.getName())!=null
-			|| !isEmpty(xml.attributesLoad().get(aClass.getName()));
-	}
-	
-	/**
-	 * Returns true if the class is configured in annotation, false otherwise.
-	 * @param aClass a class
-	 * @return true if the class is configured in annotation, false otherwise
-	 */
-	public static boolean isMappedInAnnotation(Class<?> aClass){
-		if(aClass.getAnnotation(JGlobalMap.class)!=null) return true;
-		for (Field it : aClass.getDeclaredFields()) 
-			if(it.getAnnotation(JMap.class)!=null      || 
-			   it.getAnnotation(JMultiMap.class)!=null ||
-			   it.getAnnotation(JMultiMaps.class)!=null) 
-				return true;
 		
-		return false;
-	}
-	
 	/**
 	 * Returns a list with the class passed in input plus his superclasses.
 	 * @param aClass class to check
@@ -421,22 +389,6 @@ public final class ClassesManager {
 		}
 		
 		return listOfFields;
-	}
-	
-	/**
-	 * Returns the conversions method belonging to clazz.
-	 * @param clazz class to check
-	 * @param xml xml object
-	 * @return the conversion method list
-	 */
-	public static List<ConversionMethod> getConversionMethods (Class<?> clazz, XML xml){
-		List<ConversionMethod> conversions = new ArrayList<ConversionMethod>();
-		Map<String, List<ConversionMethod>> conversionsMap = xml.conversionsLoad();
-		for (Class<?> classToCheck : getAllsuperclasses(clazz)){
-			List<ConversionMethod> methods = conversionsMap.get(classToCheck.getName());
-			if(methods != null)conversions.addAll(methods);
-		}
-		return conversions;
 	}
 	
 	/**
@@ -494,7 +446,7 @@ public final class ClassesManager {
 	 * @see <a href="http://en.wikipedia.org/wiki/JavaBean">javaBean conventions</a>
 	 */
 	public static void verifiesAccessorMethods(Class<?> clazz, Field... fields){
-		verifiesGetterMethods(clazz, fields);
+		verifiesGetterMethod(clazz, fields);
 		verifySetterMethods(clazz, fields);
 	}
 	
@@ -504,7 +456,7 @@ public final class ClassesManager {
 	 * @param fields fields to control
 	 * @see <a href="http://en.wikipedia.org/wiki/JavaBean">javaBean conventions</a>
 	 */
-	public static void verifiesGetterMethods(Class<?> clazz, Field... fields){
+	public static void verifiesGetterMethod(Class<?> clazz, Field... fields){
 		String methodName = null;
 		String fieldName = null;
 		Class<?> fieldType = null;
@@ -752,43 +704,5 @@ public final class ClassesManager {
 		}
 	}
 	
-	/**
-	 * This method defines the destination structure for this operation.
-	 * If destination class is an interface, a relative implementation will be found.
-	 * 
-	 * @param destination destination field
-	 * @param source source field
-	 */
-	public static Class<?> defineStructure(Field destination, Field source){
-		
-		Class<?> destinationClass = destination.getType();
-		Class<?> sourceClass = source.getType();
-		
-		Class<?> result = null;
-		
-		// if destination is an interface
-		if(destinationClass.isInterface())
-			// if source is an interface
-			if(sourceClass.isInterface())
-					// retrieves the implementation of the destination interface
-					result = (Class<?>) implementationClass.get(destinationClass.getName());
-			// if source is an implementation	
-			else{
-				// retrieves source interface
-				Class<?> sourceInterface = sourceClass.getInterfaces()[0];
-				// if the destination and source interfaces are equal
-				if(destinationClass == sourceInterface)
-					// assigns implementation to destination
-					result = sourceClass;
-				// if they are different
-				else
-					// destination gets the implementation of his interface
-					result = (Class<?>) implementationClass.get(destinationClass.getName());
-			}
-		// if destination is an implementation
-		else
-			result = destinationClass;
-		
-		return result;
-	}
+	
 }

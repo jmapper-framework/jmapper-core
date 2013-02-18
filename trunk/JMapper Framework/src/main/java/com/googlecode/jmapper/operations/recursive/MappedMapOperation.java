@@ -20,6 +20,10 @@ import static com.googlecode.jmapper.enums.MappingType.ALL_FIELDS;
 import static com.googlecode.jmapper.util.ClassesManager.getGenericMapKeyItem;
 import static com.googlecode.jmapper.util.ClassesManager.getGenericMapValueItem;
 import static com.googlecode.jmapper.util.GeneralUtility.newLine;
+import static com.googlecode.jmapper.util.GeneralUtility.replace$;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import com.googlecode.jmapper.enums.ConversionType;
 import com.googlecode.jmapper.enums.OperationType;
@@ -35,7 +39,7 @@ public class MappedMapOperation extends ARecursiveOperation {
 
 	@Override
 	protected Object getSourceConverted() {
-		return "mapOfDestination"+count;
+		return c("mapOfDestination");
 	}
 	
 	@Override
@@ -51,26 +55,22 @@ public class MappedMapOperation extends ARecursiveOperation {
 	@Override
 	protected StringBuilder sharedCode(StringBuilder content) {
 		
-		Object destMap 	 = getSourceConverted();
-		String entryList = "mapOfSource"+count;
-		String i = "index"+count;
-		
 		Class<?> itemDKClass = getGenericMapKeyItem(destinationField);
 		Class<?> itemSKClass = getGenericMapKeyItem(sourceField);
 		Class<?> itemDVClass = getGenericMapValueItem(destinationField);
 		Class<?> itemSVClass = getGenericMapValueItem(sourceField);
 		
-		Object itemSKType = itemSKClass.getName();
-		Object itemDKType = itemDKClass.getName();
-		Object itemSVType = itemSVClass.getName();
-		Object itemDVType = itemDVClass.getName();
+		Object skClass = itemSKClass.getName();
+		Object dkClass = itemDKClass.getName();
+		Object svClass = itemSVClass.getName();
+		Object dvClass = itemDVClass.getName();
 
-		String itemSKName = "sourceKeyObj"+count;
-		String itemDKName = "destinationKeyObj"+count;
-		String itemSVName = "sourceValueObj"+count;
-		String itemDVName = "destinationValueObj"+count;
-		Object entryItem  = "entryItem"+count++;
-		
+		String skItem = c("sourceKeyObj");
+		String dkItem = c("destinationKeyObj");
+		String svItem = c("sourceValueObj");
+		String dvItem = c("destinationValueObj");
+		Object sItem  = c("entryItem");
+				
 		InfoMapOperation mapInfo      = (InfoMapOperation) info;
 		StringBuilder keyConversion   = new StringBuilder();
 		StringBuilder valueConversion = new StringBuilder();
@@ -81,36 +81,55 @@ public class MappedMapOperation extends ARecursiveOperation {
 		ConversionType valueConversionType = mapInfo.getValueConversionType();
 		
 		if(keyInstruction.isBetweenMappedObjects()){
-			MapperConstructor mapper = new MapperConstructor(itemDKClass, itemSKClass, itemDKName, itemDKName, itemSKName, mapInfo.getKeyConfigChosen(), xml,methodsToGenerate);
+			MapperConstructor mapper = new MapperConstructor(itemDKClass, itemSKClass, dkItem, dkItem, skItem, mapInfo.getKeyConfigChosen(), xml,methodsToGenerate);
 			write(keyConversion,newLine, mapper.mapping(newInstance, ALL_FIELDS, getMts()));
 		}
 		
 		if(valueInstruction.isBetweenMappedObjects()){
-			MapperConstructor mapper = new MapperConstructor(itemDVClass, itemSVClass, itemDVName, itemDVName, itemSVName, mapInfo.getValueConfigChosen(), xml,methodsToGenerate);
+			MapperConstructor mapper = new MapperConstructor(itemDVClass, itemSVClass, dvItem, dvItem, svItem, mapInfo.getValueConfigChosen(), xml,methodsToGenerate);
 			write(valueConversion,newLine,mapper.mapping(newInstance, ALL_FIELDS, getMts()));
 		}
 		
 		if(keyInstruction.isBasic())
-			if(keyConversionType.isAbsent()) itemDKName = itemSKName;
-			else{ Object conversion = applyImplicitConversion(keyConversionType, itemDKClass, itemSKClass, itemSKName);
-				  write(keyConversion,newLine,"   ",itemDKType," ",itemDKName," = ",conversion,";");}
+			if(keyConversionType.isAbsent()) dkItem = skItem;
+			else{ Object conversion = applyImplicitConversion(keyConversionType, itemDKClass, itemSKClass, skItem);
+				  write(keyConversion,newLine,"   ",dkClass," ",dkItem," = ",conversion,";");}
 		
 		if(valueInstruction.isBasic())
-			if(valueConversionType.isAbsent()) itemDVName = itemSVName;
-			else{ Object conversion = applyImplicitConversion(valueConversionType, itemDVClass, itemSVClass, itemSVName);
-				  write(valueConversion,newLine,"   ",itemDVType," ",itemDVName," = ",conversion,";");}
+			if(valueConversionType.isAbsent()) dvItem = svItem;
+			else{ Object conversion = applyImplicitConversion(valueConversionType, itemDVClass, itemSVClass, svItem);
+				  write(valueConversion,newLine,"   ",dvClass," ",dvItem," = ",conversion,";");}
 		
-		return write(   "   ",newInstance(destMap),
-			  newLine , "   Object[] ",entryList," = ",getSource(),".entrySet().toArray();",
-			  newLine , "   for(int ",i," = ",entryList,".length-1;",i," >=0;",i,"--){",
-			  newLine , "   java.util.Map.Entry ",entryItem," = (java.util.Map.Entry) ",entryList,"[",i,"];",
-			  newLine , "   ",itemSKType," ",itemSKName," = (",itemSKType,") ",entryItem,".getKey();",
-			  newLine , "   ",itemSVType," ",itemSVName," = (",itemSVType,") ",entryItem,".getValue();",
-			  		  	     keyConversion,
-			  		  	     valueConversion,
-			  newLine , "   ",destMap,".put(",itemDKName,", ",itemDVName,");",
-			  newLine , "   }",
-			  newLine , 	content , newLine);
+		Map<String, String> vars = new HashMap<String, String>();
+		
+		vars.put("newInstance(destination)",s(newInstance(getSourceConverted())));
+		vars.put("destination"             ,s(getSourceConverted()));
+		vars.put("source"                  ,c("mapOfSource"));
+		vars.put("getSource()"             ,s(getSource()));
+		vars.put("i"                       ,c("index"));
+		vars.put("sItem"                   ,s(sItem));
+		vars.put("skClass"				   ,s(skClass));
+		vars.put("svClass"				   ,s(svClass));
+		vars.put("skItem"                  ,s(skItem));
+		vars.put("svItem"                  ,s(svItem));
+		vars.put("dkItem"                  ,s(dkItem));
+		vars.put("dvItem"                  ,s(dvItem));
+		vars.put("keyConversion"           ,s(keyConversion));
+		vars.put("valueConversion"         ,s(valueConversion));
+		
+		count++;
+		
+		return write(replace$("   $newInstance(destination)"
+				  + newLine + "   Object[] $source = $getSource().entrySet().toArray();"
+				  + newLine + "   for(int $i = $source.length-1;$i >=0;$i--){"
+				  + newLine + "   java.util.Map.Entry $sItem = (java.util.Map.Entry) $source[$i];"
+				  + newLine + "   $skClass $skItem = ($skClass) $sItem.getKey();"
+				  + newLine + "   $svClass $svItem = ($svClass) $sItem.getValue();"
+				   		    +     "$keyConversion"
+				  		    +     "$valueConversion"
+				  + newLine + "   $destination.put($dkItem, $dvItem);"
+				  + newLine + "   }"
+				  + newLine + 	content + newLine,vars));
 			
 	}
 	
@@ -119,4 +138,13 @@ public class MappedMapOperation extends ARecursiveOperation {
 	 *  it's static for ensure the uniqueness
 	 */ 
 	private static int count = 0;
+	
+	/**
+	 * Appends the count to string.
+	 * @param str
+	 * @return str + count;
+	 */
+	private String c(String str){
+		return str + count;
+	}
 }

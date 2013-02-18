@@ -24,13 +24,14 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Queue;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
-
+import java.util.regex.Pattern;
 import org.apache.commons.collections.bidimap.DualHashBidiMap;
 
 /**
@@ -359,4 +360,49 @@ public final class GeneralUtility {
 		return false;
 	}
 	
+	/**
+	 * Returns true if the input given as input is null, false otherwise.
+	 * @param obj object to check
+	 * @return true if the input given as input is null, false otherwise
+	 */
+	public static boolean isNull(Object obj){
+		return obj == null;
+	}
+	
+	/**
+	 * Returns true if the input given as input isn't null, false otherwise.
+	 * @param obj object to check
+	 * @return true if the input given as input isn't null, false otherwise
+	 */
+	public static boolean isNotNull(Object obj){
+		return obj != null;
+	}
+	
+	/**
+	 * Replaces the variables present in the text and returns the result.<br>
+	 * @param text text to edit
+	 * @param vars map with the string to replace as key and the respective value as value
+	 * @return the text resultant
+	 */
+	public static String replace (String text, Map<String, String> vars){
+		return replace(text, vars, "");
+	}
+	
+	/**
+	 * Replaces the variables present in the text and returns the result.<br>
+	 * Each key will be added to the $ prefix.
+	 * @param text text to edit
+	 * @param vars map with the string to replace as key and the respective value as value
+	 * @return the text resultant
+	 */
+	public static String replace$ (String text, Map<String, String> vars){
+		return replace(text, vars, "$");
+	}
+	
+	private  static String replace (String text, Map<String, String> vars, String prefix){
+		for (Entry<String, String> var : vars.entrySet())
+			text = text.replaceAll(Pattern.quote(prefix+var.getKey()), var.getValue());
+		
+		return text;
+	}
 }

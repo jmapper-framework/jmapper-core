@@ -18,6 +18,7 @@ package com.googlecode.jmapper.generation;
 import static com.googlecode.jmapper.generation.MapperGenerator.generateMapperClass;
 import static com.googlecode.jmapper.util.ClassesManager.mapperClassName;
 import static com.googlecode.jmapper.xml.XmlBuilder.loadXml;
+import static com.googlecode.jmapper.util.GeneralUtility.isNull;
 import java.util.HashSet;
 import java.util.Set;
 import com.googlecode.jmapper.IMapper;
@@ -56,12 +57,13 @@ public class MapperBuilder {
 		Set<Method> methodsToGenerate = new HashSet<Method>();
 		
 		Class<IMapper<D,S>> mapperClass = (Class<IMapper<D,S>>) generateMapperClass
-				(new MapperConstructor(destination,source,config,loadXml(path).atRuntime(),methodsToGenerate)
-		 		     .setMapperName(mapperClassName(destination, source,path)),methodsToGenerate);
+				( new MapperConstructor(destination,source,config,loadXml(path).atRuntime(),methodsToGenerate)
+		 		         .setMapperName(mapperClassName(destination, source,path))
+		 		 , methodsToGenerate);
 		
 		// a new instance is created to check the mapper implementation
-		try{ mapperClass.newInstance();}
-		catch (Throwable e) { if(path == null)Error.illegalCode(destination, source, e);
+		try{ mapperClass.newInstance(); }
+		catch (Throwable e) { if(isNull(path))Error.illegalCode(destination, source, e);
 							  else            Error.illegalCode(destination,source,path,e);}
 		return mapperClass;
 	}

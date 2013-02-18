@@ -23,18 +23,11 @@ import static com.googlecode.jmapper.enums.NullPointerControl.ALL;
 import static com.googlecode.jmapper.enums.NullPointerControl.DESTINATION;
 import static com.googlecode.jmapper.enums.NullPointerControl.NOT_ANY;
 import static com.googlecode.jmapper.enums.NullPointerControl.SOURCE;
-import static com.googlecode.jmapper.util.ClassesManager.isMappedInAnnotation;
-import static com.googlecode.jmapper.util.ClassesManager.isMappedInXML;
 import static com.googlecode.jmapper.util.GeneralUtility.newLine;
-
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
-
 import com.googlecode.jmapper.IMapper;
-import com.googlecode.jmapper.config.Constants;
 import com.googlecode.jmapper.config.Error;
 import com.googlecode.jmapper.enums.ChooseConfig;
 import com.googlecode.jmapper.enums.MappingType;
@@ -45,41 +38,57 @@ import com.googlecode.jmapper.operations.OperationHandler;
 import com.googlecode.jmapper.operations.complex.AComplexOperation;
 import com.googlecode.jmapper.operations.simple.ASimpleOperation;
 import com.googlecode.jmapper.xml.XML;
+
 /**
  * MapperConstructor builds all combinations of possible mappings between classes Source and Destination.<br>
  * 
  * @author Alessandro Vurro
  *
  */
-public class MapperConstructor {
+public class MapperConstructor extends MapperConstructorAccessor{
 
-	/** List of simple operations */
-	private List<ASimpleOperation> simpleOperations = new ArrayList<ASimpleOperation>();
-	
-	/** List of complex operations */
-	private List<AComplexOperation> complexOperations= new ArrayList<AComplexOperation>();
-	
-	/** List of methods to generate */
-	private Set<Method> methodsToGenerate;
-	
-	/** string used to set the destination instance into mapping */
-	private String stringOfSetDestination = Constants.DESTINATION_DEFAULT_NAME;;
-	
-	/** string used to get the destination instance into mapping */
-	private String stringOfGetDestination = Constants.DESTINATION_DEFAULT_NAME;;
+	/**
+	 * Returns a Map where the keys are the mappings names and relative values are the mappings.
+	 * @return a Map with all mapping combinations
+	 */
+	public java.util.Map<String,String> getMappings(){
+		
+		HashMap<String, String> mappings      = new HashMap<String, String> ();
+		HashMap<String, Boolean> destInstance = new HashMap<String, Boolean>();
+		
+		String s = "V";
+		
+		destInstance.put("null", true  );
+		destInstance.put("v"   , false );
+		
+		HashMap<String, NullPointerControl> nullPointer = new HashMap<String, NullPointerControl>();
+		
+		nullPointer.put("Not", NOT_ANY     );
+		nullPointer.put("All", ALL         );
+		nullPointer.put("Des", DESTINATION );
+		nullPointer.put("Sou", SOURCE      );
+		
+		HashMap<String, MappingType> mapping = new HashMap<String, MappingType>();		
+		
+		mapping.put("All"   , ALL_FIELDS         );
+		mapping.put("Valued", ONLY_VALUED_FIELDS );
+		mapping.put("Null"  , ONLY_NULL_FIELDS   );
+		
+		java.lang.reflect.Method[] methods = IMapper.class.getDeclaredMethods();
+		
+		for (Entry<String, Boolean> d : destInstance.entrySet()) 
+			for (Entry<String, NullPointerControl> npc : nullPointer.entrySet()) 
+				for (Entry<String, MappingType> mtd : mapping.entrySet()) 
+					for (Entry<String, MappingType> mts : mapping.entrySet()) {
+						String methodName = d.getKey()+s+npc.getKey()+mtd.getKey()+mts.getKey();
+						for (java.lang.reflect.Method method : methods) 
+							if(method.getName().equals(methodName))
+								mappings.put(methodName, wrapMapping(d.getValue(),npc.getValue(),mtd.getValue(),mts.getValue()));}
+		
+		mappings.put("get", "return null;"+newLine);
+		return mappings;
+	}
 
-	/** string used to get the source instance into mapping */
-	private String stringOfGetSource = Constants.SOURCE_DEFAULT_NAME;;
-	
-	/** class that identifies the Destination Class */
-	private Class<?> destination;
-
-	/** class that identifies the Source Class */
-	private Class<?> source;
-
-	/** mapper name */
-	private String mapperName;
-	
 	/**
 	 * This method adds the Null Pointer Control to mapping created by the mapping method.
 	 * wrapMapping is used to wrap the mapping returned by mapping method. 
@@ -162,53 +171,6 @@ public class MapperConstructor {
 	}
 	
 	/**
-	 * Returns a Map where the keys are the mappings names and relative values are the mappings.
-	 * @return a Map with all mapping combinations
-	 */
-	public java.util.Map<String,String> getMappings(){
-		
-		HashMap<String, String> mappings      = new HashMap<String, String> ();
-		HashMap<String, Boolean> destInstance = new HashMap<String, Boolean>();
-		
-		String s = "V";
-		
-		destInstance.put("null", true  );
-		destInstance.put("v"   , false );
-		
-		HashMap<String, NullPointerControl> nullPointer = new HashMap<String, NullPointerControl>();
-		
-		nullPointer.put("Not", NOT_ANY     );
-		nullPointer.put("All", ALL         );
-		nullPointer.put("Des", DESTINATION );
-		nullPointer.put("Sou", SOURCE      );
-		
-		HashMap<String, MappingType> mapping = new HashMap<String, MappingType>();		
-		
-		mapping.put("All"   , ALL_FIELDS         );
-		mapping.put("Valued", ONLY_VALUED_FIELDS );
-		mapping.put("Null"  , ONLY_NULL_FIELDS   );
-		
-		java.lang.reflect.Method[] methods = IMapper.class.getDeclaredMethods();
-		
-		for (Entry<String, Boolean> d : destInstance.entrySet()) 
-			for (Entry<String, NullPointerControl> npc : nullPointer.entrySet()) 
-				for (Entry<String, MappingType> mtd : mapping.entrySet()) 
-					for (Entry<String, MappingType> mts : mapping.entrySet()) {
-						String methodName = d.getKey()+s+npc.getKey()+mtd.getKey()+mts.getKey();
-						for (java.lang.reflect.Method method : methods) 
-							if(method.getName().equals(methodName))
-								mappings.put(methodName, wrapMapping(d.getValue(),npc.getValue(),mtd.getValue(),mts.getValue()));}
-		
-		mappings.put("get", "return null;"+newLine);
-		return mappings;
-	}
-
-	/**@return the list of methods to generate*/
-	public Set<com.googlecode.jmapper.generation.beans.Method> methodsToGenerate(){
-		return methodsToGenerate;
-	}
-	
-	/**
 	 * if it is a null setting returns the null mapping
 	 * @param makeDest true if destination is a new instance
 	 * @param mtd mapping type of destination
@@ -225,6 +187,7 @@ public class MapperConstructor {
 		}
 		return false;
 	}
+	
    /**
 	 * MapperConstructor takes in input all informations that need for to write the mappings.
 	 *
@@ -237,10 +200,10 @@ public class MapperConstructor {
 	 */
 	public MapperConstructor(Class<?> aDestination, Class<?> aSource,String aStringOfSetDestination,String aStringOfGetDestination,String aStringOfGetSource,ChooseConfig cc, XML xml, Set<Method>	methodsToGenerate) {
     		this(aDestination,aSource,cc,xml,methodsToGenerate);
-			stringOfSetDestination = aStringOfSetDestination;
-			stringOfGetDestination = aStringOfGetDestination;
-			stringOfGetSource = aStringOfGetSource;
-	}
+    		stringOfSetDestination = aStringOfSetDestination;
+    		stringOfGetDestination = aStringOfGetDestination;
+    		stringOfGetSource = aStringOfGetSource;
+    }
 
     /**
 	 * MapperConstructor takes in input all informations that need to write the mappings.
@@ -291,83 +254,9 @@ public class MapperConstructor {
 		complexOperations = operationHandler.getComplexOperations();
 	}
 
-	
-	/**
-	 * True if config doesn't exists, false otherwise.
-	 * @param cc config to check
-	 * @return true if config doesn't exists, false otherwise
-	 */
-	private boolean notFound(ChooseConfig cc)   { return cc == null; }
-	/**
-	 * True if config doesn't exists, false otherwise.
-	 * @param cc config to check
-	 * @return true if config doesn't exists, false otherwise
-	 */
-	private boolean notDeclared(ChooseConfig cc){ return cc == null; }
-	/**
-	 * True if config exists, false otherwise.
-	 * @param cc config to check
-	 * @return true if config exists, false otherwise
-	 */
-	private boolean isDeclared(ChooseConfig cc) { return cc != null; }
-	
-
-    /**
-     * This method finds the configuration location, returns null if don't finds it
-     * @param cc configuration chosen
-     * @param xml xml object
-     * @return configuration found
-     */
-    private ChooseConfig searchConfig(ChooseConfig cc, XML xml){
-    	
-    	ChooseConfig      config = searchXmlConfig(cc, xml);
-    	if(config == null)config = searchAnnotatedConfig(cc);
-    	return config;
-    }
-    
-    /**
-	 * This method finds the xml configuration, returns null if there are no.
-	 * @param cc Configuration to check
-	 * @param xml xml object
-     * return ChooseConfig configuration found
-	 */
-	private ChooseConfig searchXmlConfig(ChooseConfig cc, XML xml){
-		if(xml.getXmlPath() == null) return null;
-		
-    	if(cc == null||cc == ChooseConfig.DESTINATION)
-			if(isMappedInXML(this.destination,xml))	return ChooseConfig.DESTINATION;
-	
-		if(cc == null||cc == ChooseConfig.SOURCE)
-			if(isMappedInXML(this.source,xml))		return  ChooseConfig.SOURCE;
-		
-		return null;
-    }
-    
-	/**
-	 * This method finds the annotations, returns null if there are no.
-	 * @param cc Configuration to check
-	 * return ChooseConfig configuration found
-	 */
-	private ChooseConfig searchAnnotatedConfig(ChooseConfig cc) {
-		
-		if(cc == null||cc == ChooseConfig.DESTINATION)
-			if(isMappedInAnnotation(this.destination))	return ChooseConfig.DESTINATION;
-	
-		if(cc == null||cc == ChooseConfig.SOURCE)
-			if(isMappedInAnnotation(this.source))		return  ChooseConfig.SOURCE;
-		
-		return null;
-	}
-	
-	/**@return the source class */
-	public Class<?> getSource(){	 return source;}
-	
-	/**@return the destination class */
-	public Class<?> getDestination(){return destination;}
-	
-	/**@return the mapper class name */
-	public String   getMapperName() {return mapperName; }
-	
 	/**@param name the mapper class name */
-	public MapperConstructor setMapperName(String name){mapperName = name;return this;}
+	public MapperConstructor setMapperName(String name){
+		mapperName = name;
+		return this;
+	}
 }

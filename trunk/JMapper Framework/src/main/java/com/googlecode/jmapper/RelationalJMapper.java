@@ -16,8 +16,6 @@
 
 package com.googlecode.jmapper;
 
-import static com.googlecode.jmapper.util.ClassesManager.isMappedInAnnotation;
-import static com.googlecode.jmapper.util.ClassesManager.isMappedInXML;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.net.MalformedURLException;
@@ -25,6 +23,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.googlecode.jmapper.annotations.Annotation;
 import com.googlecode.jmapper.annotations.JGlobalMap;
 import com.googlecode.jmapper.annotations.JMap;
 import com.googlecode.jmapper.config.Error;
@@ -128,7 +127,7 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	private void init(String xmlPath) throws MalformedURLException, IOException{
 		
 		XML xml = new XML(true, xmlPath);
-		if(!isMappedInXML(configuredClass, xml))
+		if(!xml.isMapped(configuredClass))
 			Error.classNotMapped(configuredClass);
 		
 		for (Class<?> classe :getClasses(xml)){
@@ -166,7 +165,7 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	 */
 	private void init(){
 	
-		if(!isMappedInAnnotation(configuredClass))
+		if(!Annotation.isMapped(configuredClass))
 			Error.classNotMapped(configuredClass);
 		
 		for (Class<?> classe :getClasses()){

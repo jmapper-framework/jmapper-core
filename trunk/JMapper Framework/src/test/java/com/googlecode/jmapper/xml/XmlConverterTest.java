@@ -2,7 +2,7 @@ package com.googlecode.jmapper.xml;
 
 import com.googlecode.jmapper.conversions.explicit.ConversionMethod;
 import com.googlecode.jmapper.xml.Attribute;
-import com.googlecode.jmapper.xml.XmlConverter;
+import com.googlecode.jmapper.xml.Converter;
 import com.googlecode.jmapper.xml.beans.XmlAttribute;
 import com.googlecode.jmapper.xml.beans.XmlClass;
 import com.googlecode.jmapper.xml.beans.XmlConversion;
@@ -17,7 +17,7 @@ import junit.framework.TestCase;
 public class XmlConverterTest extends TestCase{
  
 	public void testToConversionMethod() throws SecurityException, NoSuchMethodException{
-		ConversionMethod method = XmlConverter.toConversionMethod(AnnotatedClass.class.getDeclaredMethod("get",new Class[]{String.class}));
+		ConversionMethod method = Converter.toConversionMethod(AnnotatedClass.class.getDeclaredMethod("get",new Class[]{String.class}));
 		assertEquals("get", method.getName());
 		assertEquals("source", method.getFrom()[0]);
 		assertEquals("destination", method.getTo()[0]);
@@ -27,7 +27,7 @@ public class XmlConverterTest extends TestCase{
 	
 	public void testToConversionMethod2() throws SecurityException, NoSuchMethodException{
 		XmlConversion xml = new XmlConversion("get", "source", "destination", "static", "content");
-		ConversionMethod method = XmlConverter.toConversionMethod(xml);
+		ConversionMethod method = Converter.toConversionMethod(xml);
 		assertEquals("get", method.getName());
 		assertEquals("source", method.getFrom()[0]);
 		assertEquals("destination", method.getTo()[0]);
@@ -35,7 +35,7 @@ public class XmlConverterTest extends TestCase{
 		assertEquals("content", method.getContent());
 		
 		xml = new XmlConversion("get", "source", "destination", null, "content");
-		method = XmlConverter.toConversionMethod(xml);
+		method = Converter.toConversionMethod(xml);
 		assertEquals("get", method.getName());
 		assertEquals("source", method.getFrom()[0]);
 		assertEquals("destination", method.getTo()[0]);
@@ -44,12 +44,12 @@ public class XmlConverterTest extends TestCase{
 	}
 	
 	public void testToXmlClass(){
-		XmlClass xmlClass = XmlConverter.toXmlClass(MappedObject.class);
+		XmlClass xmlClass = Converter.toXmlClass(MappedObject.class);
 		assertEquals(MappedObject.class.getName(), xmlClass.name);
 		assertEquals("field",xmlClass.attributes.get(0).name);
 		assertEquals("field",xmlClass.attributes.get(0).value.name);
 		
-		XmlClass xmlClass2 = XmlConverter.toXmlClass(MappedObject3.class);
+		XmlClass xmlClass2 = Converter.toXmlClass(MappedObject3.class);
 		assertEquals("properties",xmlClass2.global.value.name);
 		assertEquals("field3",xmlClass2.attributes.get(0).value.name);
 		
@@ -58,31 +58,31 @@ public class XmlConverterTest extends TestCase{
 	public void testToXmlAttribute() throws SecurityException, NoSuchFieldException, ClassNotFoundException{
 		
 		// FROM ANNOTATIONS
-		XmlAttribute xmlAttribute = XmlConverter.toXmlAttribute(AnnotatedClass.class.getDeclaredField("field"));
+		XmlAttribute xmlAttribute = Converter.toXmlAttribute(AnnotatedClass.class.getDeclaredField("field"));
 		field1(xmlAttribute);
 		
-		Attribute attribute = XmlConverter.toAttribute(xmlAttribute);
+		Attribute attribute = Converter.toAttribute(xmlAttribute);
 		field1(attribute);
 		
-		xmlAttribute = XmlConverter.toXmlAttribute(AnnotatedClass.class.getDeclaredField("field2"));
+		xmlAttribute = Converter.toXmlAttribute(AnnotatedClass.class.getDeclaredField("field2"));
 		field2(xmlAttribute);
 		
-		attribute = XmlConverter.toAttribute(xmlAttribute);
+		attribute = Converter.toAttribute(xmlAttribute);
 		field2(attribute);
 		
 		// FROM ATTRIBUTES
 		attribute = new Attribute("field", "", new String[]{"","targetField2"}, new Class[]{SimpleClass.class,ComplexClass.class});
-		xmlAttribute = XmlConverter.toXmlAttribute(attribute);
+		xmlAttribute = Converter.toXmlAttribute(attribute);
 		field1(xmlAttribute);
 		
-		attribute = XmlConverter.toAttribute(xmlAttribute);
+		attribute = Converter.toAttribute(xmlAttribute);
 		field1(attribute);
 		
 		attribute = new Attribute("field2", "targetField1");
-		xmlAttribute = XmlConverter.toXmlAttribute(attribute);
+		xmlAttribute = Converter.toXmlAttribute(attribute);
 		field2(xmlAttribute);
 		
-		attribute = XmlConverter.toAttribute(xmlAttribute);
+		attribute = Converter.toAttribute(xmlAttribute);
 		field2(attribute);
 		
 	}

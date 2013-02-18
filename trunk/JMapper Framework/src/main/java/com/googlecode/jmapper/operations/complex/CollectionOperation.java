@@ -20,7 +20,11 @@ import static com.googlecode.jmapper.util.ClassesManager.getCollectionItemClass;
 import static com.googlecode.jmapper.util.ClassesManager.isAssignableFrom;
 import static com.googlecode.jmapper.util.GeneralUtility.listIsAssignableFrom;
 import static com.googlecode.jmapper.util.GeneralUtility.newLine;
+import static com.googlecode.jmapper.util.GeneralUtility.replace$;
 import static com.googlecode.jmapper.util.GeneralUtility.sortedSetIsAssignableFrom;
+
+import java.util.HashMap;
+import java.util.Map;
 /**
  * This Class represents the mappings between Collections.
  * @author Alessandro Vurro
@@ -30,7 +34,7 @@ public class CollectionOperation extends AComplexOperation {
 	
 	@Override
 	protected Object getSourceConverted() {
-		return "collectionOfDestination"+count;
+		return c("collectionOfDestination");
 	}
 	
 	@Override
@@ -51,12 +55,13 @@ public class CollectionOperation extends AComplexOperation {
 		
 		// in all those cases in which it is necessary to convert the structure
 		else{
-			  Object list = "complexCollection"+count;
+			  Object list = c("complexCollection");
 			  StringBuilder sb = new StringBuilder();
 			  
 			  // optimization applied to class type
 			 if(   listIsAssignableFrom(getDestinationClass()) 
 				|| sortedSetIsAssignableFrom(getDestinationClass()))
+				 
 							write(sb,"   ",newInstance(list,getSource()),newLine);
 			 
 			 else           write(sb,"   ",newInstance(list)                ,newLine
@@ -71,28 +76,34 @@ public class CollectionOperation extends AComplexOperation {
 		
 		if(!theSourceIsToBeConverted()){count++; return content;}
 		
-		Class<?> dItemType = getCollectionItemClass(destinationField);
-		Class<?> sItemType = getCollectionItemClass(sourceField);
+		Class<?> itemDClass = getCollectionItemClass(destinationField);
+		Class<?> itemSClass = getCollectionItemClass(sourceField);
+		Object sItem = c("objectOfSource");
+		Object conversion = applyImplicitConversion(info.getConversionType(), itemDClass, itemSClass, sItem);
 		
-		Object dList = getSourceConverted();
-		Object sList = "collectionOfSource"+count;
-		Object sName = "objectOfSource"+count;
-		Object dName = "objectOfDestination"+count;
-		Object i     = "index"+count++;
+		Map<String, String> vars = new HashMap<String, String>();
 		
-		Object sItem = sItemType.getName();
-		Object dItem = dItemType.getName();
-
-		Object conversion = applyImplicitConversion(info.getConversionType(), dItemType, sItemType, sName);
+		vars.put("dClass"                  ,itemDClass.getName());
+		vars.put("sClass"                  ,itemSClass.getName());
+		vars.put("dItem"				   ,c("objectOfDestination"));
+		vars.put("sItem"                   ,s(sItem));
+		vars.put("source"                  ,c("collectionOfSource"));
+		vars.put("destination"             ,s(getSourceConverted()));
+		vars.put("i"                       ,c("index"));
+		vars.put("getSource()"             ,s(getSource()));
+		vars.put("conversion"              ,s(conversion));
+		vars.put("newInstance(destination)",s(newInstance(getSourceConverted())));
 		
-		return write(   "   ",newInstance(dList),
-			  newLine , "   Object[] ",sList," = ",getSource(),".toArray();",
-			  newLine , "   for(int ",i," = ",sList,".length-1;",i," >=0;",i,"--){",
-			  newLine , "   ",sItem," ",sName," = (",sItem,") ",sList,"[",i,"];",
-			  newLine , "   ",dItem," ",dName," = ", conversion ,";",
-			  newLine , "   ",dList,".add(",dName,");",
-			  newLine , "   }",
-			  newLine , 	content , newLine);
+		count++;
+		
+		return write(replace$("   $newInstance(destination)"
+				  + newLine + "   Object[] $source = $getSource().toArray();"
+				  + newLine + "   for(int $i = $source.length-1;$i >=0;$i--){"
+				  + newLine + "   $sClass $sItem = ($sClass) $source[$i];"
+				  + newLine + "   $dClass $dItem = $conversion;"
+				  + newLine + "   $destination.add($dItem);"
+				  + newLine + "   }"
+				  + newLine + content + newLine,vars));
 	}
 	
 	/** the count is used to differentiate local variables in case of recursive mappings.
@@ -100,4 +111,13 @@ public class CollectionOperation extends AComplexOperation {
 	 *  it's static for ensure the uniqueness
 	 */ 
 	private static int count = 0;
+	
+	/**
+	 * Appends the count to string.
+	 * @param str
+	 * @return str + count;
+	 */
+	private String c(String str){
+		return str + count;
+	}
 }
