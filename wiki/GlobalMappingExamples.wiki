@@ -8,6 +8,7 @@ The global mapping permits to reduce the configuration in cases that  the fields
 
 We have two beans with some variables that have the same names.
 
+==== In Annotation ====
 {{{
 @JGlobalMap(excluded={"other"})
 class Destination {            class Source {
@@ -20,7 +21,19 @@ class Destination {            class Source {
     // getters and setters..       // getters and setters..
 }                              }
 }}}
-code:
+==== In XML ====
+{{{
+<jmapper>
+   <class name="package.Destination">
+      <global>
+          <excluded>
+             <attribute name="other"/>
+          </excluded>
+      </global>
+   </class>
+</jmapper>
+}}}
+==== example code ====
 {{{
 JMapper<Destination, Source> mapper = new JMapper<Destination, Source>(Destination.class, Source.class);
 Destination destination = mapper.getDestination(new Source("Alessandro",new Date(),5000));
@@ -31,3 +44,5 @@ Destination [name="Alessandro", currentDate=Mon Feb 18 17:56:23 CET 2013, value=
 }}}
 
 == 2° Scenario ==
+
+We have one bean with some variables that point to a single field.
