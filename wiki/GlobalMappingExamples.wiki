@@ -54,6 +54,7 @@ We have one bean with some variables that point to a single field.
 ==== In Annotation ====
 {{{
 class Destination {
+
     Double overallCost;
 
     public Destination(){
@@ -63,7 +64,7 @@ class Destination {
     public void setOverallCost(Double overallCost){
         this.overallCost += overallCost;
     }
-    // getters and setters..                                   
+    // getter and setter..                                   
 }
 
 @JGlobalMap("overallCost")
