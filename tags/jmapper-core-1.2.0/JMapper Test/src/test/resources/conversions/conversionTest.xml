@@ -1,0 +1,25 @@
+<jmapper>
+  <class name="com.googlecode.jmapper.integrationtest.conversions.bean.SExplicitXmlConversion">
+    <attribute name="sField">
+      <value name="dField"/>
+    </attribute>
+    <attribute name="sField2">
+      <value name="dField2"/>
+    </attribute>
+    <attribute name="sField3">
+      <value name="dField3"/>
+    </attribute>
+    <!-- testato anche senza l'attributo "to", "from" e il "type" -->
+    <conversion name="firstConversion" from="sField" to="dField" type="STATIC">
+       return ${source} + " ${source.name} converted"; 
+    </conversion>
+    <conversion name="thirdConversion" from="sField2,sField3" to="dField2,dField3" type="STATIC">
+       return "${destination.name}  ${source.name}"; 
+    </conversion>
+    <!-- Con questa conversione testo la gestione dei metodi statici con nomi già usati
+    in questo caso la conversione viene ignorata, qualsiasi siano i from e i to -->
+    <conversion name="firstConversion" from="sField3" to="dField3" type="STATIC">
+       return ${source} + "TEST ${source.name} converted"; 
+    </conversion>
+  </class>
+</jmapper>

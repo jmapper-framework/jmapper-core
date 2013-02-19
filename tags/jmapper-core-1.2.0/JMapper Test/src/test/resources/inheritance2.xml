@@ -1,0 +1,27 @@
+<jmapper>
+  <class name="com.googlecode.jmapper.integrationtest.application.bean.ChildConversion">
+    <attribute name="specificField1">
+      <value name="specificField1"/>
+    </attribute>
+    <attribute name="specificField2">
+      <value name="specificField2"/>
+    </attribute>
+    <conversion name="conversionChild" from="specificField2">
+    	return ${source} + " XML CONVERSION Child";
+    </conversion>
+  </class>
+  <class name="com.googlecode.jmapper.integrationtest.application.bean.ParentConversion">
+    <attribute name="commonField1">
+      <value name="commonField1"/>
+    </attribute>
+    <attribute name="commonField2">
+      <value name="commonField2"/>
+    </attribute>
+    <conversion name="conversion" from="commonField1">
+    	return ${source} + " XML CONVERSION common";
+    </conversion>
+    <conversion name="conversion2" from="specificField1">
+    	return ${source} + " XML CONVERSION2";
+    </conversion>
+  </class>
+</jmapper>
