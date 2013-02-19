@@ -31,9 +31,10 @@
        * [ExplicitConversions#Dynamic_conversion Dynamic conversion]
    * Examples
      * [AdvancedEnumerationExamples Enumerations usage]
-     * [AdvancedInheritanceExamples Inherited configurations]
+     * [GlobalMappingExamples Global mapping]
      * [AdvancedExamples Relational mapping]
      * [AdvancedConversionExamples Explicit conversion]
+     * [AdvancedInheritanceExamples Inherited configurations]
    * [MoreInformations More informations]
    * [PerformanceTests Performance tests]
  * Configurations
