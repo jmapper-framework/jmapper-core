@@ -13,10 +13,10 @@ We have two beans with some variables that have the same names.
 @JGlobalMap(excluded={"other"})
 class Destination {            class Source {
 
-    String name;                   String name;  
-    Date currentDate;              Date currentDate;
-    Integer value;                 Integer value;
-    String other;                 
+    String[] authors;              List<String> authors;  
+    Date releaseDate;              Date releaseDate;
+    String releaseVersion;         String releaseVersion;
+    String other;                  String other;
 
     // getters and setters..       // getters and setters..
 }                              }
@@ -35,12 +35,16 @@ class Destination {            class Source {
 }}}
 ==== example code ====
 {{{
+List<String> authors = new ArrayList<String>();
+authors.add("Alessandro Vurro");
+authors.add("Federico De Felici");
+		
 JMapper<Destination, Source> mapper = new JMapper<Destination, Source>(Destination.class, Source.class);
-Destination destination = mapper.getDestination(new Source("Alessandro",new Date(),5000));
+Destination destination = mapper.getDestination(new Source(authors, new GregorianCalendar(2013, 1, 16).getTime(), "1.2.0", "other"));
 }}}
 output:
 {{{
-Destination [name="Alessandro", currentDate=Mon Feb 18 17:56:23 CET 2013, value=5000, other=null]
+Destination [authors=[Alessandro Vurro, Federico De Felici], releaseDate=Sat Feb 16 00:00:00 CET 2013, releaseVersion=1.2.0, other=null]
 }}}
 
 == 2° Scenario ==
