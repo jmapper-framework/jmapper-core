@@ -1,0 +1,30 @@
+<jmapper>
+  <class name="com.googlecode.jmapper.integrationtest.configurations.bean.JGlobalMapD">
+    <global>
+    	<value name="field2"/>
+    </global>
+  </class>
+  <class name="com.googlecode.jmapper.integrationtest.configurations.bean.JGlobalMapD2">
+    <global>
+    	<value name="field"/>
+    	<classes>
+    	   <class name="com.googlecode.jmapper.integrationtest.configurations.bean.JGlobalMapS2"/>
+    	</classes>
+    </global>
+    <attribute name="field3">
+      <value name="field3"/>
+    </attribute>
+  </class>
+  <class name="com.googlecode.jmapper.integrationtest.configurations.bean.JGlobalMapD3">
+    <global>
+    	<attributes>
+    	   <attribute name ="undefined"/>
+    	   <attribute name ="field2"/>
+    	   <attribute name ="field3"/>
+    	</attributes>
+    </global>
+    <attribute name="field2">
+      <value name="notUsed"/>
+    </attribute>
+  </class>
+</jmapper>
