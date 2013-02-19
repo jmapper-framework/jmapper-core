@@ -3,7 +3,6 @@
    * How to map
      * [basicMapping Basic Mapping]
      * [globalMapping Global Mapping]
-   * [XmlHandling Xml handling]
    * Relations
      * [ImplicitRelations Implicit relations]
        * [ImplicitRelations#Many_to_One Many to One]
@@ -35,6 +34,7 @@
      * [AdvancedExamples Relational mapping]
      * [AdvancedConversionExamples Explicit conversion]
      * [AdvancedInheritanceExamples Inherited configurations]
+   * [XmlHandling Xml handling]
    * [MoreInformations More informations]
    * [PerformanceTests Performance tests]
  * Configurations
