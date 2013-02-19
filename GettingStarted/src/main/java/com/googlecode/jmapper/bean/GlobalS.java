@@ -1,28 +1,51 @@
 package com.googlecode.jmapper.bean;
 
-import java.util.Properties;
-
-import com.googlecode.jmapper.annotations.JMapConversion;
-import com.googlecode.jmapper.annotations.JMapConversion.Type;
+import java.util.Date;
+import java.util.List;
 
 public class GlobalS {
 
-private Properties properties;
+	private List<String> authors;
+	private Date releaseDate;
+	private String releaseVersion;
+	private String other;
 	
-	@JMapConversion(from={"properties"},type=Type.DYNAMIC)
-	public static String conversion(){
-		return "return ((String) ${source}.get(\"${destination.name}\")) + \" ANNOTATION\";";
-	}
-	
-	public Properties getProperties() {
-		return properties;
-	}
-
 	public GlobalS() {}
-
-	public GlobalS(Properties properties) {
+	
+	public GlobalS(List<String> authors, Date releaseDate, String releaseVersion,
+			String other) {
 		super();
-		this.properties = properties;
+		this.authors = authors;
+		this.releaseDate = releaseDate;
+		this.releaseVersion = releaseVersion;
+		this.other = other;
 	}
 
+	public List<String> getAuthors() {
+		return authors;
+	}
+	public void setAuthors(List<String> authors) {
+		this.authors = authors;
+	}
+	public Date getReleaseDate() {
+		return releaseDate;
+	}
+	public void setReleaseDate(Date releaseDate) {
+		this.releaseDate = releaseDate;
+	}
+	public String getReleaseVersion() {
+		return releaseVersion;
+	}
+	public void setReleaseVersion(String releaseVersion) {
+		this.releaseVersion = releaseVersion;
+	}
+	public String getOther() {
+		return other;
+	}
+	public void setOther(String other) {
+		this.other = other;
+	}
+	
+	
+	
 }

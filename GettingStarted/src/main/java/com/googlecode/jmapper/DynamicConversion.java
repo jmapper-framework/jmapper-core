@@ -36,7 +36,7 @@ public class DynamicConversion {
 		
 		// SECOND EXAMPLE
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("id", "JMapper Framework v.1.1.0");
+		map.put("id", "JMapper Framework v.1.2.0");
 		map.put("quantity", 10);
 		map.put("purchase", new Date());
 

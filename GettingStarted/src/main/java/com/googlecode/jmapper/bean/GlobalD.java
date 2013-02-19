@@ -1,46 +1,49 @@
 package com.googlecode.jmapper.bean;
 
+import java.util.Arrays;
+import java.util.Date;
+
 import com.googlecode.jmapper.annotations.JGlobalMap;
 
-@JGlobalMap("properties")
+@JGlobalMap(excluded={"other"})
 public class GlobalD {
 
-	private String author;
-	private String framework;
-	private String version;
-	private String label;
+	private String[] authors;
+	private Date releaseDate;
+	private String releaseVersion;
+	private String other;
 	
-	public String getAuthor() {
-		return author;
+	public String[] getAuthors() {
+		return authors;
 	}
-	public void setAuthor(String author) {
-		this.author = author;
+	public void setAuthors(String[] authors) {
+		this.authors = authors;
 	}
-	public String getFramework() {
-		return framework;
+	public Date getReleaseDate() {
+		return releaseDate;
 	}
-	public void setFramework(String framework) {
-		this.framework = framework;
+	public void setReleaseDate(Date releaseDate) {
+		this.releaseDate = releaseDate;
 	}
-	public String getVersion() {
-		return version;
+	public String getReleaseVersion() {
+		return releaseVersion;
 	}
-	public void setVersion(String version) {
-		this.version = version;
+	public void setReleaseVersion(String releaseVersion) {
+		this.releaseVersion = releaseVersion;
 	}
-	public String getLabel() {
-		return label;
+	public String getOther() {
+		return other;
 	}
-	public void setLabel(String label) {
-		this.label = label;
+	public void setOther(String other) {
+		this.other = other;
 	}
-	
-	public GlobalD() {}
 	@Override
 	public String toString() {
-		return "DynamicD:\n author = " + author + "\n framework = " + framework
-				+ "\n version = " + version + "\n label = " + label;
+		return "GlobalD [authors=" + Arrays.toString(authors)
+				+ ", releaseDate=" + releaseDate + ", releaseVersion="
+				+ releaseVersion + ", other=" + other + "]";
 	}
+	
 	
 
 }
