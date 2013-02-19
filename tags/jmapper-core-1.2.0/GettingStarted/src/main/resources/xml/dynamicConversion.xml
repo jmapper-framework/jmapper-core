@@ -1,0 +1,27 @@
+<jmapper>
+  <class name="com.googlecode.jmapper.bean.DynamicD">
+    <global>
+    	<value name="properties"/>
+    </global>
+  </class>
+  <class name="com.googlecode.jmapper.bean.DynamicS">
+    <conversion name="conversion" from="properties" type="dynamic">
+    	return ((String) ${source}.get("${destination.name}")) + " XML";
+    </conversion>
+  </class>
+  <class name="com.googlecode.jmapper.bean.DynamicD2">
+    <global>
+       <value name="map"/>
+      <classes>
+        <class name="com.googlecode.jmapper.bean.DynamicS2"/>
+      </classes>
+    </global>
+    <conversion name="fromMapToAll" from="map" type="dynamic">
+    	return (${destination.type}) ${source}.get("${destination.name}");
+    </conversion>
+    <conversion name="fromAllToMap" to="map" type="dynamic">
+	    ${destination}.put("${source.name}",${source});
+        return ${destination};
+    </conversion>
+  </class>
+</jmapper>
