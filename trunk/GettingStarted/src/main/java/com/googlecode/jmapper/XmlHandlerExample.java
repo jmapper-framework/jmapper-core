@@ -7,6 +7,7 @@ import com.googlecode.jmapper.bean.Class1;
 import com.googlecode.jmapper.bean.Class2;
 import com.googlecode.jmapper.bean.Class3;
 import com.googlecode.jmapper.xml.Attribute;
+import com.googlecode.jmapper.xml.Global;
 import com.googlecode.jmapper.xml.XmlHandler;
 
 
@@ -22,6 +23,10 @@ public class XmlHandlerExample {
 		Attribute attribute = new Attribute("field1", attributes, classes);
 		
 		xmlHandler.addClass(AnnotatedClass.class, attribute);
+		
+		Global global = new Global(attributes, classes);
+		
+		xmlHandler.addGlobal(AnnotatedClass.class, global);
 		
 		attributes           = new String[]{"field2Class1","field2Class2","field2Class3"};
 		classes 			 = new Class []{Class1.class,Class2.class,Class3.class};
