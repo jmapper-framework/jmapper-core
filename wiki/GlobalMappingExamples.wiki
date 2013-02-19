@@ -53,12 +53,8 @@ We have one bean with some variables that point to a single field.
 
 ==== In Annotation ====
 {{{
-                                                          @JGlobalMap("overallCost")
-class Destination {                                       class Source {
-
-    Double overallCost;                                       Double costEmployees;
-                                                              Double costStructure;
-                                                              Double costAdvertising;
+class Destination {
+    Double overallCost;
 
     public Destination(){
         overallCost = 0D;
@@ -67,16 +63,26 @@ class Destination {                                       class Source {
     public void setOverallCost(Double overallCost){
         this.overallCost += overallCost;
     }
-    // getters and setters..                                   // getters and setters..
-}                                                          }
+    // getters and setters..                                   
+}
+
+@JGlobalMap("overallCost")
+class Source {
+  
+    Double costEmployees;
+    Double costStructure;
+    Double costAdvertising;
+
+    // getters and setters..                                   
+}
 }}}
 ==== In XML ====
 {{{
 <jmapper>
-   <class name="package.Destination">
+   <class name="package.Source">
       <global>
           <excluded>
-             <attribute name="other"/>
+             <value name="overallCost"/>
           </excluded>
       </global>
    </class>
@@ -84,14 +90,10 @@ class Destination {                                       class Source {
 }}}
 ==== example code ====
 {{{
-List<String> authors = new ArrayList<String>();
-authors.add("Alessandro Vurro");
-authors.add("Federico De Felici");
-		
 JMapper<Destination, Source> mapper = new JMapper<Destination, Source>(Destination.class, Source.class);
-Destination destination = mapper.getDestination(new Source(authors, new GregorianCalendar(2013, 1, 16).getTime(), "1.2.0", "other"));
+		Destination destination = mapper.getDestination(new Source(154080.80D,24000D,12570.20D));
 }}}
 output:
 {{{
-Destination [authors=[Alessandro Vurro, Federico De Felici], releaseDate=Sat Feb 16 00:00:00 CET 2013, releaseVersion=1.2.0, other=null]
+Destination [overallCost=190651.0]
 }}}
