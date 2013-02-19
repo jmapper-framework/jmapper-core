@@ -40,7 +40,8 @@ authors.add("Alessandro Vurro");
 authors.add("Federico De Felici");
 		
 JMapper<Destination, Source> mapper = new JMapper<Destination, Source>(Destination.class, Source.class);
-Destination destination = mapper.getDestination(new Source(authors, new GregorianCalendar(2013, 1, 16).getTime(), "1.2.0", "other"));
+Source source = new Source(authors, new GregorianCalendar(2013, 1, 16).getTime(), "1.2.0", "other");
+Destination destination = mapper.getDestination(source);
 }}}
 output:
 {{{
