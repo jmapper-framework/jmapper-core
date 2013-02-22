@@ -62,8 +62,8 @@ class Destination {
         overallCost = 0D;
     }
 
-    public void setOverallCost(Double overallCost){
-        this.overallCost += overallCost;
+    public void setOverallCost(Double singleCost){
+        this.overallCost += singleCost;
     }
     // getter and setter..                                   
 }
