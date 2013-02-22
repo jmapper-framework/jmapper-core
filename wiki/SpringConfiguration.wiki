@@ -4,7 +4,7 @@
 
 Example of JMapper configuration:
 {{{
-<bean id="jmapper" class="it.avutils.jmapper.JMapper">
+<bean id="jmapper" class="com.googlecode.jmapper.JMapper">
    <constructor-arg><value>bean.Destination</value></constructor-arg>
    <constructor-arg><value>bean.Source</value></constructor-arg>
    <constructor-arg><value>ChooseConfig.SOURCE</value></constructor-arg>
@@ -13,7 +13,7 @@ Example of JMapper configuration:
 }}}
 Example of RelationalJMapper configuration:
 {{{
-<bean id="relationalJmapper" class="it.avutils.jmapper.RelationalJMapper">
+<bean id="relationalJmapper" class="com.googlecode.jmapper.RelationalJMapper">
    <constructor-arg><value>bean.ConfiguredBean</value></constructor-arg>
    <constructor-arg><value>com/myapplication/xml/jmapper.xml</value></constructor-arg>
 </bean>
