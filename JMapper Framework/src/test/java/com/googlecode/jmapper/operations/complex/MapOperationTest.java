@@ -48,7 +48,7 @@ public class MapOperationTest extends AOperation<MapOperation>{
 		 newLine + "   destination.setASimpleMap(null);"+
 		 newLine + "   }"+newLine;
 		
-		actual   = operation.write(newInstance).toString();
+		write(newInstance);
 		verify();
 		
 		expected = "   if(destination.getASimpleMap()!=null){"+
@@ -65,7 +65,7 @@ public class MapOperationTest extends AOperation<MapOperation>{
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;
 		
-		actual   = operation.write(enrichment).toString();
+		write(enrichment);
 		verify();
 	}
 
@@ -76,7 +76,7 @@ public class MapOperationTest extends AOperation<MapOperation>{
 		 newLine + "   destination.setASimpleMap(source.getASimpleMap2());"+
 		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(newInstance).toString();
+		write(newInstance);
 		verify();
 		
 		expected = "   if(source.getASimpleMap2()!=null){"+
@@ -87,7 +87,7 @@ public class MapOperationTest extends AOperation<MapOperation>{
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
+		write(enrichment);
 		verify();
 	}
 
@@ -102,7 +102,7 @@ public class MapOperationTest extends AOperation<MapOperation>{
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
+		write(enrichment);
 		verify();	
 	}
 
@@ -115,7 +115,7 @@ public class MapOperationTest extends AOperation<MapOperation>{
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
+		write(enrichment);
 		verify();	
 	}
 
@@ -128,7 +128,7 @@ public class MapOperationTest extends AOperation<MapOperation>{
 	     newLine + "   }"+
 	     newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
+		write(enrichment);
 		verify();		
 	}
 
@@ -141,7 +141,7 @@ public class MapOperationTest extends AOperation<MapOperation>{
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
+		write(enrichment);
 		verify();		
 	}	
 	

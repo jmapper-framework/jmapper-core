@@ -8,7 +8,6 @@ import com.googlecode.jmapper.enums.ConversionType;
 import com.googlecode.jmapper.operations.AOperation;
 import com.googlecode.jmapper.operations.info.InfoOperation;
 
-//TODO Test da completare --> ArrayListOperationTest
 public class ArrayListOperationTest extends AOperation<ArrayListOperation> {
 
 	@Override
@@ -34,81 +33,161 @@ public class ArrayListOperationTest extends AOperation<ArrayListOperation> {
 	@Override
 	protected void AllAll() {
 		
-		expected = ""+newLine;
+		expected = "   if(source.getASetInteger()!=null){"+
+		newLine + "   java.lang.String[] arrayListOfDestination$i = (java.lang.String[])source.getASetInteger().toArray(new java.lang.String[source.getASetInteger().size()]);"+
+		newLine + "   destination.setStringArray(arrayListOfDestination$i);"+
+		newLine + 
+		newLine + "   }else{"+
+		newLine + "   destination.setStringArray(null);"+
+		newLine + "   }"+newLine;
 		
-		actual   = operation.write(newInstance).toString();
-		
-//		System.out.println(actual);
-//		verify();
+		write(newInstance);
+		verify();
 
-		expected = ""+newLine;
+		expected = "   if(destination.getStringArray()!=null){"+
+		 newLine + "   if(source.getASetInteger()!=null){"+
+		 newLine + "   java.lang.String[] arrayListOfDestination$i = (java.lang.String[])source.getASetInteger().toArray(new java.lang.String[source.getASetInteger().size()]);"+
+		 newLine + "   java.lang.String[] dep$i = destination.getStringArray();"+
+		 newLine + "   java.lang.String[] newDestination$i = new java.lang.String[dep$i.length + arrayListOfDestination$i.length];"+
+		 newLine + "   int counter$i = 0;"+
+		 newLine + "   for(int index$i = dep$i.length-1;index$i >=0;index$i--){"+
+		 newLine + "   newDestination$i[counter$i++] = dep$i[index$i];"+
+		 newLine + "   }"+
+		 newLine + "   for(int index$i = arrayListOfDestination$i.length-1;index$i >=0;index$i--){"+
+		 newLine + "   newDestination$i[counter$i++] = arrayListOfDestination$i[index$i];"+
+		 newLine + "   }"+
+		 newLine + "   destination.setStringArray(newDestination$i);"+
+		 newLine + 
+		 newLine + "   }else{"+
+		 newLine + "   destination.setStringArray(null);"+
+		 newLine + "   }"+
+		 newLine + "   }else{"+
+		 newLine + "   if(source.getASetInteger()!=null){"+
+		 newLine + "   java.lang.String[] arrayListOfDestination$y = (java.lang.String[])source.getASetInteger().toArray(new java.lang.String[source.getASetInteger().size()]);"+
+		 newLine + "   destination.setStringArray(arrayListOfDestination$y);"+
+		 newLine + 
+		 newLine + "   }else{"+
+		 newLine + "   destination.setStringArray(null);"+
+		 newLine + "   }"+
+		 newLine + "   }"+newLine;
 		
-		actual   = operation.write(enrichment).toString();
-		
-//		System.out.println("\n\n"+actual);
-//		verify();
+		write(enrichment);
+		verify();
 	}
 
 	@Override
 	protected void AllValued() {
 		
-		expected = ""+newLine;
+		expected = "   if(source.getASetInteger()!=null){"+
+		 newLine + "   java.lang.String[] arrayListOfDestination$i = (java.lang.String[])source.getASetInteger().toArray(new java.lang.String[source.getASetInteger().size()]);"+
+		 newLine + "   destination.setStringArray(arrayListOfDestination$i);"+
+		 newLine + 
+		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(newInstance).toString();
+		write(newInstance);
+		verify();
 		
-//		System.out.println(actual);
-//		verify();
+		expected = "   if(source.getASetInteger()!=null){"+
+		 newLine + "   if(destination.getStringArray()!=null){"+
+		 newLine + "   java.lang.String[] arrayListOfDestination$i = (java.lang.String[])source.getASetInteger().toArray(new java.lang.String[source.getASetInteger().size()]);"+
+		 newLine + "   java.lang.String[] dep$i = destination.getStringArray();"+
+		 newLine + "   java.lang.String[] newDestination$i = new java.lang.String[dep$i.length + arrayListOfDestination$i.length];"+
+		 newLine + "   int counter$i = 0;"+
+		 newLine + "   for(int index$i = dep$i.length-1;index$i >=0;index$i--){"+
+		 newLine + "   newDestination$i[counter$i++] = dep$i[index$i];"+
+		 newLine + "   }"+
+		 newLine + "   for(int index$i = arrayListOfDestination$i.length-1;index$i >=0;index$i--){"+
+		 newLine + "   newDestination$i[counter$i++] = arrayListOfDestination$i[index$i];"+
+		 newLine + "   }"+
+		 newLine + "   destination.setStringArray(newDestination$i);"+
+		 newLine + 
+		 newLine + "   }else{"+
+		 newLine + "   java.lang.String[] arrayListOfDestination$y = (java.lang.String[])source.getASetInteger().toArray(new java.lang.String[source.getASetInteger().size()]);"+
+		 newLine + "   destination.setStringArray(arrayListOfDestination$y);"+
+		 newLine + 
+		 newLine + "   }"+
+		 newLine + "   }"+newLine;
 		
-		expected = ""+newLine;
-		
-		actual	 = operation.write(enrichment).toString();
-		
-//		System.out.println("\n\n"+actual);
-//		verify();
+		write(enrichment);
+		verify();
 	}
 
 	@Override
 	protected void ValuedAll() {
 		
-		expected = ""+newLine;
+		expected = "   if(destination.getStringArray()!=null){"+
+		 newLine + "   if(source.getASetInteger()!=null){"+
+		 newLine + "   java.lang.String[] arrayListOfDestination$i = (java.lang.String[])source.getASetInteger().toArray(new java.lang.String[source.getASetInteger().size()]);"+
+		 newLine + "   java.lang.String[] dep$i = destination.getStringArray();"+
+		 newLine + "   java.lang.String[] newDestination$i = new java.lang.String[dep$i.length + arrayListOfDestination$i.length];"+
+		 newLine + "   int counter$i = 0;"+
+		 newLine + "   for(int index$i = dep$i.length-1;index$i >=0;index$i--){"+
+		 newLine + "   newDestination$i[counter$i++] = dep$i[index$i];"+
+		 newLine + "   }"+
+		 newLine + "   for(int index$i = arrayListOfDestination$i.length-1;index$i >=0;index$i--){"+
+		 newLine + "   newDestination$i[counter$i++] = arrayListOfDestination$i[index$i];"+
+		 newLine + "   }"+
+		 newLine + "   destination.setStringArray(newDestination$i);"+
+		 newLine + 
+		 newLine + "   }else{"+
+		 newLine + "   destination.setStringArray(null);"+
+		 newLine + "   }"+
+		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
-		
-//		System.out.println(actual);
-//		verify();
+		write(enrichment);
+		verify();
 	}
 
 	@Override
 	protected void ValuedValued() {
 
-		expected = ""+newLine;
+		expected = "   if(destination.getStringArray()!=null){"+
+		 newLine + "   if(source.getASetInteger()!=null){"+
+		 newLine + "   java.lang.String[] arrayListOfDestination$i = (java.lang.String[])source.getASetInteger().toArray(new java.lang.String[source.getASetInteger().size()]);"+
+		 newLine + "   java.lang.String[] dep$i = destination.getStringArray();"+
+		 newLine + "   java.lang.String[] newDestination$i = new java.lang.String[dep$i.length + arrayListOfDestination$i.length];"+
+		 newLine + "   int counter$i = 0;"+
+		 newLine + "   for(int index$i = dep$i.length-1;index$i >=0;index$i--){"+
+		 newLine + "   newDestination$i[counter$i++] = dep$i[index$i];"+
+		 newLine + "   }"+
+		 newLine + "   for(int index$i = arrayListOfDestination$i.length-1;index$i >=0;index$i--){"+
+		 newLine + "   newDestination$i[counter$i++] = arrayListOfDestination$i[index$i];"+
+		 newLine + "   }"+
+		 newLine + "   destination.setStringArray(newDestination$i);"+
+		 newLine + 
+		 newLine + "   }"+
+		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
-
-//		System.out.println(actual);
-//		verify();
+		write(enrichment);
+		verify();
 	
 	}
 
 	@Override
 	protected void ValuedNull() {
 		
-		expected = ""+newLine;
+		expected = "   if(destination.getStringArray()!=null){"+
+		 newLine + "   if(source.getASetInteger()==null){"+
+		 newLine + "   destination.setStringArray(null);"+
+		 newLine + "   }"+
+		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
-
-//		System.out.println(actual);
-//		verify();
+		write(enrichment);
+		verify();
 	}
 
 	@Override
 	protected void NullValued() {
 
-		expected = ""+newLine;
+		expected = "   if(destination.getStringArray()==null){"+
+		 newLine + "   if(source.getASetInteger()!=null){"+
+		 newLine + "   java.lang.String[] arrayListOfDestination$i = (java.lang.String[])source.getASetInteger().toArray(new java.lang.String[source.getASetInteger().size()]);"+
+		 newLine + "   destination.setStringArray(arrayListOfDestination$i);"+
+		 newLine + 
+		 newLine + "   }"+
+		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
-
-//		System.out.println(actual);
-//		verify();		
+		write(enrichment);
+		verify();		
 	}	
 }

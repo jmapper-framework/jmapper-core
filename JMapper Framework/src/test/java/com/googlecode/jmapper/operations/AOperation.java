@@ -1,14 +1,17 @@
 package com.googlecode.jmapper.operations;
 
-import java.lang.reflect.Field;
+import static com.googlecode.jmapper.util.ClassesManager.getFieldValue;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
+import junit.framework.TestCase;
 import com.googlecode.jmapper.enums.MappingType;
-import com.googlecode.jmapper.operations.AGeneralOperation;
 import com.googlecode.jmapper.operations.info.InfoOperation;
 import com.googlecode.jmapper.operations.recursive.ARecursiveOperation;
+import com.googlecode.jmapper.util.GeneralUtility;
 import com.googlecode.jmapper.xml.XML;
-
-import junit.framework.TestCase;
 
 public abstract class AOperation<T extends AGeneralOperation> extends TestCase {
 
@@ -26,6 +29,9 @@ public abstract class AOperation<T extends AGeneralOperation> extends TestCase {
 	
 	/** actual mapping */
 	protected String actual;
+	
+	/** value of count field */
+	protected Integer i;
 	
 	/** @return returns the destination field 
 	 * @throws NoSuchFieldException */
@@ -52,6 +58,7 @@ public abstract class AOperation<T extends AGeneralOperation> extends TestCase {
 		operation.setInfoOperation(getInfoOperation());
 		if(operation instanceof ARecursiveOperation)
 			((ARecursiveOperation)operation).setXml(new XML());
+		
 	}
 	
 	/** method to be implemented to test the AllAll combination */
@@ -73,7 +80,7 @@ public abstract class AOperation<T extends AGeneralOperation> extends TestCase {
 	protected abstract void NullValued();
 	
 	public void verify(){
-		assertEquals(expected, actual);
+		assertEquals(replace$(expected,"i",""+(i),"y",""+(++i)), actual);
 	}
 	
 	public void testAllAll(){
@@ -117,4 +124,44 @@ public abstract class AOperation<T extends AGeneralOperation> extends TestCase {
 
 		NullValued();
 	}
+	
+	/**
+	 * Replaces the variables present in the text and returns the result.<br>
+	 * Each key will be added to the $ prefix.
+	 * @param text text to edit
+	 * @param pairs strings in "key","value","key","value" order
+	 * @return the text resultant
+	 */
+	protected static String replace$ (String text, String... pairs){
+		String key = null;
+		String value = null;
+		Map<String, String> vars = new HashMap<String, String>();
+		for(int i = 0; i < pairs.length; i++){
+			
+			if(i%2 == 0) key = pairs[i];
+			
+			if(i%2 == 1){
+				value = pairs[i];
+				vars.put(key, value);
+			}
+		}
+		return GeneralUtility.replace$(text, vars);
+	}
+	
+	public void write(){
+		i =  0;
+		try {Method method = operation.getClass().getMethod("write",new Class[]{});
+		     actual = ((StringBuilder) method.invoke(operation, new Object[]{})).toString();
+		} catch (Exception e) {e.printStackTrace();}
+	}
+	
+	public void write(boolean type){
+		i =  (Integer) getFieldValue(operation,"count");
+		if(i == null) i = 0;
+		try {Method method = operation.getClass().getMethod("write",boolean.class);
+		     actual = ((StringBuilder) method.invoke(operation, type)).toString();
+		} catch (Exception e) {e.printStackTrace();}
+	}
+	
+	
 }

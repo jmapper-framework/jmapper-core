@@ -48,42 +48,42 @@ public class ExplicitSimpleConversion2Test extends AOperation<BasicConversion> {
 	@Override
 	protected void AllAll() {
 		expected = "   destination.setAIntField(destination.conversion(destination.getAIntField(), source.getAIntField()));"+newLine;
-		actual   = operation.write().toString();
+		write();
 		verify();
 	}
 
 	@Override
 	protected void AllValued() {
 		expected = "   destination.setAIntField(destination.conversion(destination.getAIntField(), source.getAIntField()));"+newLine;
-		actual	 = operation.write().toString();
+		write();
 		verify();
 	}
 
 	@Override
 	protected void ValuedAll() {
 		expected = "   destination.setAIntField(destination.conversion(destination.getAIntField(), source.getAIntField()));"+newLine;
-		actual	 = operation.write().toString();
+		write();
 		verify();	
 	}
 
 	@Override
 	protected void ValuedValued() {
 		expected = "   destination.setAIntField(destination.conversion(destination.getAIntField(), source.getAIntField()));"+newLine;
-		actual	 = operation.write().toString();
+		write();
 		verify();	
 	}
 
 	@Override
 	protected void ValuedNull() {
 		expected = ""+newLine;
-		actual	 = operation.write().toString();
+		write();
 		verify();		
 	}
 
 	@Override
 	protected void NullValued() {
 		expected = ""+newLine;
-		actual	 = operation.write().toString();
+		write();
 		verify();		
 	}
 

@@ -48,7 +48,7 @@ public class ExplicitSimpleConversionTest extends AOperation<BasicConversion> {
 	@Override
 	protected void AllAll() {
 		expected = "   destination.setAField(destination.conversion(source.getAField()));"+newLine;
-		actual   = operation.write().toString();
+		write();
 		verify();
 	}
 
@@ -57,7 +57,7 @@ public class ExplicitSimpleConversionTest extends AOperation<BasicConversion> {
 		expected = "   if(source.getAField()!=null){"+
 		 newLine + "   destination.setAField(destination.conversion(source.getAField()));"+
 		 newLine + "   }"+newLine;
-		actual	 = operation.write().toString();
+		write();
 		verify();
 	}
 
@@ -66,7 +66,7 @@ public class ExplicitSimpleConversionTest extends AOperation<BasicConversion> {
 		expected = "   if(destination.getAField()!=null){"+
 		 newLine + "   destination.setAField(destination.conversion(source.getAField()));"+
 	     newLine + "   }"+newLine;
-		actual	 = operation.write().toString();
+		write();
 		verify();	
 	}
 
@@ -77,7 +77,7 @@ public class ExplicitSimpleConversionTest extends AOperation<BasicConversion> {
 	     newLine + "   destination.setAField(destination.conversion(source.getAField()));"+
 	     newLine + "   }"+
 	     newLine + "   }"+newLine;
-		actual	 = operation.write().toString();
+		write();
 		verify();	
 	}
 
@@ -88,7 +88,7 @@ public class ExplicitSimpleConversionTest extends AOperation<BasicConversion> {
 	     newLine + "   destination.setAField(null);"+
 	     newLine + "   }"+
 	     newLine + "   }"+newLine;
-		actual	 = operation.write().toString();
+		write();
 		verify();		
 	}
 
@@ -99,7 +99,7 @@ public class ExplicitSimpleConversionTest extends AOperation<BasicConversion> {
 		 newLine + "   destination.setAField(destination.conversion(source.getAField()));"+
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;
-		actual	 = operation.write().toString();
+		write();
 		verify();		
 	}
 

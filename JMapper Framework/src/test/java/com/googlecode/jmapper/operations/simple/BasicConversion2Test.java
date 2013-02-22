@@ -36,7 +36,7 @@ public class BasicConversion2Test extends AOperation<BasicOperation>{
 	@Override
 	protected void AllAll() {
 		expected = "   destination.setAIntField(Integer.parseInt(source.getAStringField()));"+newLine;
-		actual   = operation.write().toString();
+		write();
 		verify();
 	}
 
@@ -45,14 +45,14 @@ public class BasicConversion2Test extends AOperation<BasicOperation>{
 		expected = "   if(source.getAStringField()!=null){"+
 		 newLine + "   destination.setAIntField(Integer.parseInt(source.getAStringField()));"+
 		 newLine + "   }"+newLine;
-		actual	 = operation.write().toString();
+		write();
 		verify();
 	}
 
 	@Override
 	protected void ValuedAll() {
 		expected = "   destination.setAIntField(Integer.parseInt(source.getAStringField()));"+newLine;
-		actual	 = operation.write().toString();
+		write();
 		verify();	
 	}
 
@@ -61,21 +61,21 @@ public class BasicConversion2Test extends AOperation<BasicOperation>{
 		expected = "   if(source.getAStringField()!=null){"+
 	     newLine + "   destination.setAIntField(Integer.parseInt(source.getAStringField()));"+
 	     newLine + "   }"+newLine;
-		actual	 = operation.write().toString();
+		write();
 		verify();	
 	}
 
 	@Override
 	protected void ValuedNull() {
 		expected = newLine;
-		actual	 = operation.write().toString();
+		write();
 		verify();		
 	}
 
 	@Override
 	protected void NullValued() {
 		expected = newLine;
-		actual	 = operation.write().toString();
+		write();
 		verify();		
 	}
 

@@ -1,16 +1,11 @@
 package com.googlecode.jmapper.operations.complex;
 
-import static com.googlecode.jmapper.util.ClassesManager.getFieldValue;
 import static com.googlecode.jmapper.util.GeneralUtility.newLine;
-
 import java.lang.reflect.Field;
-
-import com.googlecode.jmapper.enums.ConversionType;
-import com.googlecode.jmapper.operations.complex.ArrayOperation;
-import com.googlecode.jmapper.operations.info.InfoOperation;
-
 import com.googlecode.jmapper.bean.ComplexClass;
+import com.googlecode.jmapper.enums.ConversionType;
 import com.googlecode.jmapper.operations.AOperation;
+import com.googlecode.jmapper.operations.info.InfoOperation;
 
 public class ArrayOperationTest extends AOperation<ArrayOperation>{
 
@@ -43,23 +38,21 @@ public class ArrayOperationTest extends AOperation<ArrayOperation>{
 		 newLine + "   destination.setStringArray(null);"+
 		 newLine + "   }"+newLine;
 		
-		actual   = operation.write(newInstance).toString();
+		write(newInstance);
 		verify();
-		
-		Integer i =  getFieldValue(operation,"count");
 		
 		expected = "   if(destination.getStringArray()!=null){"+
 		 newLine + "   if(source.getStringArray2()!=null){"+
-		 newLine + "   java.lang.String[] dep"+i+" = destination.getStringArray();"+
-		 newLine + "   java.lang.String[] newDestination"+i+" = new java.lang.String[dep"+i+".length + source.getStringArray2().length];"+
-		 newLine + "   int counter"+i+" = 0;"+
-		 newLine + "   for(int index"+i+" = dep"+i+".length-1;index"+i+" >=0;index"+i+"--){"+
-		 newLine + "   newDestination"+i+"[counter"+i+"++] = dep"+i+"[index"+i+"];"+
+		 newLine + "   java.lang.String[] dep$i = destination.getStringArray();"+
+		 newLine + "   java.lang.String[] newDestination$i = new java.lang.String[dep$i.length + source.getStringArray2().length];"+
+		 newLine + "   int counter$i = 0;"+
+		 newLine + "   for(int index$i = dep$i.length-1;index$i >=0;index$i--){"+
+		 newLine + "   newDestination$i[counter$i++] = dep$i[index$i];"+
 		 newLine + "   }"+
-		 newLine + "   for(int index"+i+" = source.getStringArray2().length-1;index"+i+" >=0;index"+i+"--){"+
-		 newLine + "   newDestination"+i+"[counter"+i+"++] = source.getStringArray2()[index"+i+"];"+
+		 newLine + "   for(int index$i = source.getStringArray2().length-1;index$i >=0;index$i--){"+
+		 newLine + "   newDestination$i[counter$i++] = source.getStringArray2()[index$i];"+
 		 newLine + "   }"+
-		 newLine + "   destination.setStringArray(newDestination"+i+");"+
+		 newLine + "   destination.setStringArray(newDestination$i);"+
 		 newLine + "   }else{"+
 		 newLine + "   destination.setStringArray(null);"+
 		 newLine + "   }"+
@@ -71,7 +64,7 @@ public class ArrayOperationTest extends AOperation<ArrayOperation>{
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;
 		
-		actual   = operation.write(enrichment).toString();
+		write(enrichment);
 		verify();
 	}
 
@@ -82,79 +75,73 @@ public class ArrayOperationTest extends AOperation<ArrayOperation>{
 		 newLine + "   destination.setStringArray(source.getStringArray2());"+
 		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(newInstance).toString();
+		write(newInstance);
 		verify();
-		
-		Integer i =  (Integer) getFieldValue(operation,"count");
 		
 		expected = "   if(source.getStringArray2()!=null){"+
 		 newLine + "   if(destination.getStringArray()!=null){"+
-		 newLine + "   java.lang.String[] dep"+i+" = destination.getStringArray();"+
-		 newLine + "   java.lang.String[] newDestination"+i+" = new java.lang.String[dep"+i+".length + source.getStringArray2().length];"+
-		 newLine + "   int counter"+i+" = 0;"+
-		 newLine + "   for(int index"+i+" = dep"+i+".length-1;index"+i+" >=0;index"+i+"--){"+
-		 newLine + "   newDestination"+i+"[counter"+i+"++] = dep"+i+"[index"+i+"];"+
+		 newLine + "   java.lang.String[] dep$i = destination.getStringArray();"+
+		 newLine + "   java.lang.String[] newDestination$i = new java.lang.String[dep$i.length + source.getStringArray2().length];"+
+		 newLine + "   int counter$i = 0;"+
+		 newLine + "   for(int index$i = dep$i.length-1;index$i >=0;index$i--){"+
+		 newLine + "   newDestination$i[counter$i++] = dep$i[index$i];"+
 		 newLine + "   }"+
-		 newLine + "   for(int index"+i+" = source.getStringArray2().length-1;index"+i+" >=0;index"+i+"--){"+
-		 newLine + "   newDestination"+i+"[counter"+i+"++] = source.getStringArray2()[index"+i+"];"+
+		 newLine + "   for(int index$i = source.getStringArray2().length-1;index$i >=0;index$i--){"+
+		 newLine + "   newDestination$i[counter$i++] = source.getStringArray2()[index$i];"+
 		 newLine + "   }"+
-		 newLine + "   destination.setStringArray(newDestination"+i+");"+
+		 newLine + "   destination.setStringArray(newDestination$i);"+
 		 newLine + "   }else{"+
 		 newLine + "   destination.setStringArray(source.getStringArray2());"+
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
+		write(enrichment);
 		verify();
 	}
 
 	@Override
 	protected void ValuedAll() {
 
-		Integer i =  (Integer) getFieldValue(operation,"count");
-		
 		expected = "   if(destination.getStringArray()!=null){"+
 		 newLine + "   if(source.getStringArray2()!=null){"+
-		 newLine + "   java.lang.String[] dep"+i+" = destination.getStringArray();"+
-		 newLine + "   java.lang.String[] newDestination"+i+" = new java.lang.String[dep"+i+".length + source.getStringArray2().length];"+
-		 newLine + "   int counter"+i+" = 0;"+
-		 newLine + "   for(int index"+i+" = dep"+i+".length-1;index"+i+" >=0;index"+i+"--){"+
-		 newLine + "   newDestination"+i+"[counter"+i+"++] = dep"+i+"[index"+i+"];"+
+		 newLine + "   java.lang.String[] dep$i = destination.getStringArray();"+
+		 newLine + "   java.lang.String[] newDestination$i = new java.lang.String[dep$i.length + source.getStringArray2().length];"+
+		 newLine + "   int counter$i = 0;"+
+		 newLine + "   for(int index$i = dep$i.length-1;index$i >=0;index$i--){"+
+		 newLine + "   newDestination$i[counter$i++] = dep$i[index$i];"+
 		 newLine + "   }"+
-		 newLine + "   for(int index"+i+" = source.getStringArray2().length-1;index"+i+" >=0;index"+i+"--){"+
-		 newLine + "   newDestination"+i+"[counter"+i+"++] = source.getStringArray2()[index"+i+"];"+
+		 newLine + "   for(int index$i = source.getStringArray2().length-1;index$i >=0;index$i--){"+
+		 newLine + "   newDestination$i[counter$i++] = source.getStringArray2()[index$i];"+
 		 newLine + "   }"+
-		 newLine + "   destination.setStringArray(newDestination"+i+");"+
+		 newLine + "   destination.setStringArray(newDestination$i);"+
 		 newLine + "   }else{"+
 		 newLine + "   destination.setStringArray(null);"+
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
+		write(enrichment);
 		verify();	
 	}
 
 	@Override
 	protected void ValuedValued() {
 
-		Integer i =  (Integer) getFieldValue(operation,"count");
-		
 		expected = "   if(destination.getStringArray()!=null){"+
 		 newLine + "   if(source.getStringArray2()!=null){"+
-		 newLine + "   java.lang.String[] dep"+i+" = destination.getStringArray();"+
-		 newLine + "   java.lang.String[] newDestination"+i+" = new java.lang.String[dep"+i+".length + source.getStringArray2().length];"+
-		 newLine + "   int counter"+i+" = 0;"+
-		 newLine + "   for(int index"+i+" = dep"+i+".length-1;index"+i+" >=0;index"+i+"--){"+
-		 newLine + "   newDestination"+i+"[counter"+i+"++] = dep"+i+"[index"+i+"];"+
+		 newLine + "   java.lang.String[] dep$i = destination.getStringArray();"+
+		 newLine + "   java.lang.String[] newDestination$i = new java.lang.String[dep$i.length + source.getStringArray2().length];"+
+		 newLine + "   int counter$i = 0;"+
+		 newLine + "   for(int index$i = dep$i.length-1;index$i >=0;index$i--){"+
+		 newLine + "   newDestination$i[counter$i++] = dep$i[index$i];"+
 		 newLine + "   }"+
-		 newLine + "   for(int index"+i+" = source.getStringArray2().length-1;index"+i+" >=0;index"+i+"--){"+
-		 newLine + "   newDestination"+i+"[counter"+i+"++] = source.getStringArray2()[index"+i+"];"+
+		 newLine + "   for(int index$i = source.getStringArray2().length-1;index$i >=0;index$i--){"+
+		 newLine + "   newDestination$i[counter$i++] = source.getStringArray2()[index$i];"+
 		 newLine + "   }"+
-		 newLine + "   destination.setStringArray(newDestination"+i+");"+
+		 newLine + "   destination.setStringArray(newDestination$i);"+
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
+		write(enrichment);
 		verify();	
 	}
 
@@ -167,7 +154,7 @@ public class ArrayOperationTest extends AOperation<ArrayOperation>{
 	     newLine + "   }"+
 	     newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
+		write(enrichment);
 		verify();		
 	}
 
@@ -180,7 +167,7 @@ public class ArrayOperationTest extends AOperation<ArrayOperation>{
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
+		write(enrichment);
 		verify();		
 	}
 

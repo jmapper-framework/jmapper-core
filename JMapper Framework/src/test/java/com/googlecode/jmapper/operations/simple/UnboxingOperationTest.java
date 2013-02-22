@@ -35,7 +35,7 @@ public class UnboxingOperationTest extends AOperation<BasicOperation> {
 	@Override
 	protected void AllAll() {
 		expected = "   destination.setAIntField(source.getAIntegerField().intValue());"+newLine;
-		actual   = operation.write().toString();
+		write();
 		verify();
 	}
 
@@ -44,14 +44,14 @@ public class UnboxingOperationTest extends AOperation<BasicOperation> {
 		expected = "   if(source.getAIntegerField()!=null){"+
 		 newLine + "   destination.setAIntField(source.getAIntegerField().intValue());"+
 		 newLine + "   }" + newLine;
-		actual   = operation.write().toString();
+		write();
 		verify();
 	}
 
 	@Override
 	protected void ValuedAll() {
 		expected = "   destination.setAIntField(source.getAIntegerField().intValue());"+newLine;
-		actual   = operation.write().toString();
+		write();
 		verify();
 	}
 
@@ -60,21 +60,21 @@ public class UnboxingOperationTest extends AOperation<BasicOperation> {
 		expected = "   if(source.getAIntegerField()!=null){"+
 		 newLine + "   destination.setAIntField(source.getAIntegerField().intValue());"+
 		 newLine + "   }" + newLine;
-		actual   = operation.write().toString();
+		write();
 		verify();
 	}
 
 	@Override
 	protected void ValuedNull() {
 		expected = newLine;
-		actual   = operation.write().toString();
+		write();
 		verify();
 	}
 
 	@Override
 	protected void NullValued() {
 		expected = newLine;
-		actual = operation.write().toString();
+		write();
 		verify();
 	}
 
