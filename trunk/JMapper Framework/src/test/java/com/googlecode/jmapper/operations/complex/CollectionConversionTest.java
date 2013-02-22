@@ -1,17 +1,12 @@
 package com.googlecode.jmapper.operations.complex;
 
-import static com.googlecode.jmapper.util.ClassesManager.getFieldValue;
 import static com.googlecode.jmapper.util.GeneralUtility.newLine;
-
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-
-import com.googlecode.jmapper.enums.ConversionType;
-import com.googlecode.jmapper.operations.complex.CollectionOperation;
-import com.googlecode.jmapper.operations.info.InfoOperation;
-
 import com.googlecode.jmapper.bean.ComplexClass;
+import com.googlecode.jmapper.enums.ConversionType;
 import com.googlecode.jmapper.operations.AOperation;
+import com.googlecode.jmapper.operations.info.InfoOperation;
 
 public class CollectionConversionTest extends AOperation<CollectionOperation>{
 
@@ -44,19 +39,15 @@ public class CollectionConversionTest extends AOperation<CollectionOperation>{
 	@Override
 	protected void AllAll() {
 		
-		Integer i =  (Integer) getFieldValue(operation,"count");
-		
 		expected = "   if(source.getASet()!=null){"+
-		 newLine + "   java.util.ArrayList complexCollection"+i+" = new java.util.ArrayList(source.getASet());"+
-		 newLine + "   destination.setAList(complexCollection"+i+");"+
+		 newLine + "   java.util.ArrayList complexCollection$i = new java.util.ArrayList(source.getASet());"+
+		 newLine + "   destination.setAList(complexCollection$i);"+
 		 newLine + "   }else{"+
 		 newLine + "   destination.setAList(null);"+
 		 newLine + "   }"+newLine;
 		
-		actual   = operation.write(newInstance).toString();
+		write(newInstance);
 		verify();
-		
-		i =  (Integer) getFieldValue(operation,"count");
 		
 		expected = "   if(destination.getAList()!=null){"+
 		 newLine + "   if(source.getASet()!=null){"+
@@ -66,42 +57,38 @@ public class CollectionConversionTest extends AOperation<CollectionOperation>{
 		 newLine + "   }"+
 		 newLine + "   }else{"+
 		 newLine + "   if(source.getASet()!=null){"+
-		 newLine + "   java.util.ArrayList complexCollection"+ ++i+" = new java.util.ArrayList(source.getASet());"+
-		 newLine + "   destination.setAList(complexCollection"+i+");"+
+		 newLine + "   java.util.ArrayList complexCollection$y = new java.util.ArrayList(source.getASet());"+
+		 newLine + "   destination.setAList(complexCollection$y);"+
 		 newLine + "   }else{"+
 		 newLine + "   destination.setAList(null);"+
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;
 		
-		actual   = operation.write(enrichment).toString();
+		write(enrichment);
 		verify();
 	}
 
 	@Override
 	protected void AllValued() {
 		
-		Integer i =  (Integer) getFieldValue(operation,"count");
-		
 		expected = "   if(source.getASet()!=null){"+
-		 newLine + "   java.util.ArrayList complexCollection"+i+" = new java.util.ArrayList(source.getASet());"+
-		 newLine + "   destination.setAList(complexCollection"+i+");"+
+		 newLine + "   java.util.ArrayList complexCollection$i = new java.util.ArrayList(source.getASet());"+
+		 newLine + "   destination.setAList(complexCollection$i);"+
 		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(newInstance).toString();
+		write(newInstance);
 		verify();
-		
-		i =  (Integer) getFieldValue(operation,"count");
 		
 		expected = "   if(source.getASet()!=null){"+
 		 newLine + "   if(destination.getAList()!=null){"+
 		 newLine + "   destination.getAList().addAll(source.getASet());"+
 		 newLine + "   }else{"+
-		 newLine + "   java.util.ArrayList complexCollection"+ ++i+" = new java.util.ArrayList(source.getASet());"+
-		 newLine + "   destination.setAList(complexCollection"+i+");"+
+		 newLine + "   java.util.ArrayList complexCollection$y = new java.util.ArrayList(source.getASet());"+
+		 newLine + "   destination.setAList(complexCollection$y);"+
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
+		write(enrichment);
 		verify();
 	}
 
@@ -116,7 +103,7 @@ public class CollectionConversionTest extends AOperation<CollectionOperation>{
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
+		write(enrichment);
 		verify();	
 	}
 
@@ -129,7 +116,7 @@ public class CollectionConversionTest extends AOperation<CollectionOperation>{
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
+		write(enrichment);
 		verify();	
 	}
 
@@ -142,23 +129,23 @@ public class CollectionConversionTest extends AOperation<CollectionOperation>{
 	     newLine + "   }"+
 	     newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
+		write(enrichment);
 		verify();		
 	}
 
 	@Override
 	protected void NullValued() {
 
-		Integer i =  (Integer) getFieldValue(operation,"count");
+		
 		
 		expected = "   if(destination.getAList()==null){"+
 		 newLine + "   if(source.getASet()!=null){"+
-		 newLine + "   java.util.ArrayList complexCollection"+i+" = new java.util.ArrayList(source.getASet());"+
-		 newLine + "   destination.setAList(complexCollection"+i+");"+
+		 newLine + "   java.util.ArrayList complexCollection$i = new java.util.ArrayList(source.getASet());"+
+		 newLine + "   destination.setAList(complexCollection$i);"+
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
+		write(enrichment);
 		verify();		
 	}
 

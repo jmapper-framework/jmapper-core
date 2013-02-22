@@ -56,7 +56,7 @@ public class ExplicitComplexConversion2Test extends AOperation<ConversionOperati
 		 newLine + "   destination.setAStringList(null);"+
 		 newLine + "   }"+newLine;
 		
-		actual   = operation.write(newInstance).toString();
+		write(newInstance);
 		verify();
 		
 		expected = "   if(destination.getAStringList()!=null){"+
@@ -73,7 +73,7 @@ public class ExplicitComplexConversion2Test extends AOperation<ConversionOperati
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;
 		
-		actual   = operation.write(enrichment).toString();
+		write(enrichment);
 		verify();
 	}
 
@@ -84,7 +84,7 @@ public class ExplicitComplexConversion2Test extends AOperation<ConversionOperati
 		 newLine + "   destination.setAStringList(destination.conversion(destination.getAStringList(), source.getAStringList2()));"+
 		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(newInstance).toString();
+		write(newInstance);
 		verify();
 		
 		expected = "   if(source.getAStringList2()!=null){"+
@@ -95,7 +95,7 @@ public class ExplicitComplexConversion2Test extends AOperation<ConversionOperati
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
+		write(enrichment);
 		verify();
 	}
 
@@ -110,7 +110,7 @@ public class ExplicitComplexConversion2Test extends AOperation<ConversionOperati
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
+		write(enrichment);
 		verify();	
 	}
 
@@ -123,7 +123,7 @@ public class ExplicitComplexConversion2Test extends AOperation<ConversionOperati
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
+		write(enrichment);
 		verify();	
 	}
 
@@ -136,7 +136,7 @@ public class ExplicitComplexConversion2Test extends AOperation<ConversionOperati
 	     newLine + "   }"+
 	     newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
+		write(enrichment);
 		verify();		
 	}
 
@@ -149,7 +149,7 @@ public class ExplicitComplexConversion2Test extends AOperation<ConversionOperati
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
+		write(enrichment);
 		verify();		
 	}	
 }

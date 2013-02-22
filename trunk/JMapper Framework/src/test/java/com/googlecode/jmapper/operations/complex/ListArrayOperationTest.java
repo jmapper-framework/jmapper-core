@@ -10,7 +10,6 @@ import com.googlecode.jmapper.enums.ConversionType;
 import com.googlecode.jmapper.operations.AOperation;
 import com.googlecode.jmapper.operations.info.InfoOperation;
 
-//TODO Test da completare --> ListArrayOperationTest
 public class ListArrayOperationTest extends AOperation<ListArrayOperation> {
 
 	@Override
@@ -42,82 +41,116 @@ public class ListArrayOperationTest extends AOperation<ListArrayOperation> {
 	@Override
 	protected void AllAll() {
 		
-		expected = ""+newLine;
+		expected = "   if(source.getStringArray()!=null){"+
+		 newLine + "   java.util.ArrayList listArrayOfDestination$i = new java.util.ArrayList(java.util.Arrays#asList(source.getStringArray()));"+
+		 newLine + "   destination.setAStringList(listArrayOfDestination$i);"+
+		 newLine + "   }else{"+
+		 newLine + "   destination.setAStringList(null);"+
+		 newLine + "   }"+newLine;
 		
-		actual   = operation.write(newInstance).toString();
-		
-//		System.out.println(actual);
-//		verify();
+		write(newInstance);
+		verify();
 
-		expected = ""+newLine;
+		expected = "   if(destination.getAStringList()!=null){"+
+		 newLine + "   if(source.getStringArray()!=null){"+
+		 newLine + "   java.util.ArrayList listArrayOfDestination$i = new java.util.ArrayList(java.util.Arrays#asList(source.getStringArray()));"+
+		 newLine + "   destination.getAStringList().addAll(listArrayOfDestination$i);"+
+		 newLine + "   }else{"+
+		 newLine + "   destination.setAStringList(null);"+
+		 newLine + "   }"+
+		 newLine + "   }else{"+
+		 newLine + "   if(source.getStringArray()!=null){"+
+		 newLine + "   java.util.ArrayList listArrayOfDestination$y = new java.util.ArrayList(java.util.Arrays#asList(source.getStringArray()));"+
+		 newLine + "   destination.setAStringList(listArrayOfDestination$y);"+
+		 newLine + "   }else{"+
+		 newLine + "   destination.setAStringList(null);"+
+		 newLine + "   }"+
+		 newLine + "   }"+newLine;
 		
-		actual   = operation.write(enrichment).toString();
-		
-//		System.out.println("\n\n"+actual);
-//		verify();
+		write(enrichment);
+		verify();
 	}
 
 	@Override
 	protected void AllValued() {
 		
-		expected = ""+newLine;
+		expected = "   if(source.getStringArray()!=null){"+
+		 newLine + "   java.util.ArrayList listArrayOfDestination$i = new java.util.ArrayList(java.util.Arrays#asList(source.getStringArray()));"+
+		 newLine + "   destination.setAStringList(listArrayOfDestination$i);"+
+		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(newInstance).toString();
+		write(newInstance);
+		verify();
 		
-//		System.out.println(actual);
-//		verify();
+		expected = "   if(source.getStringArray()!=null){"+
+		 newLine + "   if(destination.getAStringList()!=null){"+
+		 newLine + "   java.util.ArrayList listArrayOfDestination$i = new java.util.ArrayList(java.util.Arrays#asList(source.getStringArray()));"+
+		 newLine + "   destination.getAStringList().addAll(listArrayOfDestination$i);"+
+		 newLine + "   }else{"+
+		 newLine + "   java.util.ArrayList listArrayOfDestination$y = new java.util.ArrayList(java.util.Arrays#asList(source.getStringArray()));"+
+		 newLine + "   destination.setAStringList(listArrayOfDestination$y);"+
+		 newLine + "   }"+
+		 newLine + "   }"+newLine;
 		
-		expected = ""+newLine;
-		
-		actual	 = operation.write(enrichment).toString();
-		
-//		System.out.println("\n\n"+actual);
-//		verify();
+		write(enrichment);
+		verify();
 	}
 
 	@Override
 	protected void ValuedAll() {
 		
-		expected = ""+newLine;
+		expected = "   if(destination.getAStringList()!=null){"+
+		 newLine + "   if(source.getStringArray()!=null){"+
+		 newLine + "   java.util.ArrayList listArrayOfDestination$i = new java.util.ArrayList(java.util.Arrays#asList(source.getStringArray()));"+
+		 newLine + "   destination.getAStringList().addAll(listArrayOfDestination$i);"+
+		 newLine + "   }else{"+
+		 newLine + "   destination.setAStringList(null);"+
+		 newLine + "   }"+
+		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
-		
-//		System.out.println(actual);
-//		verify();
+		write(enrichment);
+		verify();
 	}
 
 	@Override
 	protected void ValuedValued() {
 
-		expected = ""+newLine;
+		expected = "   if(destination.getAStringList()!=null){"+
+		 newLine + "   if(source.getStringArray()!=null){"+
+		 newLine + "   java.util.ArrayList listArrayOfDestination$i = new java.util.ArrayList(java.util.Arrays#asList(source.getStringArray()));"+
+		 newLine + "   destination.getAStringList().addAll(listArrayOfDestination$i);"+
+		 newLine + "   }"+
+		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
-
-//		System.out.println(actual);
-//		verify();
-	
+		write(enrichment);
+		verify();
 	}
 
 	@Override
 	protected void ValuedNull() {
 		
-		expected = ""+newLine;
+		expected = "   if(destination.getAStringList()!=null){"+
+		 newLine + "   if(source.getStringArray()==null){"+
+		 newLine + "   destination.setAStringList(null);"+
+		 newLine + "   }"+
+		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
-
-//		System.out.println(actual);
-//		verify();
+		write(enrichment);
+		verify();
 	}
 
 	@Override
 	protected void NullValued() {
 
-		expected = ""+newLine;
+		expected = "   if(destination.getAStringList()==null){"+
+		 newLine + "   if(source.getStringArray()!=null){"+
+		 newLine + "   java.util.ArrayList listArrayOfDestination$i = new java.util.ArrayList(java.util.Arrays#asList(source.getStringArray()));"+
+		 newLine + "   destination.setAStringList(listArrayOfDestination$i);"+
+		 newLine + "   }"+
+		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
-
-//		System.out.println(actual);
-//		verify();		
+		write(enrichment);
+		verify();		
 	}	
 
 }

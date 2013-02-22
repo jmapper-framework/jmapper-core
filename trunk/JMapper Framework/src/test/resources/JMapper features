@@ -1,13 +1,50 @@
+
+Sviluppo componenti come procedere ?     
+     Integrazione con Hibernate, Apache Camel, OSGI..
+     plugin eclipse
+
 1.2.1
 
  - Refactoring del codice
 
-  - verificare che la eliminazione del global dal file avvenga bene anche con le innerclass
+  - XmlHandler --> verificare che la eliminazione del global dal file avvenga bene anche con le innerclass
   - gestire gli analyzer in un vettore e non con una sequenza di if.
-  - merge di due array ottimizzato:
+  - merge di due array ottimizzato (applicarlo in ArrayOperation e ArrayListOperation):
  		int[] result2 = Arrays.copyOf(array, array.length + array2.length);
 		System.arraycopy(array2, 0, result2, array.length, array2.length);  
 
+  - scrivere nuove operazioni:
+    
+    from: T to: List<T> 
+    ListItemOperation: Con questa operazione si potrà mappare un item verso una lista
+                       il mapping consisterà nell'effettuare un add dell'item in list
+                                           
+    from: V to: List<T> 
+    ListItemOperation: Gestire anche il caso di conversione implicite
+    
+    from: MappedObj to: List<TargetObj>  
+    MappedListItemOperation: Gestire il caso di oggetti configurati
+    
+    from: Object to: StringBuilder
+    StringBuilderObjectOperation: l'operazione da effettuare sarà in caso di creazione: 
+                                  new StringBuilder(object);
+                                  in caso di arricchimento:
+                                  stringBuilder.append(object);
+                                  
+    from: Object to: StringBuffer
+    StringBufferObjectOperation: le operazioni da effettuare saranno: in caso di creazione: 
+                                  new StringBuilder(object);
+                                  in caso di arricchimento:
+                                  stringBuilder.append(object);
+    
+    from: Object to: String
+    ToStringOperation:  Nel caso in cui non ci siano operazioni precedentemente definite
+                        che possono risolvere l'operazione, utilizzare il toStringOperation (di tipo ASimpleOperation)
+                        solo se il destination è di tipo String.
+                        operazione eseguita: object.toString();
+     
+     Altre idee ?
+   
 1.3.0
 
  - Multiple Mapping
@@ -65,9 +102,26 @@
 
 1.4.0
 
-  - possibilità di definire template
-         
+  - possibilità di definire template:
+    
+     In alcuni casi serve generalizzare una configurazione e/o conversioni, ma non per questo bisogna costringere lo sviluppatore
+     a creare le classi al quale associarle, soprattutto in caso di configurazione XML.
+     Il template permetterà quindi di definire configurazioni e/o conversioni comuni, senza dover definire alcuna classe. 
+
 1.5.0
+ 
+  - possibilità di definire i nomi dei metodi get e set es: JMap("$get{customField}$set{getL}")
+  - aggiungere regex con pipeline come separatori es |[a-z]|
+
+2.0.0
+
+  - possibilità di mappare livelli diversi di campi es: JMap("user.getName()")
+         
+2.1.0
+
+    Flattern e Expand, in caso di campi con lo stesso nome ma situati in livelli diversi, semplificare la configurazione.
+  
+2.2.0
 
  - DEFAULT BEHAVIORs
   
@@ -131,9 +185,3 @@
    Per usufruire di questa feature bisogna contrassegnare la classe con l'annotation @DefaultBehavior
    e contrassegnare i metodi che creano il destination con @Creation e quelli che lo arricchiscono con @Enrichment
   
-
-2.0.0
-
-  - possibilità di definire i nomi dei metodi get e set es: JMap("$get{customField}")
-  - possibilità di mappare livelli diversi di campi es: JMap("user.getName()")
-  - aggiungere regex con pipeline come separatori es |[a-z]|

@@ -36,7 +36,7 @@ public class BasicOperationTest extends AOperation<BasicOperation>{
 	@Override
 	protected void AllAll() {
 		expected = "   destination.setAField(source.getAField());"+newLine;
-		actual   = operation.write().toString();
+		write();
 		verify();
 	}
 
@@ -45,7 +45,7 @@ public class BasicOperationTest extends AOperation<BasicOperation>{
 		expected = "   if(source.getAField()!=null){"+
 		 newLine + "   destination.setAField(source.getAField());"+
 		 newLine + "   }"+newLine;
-		actual	 = operation.write().toString();
+		write();
 		verify();
 	}
 
@@ -54,7 +54,7 @@ public class BasicOperationTest extends AOperation<BasicOperation>{
 		expected = "   if(destination.getAField()!=null){"+
 		 newLine + "   destination.setAField(source.getAField());"+
 	     newLine + "   }"+newLine;
-		actual	 = operation.write().toString();
+		write();
 		verify();	
 	}
 
@@ -65,7 +65,7 @@ public class BasicOperationTest extends AOperation<BasicOperation>{
 	     newLine + "   destination.setAField(source.getAField());"+
 	     newLine + "   }"+
 	     newLine + "   }"+newLine;
-		actual	 = operation.write().toString();
+		write();
 		verify();	
 	}
 
@@ -76,7 +76,7 @@ public class BasicOperationTest extends AOperation<BasicOperation>{
 	     newLine + "   destination.setAField(null);"+
 	     newLine + "   }"+
 	     newLine + "   }"+newLine;
-		actual	 = operation.write().toString();
+		write();
 		verify();		
 	}
 
@@ -87,7 +87,7 @@ public class BasicOperationTest extends AOperation<BasicOperation>{
 		 newLine + "   destination.setAField(source.getAField());"+
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;
-		actual	 = operation.write().toString();
+		write();
 		verify();		
 	}
 

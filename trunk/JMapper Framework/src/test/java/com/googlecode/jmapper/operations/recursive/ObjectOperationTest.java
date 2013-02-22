@@ -1,15 +1,10 @@
 package com.googlecode.jmapper.operations.recursive;
 
-import static com.googlecode.jmapper.util.ClassesManager.getFieldValue;
 import static com.googlecode.jmapper.util.GeneralUtility.newLine;
-
 import java.lang.reflect.Field;
-
-import com.googlecode.jmapper.operations.info.InfoOperation;
-import com.googlecode.jmapper.operations.recursive.ObjectOperation;
-
 import com.googlecode.jmapper.bean.ComplexClass;
 import com.googlecode.jmapper.operations.AOperation;
+import com.googlecode.jmapper.operations.info.InfoOperation;
 
 public class ObjectOperationTest extends AOperation<ObjectOperation>{
 
@@ -37,20 +32,16 @@ public class ObjectOperationTest extends AOperation<ObjectOperation>{
 	@Override
 	protected void AllAll() {
 		
-		Integer i =  (Integer) getFieldValue(operation,"count");
-		
 		expected = "   if(source.getMappedObject()!=null){"+
-		 newLine + "   com.googlecode.jmapper.bean.TargetObject obj"+i+" = new com.googlecode.jmapper.bean.TargetObject();"+
-		 newLine + "   obj"+i+".setField(source.getMappedObject().getField());"+
-		 newLine + "   destination.setTargetObject(obj"+i+");"+
+		 newLine + "   com.googlecode.jmapper.bean.TargetObject obj$i = new com.googlecode.jmapper.bean.TargetObject();"+
+		 newLine + "   obj$i.setField(source.getMappedObject().getField());"+
+		 newLine + "   destination.setTargetObject(obj$i);"+
 		 newLine + "   }else{"+
 		 newLine + "   destination.setTargetObject(null);"+
 		 newLine + "   }"+newLine;
 		
-		actual   = operation.write(newInstance).toString();
+		write(newInstance);
 		verify();
-		
-		i =  (Integer) getFieldValue(operation,"count");
 		
 		expected = "   if(destination.getTargetObject()!=null){"+
 		 newLine + "   if(source.getMappedObject()!=null){"+
@@ -61,33 +52,29 @@ public class ObjectOperationTest extends AOperation<ObjectOperation>{
 		 newLine + "   }"+
 		 newLine + "   }else{"+
 		 newLine + "   if(source.getMappedObject()!=null){"+
-		 newLine + "   com.googlecode.jmapper.bean.TargetObject obj"+i+" = new com.googlecode.jmapper.bean.TargetObject();"+
-		 newLine + "   obj"+i+".setField(source.getMappedObject().getField());"+
-		 newLine + "   destination.setTargetObject(obj"+i+");"+
+		 newLine + "   com.googlecode.jmapper.bean.TargetObject obj$i = new com.googlecode.jmapper.bean.TargetObject();"+
+		 newLine + "   obj$i.setField(source.getMappedObject().getField());"+
+		 newLine + "   destination.setTargetObject(obj$i);"+
 		 newLine + "   }else{"+
 		 newLine + "   destination.setTargetObject(null);"+
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;
 		
-		actual   = operation.write(enrichment).toString();
+		write(enrichment);
 		verify();
 	}
 
 	@Override
 	protected void AllValued() {
 		
-		Integer i =  (Integer) getFieldValue(operation,"count");
-		
 		expected = "   if(source.getMappedObject()!=null){"+
-		 newLine + "   com.googlecode.jmapper.bean.TargetObject obj"+i+" = new com.googlecode.jmapper.bean.TargetObject();"+
-		 newLine + "   obj"+i+".setField(source.getMappedObject().getField());"+
-		 newLine + "   destination.setTargetObject(obj"+i+");"+
+		 newLine + "   com.googlecode.jmapper.bean.TargetObject obj$i = new com.googlecode.jmapper.bean.TargetObject();"+
+		 newLine + "   obj$i.setField(source.getMappedObject().getField());"+
+		 newLine + "   destination.setTargetObject(obj$i);"+
 		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(newInstance).toString();
+		write(newInstance);
 		verify();
-		
-		i =  (Integer) getFieldValue(operation,"count");
 		
 		expected = "   if(source.getMappedObject()!=null){"+
 		 newLine + "   if(destination.getTargetObject()!=null){"+
@@ -96,13 +83,13 @@ public class ObjectOperationTest extends AOperation<ObjectOperation>{
 		 newLine + "   }"+
 		 newLine +
 		 newLine + "   }else{"+
-		 newLine + "   com.googlecode.jmapper.bean.TargetObject obj"+i+" = new com.googlecode.jmapper.bean.TargetObject();"+
-		 newLine + "   obj"+i+".setField(source.getMappedObject().getField());"+
-		 newLine + "   destination.setTargetObject(obj"+i+");"+
+		 newLine + "   com.googlecode.jmapper.bean.TargetObject obj$i = new com.googlecode.jmapper.bean.TargetObject();"+
+		 newLine + "   obj$i.setField(source.getMappedObject().getField());"+
+		 newLine + "   destination.setTargetObject(obj$i);"+
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
+		write(enrichment);
 		verify();
 	}
 
@@ -120,7 +107,7 @@ public class ObjectOperationTest extends AOperation<ObjectOperation>{
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
+		write(enrichment);
 		verify();	
 	}
 
@@ -138,7 +125,7 @@ public class ObjectOperationTest extends AOperation<ObjectOperation>{
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
+		write(enrichment);
 		verify();	
 	}
 
@@ -151,24 +138,22 @@ public class ObjectOperationTest extends AOperation<ObjectOperation>{
 	     newLine + "   }"+
 	     newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
+		write(enrichment);
 		verify();		
 	}
 
 	@Override
 	protected void NullValued() {
 
-		Integer i =  (Integer) getFieldValue(operation,"count");
-		
 		expected = "   if(destination.getTargetObject()==null){"+
 		 newLine + "   if(source.getMappedObject()!=null){"+
-		 newLine + "   com.googlecode.jmapper.bean.TargetObject obj"+i+" = new com.googlecode.jmapper.bean.TargetObject();"+
-		 newLine + "   obj"+i+".setField(source.getMappedObject().getField());"+
-		 newLine + "   destination.setTargetObject(obj"+i+");"+
+		 newLine + "   com.googlecode.jmapper.bean.TargetObject obj$i = new com.googlecode.jmapper.bean.TargetObject();"+
+		 newLine + "   obj$i.setField(source.getMappedObject().getField());"+
+		 newLine + "   destination.setTargetObject(obj$i);"+
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
+		write(enrichment);
 		verify();		
 	}	
 }

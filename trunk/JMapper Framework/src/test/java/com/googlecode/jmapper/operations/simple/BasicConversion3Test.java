@@ -36,7 +36,7 @@ public class BasicConversion3Test extends AOperation<BasicOperation>{
 	@Override
 	protected void AllAll() {
 		expected = "   destination.setAStringField(source.getAIntegerField().toString());"+newLine;
-		actual   = operation.write().toString();
+		write();
 		verify();
 	}
 
@@ -45,7 +45,7 @@ public class BasicConversion3Test extends AOperation<BasicOperation>{
 		expected = "   if(source.getAIntegerField()!=null){"+
 		 newLine + "   destination.setAStringField(source.getAIntegerField().toString());"+
 		 newLine + "   }"+newLine;
-		actual	 = operation.write().toString();
+		write();
 		verify();
 	}
 
@@ -54,7 +54,7 @@ public class BasicConversion3Test extends AOperation<BasicOperation>{
 		expected = "   if(destination.getAStringField()!=null){"+
 		 newLine + "   destination.setAStringField(source.getAIntegerField().toString());"+
 	     newLine + "   }"+newLine;
-		actual	 = operation.write().toString();
+		write();
 		verify();	
 	}
 
@@ -65,7 +65,7 @@ public class BasicConversion3Test extends AOperation<BasicOperation>{
 	     newLine + "   destination.setAStringField(source.getAIntegerField().toString());"+
 	     newLine + "   }"+
 	     newLine + "   }"+newLine;
-		actual	 = operation.write().toString();
+		write();
 		verify();	
 	}
 
@@ -76,7 +76,7 @@ public class BasicConversion3Test extends AOperation<BasicOperation>{
 	     newLine + "   destination.setAStringField(null);"+
 	     newLine + "   }"+
 	     newLine + "   }"+newLine;
-		actual	 = operation.write().toString();
+		write();
 		verify();		
 	}
 
@@ -87,7 +87,7 @@ public class BasicConversion3Test extends AOperation<BasicOperation>{
 		 newLine + "   destination.setAStringField(source.getAIntegerField().toString());"+
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;
-		actual	 = operation.write().toString();
+		write();
 		verify();		
 	}
 

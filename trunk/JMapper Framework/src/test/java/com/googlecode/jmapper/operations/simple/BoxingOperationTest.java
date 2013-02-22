@@ -35,14 +35,14 @@ public class BoxingOperationTest extends AOperation<BasicOperation> {
 	@Override
 	protected void AllAll() {
 		expected = "   destination.setAIntegerField(new java.lang.Integer(source.getAIntField()));"+newLine;
-		actual   = operation.write().toString();
+		write();
 		verify();
 	}
 
 	@Override
 	protected void AllValued() {
 		expected = "   destination.setAIntegerField(new java.lang.Integer(source.getAIntField()));"+newLine;
-		actual   = operation.write().toString();
+		write();
 		verify();
 	}
 
@@ -51,7 +51,7 @@ public class BoxingOperationTest extends AOperation<BasicOperation> {
 		expected = "   if(destination.getAIntegerField()!=null){"+
 		 newLine + "   destination.setAIntegerField(new java.lang.Integer(source.getAIntField()));"+
 		 newLine + "   }" + newLine;
-		actual = operation.write().toString();
+		write();
 		verify();
 	}
 
@@ -60,14 +60,14 @@ public class BoxingOperationTest extends AOperation<BasicOperation> {
 		expected = "   if(destination.getAIntegerField()!=null){"+
 		 newLine + "   destination.setAIntegerField(new java.lang.Integer(source.getAIntField()));"+
 		 newLine + "   }" + newLine;
-		actual = operation.write().toString();
+		write();
 		verify();
 	}
 
 	@Override
 	protected void ValuedNull() {
 		expected = newLine;
-		actual = operation.write().toString();
+		write();
 		verify();
 	}
 
@@ -76,7 +76,7 @@ public class BoxingOperationTest extends AOperation<BasicOperation> {
 		expected = "   if(destination.getAIntegerField()==null){"+
 		 newLine + "   destination.setAIntegerField(new java.lang.Integer(source.getAIntField()));"+
 		 newLine + "   }" + newLine;
-		actual = operation.write().toString();
+		write();
 		verify();
 	}
 

@@ -49,7 +49,7 @@ public class CollectionOperationTest extends AOperation<CollectionOperation>{
 		 newLine + "   destination.setAStringList(null);"+
 		 newLine + "   }"+newLine;
 		
-		actual   = operation.write(newInstance).toString();
+		write(newInstance);
 		verify();
 		
 		expected = "   if(destination.getAStringList()!=null){"+
@@ -77,7 +77,7 @@ public class CollectionOperationTest extends AOperation<CollectionOperation>{
 		 newLine + "   destination.setAStringList(source.getAStringList2());"+
 		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(newInstance).toString();
+		write(newInstance);
 		verify();
 		
 		expected = "   if(source.getAStringList2()!=null){"+
@@ -88,7 +88,7 @@ public class CollectionOperationTest extends AOperation<CollectionOperation>{
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
+		write(enrichment);
 		verify();
 	}
 
@@ -103,7 +103,7 @@ public class CollectionOperationTest extends AOperation<CollectionOperation>{
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
+		write(enrichment);
 		verify();	
 	}
 
@@ -116,7 +116,7 @@ public class CollectionOperationTest extends AOperation<CollectionOperation>{
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
+		write(enrichment);
 		verify();	
 	}
 
@@ -129,7 +129,7 @@ public class CollectionOperationTest extends AOperation<CollectionOperation>{
 	     newLine + "   }"+
 	     newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
+		write(enrichment);
 		verify();		
 	}
 
@@ -142,7 +142,7 @@ public class CollectionOperationTest extends AOperation<CollectionOperation>{
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;
 		
-		actual	 = operation.write(enrichment).toString();
+		write(enrichment);
 		verify();		
 	}	
 }
