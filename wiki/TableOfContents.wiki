@@ -1,4 +1,4 @@
- * JMapper Framework
+ * User's Guide
    * [Introduction Introduction]
    * How to map
      * [basicMapping Basic Mapping]
