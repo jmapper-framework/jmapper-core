@@ -15,10 +15,14 @@ import com.googlecode.jmapper.conversions.implicit.ConversionsToShortTest;
 import com.googlecode.jmapper.conversions.implicit.ConversionsToStringTest;
 import com.googlecode.jmapper.operations.OperationAnalyzerTest;
 import com.googlecode.jmapper.operations.complex.ArrayConversionTest;
+import com.googlecode.jmapper.operations.complex.ArrayListConversionTest;
+import com.googlecode.jmapper.operations.complex.ArrayListOperationTest;
 import com.googlecode.jmapper.operations.complex.ArrayOperationTest;
 import com.googlecode.jmapper.operations.complex.CollectionConversion2Test;
 import com.googlecode.jmapper.operations.complex.CollectionConversionTest;
 import com.googlecode.jmapper.operations.complex.CollectionOperationTest;
+import com.googlecode.jmapper.operations.complex.ListArrayConversionTest;
+import com.googlecode.jmapper.operations.complex.ListArrayOperationTest;
 import com.googlecode.jmapper.operations.complex.MapConversion2Test;
 import com.googlecode.jmapper.operations.complex.MapConversionTest;
 import com.googlecode.jmapper.operations.complex.MapOperationTest;
@@ -112,6 +116,17 @@ public class JUnitTests {
 			suite.addTestSuite(CollectionConversion2Test.class);
 			// test between mapped Collections: destination List<TargetObject> and source Set<MappedObject>
 			suite.addTestSuite(MappedCollectionOperationTest.class);			
+		
+		/*	Tests on Array <-> Collections         */	
+		
+			// test with an array as destination and a list as source
+			suite.addTestSuite(ArrayListOperationTest.class);
+			// conversion test between: destination String[] and source List<Integer> 
+			suite.addTestSuite(ArrayListConversionTest.class);
+			// test with a list as destination and an array as source
+			suite.addTestSuite(ListArrayOperationTest.class);
+			// conversion test between: destination List<Integer> and source String[]
+			suite.addTestSuite(ListArrayConversionTest.class);
 			
 		/*	Tests on Maps                          */
 			
