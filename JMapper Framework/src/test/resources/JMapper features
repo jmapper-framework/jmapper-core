@@ -1,9 +1,10 @@
 
-Sviluppo componenti come procedere ?     
-     Integrazione con Hibernate, Apache Camel, OSGI..
+
+  Sviluppo componenti esterni come procedere ?     
+     Integrazione con Hibernate, Apache Camel
      plugin eclipse
-     
-Sviluppo di configurazione tramite API ?
+     renderlo OSGI compatibile (karaf), maven-bundle-plugin
+  Sviluppo di configurazione tramite API ?
 
 1.2.1
 
@@ -26,6 +27,20 @@ Sviluppo di configurazione tramite API ?
     
     from: MappedObj to: List<TargetObj>  
     MappedListItemOperation: Gestire il caso di oggetti configurati
+    
+    codice di esempio:
+                                @JGlobalMap
+    Destination {				Source {
+                                    String item; 
+       List<String> list;           Integer item2;
+                                    char item3;
+    }                           }
+    
+    JMapper mapper = new JMapper(Destination, Source);
+    Destination destination = mapper.getDestination(new Source("firstItem",2,'3'));
+    output:
+    Destination [list=["firstItem", "2", "3"]]
+    
     
     from: Object to: StringBuilder
     StringBuilderObjectOperation: l'operazione da effettuare sarà in caso di creazione: 
@@ -56,7 +71,7 @@ Sviluppo di configurazione tramite API ?
     Ma la relazione che c'è tra i campi della classe configurata e i campi delle classi target è sempre 1 a 1 (con @JMap).
     Ciò vuol dire che in caso di conversioni dinamiche non è permesso (con la versione 1.1.1) configurare 
     direttamente un campo con N altri, ma invece bisogna configurare gli N campi verso il campo interessato.
-    Con il global mapping invece è possibile mappare N campi verso uno.
+    Con la versione 1.2.0 è possibile (tramite JGlobalMap) mappare N campi verso uno.
     Ciò che manca è la possibilità di mappare un campo verso N.
 
     Obiettivo
