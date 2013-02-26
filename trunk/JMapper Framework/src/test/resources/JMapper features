@@ -13,8 +13,8 @@
   - XmlHandler --> verificare che la eliminazione del global dal file avvenga bene anche con le innerclass
   - gestire gli analyzer in un vettore e non con una sequenza di if.
   - merge di due array ottimizzato (applicarlo in ArrayOperation e ArrayListOperation):
- 		int[] result2 = Arrays.copyOf(array, array.length + array2.length);
-		System.arraycopy(array2, 0, result2, array.length, array2.length);  
+ 		int[] newArray = Arrays.copyOf(array, firstArray.length + secondArray.length);
+		System.arraycopy(secondArray, 0, newArray, firstArray.length, secondArray.length);  
 
   - scrivere nuove operazioni:
     
