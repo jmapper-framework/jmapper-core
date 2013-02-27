@@ -59,14 +59,8 @@ public class ArrayListConversionTest extends AOperation<ArrayListOperation> {
 		 newLine + "   arrayListOfDestination$i[index$i] = destinationItem$i;"+
 		 newLine + "   }"+
 		 newLine + "   java.lang.String[] dep$i = destination.getStringArray();"+
-		 newLine + "   java.lang.String[] newDestination$i = new java.lang.String[dep$i.length + arrayListOfDestination$i.length];"+
-		 newLine + "   int counter$i = 0;"+
-		 newLine + "   for(int index$i = dep$i.length-1;index$i >=0;index$i--){"+
-		 newLine + "   newDestination$i[counter$i++] = dep$i[index$i];"+
-		 newLine + "   }"+
-		 newLine + "   for(int index$i = arrayListOfDestination$i.length-1;index$i >=0;index$i--){"+
-		 newLine + "   newDestination$i[counter$i++] = arrayListOfDestination$i[index$i];"+
-		 newLine + "   }"+
+		 newLine + "   java.lang.String[] newDestination$i = (java.lang.String[])java.util.Arrays.copyOf(dep$i, dep$i.length + arrayListOfDestination$i.length);"+
+		 newLine + "   System.arraycopy(arrayListOfDestination$i, 0, newDestination$i, dep$i.length, arrayListOfDestination$i.length);"+
 		 newLine + "   destination.setStringArray(newDestination$i);"+
 		 newLine + 
 		 newLine + "   }else{"+
@@ -120,14 +114,8 @@ public class ArrayListConversionTest extends AOperation<ArrayListOperation> {
 		 newLine + "   arrayListOfDestination$i[index$i] = destinationItem$i;"+
 		 newLine + "   }"+
 		 newLine + "   java.lang.String[] dep$i = destination.getStringArray();"+
-		 newLine + "   java.lang.String[] newDestination$i = new java.lang.String[dep$i.length + arrayListOfDestination$i.length];"+
-		 newLine + "   int counter$i = 0;"+
-		 newLine + "   for(int index$i = dep$i.length-1;index$i >=0;index$i--){"+
-		 newLine + "   newDestination$i[counter$i++] = dep$i[index$i];"+
-		 newLine + "   }"+
-		 newLine + "   for(int index$i = arrayListOfDestination$i.length-1;index$i >=0;index$i--){"+
-		 newLine + "   newDestination$i[counter$i++] = arrayListOfDestination$i[index$i];"+
-		 newLine + "   }"+
+		 newLine + "   java.lang.String[] newDestination$i = (java.lang.String[])java.util.Arrays.copyOf(dep$i, dep$i.length + arrayListOfDestination$i.length);"+
+		 newLine + "   System.arraycopy(arrayListOfDestination$i, 0, newDestination$i, dep$i.length, arrayListOfDestination$i.length);"+
 		 newLine + "   destination.setStringArray(newDestination$i);"+
 		 newLine + 
 		 newLine + "   }else{"+
@@ -160,14 +148,8 @@ public class ArrayListConversionTest extends AOperation<ArrayListOperation> {
 		 newLine + "   arrayListOfDestination$i[index$i] = destinationItem$i;"+
 		 newLine + "   }"+
 		 newLine + "   java.lang.String[] dep$i = destination.getStringArray();"+
-		 newLine + "   java.lang.String[] newDestination$i = new java.lang.String[dep$i.length + arrayListOfDestination$i.length];"+
-		 newLine + "   int counter$i = 0;"+
-		 newLine + "   for(int index$i = dep$i.length-1;index$i >=0;index$i--){"+
-		 newLine + "   newDestination$i[counter$i++] = dep$i[index$i];"+
-		 newLine + "   }"+
-		 newLine + "   for(int index$i = arrayListOfDestination$i.length-1;index$i >=0;index$i--){"+
-		 newLine + "   newDestination$i[counter$i++] = arrayListOfDestination$i[index$i];"+
-		 newLine + "   }"+
+		 newLine + "   java.lang.String[] newDestination$i = (java.lang.String[])java.util.Arrays.copyOf(dep$i, dep$i.length + arrayListOfDestination$i.length);"+
+		 newLine + "   System.arraycopy(arrayListOfDestination$i, 0, newDestination$i, dep$i.length, arrayListOfDestination$i.length);"+
 		 newLine + "   destination.setStringArray(newDestination$i);"+
 		 newLine + 
 		 newLine + "   }else{"+
@@ -192,14 +174,8 @@ public class ArrayListConversionTest extends AOperation<ArrayListOperation> {
 		 newLine + "   arrayListOfDestination$i[index$i] = destinationItem$i;"+
 		 newLine + "   }"+
 		 newLine + "   java.lang.String[] dep$i = destination.getStringArray();"+
-		 newLine + "   java.lang.String[] newDestination$i = new java.lang.String[dep$i.length + arrayListOfDestination$i.length];"+
-		 newLine + "   int counter$i = 0;"+
-		 newLine + "   for(int index$i = dep$i.length-1;index$i >=0;index$i--){"+
-		 newLine + "   newDestination$i[counter$i++] = dep$i[index$i];"+
-		 newLine + "   }"+
-		 newLine + "   for(int index$i = arrayListOfDestination$i.length-1;index$i >=0;index$i--){"+
-		 newLine + "   newDestination$i[counter$i++] = arrayListOfDestination$i[index$i];"+
-		 newLine + "   }"+
+		 newLine + "   java.lang.String[] newDestination$i = (java.lang.String[])java.util.Arrays.copyOf(dep$i, dep$i.length + arrayListOfDestination$i.length);"+
+		 newLine + "   System.arraycopy(arrayListOfDestination$i, 0, newDestination$i, dep$i.length, arrayListOfDestination$i.length);"+
 		 newLine + "   destination.setStringArray(newDestination$i);"+
 		 newLine + 
 		 newLine + "   }"+

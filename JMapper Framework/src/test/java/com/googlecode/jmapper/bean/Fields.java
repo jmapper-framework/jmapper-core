@@ -13,6 +13,9 @@ import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import com.googlecode.jmapper.annotations.JGlobalMap;
+
+@JGlobalMap(classes={Fields.class},attributes={"aByte"})
 public class Fields {
 
 	
