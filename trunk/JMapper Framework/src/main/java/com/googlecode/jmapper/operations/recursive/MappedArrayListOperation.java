@@ -45,21 +45,13 @@ public class MappedArrayListOperation extends ARecursiveOperation {
 		vars.put("dClass"                  ,getArrayItemClass(destinationField).getName());
 		vars.put("source"                  ,s(getSourceConverted()));
 		vars.put("destination"             ,c("dep"));
-		vars.put("i"                       ,c("index"));
-		vars.put("index"                   ,c("counter"));
 		vars.put("getDestination()"        ,s(getDestination()));
 		vars.put("setDestination(result)"  ,s(setDestination(c("newDestination"))));
 		vars.put("result"                  ,c("newDestination"));
 		
 		return write(replace$("   $dClass[] $destination = $getDestination();"
-				  + newLine + "   $dClass[] $result = new $dClass[$destination.length + $source.length];"
-				  + newLine + "   int $index = 0;"
-				  + newLine + "   for(int $i = $destination.length-1;$i >=0;$i--){"
-				  + newLine + "   $result[$index++] = $destination[$i];"
-				  + newLine + "   }"
-				  + newLine + "   for(int $i = $source.length-1;$i >=0;$i--){"
-				  + newLine + "   $result[$index++] = $source[$i];"
-				  + newLine + "   }"
+				  + newLine + "   $dClass[] $result = ($dClass[]) java.util.Arrays.copyOf($destination, $destination.length + $source.length);"
+				  + newLine + "   System.arraycopy($source, 0, $result, $destination.length, $source.length);"
 				  + newLine + "$setDestination(result)",vars));
 	}
 
@@ -93,7 +85,6 @@ public class MappedArrayListOperation extends ARecursiveOperation {
 		vars.put("mapping"                 , mapping);
 		
 		count++;
-		
 		return write(replace$("   Object[] $source = $getSource().toArray();"
 				  + newLine + "   $dClass[] $destination = new $dClass[$source.length];"
 				  + newLine + "   for(int $i = $source.length-1;$i >=0;$i--){"

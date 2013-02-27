@@ -44,19 +44,11 @@ public class ArrayListOperation extends AComplexOperation {
 		vars.put("result"                ,c("newDestination"));
 		vars.put("setDestination(result)",s(setDestination(c("newDestination"))));
 		vars.put("destination"           ,c("dep"));
-		vars.put("i"                     ,c("index"));
-		vars.put("y"                     ,c("counter"));
 		vars.put("getDestination()"      ,s(getDestination()));
-					
-       return write(replace$( "   $dClass[] $destination = $getDestination();"
-				  + newLine + "   $dClass[] $result = new $dClass[$destination.length + $source.length];"
-				  + newLine + "   int $y = 0;"
-				  + newLine + "   for(int $i = $destination.length-1;$i >=0;$i--){"
-				  + newLine + "   $result[$y++] = $destination[$i];"
-				  + newLine + "   }"
-				  + newLine + "   for(int $i = $source.length-1;$i >=0;$i--){"
-				  + newLine + "   $result[$y++] = $source[$i];"
-				  + newLine + "   }"
+	
+	   return write(replace$( "   $dClass[] $destination = $getDestination();"
+				  + newLine + "   $dClass[] $result = ($dClass[])java.util.Arrays.copyOf($destination, $destination.length + $source.length);"
+				  + newLine + "   System.arraycopy($source, 0, $result, $destination.length, $source.length);"
 				  + newLine +     "$setDestination(result)", vars));
 	}
 

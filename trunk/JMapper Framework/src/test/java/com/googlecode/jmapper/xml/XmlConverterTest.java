@@ -9,6 +9,7 @@ import com.googlecode.jmapper.xml.beans.XmlConversion;
 
 import com.googlecode.jmapper.bean.AnnotatedClass;
 import com.googlecode.jmapper.bean.ComplexClass;
+import com.googlecode.jmapper.bean.Fields;
 import com.googlecode.jmapper.bean.MappedObject;
 import com.googlecode.jmapper.bean.MappedObject3;
 import com.googlecode.jmapper.bean.SimpleClass;
@@ -41,6 +42,20 @@ public class XmlConverterTest extends TestCase{
 		assertEquals("destination", method.getTo()[0]);
 		assertEquals("STATIC", method.getType().toString());
 		assertEquals("content", method.getContent());
+	}
+
+	public void testGlobal(){
+	
+		XmlClass xmlClass = Converter.toXmlClass(Fields.class);
+		
+		assertEquals("com.googlecode.jmapper.bean.Fields", xmlClass.global.classes.get(0).name);
+		assertEquals("aByte", xmlClass.global.attributes.get(0).name);
+		
+		Global global = Converter.toGlobal(xmlClass.global);
+		
+		assertEquals(global.getClasses()[0].getName(), xmlClass.global.classes.get(0).name);
+		assertEquals(global.getAttributes()[0], xmlClass.global.attributes.get(0).name);
+		
 	}
 	
 	public void testToXmlClass(){

@@ -2,7 +2,7 @@
 
   Sviluppo componenti esterni come procedere ?     
      Integrazione con Hibernate, Apache Camel
-     plugin eclipse
+     eclipse plugin
      renderlo OSGI compatibile (karaf), maven-bundle-plugin
   Sviluppo di configurazione tramite API ?
 
@@ -10,12 +10,8 @@
 
  - Refactoring del codice
 
-  - XmlHandler --> verificare che la eliminazione del global dal file avvenga bene anche con le innerclass
   - gestire gli analyzer in un vettore e non con una sequenza di if.
-  - merge di due array ottimizzato (applicarlo in ArrayOperation e ArrayListOperation):
- 		int[] newArray = Arrays.copyOf(array, firstArray.length + secondArray.length);
-		System.arraycopy(secondArray, 0, newArray, firstArray.length, secondArray.length);  
-
+  - creare XSD per la validazione dell'xml
   - scrivere nuove operazioni:
     
     from: T to: List<T> 
@@ -128,6 +124,7 @@
 1.5.0
  
   - possibilità di definire i nomi dei metodi get e set es: JMap("$get{customField}$set{getL}")
+    mettendo le parentesi si definisce la signature es $set{getList().addAll}
   - aggiungere regex con pipeline come separatori es |[a-z]|
 
 2.0.0

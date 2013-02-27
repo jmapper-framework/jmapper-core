@@ -44,14 +44,8 @@ public class ArrayOperationTest extends AOperation<ArrayOperation>{
 		expected = "   if(destination.getStringArray()!=null){"+
 		 newLine + "   if(source.getStringArray2()!=null){"+
 		 newLine + "   java.lang.String[] dep$i = destination.getStringArray();"+
-		 newLine + "   java.lang.String[] newDestination$i = new java.lang.String[dep$i.length + source.getStringArray2().length];"+
-		 newLine + "   int counter$i = 0;"+
-		 newLine + "   for(int index$i = dep$i.length-1;index$i >=0;index$i--){"+
-		 newLine + "   newDestination$i[counter$i++] = dep$i[index$i];"+
-		 newLine + "   }"+
-		 newLine + "   for(int index$i = source.getStringArray2().length-1;index$i >=0;index$i--){"+
-		 newLine + "   newDestination$i[counter$i++] = source.getStringArray2()[index$i];"+
-		 newLine + "   }"+
+		 newLine + "   java.lang.String[] newDestination$i = (java.lang.String[]) java.util.Arrays.copyOf(dep$i, dep$i.length + source.getStringArray2().length);"+
+		 newLine + "   System.arraycopy(source.getStringArray2(), 0, newDestination$i, dep$i.length, source.getStringArray2().length);"+
 		 newLine + "   destination.setStringArray(newDestination$i);"+
 		 newLine + "   }else{"+
 		 newLine + "   destination.setStringArray(null);"+
@@ -81,14 +75,8 @@ public class ArrayOperationTest extends AOperation<ArrayOperation>{
 		expected = "   if(source.getStringArray2()!=null){"+
 		 newLine + "   if(destination.getStringArray()!=null){"+
 		 newLine + "   java.lang.String[] dep$i = destination.getStringArray();"+
-		 newLine + "   java.lang.String[] newDestination$i = new java.lang.String[dep$i.length + source.getStringArray2().length];"+
-		 newLine + "   int counter$i = 0;"+
-		 newLine + "   for(int index$i = dep$i.length-1;index$i >=0;index$i--){"+
-		 newLine + "   newDestination$i[counter$i++] = dep$i[index$i];"+
-		 newLine + "   }"+
-		 newLine + "   for(int index$i = source.getStringArray2().length-1;index$i >=0;index$i--){"+
-		 newLine + "   newDestination$i[counter$i++] = source.getStringArray2()[index$i];"+
-		 newLine + "   }"+
+		 newLine + "   java.lang.String[] newDestination$i = (java.lang.String[]) java.util.Arrays.copyOf(dep$i, dep$i.length + source.getStringArray2().length);"+
+		 newLine + "   System.arraycopy(source.getStringArray2(), 0, newDestination$i, dep$i.length, source.getStringArray2().length);"+
 		 newLine + "   destination.setStringArray(newDestination$i);"+
 		 newLine + "   }else{"+
 		 newLine + "   destination.setStringArray(source.getStringArray2());"+
@@ -105,14 +93,8 @@ public class ArrayOperationTest extends AOperation<ArrayOperation>{
 		expected = "   if(destination.getStringArray()!=null){"+
 		 newLine + "   if(source.getStringArray2()!=null){"+
 		 newLine + "   java.lang.String[] dep$i = destination.getStringArray();"+
-		 newLine + "   java.lang.String[] newDestination$i = new java.lang.String[dep$i.length + source.getStringArray2().length];"+
-		 newLine + "   int counter$i = 0;"+
-		 newLine + "   for(int index$i = dep$i.length-1;index$i >=0;index$i--){"+
-		 newLine + "   newDestination$i[counter$i++] = dep$i[index$i];"+
-		 newLine + "   }"+
-		 newLine + "   for(int index$i = source.getStringArray2().length-1;index$i >=0;index$i--){"+
-		 newLine + "   newDestination$i[counter$i++] = source.getStringArray2()[index$i];"+
-		 newLine + "   }"+
+		 newLine + "   java.lang.String[] newDestination$i = (java.lang.String[]) java.util.Arrays.copyOf(dep$i, dep$i.length + source.getStringArray2().length);"+
+		 newLine + "   System.arraycopy(source.getStringArray2(), 0, newDestination$i, dep$i.length, source.getStringArray2().length);"+
 		 newLine + "   destination.setStringArray(newDestination$i);"+
 		 newLine + "   }else{"+
 		 newLine + "   destination.setStringArray(null);"+
@@ -129,14 +111,8 @@ public class ArrayOperationTest extends AOperation<ArrayOperation>{
 		expected = "   if(destination.getStringArray()!=null){"+
 		 newLine + "   if(source.getStringArray2()!=null){"+
 		 newLine + "   java.lang.String[] dep$i = destination.getStringArray();"+
-		 newLine + "   java.lang.String[] newDestination$i = new java.lang.String[dep$i.length + source.getStringArray2().length];"+
-		 newLine + "   int counter$i = 0;"+
-		 newLine + "   for(int index$i = dep$i.length-1;index$i >=0;index$i--){"+
-		 newLine + "   newDestination$i[counter$i++] = dep$i[index$i];"+
-		 newLine + "   }"+
-		 newLine + "   for(int index$i = source.getStringArray2().length-1;index$i >=0;index$i--){"+
-		 newLine + "   newDestination$i[counter$i++] = source.getStringArray2()[index$i];"+
-		 newLine + "   }"+
+		 newLine + "   java.lang.String[] newDestination$i = (java.lang.String[]) java.util.Arrays.copyOf(dep$i, dep$i.length + source.getStringArray2().length);"+
+		 newLine + "   System.arraycopy(source.getStringArray2(), 0, newDestination$i, dep$i.length, source.getStringArray2().length);"+
 		 newLine + "   destination.setStringArray(newDestination$i);"+
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;

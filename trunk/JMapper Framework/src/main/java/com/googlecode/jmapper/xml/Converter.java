@@ -164,11 +164,6 @@ public class Converter {
 		return new ConversionMethod(name, from, to, type, number, body);
 	}
 	
-	private static String[] trim(String[] array){
-		for (int i = 0; i < array.length; i++)array[i] = array[i].trim();
-		return array;
-	}
-	
 	/**
 	 * This method transforms a XmlAttribute into an Attribute.
 	 * @param xmlAttribute
@@ -232,13 +227,12 @@ public class Converter {
 	}
 
 	/**
-	 * Transforms the JGlobalMap annotation to Global bean.
-	 * @param aClass class to check
-	 * @return a new instance of Global Class
+	 * This method transforms a Global bean to an instance of XmlGlobal.
+	 * @param global global to transform
+	 * @return a new instance of XmlGlobal
 	 */
-	public static Global toGlobal(Class<?> aClass){
-		JGlobalMap globalMap = aClass.getAnnotation(JGlobalMap.class);
-		return new Global(globalMap.value(), globalMap.attributes(), globalMap.classes(), globalMap.excluded());
+	public static XmlGlobal toXmlGlobal(Global global){
+		 return toXmlGlobal(global.getValue(), global.getAttributes(), global.getClasses(), global.getExcluded());
 	}
 	
 	/**
@@ -246,18 +240,9 @@ public class Converter {
 	 * @param aClass class to check
 	 * @return a new instance of XmlGlobal
 	 */
-	public static XmlGlobal toXmlGlobal(Class<?> aClass){
-		 JGlobalMap globalMap = aClass.getAnnotation(JGlobalMap.class);
-		 return toXmlGlobal(globalMap.value(), globalMap.attributes(), globalMap.classes(), globalMap.excluded());
-	}
-	
-	/**
-	 * This method transforms a Global bean to an instance of XmlGlobal.
-	 * @param global global to transform
-	 * @return a new instance of XmlGlobal
-	 */
-	public static XmlGlobal toXmlGlobal(Global global){
-		 return toXmlGlobal(global.getValue(), global.getAttributes(), global.getClasses(), global.getExcluded());
+	private static XmlGlobal toXmlGlobal(Class<?> aClass){
+		JGlobalMap globalMap = aClass.getAnnotation(JGlobalMap.class);
+		return toXmlGlobal(globalMap.value(), globalMap.attributes(), globalMap.classes(), globalMap.excluded());
 	}
 	
 	/**
@@ -270,34 +255,37 @@ public class Converter {
 	 */
 	private static XmlGlobal toXmlGlobal(String value, String[] attributes, Class<?>[] classes, String[] excluded){
 		
-		XmlGlobal xmlAttribute = new XmlGlobal();
+		XmlGlobal xmlGlobal = new XmlGlobal();
 		
 		if(value != null && value.length()>0){
-			xmlAttribute.value = new XmlValueName();
-			xmlAttribute.value.name = value;
+			xmlGlobal.value = new XmlValueName();
+			xmlGlobal.value.name = value;
 		}
 		
 		if(!isEmpty(attributes)){
-			xmlAttribute.attributes = new ArrayList<XmlAttributeName>();
+			xmlGlobal.attributes = new ArrayList<XmlAttributeName>();
 			for (String attribute : attributes)
-				xmlAttribute.attributes.add(new XmlAttributeName(attribute));
+				xmlGlobal.attributes.add(new XmlAttributeName(attribute));
 		}
 		
 		if(!isEmpty(classes)){
-			xmlAttribute.classes = new ArrayList<XmlClassName>();
+			xmlGlobal.classes = new ArrayList<XmlClassName>();
 			for (Class<?> clazz : classes) 
-				xmlAttribute.classes.add(new XmlClassName(clazz.getName()));
+				xmlGlobal.classes.add(new XmlClassName(clazz.getName()));
 		}
 		
 		if(!isEmpty(excluded)){
-			xmlAttribute.excluded = new ArrayList<XmlAttributeName>();
+			xmlGlobal.excluded = new ArrayList<XmlAttributeName>();
 			for (String attribute : excluded)
-				xmlAttribute.excluded.add(new XmlAttributeName(attribute));
+				xmlGlobal.excluded.add(new XmlAttributeName(attribute));
 		}
 		
-		return xmlAttribute;
+		return xmlGlobal;
 	}
 	
+	public static void main(String[] args){
+		System.out.println(""!=null);
+	}
 	/**
 	 * This method transforms a Field given in input, into a XmlAttribute.
 	 * @param aField Field to transform in XmlAttribute
@@ -365,5 +353,10 @@ public class Converter {
 	private static String getValue(final String value,final String name){
 		if(value == null) return null;
 		return value.equals(DEFAULT_FIELD_VALUE)?name:value;
+	}
+	
+	private static String[] trim(String[] array){
+		for (int i = 0; i < array.length; i++)array[i] = array[i].trim();
+		return array;
 	}
 }
