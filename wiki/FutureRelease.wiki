@@ -2,4 +2,23 @@
 
 = In the next release =
 
-Work in progress..
+== merge optimized of two arrays ==
+
+the actual operation is:
+{{{
+String[] newArray = new String[firstArray.length + secondArray.length];
+int index = 0;
+for(int i = 0; i < firstArray.length: i++){
+   newArray[index++] = firstArray[i];
+}
+ 
+for(int i = 0; i < secondArray.length: i++){
+   newArray[index++] = secondArray[i];
+}
+}}}
+This code is simple but slow, the best way to do this is to use system methods, as follow: 
+{{{
+String[] newArray = Arrays.copyOf(firstArray, firstArray.length + secondArray.length);
+System.arraycopy(secondArray, 0, newArray, firstArray.length, secondArray.length);  
+}}}
+This algorithm is three times faster and short.
