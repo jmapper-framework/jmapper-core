@@ -4,15 +4,20 @@
      Integrazione con Hibernate, Apache Camel, XMLBeans, JAXB
      eclipse plugin
      renderlo OSGI compatibile (karaf), maven-bundle-plugin
-  Sviluppo di configurazione tramite API ? permettere la creazione della configurazione sia tramite codice che tramite Spring, 
-  così da poter sfruttare a pieno il framework, es l'utilizzo del SpEL (http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/expressions.html)
+     
+  Sviluppo di configurazione tramite API ? 
+     permettere la creazione della configurazione sia tramite codice che tramite Spring, 
+     così da poter sfruttare a pieno il framework, es l'utilizzo del SpEL (http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/expressions.html)
+     
+  Migliorie da apportare alla configurazione XML:
+     creare XSD per la validazione dell'xml
+     possibilità di utilizzare dei propri placeholder, come in spring (PropertyPlaceholderConfigurer)
 
 1.2.1
 
  - Refactoring del codice
 
   - gestire gli analyzer in un vettore e non con una sequenza di if.
-  - creare XSD per la validazione dell'xml
   - scrivere nuove operazioni:
     
     from: T to: List<T> 
