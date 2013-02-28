@@ -1,7 +1,7 @@
 
 
   Sviluppo componenti esterni come procedere ?     
-     Integrazione con Hibernate, Apache Camel
+     Integrazione con Hibernate, Apache Camel, XMLBeans, JAXB
      eclipse plugin
      renderlo OSGI compatibile (karaf), maven-bundle-plugin
   Sviluppo di configurazione tramite API ? permettere la creazione della configurazione sia tramite codice che tramite Spring, 
