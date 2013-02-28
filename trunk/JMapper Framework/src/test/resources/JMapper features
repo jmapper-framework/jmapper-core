@@ -123,8 +123,8 @@
 
   - possibilità di definire template:
     
-     In alcuni casi serve generalizzare una configurazione e/o conversioni, ma non per questo bisogna costringere lo sviluppatore
-     a creare le classi al quale associarle, soprattutto in caso di configurazione XML.
+     Nei casi in cui serve generalizzare una configurazione e/o conversioni,
+     non deve essere obbligatorio creare una classe in caso di configurazione XML.
      Il template permetterà quindi di definire configurazioni e/o conversioni comuni, senza dover definire alcuna classe. 
 
 1.5.0
@@ -132,6 +132,7 @@
   - possibilità di definire i nomi dei metodi get e set es: JMap("$get{customField}$set{getL}")
     mettendo le parentesi si definisce la signature es $set{getList().addAll}
   - aggiungere regex con pipeline come separatori es |[a-z]|
+  - possibilità di accedere ad un elemento della struttura (array, collection, map ecc...)
 
 2.0.0
 
@@ -139,14 +140,15 @@
          
 2.1.0
 
-    Flattern e Expand, in caso di campi con lo stesso nome ma situati in livelli diversi, semplificare la configurazione.
+    Flattern ed Expand, in caso di campi con lo stesso nome ma situati in livelli diversi, automatizzare il mapping.
   
-2.2.0
+2.2.0 o prima ??
 
  - DEFAULT BEHAVIORs
   
-   i comportamenti predefiniti tornano utili in tutti quei casi in cui il comportamento desiderato è identico in ogni utilizzo di JMapper. 
-   Ad essere analizzati sono i tipi dei campi, non servirà quindi dichiarare i nomi dei campi interessati.
+   i comportamenti predefiniti tornano utili in tutti quei casi in cui il mapping è preferibile 
+   applicarlo al "tipo" piuttosto che al "nome" del campo. 
+   Ad essere analizzati quindi sono i tipi dei campi, non servirà quindi dichiarare i nomi dei campi interessati.
    Un esempio può essere la conversione da String a Date:
 
    @DefaultBehavior
@@ -198,8 +200,6 @@
       }
    }
   
-   In questo modo i mapping che comprendono due campi i cui tipi sono esplicitamente gestiti come Default Behavior, verranno gestiti
-   con i metodi definiti.
    IMPORTANTE Le conversioni esplicite hanno la precedenza.
    
    Per usufruire di questa feature bisogna contrassegnare la classe con l'annotation @DefaultBehavior
