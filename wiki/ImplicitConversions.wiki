@@ -2,7 +2,7 @@
 
 = Implicit conversions =
 
-JMapper allows to perform implicitly mapping between primitive and / or wrapper types, such as from String to Integer and vice versa. Below are represented the conventions used to handle all those *conversions* that are *uncommon*:
+JMapper allows to perform implicitly mapping between primitive and / or wrapper types, structures, mapped and target objects.<br>Below are represented the conventions used to handle all those *conversions* that are *uncommon*:
 ||*Conversion*||*Result*||
 ||Boolean -> Number||1 if Boolean is true, 0 if false||
 ||Boolean -> Character/char||T if Boolean is true, F if false||
@@ -11,9 +11,10 @@ JMapper allows to perform implicitly mapping between primitive and / or wrapper 
 ||Character/char -> Boolean||true if Char is equal to T, false if Char is equal to F, null all other cases||
 ||Character/char -> boolean||true if Char is equal to T, false all other cases||
 
-It also converts the arrays, collections and maps including their objects, for example ({{{<-->}}} means bidirectional):
+JMapper converts the arrays, collections and maps including their objects, for example ({{{<-->}}} means bidirectional):
  * from interface to implementation and vice versa
-   {{{List <--> ArrayList}}}
+   {{{List <--> ArrayList}}}<br>
+   {{{MyInterface <--> MyImplementation }}}
  * between different interfaces
    {{{List <--> Set}}}<br>
    {{{Map <--> SortedMap}}}
