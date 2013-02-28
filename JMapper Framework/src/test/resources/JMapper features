@@ -4,7 +4,8 @@
      Integrazione con Hibernate, Apache Camel
      eclipse plugin
      renderlo OSGI compatibile (karaf), maven-bundle-plugin
-  Sviluppo di configurazione tramite API ?
+  Sviluppo di configurazione tramite API ? permettere la creazione della configurazione sia tramite codice che tramite Spring, 
+  così da poter sfruttare a pieno il framework, es l'utilizzo del SpEL (http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/expressions.html)
 
 1.2.1
 
