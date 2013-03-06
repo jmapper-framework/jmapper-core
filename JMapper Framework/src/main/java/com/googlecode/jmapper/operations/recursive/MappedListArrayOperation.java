@@ -70,6 +70,8 @@ public class MappedListArrayOperation extends ARecursiveOperation{
 		vars.put("dItem"				   ,dItem);
 		vars.put("mapping"				   ,mapping);
 		
+		count++;
+		
 		return write(replace$("   $newInstance(destination)"
 				  + newLine + "   $sClass[] $source = $getSource();"
 				  + newLine + "   for(int $i = $source.length-1;$i >=0;$i--){"
