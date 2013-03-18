@@ -1,6 +1,6 @@
 package com.googlecode.jmapper.integrationtest.operations.bean;
-import com.googlecode.jmapper.annotations.JGlobalMap;
 
+import com.googlecode.jmapper.annotations.JGlobalMap;
 
 @JGlobalMap(value="globalMapping", classes={Class1.class, Class2.class, Class3.class}, excluded={"field2"})
 public class AnnotatedExampleClass2 {
@@ -43,4 +43,31 @@ public class AnnotatedExampleClass2 {
 				+ ", field3=" + field3 + "]";
 	}
 	
+	@JGlobalMap
+	public static class Inner {
+		
+		private String innerField;
+
+		public String getInnerField() {
+			return innerField;
+		}
+
+		public void setInnerField(String innerField) {
+			this.innerField = innerField;
+		}
+
+		@Override
+		public String toString() {
+			return "Inner [innerField=" + innerField + "]";
+		}
+		
+		public Inner() {}
+
+		public Inner(String innerField) {
+			super();
+			this.innerField = innerField;
+		}
+		
+		
+	}
 }

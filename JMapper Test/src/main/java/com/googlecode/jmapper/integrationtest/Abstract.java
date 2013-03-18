@@ -1,6 +1,12 @@
 package com.googlecode.jmapper.integrationtest;
 
+import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
+
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+import org.apache.log4j.SimpleLayout;
+import org.apache.log4j.WriterAppender;
 
 import com.googlecode.jmapper.JMapper;
 import com.googlecode.jmapper.enums.MappingType;
@@ -39,6 +45,8 @@ public abstract class Abstract<D,S> extends TestCase{
 	public final MappingType valuedFields = MappingType.ONLY_VALUED_FIELDS;
 	public final MappingType nullFields = MappingType.ONLY_NULL_FIELDS;
 	public final HashMap<MappingType, String> mt;
+
+	ByteArrayOutputStream log;
 	
 	public Abstract() {
 		npc = new HashMap<NullPointerControl, String>();
@@ -52,6 +60,10 @@ public abstract class Abstract<D,S> extends TestCase{
 		mt.put(allFields, "All");
 		mt.put(valuedFields, "Valued");
 		mt.put(nullFields, "Null");
+		
+		log = new ByteArrayOutputStream();
+		PropertyConfigurator.configure("log4j.properties");
+		Logger.getLogger(JMapper.class).addAppender(new WriterAppender(new SimpleLayout(), log));
 	}
 	
 	@Override
