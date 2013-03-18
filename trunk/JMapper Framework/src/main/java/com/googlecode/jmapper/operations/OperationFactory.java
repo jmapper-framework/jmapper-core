@@ -70,8 +70,10 @@ public class OperationFactory {
 	 * @param methodsToGenerate 
 	 * @return a new instance of AGeneralOperation
 	 */
-	public AGeneralOperation get(OperationType operationType, Field destinationField, Field sourceField, InfoOperation info, Set<Method> methodsToGenerate){
+	public AGeneralOperation get(Field destinationField, Field sourceField, InfoOperation info, Set<Method> methodsToGenerate){
 		AGeneralOperation operation = null;
+		OperationType operationType = info.getInstructionType();
+		 
 		switch(operationType){
 			case BASIC_INSTRUCTION:			   operation = new BasicOperation();			break;
 			case BASIC_CONVERSION:             operation = new BasicConversion();			break;
