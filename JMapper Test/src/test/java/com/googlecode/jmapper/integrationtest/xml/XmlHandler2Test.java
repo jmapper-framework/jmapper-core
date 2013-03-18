@@ -140,17 +140,17 @@ public class XmlHandler2Test extends TestCase {
 				
 	}
 	
-//	public void testFromXmlToAnnotation(){
-//		
-//		xmlHandler.fromXmlToAnnotationAll(AnnotatedExampleClass2.class);
-//		
-//	}
-//	
-//	public void testDeleteAnnotatedClasses(){
-//		
-//		xmlHandler.deleteAnnotatedClasses();
-//		
-//		assertNull(xml.globalsLoad().get(AnnotatedExampleClass2.class.getName()));
-//	}
+	public void testFromXmlToAnnotation(){
+		
+		xmlHandler.fromXmlToAnnotationAll(AnnotatedExampleClass2.class);
+		
+	}
+	
+	public void testDeleteAnnotatedClasses(){
+		
+		xmlHandler.deleteAnnotatedClasses();
+		
+		assertNull(xml.globalsLoad().get(AnnotatedExampleClass2.class.getName()));
+	}
 
 }
