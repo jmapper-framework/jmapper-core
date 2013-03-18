@@ -52,6 +52,7 @@ import com.thoughtworks.xstream.XStream;
  * @author Alessandro Vurro
  *
  */
+//TODO refactoring
 public class FilesManager {
 	
 	/** application root */
@@ -318,9 +319,11 @@ public class FilesManager {
 		// lines to write
 		List<String> linesToWrite = new ArrayList<String>();
 		// previous line
-		String previousLine = "|insignifant value|";
+		String previousLine = ":-P";
 		// true if lines belong to aClass
 		boolean classFound = false;
+		// true if a class definition was found
+		boolean classDefinitionFound = false;
 		// true if annotation is written on more lines
 		boolean moreLines = false;
 		// number of annotated fields
@@ -329,35 +332,41 @@ public class FilesManager {
 		for (String line : readFile(file)) {
 
 			// If the class declaration has been found
-			if(containsAll(line, classIdentifier)){
+			if(containsAll(line, classIdentifier))
 				classFound = true;
-			}
+			
+			if(containsAll(line, "class","{") && !containsAll(line,";","="))
+				classDefinitionFound = true;
 			
 			// if line contains JGlobalMap configuration or if this annotation is written on more lines
-			if(globalToClean(line) || globalToClean(previousLine) || moreLines){
-				
-				if(cleanAll || classFound){
-					HashMap<String,Object> cleanLine = cleanLine(previousLine,moreLines,JGlobalMap.class);
-					boolean newLine = (Boolean) cleanLine.get("newLine");
-					String result = (String) cleanLine.get("result");
-					
-					if(result != null)
-						linesToWrite.add(result);
-					
-					previousLine = line;
-					moreLines = newLine;
-					if(!newLine) linesToWrite.add(line);
-					continue;
+			if(!globalToClean(line) && globalToClean(previousLine)){
+				if(moreLines){
+					if((cleanAll && classDefinitionFound) || classFound){
+						HashMap<String,Object> cleanLine = cleanLine(previousLine,moreLines,JGlobalMap.class);
+						boolean newLine = (Boolean) cleanLine.get("newLine");
+						String result = (String) cleanLine.get("result");
+						
+						if(result != null)
+							linesToWrite.add(result);
+						
+						previousLine = line;
+						moreLines = newLine;
+						if(!newLine){
+							linesToWrite.add(line);
+						}
+						continue;
+					}
 				}
-				if(globalToClean(previousLine) && !globalToClean(line) && !classFound){
+				if(!classFound || (cleanAll && !classDefinitionFound)){
 					linesToWrite.add(previousLine);
 					linesToWrite.add(line);
+					previousLine = line;
+					classDefinitionFound = false;
 					continue;
 				}
 				previousLine = line;
 				continue;
 			}
-			
 			// if line contains JMap configuration or if this annotation is written on more lines
 			if(attributeToClean(line) || moreLines){
 				
@@ -436,8 +445,7 @@ public class FilesManager {
 	 * @return true if the line contains a JGlobalMap configuration, false otherwise
 	 */
 	private static boolean globalToClean(String line){
-		String jglobalmap = "@"+JGlobalMap.class.getSimpleName();
-		if(!line.contains(jglobalmap))return false;
+		if(!line.contains("@"+JGlobalMap.class.getSimpleName()))return false;
 		return true;
 	}
 	/**
