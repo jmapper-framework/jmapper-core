@@ -32,7 +32,6 @@ import com.googlecode.jmapper.config.Error;
 import com.googlecode.jmapper.conversions.explicit.ConversionAnalyzer;
 import com.googlecode.jmapper.conversions.explicit.ConversionHandler;
 import com.googlecode.jmapper.enums.ChooseConfig;
-import com.googlecode.jmapper.enums.OperationType;
 import com.googlecode.jmapper.generation.beans.Method;
 import com.googlecode.jmapper.operations.complex.AComplexOperation;
 import com.googlecode.jmapper.operations.info.InfoOperation;
@@ -91,11 +90,11 @@ public final class OperationHandler {
 		configuredClass = isDestConfigured?destinationClass:sourceClass;
 		targetClass = isDestConfigured?sourceClass:destinationClass;
 		
-		// initialization dependencies
+		// dependencies initialization
 		configReader = new ConfigReader(configuredClass, targetClass, xml);
-		operationAnalyzer = new OperationAnalyzer(xml);
 		conversionHandler = new ConversionHandler(xml,destinationClass,sourceClass);
 		conversionAnalyzer = new ConversionAnalyzer(xml,configurationChosen,destinationClass,sourceClass);
+		operationAnalyzer = new OperationAnalyzer(xml, conversionAnalyzer);
 		operationFactory = new OperationFactory(xml, configurationChosen, simpleOperations, complexOperations);
 	}
 	
@@ -119,22 +118,14 @@ public final class OperationHandler {
 			verifiesAccessorMethods(destinationClass,destinationField);
 			verifiesGetterMethod(sourceClass,sourceField);
 			
-			boolean conversionMethodExists = conversionAnalyzer.fieldsToCheck(destinationField,sourceField);
+			if(operationAnalyzer.isUndefined(destinationField, sourceField))
+				Error.undefinedMapping(destinationField, destinationClass, sourceField, sourceClass);
 			
-			InfoOperation info = operationAnalyzer.getInfoOperation(destinationField, sourceField);
-			OperationType operationType = info.getInstructionType(); 
-				
-			if(operationType.isUndefined() && !conversionMethodExists)
-					Error.undefinedMapping(destinationField, destinationClass, sourceField, sourceClass);
+			InfoOperation info = operationAnalyzer.getInfo();
 			
-			if(conversionMethodExists)                  // explicit conversion between primitive types
-				operationType = operationType.isBasic()?OperationType.BASIC_CONVERSION
-														// explicit conversion between complex types
-				                         			   :OperationType.CONVERSION;
-			
-			AGeneralOperation operation = operationFactory.get(operationType, destinationField, sourceField, info, methodsToGenerate);
+			AGeneralOperation operation = operationFactory.get(destinationField, sourceField, info, methodsToGenerate);
 
-			if(operationType.isAConversion()){
+			if(info.getInstructionType().isAConversion()){
 				conversionHandler.load(conversionAnalyzer)
 				                 .from(sourceField).to(destinationField);
 				

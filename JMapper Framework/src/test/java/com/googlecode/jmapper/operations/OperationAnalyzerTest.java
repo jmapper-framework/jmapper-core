@@ -2,9 +2,11 @@ package com.googlecode.jmapper.operations;
 
 import static com.googlecode.jmapper.util.ClassesManager.retrieveField;
 import com.googlecode.jmapper.bean.Fields;
+import com.googlecode.jmapper.conversions.explicit.ConversionAnalyzer;
 
 import java.lang.reflect.Field;
 
+import com.googlecode.jmapper.enums.ChooseConfig;
 import com.googlecode.jmapper.enums.ConversionType;
 import com.googlecode.jmapper.enums.OperationType;
 import com.googlecode.jmapper.operations.info.InfoMapOperation;
@@ -105,7 +107,9 @@ public class OperationAnalyzerTest extends TestCase {
 	private void verifyInstructionType(OperationType instructionTypes, String type, String type2) throws ClassNotFoundException{
 		Field typeField = retrieveField(Fields.class, type);
 		Field typeField2 = retrieveField(Fields.class, type2);
-		OperationType operationType = new OperationAnalyzer(new XML()).getInfoOperation(typeField, typeField2).getInstructionType();
+		OperationAnalyzer operationAnalyzer = new OperationAnalyzer(new XML(), new ConversionAnalyzer(new XML(), ChooseConfig.DESTINATION, Fields.class, Fields.class));
+		operationAnalyzer.isUndefined(typeField, typeField2);
+		OperationType operationType = operationAnalyzer.getInfo().getInstructionType();
 		assertEquals("destination field: "+type+" source field: "+type2,instructionTypes, operationType);
 	}
 	private void verifyInstructionType(OperationType instructionTypes, String[] types) throws ClassNotFoundException{
@@ -118,13 +122,19 @@ public class OperationAnalyzerTest extends TestCase {
 	private void verifyConversionType(ConversionType expected, String field, String field2){
 		Field typeField = retrieveField(Fields.class, field);
 		Field typeField2 = retrieveField(Fields.class, field2);
-		ConversionType actual = new OperationAnalyzer(new XML()).getInfoOperation(typeField, typeField2).getConversionType();
+		
+		OperationAnalyzer operationAnalyzer = new OperationAnalyzer(new XML(), new ConversionAnalyzer(new XML(), ChooseConfig.DESTINATION, Fields.class, Fields.class));
+		operationAnalyzer.isUndefined(typeField, typeField2);
+		ConversionType actual = operationAnalyzer.getInfo().getConversionType();
 		assertEquals(expected, actual);
 	}
-	private InfoOperation getInfo(String field, String field2){
+	private InfoOperation getInfo(String field, String field2){ 
 		Field typeField = retrieveField(Fields.class, field);
 		Field typeField2 = retrieveField(Fields.class, field2);
-		return new OperationAnalyzer(new XML()).getInfoOperation(typeField, typeField2);
+		
+		OperationAnalyzer operationAnalyzer = new OperationAnalyzer(new XML(), new ConversionAnalyzer(new XML(), ChooseConfig.DESTINATION, Fields.class, Fields.class));
+		operationAnalyzer.isUndefined(typeField, typeField2);
+		return operationAnalyzer.getInfo();
 	}
 	private void verifyConversionPair(ConversionType expectedKey, ConversionType expectedValue,String field, String field2){
 		InfoMapOperation info = (InfoMapOperation) getInfo(field,field2);

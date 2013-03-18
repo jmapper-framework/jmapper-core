@@ -52,7 +52,7 @@ import com.thoughtworks.xstream.XStream;
  * @author Alessandro Vurro
  *
  */
-//TODO refactoring
+//TODO FilesManager -> refactoring
 public class FilesManager {
 	
 	/** application root */

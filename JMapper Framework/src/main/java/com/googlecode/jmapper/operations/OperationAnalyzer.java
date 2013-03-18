@@ -24,6 +24,7 @@ import static com.googlecode.jmapper.util.GeneralUtility.isBasic;
 import static com.googlecode.jmapper.util.GeneralUtility.isStructure;
 import static com.googlecode.jmapper.util.GeneralUtility.mapIsAssignableFrom;
 import java.lang.reflect.Field;
+import com.googlecode.jmapper.conversions.explicit.ConversionAnalyzer;
 import com.googlecode.jmapper.enums.OperationType;
 import com.googlecode.jmapper.operations.analyzer.ArrayAnalyzer;
 import com.googlecode.jmapper.operations.analyzer.ArrayListAnalyzer;
@@ -42,16 +43,18 @@ import com.googlecode.jmapper.xml.XML;
 public final class OperationAnalyzer {
 	
 	/** xml object */
-	private final XML xml;
+	private XML xml;
 	
-	private final BasicAnalyzer basicAnalyzer;
-	private final ArrayAnalyzer arrayAnalyzer;
-	private final ObjectAnalyzer objectAnalyzer;
-	private final CollectionAnalyzer collectionAnalyzer;
-	private final MapAnalyzer mapAnalyzer;
-	private final ArrayListAnalyzer arrayListAnalyzer;
+	private BasicAnalyzer basicAnalyzer;
+	private ArrayAnalyzer arrayAnalyzer;
+	private ObjectAnalyzer objectAnalyzer;
+	private CollectionAnalyzer collectionAnalyzer;
+	private MapAnalyzer mapAnalyzer;
+	private ArrayListAnalyzer arrayListAnalyzer;
+	private ConversionAnalyzer conversionAnalyzer;
+	private InfoOperation info;
 	
-	public OperationAnalyzer(XML aXml) {
+	public OperationAnalyzer(XML aXml, ConversionAnalyzer conversionAnalyzer) {
 		xml = aXml;
 		basicAnalyzer      = new BasicAnalyzer();
 		arrayAnalyzer      = new ArrayAnalyzer(xml);
@@ -59,6 +62,7 @@ public final class OperationAnalyzer {
 		collectionAnalyzer = new CollectionAnalyzer(xml);
 		mapAnalyzer        = new MapAnalyzer(xml);
 		arrayListAnalyzer  = new ArrayListAnalyzer(xml);
+		this.conversionAnalyzer = conversionAnalyzer;
 	}
 	
 	/**
@@ -68,26 +72,42 @@ public final class OperationAnalyzer {
 	 * @return returns the informations relating the operation to be performed
 	 * @see InfoOperation
 	 */
-	public InfoOperation getInfoOperation(final Field destination,final Field source) {
+	public boolean isUndefined(final Field destination,final Field source) {
 		
+		info = null;
 		Class<?> dClass = destination.getType();
 		Class<?> sClass = source.getType();
 		
 		// 	BASIC OPERATION
-		if(areBasic(destination,source))   	   return basicAnalyzer      .getInfoOperation(destination, source);
+		if(areBasic(destination,source))   	        info = basicAnalyzer     .getInfoOperation(destination, source);
 		// ARRAYS OPERATION
-		if(areArrays(dClass,sClass)) 	   	   return arrayAnalyzer	     .getInfoOperation(destination, source);
+		else if(areArrays(dClass,sClass)) 	   	    info = arrayAnalyzer	 .getInfoOperation(destination, source);
 		// OBJECTS OPERATION
-		if(areMappedObjects(dClass,sClass,xml))return objectAnalyzer	 .getInfoOperation(destination, source);
+		else if(areMappedObjects(dClass,sClass,xml))info = objectAnalyzer	 .getInfoOperation(destination, source);
 		// COLLECTIONS OPERATION
-		if(areCollections(dClass,sClass))  	   return collectionAnalyzer .getInfoOperation(destination, source);
+		else if(areCollections(dClass,sClass))  	info = collectionAnalyzer.getInfoOperation(destination, source);
 		// MAPS OPERATION
-		if(areMaps(dClass,sClass))		       return mapAnalyzer		 .getInfoOperation(destination, source);
+		else if(areMaps(dClass,sClass))		        info = mapAnalyzer		 .getInfoOperation(destination, source);
 		// ARRAY <-> LIST OPERATION
-		if(areArrayAndList(dClass, sClass))    return arrayListAnalyzer  .getInfoOperation(destination, source);
-		
+		else if(areArrayAndList(dClass, sClass))    info = arrayListAnalyzer .getInfoOperation(destination, source);
 		// if the operation has not been identified
-		return new InfoOperation().setInstructionType(OperationType.UNDEFINED);
+		else info = new InfoOperation().setInstructionType(OperationType.UNDEFINED);
+		
+		boolean conversionMethodExists = conversionAnalyzer.fieldsToCheck(destination,source);
+		
+		OperationType operationType = info.getInstructionType(); 
+			
+		if(operationType.isUndefined() && !conversionMethodExists)return true;
+		
+		if(conversionMethodExists)                  // explicit conversion between primitive types
+			info.setInstructionType(operationType.isBasic()?OperationType.BASIC_CONVERSION
+													// explicit conversion between complex types
+			                         			   :OperationType.CONVERSION);
+		return false;
+	}
+	
+	public InfoOperation getInfo(){
+		return info;
 	}
 	
 	private boolean areBasic(Field destination,Field source){
