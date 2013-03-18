@@ -335,7 +335,7 @@ public class FilesManager {
 			if(containsAll(line, classIdentifier))
 				classFound = true;
 			
-			if(containsAll(line, "class","{") && !containsAll(line,";","="))
+			if(containsAll(line, "class","{") && !containsAll(line,"="))
 				classDefinitionFound = true;
 			
 			// if line contains JGlobalMap configuration or if this annotation is written on more lines
@@ -364,9 +364,16 @@ public class FilesManager {
 					classDefinitionFound = false;
 					continue;
 				}
+				linesToWrite.add(line);
 				previousLine = line;
 				continue;
 			}
+			
+			if(globalToClean(line)){
+				previousLine = line;
+				continue;
+			}
+			
 			// if line contains JMap configuration or if this annotation is written on more lines
 			if(attributeToClean(line) || moreLines){
 				
