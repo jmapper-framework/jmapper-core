@@ -28,6 +28,7 @@ import com.googlecode.jmapper.operations.complex.MapConversionTest;
 import com.googlecode.jmapper.operations.complex.MapOperationTest;
 import com.googlecode.jmapper.operations.recursive.MappedArrayOperationTest;
 import com.googlecode.jmapper.operations.recursive.MappedCollectionOperationTest;
+import com.googlecode.jmapper.operations.recursive.MappedListArrayOperationTest;
 import com.googlecode.jmapper.operations.recursive.MappedMapOperation2Test;
 import com.googlecode.jmapper.operations.recursive.MappedMapOperationTest;
 import com.googlecode.jmapper.operations.recursive.ObjectOperationTest;
@@ -127,6 +128,11 @@ public class JUnitTests {
 			suite.addTestSuite(ListArrayOperationTest.class);
 			// conversion test between: destination List<Integer> and source String[]
 			suite.addTestSuite(ListArrayConversionTest.class);
+			// test between a mapped destination List and a mapped source Array
+			suite.addTestSuite(MappedListArrayOperationTest.class);
+			// test between a mapped destination Array and a mapped source List
+			suite.addTestSuite(MappedListArrayOperationTest.class);
+						
 			
 		/*	Tests on Maps                          */
 			

@@ -9,7 +9,6 @@ import com.googlecode.jmapper.bean.ComplexClass;
 import com.googlecode.jmapper.operations.AOperation;
 import com.googlecode.jmapper.operations.info.InfoOperation;
 
-//TODO Completare
 public class MappedListArrayOperationTest extends
 		AOperation<MappedListArrayOperation> {
 
