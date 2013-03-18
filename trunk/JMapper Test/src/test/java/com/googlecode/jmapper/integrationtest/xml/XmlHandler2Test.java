@@ -108,13 +108,20 @@ public class XmlHandler2Test extends TestCase {
 	
 	public void testAddAnnotatedClass(){
 		
-		xmlHandler.addAnnotatedClass(AnnotatedExampleClass2.class);
+		xmlHandler.addAnnotatedClassAll(AnnotatedExampleClass2.class);
 
 		Global global = xml.globalsLoad().get(AnnotatedExampleClass2.class.getName());
 		
 		assertEquals("globalMapping", global.getValue());
 		assertEquals(3, global.getClasses().length);
 		assertEquals("field2", global.getExcluded()[0]);
+		
+		global = xml.globalsLoad().get(AnnotatedExampleClass2.Inner.class.getName());
+		
+		assertEquals(null, global.getValue());
+		assertEquals(null, global.getClasses());
+		assertEquals(null, global.getExcluded());
+		
 	}
 	
 	public void testOverrideAnnotatedClass(){
@@ -129,21 +136,21 @@ public class XmlHandler2Test extends TestCase {
 
 	public void testCleanAnnotatedClass(){
 		
-		xmlHandler.cleanAnnotatedClass(AnnotatedExampleClass2.class);
+		xmlHandler.cleanAnnotatedClassAll(AnnotatedExampleClass2.class);
 				
 	}
 	
-	public void testFromXmlToAnnotation(){
-		
-		xmlHandler.fromXmlToAnnotation(AnnotatedExampleClass2.class);
-		
-	}
-	
-	public void testDeleteAnnotatedClasses(){
-		
-		xmlHandler.deleteAnnotatedClasses();
-		
-		assertNull(xml.globalsLoad().get(AnnotatedExampleClass2.class.getName()));
-	}
+//	public void testFromXmlToAnnotation(){
+//		
+//		xmlHandler.fromXmlToAnnotationAll(AnnotatedExampleClass2.class);
+//		
+//	}
+//	
+//	public void testDeleteAnnotatedClasses(){
+//		
+//		xmlHandler.deleteAnnotatedClasses();
+//		
+//		assertNull(xml.globalsLoad().get(AnnotatedExampleClass2.class.getName()));
+//	}
 
 }
