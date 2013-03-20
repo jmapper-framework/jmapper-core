@@ -66,10 +66,10 @@ public final class OperationAnalyzer {
 	}
 	
 	/**
-	 * This method analyzes the fields and returns the informations relating the operation to be performed.
+	 * This method analyzes the fields, calculates the info and returns true if operation is undefined.
 	 * @param destination
 	 * @param source
-	 * @return returns the informations relating the operation to be performed
+	 * @return returns true if an operation between fields exists
 	 * @see InfoOperation
 	 */
 	public boolean isUndefined(final Field destination,final Field source) {
@@ -106,6 +106,9 @@ public final class OperationAnalyzer {
 		return false;
 	}
 	
+	/**
+	 * @return the info obtained
+	 */
 	public InfoOperation getInfo(){
 		return info;
 	}

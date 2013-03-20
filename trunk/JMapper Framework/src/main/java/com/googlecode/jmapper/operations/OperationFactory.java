@@ -70,7 +70,7 @@ public class OperationFactory {
 	 * @param methodsToGenerate 
 	 * @return a new instance of AGeneralOperation
 	 */
-	public AGeneralOperation get(Field destinationField, Field sourceField, InfoOperation info, Set<Method> methodsToGenerate){
+	public AGeneralOperation getOperation(Field destinationField, Field sourceField, InfoOperation info, Set<Method> methodsToGenerate){
 		AGeneralOperation operation = null;
 		OperationType operationType = info.getInstructionType();
 		 
