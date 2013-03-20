@@ -123,7 +123,7 @@ public final class OperationHandler {
 			
 			InfoOperation info = operationAnalyzer.getInfo();
 			
-			AGeneralOperation operation = operationFactory.get(destinationField, sourceField, info, methodsToGenerate);
+			AGeneralOperation operation = operationFactory.getOperation(destinationField, sourceField, info, methodsToGenerate);
 
 			if(info.getInstructionType().isAConversion()){
 				conversionHandler.load(conversionAnalyzer)
