@@ -84,9 +84,7 @@ class Source {
 <jmapper>
    <class name="package.Source">
       <global>
-          <excluded>
-             <value name="overallCost"/>
-          </excluded>
+          <value name="overallCost"/>
       </global>
    </class>
 </jmapper>
