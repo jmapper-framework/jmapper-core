@@ -384,4 +384,6 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
 				                                        :mapper.<D,S>generate();
 		return mapperClass.newInstance();
 	}
+    //TODO il cast nell xml non è accettato da javassist capire perche e poi cercare di far funzionare i primitivi
+    // anche nelle conversioni esplicite
 }

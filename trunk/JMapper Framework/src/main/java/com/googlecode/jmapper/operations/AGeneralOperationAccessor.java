@@ -165,10 +165,10 @@ public abstract class AGeneralOperationAccessor {
 		return sb;
 	}
 	
-	/** @return mapping type of destination */
+	/** @return mapping type of source */
 	public final MappingType getMts() { return mts; }
 	
-	/** @return mapping type of source */
+	/** @return mapping type of destination */
 	public final MappingType getMtd() { return mtd; }
 	
 	/**

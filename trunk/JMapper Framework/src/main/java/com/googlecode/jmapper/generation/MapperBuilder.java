@@ -28,46 +28,63 @@ import com.googlecode.jmapper.generation.beans.Method;
 import javassist.NotFoundException;
 
 /**
- * MapperBuilder increases the readability of the code to retrieve the parameters necessary 
- * to create or find a new IMapper class.
- * <br>For example:<pre><code>from(source).to(destination)
-     .analyzing(config)
-     .presentIn(xmlPath)</code></pre> 
- *    
+ * MapperBuilder increases the readability of the code to retrieve the
+ * parameters necessary to create or find a new IMapper class. <br>
+ * For example:
+ * 
+ * <pre>
+ * <code>from(source).to(destination)
+ *      .analyzing(config)
+ *      .presentIn(xmlPath)</code>
+ * </pre>
+ * 
  * @author Alessandro Vurro
  */
 @SuppressWarnings("unchecked")
 public class MapperBuilder {
-	
-	/** @return true if the mapper class exists, false otherwise	 */
-	public boolean exist(){
-		try {  Class.forName(mapperClassName(destination, source,path)); return true;} 
-		catch (ClassNotFoundException e) { return false; }
+
+	/** @return true if the mapper class exists, false otherwise */
+	public boolean exist() {
+		
+		try {
+			Class.forName(mapperClassName(destination, source, path));
+			return true;
+		} catch (ClassNotFoundException e) {
+			return false;
+		}
 	}
-	
+
 	/** @return the existent mapper class */
-	public <D,S> Class<IMapper<D,S>> get(){
-		try {  return (Class<IMapper<D,S>>) Class.forName(mapperClassName(destination, source,path));} 
-		catch (Exception e) { return null; }
+	public <D, S> Class<IMapper<D, S>> get() {
+		
+		try {
+			return (Class<IMapper<D, S>>) Class.forName(mapperClassName(
+					destination, source, path));
+		} catch (Exception e) {
+			return null;
+		}
 	}
-	
+
 	/** @return the generated mapper class */
-	public <D,S> Class<IMapper<D,S>> generate() throws NotFoundException, Exception{
-		
+	public <D, S> Class<IMapper<D, S>> generate() throws NotFoundException,
+			Exception {
+
 		Set<Method> methodsToGenerate = new HashSet<Method>();
-		
-		Class<IMapper<D,S>> mapperClass = (Class<IMapper<D,S>>) generateMapperClass
-				( new MapperConstructor(destination,source,config,loadXml(path).atRuntime(),methodsToGenerate)
-		 		         .setMapperName(mapperClassName(destination, source,path))
-		 		 , methodsToGenerate);
-		
+
+		Class<IMapper<D, S>> mapperClass = (Class<IMapper<D, S>>) generateMapperClass(
+				new MapperConstructor(destination, source, config,loadXml(path).atRuntime(), methodsToGenerate)
+				       .setMapperName(mapperClassName(destination, source, path)), methodsToGenerate);
+
 		// a new instance is created to check the mapper implementation
-		try{ mapperClass.newInstance(); }
-		catch (Throwable e) { if(isNull(path))Error.illegalCode(destination, source, e);
-							  else            Error.illegalCode(destination,source,path,e);}
+		try {
+			mapperClass.newInstance();
+		} catch (Throwable e) {
+			if (isNull(path))	Error.illegalCode(destination, source, e);
+			else				Error.illegalCode(destination, source, path, e);
+		}
 		return mapperClass;
 	}
-	
+
 	/** destination class */
 	private Class<?> destination;
 	/** source class */
@@ -76,34 +93,62 @@ public class MapperBuilder {
 	private ChooseConfig config;
 	/** path of the xml file */
 	private String path;
-	
+
 	/**
-	 * Starting point for parameters setting. This method set the source instance variable.
-	 * @param source source to set
+	 * Starting point for parameters setting. This method set the source
+	 * instance variable.
+	 * 
+	 * @param source
+	 *            source to set
 	 * @return a new instance of MapperBuilder
 	 */
-	public  static MapperBuilder from(Class<?> source)  {return new MapperBuilder(source);	        }
+	public static MapperBuilder from(Class<?> source) {
+		return new MapperBuilder(source);
+	}
+
 	/**
 	 * This method set the destination instance variable.
-	 * @param destination destination to set
+	 * 
+	 * @param destination
+	 *            destination to set
 	 * @return this instance of MapperBuilder
 	 */
-	public  MapperBuilder to(Class<?> destination)      {this.destination = destination;return this;}
+	public MapperBuilder to(Class<?> destination) {
+		this.destination = destination;
+		return this;
+	}
+
 	/**
 	 * This method set the config instance variable.
-	 * @param config configuration to set
+	 * 
+	 * @param config
+	 *            configuration to set
 	 * @return this instance of MapperBuilder
 	 */
-	public  MapperBuilder analyzing(ChooseConfig config){this.config = config;		   return this; }
+	public MapperBuilder analyzing(ChooseConfig config) {
+		this.config = config;
+		return this;
+	}
+
 	/**
 	 * This method set the xmlPath instance variable.
-	 * @param xmlPath xml path to set
+	 * 
+	 * @param xmlPath
+	 *            xml path to set
 	 * @return this instance of MapperBuilder
 	 */
-	public  MapperBuilder presentIn(String xmlPath)     {this.path = xmlPath;	       return this; }
+	public MapperBuilder presentIn(String xmlPath) {
+		this.path = xmlPath;
+		return this;
+	}
+
 	/**
 	 * This is the entry point of MapperBuilder.
-	 * @param source source to set
+	 * 
+	 * @param source
+	 *            source to set
 	 */
-	private MapperBuilder(Class<?> source)              {this.source = source;}
+	private MapperBuilder(Class<?> source) {
+		this.source = source;
+	}
 }

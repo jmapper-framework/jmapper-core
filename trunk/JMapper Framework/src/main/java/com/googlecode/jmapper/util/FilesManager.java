@@ -16,10 +16,12 @@
 
 package com.googlecode.jmapper.util;
 
+import static com.googlecode.jmapper.config.ResourceLoader.loadResource;
 import static com.googlecode.jmapper.util.GeneralUtility.containsAll;
 import static com.googlecode.jmapper.util.GeneralUtility.fileSeparator;
-import static com.googlecode.jmapper.util.GeneralUtility.list;
 import static com.googlecode.jmapper.util.GeneralUtility.isEmpty;
+import static com.googlecode.jmapper.util.GeneralUtility.list;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -39,7 +41,6 @@ import java.util.List;
 import com.googlecode.jmapper.annotations.JGlobalMap;
 import com.googlecode.jmapper.annotations.JMap;
 import com.googlecode.jmapper.config.Error;
-import com.googlecode.jmapper.config.ResourceLoader;
 import com.googlecode.jmapper.exceptions.LoadingFileException;
 import com.googlecode.jmapper.xml.Attribute;
 import com.googlecode.jmapper.xml.Global;
@@ -870,7 +871,7 @@ public class FilesManager {
 	 * @throws MalformedURLException 
 	 */
 	public static XmlJmapper readAtRuntime(String xmlPath) throws MalformedURLException, IOException{
-		return toXmlJmapper(xmlPath,ResourceLoader.loadResource(xmlPath));
+		return toXmlJmapper(xmlPath,loadResource(xmlPath));
 	}
 	
 	/**
