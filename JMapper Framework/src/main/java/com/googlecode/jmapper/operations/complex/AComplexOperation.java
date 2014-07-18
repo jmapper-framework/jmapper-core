@@ -122,12 +122,21 @@ public abstract class AComplexOperation extends AGeneralOperation{
 	 * @return a StringBuilder that contains the mapping enriched with source controls
 	 */
 	private StringBuilder sourceControl(StringBuilder mapping){
-		
-		if(getMts() == ALL_FIELDS) return write("   if(",getSource(),"!=null){",newLine,
-													 sharedCode(mapping)	   ,newLine,
-										        "   }else{"					   ,newLine,
-											         setDestination("null")    ,newLine,
-										        "   }"						   ,newLine);
+		//TODO il ramo else dev'essere fatto solo in caso di campi non primitivi
+		System.out.println("====== "+destinationType()+" ======");
+		if(getMts() == ALL_FIELDS){
+			StringBuilder write = write("   if(",getSource(),"!=null){",newLine,
+										      sharedCode(mapping)	   ,newLine,
+										"   }");
+			
+			if(!destinationType().isPrimitive())
+					write.append(write("else{"					   ,newLine,
+										 setDestination("null")    ,newLine,
+										"   }"					   ,newLine));
+			else    write.append(newLine);
+			
+			return write;
+		} 
 		else return write(sharedCode(mapping),newLine);
 	}
 
