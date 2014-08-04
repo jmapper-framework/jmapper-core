@@ -1,0 +1,10 @@
+<jmapper>
+  <class name="com.googlecode.jmapper.integrationtest.conversions.bean.SExplicitDynamicConversion3">
+    <conversion name="firstConversion" from="source,source2" to="destination,destination2" type="dynamic">
+      return ${source}.toString();
+    </conversion>
+    <conversion name="secondConversion" from="source3,source4" to="destination2,destination3" type="dynamic">
+      return "${destination.name} + ${source.name}";
+    </conversion>
+  </class>
+</jmapper>

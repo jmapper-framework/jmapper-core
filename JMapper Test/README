@@ -24,9 +24,7 @@ Le dipendenze:
       	<version>1.0.0</version>
     </dependency>
     
-vanno aggiunte al repository locale, il folder performance è presente nel folder presente nella root 
-della applicazione: "cofig"
+vanno aggiunte al repository locale, le librerie sono posizionate nel folder "config/performance"
 
 Alcuni test fanno riferimento al sistema operativo e potrebbero fallire, vanno riadattati (sono contrassegnati con i TODO),
 lo scopo è verificare il recupero delle risorse in vari contesti.
-
