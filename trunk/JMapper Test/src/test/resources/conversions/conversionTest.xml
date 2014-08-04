@@ -13,7 +13,7 @@
     <conversion name="firstConversion" from="sField" to="dField" type="STATIC">
        return ${source} + " ${source.name} converted"; 
     </conversion>
-    <conversion name="thirdConversion" from="sField2,sField3" to="dField2,dField3" type="STATIC">
+    <conversion name="thirdConversion" from="sField2,sField3" to="dField2, dField3" type="STATIC">
        return "${destination.name}  ${source.name}"; 
     </conversion>
     <!-- Con questa conversione testo la gestione dei metodi statici con nomi già usati
