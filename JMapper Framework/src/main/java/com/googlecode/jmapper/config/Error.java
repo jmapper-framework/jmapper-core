@@ -41,14 +41,16 @@ public final class Error {
 	*/
 	
 	/**
-	 * Thrown when the explicit conversion method defined has a null pointer.
+	 * Thrown when the explicit conversion method defined has a null pointer.<br>
+	 * Used in the generated code, in case of dynamic methods defined.
 	 * @param className class name
 	 */
 	public static void illegalCode(Exception e, String methodName, String className){
 		throw new IllegalCodeException(MSG.INSTANCE.message(nullPointer,methodName,className,e.getClass().getSimpleName(),""+e.getMessage()));
 	}
 	/**
-	 * Thrown when the explicit conversion method defined has a null pointer.
+	 * Thrown when the explicit conversion method defined has a null pointer.<br>
+	 * Used in the generated code, in case of dynamic methods defined.
 	 * @param className class name
 	 * @param path xml path file
 	 */

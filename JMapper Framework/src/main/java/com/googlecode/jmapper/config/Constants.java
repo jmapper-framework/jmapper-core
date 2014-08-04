@@ -56,7 +56,6 @@ public final class Constants {
 	public static final String mappingErrorException2length = "mappingErrorException2length";
 	public static final String mappingErrorRelationalException2 = "mappingErrorRelationalException2";
 	public static final String mappingErrorRelationalException3 = "mappingErrorRelationalException3";
-	public static final String mappingNotFoundException0 = "mappingNotFoundException0";
 	public static final String malformedBeanException3 = "malformedBeanException3";
 	public static final String malformedBeanException2 = "malformedBeanException2";
 	public static final String malformedBeanException1 = "malformedBeanException1";

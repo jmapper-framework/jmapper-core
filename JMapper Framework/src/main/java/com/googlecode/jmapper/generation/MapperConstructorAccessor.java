@@ -17,15 +17,13 @@ package com.googlecode.jmapper.generation;
 
 import static com.googlecode.jmapper.util.GeneralUtility.isNotNull;
 import static com.googlecode.jmapper.util.GeneralUtility.isNull;
-import static com.googlecode.jmapper.util.GeneralUtility.newLine;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+
 import com.googlecode.jmapper.annotations.Annotation;
 import com.googlecode.jmapper.config.Constants;
 import com.googlecode.jmapper.enums.ChooseConfig;
-import com.googlecode.jmapper.generation.beans.Method;
 import com.googlecode.jmapper.operations.complex.AComplexOperation;
 import com.googlecode.jmapper.operations.simple.ASimpleOperation;
 import com.googlecode.jmapper.xml.XML;
@@ -43,9 +41,6 @@ public abstract class MapperConstructorAccessor {
 	
 	/** List of complex operations */
 	protected List<AComplexOperation> complexOperations= new ArrayList<AComplexOperation>();
-	
-	/** List of methods to generate */
-	protected Set<Method> methodsToGenerate;
 	
 	/** string used to set the destination instance into mapping */
 	protected String stringOfSetDestination = Constants.DESTINATION_DEFAULT_NAME;
@@ -65,21 +60,6 @@ public abstract class MapperConstructorAccessor {
 	/** mapper name */
 	protected String mapperName;
 	
-	/**
-	 * variables used to increase mapping readability
-	 */
-	protected HashMap<String, String> initVars(){
-		HashMap<String, String> vars = new HashMap<String, String>();
-		vars.put("sClass"        ,source.getName());
-		vars.put("dClass"        ,destination.getName());
-		vars.put("source"        ,stringOfGetSource);
-		vars.put("destination"   ,stringOfGetDestination);
-		vars.put("setDestination",stringOfSetDestination);
-		vars.put("nl"            ,newLine);
-		return vars;
-	}
-	
-
 	/**
 	 * True if config doesn't exists, false otherwise.
 	 * @param cc config to check
@@ -163,8 +143,4 @@ public abstract class MapperConstructorAccessor {
 		return mapperName; 
 	}
 	
-	/**@return the list of methods to generate*/
-	public Set<com.googlecode.jmapper.generation.beans.Method> methodsToGenerate(){
-		return methodsToGenerate;
-	}	
 }

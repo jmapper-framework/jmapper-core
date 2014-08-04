@@ -354,7 +354,7 @@ public final class ClassesManager {
 	 * @param aClass a class
 	 * @return true if the class is configured in annotation or xml, false otherwise
 	 */
-	public static boolean isMapped(Class<?> aClass,XML xml){
+	private static boolean isMapped(Class<?> aClass,XML xml){
 		return xml.isMapped(aClass) || Annotation.isMapped(aClass);
 	}
 		
@@ -477,7 +477,7 @@ public final class ClassesManager {
 	 * @param fields fields to control
 	 * @see <a href="http://en.wikipedia.org/wiki/JavaBean">javaBean conventions</a>
 	 */
-	public static void verifySetterMethods(Class<?> clazz, Field... fields){
+	private static void verifySetterMethods(Class<?> clazz, Field... fields){
 		String methodName = null;
 		String fieldName = null;
 		Class<?> fieldType = null;
@@ -501,70 +501,6 @@ public final class ClassesManager {
 	public static ChooseConfig configChosen(Class<?>dItem,Class<?>sItem,XML xml){
 		return  isMapped(dItem,xml) && isMapped(sItem,xml)?null:
 				isMapped(dItem,xml)?ChooseConfig.DESTINATION:ChooseConfig.SOURCE;
-	}
-	
-	/**
-	 * Returns the getMethod of the field received in input.
-	 * @param clazz class of the field
-	 * @param field
-	 * @return Method
-	 */
-	public static Method getMethodOf(Class<?> clazz, String field){
-		return methodOf(clazz, retrieveField(clazz,field), true);
-	}
-	
-	/**
-	 * Returns the setMethod of the field received in input.
-	 * @param clazz class of the field
-	 * @param field
-	 * @return Method
-	 */
-	public static Method setMethodOf(Class<?> clazz, String field){
-		return methodOf(clazz, retrieveField(clazz,field), false);
-	}
-	
-	/**
-	 * Returns the getMethod of the field received in input.
-	 * @param clazz class of the field
-	 * @param field
-	 * @return Method
-	 */
-	public static Method getMethodOf(Class<?> clazz, Field field){
-		return methodOf(clazz, field, true);
-	}
-	
-	/**
-	 * Returns the setMethod of the field received in input.
-	 * @param clazz class of the field
-	 * @param field
-	 * @return Method
-	 */
-	public static Method setMethodOf(Class<?> clazz, Field field){
-		return methodOf(clazz, field, false);
-	}
-	
-	/**
-	 * If isGet is true, returns get method of the field belong to clazz,
-	 * if it is false, returns the set method.
-	 * @param clazz class to verify
-	 * @param field field to check
-	 * @param isGet true if is a get method, false if it is a set method
-	 * @return Method requested
-	 */
-	private static Method methodOf(Class<?> clazz,Field field,boolean isGet) {
-		String methodName = null;
-		String fieldName = null;
-		try {
-			fieldName = field.getName();
-			
-			methodName = isGet ? getMethod(field.getType(),fieldName)
-					           : mSet(field.getName());
-			
-			return isGet ? clazz.getMethod(methodName)
-					     : clazz.getMethod(methodName,field.getType());
-			
-		} catch (Exception e) {	Error.method(methodName, fieldName, clazz); }
-		return null;
 	}
 	
 	/**
@@ -681,11 +617,11 @@ public final class ClassesManager {
 	}
 	
 	/**
-	 * Classes key and value will be enhanced with the type of classes of the map.
+	 * Retrieves (from a field of map type) the key and value classes.
 	 * 
-	 * @param field of type map
-	 * @param key class of the map
-	 * @param value class of the map
+	 * @param field to analyze
+	 * @param key key class
+	 * @param value value class
 	 */
 	public static void getKeyValueClasses(Field field,Class<?> key, Class<?> value){
 		

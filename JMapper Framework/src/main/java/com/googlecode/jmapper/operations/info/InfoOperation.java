@@ -49,31 +49,6 @@ public class InfoOperation {
 	public OperationType getInstructionType() {	return instructionType;	}
 	public ConversionType getConversionType() {	return conversionType;	}
 	
-	/**
-	 * @param instructionType
-	 * @param conversionType
-	 */
-	public InfoOperation(OperationType instructionType, ConversionType conversionType) {
-		super();
-		this.instructionType = instructionType;
-		this.conversionType = conversionType;
-	}
-	
 	public InfoOperation() {}
-	
-	/**
-	 * @param instructionType
-	 * @param conversionType
-	 * @param configChosen
-	 * @param mapOperation
-	 */
-	public InfoOperation(OperationType instructionType, ConversionType conversionType, ChooseConfig configChosen,
-			InfoMapOperation mapOperation) {
-		super();
-		this.instructionType = instructionType;
-		this.conversionType = conversionType;
-		this.configChosen = configChosen;
-	}
-	
 	
 }

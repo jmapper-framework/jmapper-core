@@ -67,10 +67,10 @@ public class OperationFactory {
 	 * @param sourceField source field
 	 * @param destinationField destination field
 	 * @param info info operation
-	 * @param methodsToGenerate 
+	 * @param dynamicMethodsToWrite 
 	 * @return a new instance of AGeneralOperation
 	 */
-	public AGeneralOperation getOperation(Field destinationField, Field sourceField, InfoOperation info, Set<Method> methodsToGenerate){
+	public AGeneralOperation getOperation(Field destinationField, Field sourceField, InfoOperation info, Set<Method> dynamicMethodsToWrite){
 		AGeneralOperation operation = null;
 		OperationType operationType = info.getInstructionType();
 		 
@@ -99,7 +99,7 @@ public class OperationFactory {
 			complexOperations.add(((AComplexOperation) operation).setDestinationClass(defineStructure(destinationField, sourceField)));
 				
 		if(operationType.isRecursive())
-			((ARecursiveOperation) operation).setMethodsToGenerate(methodsToGenerate)
+			((ARecursiveOperation) operation).setDynamicMethodsToWrite(dynamicMethodsToWrite)
 			 							     .setXml(xml)
 			                                 .setConfigChosen(info.getConfigChosen()==null // if both classes are configured
 									                    	  ?configurationChosen		   // returns the configuration chosen

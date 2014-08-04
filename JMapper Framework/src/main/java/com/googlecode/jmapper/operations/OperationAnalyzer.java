@@ -138,4 +138,5 @@ public final class OperationAnalyzer {
 		return (dClass.isArray() && collectionIsAssignableFrom(sClass)) 
 			|| (sClass.isArray() && collectionIsAssignableFrom(dClass));
 	}
+	
 }

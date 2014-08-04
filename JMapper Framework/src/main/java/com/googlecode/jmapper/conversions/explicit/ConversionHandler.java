@@ -127,7 +127,7 @@ public class ConversionHandler {
 		for (Entry<String, String> pair : placeholders.entrySet()) 
 			body = body.replaceAll(pair.getKey(), pair.getValue());
 		
-		return methodToGenerate.setBody(body+"}catch(Exception e){"+error()+"}return null;}");
+		return methodToGenerate.setBody(body+"}catch(java.lang.Exception e){"+error()+"}return null;}");
 	}
 	
 	/**

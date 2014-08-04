@@ -100,9 +100,9 @@ public final class OperationHandler {
 	
 	/**
 	 * This method calculates and loads the lists relating to the operations to be performed.
-	 * @param methodsToGenerate methods to generate
+	 * @param dynamicMethodsToWrite methods to generate
 	 */
-	public void loadStructures(Set<Method> methodsToGenerate) {
+	public void loadStructures(Set<Method> dynamicMethodsToWrite) {
 		
 	   	for (Field configuredField : getListOfFields(configuredClass)) {
 		
@@ -123,14 +123,14 @@ public final class OperationHandler {
 			
 			InfoOperation info = operationAnalyzer.getInfo();
 			
-			AGeneralOperation operation = operationFactory.getOperation(destinationField, sourceField, info, methodsToGenerate);
+			AGeneralOperation operation = operationFactory.getOperation(destinationField, sourceField, info, dynamicMethodsToWrite);
 
 			if(info.getInstructionType().isAConversion()){
 				conversionHandler.load(conversionAnalyzer)
 				                 .from(sourceField).to(destinationField);
 				
 				if(conversionHandler.toBeCreated())
-					methodsToGenerate.add(conversionHandler.loadMethod());
+					dynamicMethodsToWrite.add(conversionHandler.loadMethod());
 				
 				operation.setConversionMethod(conversionHandler.getMethod())
 						 .setMemberShip      (conversionHandler.getMembership());

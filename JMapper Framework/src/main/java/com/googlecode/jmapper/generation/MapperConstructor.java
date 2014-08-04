@@ -83,7 +83,7 @@ public class MapperConstructor extends MapperConstructorAccessor{
 						String methodName = d.getKey()+s+npc.getKey()+mtd.getKey()+mts.getKey();
 						for (java.lang.reflect.Method method : methods) 
 							if(method.getName().equals(methodName))
-								mappings.put(methodName, wrapMapping(d.getValue(),npc.getValue(),mtd.getValue(),mts.getValue()));}
+								mappings.put(methodName, wrappedMapping(d.getValue(),npc.getValue(),mtd.getValue(),mts.getValue()));}
 		
 		mappings.put("get", "return null;"+newLine);
 		return mappings;
@@ -102,7 +102,7 @@ public class MapperConstructor extends MapperConstructorAccessor{
 	 * @see NullPointerControl
 	 * @see MappingType
 	 */
-	private String wrapMapping(boolean makeDest,NullPointerControl npc,MappingType mtd,MappingType mts){	
+	private String wrappedMapping(boolean makeDest,NullPointerControl npc,MappingType mtd,MappingType mts){	
 		String sClass = source.getName();
 		String dClass = destination.getName();
 		
@@ -126,7 +126,7 @@ public class MapperConstructor extends MapperConstructorAccessor{
 	}
 
 	/**
-	 * This method writes the mapping based on the value of the three parameters taken in input.
+	 * This method writes the mapping based on the value of the three MappingType taken in input.
 	 * 
 	 * @param makeDest true if destination is a new instance, false otherwise
 	 * @param mtd mapping type of destination
@@ -197,9 +197,11 @@ public class MapperConstructor extends MapperConstructorAccessor{
 	 * @param aStringOfGetDestination get destination String
 	 * @param aStringOfGetSource get source String
 	 * @param cc config choosen
+	 * @param xml xml object
+	 * @param dynamicMethodsToWrite dynamic methods to write (if defined)
 	 */
-	public MapperConstructor(Class<?> aDestination, Class<?> aSource,String aStringOfSetDestination,String aStringOfGetDestination,String aStringOfGetSource,ChooseConfig cc, XML xml, Set<Method>	methodsToGenerate) {
-    		this(aDestination,aSource,cc,xml,methodsToGenerate);
+	public MapperConstructor(Class<?> aDestination, Class<?> aSource,String aStringOfSetDestination,String aStringOfGetDestination,String aStringOfGetSource,ChooseConfig cc, XML xml, Set<Method>	dynamicMethodsToWrite) {
+    		this(aDestination,aSource,cc,xml,dynamicMethodsToWrite);
     		stringOfSetDestination = aStringOfSetDestination;
     		stringOfGetDestination = aStringOfGetDestination;
     		stringOfGetSource = aStringOfGetSource;
@@ -212,8 +214,9 @@ public class MapperConstructor extends MapperConstructorAccessor{
 	 * @param aSource Type of Source
 	 * @param configChoice configuration chosen from user
 	 * @param xml xml object
+	 * @param dynamicMethodsToWrite dynamic methods to write (if defined)
 	 */
-    public MapperConstructor(Class<?> aDestination, Class<?> aSource,ChooseConfig configChoice, XML xml,Set<Method> methodsToGenerate){
+    public MapperConstructor(Class<?> aDestination, Class<?> aSource,ChooseConfig configChoice, XML xml,Set<Method> dynamicMethodsToWrite){
     	
     	// definition of the instance variables
     	destination = aDestination;
@@ -248,13 +251,15 @@ public class MapperConstructor extends MapperConstructorAccessor{
 		OperationHandler operationHandler = new OperationHandler(destination, source, configObtained, xml);
 		
 		// Loading structures (simpleOperations and complexOperations) that will be used for writing mapping
-		operationHandler.loadStructures(methodsToGenerate);
+		operationHandler.loadStructures(dynamicMethodsToWrite);
 		
 		simpleOperations = operationHandler.getSimpleOperations();
 		complexOperations = operationHandler.getComplexOperations();
 	}
 
-	/**@param name the mapper class name */
+	/**
+	 * The algorithm is recursive, the setting of the name needs to be done externally.
+	 * @param name the mapper class name */
 	public MapperConstructor setMapperName(String name){
 		mapperName = name;
 		return this;

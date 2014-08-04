@@ -42,27 +42,6 @@ public class InfoMapOperation extends InfoOperation{
 	private ChooseConfig valueConfigChosen;
 	
 	public InfoMapOperation() {}
-	/**
-	 * @param keyInstructionType
-	 * @param keyConversionType
-	 * @param keyConfigChosen
-	 * @param valueInstructionType
-	 * @param valueConversionType
-	 * @param valueConfigChosen
-	 */
-	public InfoMapOperation(OperationType keyInstructionType,
-			ConversionType keyConversionType, ChooseConfig keyConfigChosen,
-			OperationType valueInstructionType,
-			ConversionType valueConversionType, ChooseConfig valueConfigChosen) {
-		super();
-		this.keyInstructionType = keyInstructionType;
-		this.keyConversionType = keyConversionType;
-		this.keyConfigChosen = keyConfigChosen;
-		this.valueInstructionType = valueInstructionType;
-		this.valueConversionType = valueConversionType;
-		this.valueConfigChosen = valueConfigChosen;
-	}
-	
 	public void keyValueUndefined(){
 		keyInstructionType = OperationType.UNDEFINED;
 		keyConversionType = ConversionType.UNDEFINED;

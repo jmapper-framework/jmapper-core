@@ -35,6 +35,7 @@ import com.googlecode.jmapper.operations.recursive.ObjectOperationTest;
 import com.googlecode.jmapper.operations.simple.BasicConversion2Test;
 import com.googlecode.jmapper.operations.simple.BasicConversion3Test;
 import com.googlecode.jmapper.operations.simple.BasicConversion4Test;
+import com.googlecode.jmapper.operations.simple.BasicConversion5Test;
 import com.googlecode.jmapper.operations.simple.BasicConversionTest;
 import com.googlecode.jmapper.operations.simple.BasicOperationTest;
 import com.googlecode.jmapper.operations.simple.BoxingOperationTest;
@@ -97,6 +98,8 @@ public class JUnitTests {
 			suite.addTestSuite(BasicConversion3Test.class);
 			// conversion test between: destination String and source int
 			suite.addTestSuite(BasicConversion4Test.class);
+			// conversion test between: destination int and source Character
+            suite.addTestSuite(BasicConversion5Test.class);
 			
 		/*	Tests on Arrays        	       	   	   */
 			

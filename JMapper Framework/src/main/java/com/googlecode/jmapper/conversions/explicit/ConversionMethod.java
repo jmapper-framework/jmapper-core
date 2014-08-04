@@ -22,7 +22,7 @@ import com.googlecode.jmapper.annotations.JMapConversion;
 import com.googlecode.jmapper.annotations.JMapConversion.Type;
 
 /**
- * Bean used to centralize all the information relative to conversion method to perform.
+ * Bean used to centralize all the informations relative to conversion method to perform.
  * @author Alessandro Vurro
  *
  */

@@ -81,19 +81,19 @@ public class ConversionAnalyzer {
 		if(!xml.conversionsLoad().isEmpty()){
 			configurationType = XML;
 			if(config == DESTINATION){
-				if(existsXml(destinationClass)) { membership = Membership.DESTINATION;  return true;}
-				if(existsXml(sourceClass))      { membership = Membership.SOURCE;       return true;}}
+				if(existsXmlConversion(destinationClass)) { membership = Membership.DESTINATION;  return true;}
+				if(existsXmlConversion(sourceClass))      { membership = Membership.SOURCE;       return true;}}
 			else{
-				if(existsXml(sourceClass))      { membership = Membership.SOURCE;       return true;}
-				if(existsXml(destinationClass)) { membership = Membership.DESTINATION;  return true;}}
+				if(existsXmlConversion(sourceClass))      { membership = Membership.SOURCE;       return true;}
+				if(existsXmlConversion(destinationClass)) { membership = Membership.DESTINATION;  return true;}}
 		}
 		configurationType = ANNOTATION;
 		if(config == DESTINATION){
-			if(existsAnnotation(destinationClass)) { membership = Membership.DESTINATION;  return true;}
-			if(existsAnnotation(sourceClass))      { membership = Membership.SOURCE;       return true;}}
+			if(existsAnnotatedConversion(destinationClass)) { membership = Membership.DESTINATION;  return true;}
+			if(existsAnnotatedConversion(sourceClass))      { membership = Membership.SOURCE;       return true;}}
 		else{
-			if(existsAnnotation(sourceClass))      { membership = Membership.SOURCE;       return true;}
-			if(existsAnnotation(destinationClass)) { membership = Membership.DESTINATION;  return true;}}
+			if(existsAnnotatedConversion(sourceClass))      { membership = Membership.SOURCE;       return true;}
+			if(existsAnnotatedConversion(destinationClass)) { membership = Membership.DESTINATION;  return true;}}
 		return false;
 	}
 	
@@ -111,7 +111,7 @@ public class ConversionAnalyzer {
 	 * @param clazz class to check
 	 * @return true if annotated conversion exists, false otherwise
 	 */
-	private boolean existsAnnotation(Class<?> clazz){
+	private boolean existsAnnotatedConversion(Class<?> clazz){
 		return exists(Annotation.getConversionMethods(clazz));
 	}
 	
@@ -120,7 +120,7 @@ public class ConversionAnalyzer {
 	 * @param clazz class to check
 	 * @return true if an xml conversion exists, false otherwise
 	 */
-	private boolean existsXml(Class<?> clazz){
+	private boolean existsXmlConversion(Class<?> clazz){
 		return exists(xml.getConversionMethods(clazz));
 	}
 	
