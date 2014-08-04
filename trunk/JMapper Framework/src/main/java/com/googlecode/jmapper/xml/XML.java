@@ -432,7 +432,7 @@ public final class XML {
 	 * @param attribute Attribute to check
 	 * @return true if attribute exist, false otherwise
 	 */
-	public boolean attributeExists(Class<?> aClass,Attribute attribute){
+	private boolean attributeExists(Class<?> aClass,Attribute attribute){
 		if(!classExists(aClass))return false;
 		for (XmlAttribute xmlAttribute : findXmlClass(aClass).attributes) 
 			if(xmlAttribute.name.equals(attribute.getName()))return true;

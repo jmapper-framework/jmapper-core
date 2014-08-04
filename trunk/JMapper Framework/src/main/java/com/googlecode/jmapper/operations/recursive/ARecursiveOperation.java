@@ -87,7 +87,7 @@ public abstract class ARecursiveOperation extends AComplexOperation{
 	 * @param methodsToGenerate methods to generate
 	 * @return this instance of ARecursiveOperation
 	 */
-	public ARecursiveOperation setMethodsToGenerate(Set<Method> methodsToGenerate) {
+	public ARecursiveOperation setDynamicMethodsToWrite(Set<Method> methodsToGenerate) {
 		this.methodsToGenerate = methodsToGenerate;
 		return this;
 	}

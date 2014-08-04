@@ -1,4 +1,11 @@
+NEXT RELEASE:
 
+ - aggiunta gestione errori dei metodi dinamici relativi:
+   alla scrittura errata di metodi e al passaggio di variabili null 
+ - aggiornate le dipendenze: xstream, slf4j e javassist
+ - aggiunto printStackTrace oltre alla gestione con log 
+
+ 
 
   Sviluppo componenti esterni come procedere ?     
      Integrazione con Hibernate, Apache Camel, XMLBeans, JAXB

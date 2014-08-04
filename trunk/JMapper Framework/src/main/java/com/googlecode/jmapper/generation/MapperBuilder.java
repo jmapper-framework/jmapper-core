@@ -68,12 +68,13 @@ public class MapperBuilder {
 	/** @return the generated mapper class */
 	public <D, S> Class<IMapper<D, S>> generate() throws NotFoundException,
 			Exception {
-
-		Set<Method> methodsToGenerate = new HashSet<Method>();
+		// if defined the dynamic methods are treated differently
+		Set<Method> dynamicMethodsToWrite = new HashSet<Method>();
 
 		Class<IMapper<D, S>> mapperClass = (Class<IMapper<D, S>>) generateMapperClass(
-				new MapperConstructor(destination, source, config,loadXml(path).atRuntime(), methodsToGenerate)
-				       .setMapperName(mapperClassName(destination, source, path)), methodsToGenerate);
+				new MapperConstructor(destination, source, config,loadXml(path).atRuntime(), dynamicMethodsToWrite)
+				       .setMapperName(mapperClassName(destination, source, path))
+				       , dynamicMethodsToWrite);
 
 		// a new instance is created to check the mapper implementation
 		try {

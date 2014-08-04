@@ -69,7 +69,7 @@ public final class GeneralUtility {
 			};
 																
 	/** basicTypes contains all the names of primitive and wrapper classes */
-	public static final ArrayList<String> basicTypes = 
+	private static final ArrayList<String> basicTypes = 
 			
 			new ArrayList<String>(){
 
@@ -163,35 +163,7 @@ public final class GeneralUtility {
 	public static boolean areBasic(Class<?> dClass,Class<?> sClass){
 		return isBasic(dClass) && isBasic(sClass);
 	}
-	
-	/**
-	 * Returns true if both classes are of Array type, false otherwise.
-	 * @param dClass class to analyze
-	 * @param sClass class to analyze
-	 * @return true if both classes are of Array type, false otherwise.
-	 */
-	public static boolean areArrays(Class<?> dClass,Class<?> sClass){
-		return dClass.isArray() && sClass.isArray();
-	}
-	/**
-	 * Returns true if both classes are of Collection type, false otherwise.
-	 * @param dClass class to analyze
-	 * @param sClass class to analyze
-	 * @return true if both classes are of Collection type, false otherwise.
-	 */
-	public static boolean areCollections(Class<?> dClass,Class<?> sClass){
-		return collectionIsAssignableFrom(dClass) && collectionIsAssignableFrom(sClass);
-	}
-	
-	/**
-	 * Returns true if both classes are of Map type, false otherwise.
-	 * @param dClass class to analyze
-	 * @param sClass class to analyze
-	 * @return true if both classes are of Map type, false otherwise.
-	 */
-	public static boolean areMaps(Class<?> dClass,Class<?> sClass){
-		return mapIsAssignableFrom(dClass) &&  mapIsAssignableFrom(sClass);
-	}
+
 	/**
 	 * Determines if the Collection interface is either the same as, or is a superinterface of, 
 	 * the class or interface represented by the specified Class parameter. 
@@ -229,18 +201,6 @@ public final class GeneralUtility {
 	}
 	
 	/**
-	 * Determines if the Set interface is either the same as, or is a superinterface of, 
-	 * the class or interface represented by the specified Class parameter. 
-	 * It returns true if so; otherwise it returns false.
-	 *  
-	 * @param aClass  the Class to be checked
-	 * @return the boolean value indicating whether objects of the type aClass can be assigned to objects of Set interface
-	 */
-	public static boolean setIsAssignableFrom(Class<?> aClass){
-		return Set.class.isAssignableFrom(aClass);
-	}
-	
-	/**
 	 * Determines if the SortedSet interface is either the same as, or is a superinterface of, 
 	 * the class or interface represented by the specified Class parameter. 
 	 * It returns true if so; otherwise it returns false.
@@ -257,7 +217,7 @@ public final class GeneralUtility {
 	 * @param aClass  the Class to be checked
 	 * @return true if the specified Class parameter represents an array class; false otherwise.
 	 */
-	public static boolean isArray(Class<?> aClass){
+	private static boolean isArray(Class<?> aClass){
 		return aClass.isArray();
 	}
 	
@@ -265,7 +225,7 @@ public final class GeneralUtility {
 	 * @param fieldName
 	 * @return returns a getMethod name of the string given in input
 	 */
-	public static String mGet(String fieldName) {
+	private static String mGet(String fieldName) {
 		return "get" + fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
 	}
 	
@@ -281,7 +241,7 @@ public final class GeneralUtility {
 	 * @param fieldName
 	 * @return returns a isMethod name of the string given in input
 	 */
-	public static String mIs (String fieldName) {
+	private static String mIs (String fieldName) {
 		return "is"  + fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
 	}
 	
@@ -376,16 +336,6 @@ public final class GeneralUtility {
 	 */
 	public static boolean isNotNull(Object obj){
 		return obj != null;
-	}
-	
-	/**
-	 * Replaces the variables present in the text and returns the result.<br>
-	 * @param text text to edit
-	 * @param vars map with the string to replace as key and the respective value as value
-	 * @return the text resultant
-	 */
-	public static String replace (String text, Map<String, String> vars){
-		return replace(text, vars, "");
 	}
 	
 	/**

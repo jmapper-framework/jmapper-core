@@ -52,11 +52,12 @@ public class MapperGenerator {
 	
 	/** 
 	 * @param mapping parameter that containts the mappings
+	 * @param dynamicMethods dynamic methods to add
 	 * @return a new instance of IMapper interface, following the mappingBuilder specifications
 	 * @throws Exception 
 	 * @throws NotFoundException 
 	 */
-	public static Class<?> generateMapperClass(MapperConstructor mapping, Set<Method> methodsToGenerate) throws NotFoundException, Exception{
+	public static Class<?> generateMapperClass(MapperConstructor mapping, Set<Method> dynamicMethods) throws NotFoundException, Exception{
 		
 		// adds empty constructor
 		ArrayList<Constructor> constructors = list(new Constructor());
@@ -64,7 +65,7 @@ public class MapperGenerator {
 		// adds methods to generate
 		Map<String, String> mappings = mapping.getMappings();
 
-		ArrayList<Method> methods = new ArrayList<Method>(methodsToGenerate);
+		ArrayList<Method> methods = new ArrayList<Method>(dynamicMethods);
 		for (java.lang.reflect.Method method : IMapper.class.getDeclaredMethods())
 									// construction of the method signature
 			methods.add(new Method(method.getReturnType(), method.getParameterTypes(), method.getName())
@@ -131,7 +132,7 @@ public class MapperGenerator {
 	 * @return CtClass[] version of classes parameter
 	 * @throws Exception
 	 */
-	public static CtClass[] toCtClass(Class<?>... classes) throws Exception{
+	private static CtClass[] toCtClass(Class<?>... classes) throws Exception{
 		ClassPool cp = ClassPool.getDefault();
 		CtClass[] parameters = new CtClass[classes.length];
 		for(int i=0;i<classes.length;i++)

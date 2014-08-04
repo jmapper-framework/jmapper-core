@@ -90,7 +90,12 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
 	 * @see MappingType
 	 */
 	public D getDestination(final S source){
-		return mapper.nullVSouAllAll(source);
+        try {
+            return mapper.nullVSouAllAll(source);
+        } catch (Exception e) {
+            JmapperLog.ERROR(e);
+            return null;
+        }
 	}
 	
 	/**
@@ -110,7 +115,13 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
 	 * @see MappingType
 	 */
 	public D getDestinationWithoutControl(final S source){
-		return mapper.nullVNotAllAll(source);
+        try {
+            return mapper.nullVNotAllAll(source);
+        } catch (Exception e) {
+            JmapperLog.ERROR(e);
+            return null;
+        }
+
 	}
 	
 	/**
@@ -132,7 +143,10 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
 	 * @see MappingType
 	 */
 	public D getDestination(D destination,final S source){
-		return mapper.vVAllAllAll(destination,source); 
+        try {
+            return mapper.vVAllAllAll(destination, source);
+        }catch (Exception e) { JmapperLog.ERROR(e); return null;}
+
 	}
 	
 	/**
@@ -154,7 +168,10 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
 	 * @see MappingType
 	 */
 	public D getDestinationWithoutControl(D destination,final S source){
-		return mapper.vVNotAllAll(destination,source); 
+        try {
+            return mapper.vVNotAllAll(destination, source);
+        } catch (Exception e) { JmapperLog.ERROR(e); return null;}
+
 	}
 		
 	/**
@@ -197,18 +214,22 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
 	 * @see MappingType
 	 */
 	public D getDestination(final S source,final NullPointerControl nullPointerControl,final MappingType mtSource){
-		switch(nullPointerControl){
-			case ALL:
-			case DESTINATION:
-			case SOURCE:	switch(mtSource){
-							case ALL_FIELDS: 			return mapper.nullVSouAllAll(source); 
-							case ONLY_VALUED_FIELDS:	return mapper.nullVSouAllValued(source);
-							case ONLY_NULL_FIELDS:		return mapper.get(source);}
-			case NOT_ANY:	switch(mtSource){
-							case ALL_FIELDS: 			return mapper.nullVNotAllAll(source); 
-							case ONLY_VALUED_FIELDS:	return mapper.nullVNotAllValued(source);
-							case ONLY_NULL_FIELDS:		return mapper.get(source);}}
-		return null;
+	       try{
+
+        		switch(nullPointerControl){
+        			case ALL:
+        			case DESTINATION:
+        			case SOURCE:	switch(mtSource){
+        							case ALL_FIELDS: 			return mapper.nullVSouAllAll(source); 
+        							case ONLY_VALUED_FIELDS:	return mapper.nullVSouAllValued(source);
+        							case ONLY_NULL_FIELDS:		return mapper.get(source);}
+        			case NOT_ANY:	switch(mtSource){
+        							case ALL_FIELDS: 			return mapper.nullVNotAllAll(source); 
+        							case ONLY_VALUED_FIELDS:	return mapper.nullVNotAllValued(source);
+        							case ONLY_NULL_FIELDS:		return mapper.get(source);}}
+	       
+	       }catch (Exception e) { JmapperLog.ERROR(e);}
+	       return null;
 	}
 	
 	/**
@@ -257,61 +278,64 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
 	 * @see MappingType
 	 */
 	public D getDestination(D destination,final S source,final NullPointerControl nullPointerControl,final MappingType mtDestination,final MappingType mtSource){
-		switch(nullPointerControl){
-		case ALL:			switch(mtDestination){
-							case ALL_FIELDS: 			switch(mtSource){
-														case ALL_FIELDS:  			return mapper.vVAllAllAll(destination,source); 
-														case ONLY_VALUED_FIELDS:	return mapper.vVAllAllValued(destination,source); 
-														case ONLY_NULL_FIELDS:		return mapper.vVAllValuedNull(destination,source); }
-							case ONLY_VALUED_FIELDS: 	switch(mtSource){
-														case ALL_FIELDS: 			return mapper.vVAllValuedAll(destination,source); 
-														case ONLY_VALUED_FIELDS: 	return mapper.vVAllValuedValued(destination,source); 
-														case ONLY_NULL_FIELDS:		return mapper.vVAllValuedNull(destination,source); } 
-							case ONLY_NULL_FIELDS:		switch(mtSource){
-														case ALL_FIELDS:			
-														case ONLY_VALUED_FIELDS: 	return mapper.vVAllNullValued(destination,source); 
-														case ONLY_NULL_FIELDS:		return destination;}}
-		case DESTINATION: 	switch(mtDestination){
-							case ALL_FIELDS: 			switch(mtSource){
-														case ALL_FIELDS: 			return mapper.vVDesAllAll(destination,source); 
-														case ONLY_VALUED_FIELDS: 	return mapper.vVDesAllValued(destination,source); 
-														case ONLY_NULL_FIELDS:		return mapper.vVDesValuedNull(destination,source); }
-							case ONLY_VALUED_FIELDS: 	switch(mtSource){
-														case ALL_FIELDS: 			return mapper.vVDesValuedAll(destination,source); 
-														case ONLY_VALUED_FIELDS: 	return mapper.vVDesValuedValued(destination,source); 
-														case ONLY_NULL_FIELDS:		return mapper.vVDesValuedNull(destination,source); }
-							case ONLY_NULL_FIELDS:		switch(mtSource){
-														case ALL_FIELDS: 
-														case ONLY_VALUED_FIELDS: 	return mapper.vVDesNullValued(destination,source); 
-														case ONLY_NULL_FIELDS:		return destination;}}
-		case SOURCE: 		switch(mtDestination){
-							case ALL_FIELDS: 			switch(mtSource){
-														case ALL_FIELDS: 			return mapper.vVSouAllAll(destination,source); 
-														case ONLY_VALUED_FIELDS: 	return mapper.vVSouAllValued(destination,source); 
-														case ONLY_NULL_FIELDS:		return mapper.vVSouValuedNull(destination,source); }
-							case ONLY_VALUED_FIELDS: 	switch(mtSource){
-														case ALL_FIELDS: 			return mapper.vVSouValuedAll(destination,source); 
-														case ONLY_VALUED_FIELDS: 	return mapper.vVSouValuedValued(destination,source); 
-														case ONLY_NULL_FIELDS:		return mapper.vVSouValuedNull(destination,source); }
-							case ONLY_NULL_FIELDS:		switch(mtSource){
-														case ALL_FIELDS: 
-														case ONLY_VALUED_FIELDS: 	return mapper.vVSouNullValued(destination,source); 
-														case ONLY_NULL_FIELDS:		return destination;}}
-		case NOT_ANY:		switch(mtDestination){
-							case ALL_FIELDS: 			switch(mtSource){
-														case ALL_FIELDS: 			return mapper.vVNotAllAll(destination,source); 
-														case ONLY_VALUED_FIELDS: 	return mapper.vVNotAllValued(destination,source); 
-														case ONLY_NULL_FIELDS:		return mapper.vVNotValuedNull(destination,source); }
-							case ONLY_VALUED_FIELDS: 	switch(mtSource){
-														case ALL_FIELDS: 			return mapper.vVNotValuedAll(destination,source); 
-														case ONLY_VALUED_FIELDS: 	return mapper.vVNotValuedValued(destination,source); 
-														case ONLY_NULL_FIELDS:		return mapper.vVNotValuedNull(destination,source); }
-							case ONLY_NULL_FIELDS:		switch(mtSource){
-														case ALL_FIELDS: 
-														case ONLY_VALUED_FIELDS: 	return mapper.vVNotNullValued(destination,source); 
-														case ONLY_NULL_FIELDS:		return destination;}}
-		}
-		return null;
+	    try{
+
+    		switch(nullPointerControl){
+    		case ALL:			switch(mtDestination){
+    							case ALL_FIELDS: 			switch(mtSource){
+    														case ALL_FIELDS:  			return mapper.vVAllAllAll(destination,source); 
+    														case ONLY_VALUED_FIELDS:	return mapper.vVAllAllValued(destination,source); 
+    														case ONLY_NULL_FIELDS:		return mapper.vVAllValuedNull(destination,source); }
+    							case ONLY_VALUED_FIELDS: 	switch(mtSource){
+    														case ALL_FIELDS: 			return mapper.vVAllValuedAll(destination,source); 
+    														case ONLY_VALUED_FIELDS: 	return mapper.vVAllValuedValued(destination,source); 
+    														case ONLY_NULL_FIELDS:		return mapper.vVAllValuedNull(destination,source); } 
+    							case ONLY_NULL_FIELDS:		switch(mtSource){
+    														case ALL_FIELDS:			
+    														case ONLY_VALUED_FIELDS: 	return mapper.vVAllNullValued(destination,source); 
+    														case ONLY_NULL_FIELDS:		return destination;}}
+    		case DESTINATION: 	switch(mtDestination){
+    							case ALL_FIELDS: 			switch(mtSource){
+    														case ALL_FIELDS: 			return mapper.vVDesAllAll(destination,source); 
+    														case ONLY_VALUED_FIELDS: 	return mapper.vVDesAllValued(destination,source); 
+    														case ONLY_NULL_FIELDS:		return mapper.vVDesValuedNull(destination,source); }
+    							case ONLY_VALUED_FIELDS: 	switch(mtSource){
+    														case ALL_FIELDS: 			return mapper.vVDesValuedAll(destination,source); 
+    														case ONLY_VALUED_FIELDS: 	return mapper.vVDesValuedValued(destination,source); 
+    														case ONLY_NULL_FIELDS:		return mapper.vVDesValuedNull(destination,source); }
+    							case ONLY_NULL_FIELDS:		switch(mtSource){
+    														case ALL_FIELDS: 
+    														case ONLY_VALUED_FIELDS: 	return mapper.vVDesNullValued(destination,source); 
+    														case ONLY_NULL_FIELDS:		return destination;}}
+    		case SOURCE: 		switch(mtDestination){
+    							case ALL_FIELDS: 			switch(mtSource){
+    														case ALL_FIELDS: 			return mapper.vVSouAllAll(destination,source); 
+    														case ONLY_VALUED_FIELDS: 	return mapper.vVSouAllValued(destination,source); 
+    														case ONLY_NULL_FIELDS:		return mapper.vVSouValuedNull(destination,source); }
+    							case ONLY_VALUED_FIELDS: 	switch(mtSource){
+    														case ALL_FIELDS: 			return mapper.vVSouValuedAll(destination,source); 
+    														case ONLY_VALUED_FIELDS: 	return mapper.vVSouValuedValued(destination,source); 
+    														case ONLY_NULL_FIELDS:		return mapper.vVSouValuedNull(destination,source); }
+    							case ONLY_NULL_FIELDS:		switch(mtSource){
+    														case ALL_FIELDS: 
+    														case ONLY_VALUED_FIELDS: 	return mapper.vVSouNullValued(destination,source); 
+    														case ONLY_NULL_FIELDS:		return destination;}}
+    		case NOT_ANY:		switch(mtDestination){
+    							case ALL_FIELDS: 			switch(mtSource){
+    														case ALL_FIELDS: 			return mapper.vVNotAllAll(destination,source); 
+    														case ONLY_VALUED_FIELDS: 	return mapper.vVNotAllValued(destination,source); 
+    														case ONLY_NULL_FIELDS:		return mapper.vVNotValuedNull(destination,source); }
+    							case ONLY_VALUED_FIELDS: 	switch(mtSource){
+    														case ALL_FIELDS: 			return mapper.vVNotValuedAll(destination,source); 
+    														case ONLY_VALUED_FIELDS: 	return mapper.vVNotValuedValued(destination,source); 
+    														case ONLY_NULL_FIELDS:		return mapper.vVNotValuedNull(destination,source); }
+    							case ONLY_NULL_FIELDS:		switch(mtSource){
+    														case ALL_FIELDS: 
+    														case ONLY_VALUED_FIELDS: 	return mapper.vVNotNullValued(destination,source); 
+    														case ONLY_NULL_FIELDS:		return destination;}}
+    		}
+	    }catch (Exception e) { JmapperLog.ERROR(e); e.printStackTrace();}
+	    return null;
 	}
 	
 	/**
@@ -378,7 +402,7 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
 		}catch (Exception e) { JmapperLog.ERROR(e); }
 	}
 	
-    public IMapper<D,S> createMapper(MapperBuilder mapper) throws NotFoundException, Exception{
+    private IMapper<D,S> createMapper(MapperBuilder mapper) throws NotFoundException, Exception{
 	    
 		Class<IMapper<D,S>> mapperClass = mapper.exist()?mapper.<D,S>get()
 				                                        :mapper.<D,S>generate();

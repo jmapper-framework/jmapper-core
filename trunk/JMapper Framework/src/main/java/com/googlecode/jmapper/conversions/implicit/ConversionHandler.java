@@ -278,7 +278,7 @@ public final class ConversionHandler {
 		case FromdoubleTochar:			return FromdoubleTochar(source);
 		case FromBooleanTochar:			return FromBooleanTochar(source);
 		case FrombooleanTochar:			return FrombooleanTochar(source);
-		                            	                                                    
+
 		case FromStringToBoolean:		return FromStringToBoolean(source);
 		case FromByteToBoolean:			return FromByteToBoolean(source);
 		case FrombyteToBoolean:			return FrombyteToBoolean(source);

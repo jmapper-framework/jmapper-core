@@ -9,7 +9,8 @@ public class SimpleClass {
 	int aIntField;
 	Integer aIntegerField;
 	String aStringField;
-
+	Character aCharacterField;
+	
 	@JMapConversion(from={"aField"},to={"aField"})
 	public String conversion(String str){
 		return str + " converted";

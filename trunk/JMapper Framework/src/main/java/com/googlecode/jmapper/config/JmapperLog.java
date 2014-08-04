@@ -42,5 +42,6 @@ public class JmapperLog {
 	 */
 	public static void ERROR(Exception e){
 		logger.error("{}: {}",e.getClass().getSimpleName(),e.getMessage());
+		e.printStackTrace();
 	}
 }
