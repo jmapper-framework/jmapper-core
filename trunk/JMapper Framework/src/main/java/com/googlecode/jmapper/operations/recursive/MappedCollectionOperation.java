@@ -77,7 +77,7 @@ public class MappedCollectionOperation extends ARecursiveOperation {
 			 + newLine + "   for(int $i = $source.length-1;$i >=0;$i--){"
 			 + newLine + "   $sClass $sItem = ($sClass) $source[$i];"
 			 + newLine + 	"$mapping"
-			 + newLine + "   $destination.add($dItem);"
+			 + newLine + "   $destination.add($i,$dItem);"
 			 + newLine + "   }"
 			 + newLine + 	content + newLine,vars));
 		

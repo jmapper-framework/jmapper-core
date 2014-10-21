@@ -47,7 +47,7 @@ public class MappedCollectionOperationTest extends AOperation<MappedCollectionOp
 		 newLine + "   com.googlecode.jmapper.bean.TargetObject objectOfDestination$i = new com.googlecode.jmapper.bean.TargetObject();"+
 		 newLine + "   objectOfDestination$i.setField(objectOfSoure$i.getField());"+
 		 newLine + 
-		 newLine + "   collectionOfDestination$i.add(objectOfDestination$i);"+
+		 newLine + "   collectionOfDestination$i.add(index$i,objectOfDestination$i);"+
 		 newLine + "   }"+
 		 newLine + "   destination.setATargetList(collectionOfDestination$i);"+
 		 newLine + 
@@ -67,7 +67,7 @@ public class MappedCollectionOperationTest extends AOperation<MappedCollectionOp
 		 newLine + "   com.googlecode.jmapper.bean.TargetObject objectOfDestination$i = new com.googlecode.jmapper.bean.TargetObject();"+
 		 newLine + "   objectOfDestination$i.setField(objectOfSoure$i.getField());"+
 		 newLine + 
-		 newLine + "   collectionOfDestination$i.add(objectOfDestination$i);"+
+		 newLine + "   collectionOfDestination$i.add(index$i,objectOfDestination$i);"+
 		 newLine + "   }"+
 		 newLine + "   destination.getATargetList().addAll(collectionOfDestination$i);"+
 		 newLine + 
@@ -83,7 +83,7 @@ public class MappedCollectionOperationTest extends AOperation<MappedCollectionOp
 		 newLine + "   com.googlecode.jmapper.bean.TargetObject objectOfDestination$y = new com.googlecode.jmapper.bean.TargetObject();"+
 		 newLine + "   objectOfDestination$y.setField(objectOfSoure$y.getField());"+
 		 newLine + 
-		 newLine + "   collectionOfDestination$y.add(objectOfDestination$y);"+
+		 newLine + "   collectionOfDestination$y.add(index$y,objectOfDestination$y);"+
 		 newLine + "   }"+
 		 newLine + "   destination.setATargetList(collectionOfDestination$y);"+
 		 newLine + 
@@ -109,7 +109,7 @@ public class MappedCollectionOperationTest extends AOperation<MappedCollectionOp
 		 newLine + "   objectOfDestination$i.setField(objectOfSoure$i.getField());"+
 		 newLine + "   }"+
 		 newLine + 
-		 newLine + "   collectionOfDestination$i.add(objectOfDestination$i);"+
+		 newLine + "   collectionOfDestination$i.add(index$i,objectOfDestination$i);"+
 		 newLine + "   }"+
 		 newLine + "   destination.setATargetList(collectionOfDestination$i);"+
 		 newLine + 		 
@@ -129,7 +129,7 @@ public class MappedCollectionOperationTest extends AOperation<MappedCollectionOp
 		 newLine + "   objectOfDestination$i.setField(objectOfSoure$i.getField());"+
 		 newLine + "   }"+
 		 newLine + 
-		 newLine + "   collectionOfDestination$i.add(objectOfDestination$i);"+
+		 newLine + "   collectionOfDestination$i.add(index$i,objectOfDestination$i);"+
 		 newLine + "   }"+
 		 newLine + "   destination.getATargetList().addAll(collectionOfDestination$i);"+
 		 newLine + 
@@ -143,7 +143,7 @@ public class MappedCollectionOperationTest extends AOperation<MappedCollectionOp
 		 newLine + "   objectOfDestination$y.setField(objectOfSoure$y.getField());"+
 		 newLine + "   }"+
 		 newLine + 
-		 newLine + "   collectionOfDestination$y.add(objectOfDestination$y);"+
+		 newLine + "   collectionOfDestination$y.add(index$y,objectOfDestination$y);"+
 		 newLine + "   }"+
 		 newLine + "   destination.setATargetList(collectionOfDestination$y);"+
 		 newLine + 
@@ -166,7 +166,7 @@ public class MappedCollectionOperationTest extends AOperation<MappedCollectionOp
 		 newLine + "   com.googlecode.jmapper.bean.TargetObject objectOfDestination$i = new com.googlecode.jmapper.bean.TargetObject();"+
 		 newLine + "   objectOfDestination$i.setField(objectOfSoure$i.getField());"+
 		 newLine + 
-		 newLine + "   collectionOfDestination$i.add(objectOfDestination$i);"+
+		 newLine + "   collectionOfDestination$i.add(index$i,objectOfDestination$i);"+
 		 newLine + "   }"+
 		 newLine + "   destination.getATargetList().addAll(collectionOfDestination$i);"+
 		 newLine + 
@@ -193,7 +193,7 @@ public class MappedCollectionOperationTest extends AOperation<MappedCollectionOp
 		 newLine + "   objectOfDestination$i.setField(objectOfSoure$i.getField());"+
 		 newLine + "   }"+
 		 newLine + 
-		 newLine + "   collectionOfDestination$i.add(objectOfDestination$i);"+
+		 newLine + "   collectionOfDestination$i.add(index$i,objectOfDestination$i);"+
 		 newLine + "   }"+
 		 newLine + "   destination.getATargetList().addAll(collectionOfDestination$i);"+
 		 newLine + 
@@ -231,7 +231,7 @@ public class MappedCollectionOperationTest extends AOperation<MappedCollectionOp
 		 newLine + "   objectOfDestination$i.setField(objectOfSoure$i.getField());"+
 		 newLine + "   }"+
 		 newLine + 
-		 newLine + "   collectionOfDestination$i.add(objectOfDestination$i);"+
+		 newLine + "   collectionOfDestination$i.add(index$i,objectOfDestination$i);"+
 		 newLine + "   }"+
 		 newLine + "   destination.setATargetList(collectionOfDestination$i);"+
 		 newLine + 

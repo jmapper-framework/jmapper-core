@@ -127,9 +127,28 @@ public class ConversionHandler {
 		for (Entry<String, String> pair : placeholders.entrySet()) 
 			body = body.replaceAll(pair.getKey(), pair.getValue());
 		
-		return methodToGenerate.setBody(body+"}catch(java.lang.Exception e){"+error()+"}return null;}");
+		return methodToGenerate.setBody(body+"}catch(java.lang.Exception e){"+error()+"}return "+defaultPrimitiveValue(destinationClass)+";}");
 	}
 	
+
+	/**
+	 * Returns the default values of primitive types in the form of strings.
+	 * @param clazz primitive type
+	 * @return a string that contains default value
+	 */
+	private String defaultPrimitiveValue(Class<?> clazz){
+		
+		return clazz == byte.class  || 
+			   clazz == short.class || 
+			   clazz == int.class? "0":
+			   clazz == long.class? "0L":
+			   clazz == float.class? "0.0f":
+			   clazz == double.class? "0.0d":
+			   clazz == char.class ? "'\u0000'":
+			   clazz == boolean.class ? "false":
+			   "null";
+					   
+	}
 	/**
 	 * This method surrounds the explicit conversion defined with a try-catch, to handle null pointers.
 	 * @return the body wrapped
