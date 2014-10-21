@@ -1,6 +1,20 @@
 package com.googlecode.jmapper.integrationtest.application;
 
 import static com.googlecode.jmapper.util.GeneralUtility.newLine;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
+import junit.framework.TestCase;
+
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+import org.apache.log4j.SimpleLayout;
+import org.apache.log4j.WriterAppender;
+
+import com.googlecode.jmapper.IMapper;
+import com.googlecode.jmapper.JMapper;
+import com.googlecode.jmapper.enums.ChooseConfig;
 import com.googlecode.jmapper.integrationtest.application.bean.Class1;
 import com.googlecode.jmapper.integrationtest.application.bean.Class3;
 import com.googlecode.jmapper.integrationtest.operations.bean.AnnotatedClass;
@@ -11,16 +25,8 @@ import com.googlecode.jmapper.integrationtest.operations.bean.BeanS;
 import com.googlecode.jmapper.integrationtest.operations.bean.BeanS2;
 import com.googlecode.jmapper.integrationtest.operations.bean.UndefinedD;
 import com.googlecode.jmapper.integrationtest.operations.bean.UndefinedS;
-import java.io.ByteArrayOutputStream;
-import junit.framework.TestCase;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
-import org.apache.log4j.SimpleLayout;
-import org.apache.log4j.WriterAppender;
-
-import com.googlecode.jmapper.IMapper;
-import com.googlecode.jmapper.JMapper;
-import com.googlecode.jmapper.enums.ChooseConfig;
+import com.googlecode.jmapper.util.FilesManager;
+import com.googlecode.jmapper.util.GeneralUtility;
 
 public class JMapperExceptionTest extends TestCase {
 
@@ -34,7 +40,7 @@ public class JMapperExceptionTest extends TestCase {
 	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public void testConstructorParameters(){
+	public void testConstructorParameters() throws IOException{
 		
 	    
 		Class<?> nullClass = null;
@@ -96,13 +102,14 @@ public class JMapperExceptionTest extends TestCase {
 
 		/******** CHECK XML CONFIGURATION ****************************************/
 		log.reset();
-		//TODO JMapper Test -> JMapperExceptionTest -> replace xml path in constructor and assert
-		new JMapper<BeanD2,BeanS>(BeanD2.class, BeanS.class,"file:/Users/alessandrovurro/Progetti/Personali/JMapper Test/src/test/resources/jmapper.xml");
-		assertEquals("ERROR - MappingNotFoundException: the classes: BeanD2 and BeanS aren't configured, verify file:/Users/alessandrovurro/Progetti/Personali/JMapper Test/src/test/resources/jmapper.xml mapping file"+newLine, log.toString());
+		
+		String xmlPath = "file:" + GeneralUtility.fileSeparator + FilesManager.searchFile("testJmapper.xml").getCanonicalPath();
+		
+		new JMapper<BeanD2,BeanS>(BeanD2.class, BeanS.class, xmlPath);
+		assertEquals("ERROR - MappingNotFoundException: the classes: BeanD2 and BeanS aren't configured, verify " + xmlPath + " mapping file"+newLine, log.toString());
 		
 		log.reset();
-		//TODO JMapper Test -> JMapperExceptionTest -> replace xml path in constructor and assert
-		new JMapper<BeanD2,BeanS>(BeanD2.class, BeanS.class,ChooseConfig.DESTINATION,"file:/Users/alessandrovurro/Progetti/Personali/JMapper Test/src/test/resources/jmapper.xml");
-		assertEquals("ERROR - MappingNotFoundException: BeanD2 isn't configured, verify file:/Users/alessandrovurro/Progetti/Personali/JMapper Test/src/test/resources/jmapper.xml mapping file"+newLine, log.toString());
+		new JMapper<BeanD2,BeanS>(BeanD2.class, BeanS.class,ChooseConfig.DESTINATION,xmlPath);
+		assertEquals("ERROR - MappingNotFoundException: BeanD2 isn't configured, verify " + xmlPath + " mapping file"+newLine, log.toString());
 	}
 }

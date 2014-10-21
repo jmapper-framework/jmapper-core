@@ -1,10 +1,10 @@
-package it.avutils.jmapper.integrationtest.operations.mock;
+package com.googlecode.jmapper.integrationtest.operations.mock;
 
-import it.avutils.jmapper.integrationtest.mock.IMockDS;
-import it.avutils.jmapper.integrationtest.mock.IObjDS;
-import it.avutils.jmapper.integrationtest.mock.ObjDS;
-import it.avutils.jmapper.integrationtest.operations.bean.${testName}D;
-import it.avutils.jmapper.integrationtest.operations.bean.${testName}S;
+import com.googlecode.jmapper.integrationtest.mock.IMockDS;
+import com.googlecode.jmapper.integrationtest.mock.IObjDS;
+import com.googlecode.jmapper.integrationtest.mock.ObjDS;
+import com.googlecode.jmapper.integrationtest.operations.bean.${testName}D;
+import com.googlecode.jmapper.integrationtest.operations.bean.${testName}S;
 
 public class ${testName}MockDS implements IMockDS<${testName}D, ${testName}S> {
 

@@ -1,4 +1,4 @@
-package it.avutils.jmapper.integrationtest.operations.bean;
+package com.googlecode.jmapper.integrationtest.operations.bean;
 
 public class ${testName}S {
 	
