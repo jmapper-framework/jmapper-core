@@ -23,18 +23,22 @@ System.arraycopy(secondArray, 0, newArray, firstArray.length, secondArray.length
 }}}
 This algorithm is three times faster and short.
 
-== errors management of Dynamic Methods ==
+== Errors management of Dynamic Methods ==
 
 errors managed: methods poorly written and null variables as input.
 
-== dependencies update ==
+== Added management of primitive types in complex mappings ==
+
+the dynamic mappings between primitive types and complex types as Map,Collection etc.. now are permitted.
+
+== Dependencies update ==
 
 XStream, slf4j and javassist.
 
-== added printStackTrace ==
+== Added printStackTrace ==
 
 To avoid log management a printStackTrace will be added.
 
-== mapping between collections ==
+== Mapping between collections ==
 
 The order of the destination will be the same of source.
