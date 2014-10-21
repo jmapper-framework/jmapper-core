@@ -7,7 +7,7 @@ class TestWriter {
 
 	static main(args) {
 		
-		def testName = 'MappedArrayList'
+		def testName = 'PrimitiveComplexOperation'
 		
 		def vars = ['testName':testName]
 		
@@ -27,12 +27,12 @@ class TestWriter {
 		def testDSResult = testDSTemplate.make(vars)
 		def testSResult = testSTemplate.make(vars)
 		
-		beanDResult.writeTo(new FileWriter("src/test/java/it/avutils/jmapper/integrationtest/operations/bean/${testName}D.java"))
-		beanSResult.writeTo(new FileWriter("src/test/java/it/avutils/jmapper/integrationtest/operations/bean/${testName}S.java"))
-		mockDSResult.writeTo(new FileWriter("src/test/java/it/avutils/jmapper/integrationtest/operations/mock/${testName}MockDS.java"))
-		mockSResult.writeTo(new FileWriter("src/test/java/it/avutils/jmapper/integrationtest/operations/mock/${testName}MockS.java"))
-		testDSResult.writeTo(new FileWriter("src/test/java/it/avutils/jmapper/integrationtest/operations/${testName}DSTest.java"))
-		testSResult.writeTo(new FileWriter("src/test/java/it/avutils/jmapper/integrationtest/operations/${testName}STest.java"))
+		beanDResult.writeTo(new FileWriter("src/test/java/com/googlecode/jmapper/integrationtest/operations/bean/${testName}D.java"))
+		beanSResult.writeTo(new FileWriter("src/test/java/com/googlecode/jmapper/integrationtest/operations/bean/${testName}S.java"))
+		mockDSResult.writeTo(new FileWriter("src/test/java/com/googlecode/jmapper/integrationtest/operations/mock/${testName}MockDS.java"))
+		mockSResult.writeTo(new FileWriter("src/test/java/com/googlecode/jmapper/integrationtest/operations/mock/${testName}MockS.java"))
+		testDSResult.writeTo(new FileWriter("src/test/java/com/googlecode/jmapper/integrationtest/operations/${testName}DSTest.java"))
+		testSResult.writeTo(new FileWriter("src/test/java/com/googlecode/jmapper/integrationtest/operations/${testName}STest.java"))
 	}
 
 }

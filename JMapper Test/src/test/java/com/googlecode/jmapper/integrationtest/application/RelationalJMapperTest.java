@@ -1,12 +1,16 @@
 package com.googlecode.jmapper.integrationtest.application;
 
 
-import com.googlecode.jmapper.RelationalJMapper;
+import java.io.IOException;
 
+import com.googlecode.jmapper.RelationalJMapper;
 import com.googlecode.jmapper.integrationtest.operations.bean.AnnotatedClass2;
 import com.googlecode.jmapper.integrationtest.operations.bean.Class1;
 import com.googlecode.jmapper.integrationtest.operations.bean.Class2;
 import com.googlecode.jmapper.integrationtest.operations.bean.Class3;
+import com.googlecode.jmapper.util.FilesManager;
+import com.googlecode.jmapper.util.GeneralUtility;
+
 import junit.framework.TestCase;
 
 public class RelationalJMapperTest extends TestCase {
@@ -40,10 +44,11 @@ public class RelationalJMapperTest extends TestCase {
 		assertEquals(class3Expected, class3Actual);
 	}
 	
-	public void testRelationalJMapperWithXML(){
-		// explicit configuration path
-		//TODO JMapper Test -> RelationalJMapperTest -> replace xml path
-		RelationalJMapper<AnnotatedClass2> rm = new RelationalJMapper<AnnotatedClass2>(AnnotatedClass2.class,"file:/path to JMapper Test/src/test/resources/jmapper-test.xml");
+	public void testRelationalJMapperWithXML() throws IOException{
+		
+		String xmlPath = "file:" + GeneralUtility.fileSeparator + FilesManager.searchFile("jmapper-test.xml").getCanonicalPath();
+		
+		RelationalJMapper<AnnotatedClass2> rm = new RelationalJMapper<AnnotatedClass2>(AnnotatedClass2.class,xmlPath);
 
 		AnnotatedClass2 expected = new AnnotatedClass2(null, "field2Class1", "field3Class1");
 		AnnotatedClass2 actual = rm.manyToOne(new Class1("field1Class1", "field2Class1", "field3Class1"));

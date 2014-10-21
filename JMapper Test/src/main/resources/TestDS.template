@@ -1,7 +1,7 @@
-package it.avutils.jmapper.integrationtest.operations;
+package com.googlecode.jmapper.integrationtest.operations;
 
-import it.avutils.jmapper.integrationtest.operations.bean.${testName}D;
-import it.avutils.jmapper.integrationtest.operations.bean.${testName}S;
-import it.avutils.jmapper.integrationtest.BuilderDS;
+import com.googlecode.jmapper.integrationtest.operations.bean.${testName}D;
+import com.googlecode.jmapper.integrationtest.operations.bean.${testName}S;
+import com.googlecode.jmapper.integrationtest.BuilderDS;
 
 public class ${testName}DSTest extends BuilderDS<${testName}D,${testName}S> {}

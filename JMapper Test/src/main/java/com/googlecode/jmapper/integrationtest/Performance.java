@@ -1,7 +1,7 @@
 package com.googlecode.jmapper.integrationtest;
 
 import static com.googlecode.jmapper.util.GeneralUtility.newLine;
-import static com.googlecode.jmapper.integrationtest.config.PerformanceWriter.write;
+//import static com.googlecode.jmapper.integrationtest.config.PerformanceWriter.write;
 import com.googlecode.jmapper.integrationtest.config.Constants;
 import java.util.concurrent.Callable;
 
@@ -55,7 +55,7 @@ public abstract class Performance<D,S> extends TestCase {
 	protected abstract String titleOfTest();
 	
 	public void testStaticMapping(){
-		write(newLine+titleOfTest()+newLine);
+		//write(newLine+titleOfTest()+newLine);
 		try {
 			Benchmark staticMapping = new Benchmark(new Callable<D>() {
 											public D call() throws Exception {
@@ -63,7 +63,7 @@ public abstract class Performance<D,S> extends TestCase {
 											}
 									  }, true, getInternalWeight());
 			
-			write("  static mapping:		"+staticMapping);
+		//	write("  static mapping:		"+staticMapping);
 		} catch (Exception e) {e.printStackTrace();}
 	}
 	
@@ -74,7 +74,7 @@ public abstract class Performance<D,S> extends TestCase {
 											return mapper.getDestinationWithoutControl(getSource());
 										}
 								  }, true, getInternalWeight());
-			write("  dynamic mapping:		"+dynamicMapping);
+		//	write("  dynamic mapping:		"+dynamicMapping);
 		} catch (Exception e) {e.printStackTrace();}
 	}
 	

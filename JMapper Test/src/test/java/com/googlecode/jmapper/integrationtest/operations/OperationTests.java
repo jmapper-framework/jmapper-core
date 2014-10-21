@@ -74,6 +74,10 @@ public class OperationTests {
 			suite.addTestSuite(WithoutGenericsSTest.class);
 			suite.addTestSuite(WithoutGenericsDSTest.class);
 			
+		/*  Tests on others mapping types          */
+			suite.addTestSuite(PrimitiveComplexOperationSTest.class);
+			suite.addTestSuite(PrimitiveComplexOperationDSTest.class);
+			
 			suite.addTestSuite(OtherTypesTest.class);
 		//$JUnit-END$
 		return suite;
