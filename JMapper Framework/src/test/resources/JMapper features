@@ -1,10 +1,11 @@
 NEXT RELEASE:
 
  - aggiunta gestione errori dei metodi dinamici relativi:
-   alla scrittura errata di metodi e al passaggio di variabili null 
+   alla scrittura errata di metodi e al passaggio di variabili null
+ - aggiunta gestione del setting dei primitivi in mapping complessi
  - aggiornate le dipendenze: xstream, slf4j e javassist
  - aggiunto printStackTrace oltre alla gestione con log 
-
+ - in caso di creazione di collection in destination l'ordine degli elementi viene rispettato
  
 
   Sviluppo componenti esterni come procedere ?     

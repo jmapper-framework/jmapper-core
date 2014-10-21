@@ -29,7 +29,7 @@ public class Method {
 	private Class<?> returnType;
 	/** method parameters */
 	private Class<?>[] parameters;
-	/** original conversione method name */
+	/** original conversion method name */
 	private String originalName;
 	/** method name */
 	private String name;

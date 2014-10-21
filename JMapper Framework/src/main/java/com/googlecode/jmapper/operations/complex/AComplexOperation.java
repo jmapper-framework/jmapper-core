@@ -105,7 +105,7 @@ public abstract class AComplexOperation extends AGeneralOperation{
 			return sourceControl(fieldToCreate()); 
 		
 		// if is enrichment case and mapping type of destination is ALL_FIELDS
-		if(getMtd() == ALL_FIELDS)
+		if(getMtd() == ALL_FIELDS && !destinationType().isPrimitive())
 			return  write(	  "   if(",getDestination(),"!=null){",newLine
 							  	   ,sourceControl(existingField()),
 							  "   }else{"						  ,newLine
@@ -122,8 +122,7 @@ public abstract class AComplexOperation extends AGeneralOperation{
 	 * @return a StringBuilder that contains the mapping enriched with source controls
 	 */
 	private StringBuilder sourceControl(StringBuilder mapping){
-		//TODO il ramo else dev'essere fatto solo in caso di campi non primitivi
-		System.out.println("====== "+destinationType()+" ======");
+		
 		if(getMts() == ALL_FIELDS){
 			StringBuilder write = write("   if(",getSource(),"!=null){",newLine,
 										      sharedCode(mapping)	   ,newLine,

@@ -114,7 +114,7 @@ public class MapperGenerator {
 			// adds methods
 			for (Method method : methods) {
 				try{// create method
-					CtMethod ctMethod = new CtMethod(cp.get(method.getReturnType().getName()),method.getName(), toCtClass(method.getParameters()), cc);
+					CtMethod ctMethod = new CtMethod(toCtClass(method.getReturnType())[0],method.getName(), toCtClass(method.getParameters()), cc);
 					// set body method
 					ctMethod.setBody(method.getBody());
 					// add method to CtClass
