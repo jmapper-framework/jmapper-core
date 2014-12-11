@@ -33,6 +33,7 @@ import com.googlecode.jmapper.conversions.explicit.ConversionAnalyzer;
 import com.googlecode.jmapper.conversions.explicit.ConversionHandler;
 import com.googlecode.jmapper.enums.ChooseConfig;
 import com.googlecode.jmapper.generation.beans.Method;
+import com.googlecode.jmapper.operations.beans.MappedField;
 import com.googlecode.jmapper.operations.complex.AComplexOperation;
 import com.googlecode.jmapper.operations.info.InfoOperation;
 import com.googlecode.jmapper.operations.simple.ASimpleOperation;
@@ -115,15 +116,18 @@ public final class OperationHandler {
 			Field destinationField = isDestConfigured?configuredField:targetField;
 			Field sourceField      = isDestConfigured?targetField:configuredField;
 				
-			verifiesAccessorMethods(destinationClass,destinationField);
-			verifiesGetterMethod(sourceClass,sourceField);
+			MappedField destinationMappedField = new MappedField(destinationField);
+			MappedField sourceMappedField = new MappedField(sourceField);
+			
+			verifiesAccessorMethods(destinationClass,destinationMappedField);
+			verifiesGetterMethod(sourceClass,sourceMappedField);
 			
 			if(operationAnalyzer.isUndefined(destinationField, sourceField))
 				Error.undefinedMapping(destinationField, destinationClass, sourceField, sourceClass);
 			
 			InfoOperation info = operationAnalyzer.getInfo();
 			
-			AGeneralOperation operation = operationFactory.getOperation(destinationField, sourceField, info, dynamicMethodsToWrite);
+			AGeneralOperation operation = operationFactory.getOperation(destinationMappedField, sourceMappedField, info, dynamicMethodsToWrite);
 
 			if(info.getInstructionType().isAConversion()){
 				conversionHandler.load(conversionAnalyzer)

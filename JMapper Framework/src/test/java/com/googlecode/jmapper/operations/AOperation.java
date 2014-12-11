@@ -1,13 +1,17 @@
 package com.googlecode.jmapper.operations;
 
 import static com.googlecode.jmapper.util.ClassesManager.getFieldValue;
+import static com.googlecode.jmapper.util.GeneralUtility.*;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
+
 import junit.framework.TestCase;
+
 import com.googlecode.jmapper.enums.MappingType;
+import com.googlecode.jmapper.operations.beans.MappedField;
 import com.googlecode.jmapper.operations.info.InfoOperation;
 import com.googlecode.jmapper.operations.recursive.ARecursiveOperation;
 import com.googlecode.jmapper.util.GeneralUtility;
@@ -49,8 +53,16 @@ public abstract class AOperation<T extends AGeneralOperation> extends TestCase {
 	@Override
 	protected void setUp(){
 		operation = getOperationIstance();
-		try{	operation.setDestinationField(getDField());
-				operation.setSourceField(getSField());
+		try{
+			MappedField dField = new MappedField(getDField());
+			dField.getMethod(getMethod(dField.getType(), dField.getName()));
+			dField.setMethod(mSet(dField.getName()));
+			
+			MappedField sField = new MappedField(getSField());
+			sField.getMethod(getMethod(sField.getType(), sField.getName()));
+			
+			    operation.setDestinationField(dField);
+				operation.setSourceField(sField);
 		}catch(Exception e){}
 		operation.initialDGetPath("destination");
 		operation.initialDSetPath("destination");

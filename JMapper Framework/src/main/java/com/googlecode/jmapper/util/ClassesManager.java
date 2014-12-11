@@ -18,13 +18,7 @@ package com.googlecode.jmapper.util;
 
 import static com.googlecode.jmapper.util.AutoBoxing.boxingOperations;
 import static com.googlecode.jmapper.util.AutoBoxing.unBoxingOperations;
-import static com.googlecode.jmapper.util.GeneralUtility.collectionIsAssignableFrom;
-import static com.googlecode.jmapper.util.GeneralUtility.enrichList;
-import static com.googlecode.jmapper.util.GeneralUtility.getMethod;
-import static com.googlecode.jmapper.util.GeneralUtility.isAccessModifier;
-import static com.googlecode.jmapper.util.GeneralUtility.mSet;
-import static com.googlecode.jmapper.util.GeneralUtility.mapIsAssignableFrom;
-import static com.googlecode.jmapper.util.GeneralUtility.toList;
+import static com.googlecode.jmapper.util.GeneralUtility.*;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -35,6 +29,7 @@ import java.util.List;
 import com.googlecode.jmapper.annotations.Annotation;
 import com.googlecode.jmapper.config.Error;
 import com.googlecode.jmapper.enums.ChooseConfig;
+import com.googlecode.jmapper.operations.beans.MappedField;
 import com.googlecode.jmapper.xml.XML;
 
 /**
@@ -83,6 +78,19 @@ public final class ClassesManager {
 	 * <p><code> destination = source </code>
 	 * <p>is permitted, checking their generics also
 	 * 
+	 * @param destination of type {@link MappedField}
+	 * @param source of type {@link MappedField}
+	 * @return true if destination is assignable from source
+	 */
+	public static boolean isAssignableFrom(MappedField destination,MappedField source)  {
+		return isAssignableFrom(destination.getValue(), source.getValue());
+	}
+	
+	/**
+	 * this method verify that the instruction:
+	 * <p><code> destination = source </code>
+	 * <p>is permitted, checking their generics also
+	 * 
 	 * @param destination
 	 * @param source
 	 * @return true if destination is assignable from source
@@ -95,7 +103,6 @@ public final class ClassesManager {
 		return isAssignableFrom(getGenericString(destination), getGenericString(source), destination.getType(),source.getType(),isFirst, isAddAllFunction, isPutAllFunction);
 		
 	}
-	
 	/**
 	 * Returns true if destination is assignable from source analyzing autoboxing also.
 	 * @param destination
@@ -445,7 +452,7 @@ public final class ClassesManager {
 	 * @param fields fields to control
 	 * @see <a href="http://en.wikipedia.org/wiki/JavaBean">javaBean conventions</a>
 	 */
-	public static void verifiesAccessorMethods(Class<?> clazz, Field... fields){
+	public static void verifiesAccessorMethods(Class<?> clazz, MappedField... fields){
 		verifiesGetterMethod(clazz, fields);
 		verifySetterMethods(clazz, fields);
 	}
@@ -456,38 +463,54 @@ public final class ClassesManager {
 	 * @param fields fields to control
 	 * @see <a href="http://en.wikipedia.org/wiki/JavaBean">javaBean conventions</a>
 	 */
-	public static void verifiesGetterMethod(Class<?> clazz, Field... fields){
-		String methodName = null;
-		String fieldName = null;
-		Class<?> fieldType = null;
+	public static void verifiesGetterMethod(Class<?> clazz, MappedField... fields){
 		
-		try{for (Field field : fields) {
-				fieldName = field.getName();
-				fieldType = field.getType();
+		for (MappedField field : fields) {
+			String fieldName = field.getName();
+			Class<?> fieldType = field.getType();
 				
-				methodName = getMethod(fieldType,fieldName);
-				clazz.getMethod(methodName);                  }
-		}catch(Exception e) 
-		   {	Error.method(methodName, fieldName, clazz);   }
+			String methodName = getMethod(fieldType,fieldName);
+			
+			try{
+				clazz.getMethod(methodName);  
+			}catch(Exception e) {	
+					
+				if(!isBoolean(fieldType)) Error.method(methodName, fieldName, clazz);   
+				
+				try {
+					//in case of boolean field i try to find get method
+					methodName = (mGet(fieldName));
+					clazz.getMethod(methodName);
+				} catch (Exception e1) {
+					Error.method(methodName, fieldName, clazz);  
+				}
+
+			}
+			
+			// store the getMethod name
+			field.getMethod(methodName);
+		}
 	}
-	
+
 	/**
 	 * Verifies that the setter methods are compliant with the naming convention.
 	 * @param clazz a class to check
 	 * @param fields fields to control
 	 * @see <a href="http://en.wikipedia.org/wiki/JavaBean">javaBean conventions</a>
 	 */
-	private static void verifySetterMethods(Class<?> clazz, Field... fields){
+	private static void verifySetterMethods(Class<?> clazz, MappedField... fields){
 		String methodName = null;
 		String fieldName = null;
 		Class<?> fieldType = null;
 		
-		try{for (Field field : fields) {
+		try{for (MappedField field : fields) {
 				fieldName = field.getName();
 				fieldType = field.getType();
 				
 				methodName = mSet(fieldName);
-				clazz.getMethod(methodName,fieldType);        }
+				clazz.getMethod(methodName,fieldType); 
+				// store the setMethod name
+				field.setMethod(methodName);                  }
 		}catch(Exception e) 
 			{	Error.method(methodName, fieldName, clazz);   }
 	}
@@ -536,6 +559,24 @@ public final class ClassesManager {
 	}
 	
 	/**
+	 * Extracts the generic class from the type of Mappedfield given as input.<br>
+	 * Example:
+	 * <code><br>MyClass {
+	 * <br>List&ltString&gt aList;
+	 * <br> get and set...
+	 * <br>}
+	 * <br>
+	 * <br>Field aField = MyClass.class.getDeclaredField("aList");
+	 * <br>Class<?> generic = getCollectionItemClass(aField);
+	 * <br>assertEqual(generic,String.class);</code>
+	 * @param generic a Field 
+	 * @return a Class contained in the class type of the field, returns null if no generics 
+	 */
+	public static Class<?> getCollectionItemClass(MappedField generic) {
+		return getCollectionItemClass(generic.getValue());
+	}	
+	
+	/**
 	 * Extracts the generic class from the type of field given as input.<br>
 	 * Example:
 	 * <code><br>MyClass {
@@ -555,10 +596,27 @@ public final class ClassesManager {
 		try {				    return Class.forName(item);
 		} catch (Exception e) { return null; }
 		
-	}	
+	}
+	/**
+	 * Extracts the generic class from the type of Mappedfield given as input.<br>
+	 * Example:
+	 * <code><br>MyClass {
+	 * <br>Map&ltString, Integer&gt aMap;
+	 * <br> get and set...
+	 * <br>}
+	 * <br>
+	 * <br>Field aField = MyClass.class.getDeclaredField("aMap");
+	 * <br>Class<?> generic = getGenericMapKeyItem(aField);
+	 * <br>assertEqual(generic,String.class);</code>
+	 * @param generic a Field 
+	 * @return a Class contained in the class type of the field
+	 */
+	public static Class<?> getGenericMapKeyItem(MappedField generic) {
+		return getGenericMapKeyItem(generic.getValue());
+	}
 	
 	/**
-	 * Extracts the generic class from the type of field given as input.<br>
+	 * Extracts the generic class from the type of Mappedfield given as input.<br>
 	 * Example:
 	 * <code><br>MyClass {
 	 * <br>Map&ltString, Integer&gt aMap;
@@ -576,6 +634,24 @@ public final class ClassesManager {
 		try { return Class.forName(item.split(",")[0].trim());
 		} catch (Exception e) { return null; }
 		
+	}
+	
+	/**
+	 * Extracts the generic class from the type of Mappedfield given as input.<br>
+	 * Example:
+	 * <code><br>MyClass {
+	 * <br>Map&ltString, Integer&gt aMap;
+	 * <br> get and set...
+	 * <br>}
+	 * <br>
+	 * <br>Field aField = MyClass.class.getGenericMapValueItem("aMap");
+	 * <br>Class<?> generic = getGenericMapKeyItem(aField);
+	 * <br>assertEqual(generic,Integer.class);</code>
+	 * @param generic a Field 
+	 * @return a Class contained in the class type of the field
+	 */
+	public static Class<?> getGenericMapValueItem(MappedField generic) {
+		return getGenericMapValueItem(generic.getValue());
 	}
 	
 	/**
@@ -598,6 +674,7 @@ public final class ClassesManager {
 		} catch (Exception e) { return null; }
 		
 	}
+	
 	/**
 	 * Extracts the generic class from the type of field given as input.<br>
 	 * Example:
@@ -612,7 +689,7 @@ public final class ClassesManager {
 	 * @param field a Field 
 	 * @return a Class contained in the class type of the field
 	 */
-	public static Class<?> getArrayItemClass(Field field) {
+	public static Class<?> getArrayItemClass(MappedField field) {
 		return field.getType().getComponentType();
 	}
 	

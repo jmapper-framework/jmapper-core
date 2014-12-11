@@ -225,7 +225,7 @@ public final class GeneralUtility {
 	 * @param fieldName
 	 * @return returns a getMethod name of the string given in input
 	 */
-	private static String mGet(String fieldName) {
+	public static String mGet(String fieldName) {
 		return "get" + fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
 	}
 	
@@ -254,8 +254,16 @@ public final class GeneralUtility {
 	 * @see GeneralUtility#mGet(String)
 	 */
 	public static String getMethod(Class<?> clazz,String field){
-		return clazz == boolean.class || clazz == Boolean.class ? mIs(field):mGet(field);
+		return isBoolean(clazz) ? mIs(field):mGet(field);
 	}	
+	
+	/**
+	 * @param clazz
+	 * @return True if clazz is boolean (primitive or wrapper), false otherwise.
+	 */
+	public static boolean isBoolean(Class<?> clazz){
+		return clazz == boolean.class || clazz == Boolean.class;
+	}
 	
 	/**
 	 * Add elements to an ArrayList.

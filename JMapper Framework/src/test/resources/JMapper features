@@ -1,4 +1,4 @@
-NEXT RELEASE:
+NEXT RELEASE 1.2.1:
 
  - aggiunta gestione errori dei metodi dinamici relativi:
    alla scrittura errata di metodi e al passaggio di variabili null
@@ -6,8 +6,9 @@ NEXT RELEASE:
  - aggiornate le dipendenze: xstream, slf4j e javassist
  - aggiunto printStackTrace oltre alla gestione con log 
  - in caso di creazione di collection in destination l'ordine degli elementi viene rispettato
+ - aggiunta gestione get dei campi boolean
+ - renderlo OSGI compatibile
  
-
   Sviluppo componenti esterni come procedere ?     
      Integrazione con Hibernate, Apache Camel, XMLBeans, JAXB
      eclipse plugin

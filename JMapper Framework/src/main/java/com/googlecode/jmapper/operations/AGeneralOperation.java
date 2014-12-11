@@ -19,8 +19,6 @@ import static com.googlecode.jmapper.conversions.implicit.ConversionHandler.getC
 import static com.googlecode.jmapper.enums.MappingType.ONLY_NULL_FIELDS;
 import static com.googlecode.jmapper.util.ClassesManager.isBoxing;
 import static com.googlecode.jmapper.util.ClassesManager.isUnBoxing;
-import static com.googlecode.jmapper.util.GeneralUtility.getMethod;
-import static com.googlecode.jmapper.util.GeneralUtility.mSet;
 import static com.googlecode.jmapper.util.GeneralUtility.newLine;
 
 import com.googlecode.jmapper.enums.ConversionType;
@@ -39,7 +37,7 @@ public abstract class AGeneralOperation extends AGeneralOperationAccessor{
 	 * <br>for example: destination.setField;
 	 */
 	protected final StringBuilder setDestination() {	
-		return write(initialDSetPath,".",mSet(destinationField.getName()));		
+		return write(initialDSetPath,".",destinationField.setMethod());		
 	}
 	
 	/**
@@ -55,8 +53,8 @@ public abstract class AGeneralOperation extends AGeneralOperationAccessor{
 	 * @return a StringBuilder calculated at runtime representing the complete get destination path.
 	 * <br>for example: destination.getField()
 	 */
-	protected final StringBuilder getDestination() {	
-		return write(initialDGetPath,".",getMethod(destinationField.getType(),destinationField.getName()),"()");
+	protected final StringBuilder getDestination() {
+		return write(initialDGetPath,".",destinationField.getMethod(),"()");
 	}
 
 	/**
@@ -64,7 +62,7 @@ public abstract class AGeneralOperation extends AGeneralOperationAccessor{
 	 * <br>for example: source.getField()
 	 */
 	protected final StringBuilder getSource() {	
-		return write(initialSGetPath,".",getMethod(sourceField.getType(),sourceField.getName()),"()");			
+		return write(initialSGetPath,".",sourceField.getMethod(),"()");			
 	}
 
 	/**

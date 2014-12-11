@@ -16,12 +16,15 @@
 package com.googlecode.jmapper.operations;
 
 import static com.googlecode.jmapper.util.GeneralUtility.implementationClass;
+
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Set;
+
 import com.googlecode.jmapper.enums.ChooseConfig;
 import com.googlecode.jmapper.enums.OperationType;
 import com.googlecode.jmapper.generation.beans.Method;
+import com.googlecode.jmapper.operations.beans.MappedField;
 import com.googlecode.jmapper.operations.complex.AComplexOperation;
 import com.googlecode.jmapper.operations.complex.ArrayListOperation;
 import com.googlecode.jmapper.operations.complex.ArrayOperation;
@@ -70,7 +73,7 @@ public class OperationFactory {
 	 * @param dynamicMethodsToWrite 
 	 * @return a new instance of AGeneralOperation
 	 */
-	public AGeneralOperation getOperation(Field destinationField, Field sourceField, InfoOperation info, Set<Method> dynamicMethodsToWrite){
+	public AGeneralOperation getOperation(MappedField destinationField, MappedField sourceField, InfoOperation info, Set<Method> dynamicMethodsToWrite){
 		AGeneralOperation operation = null;
 		OperationType operationType = info.getInstructionType();
 		 
@@ -96,7 +99,7 @@ public class OperationFactory {
 			simpleOperations.add((ASimpleOperation) operation);	
 			
 		if(operationType.isComplex())
-			complexOperations.add(((AComplexOperation) operation).setDestinationClass(defineStructure(destinationField, sourceField)));
+			complexOperations.add(((AComplexOperation) operation).setDestinationClass(defineStructure(destinationField.getValue(), sourceField.getValue())));
 				
 		if(operationType.isRecursive())
 			((ARecursiveOperation) operation).setDynamicMethodsToWrite(dynamicMethodsToWrite)

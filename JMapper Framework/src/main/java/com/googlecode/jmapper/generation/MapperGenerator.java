@@ -23,20 +23,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.googlecode.jmapper.IMapper;
-import com.googlecode.jmapper.config.Error;
-import com.googlecode.jmapper.generation.beans.Constructor;
-import com.googlecode.jmapper.generation.beans.Field;
-import com.googlecode.jmapper.generation.beans.Method;
-
 import javassist.CannotCompileException;
 import javassist.ClassClassPath;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtConstructor;
-import javassist.CtField;
 import javassist.CtMethod;
 import javassist.NotFoundException;
+
+import com.googlecode.jmapper.IMapper;
+import com.googlecode.jmapper.config.Error;
+import com.googlecode.jmapper.generation.beans.Constructor;
+import com.googlecode.jmapper.generation.beans.Method;
 
 /**
  * This Class generates Mapper starting from the mappings.
@@ -73,7 +71,7 @@ public class MapperGenerator {
 									.setBody("{"+mappings.get(method.getName())+"}"));
 		
 		String className = mapping.getMapperName();
-		return generateClass(className, constructors, methods, new ArrayList<Field>());
+		return generateClass(className, constructors, methods);
 	}
 	
 	/**
@@ -83,12 +81,11 @@ public class MapperGenerator {
 	 * @param superClazzName superClass of clazzName
 	 * @param constructors constructors of the class that will be generated
 	 * @param methods methods of the class that will be generated
-	 * @param fields fields of the class that will be generated
 	 * @return the generated Class
 	 * @throws Exception 
 	 * @throws NotFoundException 
 	 */
-	private static Class<?> generateClass(String clazzName,List<Constructor> constructors,List<Method>	methods,List<Field> fields) throws Exception {
+	private static Class<?> generateClass(String clazzName,List<Constructor> constructors,List<Method>	methods) throws Exception {
 		try{
 			ClassPool cp = ClassPool.getDefault();
 			// create the class
@@ -96,10 +93,6 @@ public class MapperGenerator {
 			
 			// adds the interface
 			cc.addInterface(cp.get(IMapper.class.getName()));
-			
-			// adds the fields
-			for (Field field : fields)
-				cc.addField(new CtField(cp.get(field.getType().getName()), field.getName(), cc));
 			
 			// adds constructor
 			for (Constructor constructor : constructors) {
@@ -111,6 +104,7 @@ public class MapperGenerator {
 				// add constructor to CtClass
 				cc.addConstructor(ctConstructor);	
 			}
+			
 			// adds methods
 			for (Method method : methods) {
 				try{// create method
@@ -121,7 +115,10 @@ public class MapperGenerator {
 					cc.addMethod(ctMethod); }
 				catch (CannotCompileException e) { Error.bodyContainsIllegalCode(method,e); } 
 			}
-			return cc.toClass();
+			
+			Class<?> generetedClass = cc.toClass();
+			cc.defrost();
+			return generetedClass;
 		}catch (NotFoundException e) { Error.notFoundException(e); }
 		return null;
 	}
