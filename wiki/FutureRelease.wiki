@@ -42,3 +42,11 @@ To avoid log management a printStackTrace will be added.
 == Mapping between collections ==
 
 The order of the destination will be the same of source.
+
+== get method for boolean ==
+
+For boolean types: will be permitted have a "get" method in addition to "is" method.
+
+== OSGI compatible ==
+
+Will be published an artifact with only interfaces to be compliant to OSGI specification.
