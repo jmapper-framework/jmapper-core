@@ -15,11 +15,10 @@
  */
 package com.googlecode.jmapper.operations;
 
-import java.lang.reflect.Field;
-
 import com.googlecode.jmapper.conversions.explicit.ConversionMethod;
 import com.googlecode.jmapper.enums.MappingType;
 import com.googlecode.jmapper.enums.Membership;
+import com.googlecode.jmapper.operations.beans.MappedField;
 import com.googlecode.jmapper.operations.info.InfoOperation;
 
 /**
@@ -43,9 +42,9 @@ public abstract class AGeneralOperationAccessor {
 	/** information about the operation that will be executed */
 	protected InfoOperation info;
 	/** destination field */
-	protected Field destinationField;
+	protected MappedField destinationField;
 	/** source field */
-	protected Field sourceField;
+	protected MappedField sourceField;
 	/** Name of the method  that defines the conversion */
 	protected ConversionMethod conversion;
 	/** membership of the conversion method */
@@ -107,7 +106,7 @@ public abstract class AGeneralOperationAccessor {
 	 * @param aDestinationField
 	 * @return this instance
 	 */
-	public final AGeneralOperationAccessor setDestinationField(Field aDestinationField) {	
+	public final AGeneralOperationAccessor setDestinationField(MappedField aDestinationField) {	
 		destinationField = aDestinationField;
 		return this;	
 	}
@@ -117,7 +116,7 @@ public abstract class AGeneralOperationAccessor {
 	 * @param aSourceField
 	 * @return this instance
 	 */
-	public final AGeneralOperationAccessor setSourceField(Field aSourceField) {	
+	public final AGeneralOperationAccessor setSourceField(MappedField aSourceField) {	
 		sourceField = aSourceField;			 
 		return this;	
 	}
