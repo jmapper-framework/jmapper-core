@@ -6,7 +6,9 @@ import com.googlecode.jmapper.integrationtest.application.ApplicationTests;
 import com.googlecode.jmapper.integrationtest.configurations.ConfigurationTests;
 import com.googlecode.jmapper.integrationtest.conversions.ConversionTests;
 import com.googlecode.jmapper.integrationtest.operations.OperationTests;
+import com.googlecode.jmapper.integrationtest.others.OthersTests;
 import com.googlecode.jmapper.integrationtest.xml.XmlTests;
+
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
@@ -21,6 +23,7 @@ public class IntegrationTests {
 		suite.addTest(ConversionTests.suite());
 		suite.addTest(XmlTests.suite());
 		suite.addTest(ConfigurationTests.suite());
+		suite.addTest(OthersTests.suite());
 		
 		// performance tests
 //		suite.addTest(PerformanceTests.suite());
