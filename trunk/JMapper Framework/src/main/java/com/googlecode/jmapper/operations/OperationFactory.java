@@ -65,6 +65,31 @@ public class OperationFactory {
 	}
 	
 	/**
+	 * Operation factory.
+	 * @param operationType
+	 * @return
+	 */
+	private AGeneralOperation getOperation(OperationType operationType){
+		switch(operationType){
+			case BASIC_INSTRUCTION:			   return new BasicOperation();			
+			case BASIC_CONVERSION:             return new BasicConversion();			
+			case OBJECT:					   return new ObjectOperation();			
+			case ARRAY: 					   return new ArrayOperation();			
+			case ARRAY_LIST:				   return new ArrayListOperation();		
+			case LIST_ARRAY:			       return new ListArrayOperation();		
+			case ARRAY_WITH_MAPPED_ITEMS:	   return new MappedArrayOperation();		
+			case ARRAY_LIST_WITH_MAPPED_ITEMS: return new MappedArrayListOperation();	
+			case LIST_ARRAY_WITH_MAPPED_ITEMS: return new MappedListArrayOperation();	
+			case COLLECTION: 				   return new CollectionOperation();		
+			case COLLECTION_WITH_MAPPED_ITEMS: return new MappedCollectionOperation();	
+			case MAP:	     				   return new MapOperation();				
+			case MAP_WITH_MAPPED_ITEMS: 	   return new MappedMapOperation();		
+			case CONVERSION: 				   return new ConversionOperation();		
+			default: return null;
+		}
+	}
+	
+	/**
 	 * Returns an operation relative to operation to perform.
 	 * @param operationType operation type
 	 * @param sourceField source field
@@ -74,27 +99,9 @@ public class OperationFactory {
 	 * @return a new instance of AGeneralOperation
 	 */
 	public AGeneralOperation getOperation(MappedField destinationField, MappedField sourceField, InfoOperation info, Set<Method> dynamicMethodsToWrite){
-		AGeneralOperation operation = null;
 		OperationType operationType = info.getInstructionType();
+		AGeneralOperation operation = getOperation(operationType);
 		 
-		switch(operationType){
-			case BASIC_INSTRUCTION:			   operation = new BasicOperation();			break;
-			case BASIC_CONVERSION:             operation = new BasicConversion();			break;
-			case OBJECT:					   operation = new ObjectOperation();			break;
-			case ARRAY: 					   operation = new ArrayOperation();			break;
-			case ARRAY_LIST:				   operation = new ArrayListOperation();		break;
-			case LIST_ARRAY:			       operation = new ListArrayOperation();		break;
-			case ARRAY_WITH_MAPPED_ITEMS:	   operation = new MappedArrayOperation();		break;
-			case ARRAY_LIST_WITH_MAPPED_ITEMS: operation = new MappedArrayListOperation();	break;
-			case LIST_ARRAY_WITH_MAPPED_ITEMS: operation = new MappedListArrayOperation();	break;
-			case COLLECTION: 				   operation = new CollectionOperation();		break;
-			case COLLECTION_WITH_MAPPED_ITEMS: operation = new MappedCollectionOperation();	break;
-			case MAP:	     				   operation = new MapOperation();				break;
-			case MAP_WITH_MAPPED_ITEMS: 	   operation = new MappedMapOperation();		break;
-			case CONVERSION: 				   operation = new ConversionOperation();		break;
-			default: break;
-		}
-		
 		if(operationType.isBasic())
 			simpleOperations.add((ASimpleOperation) operation);	
 			

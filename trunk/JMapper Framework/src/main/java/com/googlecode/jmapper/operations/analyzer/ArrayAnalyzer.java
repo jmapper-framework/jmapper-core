@@ -27,6 +27,7 @@ import static com.googlecode.jmapper.util.GeneralUtility.areBasic;
 
 import java.lang.reflect.Field;
 
+import com.googlecode.jmapper.operations.IOperationAnalyzer;
 import com.googlecode.jmapper.operations.info.InfoOperation;
 import com.googlecode.jmapper.xml.XML;
 /**
@@ -35,7 +36,7 @@ import com.googlecode.jmapper.xml.XML;
  * @author Alessandro Vurro
  *
  */
-public final class ArrayAnalyzer {
+public final class ArrayAnalyzer implements IOperationAnalyzer{
 
 	/** xml object */
 	private final XML xml;
@@ -48,12 +49,6 @@ public final class ArrayAnalyzer {
 		xml = aXml;
 	}
 	
-	/**
-	 * This method calculates and returns information relating the operation to be performed.
-	 * @param destination destination field to be analyzed
-	 * @param source source field to be analyzed
-	 * @return all information relating the operation to be performed
-	 */
 	public InfoOperation getInfoOperation(final Field destination, final Field source) {
 		
 		InfoOperation operation = new InfoOperation().setInstructionType(ARRAY)
@@ -80,6 +75,10 @@ public final class ArrayAnalyzer {
 					        .setConfigChosen(configChosen(dComponentType,sComponentType,xml));
 
 		return operation;
+	}
+
+	public boolean verifyConditions(Field destination, Field source) {
+		return destination.getType().isArray() && source.getType().isArray();
 	}
 
 }

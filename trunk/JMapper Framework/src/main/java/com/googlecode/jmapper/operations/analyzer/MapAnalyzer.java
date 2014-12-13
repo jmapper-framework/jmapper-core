@@ -31,10 +31,12 @@ import static com.googlecode.jmapper.util.ClassesManager.getGenericMapValueItem;
 import static com.googlecode.jmapper.util.ClassesManager.isAssignableFrom;
 import static com.googlecode.jmapper.util.ClassesManager.isPutAllPermitted;
 import static com.googlecode.jmapper.util.GeneralUtility.areBasic;
+import static com.googlecode.jmapper.util.GeneralUtility.mapIsAssignableFrom;
 
 import java.lang.reflect.Field;
 
 import com.googlecode.jmapper.enums.ConversionType;
+import com.googlecode.jmapper.operations.IOperationAnalyzer;
 import com.googlecode.jmapper.operations.info.InfoMapOperation;
 import com.googlecode.jmapper.operations.info.InfoOperation;
 import com.googlecode.jmapper.xml.XML;
@@ -44,7 +46,7 @@ import com.googlecode.jmapper.xml.XML;
  * @author Alessandro Vurro
  *
  */
-public final class MapAnalyzer {
+public final class MapAnalyzer implements IOperationAnalyzer{
 
 	/** xml object */
 	private final XML xml;
@@ -56,12 +58,7 @@ public final class MapAnalyzer {
 	public MapAnalyzer(XML aXml) {
 		xml = aXml;
 	}
-	/**
-	 * This method calculates and returns information relating the operation to be performed.
-	 * @param destination destination field to be analyzed
-	 * @param source source field to be analyzed
-	 * @return all information relating the operation to be performed
-	 */
+
 	public InfoOperation getInfoOperation(final Field destination,final Field source) {
 		
 		InfoMapOperation operation = (InfoMapOperation) new InfoMapOperation()
@@ -115,6 +112,10 @@ public final class MapAnalyzer {
 
 	private static ConversionType getConversion(Class<?> dClass,Class<?> sClass){
 		return dClass.isAssignableFrom(sClass)?UNDEFINED:getConversionType(dClass, sClass);
+	}
+	
+	public boolean verifyConditions(Field destination, Field source) {
+		return mapIsAssignableFrom(destination.getType()) &&  mapIsAssignableFrom(source.getType());
 	}
 
 }

@@ -20,25 +20,35 @@ import static com.googlecode.jmapper.conversions.implicit.ConversionAnalyzer.get
 import static com.googlecode.jmapper.enums.ConversionType.ABSENT;
 import static com.googlecode.jmapper.enums.ConversionType.UNDEFINED;
 import static com.googlecode.jmapper.enums.OperationType.BASIC_INSTRUCTION;
+import static com.googlecode.jmapper.util.ClassesManager.areEqual;
+import static com.googlecode.jmapper.util.ClassesManager.areMappedObjects;
 import static com.googlecode.jmapper.util.ClassesManager.isAssignableFrom;
 import static com.googlecode.jmapper.util.GeneralUtility.isBasic;
+import static com.googlecode.jmapper.util.GeneralUtility.isStructure;
 
 import java.lang.reflect.Field;
 
+import com.googlecode.jmapper.operations.IOperationAnalyzer;
 import com.googlecode.jmapper.operations.info.InfoOperation;
+import com.googlecode.jmapper.xml.XML;
 /**
  * This Class analyzes operations between basic types.
  * @author Alessandro Vurro
  *
  */
-public final class BasicAnalyzer {
+public final class BasicAnalyzer implements IOperationAnalyzer{
+
+	/** xml object */
+	private XML xml;
 
 	/**
-	 * This method calculates and returns information relating the operation to be performed.
-	 * @param destination destination field to be analyzed
-	 * @param source source field to be analyzed
-	 * @return all information relating the operation to be performed
+	 * Takes as input an xml object that represents the xml configuration.
+	 * @param aXml xml object
 	 */
+	public BasicAnalyzer(XML xml) {
+		this.xml = xml;
+	}
+
 	public InfoOperation getInfoOperation(final Field destination, final Field source) {
 		
 		InfoOperation operation = new InfoOperation().setInstructionType(BASIC_INSTRUCTION)
@@ -51,6 +61,18 @@ public final class BasicAnalyzer {
 			return operation.setConversionType(getConversionType(destination, source));
 		
 		return operation;
+	}
+
+	public boolean verifyConditions(Field destination, Field source) {
+		Class<?> dClass = destination.getType();
+		Class<?> sClass = source.getType();
+		// if the fields aren't structure or mapped objects
+		return  (!isStructure(dClass) && !isStructure(sClass) && !areMappedObjects(dClass,sClass,xml)
+				 // and destination is equal or assignable from source
+				 && (areEqual(destination,source) || isAssignableFrom(destination,source))
+				) 
+				// or are both basic classes
+				||	(isBasic(dClass) && isBasic(sClass));
 	}
 
 }
