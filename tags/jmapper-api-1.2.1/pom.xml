@@ -1,0 +1,121 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<name>JMapper Framework Api</name>
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.googlecode.jmapper-framework</groupId>
+	<artifactId>jmapper-api</artifactId>
+	<version>1.2.1</version>
+
+	<description>
+  JMapper is a framework that permits to write dynamic mapping, bringing several advantages as:
+  create and enrich target objects,
+  apply a specific logic to the mapping (only valued fields, only null fields, etc..),
+  automated management of the XML file,
+  possibility of implementing the 1 to N and N to 1 relationships,
+  define explicit conversions,
+  define inherited configurations,
+  </description>
+
+	<url>http://code.google.com/p/jmapper-framework/</url>
+
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<scm>
+		<connection>scm:svn:http://jmapper-framework.googlecode.com/svn/trunk/</connection>
+		<developerConnection>scm:svn:https://jmapper-framework.googlecode.com/svn/trunk/</developerConnection>
+		<url>http://jmapper-framework.googlecode.com/svn/trunk/</url>
+	</scm>
+
+	<developers>
+		<developer>
+			<id>alessandro.vurro</id>
+			<name>Alessandro Vurro</name>
+			<email>alessandro.vurro@gmail.com</email>
+			<roles>
+				<role>project leader</role>
+			</roles>
+		</developer>
+	</developers>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>1.6.3</version>
+				<extensions>true</extensions>
+				<configuration>
+					<serverId>ossrh</serverId>
+					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+					<autoReleaseAfterClose>true</autoReleaseAfterClose>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.5</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+			  <groupId>org.apache.maven.plugins</groupId>
+			  <artifactId>maven-compiler-plugin</artifactId>
+			  <version>3.0</version>
+			  <configuration>
+			     <source>1.5</source>
+			     <target>1.5</target>
+			  </configuration>
+		    </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.2.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9.1</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	
+</project>
