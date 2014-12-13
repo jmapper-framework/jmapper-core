@@ -31,6 +31,7 @@ import static com.googlecode.jmapper.util.GeneralUtility.collectionIsAssignableF
 
 import java.lang.reflect.Field;
 
+import com.googlecode.jmapper.operations.IOperationAnalyzer;
 import com.googlecode.jmapper.operations.info.InfoOperation;
 import com.googlecode.jmapper.xml.XML;
 
@@ -39,7 +40,7 @@ import com.googlecode.jmapper.xml.XML;
  * @author Alessandro Vurro
  *
  */
-public class ArrayListAnalyzer {
+public class ArrayListAnalyzer implements IOperationAnalyzer{
 
 	/** xml object */
 	private final XML xml;
@@ -97,5 +98,10 @@ public class ArrayListAnalyzer {
 			return operation.setConversionType(getConversionType(dItem, sItem));
 				
 		return operation;
+	}
+
+	public boolean verifyConditions(Field destination, Field source) {
+		return (destination.getType().isArray() && collectionIsAssignableFrom(source.getType())) 
+				|| (source.getType().isArray() && collectionIsAssignableFrom(destination.getType()));
 	}
 }

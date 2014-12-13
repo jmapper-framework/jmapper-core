@@ -17,10 +17,12 @@
 package com.googlecode.jmapper.operations.analyzer;
 
 import static com.googlecode.jmapper.enums.OperationType.OBJECT;
+import static com.googlecode.jmapper.util.ClassesManager.areMappedObjects;
 import static com.googlecode.jmapper.util.ClassesManager.configChosen;
 
 import java.lang.reflect.Field;
 
+import com.googlecode.jmapper.operations.IOperationAnalyzer;
 import com.googlecode.jmapper.operations.info.InfoOperation;
 import com.googlecode.jmapper.xml.XML;
 /**
@@ -28,7 +30,7 @@ import com.googlecode.jmapper.xml.XML;
  * @author Alessandro Vurro
  *
  */
-public final class ObjectAnalyzer {
+public final class ObjectAnalyzer implements IOperationAnalyzer{
 
 	/** xml object */
 	private final XML xml;
@@ -41,16 +43,14 @@ public final class ObjectAnalyzer {
 		xml = aXml;
 	}
 	
-	/**
-	 * This method calculates and returns information relating the operation to be performed.
-	 * @param destination destination field to be analyzed
-	 * @param source source field to be analyzed
-	 * @return all information relating the operation to be performed
-	 */
 	public InfoOperation getInfoOperation(final Field destination, final Field source) {
 		
 		return new InfoOperation().setInstructionType(OBJECT)
 								  .setConfigChosen(configChosen(destination.getType(),source.getType(),xml)); 
+	}
+
+	public boolean verifyConditions(Field destination, Field source) {
+		return areMappedObjects(destination.getType(), source.getType(), xml);
 	}
 
 }

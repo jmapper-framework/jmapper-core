@@ -26,9 +26,11 @@ import static com.googlecode.jmapper.util.ClassesManager.configChosen;
 import static com.googlecode.jmapper.util.ClassesManager.getCollectionItemClass;
 import static com.googlecode.jmapper.util.ClassesManager.isAddAllPermitted;
 import static com.googlecode.jmapper.util.GeneralUtility.areBasic;
+import static com.googlecode.jmapper.util.GeneralUtility.collectionIsAssignableFrom;
 
 import java.lang.reflect.Field;
 
+import com.googlecode.jmapper.operations.IOperationAnalyzer;
 import com.googlecode.jmapper.operations.info.InfoOperation;
 import com.googlecode.jmapper.xml.XML;
 /**
@@ -36,7 +38,7 @@ import com.googlecode.jmapper.xml.XML;
  * @author Alessandro Vurro
  *
  */
-public final class CollectionAnalyzer {
+public final class CollectionAnalyzer implements IOperationAnalyzer{
 	
 	/** xml object */
 	private final XML xml;
@@ -48,12 +50,7 @@ public final class CollectionAnalyzer {
 	public CollectionAnalyzer(XML aXml) {
 		xml = aXml;
 	}
-	/**
-	 * This method calculates and returns information relating the operation to be performed.
-	 * @param destination destination field to be analyzed
-	 * @param source source field to be analyzed
-	 * @return all information relating the operation to be performed
-	 */
+
 	public InfoOperation getInfoOperation(final Field destination, final Field source) {
 		
 		InfoOperation operation = new InfoOperation().setInstructionType(COLLECTION)
@@ -77,6 +74,10 @@ public final class CollectionAnalyzer {
 						    .setConfigChosen(configChosen(dItem,sItem,xml));
 		
 		return operation;
+	}
+	
+	public boolean verifyConditions(Field destination, Field source) {
+		return collectionIsAssignableFrom(destination.getType()) && collectionIsAssignableFrom(source.getType());
 	}
 
 }
