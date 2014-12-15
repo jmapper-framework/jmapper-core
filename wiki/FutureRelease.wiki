@@ -13,5 +13,5 @@ public class Destination {
 
    public Integer countValue(){ ... }
 
-   public void redefineCount(Integer count){ .. }
+   public void redefineCount(Integer count){ ... }
 }}}
