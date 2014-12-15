@@ -38,8 +38,9 @@
    * [MoreInformations More informations]
    * [PerformanceTests Performance tests]
  * Configurations
-   * [SpringConfiguration Spring configuration]
-   * [MavenConfiguration Maven configuration]
+   * [SpringConfiguration Spring]
+   * [MavenConfiguration Maven]
+   * [OSGI#compliant OSGI]
  * [FutureRelease Future Release]
  * [ReleaseNotes Release Notes]
  * [Support Support]
