@@ -14,4 +14,28 @@ public class Destination {
    public Integer countValue(){ ... }
 
    public void redefineCount(Integer count){ ... }
+
+}
+}}}
+
+For specify the accessor methods of a mapped field from another:
+
+{{{
+public class Source {
+
+  @JMapAccessor(name = "count", get = "countValue", set = "redefineCount")
+  private Integer source;
+
+}
+
+public class Destination {
+
+   private Integer count;
+
+   public Integer countValue(){ ... }
+
+   public void redefineCount(Integer count){ ... }
+
+}
+
 }}}
