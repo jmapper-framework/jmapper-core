@@ -1,0 +1,7 @@
+#summary OSGI compliant
+
+= OSGI =
+
+API library with only interfaces: [http://mvnrepository.com/artifact/com.googlecode.jmapper-framework/jmapper-api JMapper API]
+
+Relative implementation: [http://mvnrepository.com/artifact/com.googlecode.jmapper-framework/jmapper-core JMapper core]
