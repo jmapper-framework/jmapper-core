@@ -1,3 +1,17 @@
 #summary features of the next release.
 
-= In the next release =
+= In the next release (1.3.0) =
+
+== @JMapAccessor ==
+
+This annotation permits to define custom methods of "get " and "set":
+{{{
+public class Destination {
+
+   @JMapAccessor(get = "countValue", set = "redefineCount")
+   private Integer count;
+
+   public Integer countValue(){ ... }
+
+   public void redefineCount(Integer count){ .. }
+}}}
