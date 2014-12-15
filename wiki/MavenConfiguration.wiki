@@ -7,12 +7,12 @@ JMapper uses slf4j for logging, for the dependences resolution see [http://www.s
 <dependency>
    <groupId>com.googlecode.jmapper-framework</groupId>
    <artifactId>jmapper-core</artifactId>
-   <version>1.2.0</version>
+   <version>1.2.2</version>
 </dependency>
 <dependency> 
-   <groupId>org.slf4j</groupId>
-   <artifactId>slf4j-log4j12</artifactId>
-   <version>1.6.6</version>
+  <groupId>org.slf4j</groupId>
+  <artifactId>slf4j-log4j12</artifactId>
+  <version>1.6.6</version>
 </dependency>
 }}}
 
@@ -31,7 +31,7 @@ These are the libraries to add if you do not use Maven:
    <dependency>
  	<groupId>javassist</groupId>
  	<artifactId>javassist</artifactId>
-  	<version>3.16.1.GA</version>
+  	<version>3.18.2-GA</version>
    </dependency>
 	
    <dependency>
@@ -40,16 +40,10 @@ These are the libraries to add if you do not use Maven:
 	<version>1.6.6</version>
    </dependency>
 
-   <dependency> 
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-log4j12</artifactId>
-        <version>1.6.6</version>
-   </dependency>
-
    <dependency>
 	<groupId>com.thoughtworks.xstream</groupId>
 	<artifactId>xstream</artifactId>
-	<version>1.4.2</version>
+	<version>1.4.7</version>
    </dependency>
 </dependencies>
 }}}
