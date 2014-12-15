@@ -15,7 +15,7 @@
  */
 package com.googlecode.jmapper.operations.recursive;
 
-import static com.googlecode.jmapper.enums.MappingType.ALL_FIELDS;
+import static com.googlecode.jmapper.api.enums.MappingType.ALL_FIELDS;
 import static com.googlecode.jmapper.util.ClassesManager.getArrayItemClass;
 import static com.googlecode.jmapper.util.ClassesManager.getCollectionItemClass;
 import static com.googlecode.jmapper.util.GeneralUtility.*;

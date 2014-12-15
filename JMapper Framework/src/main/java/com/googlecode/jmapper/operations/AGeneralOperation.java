@@ -15,8 +15,8 @@
  */
 package com.googlecode.jmapper.operations;
 
+import static com.googlecode.jmapper.api.enums.MappingType.ONLY_NULL_FIELDS;
 import static com.googlecode.jmapper.conversions.implicit.ConversionHandler.getConversion;
-import static com.googlecode.jmapper.enums.MappingType.ONLY_NULL_FIELDS;
 import static com.googlecode.jmapper.util.ClassesManager.isBoxing;
 import static com.googlecode.jmapper.util.ClassesManager.isUnBoxing;
 import static com.googlecode.jmapper.util.GeneralUtility.newLine;
