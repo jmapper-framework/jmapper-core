@@ -17,11 +17,13 @@ package com.googlecode.jmapper;
 
 import static com.googlecode.jmapper.generation.MapperBuilder.from;
 import javassist.NotFoundException;
+
+import com.googlecode.jmapper.api.IJMapper;
+import com.googlecode.jmapper.api.enums.MappingType;
+import com.googlecode.jmapper.api.enums.NullPointerControl;
 import com.googlecode.jmapper.config.Error;
 import com.googlecode.jmapper.config.JmapperLog;
 import com.googlecode.jmapper.enums.ChooseConfig;
-import com.googlecode.jmapper.enums.MappingType;
-import com.googlecode.jmapper.enums.NullPointerControl;
 import com.googlecode.jmapper.generation.MapperBuilder;
 
 /**

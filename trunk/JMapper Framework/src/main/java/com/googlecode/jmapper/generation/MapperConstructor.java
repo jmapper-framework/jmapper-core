@@ -16,22 +16,24 @@
 
 package com.googlecode.jmapper.generation;
 
-import static com.googlecode.jmapper.enums.MappingType.ALL_FIELDS;
-import static com.googlecode.jmapper.enums.MappingType.ONLY_NULL_FIELDS;
-import static com.googlecode.jmapper.enums.MappingType.ONLY_VALUED_FIELDS;
-import static com.googlecode.jmapper.enums.NullPointerControl.ALL;
-import static com.googlecode.jmapper.enums.NullPointerControl.DESTINATION;
-import static com.googlecode.jmapper.enums.NullPointerControl.NOT_ANY;
-import static com.googlecode.jmapper.enums.NullPointerControl.SOURCE;
+import static com.googlecode.jmapper.api.enums.MappingType.ALL_FIELDS;
+import static com.googlecode.jmapper.api.enums.MappingType.ONLY_NULL_FIELDS;
+import static com.googlecode.jmapper.api.enums.MappingType.ONLY_VALUED_FIELDS;
+import static com.googlecode.jmapper.api.enums.NullPointerControl.ALL;
+import static com.googlecode.jmapper.api.enums.NullPointerControl.DESTINATION;
+import static com.googlecode.jmapper.api.enums.NullPointerControl.NOT_ANY;
+import static com.googlecode.jmapper.api.enums.NullPointerControl.SOURCE;
 import static com.googlecode.jmapper.util.GeneralUtility.newLine;
+
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Set;
+
 import com.googlecode.jmapper.IMapper;
+import com.googlecode.jmapper.api.enums.MappingType;
+import com.googlecode.jmapper.api.enums.NullPointerControl;
 import com.googlecode.jmapper.config.Error;
 import com.googlecode.jmapper.enums.ChooseConfig;
-import com.googlecode.jmapper.enums.MappingType;
-import com.googlecode.jmapper.enums.NullPointerControl;
 import com.googlecode.jmapper.generation.beans.Method;
 import com.googlecode.jmapper.operations.AGeneralOperation;
 import com.googlecode.jmapper.operations.OperationHandler;

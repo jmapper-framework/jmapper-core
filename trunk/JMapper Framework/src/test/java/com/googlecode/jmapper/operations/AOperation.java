@@ -10,7 +10,7 @@ import java.util.Map;
 
 import junit.framework.TestCase;
 
-import com.googlecode.jmapper.enums.MappingType;
+import com.googlecode.jmapper.api.enums.MappingType;
 import com.googlecode.jmapper.operations.beans.MappedField;
 import com.googlecode.jmapper.operations.info.InfoOperation;
 import com.googlecode.jmapper.operations.recursive.ARecursiveOperation;

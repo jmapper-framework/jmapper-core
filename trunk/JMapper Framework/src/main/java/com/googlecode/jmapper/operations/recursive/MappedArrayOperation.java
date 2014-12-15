@@ -21,7 +21,7 @@ import static com.googlecode.jmapper.util.GeneralUtility.newLine;
 import static com.googlecode.jmapper.util.GeneralUtility.replace$;
 import java.util.HashMap;
 import java.util.Map;
-import com.googlecode.jmapper.enums.MappingType;
+import com.googlecode.jmapper.api.enums.MappingType;
 import com.googlecode.jmapper.generation.MapperConstructor;
 
 /**

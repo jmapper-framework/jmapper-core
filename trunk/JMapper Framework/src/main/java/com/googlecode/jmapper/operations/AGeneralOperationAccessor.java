@@ -15,8 +15,8 @@
  */
 package com.googlecode.jmapper.operations;
 
+import com.googlecode.jmapper.api.enums.MappingType;
 import com.googlecode.jmapper.conversions.explicit.ConversionMethod;
-import com.googlecode.jmapper.enums.MappingType;
 import com.googlecode.jmapper.enums.Membership;
 import com.googlecode.jmapper.operations.beans.MappedField;
 import com.googlecode.jmapper.operations.info.InfoOperation;

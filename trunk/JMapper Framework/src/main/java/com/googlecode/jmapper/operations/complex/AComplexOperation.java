@@ -16,8 +16,8 @@
 
 package com.googlecode.jmapper.operations.complex;
 
-import static com.googlecode.jmapper.enums.MappingType.ALL_FIELDS;
-import static com.googlecode.jmapper.enums.MappingType.ONLY_NULL_FIELDS;
+import static com.googlecode.jmapper.api.enums.MappingType.ALL_FIELDS;
+import static com.googlecode.jmapper.api.enums.MappingType.ONLY_NULL_FIELDS;
 import static com.googlecode.jmapper.util.GeneralUtility.newLine;
 
 import com.googlecode.jmapper.operations.AGeneralOperation;
