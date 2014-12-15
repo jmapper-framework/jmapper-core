@@ -23,6 +23,7 @@ For specify the accessor methods of a mapped field from another:
 {{{
 public class Source {
 
+  @JMap("count")
   @JMapAccessor(name = "count", get = "countValue", set = "redefineCount")
   private Integer source;
 
