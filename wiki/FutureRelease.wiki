@@ -51,3 +51,6 @@ public class Destination {
  - JMapAccessor generation
  - xsd in generated xml
  
+== Getting Started updated ==
+
+You will see more examples in the gettingStarted.zip
