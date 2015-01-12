@@ -5,8 +5,8 @@ import junit.framework.TestCase;
 import org.apache.log4j.PropertyConfigurator;
 
 import com.googlecode.jmapper.JMapper;
-import com.googlecode.jmapper.enums.MappingType;
-import com.googlecode.jmapper.enums.NullPointerControl;
+import com.googlecode.jmapper.api.enums.MappingType;
+import com.googlecode.jmapper.api.enums.NullPointerControl;
 import com.googlecode.jmapper.integrationtest.application.bean.Child1;
 import com.googlecode.jmapper.integrationtest.application.bean.Child2;
 import com.googlecode.jmapper.integrationtest.application.bean.ChildConversion;

@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.googlecode.jmapper-framework</groupId>
   <artifactId>jmapper-test</artifactId>
-  <version>1.2.0</version>
+  <version>1.3.0</version>
    
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -27,10 +27,16 @@
   
   <dependencies>
   
+  	<dependency>
+		<groupId>com.googlecode.jmapper-framework</groupId>
+		<artifactId>jmapper-api</artifactId>
+		<version>1.2.1</version>
+	</dependency>
+  	 
     <dependency> 
       	<groupId>com.googlecode.jmapper-framework</groupId>
       	<artifactId>jmapper-core</artifactId>
-      	<version>1.2.1-SNAPSHOT</version>
+      	<version>1.2.2</version>
     </dependency>
      
 	<dependency> 
