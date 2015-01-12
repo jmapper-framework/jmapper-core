@@ -44,7 +44,13 @@ public class Destination {
 }
 
 }}}
-
+in XML we have two more attributes: "get" and "set" for mapped and target fields:
+{{{
+<attribute name="mappedField" get="getField" set="setField">
+   <attributes>
+      <attribute name=targetField" get="getTargetField" set="setTargetField"/>
+   </attributes>
+</attribute> }}}
 == !XmlHandler ==
 
  Will be added:
