@@ -49,9 +49,9 @@
 	</xs:complexType>
 	
 <!-- 
-	xs:attribute:
+	attribute:
 		name = string
-		(value?,attributes?,classes?)
+		all(value?,attributes?,classes?)
  -->
 	<xs:complexType name="jmapperAttribute">
 		<xs:all>
@@ -65,7 +65,7 @@
 <!-- 
 	global:
 		name = string
-		(value?,attributes?,classes?,excluded?)
+		all(value?,attributes?,classes?,excluded?)
  -->
 	<xs:complexType name="jmapperGlobal">
 		<xs:all>
