@@ -50,7 +50,8 @@ in XML we have two more attributes: "get" and "set" for mapped and target fields
    <attributes>
       <attribute name=targetField" get="getTargetField" set="setTargetField"/>
    </attributes>
-</attribute> }}}
+</attribute> 
+}}}
 == !XmlHandler ==
 
  Will be added:
