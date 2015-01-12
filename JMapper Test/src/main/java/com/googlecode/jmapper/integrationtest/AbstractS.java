@@ -1,7 +1,7 @@
 package com.googlecode.jmapper.integrationtest;
 
-import com.googlecode.jmapper.enums.MappingType;
-import com.googlecode.jmapper.enums.NullPointerControl;
+import com.googlecode.jmapper.api.enums.MappingType;
+import com.googlecode.jmapper.api.enums.NullPointerControl;
 
 import com.googlecode.jmapper.integrationtest.mock.IMockS;
 import com.googlecode.jmapper.integrationtest.Abstract;
@@ -97,7 +97,7 @@ public abstract class AbstractS<D,S> extends Abstract<D,S> implements IS{
 		for (int i = 0; i < mpValues.length; i++) {
 			for (int j = 0; j < npcValues.length; j++) {
 				
-				// se source è NULL e non ci sono controlli di alcun tipo va in null pointer exception
+				// se source ï¿½ NULL e non ci sono controlli di alcun tipo va in null pointer exception
 				if(npcValues[j]==NullPointerControl.NOT_ANY)continue;
 				
 				destination = mapper.getDestination(null,npcValues[j],mpValues[i]);

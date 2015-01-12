@@ -1,4 +1,8 @@
-<jmapper>
+<?xml version="1.0" encoding="UTF-8"?>
+<jmapper
+xmlns="https://jmapper-framework.googlecode.com"
+xmlns:xsi="https://jmapper-framework.googlecode.com/svn"
+xsi:noNamespaceSchemaLocation="jmapper.xsd">
   <class name="com.googlecode.jmapper.integrationtest.conversions.bean.SExplicitDynamicConversion3">
     <conversion name="firstConversion" from="source,source2" to="destination,destination2" type="dynamic">
       return ${source}.toString();

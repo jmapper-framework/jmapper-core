@@ -1,4 +1,9 @@
-<jmapper>
+<?xml version="1.0" encoding="UTF-8"?>
+<jmapper
+xmlns="https://jmapper-framework.googlecode.com"
+xmlns:xsi="https://jmapper-framework.googlecode.com/svn"
+xsi:noNamespaceSchemaLocation="jmapper.xsd">
+
    <class name="com.googlecode.jmapper.integrationtest.conversions.bean.ObjSecondD">
     <attribute name="fieldSecondD">
       <value name="fieldSecondS"/>

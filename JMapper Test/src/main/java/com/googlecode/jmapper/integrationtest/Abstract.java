@@ -9,8 +9,8 @@ import org.apache.log4j.SimpleLayout;
 import org.apache.log4j.WriterAppender;
 
 import com.googlecode.jmapper.JMapper;
-import com.googlecode.jmapper.enums.MappingType;
-import com.googlecode.jmapper.enums.NullPointerControl;
+import com.googlecode.jmapper.api.enums.MappingType;
+import com.googlecode.jmapper.api.enums.NullPointerControl;
 
 import junit.framework.TestCase;
 /**
