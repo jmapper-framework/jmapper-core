@@ -44,7 +44,7 @@ public class Destination {
 }
 
 }}}
-in XML we have two more attributes: "get" and "set" for mapped and target fields:
+in XML we will have two more attributes: "get" and "set" for mapped and target fields:
 {{{
 <attribute name="mappedField" get="getField" set="setField">
    <attributes>
