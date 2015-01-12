@@ -36,8 +36,8 @@
  -->
 	<xs:complexType name="jmapperConversion" mixed="true">
 		<xs:attribute name="name" use="required" type="xs:string"/>
-		<xs:attribute name="from" use="optional"  type="xs:string" default="xs:all"/>
-		<xs:attribute name="to" use="optional" type="xs:string" default="xs:all"/>
+		<xs:attribute name="from" use="optional"  type="xs:string" default="all"/>
+		<xs:attribute name="to" use="optional" type="xs:string" default="all"/>
 		<xs:attribute name="type" use="optional" default="STATIC">
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
