@@ -47,7 +47,7 @@ public class Destination {
 in XML we will have two more attributes: "get" and "set" for mapped and target fields:
 {{{
 <attribute name="mappedField" get="getField" set="setField">
-   <attributes>
+   <attributes>The internal exceptions are wrapped as runtime exception and relaunched.
       <attribute name=targetField" get="getTargetField" set="setTargetField"/>
    </attributes>
 </attribute> 
@@ -57,7 +57,11 @@ in XML we will have two more attributes: "get" and "set" for mapped and target f
  Will be added:
  - JMapAccessor generation
  - xsd in generated xml
- 
+
+== Exception rethrown == 
+
+The internal exceptions are wrapped as RuntimeException and relaunched.
+
 == Getting Started updated ==
 
 You will see more examples in the gettingStarted.zip
