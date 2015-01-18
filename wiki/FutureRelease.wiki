@@ -60,7 +60,7 @@ in XML we will have two more attributes: "get" and "set" for mapped and target f
 
 == Exception rethrown == 
 
-The internal exceptions are wrapped as RuntimeException and relaunched.
+The internal exceptions are wrapped as !RuntimeException and relaunched.
 
 == Getting Started updated ==
 
