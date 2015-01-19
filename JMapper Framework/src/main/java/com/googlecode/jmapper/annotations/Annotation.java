@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 - 2013 Alessandro Vurro.
+ * Copyright (C) 2012 - 2015 Alessandro Vurro.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.googlecode.jmapper.config.Error;
-import com.googlecode.jmapper.config.JmapperLog;
 import com.googlecode.jmapper.conversions.explicit.ConversionMethod;
 import com.googlecode.jmapper.exceptions.ConversionParameterException;
 import com.googlecode.jmapper.exceptions.DynamicConversionBodyException;
@@ -48,7 +47,6 @@ public class Annotation {
 	public static List<ConversionMethod> getConversionMethods(Class<?> clazz){
 		List<ConversionMethod> conversions = new ArrayList<ConversionMethod>();
 		
-		try{
 			for(Method method:getAnnotatedMethods(clazz))
 				try{   conversions.add(Converter.toConversionMethod(method));
 				}catch (ConversionParameterException e) {
@@ -60,8 +58,6 @@ public class Annotation {
 				}catch (DynamicConversionBodyException e) {
 					Error.incorrectBodyDefinition(method.getName(), clazz.getSimpleName());
 				}
-			
-		}catch (Exception e) {JmapperLog.ERROR(e);}
 		return conversions;
 	}
 	

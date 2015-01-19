@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 - 2013 Alessandro Vurro.
+ * Copyright (C) 2012 - 2015 Alessandro Vurro.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.googlecode.jmapper.JMapper;
+import com.googlecode.jmapper.exceptions.JMapperException;
 
 /**
  * Custom logger to semplify exceptions handle.
@@ -40,8 +41,8 @@ public class JmapperLog {
 	 * 
 	 * @param e exception to handle
 	 */
-	public static void ERROR(Exception e){
+	public static void ERROR(Exception e) throws JMapperException{
 		logger.error("{}: {}",e.getClass().getSimpleName(),e.getMessage());
-		e.printStackTrace();
+		throw new JMapperException(e);
 	}
 }
