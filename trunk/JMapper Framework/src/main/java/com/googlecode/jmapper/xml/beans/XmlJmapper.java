@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 - 2013 Alessandro Vurro.
+ * Copyright (C) 2012 - 2015 Alessandro Vurro.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,6 +40,15 @@ public class XmlJmapper {
 		for (XmlClass it : classes)
 			str+="\n   <class name = \""+it.name+"\">"+it+"\n   </class>";
 		
-		return "\n<jmapper>"+str+"\n</jmapper>";
+		return 
+		    "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"+
+			"\n<jmapper\n"+ 
+		            "xmlns=\"https://jmapper-framework.googlecode.com\""+
+					"xmlns:xsi=\"https://jmapper-framework.googlecode.com/svn\""+
+					"xsi:noNamespaceSchemaLocation=\"jmapper.xsd\">"+
+					
+					str+
+					
+			"\n</jmapper>";
 	}
 }

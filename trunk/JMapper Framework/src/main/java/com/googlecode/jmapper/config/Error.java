@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 - 2013 Alessandro Vurro.
+ * Copyright (C) 2012 - 2015 Alessandro Vurro.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -264,15 +264,27 @@ public final class Error {
 	  ####################################
 	*/
 	
+	 /**
+		 * Thrown when the instruction isn't defined.
+		 * @param destinationField destination field
+		 * @param destinationClass destination class
+		 * @param sourceField source field
+		 * @param sourceClass source class
+		 */
+	public static void undefinedMapping(Field destinationField, Class<?> destinationClass, Field sourceField, Class<?> sourceClass){
+		throw new UndefinedMappingException(MSG.INSTANCE.message(undefinedMappingException,destinationField.getName(),destinationClass.getSimpleName(),sourceField.getName(),sourceClass.getSimpleName()));
+	}
+		
 	/**
 	 * Thrown when the instruction isn't defined.
 	 * @param destinationField destination field
 	 * @param destinationClass destination class
 	 * @param sourceField source field
 	 * @param sourceClass source class
+	 * @param plus added messages of internal exceptions thrown
 	 */
-	public static void undefinedMapping(Field destinationField, Class<?> destinationClass, Field sourceField, Class<?> sourceClass){
-		throw new UndefinedMappingException(MSG.INSTANCE.message(undefinedMappingException,destinationField.getName(),destinationClass.getSimpleName(),sourceField.getName(),sourceClass.getSimpleName()));
+	public static void undefinedMapping(Field destinationField, Class<?> destinationClass, Field sourceField, Class<?> sourceClass,String plus){
+		throw new UndefinedMappingException(MSG.INSTANCE.message(undefinedMappingException,destinationField.getName(),destinationClass.getSimpleName(),sourceField.getName(),sourceClass.getSimpleName()) + ". More information: "+plus);
 	}
 	
 	/*

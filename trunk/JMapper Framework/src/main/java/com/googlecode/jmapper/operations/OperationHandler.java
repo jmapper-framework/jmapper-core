@@ -122,7 +122,15 @@ public final class OperationHandler {
 			verifiesAccessorMethods(destinationClass,destinationMappedField);
 			verifiesGetterMethod(sourceClass,sourceMappedField);
 			
-			if(operationAnalyzer.isUndefined(destinationField, sourceField))
+			boolean isUndefined = false;
+			
+			try{
+				isUndefined = operationAnalyzer.isUndefined(destinationField, sourceField);
+			}catch(Exception e){
+				Error.undefinedMapping(destinationField, destinationClass, sourceField, sourceClass,e.getMessage());
+			}
+			
+			if(isUndefined)	
 				Error.undefinedMapping(destinationField, destinationClass, sourceField, sourceClass);
 			
 			InfoOperation info = operationAnalyzer.getInfo();

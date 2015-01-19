@@ -13,21 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package com.googlecode.jmapper.operations.simple;
-
-import com.googlecode.jmapper.operations.AGeneralOperation;
+package com.googlecode.jmapper.exceptions;
 
 /**
- * This class represents an abstract simple operation.
- * 
+ * Exception thrown as wrapper of all exceptions thrown by the framework.
  * @author Alessandro Vurro
  *
  */
-public abstract class ASimpleOperation extends AGeneralOperation {
+public class JMapperException extends RuntimeException {
 
 	/**
-	 * @return a StringBuilder containing the mapping operation
+	 * 
 	 */
-	public abstract StringBuilder write();
+	private static final long serialVersionUID = -1081046869129532086L;
+
+	public JMapperException(Exception ex) {
+		super(ex);
+	}
 }
