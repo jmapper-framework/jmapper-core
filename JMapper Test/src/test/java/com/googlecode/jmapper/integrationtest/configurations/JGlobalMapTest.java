@@ -9,6 +9,7 @@ import org.apache.log4j.WriterAppender;
 
 import com.googlecode.jmapper.JMapper;
 import com.googlecode.jmapper.RelationalJMapper;
+import com.googlecode.jmapper.exceptions.JMapperException;
 import com.googlecode.jmapper.integrationtest.configurations.bean.JGlobalMapD;
 import com.googlecode.jmapper.integrationtest.configurations.bean.JGlobalMapD2;
 import com.googlecode.jmapper.integrationtest.configurations.bean.JGlobalMapD3;
@@ -130,7 +131,9 @@ public class JGlobalMapTest extends TestCase {
 	}
 	
 	public void testJGlobalMap8(){
-		new RelationalJMapper<JGlobalMapD3>(JGlobalMapD3.class);
+    	try{
+    		new RelationalJMapper<JGlobalMapD3>(JGlobalMapD3.class);
+		}catch(JMapperException e){	e.printStackTrace(); }
 		 
 		assertEquals("ERROR - MappingErrorException: the global configuration, of the JGlobalMapD3 Class, doesn't contain classes"+GeneralUtility.newLine,log.toString());	
 	}

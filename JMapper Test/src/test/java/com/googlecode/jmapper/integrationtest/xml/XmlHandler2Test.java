@@ -12,6 +12,7 @@ import org.apache.log4j.SimpleLayout;
 import org.apache.log4j.WriterAppender;
 
 import com.googlecode.jmapper.JMapper;
+import com.googlecode.jmapper.exceptions.JMapperException;
 import com.googlecode.jmapper.integrationtest.operations.bean.AnnotatedExampleClass2;
 import com.googlecode.jmapper.integrationtest.operations.bean.Class1;
 import com.googlecode.jmapper.integrationtest.operations.bean.Class2;
@@ -52,18 +53,24 @@ public class XmlHandler2Test extends TestCase {
 	
 	public void testAddClassException(){
 			
-		xmlHandler.addClass(AnnotatedExampleClass2.class, new Global("globalMapping"));
+    	try{
+    		xmlHandler.addClass(AnnotatedExampleClass2.class, new Global("globalMapping"));
+		}catch(JMapperException e){	e.printStackTrace(); }
 		
 		assertEquals("ERROR - XmlMappingClassExistException: AnnotatedExampleClass2 Class is present in the jmapper.xml configuration file"+newLine, log.toString());
 	}
 	
 	public void testDeleteGlobal(){
-		xmlHandler.deleteGlobal(AnnotatedExampleClass2.class);
+    	try{
+    		xmlHandler.deleteGlobal(AnnotatedExampleClass2.class);
+		}catch(JMapperException e){	e.printStackTrace(); }
 		assertNull(xml.globalsLoad().get(AnnotatedExampleClass2.class));
 	}
 	
 	public void testDeleteGlobalException(){
-		xmlHandler.deleteGlobal(AnnotatedExampleClass2.class);
+    	try{
+    		xmlHandler.deleteGlobal(AnnotatedExampleClass2.class);
+		}catch(JMapperException e){	e.printStackTrace(); }
 		assertEquals("ERROR - XmlMappingClassDoesNotExistException: AnnotatedExampleClass2 Class isn't present in the jmapper.xml configuration file"+newLine, log.toString());
 	}
 	
@@ -84,7 +91,9 @@ public class XmlHandler2Test extends TestCase {
 	
 	public void testAddGlobalException(){
 		
-		xmlHandler.addGlobal(AnnotatedExampleClass2.class, new Global("globalMapping"));
+    	try{
+    		xmlHandler.addGlobal(AnnotatedExampleClass2.class, new Global("globalMapping"));
+		}catch(JMapperException e){	e.printStackTrace(); }
 		assertEquals("ERROR - XmlMappingGlobalExistException: global mapping existent from AnnotatedExampleClass2 Class"+newLine, log.toString());
 	}
 	
