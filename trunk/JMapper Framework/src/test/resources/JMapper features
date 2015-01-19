@@ -65,15 +65,34 @@ Versione 1.2.2 RILASCIATA:
 	     
 	     
 	</attribute>
+     
+2.0.0
+
+	Mapping su livelli diversi:
+  - possibilità di mappare livelli diversi di campi es: JMap("user.name")    
+
+    creare dei metodi dinamici che creano un get splittando per .
+
+2.1.0
+
+  - possibilità di definire configurazioni xml generiche senza creare classi:
     
-1.4.0
+     Nei casi in cui serve generalizzare una configurazione e/o conversioni,
+     non deve essere obbligatorio creare una classe in caso di configurazione XML.
+     Il template permetterà quindi di definire configurazioni e/o conversioni comuni, senza dover definire alcuna classe. 
+ 
+2.2.0
+
+  - permettere l'uso dei regex nella definizione dei nomi
+     
+3.0.0
 
  - Multiple Mapping
    
   - Con la classe RelationalJMapper si ha la possibilità di implementare una relazione 1 a N o N a 1 tra
     la classe configurata e quelle target.
     Ma la relazione che c'è tra i campi della classe configurata e i campi delle classi target è sempre 1 a 1 (con @JMap).
-    Ciò vuol dire che in caso di conversioni dinamiche non è permesso (con la versione 1.1.1) configurare 
+    Ciò vuol dire che in caso di conversioni dinamiche non è permesso configurare 
     direttamente un campo con N altri, ma invece bisogna configurare gli N campi verso il campo interessato.
     Con la versione 1.2.0 è possibile (tramite JGlobalMap) mappare N campi verso uno.
     Ciò che manca è la possibilità di mappare un campo verso N.
@@ -95,14 +114,12 @@ Versione 1.2.2 RILASCIATA:
            al framework di considerare quella in input al costruttore, omettendo gli attributes si indica al framework che
            tutti i campi della classe target sono coinvolti.
            Nel caso in cui ci sia l'esigenza di dichiarare il multimapping verso altri campi di altre classi basterà
-           usare l'annotation @JMultiMaps es:
+           usare piu volte l'annotation @JMultiMap es:
            
        	class Esempio {
            
-               @JMultiMaps({
-                   @JMultiMap(targetClass=Target.class,attributes={"field1","field2","field3"})
-                   @JMultiMap(targetClass=Other.class, attributes={"other1","other2","other3"})
-               }) 
+               @JMultiMap(targetClass=Target.class,attributes={"field1","field2","field3"})
+               @JMultiMap(targetClass=Other.class, attributes={"other1","other2","other3"})
                String field1;
                ...
            }
@@ -119,25 +136,8 @@ Versione 1.2.2 RILASCIATA:
            il nodo target rispecchia l'annotation @JMultiMap, ovvero ha un attributo class e un attributo attributes,
            che contiene la lista dei campi separati da una virgola.
            Per riflettere invece JMultiMaps basterà dichiarare piu nodi target. 
-           
-
-1.5.0
-
-  - possibilità di definire template:
-    
-     Nei casi in cui serve generalizzare una configurazione e/o conversioni,
-     non deve essere obbligatorio creare una classe in caso di configurazione XML.
-     Il template permetterà quindi di definire configurazioni e/o conversioni comuni, senza dover definire alcuna classe. 
-
-2.0.0
-
-  - possibilità di mappare livelli diversi di campi es: JMap("user.getName()")
          
-2.1.0
-
-    Flattern ed Expand, in caso di campi con lo stesso nome ma situati in livelli diversi, automatizzare il mapping.
-  
-2.2.0 o prima ??
+3.1.0
 
  - DEFAULT BEHAVIORs
   
@@ -199,4 +199,6 @@ Versione 1.2.2 RILASCIATA:
    
    Per usufruire di questa feature bisogna contrassegnare la classe con l'annotation @DefaultBehavior
    e contrassegnare i metodi che creano il destination con @Creation e quelli che lo arricchiscono con @Enrichment
+   è possibile aggiungere infiniti metodi. con qualsiasi tipo di input ed output, ad essere valutati saranno i tipi di input e
+   output dei metodi.
   
