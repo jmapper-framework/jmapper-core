@@ -15,6 +15,7 @@ import org.apache.log4j.WriterAppender;
 import com.googlecode.jmapper.IMapper;
 import com.googlecode.jmapper.JMapper;
 import com.googlecode.jmapper.enums.ChooseConfig;
+import com.googlecode.jmapper.exceptions.JMapperException;
 import com.googlecode.jmapper.integrationtest.application.bean.Class1;
 import com.googlecode.jmapper.integrationtest.application.bean.Class3;
 import com.googlecode.jmapper.integrationtest.operations.bean.AnnotatedClass;
@@ -48,56 +49,80 @@ public class JMapperExceptionTest extends TestCase {
 		
 		/********************** NULL CLASSES AS INPUT ****************************/
 		log.reset();
-		new JMapper(nullClass, BeanS.class);
+		try{
+			new JMapper(nullClass, BeanS.class);
+		}catch(JMapperException e){	e.printStackTrace(); }
 		assertEquals("ERROR - NullMappedClassException: Destination Class can not be null"+newLine, log.toString());
 		
 		log.reset();
-		new JMapper(BeanD.class, nullClass);
+		try{
+			new JMapper(BeanD.class, nullClass);
+		}catch(JMapperException e){	e.printStackTrace(); }
 		assertEquals("ERROR - NullMappedClassException: Source Class can not be null"+newLine, log.toString());
 				
 		/********************** INTERFACE CLASSES AS INPUT ***********************/
 		log.reset();
-		new JMapper(anInterface, BeanS.class);
+		try{
+			new JMapper(anInterface, BeanS.class);
+		}catch(JMapperException e){	e.printStackTrace(); }
 		assertEquals("ERROR - IllegalArgumentException: Destination Class can not be an interface"+newLine, log.toString());
 
 		log.reset();
-		new JMapper(BeanD.class, anInterface);
+		try{
+			new JMapper(BeanD.class, anInterface);
+		}catch(JMapperException e){	e.printStackTrace(); }
 		assertEquals("ERROR - IllegalArgumentException: Source Class can not be an interface"+newLine,log.toString());
 
 		/******** THE CLASS BEAND HASN'T EMPTY CONSTRUCTOR ***********************/
 		log.reset();
-		new JMapper(BeanD.class, BeanS.class);
+		try{
+			new JMapper(BeanD.class, BeanS.class);
+		}catch(JMapperException e){	e.printStackTrace(); }
 		assertEquals("ERROR - MalformedBeanException: the class: BeanD hasn't empty constructor"+newLine,log.toString());
 
 		/******** THE CLASSES BEAND2 AND BEANS AREN'T CONFIGURED *****************/
 		log.reset();
-		new JMapper(BeanD2.class, BeanS.class);
+		try{
+			new JMapper(BeanD2.class, BeanS.class);
+		}catch(JMapperException e){	e.printStackTrace(); }
 		assertEquals("ERROR - MappingNotFoundException: the classes: BeanD2 and BeanS aren't configured"+newLine,log.toString());
 
 		/******** THE CLASS IS NOT CONFIGURED ************************************/
 		log.reset();
-		new JMapper(BeanD2.class, BeanS.class,ChooseConfig.DESTINATION);
+		try{
+			new JMapper(BeanD2.class, BeanS.class,ChooseConfig.DESTINATION);
+		}catch(JMapperException e){	e.printStackTrace(); }
 		assertEquals("ERROR - MappingNotFoundException: BeanD2 isn't configured"+newLine,log.toString());
 
 		log.reset();
-		new JMapper(BeanD2.class, BeanS.class,ChooseConfig.SOURCE);
+		try{
+			new JMapper(BeanD2.class, BeanS.class,ChooseConfig.SOURCE);
+		}catch(JMapperException e){	e.printStackTrace(); }
 		assertEquals("ERROR - MappingNotFoundException: BeanS isn't configured"+newLine,log.toString());
 
 		/******** UNDEFINED OPERATIONS *******************************************/
 		log.reset();
-		new JMapper(UndefinedD.class, UndefinedS.class,ChooseConfig.DESTINATION);
+		try{
+			new JMapper(UndefinedD.class, UndefinedS.class,ChooseConfig.DESTINATION);
+		}catch(JMapperException e){	e.printStackTrace(); }
 		assertEquals("ERROR - UndefinedMappingException: it was not possible to map the mapped sb field of the UndefinedD Class with the date field of UndefinedS Class, please check the configuration"+newLine, log.toString());
 
 		log.reset();
-		new JMapper<BeanD3, BeanS2>(BeanD3.class, BeanS2.class);
+		try{
+			new JMapper<BeanD3, BeanS2>(BeanD3.class, BeanS2.class);
+		}catch(JMapperException e){	e.printStackTrace(); }
 		assertEquals("ERROR - UndefinedMappingException: it was not possible to map the mapped field field of the BeanD3 Class with the field field of BeanS2 Class, please check the configuration"+newLine, log.toString());
 		
 		log.reset();
-		new JMapper<AnnotatedClass,BeanS>(AnnotatedClass.class,BeanS.class);
+		try{
+			new JMapper<AnnotatedClass,BeanS>(AnnotatedClass.class,BeanS.class);
+		}catch(JMapperException e){	e.printStackTrace(); }
 		assertEquals("ERROR - AbsentRelationshipException: there isn't relationship between AnnotatedClass Class and BeanS Class"+newLine, log.toString());
 		
 		log.reset();
-		new JMapper<Class1, Class3>(Class1.class,Class3.class);
+		try{
+			new JMapper<Class1, Class3>(Class1.class,Class3.class);
+		}catch(JMapperException e){	e.printStackTrace(); }
 		assertEquals("ERROR - AbsentRelationshipException: there isn't relationship between Class1 Class and Class3 Class"+newLine, log.toString());
 
 		/******** CHECK XML CONFIGURATION ****************************************/
@@ -105,11 +130,16 @@ public class JMapperExceptionTest extends TestCase {
 		
 		String xmlPath = "file:" + GeneralUtility.fileSeparator + FilesManager.searchFile("testJmapper.xml").getCanonicalPath();
 		
-		new JMapper<BeanD2,BeanS>(BeanD2.class, BeanS.class, xmlPath);
+		try{
+			new JMapper<BeanD2,BeanS>(BeanD2.class, BeanS.class, xmlPath);
+		}catch(JMapperException e){	e.printStackTrace(); }
 		assertEquals("ERROR - MappingNotFoundException: the classes: BeanD2 and BeanS aren't configured, verify " + xmlPath + " mapping file"+newLine, log.toString());
 		
 		log.reset();
-		new JMapper<BeanD2,BeanS>(BeanD2.class, BeanS.class,ChooseConfig.DESTINATION,xmlPath);
+
+		try{
+			new JMapper<BeanD2,BeanS>(BeanD2.class, BeanS.class,ChooseConfig.DESTINATION,xmlPath);
+		}catch(JMapperException e){	e.printStackTrace(); }
 		assertEquals("ERROR - MappingNotFoundException: BeanD2 isn't configured, verify " + xmlPath + " mapping file"+newLine, log.toString());
 	}
 }

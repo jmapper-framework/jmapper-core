@@ -1,14 +1,20 @@
 package com.googlecode.jmapper.integrationtest.conversions;
 
 import static com.googlecode.jmapper.util.GeneralUtility.newLine;
+
+import com.googlecode.jmapper.exceptions.JMapperException;
 import com.googlecode.jmapper.integrationtest.conversions.bean.DException;
 import com.googlecode.jmapper.integrationtest.conversions.bean.ObjFirstD;
 import com.googlecode.jmapper.integrationtest.conversions.bean.ObjFirstS;
 import com.googlecode.jmapper.integrationtest.conversions.bean.ObjSecondS;
 import com.googlecode.jmapper.integrationtest.conversions.bean.ObjThirdS;
 import com.googlecode.jmapper.integrationtest.conversions.bean.SException;
+import com.googlecode.jmapper.integrationtest.operations.bean.BeanS;
+
 import java.io.ByteArrayOutputStream;
+
 import junit.framework.TestCase;
+
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.SimpleLayout;
@@ -28,9 +34,12 @@ public class ExplicitConversionExceptionTest extends TestCase {
 	}
 	
 	public void testParameterNumber(){
+		log.reset();
+		try{
+			new JMapper<DException, SException>(DException.class, SException.class);
+		}catch(JMapperException e){	e.printStackTrace(); }
 		
-		mapper  = new JMapper<DException, SException>(DException.class, SException.class);
-    assertEquals("ERROR - ConversionParameterException: in static conversion is allowed to use from one to two parameters, controls the conversion method belonging to the SException class. For more information, see the wiki http://code.google.com/p/jmapper-framework/"+newLine, log.toString());
+		assertEquals("ERROR - UndefinedMappingException: it was not possible to map the mapped field field of the DException Class with the field field of SException Class, please check the configuration. More information: in static conversion is allowed to use from one to two parameters, controls the conversion method belonging to the SException class. For more information, see the wiki http://code.google.com/p/jmapper-framework/"+newLine, log.toString());
 	}
 	
 	public void testExplicitConversion2(){
@@ -38,7 +47,7 @@ public class ExplicitConversionExceptionTest extends TestCase {
 		try{
 			mapper.getDestination(new ObjFirstS(new ObjSecondS(new ObjThirdS("SOURCE"))));
 		}catch (Exception e) {
-			assertEquals("there is an error present in the conversion method: conversion belong to ObjSecondD Class defined in the conversions/exceptionTest.xml configuration file. Exception thrown: NullPointerException, exception message: null ", e.getMessage());
+			assertEquals("com.googlecode.jmapper.exceptions.IllegalCodeException: there is an error present in the conversion method: conversion belong to ObjSecondD Class defined in the conversions/exceptionTest.xml configuration file. Exception thrown: NullPointerException, exception message: null ", e.getMessage());
 		}
 	}
 }
