@@ -60,6 +60,8 @@
 			<xs:element name="classes" type="jmapperClasses" minOccurs="0"/>
 		</xs:all>
 		<xs:attribute name="name" use="required" type="xs:string"/>
+		<xs:attribute name="get" use="optional" type="xs:string" default=""/>
+		<xs:attribute name="set" use="optional" type="xs:string" default=""/>
 	</xs:complexType>
 
 <!-- 
@@ -82,7 +84,7 @@
  -->	
 	<xs:complexType name="jmapperAttributes">
 		<xs:sequence>
-			<xs:element name="attribute" type="onlyNameAttribute" maxOccurs="unbounded"/>
+			<xs:element name="attribute" type="targetAttribute" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	
@@ -97,10 +99,17 @@
 	</xs:complexType>
 		
 <!--  
-    Definition of an element with only an attribute with "name" as name
+    Definition of a target attribute with attributes: "name", "get" and "set"
+ -->	
+	<xs:complexType name="targetAttribute">
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="get" use="optional" type="xs:string" default=""/>
+		<xs:attribute name="set" use="optional" type="xs:string" default=""/>
+	</xs:complexType>
+<!--  
+    Definition of an element with only an attribute "name"
  -->	
 	<xs:complexType name="onlyNameAttribute">
 		<xs:attribute name="name" type="xs:string" use="required"/>
 	</xs:complexType>
-
 </xs:schema>
