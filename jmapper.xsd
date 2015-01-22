@@ -74,7 +74,7 @@
 				<xs:element name="value" type="onlyNameAttribute" minOccurs="0"/>
 				<xs:element name="attributes" type="jmapperAttributes" minOccurs="0"/>
 				<xs:element name="classes" type="jmapperClasses" minOccurs="0"/>
-				<xs:element name="excluded" type="jmapperAttributes" minOccurs="0"/>
+				<xs:element name="excluded" type="jmapperExcluded" minOccurs="0"/>
 		</xs:all>
 	</xs:complexType>
 	
@@ -97,7 +97,17 @@
 			<xs:element name="class" type="onlyNameAttribute" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
-		
+
+<!-- 
+	classes:
+		(class+)
+-->	
+	<xs:complexType name="jmapperExcluded">
+		<xs:sequence>
+			<xs:element name="attribute" type="onlyNameAttribute" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+			
 <!--  
     Definition of a target attribute with attributes: "name", "get" and "set"
  -->	
