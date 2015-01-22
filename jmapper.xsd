@@ -51,12 +51,14 @@
 <!-- 
 	attribute:
 		name = string
+		get = string
+		set = string
 		all(value?,attributes?,classes?)
  -->
 	<xs:complexType name="jmapperAttribute">
 		<xs:all>
 			<xs:element name="value" type="onlyNameAttribute" minOccurs="0"/>
-			<xs:element name="attributes" type="jmapperAttributes" minOccurs="0"/>
+			<xs:element name="attributes" type="jmapperTargetAttributes" minOccurs="0"/>
 			<xs:element name="classes" type="jmapperClasses" minOccurs="0"/>
 		</xs:all>
 		<xs:attribute name="name" use="required" type="xs:string"/>
@@ -67,22 +69,26 @@
 <!-- 
 	global:
 		name = string
-		all(value?,attributes?,classes?,excluded?)
+		get = string
+		set = string
+		all(attributes?,classes?,excluded?)
  -->
 	<xs:complexType name="jmapperGlobal">
 		<xs:all>
-				<xs:element name="value" type="onlyNameAttribute" minOccurs="0"/>
-				<xs:element name="attributes" type="jmapperAttributes" minOccurs="0"/>
+				<xs:element name="attributes" type="jmapperTargetAttributes" minOccurs="0"/>
 				<xs:element name="classes" type="jmapperClasses" minOccurs="0"/>
-				<xs:element name="excluded" type="jmapperExcluded" minOccurs="0"/>
+				<xs:element name="excluded" type="jmapperTargetAttributes" minOccurs="0"/>
 		</xs:all>
+		<xs:attribute name="name" use="required" type="xs:string"/>
+		<xs:attribute name="get" use="optional" type="xs:string" default=""/>
+		<xs:attribute name="set" use="optional" type="xs:string" default=""/>
 	</xs:complexType>
 	
 <!-- 
 	attributes:
 		(attribute+)
  -->	
-	<xs:complexType name="jmapperAttributes">
+	<xs:complexType name="jmapperTargetAttributes">
 		<xs:sequence>
 			<xs:element name="attribute" type="targetAttribute" maxOccurs="unbounded"/>
 		</xs:sequence>
@@ -98,16 +104,6 @@
 		</xs:sequence>
 	</xs:complexType>
 
-<!-- 
-	classes:
-		(class+)
--->	
-	<xs:complexType name="jmapperExcluded">
-		<xs:sequence>
-			<xs:element name="attribute" type="onlyNameAttribute" maxOccurs="unbounded"/>
-		</xs:sequence>
-	</xs:complexType>
-			
 <!--  
     Definition of a target attribute with attributes: "name", "get" and "set"
  -->	
