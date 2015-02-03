@@ -77,7 +77,7 @@
 		<xs:all>
 				<xs:element name="attributes" type="jmapperTargetAttributes" minOccurs="0"/>
 				<xs:element name="classes" type="jmapperClasses" minOccurs="0"/>
-				<xs:element name="excluded" type="jmapperTargetAttributes" minOccurs="0"/>
+				<xs:element name="excluded" type="onlyNameAttribute" minOccurs="0"/>
 		</xs:all>
 		<xs:attribute name="name" use="required" type="xs:string"/>
 		<xs:attribute name="get" use="optional" type="xs:string" default=""/>
