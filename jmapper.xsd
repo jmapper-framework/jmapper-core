@@ -68,10 +68,7 @@
 
 <!-- 
 	global:
-		name = string
-		get = string
-		set = string
-		all(attributes?,classes?,excluded?)
+		all(value?,attributes?,classes?,excluded?)
  -->
 	<xs:complexType name="jmapperGlobal">
 		<xs:all>
