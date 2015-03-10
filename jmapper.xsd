@@ -75,10 +75,10 @@
  -->
 	<xs:complexType name="jmapperGlobal">
 		<xs:all>
-        <xs:element name="value" type="targetAttribute"/>
-				<xs:element name="attributes" type="jmapperTargetAttributes" minOccurs="0"/>
-				<xs:element name="classes" type="jmapperClasses" minOccurs="0"/>
-				<xs:element name="excluded" type="onlyNameAttribute" minOccurs="0"/>
+      <xs:element name="value" type="targetAttribute"/>
+			<xs:element name="attributes" type="jmapperTargetAttributes" minOccurs="0"/>
+			<xs:element name="classes" type="jmapperClasses" minOccurs="0"/>
+			<xs:element name="excluded" type="onlyNameAttribute" minOccurs="0"/>
 		</xs:all>
 	</xs:complexType>
 	
