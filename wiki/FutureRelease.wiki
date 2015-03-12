@@ -55,8 +55,8 @@ in XML we will have two more attributes: "get" and "set" for mapped and target f
 == !XmlHandler ==
 
  Will be added:
- - JMapAccessor generation
- - xsd in generated xml
+ * JMapAccessor generation
+ * xsd declaration in generated xml
 
 == Exception rethrown == 
 
