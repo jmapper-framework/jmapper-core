@@ -2,7 +2,7 @@
 
 = Global Mapping =
   
-In some cases we have the need to map two fields with the same name or several fields toward the same field.<br>Currently the only mode to do this is configure each field creating much redundance.<br>To avoid it, will be introduced the global mapping.
+In some cases we have the need to map two or more fields toward the same field.<br>Currently the only mode to do this is configure each field creating much redundance.<br>To avoid it, will be introduced the global mapping.
         
 == Annotation ==
        
