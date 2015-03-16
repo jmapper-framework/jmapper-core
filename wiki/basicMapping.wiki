@@ -48,7 +48,6 @@ The equivalent configuration in xml is:
 
 == Attributes ==
 
-With attributes you can associate more target fields to a mapped field.<br>
 With the attributes parameter it's possible define more target fields.<br>
 This is useful when you want associate a field with many other that belong to different classes.<br>
 This configuration may lead to undesirable results in the case there are multiple matches between the identifiers declared in attributes and the fields of the target class, in this case JMapper considers valid the first field that respects the correspondence.<br>
