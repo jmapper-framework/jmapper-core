@@ -140,7 +140,7 @@ Conversion modes are detailed in the following paragraphs.
 
 == Static conversion ==
 
-A conversion is called static when it's used in all the defined relationships.
+A conversion is called static when its body does not change with the defined relations.
 Suppose we have two classes: Destination and Source, both with 3 fields of type String: d1, d2 and d3 for Destination and s1, s2, and s3 for Source and that you have configured s1 with d1, d2 with s2 and d3 with s3.
 We want to define a conversion to be applied to all relationships, then the method will be defined (eg in annotation):
 {{{
