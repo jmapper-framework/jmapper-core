@@ -57,7 +57,7 @@
  -->
 	<xs:complexType name="jmapperAttribute">
 		<xs:all>
-			<xs:element name="value" type="onlyNameAttribute" minOccurs="0"/>
+			<xs:element name="value" type="targetAttribute" minOccurs="0"/>
 			<xs:element name="attributes" type="jmapperTargetAttributes" minOccurs="0"/>
 			<xs:element name="classes" type="jmapperClasses" minOccurs="0"/>
 		</xs:all>
