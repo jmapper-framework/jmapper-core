@@ -38,19 +38,19 @@ public class RelationalJMapperExceptionTest extends TestCase {
 		log.reset();
     	try{
     		new RelationalJMapper<TargetClass>(TargetClass.class);
-		}catch(JMapperException e){	e.printStackTrace(); }
+		}catch(JMapperException e){}
 		assertEquals("ERROR - ClassNotMappedException: the TargetClass Class isn't mapped"+newLine, log.toString());
 		
 		log.reset();
     	try{
     		new RelationalJMapper<MappedObject>(MappedObject.class);
-		}catch(JMapperException e){	e.printStackTrace(); }
+		}catch(JMapperException e){}
 		assertEquals("ERROR - MappingErrorException: the mapping configuration, of the intS field beloging to MappedObject Class, doesn't contain classes"+newLine, log.toString());
 		
 		log.reset();
     	try{
     		new RelationalJMapper<AnnotatedClass2>(AnnotatedClass2.class);
-		}catch(JMapperException e){	e.printStackTrace(); }
+		}catch(JMapperException e){}
 		assertEquals("", log.toString());
 	}
 	
@@ -62,49 +62,49 @@ public class RelationalJMapperExceptionTest extends TestCase {
 		log.reset();
 		try{
 			actual = mapper.manyToOne(new Obj());
-		}catch(JMapperException e){	e.printStackTrace(); }
+		}catch(JMapperException e){}
 		assertEquals("ERROR - ClassNotMappedException: the Obj Class isn't mapped in AnnotatedClass Class"+newLine, log.toString());
 		assertEquals(expected,actual);
 		
 		log.reset();
 		try{
 			actual = mapper.manyToOneWithoutControl(new Obj());
-		}catch(JMapperException e){	e.printStackTrace(); }
+		}catch(JMapperException e){}
 		assertEquals("ERROR - ClassNotMappedException: the Obj Class isn't mapped in AnnotatedClass Class"+newLine, log.toString());
 		assertEquals(expected,actual);
 		
 		log.reset();
 		try{
 			actual = mapper.manyToOne(new AnnotatedClass(),new Obj());
-		}catch(JMapperException e){	e.printStackTrace(); }
+		}catch(JMapperException e){}
 		assertEquals("ERROR - ClassNotMappedException: the Obj Class isn't mapped in AnnotatedClass Class"+newLine, log.toString());
 		assertEquals(expected,actual);
 
 		log.reset();
 		try{
 			actual = mapper.manyToOne(new Obj(),MappingType.ALL_FIELDS);
-		}catch(JMapperException e){	e.printStackTrace(); }
+		}catch(JMapperException e){}
 		assertEquals("ERROR - ClassNotMappedException: the Obj Class isn't mapped in AnnotatedClass Class"+newLine, log.toString());
 		assertEquals(expected,actual);
 		
 		log.reset();
 		try{
 			actual = mapper.manyToOne(new Obj(),NullPointerControl.ALL,MappingType.ALL_FIELDS);
-		}catch(JMapperException e){	e.printStackTrace(); }
+		}catch(JMapperException e){}
 		assertEquals("ERROR - ClassNotMappedException: the Obj Class isn't mapped in AnnotatedClass Class"+newLine, log.toString());
 		assertEquals(expected,actual);
 		
 		log.reset();
 		try{
 			actual = mapper.manyToOne(new AnnotatedClass(),new Obj(),MappingType.ALL_FIELDS,MappingType.ALL_FIELDS);
-		}catch(JMapperException e){	e.printStackTrace(); }
+		}catch(JMapperException e){}
 		assertEquals("ERROR - ClassNotMappedException: the Obj Class isn't mapped in AnnotatedClass Class"+newLine, log.toString());
 		assertEquals(expected,actual);
 
 		log.reset();
 		try{
 			actual = mapper.manyToOne(new AnnotatedClass(),new Obj(),NullPointerControl.ALL,MappingType.ALL_FIELDS,MappingType.ALL_FIELDS);
-		}catch(JMapperException e){	e.printStackTrace(); }
+		}catch(JMapperException e){}
 		assertEquals("ERROR - ClassNotMappedException: the Obj Class isn't mapped in AnnotatedClass Class"+newLine, log.toString());
 		assertEquals(expected,actual);
 	}
@@ -117,7 +117,7 @@ public class RelationalJMapperExceptionTest extends TestCase {
 		log.reset();
 		try{
 			actual = mapper.oneToMany(Obj.class,new AnnotatedClass());
-		}catch(JMapperException e){	e.printStackTrace(); }
+		}catch(JMapperException e){}
 
 		assertEquals("ERROR - ClassNotMappedException: the Obj Class isn't mapped in AnnotatedClass Class"+newLine, log.toString());
 		assertEquals(expected,actual);
@@ -125,42 +125,42 @@ public class RelationalJMapperExceptionTest extends TestCase {
 		log.reset();
 		try{
 			actual = mapper.oneToManyWithoutControl(Obj.class,new AnnotatedClass());
-		}catch(JMapperException e){	e.printStackTrace(); }
+		}catch(JMapperException e){}
 		assertEquals("ERROR - ClassNotMappedException: the Obj Class isn't mapped in AnnotatedClass Class"+newLine, log.toString());
 		assertEquals(expected,actual);
 		
 		log.reset();
 		try{
 			actual = mapper.oneToMany(new Obj(),new AnnotatedClass());
-		}catch(JMapperException e){	e.printStackTrace(); }
+		}catch(JMapperException e){}
 		assertEquals("ERROR - ClassNotMappedException: the Obj Class isn't mapped in AnnotatedClass Class"+newLine, log.toString());
 		assertEquals(expected,actual);
 
 		log.reset();
 		try{
 			actual = mapper.oneToMany(Obj.class,new AnnotatedClass(),MappingType.ALL_FIELDS);
-		}catch(JMapperException e){	e.printStackTrace(); }
+		}catch(JMapperException e){}
 		assertEquals("ERROR - ClassNotMappedException: the Obj Class isn't mapped in AnnotatedClass Class"+newLine, log.toString());
 		assertEquals(expected,actual);
 		
 		log.reset();
 		try{
 			actual = mapper.oneToMany(Obj.class,new AnnotatedClass(),NullPointerControl.ALL,MappingType.ALL_FIELDS);
-		}catch(JMapperException e){	e.printStackTrace(); }
+		}catch(JMapperException e){}
 		assertEquals("ERROR - ClassNotMappedException: the Obj Class isn't mapped in AnnotatedClass Class"+newLine, log.toString());
 		assertEquals(expected,actual);
 		
 		log.reset();
 		try{
 			actual = mapper.oneToMany(new Obj(),new AnnotatedClass(),MappingType.ALL_FIELDS,MappingType.ALL_FIELDS);
-		}catch(JMapperException e){	e.printStackTrace(); }
+		}catch(JMapperException e){}
 		assertEquals("ERROR - ClassNotMappedException: the Obj Class isn't mapped in AnnotatedClass Class"+newLine, log.toString());
 		assertEquals(expected,actual);
 
 		log.reset();
 		try{
 			actual = mapper.oneToMany(new Obj(),new AnnotatedClass(),NullPointerControl.ALL,MappingType.ALL_FIELDS,MappingType.ALL_FIELDS);
-		}catch(JMapperException e){	e.printStackTrace(); }
+		}catch(JMapperException e){}
 		assertEquals("ERROR - ClassNotMappedException: the Obj Class isn't mapped in AnnotatedClass Class"+newLine, log.toString());
 		assertEquals(expected,actual);
 

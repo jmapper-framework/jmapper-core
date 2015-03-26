@@ -3,11 +3,11 @@ import com.googlecode.jmapper.annotations.JMap;
 
 public class AnnotatedExampleClass {
 
-@JMap(value="field1", attributes={"field1Class1", "field1Class2", "field1Class3"}, classes={Class1.class, Class2.class, Class3.class})
+@JMap(value="com.googlecode.jmapper.xml.Value@8a256e97", attributes={"field1Class1", "field1Class2", "field1Class3"}, classes={Class1.class, Class2.class, Class3.class})
 	  private String field1;
-@JMap(value="field2", attributes={"field2Class1", "field2Class2", "field2Class3"}, classes={Class1.class, Class2.class, Class3.class})
+@JMap(value="com.googlecode.jmapper.xml.Value@8a1d7113", attributes={"field2Class1", "field2Class2", "field2Class3"}, classes={Class1.class, Class2.class, Class3.class})
 	  private String field2;
-@JMap(value="field3", attributes={"field3Class1", "field3Class2", "field3Class3"}, classes={Class1.class, Class2.class, Class3.class})
+@JMap(value="com.googlecode.jmapper.xml.Value@89d64302", attributes={"field3Class1", "field3Class2", "field3Class3"}, classes={Class1.class, Class2.class, Class3.class})
 	  private String field3;
 	
 	public AnnotatedExampleClass() {}

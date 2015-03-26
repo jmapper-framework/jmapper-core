@@ -2,10 +2,11 @@
 <jmapper
 xmlns="https://jmapper-framework.googlecode.com"
 xmlns:xsi="https://jmapper-framework.googlecode.com/svn"
-xsi:noNamespaceSchemaLocation="jmapper.xsd">
+xsi:noNamespaceSchemaLocation="https://jmapper-framework.googlecode.com/svn/jmapper.xsd">
+<class name=""><global></global></class>
   <class name="com.googlecode.jmapper.integrationtest.configurations.bean.JGlobalMapD">
     <global>
-    	<value name="field2"/>
+    	<value name="field2" />
     </global>
   </class>
   <class name="com.googlecode.jmapper.integrationtest.configurations.bean.JGlobalMapD2">
@@ -21,14 +22,12 @@ xsi:noNamespaceSchemaLocation="jmapper.xsd">
   </class>
   <class name="com.googlecode.jmapper.integrationtest.configurations.bean.JGlobalMapD3">
     <global>
+    	<value name="field2"/>
     	<attributes>
-    	   <attribute name ="undefined"/>
+    	   <attribute name ="field" />
     	   <attribute name ="field2"/>
     	   <attribute name ="field3"/>
     	</attributes>
     </global>
-    <attribute name="field2">
-      <value name="notUsed"/>
-    </attribute>
   </class>
 </jmapper>

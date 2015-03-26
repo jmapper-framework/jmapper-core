@@ -11,6 +11,7 @@ public class ConfigurationTests {
 	
 		suite.addTestSuite(JGlobalMapTest.class);
 		suite.addTestSuite(GlobalNodeTest.class);
+		suite.addTestSuite(JMapAccessorTest.class);
 		
 		return suite;
 	}

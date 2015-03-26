@@ -133,7 +133,7 @@ public class JGlobalMapTest extends TestCase {
 	public void testJGlobalMap8(){
     	try{
     		new RelationalJMapper<JGlobalMapD3>(JGlobalMapD3.class);
-		}catch(JMapperException e){	e.printStackTrace(); }
+		}catch(JMapperException e){}
 		 
 		assertEquals("ERROR - MappingErrorException: the global configuration, of the JGlobalMapD3 Class, doesn't contain classes"+GeneralUtility.newLine,log.toString());	
 	}

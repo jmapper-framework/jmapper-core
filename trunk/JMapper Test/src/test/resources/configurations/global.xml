@@ -2,7 +2,7 @@
 <jmapper
 xmlns="https://jmapper-framework.googlecode.com"
 xmlns:xsi="https://jmapper-framework.googlecode.com/svn"
-xsi:noNamespaceSchemaLocation="jmapper.xsd">
+xsi:noNamespaceSchemaLocation="https://jmapper-framework.googlecode.com/svn/jmapper.xsd">
   <class name="com.googlecode.jmapper.integrationtest.configurations.bean.JGlobalMapD">
     <global>
     	<excluded>

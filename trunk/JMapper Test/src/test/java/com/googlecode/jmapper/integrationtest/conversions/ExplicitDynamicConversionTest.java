@@ -61,7 +61,7 @@ public class ExplicitDynamicConversionTest extends TestCase{
     	new JMapper<DExplicitDynamicConversion, SExplicitDynamicConversion3>(DExplicitDynamicConversion.class, SExplicitDynamicConversion3.class,ChooseConfig.SOURCE);
     	try{
     		mapper.getDestination(new SExplicitDynamicConversion3(null,null,null,null));
-		}catch(JMapperException e){	e.printStackTrace(); }
+		}catch(JMapperException e){}
     	assertEquals("ERROR - IllegalCodeException: there is an error present in the conversion method: nullConversion belong to SExplicitDynamicConversion3 Class. Exception thrown: NullPointerException, exception message: null "+newLine, log.toString());
 	}
 	
@@ -72,7 +72,7 @@ public class ExplicitDynamicConversionTest extends TestCase{
     	new JMapper<DExplicitDynamicConversion, SExplicitDynamicConversion3>(DExplicitDynamicConversion.class, SExplicitDynamicConversion3.class,ChooseConfig.SOURCE,"conversions/dynamicConversionTest3.xml");
     	try{
     		mapper.getDestination(new SExplicitDynamicConversion3(null,null,null,null));
-		}catch(JMapperException e){	e.printStackTrace(); }
+		}catch(JMapperException e){}
 		assertEquals("ERROR - IllegalCodeException: there is an error present in the conversion method: firstConversion belong to SExplicitDynamicConversion3 Class defined in the conversions/dynamicConversionTest3.xml configuration file. Exception thrown: NullPointerException, exception message: null "+newLine, log.toString());
 	}
     
@@ -80,7 +80,7 @@ public class ExplicitDynamicConversionTest extends TestCase{
     	log.reset();
     	try{
     		new JMapper<DExplicitDynamicConversion, SExplicitDynamicConversion2>(DExplicitDynamicConversion.class, SExplicitDynamicConversion2.class);
-		}catch(JMapperException e){	e.printStackTrace(); }
+		}catch(JMapperException e){}
     	
     	assertEquals("ERROR - ConversionBodyIllegalCodeException: the conversion method contains illegal code, check the conversion code belonging to the SExplicitDynamicConversion2 class. Additional information: by javassist.bytecode.BadBytecode: SExplicitDynamicConversion2$FROMsource2TOdestination2 ()Ljava/lang/String; in comgooglecodejmapperintegrationtestconversionsbeanDExplicitDynamicConversioncomgooglecodejmapperintegrationtestconversionsbeanSExplicitDynamicConversion2: conflict: *top* and java.lang.String"+newLine, log.toString());
     }
@@ -89,7 +89,7 @@ public class ExplicitDynamicConversionTest extends TestCase{
     	log.reset();
     	try{
     		new JMapper<DExplicitDynamicConversion, SExplicitDynamicConversion2>(DExplicitDynamicConversion.class, SExplicitDynamicConversion2.class,"conversions/dynamicConversionTest2.xml");
-		}catch(JMapperException e){	e.printStackTrace(); }
+		}catch(JMapperException e){}
     	
     	assertEquals("ERROR - ConversionBodyIllegalCodeException: the firstConversion method contains illegal code, check the conversion code belonging to the SExplicitDynamicConversion2 class. Additional information: by javassist.bytecode.BadBytecode: SExplicitDynamicConversion2$FROMsource2TOdestination2 ()Ljava/lang/String; in comgooglecodejmapperintegrationtestconversionsbeanDExplicitDynamicConversioncomgooglecodejmapperintegrationtestconversionsbeanSExplicitDynamicConversion2dynamicConversionTest2xml: conflict: *top* and java.lang.String"+newLine, log.toString());
     }

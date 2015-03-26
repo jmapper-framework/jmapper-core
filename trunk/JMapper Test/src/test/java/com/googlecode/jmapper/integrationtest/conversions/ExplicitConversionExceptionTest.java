@@ -37,7 +37,7 @@ public class ExplicitConversionExceptionTest extends TestCase {
 		log.reset();
 		try{
 			new JMapper<DException, SException>(DException.class, SException.class);
-		}catch(JMapperException e){	e.printStackTrace(); }
+		}catch(JMapperException e){}
 		
 		assertEquals("ERROR - UndefinedMappingException: it was not possible to map the mapped field field of the DException Class with the field field of SException Class, please check the configuration. More information: in static conversion is allowed to use from one to two parameters, controls the conversion method belonging to the SException class. For more information, see the wiki http://code.google.com/p/jmapper-framework/"+newLine, log.toString());
 	}

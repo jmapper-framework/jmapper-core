@@ -2,12 +2,12 @@
 <jmapper
 xmlns="https://jmapper-framework.googlecode.com"
 xmlns:xsi="https://jmapper-framework.googlecode.com/svn"
-xsi:noNamespaceSchemaLocation="jmapper.xsd">
+xsi:noNamespaceSchemaLocation="https://jmapper-framework.googlecode.com/svn/jmapper.xsd">
   <class name='com.googlecode.jmapper.integrationtest.operations.bean.AnnotatedClass2'>
     <attribute name='field1'>
       <attributes>
-        <attribute name='field1Class2' />
-        <attribute name='field1Class3' />
+        <attribute name='field1Class2' get="" set=""/>
+        <attribute name='field1Class3' get="" set=""/>
       </attributes>
       <classes>
         <class name='com.googlecode.jmapper.integrationtest.operations.bean.Class2' />
