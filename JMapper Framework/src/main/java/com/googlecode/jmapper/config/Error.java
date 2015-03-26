@@ -276,14 +276,14 @@ public final class Error {
 	}
 		
 	/**
-	 * Thrown when the instruction isn't defined.
+	 * Thrown when conversions are badly written.
 	 * @param destinationField destination field
 	 * @param destinationClass destination class
 	 * @param sourceField source field
 	 * @param sourceClass source class
 	 * @param plus added messages of internal exceptions thrown
 	 */
-	public static void undefinedMapping(Field destinationField, Class<?> destinationClass, Field sourceField, Class<?> sourceClass,String plus){
+	public static void badConversion(Field destinationField, Class<?> destinationClass, Field sourceField, Class<?> sourceClass,String plus){
 		throw new UndefinedMappingException(MSG.INSTANCE.message(undefinedMappingException,destinationField.getName(),destinationClass.getSimpleName(),sourceField.getName(),sourceClass.getSimpleName()) + ". More information: "+plus);
 	}
 	
@@ -292,6 +292,18 @@ public final class Error {
 	  #	    ClassesManager exceptions    #
 	  ####################################
 	*/
+	/**
+	 * Thrown when the bean doesn't respect the javabean conventions.
+	 * @param methodType method type
+	 * @param methodName name of the method doesn't exist
+	 * @param clazz class when this method isn't present
+	 */
+	public static void customMethod(String methodType,String methodName, Class<?> clazz){
+		String completeName = clazz.getCanonicalName();
+		String packageName = clazz.getPackage().getName();
+		String className = completeName.substring(packageName.length()+1);
+		throw new MalformedBeanException(MSG.INSTANCE.message(customMethodException, methodType, methodName,className));
+	}
 	
 	/**
 	 * Thrown when the bean doesn't respect the javabean conventions.

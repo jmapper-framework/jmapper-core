@@ -28,9 +28,11 @@ public final class Constants {
 	public static final String DESTINATION_DEFAULT_NAME = "destination";
 	public static final String SOURCE_DEFAULT_NAME = "source";
 	public static final String DEFAULT_FIELD_VALUE = "";
+	public static final String DEFAULT_ACCESSOR_VALUE = "";
 	public static final String CONTENT_ALREADY_DEFINED = "not needed";
 	public static final String MSG_FILE = "com/googlecode/jmapper/config/jmapper.msg.properties";
 	
+	public static final String customMethodException = "customMethodException";
 	public static final String nullPointer = "nullPointer";
 	public static final String nullPointerPath = "nullPointerPath";
 	public static final String illegalCode = "illegalCode";

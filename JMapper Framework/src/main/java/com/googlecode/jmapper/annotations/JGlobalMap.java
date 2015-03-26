@@ -37,7 +37,7 @@ import com.googlecode.jmapper.config.Constants;
 @Target(TYPE)
 public @interface JGlobalMap {
 	String value() default Constants.DEFAULT_FIELD_VALUE;
-	String[] attributes() default {};
 	Class<?>[] classes() default {};
+	String[] attributes() default {};
 	String[] excluded() default {};
 }

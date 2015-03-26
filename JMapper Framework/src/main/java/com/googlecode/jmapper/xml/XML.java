@@ -21,18 +21,21 @@ import static com.googlecode.jmapper.util.FilesManager.readAtDevelopmentTime;
 import static com.googlecode.jmapper.util.FilesManager.readAtRuntime;
 import static com.googlecode.jmapper.util.GeneralUtility.*;
 import static com.googlecode.jmapper.util.ClassesManager.*;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import com.googlecode.jmapper.config.Error;
 import com.googlecode.jmapper.config.JmapperLog;
 import com.googlecode.jmapper.conversions.explicit.ConversionMethod;
 import com.googlecode.jmapper.exceptions.XmlConversionNameException;
 import com.googlecode.jmapper.exceptions.XmlConversionParameterException;
 import com.googlecode.jmapper.exceptions.XmlConversionTypeException;
+import com.googlecode.jmapper.operations.beans.MappedField;
 import com.googlecode.jmapper.util.FilesManager;
 import com.googlecode.jmapper.xml.beans.XmlAttribute;
 import com.googlecode.jmapper.xml.beans.XmlClass;
@@ -457,7 +460,129 @@ public final class XML {
 	 * @return true if the class is configured in xml, false otherwise
 	 */
 	public boolean isMapped(Class<?> clazz){
-		return isNotNull  (globalsLoad().get(clazz.getName()))
+		return !isNull  (globalsLoad().get(clazz.getName()))
 			|| !isEmpty(attributesLoad().get(clazz.getName()));
+	}
+	
+	/**
+	 * Returns the Attribute relative to the configured field, null otherwise.
+	 * @param configuredField field to find
+	 * @param configuredClass class of field
+	 * @return
+	 */
+	private Attribute getGlobalAttribute(MappedField configuredField, Class<?> configuredClass){
+		Global global = globalsLoad().get(configuredClass.getName());
+		
+		if(!isNull(global) && !isNull(global.getAttributes()))
+			for (SimplyAttribute globalAttribute : global.getAttributes()) {
+				String name = globalAttribute.getName();
+				if(configuredField.getValue().getName().equals(name)){
+					String get = globalAttribute.getGet();
+					String set = globalAttribute.getSet();
+					if(!isNull(get) || !isNull(set))
+						return new Attribute(name, null, get, set, null, null);
+				}
+			}
+			
+		return null;
+	}
+	
+	/**
+	 * Returns the Attribute relative to the configured field, null otherwise.
+	 * @param configuredField field to find
+	 * @param configuredClass class of field
+	 * @return
+	 */
+	private Attribute getAttribute(MappedField configuredField, Class<?> configuredClass){
+		// If configuredClass exists in XML configuration file
+		for (Class<?> clazz : getAllsuperclasses(configuredClass))
+			if (isMapped(clazz))
+				// loads all configured attributes
+				for (Attribute attribute : attributesLoad().get(clazz.getName())) {
+
+					// verifies that exists the attribute written in XML in
+					// the configured Class
+					if (!existField(clazz, attribute.getName()))
+						Error.attributeAbsent(clazz, attribute);
+
+					// if the field given in input isn't equal to xmlField
+					// continue with the cycle
+					if (attribute.getName().equals(configuredField.getValue().getName()))
+						return attribute;
+				}
+		return null;
+	}
+	/**
+	 * Enrich configuredField with get and set define in xml configuration.
+	 * @param configuredClass class of field
+	 * @param configuredField configured field
+	 * @return this
+	 */
+	public XML fillMappedField(Class<?> configuredClass, MappedField configuredField) {
+		
+		Attribute attribute = getGlobalAttribute(configuredField, configuredClass);
+		
+		if(isNull(attribute))
+			attribute = getAttribute(configuredField, configuredClass);
+		
+		if(!isNull(attribute)){
+			if(isEmpty(configuredField.getMethod()))
+				configuredField.getMethod(attribute.getGet());
+			if(isEmpty(configuredField.setMethod()))
+				configuredField.setMethod(attribute.getSet());
+		}
+		return this;
+	}
+
+	/**
+	 * Enrich targetField with get and set define in xml configuration.
+	 * @param configuredClass class of field
+	 * @param configuredField configured field
+	 * @param targetField the opposite field to enrich
+	 * @return this
+	 */
+	public XML fillOppositeField(Class<?> configuredClass, MappedField configuredField, MappedField targetField) {
+		Attribute attribute = null;
+		Global global = globalsLoad().get(configuredClass.getName());
+		if(!isNull(global)){
+			
+			String value = global.getValue();
+			if(!isEmpty(value) && value.equals(targetField.getValue().getName())){
+				String get = global.getGet();
+				String set = global.getSet();
+				if(!isNull(get) || !isNull(set))
+					attribute = new Attribute(null,new Value(global.getValue(),get,set));
+			}
+		}
+		
+		if(isNull(attribute))
+			attribute = getAttribute(configuredField, configuredClass);
+
+		if(!isNull(attribute)){
+			
+			Value value = attribute.getValue();
+			
+			// verifies value
+			if(!isNull(value))
+				if(targetField.getValue().getName().equals(value.getName())){
+					if(isEmpty(targetField.getMethod()))
+						targetField.getMethod(value.getGet());
+					if(isEmpty(targetField.setMethod()))
+						targetField.setMethod(value.getSet());
+				}
+
+			SimplyAttribute[] attributes = attribute.getAttributes();
+			
+			// verifies attributes
+			if(!isNull(attributes))
+				for (SimplyAttribute targetAttribute : attributes) 
+					if(targetField.getValue().getName().equals(targetAttribute.getName())){
+						if(isEmpty(targetField.getMethod()))
+							targetField.getMethod(targetAttribute.getGet());
+						if(isEmpty(targetField.setMethod()))
+							targetField.setMethod(targetAttribute.getSet());
+					}
+		}
+		return this;
 	}
 }

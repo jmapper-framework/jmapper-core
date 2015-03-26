@@ -26,7 +26,10 @@ import java.util.Arrays;
 public class Global {
 
 	private String value;
-	private String[] attributes;
+	private String get;
+	private String set;
+	
+	private SimplyAttribute[] attributes;
 	private Class<?>[] classes;
 	private String[] excluded;
 	
@@ -36,10 +39,22 @@ public class Global {
 	public void setValue(String value) {
 		this.value = value;
 	}
-	public String[] getAttributes() {
+	public String getGet() {
+		return get;
+	}
+	public void setGet(String get) {
+		this.get = get;
+	}
+	public String getSet() {
+		return set;
+	}
+	public void setSet(String set) {
+		this.set = set;
+	}
+	public SimplyAttribute[] getAttributes() {
 		return attributes;
 	}
-	public void setAttributes(String[] attributes) {
+	public void setAttributes(SimplyAttribute[] attributes) {
 		this.attributes = attributes;
 	}
 	public Class<?>[] getClasses() {
@@ -64,13 +79,13 @@ public class Global {
 	}
 	
 	
-	public Global(String[] attributes) {
+	public Global(SimplyAttribute[] attributes) {
 		super();
 		this.attributes = attributes;
 	}
 	
 	
-	public Global(String[] attributes, Class<?>[] classes) {
+	public Global(SimplyAttribute[] attributes, Class<?>[] classes) {
 		this(attributes);
 		this.classes = classes;
 	}
@@ -81,7 +96,7 @@ public class Global {
 		this.classes = classes;
 	}
 	
-	public Global(String[] attributes, Class<?>[] classes, String[] excluded) {
+	public Global(SimplyAttribute[] attributes, Class<?>[] classes, String[] excluded) {
 		this(attributes,classes);
 		this.excluded = excluded;
 	}
@@ -91,12 +106,19 @@ public class Global {
 		this.excluded = excluded;
 	}
 	
-	public Global(String value, String[] attributes, Class<?>[] classes,
+	public Global(String value, SimplyAttribute[] attributes, Class<?>[] classes,
 			String[] excluded) {
 		this(attributes,classes,excluded);
 		this.value = value;
 	}
 	
+	public Global(String value, String get, String set, SimplyAttribute[] attributes,
+			Class<?>[] classes, String[] excluded) {
+		this(value, attributes, classes, excluded);
+		this.get = get;
+		this.set = set;
+		
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -104,6 +126,8 @@ public class Global {
 		result = prime * result + Arrays.hashCode(attributes);
 		result = prime * result + Arrays.hashCode(classes);
 		result = prime * result + Arrays.hashCode(excluded);
+		result = prime * result + ((get == null) ? 0 : get.hashCode());
+		result = prime * result + ((set == null) ? 0 : set.hashCode());
 		result = prime * result + ((value == null) ? 0 : value.hashCode());
 		return result;
 	}
@@ -122,6 +146,16 @@ public class Global {
 			return false;
 		if (!Arrays.equals(excluded, other.excluded))
 			return false;
+		if (get == null) {
+			if (other.get != null)
+				return false;
+		} else if (!get.equals(other.get))
+			return false;
+		if (set == null) {
+			if (other.set != null)
+				return false;
+		} else if (!set.equals(other.set))
+			return false;
 		if (value == null) {
 			if (other.value != null)
 				return false;
@@ -129,6 +163,7 @@ public class Global {
 			return false;
 		return true;
 	}
+	
 	
 	
 }

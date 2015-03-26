@@ -20,7 +20,7 @@ import static com.googlecode.jmapper.config.Constants.THE_FIELD_IS_NOT_CONFIGURE
 import static com.googlecode.jmapper.util.ClassesManager.getListOfFields;
 import static com.googlecode.jmapper.util.ClassesManager.retrieveField;
 import static com.googlecode.jmapper.util.ClassesManager.verifiesAccessorMethods;
-import static com.googlecode.jmapper.util.ClassesManager.verifiesGetterMethod;
+import static com.googlecode.jmapper.util.ClassesManager.verifyGetterMethods;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -119,15 +119,21 @@ public final class OperationHandler {
 			MappedField destinationMappedField = new MappedField(destinationField);
 			MappedField sourceMappedField = new MappedField(sourceField);
 			
+			//load and check the get/set custom methods of destination and source fields
+			configReader.loadJMapAccessor(isDestConfigured?destinationMappedField:sourceMappedField, 
+										  isDestConfigured?sourceMappedField:destinationMappedField);
+			
 			verifiesAccessorMethods(destinationClass,destinationMappedField);
-			verifiesGetterMethod(sourceClass,sourceMappedField);
+			verifyGetterMethods(sourceClass,sourceMappedField);
+			
 			
 			boolean isUndefined = false;
 			
 			try{
 				isUndefined = operationAnalyzer.isUndefined(destinationField, sourceField);
 			}catch(Exception e){
-				Error.undefinedMapping(destinationField, destinationClass, sourceField, sourceClass,e.getMessage());
+				// catch and rethrown the exception with more informations.
+				Error.badConversion(destinationField, destinationClass, sourceField, sourceClass,e.getMessage());
 			}
 			
 			if(isUndefined)	

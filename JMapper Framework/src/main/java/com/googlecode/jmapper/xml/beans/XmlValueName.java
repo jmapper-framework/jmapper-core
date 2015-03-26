@@ -16,6 +16,8 @@
 
 package com.googlecode.jmapper.xml.beans;
 
+import static com.googlecode.jmapper.config.Constants.DEFAULT_ACCESSOR_VALUE;
+
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
 /**
@@ -28,4 +30,23 @@ public class XmlValueName {
 	/** name attribute of value node */
 	@XStreamAsAttribute
 	public String name;
+	/** get attribute */
+	@XStreamAsAttribute
+	public String get;
+	/** set attribute */
+	@XStreamAsAttribute
+	public String set;
+	
+	@Override
+	public String toString() {
+		
+		String result = "<value name =\""+name+"\"";
+		if(get != null && !DEFAULT_ACCESSOR_VALUE.equals(get))
+			result+=" get =\""+get+"\"";
+		
+		if(set != null && !DEFAULT_ACCESSOR_VALUE.equals(set))
+			result+=" set =\""+set+"\"";
+		
+		return result+=" />";
+	}
 }

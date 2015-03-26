@@ -15,6 +15,10 @@
  */
 package com.googlecode.jmapper.xml.beans;
 
+import static com.googlecode.jmapper.config.Constants.DEFAULT_ACCESSOR_VALUE;
+
+import com.googlecode.jmapper.annotations.JMapConversion;
+import com.googlecode.jmapper.config.Constants;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 import com.thoughtworks.xstream.converters.extended.ToAttributedValueConverter;
@@ -54,4 +58,22 @@ public class XmlConversion {
     
 	public XmlConversion() {}
 	
+	public String attributes(){
+		String result = " name= \""+name+"\"";
+		
+		if(from != null && !JMapConversion.ALL.equalsIgnoreCase(from))
+			result+=" from =\""+from+"\"";
+		
+		if(to != null && !JMapConversion.ALL.equalsIgnoreCase(to))
+			result+=" to =\""+to+"\"";
+		
+		if(type != null && !JMapConversion.Type.STATIC.name().equalsIgnoreCase(type))
+			result+=" type =\""+type+"\"";
+		
+		return result;
+	}
+	@Override
+	public String toString() {
+		return content;
+	}
 }

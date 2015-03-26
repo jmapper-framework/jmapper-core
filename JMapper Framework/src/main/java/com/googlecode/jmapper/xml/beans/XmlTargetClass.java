@@ -13,25 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.jmapper.annotations;
 
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
+package com.googlecode.jmapper.xml.beans;
 
-import com.googlecode.jmapper.IMapper;
-//TODO JMultiMap --> javaDoc
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
+
 /**
+ * This bean represents the name attribute of the class node.
  * @author Alessandro Vurro
  *
  */
+@XStreamAlias("class")
+public class XmlTargetClass {
 
-@Retention(RUNTIME)
-@Target(FIELD)
-public @interface JMultiMap {
-
-	String[] attributes() default {};
-	Class<?> targetClass() default IMapper.class;
+	/** name attribute of class node */
+	@XStreamAsAttribute
+	public String name;
 	
+	public XmlTargetClass(String name) {this.name = name;}
+
+	@Override
+	public String toString() {
+		return "<class name =\""+name+"\"/>";
+	}
 }

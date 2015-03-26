@@ -27,44 +27,24 @@ Versione 1.2.2 RILASCIATA:
 1.3.0
    
  - definizione dell xsd per content assist da eclipse
-   Possibilità di definire get e set custom, ad esempio:
-   
-   Source {
-   
-        @JMapAccessor(name = "destinationField", get = "asd", set = "qwe")
-        private int sourceField;
-		
-		int getSourceField()
-		
-		void setSourceField()
-   }
-   
-   Destination {
-   
-   		private int destinationField;
-   
-   		int asd()
-   		
-   		void qwe(int)
-   		
-   }
-   
-   Opzionale name, se non viene definito si da per scontato che il get e il set fanno riferimento al campo stesso.
-   In caso contrario è da considerare che la configurazione è relativa al campo target del mapping.
-   
-   JMapAccessor ha quindi: 
-      name (di default si prende il nome del campo)
-      get: nome del metodo di get
-      set: nome del metodo di set
-      
-	XML:
+ - Possibilità di definire get e set custom, vedi JMapAccessor file.
+
+1.4.0
+
+	Prevedere una classe custom che permetta il mapping rapido di strutture dati con bean.
+	In questo modo si da la possibilità di mappare una HashMap con un bean e viceversa
 	
-	al tag attribute aggiungo attributi get e set, sia agli attributi della classe mappata che a quelli target.
-	
-	<attribute get= "" set= "">
-	     
-	     
-	</attribute>
+1.5.0
+
+  - possibilità di definire configurazioni xml generiche senza creare classi:
+    
+     Nei casi in cui serve generalizzare una configurazione e/o conversioni,
+     non deve essere obbligatorio creare una classe in caso di configurazione XML.
+     Il template permetterà quindi di definire configurazioni e/o conversioni comuni, senza dover definire alcuna classe. 
+ 
+1.6.0
+
+  - permettere l'uso dei regex nella definizione dei nomi
      
 2.0.0
 
@@ -74,18 +54,6 @@ Versione 1.2.2 RILASCIATA:
     creare dei metodi dinamici che creano un get splittando per .
 
 2.1.0
-
-  - possibilità di definire configurazioni xml generiche senza creare classi:
-    
-     Nei casi in cui serve generalizzare una configurazione e/o conversioni,
-     non deve essere obbligatorio creare una classe in caso di configurazione XML.
-     Il template permetterà quindi di definire configurazioni e/o conversioni comuni, senza dover definire alcuna classe. 
- 
-2.2.0
-
-  - permettere l'uso dei regex nella definizione dei nomi
-     
-3.0.0
 
  - Multiple Mapping
    
@@ -137,7 +105,7 @@ Versione 1.2.2 RILASCIATA:
            che contiene la lista dei campi separati da una virgola.
            Per riflettere invece JMultiMaps basterà dichiarare piu nodi target. 
          
-3.1.0
+3.2.0
 
  - DEFAULT BEHAVIORs
   

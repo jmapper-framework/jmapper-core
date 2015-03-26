@@ -44,6 +44,7 @@ import com.googlecode.jmapper.config.Error;
 import com.googlecode.jmapper.exceptions.LoadingFileException;
 import com.googlecode.jmapper.xml.Attribute;
 import com.googlecode.jmapper.xml.Global;
+import com.googlecode.jmapper.xml.SimplyAttribute;
 import com.googlecode.jmapper.xml.beans.XmlJmapper;
 import com.thoughtworks.xstream.XStream;
 
@@ -156,14 +157,14 @@ public class FilesManager {
 			str.append("value=\""+global.getValue()+"\"");
 			before = true;
 		}
-		
-		String[] attributes = global.getAttributes();
+		//TODO fixare anche "toAnnotation" global
+		SimplyAttribute[] attributes = global.getAttributes();
 		if(attributes!=null){
 			if(before)str.append(", ");
 			else before = true;
 			str.append("attributes={");
 			for (int i = 0; i < attributes.length; i++) {
-				str.append("\""+attributes[i]+"\"");
+				str.append("\""+attributes[i].getName()+"\"");
 				if(i<attributes.length-1)str.append(", ");
 			}
 			str.append("}");
@@ -193,7 +194,7 @@ public class FilesManager {
 		}
 			
 		str.append(")");
-		// If the brackets are empty, returns @JMap
+		// If the brackets are empty, returns @JGlobalMap
 		if("@JGlobalMap()".equals(str.toString()))return "@JGlobalMap";
 		return str.toString();
 	}
@@ -203,6 +204,8 @@ public class FilesManager {
 	 * @param attribute Attribute to trasform
 	 * @return an annotation in String format
 	 */
+	//TODO fixare anche "toAnnotation" attribute, in questo caso è facile convertire anche JMapAccessor
+	// per il campo della classe stessa, piu difficile per quella target
 	private static String toAnnotation(Attribute attribute){
 		boolean before = false;
 		StringBuilder str = new StringBuilder("@JMap(");
@@ -211,13 +214,13 @@ public class FilesManager {
 			before = true;
 		}
 		
-		String[] attributes = attribute.getAttributes();
+		SimplyAttribute[] attributes = attribute.getAttributes();
 		if(attributes!=null){
 			if(before)str.append(", ");
 			else before = true;
 			str.append("attributes={");
 			for (int i = 0; i < attributes.length; i++) {
-				str.append("\""+attributes[i]+"\"");
+				str.append("\""+attributes[i].getName()+"\"");
 				if(i<attributes.length-1)str.append(", ");
 			}
 			str.append("}");

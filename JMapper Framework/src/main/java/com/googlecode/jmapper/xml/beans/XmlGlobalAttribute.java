@@ -16,6 +16,9 @@
 
 package com.googlecode.jmapper.xml.beans;
 
+import static com.googlecode.jmapper.config.Constants.DEFAULT_ACCESSOR_VALUE;
+
+import com.googlecode.jmapper.xml.SimplyAttribute;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
@@ -24,13 +27,47 @@ import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
  * @author Alessandro Vurro
  */
 @XStreamAlias("attribute")
-public class XmlAttributeName {
+public class XmlGlobalAttribute {
 
 	/** name attribute of attribute node */
 	@XStreamAsAttribute
 	public String name;
+	/** get attribute */
+	@XStreamAsAttribute
+	public String get;
+	/** set attribute */
+	@XStreamAsAttribute
+	public String set;
 	
-	public XmlAttributeName(String name) {
+	public XmlGlobalAttribute(String name) {
 		this.name = name;
+	}
+	
+	
+	public XmlGlobalAttribute(String name, String get, String set) {
+		super();
+		this.name = name;
+		this.get = get;
+		this.set = set;
+	}
+
+
+	public XmlGlobalAttribute(SimplyAttribute attribute) {
+		name = attribute.getName();
+		get = attribute.getGet();
+		set = attribute.getSet();
+	}
+
+	@Override
+	public String toString() {
+		
+		String result = "<attribute name =\""+name+"\"";
+		if(get != null && !DEFAULT_ACCESSOR_VALUE.equals(get))
+			result+=" get =\""+get+"\"";
+		
+		if(set != null && !DEFAULT_ACCESSOR_VALUE.equals(set))
+			result+=" set =\""+set+"\"";
+		
+		return result+=" />";
 	}
 }

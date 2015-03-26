@@ -13,24 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.googlecode.jmapper.annotations;
 
-package com.googlecode.jmapper.xml.beans;
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
 /**
- * This bean represents the name attribute of the class node.
+ * It permits to define more JMapAccessor at the same time.
  * @author Alessandro Vurro
  *
  */
-@XStreamAlias("class")
-public class XmlClassName {
+@Retention(RUNTIME)
+@Target({FIELD,TYPE})
+public @interface JMapAccessors {
 
-	/** name attribute of class node */
-	@XStreamAsAttribute
-	public String name;
+	JMapAccessor[] value();
 	
-	public XmlClassName(String name) {this.name = name;}
-
 }

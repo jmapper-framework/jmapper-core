@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 - 2013 Alessandro Vurro.
+ * Copyright (C) 2012 - 2015 Alessandro Vurro.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,22 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.jmapper.annotations;
+package com.googlecode.jmapper.xml.beans;
 
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
-//TODO JMultiMaps --> javaDoc
 /**
+ * This bean represents the name attribute of the attribute node.
  * @author Alessandro Vurro
- *
  */
-@Retention(RUNTIME)
-@Target(FIELD)
-public @interface JMultiMaps {
-
-	JMultiMap[] value();
+@XStreamAlias("attribute")
+public class XmlGlobalExcludedAttribute {
+	/** name attribute of class node */
+	@XStreamAsAttribute
+	public String name;
 	
+	public XmlGlobalExcludedAttribute(String name) {this.name = name;}
+
+	@Override
+	public String toString() {
+		return "<attribute name =\""+name+"\"/>";
+	}
 }

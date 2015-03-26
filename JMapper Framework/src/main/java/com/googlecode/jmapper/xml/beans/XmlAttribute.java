@@ -15,8 +15,13 @@
  */
 package com.googlecode.jmapper.xml.beans;
 
+import static com.googlecode.jmapper.config.Constants.DEFAULT_ACCESSOR_VALUE;
+
 import java.util.List;
+
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
+import com.thoughtworks.xstream.annotations.XStreamConverter;
+import com.thoughtworks.xstream.converters.extended.NamedCollectionConverter;
 
 /**
  * This bean represents the attribute node.
@@ -28,31 +33,51 @@ public class XmlAttribute {
 	/** name attribute */
 	@XStreamAsAttribute
 	public String name;
+	/** get attribute */
+	@XStreamAsAttribute
+	public String get;
+	/** set attribute */
+	@XStreamAsAttribute
+	public String set;
 	/** value node */
 	public XmlValueName value;
 	/** list of target attributes */
-	public List<XmlAttributeName> attributes;
+	@XStreamConverter(value=NamedCollectionConverter.class, useImplicitType=false,
+		      strings={"attribute"}, types={XmlGlobalAttribute.class})
+	public List<XmlGlobalAttribute> attributes;
 	/** list of target classes */
-	public List<XmlClassName> classes;
+	public List<XmlTargetClass> classes;
+	
+	public String attributes(){
+		String result = " name= \""+name+"\"";
+		
+		if(get != null && !DEFAULT_ACCESSOR_VALUE.equals(get))
+			result+=" get =\""+get+"\"";
+		
+		if(set != null && !DEFAULT_ACCESSOR_VALUE.equals(set))
+			result+=" set =\""+set+"\"";
+		
+		return result;
+	}
 	
 	@Override
 	public String toString() {
-		String str = "";
+		String result = "";
 		if(value != null)
-			str += "\n         <value name =\""+value.name+"\"/>";
-		
+			result += "\n         "+value;
+			
 		if(attributes != null){
-			str += "\n         <attributes>";
-			for (XmlAttributeName it : attributes) 
-			str += "\n            <attribute name =\""+it.name+"\"/>";
-			str += "\n         </attributes>";
+			result += "\n         <attributes>";
+			for (XmlGlobalAttribute it : attributes) 
+			result += "\n            "+it;
+			result += "\n         </attributes>";
 		}
 		if(classes != null){
-			str += "\n         <classes>";
-			for (XmlClassName it : classes) 
-			str += "\n            <class name =\""+it.name+"\"/>";
-			str += "\n         </classes>";		
+			result += "\n         <classes>";
+			for (XmlTargetClass it : classes) 
+			result += "\n            "+it;
+			result += "\n         </classes>";		
 		}
-		return str;
+		return result;
 	}
 }
