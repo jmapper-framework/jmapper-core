@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmapper xmlns="https://jmapper-framework.googlecode.com"
+	xmlns:xsi="https://jmapper-framework.googlecode.com/svn"
+	xsi:noNamespaceSchemaLocation="https://jmapper-framework.googlecode.com/svn/jmapper.xsd">
+	<class
+		name="com.googlecode.jmapper.integrationtest.configurations.bean.JMapAccDest2">
+		<attribute name="dField1" get="getDestField1" set="setDestField1">
+			<value name="sField1" get="NON_LETTO"/>
+		</attribute>
+		<attribute name="dField2" get="getDestField2" set="setDestField2">
+			<value name="sField2" get="getSSField2"/>
+		</attribute>
+	</class>
+	<class
+		name="com.googlecode.jmapper.integrationtest.configurations.bean.JMapAccSrc2">
+		<attribute name="sField1" get="getsField1" />
+	</class>
+</jmapper>

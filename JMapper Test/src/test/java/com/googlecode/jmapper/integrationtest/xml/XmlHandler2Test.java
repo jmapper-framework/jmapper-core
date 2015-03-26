@@ -18,6 +18,7 @@ import com.googlecode.jmapper.integrationtest.operations.bean.Class1;
 import com.googlecode.jmapper.integrationtest.operations.bean.Class2;
 import com.googlecode.jmapper.integrationtest.operations.bean.Class3;
 import com.googlecode.jmapper.xml.Attribute;
+import com.googlecode.jmapper.xml.Converter;
 import com.googlecode.jmapper.xml.Global;
 import com.googlecode.jmapper.xml.XML;
 import com.googlecode.jmapper.xml.XmlHandler;
@@ -55,7 +56,7 @@ public class XmlHandler2Test extends TestCase {
 			
     	try{
     		xmlHandler.addClass(AnnotatedExampleClass2.class, new Global("globalMapping"));
-		}catch(JMapperException e){	e.printStackTrace(); }
+		}catch(JMapperException e){}
 		
 		assertEquals("ERROR - XmlMappingClassExistException: AnnotatedExampleClass2 Class is present in the jmapper.xml configuration file"+newLine, log.toString());
 	}
@@ -63,14 +64,14 @@ public class XmlHandler2Test extends TestCase {
 	public void testDeleteGlobal(){
     	try{
     		xmlHandler.deleteGlobal(AnnotatedExampleClass2.class);
-		}catch(JMapperException e){	e.printStackTrace(); }
+		}catch(JMapperException e){}
 		assertNull(xml.globalsLoad().get(AnnotatedExampleClass2.class));
 	}
 	
 	public void testDeleteGlobalException(){
     	try{
     		xmlHandler.deleteGlobal(AnnotatedExampleClass2.class);
-		}catch(JMapperException e){	e.printStackTrace(); }
+		}catch(JMapperException e){}
 		assertEquals("ERROR - XmlMappingClassDoesNotExistException: AnnotatedExampleClass2 Class isn't present in the jmapper.xml configuration file"+newLine, log.toString());
 	}
 	
@@ -81,7 +82,7 @@ public class XmlHandler2Test extends TestCase {
 		Global global = new Global("prova", classes, excluded);
 		
 		String[] attributes = new String[]{"field1Class1","field1Class2","field1Class3"};
-		Attribute attribute = new Attribute("field1", attributes, classes);
+		Attribute attribute = new Attribute("field1", Converter.toTargetAttributes(attributes), classes);
 				
 		xmlHandler.addClass(AnnotatedExampleClass2.class, attribute);
 		xmlHandler.addGlobal(AnnotatedExampleClass2.class, global);
@@ -93,7 +94,7 @@ public class XmlHandler2Test extends TestCase {
 		
     	try{
     		xmlHandler.addGlobal(AnnotatedExampleClass2.class, new Global("globalMapping"));
-		}catch(JMapperException e){	e.printStackTrace(); }
+		}catch(JMapperException e){}
 		assertEquals("ERROR - XmlMappingGlobalExistException: global mapping existent from AnnotatedExampleClass2 Class"+newLine, log.toString());
 	}
 	
