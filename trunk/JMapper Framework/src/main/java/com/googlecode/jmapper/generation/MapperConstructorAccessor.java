@@ -15,7 +15,6 @@
  */
 package com.googlecode.jmapper.generation;
 
-import static com.googlecode.jmapper.util.GeneralUtility.isNotNull;
 import static com.googlecode.jmapper.util.GeneralUtility.isNull;
 
 import java.util.ArrayList;
@@ -77,7 +76,7 @@ public abstract class MapperConstructorAccessor {
 	 * @param cc config to check
 	 * @return true if config exists, false otherwise
 	 */
-	protected boolean isDeclared(ChooseConfig cc) { return isNotNull(cc); }
+	protected boolean isDeclared(ChooseConfig cc) { return !isNull(cc); }
 	
 
     /**

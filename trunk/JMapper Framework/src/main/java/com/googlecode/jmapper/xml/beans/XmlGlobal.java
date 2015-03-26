@@ -17,6 +17,9 @@ package com.googlecode.jmapper.xml.beans;
 
 import java.util.List;
 
+import com.thoughtworks.xstream.annotations.XStreamConverter;
+import com.thoughtworks.xstream.converters.extended.NamedCollectionConverter;
+
 /**
  * This bean represents the global node.
  * @author Alessandro Vurro
@@ -25,39 +28,44 @@ import java.util.List;
 public class XmlGlobal {
 	
 	/** value node */
-	public XmlValueName value;
+	public XmlGlobalValue value;
 	/** list of target attributes */
-	public List<XmlAttributeName> attributes;
+	@XStreamConverter(value=NamedCollectionConverter.class, useImplicitType=false,
+		      strings={"attribute"}, types={XmlGlobalAttribute.class})
+	public List<XmlGlobalAttribute> attributes;
 	/** list of target classes */
-	public List<XmlClassName> classes;
-	/** list of target attributes */
-	public List<XmlAttributeName> excluded;
+	public List<XmlTargetClass> classes;
+	/** list of target excluded attributes */
 	
+	@XStreamConverter(value=NamedCollectionConverter.class, useImplicitType=false,
+		      strings={"attribute"}, types={XmlGlobalExcludedAttribute.class})
+	public List<XmlGlobalExcludedAttribute> excluded;
+
 	@Override
 	public String toString() {
-		String str = "";
+		String result = "";
 		if(value != null)
-			str += "\n         <value name =\""+value.name+"\"/>";
+			result += "\n         "+value;
 		
 		if(attributes != null){
-			str += "\n         <attributes>";
-			for (XmlAttributeName it : attributes) 
-			str += "\n            <attribute name =\""+it.name+"\"/>";
-			str += "\n         </attributes>";
+			result += "\n         <attributes>";
+			for (XmlGlobalAttribute it : attributes) 
+			result += "\n            "+it;
+			result += "\n         </attributes>";
 		}
 		if(classes != null){
-			str += "\n         <classes>";
-			for (XmlClassName it : classes) 
-			str += "\n            <class name =\""+it.name+"\"/>";
-			str += "\n         </classes>";		
+			result += "\n         <classes>";
+			for (XmlTargetClass it : classes) 
+			result += "\n            "+it;
+			result += "\n         </classes>";		
 		}
 		if(excluded != null){
-			str += "\n         <excluded>";
-			for (XmlAttributeName it : excluded) 
-			str += "\n            <attribute name =\""+it.name+"\"/>";
-			str += "\n         </excluded>";		
+			result += "\n         <excluded>";
+			for (XmlGlobalExcludedAttribute it : excluded) 
+			result += "\n            "+it;
+			result += "\n         </excluded>";		
 		}
-		return str;
+		return result;
 	}
 
 }

@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.googlecode.jmapper.annotations.Annotation;
+import com.googlecode.jmapper.config.Constants;
 import com.googlecode.jmapper.config.Error;
 import com.googlecode.jmapper.enums.ChooseConfig;
 import com.googlecode.jmapper.operations.beans.MappedField;
@@ -382,7 +383,7 @@ public final class ClassesManager {
 	}
 	
 	/**
-	 * Returns a List of aClass fields and all of its super classes.
+	 * Returns a List of aClass fields and all fields of its super classes.
 	 * @param aClass class to handle
 	 * @return a list of aClass fields
 	 */
@@ -453,7 +454,7 @@ public final class ClassesManager {
 	 * @see <a href="http://en.wikipedia.org/wiki/JavaBean">javaBean conventions</a>
 	 */
 	public static void verifiesAccessorMethods(Class<?> clazz, MappedField... fields){
-		verifiesGetterMethod(clazz, fields);
+		verifyGetterMethods(clazz, fields);
 		verifySetterMethods(clazz, fields);
 	}
 	
@@ -463,27 +464,34 @@ public final class ClassesManager {
 	 * @param fields fields to control
 	 * @see <a href="http://en.wikipedia.org/wiki/JavaBean">javaBean conventions</a>
 	 */
-	public static void verifiesGetterMethod(Class<?> clazz, MappedField... fields){
+	public static void verifyGetterMethods(Class<?> clazz, MappedField... fields){
 		
 		for (MappedField field : fields) {
+			
 			String fieldName = field.getName();
 			Class<?> fieldType = field.getType();
+
+			// find custom get first
+			String customGet = field.getMethod();
+			if(!isNull(customGet) && !customGet.equals(Constants.DEFAULT_ACCESSOR_VALUE))
 				
+				try{					clazz.getMethod(customGet);
+										// store the getMethod name
+										field.getMethod(customGet);
+										continue;
+				}catch(Exception e) {	Error.customMethod("get", customGet, clazz);	}
+			
 			String methodName = getMethod(fieldType,fieldName);
 			
-			try{
-				clazz.getMethod(methodName);  
+			try{						clazz.getMethod(methodName);  
 			}catch(Exception e) {	
 					
 				if(!isBoolean(fieldType)) Error.method(methodName, fieldName, clazz);   
 				
-				try {
-					//in case of boolean field i try to find get method
-					methodName = (mGet(fieldName));
-					clazz.getMethod(methodName);
-				} catch (Exception e1) {
-					Error.method(methodName, fieldName, clazz);  
-				}
+				try {	//in case of boolean field i try to find get method
+						methodName = (mGet(fieldName));
+						clazz.getMethod(methodName);
+				} catch (Exception e1) {  Error.method(methodName, fieldName, clazz);  }
 
 			}
 			
@@ -504,8 +512,20 @@ public final class ClassesManager {
 		Class<?> fieldType = null;
 		
 		try{for (MappedField field : fields) {
+			
 				fieldName = field.getName();
 				fieldType = field.getType();
+				
+				// find custom set first
+				String customSet = field.setMethod();
+				if(!isNull(customSet) && !customSet.equals(Constants.DEFAULT_ACCESSOR_VALUE))
+							
+					try{					clazz.getMethod(customSet,fieldType);  
+											// store the setMethod name
+											field.setMethod(customSet);   
+											continue;
+					}catch(Exception e) {	Error.customMethod("set", customSet, clazz);	}
+						
 				
 				methodName = mSet(fieldName);
 				clazz.getMethod(methodName,fieldType); 

@@ -20,18 +20,20 @@ import static com.googlecode.jmapper.config.Constants.DEFAULT_FIELD_VALUE;
 import static com.googlecode.jmapper.config.Constants.THE_FIELD_IS_NOT_CONFIGURED;
 import static com.googlecode.jmapper.util.ClassesManager.existField;
 import static com.googlecode.jmapper.util.ClassesManager.getAllsuperclasses;
-import static com.googlecode.jmapper.util.GeneralUtility.isNotNull;
-import static com.googlecode.jmapper.util.GeneralUtility.isNull;
-import static com.googlecode.jmapper.util.GeneralUtility.isPresent;
-import static com.googlecode.jmapper.util.GeneralUtility.toList;
+import static com.googlecode.jmapper.util.GeneralUtility.*;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import com.googlecode.jmapper.annotations.Annotation;
 import com.googlecode.jmapper.annotations.JGlobalMap;
 import com.googlecode.jmapper.annotations.JMap;
+import com.googlecode.jmapper.operations.beans.MappedField;
 import com.googlecode.jmapper.xml.Attribute;
 import com.googlecode.jmapper.xml.Global;
+import com.googlecode.jmapper.xml.SimplyAttribute;
 import com.googlecode.jmapper.xml.XML;
 
 /**
@@ -146,26 +148,28 @@ public final class ConfigReader {
 			
 			Global global = xml.globalsLoad().get(clazz.getName());
 			
-			if(isNotNull(global) && !isPresent(global.getExcluded(), field.getName())){
+			if( !isNull(global) 
+			 && !isPresent(global.getExcluded(), field.getName())
+			 && (	   isEmpty(global.getAttributes()) 
+				    || isPresent(global.getAttributes(), new SimplyAttribute(field.getName()))
+			    )
+			  ){
 				// get the classes of the xmlField
 				List<Class<?>> classes = toList(global.getClasses());
 				
 				// if mapped field hasn't targetClass in classes parameter
 				if(!classes.isEmpty() && !classes.contains(targetClass)) continue;
 								
-				// get the attributes names of xmlField
-				List<String> attributes = toList(global.getAttributes());
-				
 				// get value of xmlField
 				String value = global.getValue();
 				
-				// If the Value and Attributes parameters are empty, 
+				// If the Value is empty, 
 				// then the name of the target field is equal to the configuredField name, 
 				// therefore we pass the default value we use to indicate equality
-				if(isNull(value) && attributes.isEmpty()) value = DEFAULT_FIELD_VALUE;
+				if(isNull(value)) value = DEFAULT_FIELD_VALUE;
 				
 				// loaded all variables, calculates and returns the correspondence
-				return getValue(attributes, classes, value, field.getName(), clazz, targetClass);
+				return getValue(Collections.<String>emptyList(), classes, value, field.getName(), clazz, targetClass);
 			}
 			  
 			// loads all configured attributes 
@@ -185,10 +189,15 @@ public final class ConfigReader {
 				if(!classes.isEmpty() && !classes.contains(targetClass)) continue;
 								
 				// get the attributes names of xmlField
-				List<String> attributes = toList(attribute.getAttributes());
+				List<String> attributes = new ArrayList<String>();
+				if(attribute.getAttributes() != null)
+					for (SimplyAttribute targetAttribute : attribute.getAttributes()) 
+						attributes.add(targetAttribute.getName());
 				
 				// get value of xmlField
-				String value = attribute.getValue();
+				String value = null;
+				if(!isNull(attribute.getValue()))
+					value = attribute.getValue().getName();
 				
 				// If the Value and Attributes parameters are empty, 
 				// then the name of the target field is equal to the configuredField name, 
@@ -207,7 +216,12 @@ public final class ConfigReader {
 		
 		JGlobalMap jglobalMap = configuredClass.getAnnotation(JGlobalMap.class);
 		//if the field configuration is defined in the global map
-		if(isNotNull(jglobalMap) && !isPresent(jglobalMap.excluded(), field.getName())){
+		if(!isNull(jglobalMap)  
+				&&	!isPresent(jglobalMap.excluded(), field.getName())
+				&&  (     isEmpty(jglobalMap.attributes()) 
+					  ||  isPresent(jglobalMap.attributes(), field.getName())
+					)
+		){
 			
 			// get the list of target classes
 			List<Class<?>> classes = toList(jglobalMap.classes());
@@ -215,14 +229,11 @@ public final class ConfigReader {
 			// if mapped field hasn't targetClass in classes parameter
 			if(!classes.isEmpty() && !classes.contains(targetClass)) return THE_FIELD_IS_NOT_CONFIGURED;
 			
-			// get the list of target attributes
-			List<String> attributes = toList(jglobalMap.attributes());
-						
 		    // get value of configuredField
 			String value = jglobalMap.value();
 						
 			// loaded all variables, calculates and returns the correspondence
-			return getValue(attributes, classes, value, field.getName(), configuredClass, targetClass);			
+			return getValue(Collections.<String>emptyList(), classes, value, field.getName(), configuredClass, targetClass);			
 		}
 		    
 		// if the XML configuration doesn't exist, checks the annotation existence
@@ -243,6 +254,30 @@ public final class ConfigReader {
 			
 		// loaded all variables, calculates and returns the correspondence
 		return getValue(attributes, classes, value, field.getName(), configuredClass, targetClass);
+		
+	}
+
+	/**
+	 * Fill fields with they custom methods.
+	 * 
+	 * @param configuredField
+	 * @param targetField
+	 */
+	public void loadJMapAccessor(MappedField configuredField, MappedField targetField) {
+		
+		//TODO settare in xml anche opposite
+		
+		// First checks xml configuration
+		xml.fillMappedField(configuredClass, configuredField)
+		   .fillMappedField(targetClass, targetField)
+		// fill target field with custom methods defined in the configured field
+		   .fillOppositeField(configuredClass, configuredField, targetField);
+
+		// If no present custom methods in XML, it checks annotations
+		Annotation.fillMappedField(configuredClass,configuredField);
+		Annotation.fillMappedField(targetClass,targetField);
+		// fill target field with custom methods defined in the configured field
+		Annotation.fillOppositeField(configuredClass,configuredField,targetField);
 		
 	}
 }

@@ -1,5 +1,8 @@
 package com.googlecode.jmapper;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 import com.googlecode.jmapper.conversions.explicit.ExplicitComplexConversion2Test;
 import com.googlecode.jmapper.conversions.explicit.ExplicitComplexConversionTest;
 import com.googlecode.jmapper.conversions.explicit.ExplicitSimpleConversion2Test;
@@ -42,8 +45,6 @@ import com.googlecode.jmapper.operations.simple.BoxingOperationTest;
 import com.googlecode.jmapper.operations.simple.UnboxingOperationTest;
 import com.googlecode.jmapper.xml.XmlConverterTest;
 import com.googlecode.jmapper.xml.util.XmlUtilityTest;
-import junit.framework.Test;
-import junit.framework.TestSuite;
 
 public class JUnitTests {
 
@@ -137,7 +138,7 @@ public class JUnitTests {
 			suite.addTestSuite(MappedListArrayOperationTest.class);
 						
 			
-		/*	Tests on Maps                          */
+		/*	Tests on Maps                           */
 			
 			// test between two HashMap<String,String>
 			suite.addTestSuite(MapOperationTest.class);
@@ -150,23 +151,24 @@ public class JUnitTests {
 			// test between mapped Maps: destination Map<MappedObject, String> and source SortedMap<TargetObject, String>
 			suite.addTestSuite(MappedMapOperation2Test.class);
 			
-		/*	Tests on Mapped Objects                */
+		/*	Tests on Mapped Objects                 */
 			
 			// test between: destination TargetObject and source MappedObject
 			suite.addTestSuite(ObjectOperationTest.class);
 			
 			
-		/*	Tests on XML methods    	       */
+		/*	Tests on XML methods    	       	    */
 			
 			// verifies JMap presence
 			suite.addTestSuite(XmlUtilityTest.class);
 			// verifies Convertion between Attribute <-> XmlAttribute and Class <-> XmlClass
 			suite.addTestSuite(XmlConverterTest.class);
 			
-		/*   Tests on general functions            */
+		/*   Tests on general functions             */
 			
 			// test on operationAnalyzer class
 			suite.addTestSuite(OperationAnalyzerTest.class);
+		
 			
 		return suite;
 	}

@@ -29,8 +29,10 @@ import com.googlecode.jmapper.config.Constants;
 public class Attribute {
 
 	private String name;
-	private String value;
-	private String[] attributes;
+	private Value value;
+	private String get;
+	private String set;
+	private SimplyAttribute[] attributes;
 	private Class<?>[] classes;
 	
 	public String getName() {
@@ -39,16 +41,28 @@ public class Attribute {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getValue() {
+	public Value getValue() {
 		return value;
 	}
-	public void setValue(String value) {
+	public void setValue(Value value) {
 		this.value = value;
 	}
-	public String[] getAttributes() {
+	public String getGet() {
+		return get;
+	}
+	public void setGet(String get) {
+		this.get = get;
+	}
+	public String getSet() {
+		return set;
+	}
+	public void setSet(String set) {
+		this.set = set;
+	}
+	public SimplyAttribute[] getAttributes() {
 		return attributes;
 	}
-	public void setAttributes(String[] attributes) {
+	public void setAttributes(SimplyAttribute[] attributes) {
 		this.attributes = attributes;
 	}
 	public Class<?>[] getClasses() {
@@ -64,15 +78,15 @@ public class Attribute {
 	 * @param name
 	 */
 	public Attribute(String name){
-		this(name,Constants.DEFAULT_FIELD_VALUE);
+		this(name,new Value(Constants.DEFAULT_FIELD_VALUE));
 	}
 
 	/**
 	 * This constructor allows you to define the configured field name and target field name.
 	 * @param name configured field name
-	 * @param value target field name
+	 * @param value target field
 	 */
-	public Attribute(String name, String value) {
+	public Attribute(String name, Value value) {
 		this.name = name;
 		this.value = value;
 	}	
@@ -83,7 +97,7 @@ public class Attribute {
 	 * @param attributes target attributes
 	 * @param classes target classes
 	 */
-	public Attribute(String name,String[] attributes, Class<?>[] classes) {
+	public Attribute(String name,SimplyAttribute[] attributes, Class<?>[] classes) {
 		this(name,attributes);
 		this.classes = classes;
 	}
@@ -92,21 +106,36 @@ public class Attribute {
 	/**
 	 * This constructor allows you to define the configured field name, the target field name, the attributes and the classes.
 	 * @param name configured field name
-	 * @param value target field name
+	 * @param value target field
 	 * @param attributes target attributes
 	 * @param classes target classes
 	 */
-	public Attribute(String name, String value, String[] attributes,Class<?>[] classes) {
+	public Attribute(String name, Value value, SimplyAttribute[] attributes,Class<?>[] classes) {
 		this(name,attributes,classes);
 		this.value = value;
 	}
 
+	
+	/**
+	 * This constructor allows you to define the configured field name, the target field name, get and set custom for this field, the attributes and the classes.
+	 * @param name configured field name
+	 * @param value target field
+	 * @param get get custom for this attribute
+	 * @param set set custom for this attribute
+	 * @param attributes target attributes
+	 * @param classes target classes
+	 */
+	public Attribute(String name, Value value, String get, String set,	SimplyAttribute[] attributes, Class<?>[] classes) {
+		this(name, value, attributes, classes);
+		this.get = get;
+		this.set = set;
+	}
 	/**
 	 * This constructor allows you to define the configured field name and the attributes. 
 	 * @param name configured field name
 	 * @param attributes target attributes
 	 */
-	public Attribute(String name, String[] attributes) {
+	public Attribute(String name, SimplyAttribute[] attributes) {
 		this.name = name;
 		this.attributes = attributes;
 	}

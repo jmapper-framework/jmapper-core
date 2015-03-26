@@ -338,15 +338,6 @@ public final class GeneralUtility {
 	}
 	
 	/**
-	 * Returns true if the input given as input isn't null, false otherwise.
-	 * @param obj object to check
-	 * @return true if the input given as input isn't null, false otherwise
-	 */
-	public static boolean isNotNull(Object obj){
-		return obj != null;
-	}
-	
-	/**
 	 * Replaces the variables present in the text and returns the result.<br>
 	 * Each key will be added to the $ prefix.
 	 * @param text text to edit

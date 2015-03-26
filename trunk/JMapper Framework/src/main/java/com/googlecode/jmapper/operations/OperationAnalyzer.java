@@ -94,9 +94,7 @@ public final class OperationAnalyzer {
 		return new InfoOperation().setInstructionType(OperationType.UNDEFINED);
 	}
 	
-	/**
-	 * @return the info obtained
-	 */
+	/**@return the info obtained */
 	public InfoOperation getInfo(){
 		return info;
 	}

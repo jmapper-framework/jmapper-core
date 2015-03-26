@@ -54,11 +54,12 @@ public class XmlClass {
 		
 		if(global != null)
 			str += "\n      <global>"+global+"\n      </global>";
+		
 		if(attributes != null) for (XmlAttribute it : attributes) 
-			str += "\n      <attribute name=\""+it.name+"\">"+it+"\n      </attribute>";
+			str += "\n      <attribute "+ it.attributes()+">"+it+"\n      </attribute>";
 				
 		if(conversions != null) for (XmlConversion it : conversions) 
-			str += "\n      <conversion name=\""+it.name+"\" from=\""+it.from+"\" to=\""+it.to+"\" type=\""+it.type+"\">"+it.content+"\n      </conversion>";
+			str += "\n      <conversion "+it.attributes()+">"+it+"\n      </conversion>";
 		
 		return str;
 	}

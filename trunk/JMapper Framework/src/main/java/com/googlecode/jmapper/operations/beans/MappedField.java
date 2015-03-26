@@ -17,6 +17,9 @@ package com.googlecode.jmapper.operations.beans;
 
 import java.lang.reflect.Field;
 
+import com.googlecode.jmapper.config.Constants;
+import com.googlecode.jmapper.enums.ConfigurationType;
+
 /**
  * Wrapper used for a custom definition of "get" and "set" methods for a specific Field.
  * 
@@ -28,10 +31,13 @@ public class MappedField {
 	private final Field field;
 	private String getMethod;
 	private String setMethod;
+	private ConfigurationType configurationType;
 	
 	public MappedField(Field field) {
 		super();
 		this.field = field;
+		getMethod = Constants.DEFAULT_ACCESSOR_VALUE;
+		setMethod = Constants.DEFAULT_ACCESSOR_VALUE;
 	}
 	
 	public Field getValue(){
@@ -61,5 +67,15 @@ public class MappedField {
 	public void setMethod(String setMethod){
 		this.setMethod = setMethod;
 	}
+
+	public ConfigurationType getConfigurationType() {
+		return configurationType;
+	}
+
+	public void setConfigurationType(ConfigurationType configurationType) {
+		this.configurationType = configurationType;
+	}
+	
+	
 }
 

@@ -19,12 +19,15 @@ import static com.googlecode.jmapper.generation.MapperGenerator.generateMapperCl
 import static com.googlecode.jmapper.util.ClassesManager.mapperClassName;
 import static com.googlecode.jmapper.xml.XmlBuilder.loadXml;
 import static com.googlecode.jmapper.util.GeneralUtility.isNull;
+
 import java.util.HashSet;
 import java.util.Set;
+
 import com.googlecode.jmapper.IMapper;
 import com.googlecode.jmapper.config.Error;
 import com.googlecode.jmapper.enums.ChooseConfig;
 import com.googlecode.jmapper.generation.beans.Method;
+
 import javassist.NotFoundException;
 
 /**
@@ -68,16 +71,19 @@ public class MapperBuilder {
 	/** @return the generated mapper class */
 	public <D, S> Class<IMapper<D, S>> generate() throws NotFoundException,
 			Exception {
+		
 		// if defined the dynamic methods are treated differently
+		// a reference to this list is passed to the MapperConstructor and filled recursively
 		Set<Method> dynamicMethodsToWrite = new HashSet<Method>();
 
-		Class<IMapper<D, S>> mapperClass = (Class<IMapper<D, S>>) generateMapperClass(
-				new MapperConstructor(destination, source, config,loadXml(path).atRuntime(), dynamicMethodsToWrite)
-				       .setMapperName(mapperClassName(destination, source, path))
-				       , dynamicMethodsToWrite);
+		MapperConstructor mapperConstructor = new MapperConstructor(destination, source, config,loadXml(path).atRuntime(), dynamicMethodsToWrite)
+	       											 .setMapperName(mapperClassName(destination, source, path));
+	    
+		// the dynamic methods are written and added directly to the Mapper Class
+		Class<IMapper<D, S>> mapperClass = (Class<IMapper<D, S>>) generateMapperClass(mapperConstructor, dynamicMethodsToWrite);
 
-		// a new instance is created to check the mapper implementation
 		try {
+			// a new instance is created to check the mapper implementation
 			mapperClass.newInstance();
 		} catch (Throwable e) {
 			if (isNull(path))	Error.illegalCode(destination, source, e);

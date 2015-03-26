@@ -6,13 +6,13 @@ import com.googlecode.jmapper.xml.Converter;
 import com.googlecode.jmapper.xml.beans.XmlAttribute;
 import com.googlecode.jmapper.xml.beans.XmlClass;
 import com.googlecode.jmapper.xml.beans.XmlConversion;
-
 import com.googlecode.jmapper.bean.AnnotatedClass;
 import com.googlecode.jmapper.bean.ComplexClass;
 import com.googlecode.jmapper.bean.Fields;
 import com.googlecode.jmapper.bean.MappedObject;
 import com.googlecode.jmapper.bean.MappedObject3;
 import com.googlecode.jmapper.bean.SimpleClass;
+
 import junit.framework.TestCase;
 
 public class XmlConverterTest extends TestCase{
@@ -54,7 +54,7 @@ public class XmlConverterTest extends TestCase{
 		Global global = Converter.toGlobal(xmlClass.global);
 		
 		assertEquals(global.getClasses()[0].getName(), xmlClass.global.classes.get(0).name);
-		assertEquals(global.getAttributes()[0], xmlClass.global.attributes.get(0).name);
+		assertEquals(global.getAttributes()[0].getName(), xmlClass.global.attributes.get(0).name);
 		
 	}
 	
@@ -86,14 +86,14 @@ public class XmlConverterTest extends TestCase{
 		field2(attribute);
 		
 		// FROM ATTRIBUTES
-		attribute = new Attribute("field", "", new String[]{"","targetField2"}, new Class[]{SimpleClass.class,ComplexClass.class});
+		attribute = new Attribute("field", new Value(""), Converter.toTargetAttributes(new String[]{"","targetField2"}), new Class[]{SimpleClass.class,ComplexClass.class});
 		xmlAttribute = Converter.toXmlAttribute(attribute);
 		field1(xmlAttribute);
 		
 		attribute = Converter.toAttribute(xmlAttribute);
 		field1(attribute);
 		
-		attribute = new Attribute("field2", "targetField1");
+		attribute = new Attribute("field2", new Value("targetField1"));
 		xmlAttribute = Converter.toXmlAttribute(attribute);
 		field2(xmlAttribute);
 		
@@ -128,12 +128,12 @@ public class XmlConverterTest extends TestCase{
 	private void field1(Attribute attribute){
 		assertEquals("field", attribute.getName());
 		assertNotNull(attribute.getValue());
-		assertEquals("field",attribute.getValue());
+		assertEquals("field",attribute.getValue().getName());
 		
-		assertEquals("field", attribute.getAttributes()[0]);
+		assertEquals("field", attribute.getAttributes()[0].getName());
 		assertEquals(SimpleClass.class,attribute.getClasses()[0]);
 		
-		assertEquals("targetField2", attribute.getAttributes()[1]);
+		assertEquals("targetField2", attribute.getAttributes()[1].getName());
 		assertEquals(ComplexClass.class,attribute.getClasses()[1]);
 	}
 	
@@ -141,7 +141,7 @@ public class XmlConverterTest extends TestCase{
 		assertEquals("field2", attribute.getName());
 		
 		assertNotNull(attribute.getValue());
-		assertEquals("targetField1", attribute.getValue());
+		assertEquals("targetField1", attribute.getValue().getName());
 		
 		assertNull(attribute.getAttributes());
 		assertNull(attribute.getClasses());

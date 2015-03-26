@@ -16,22 +16,27 @@
 package com.googlecode.jmapper.annotations;
 
 import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import com.googlecode.jmapper.IMapper;
-//TODO JMultiMap --> javaDoc
+import com.googlecode.jmapper.config.Constants;
+
 /**
+ * JMapAccessor is the annotation that allows you to specify getter and setter of a field, 
+ * it has three fields: name, get and set.<br>
+ * <b>name</b> identifies the field name.<br>
+ * <b>get</b> the get method name.<br>
+ * <b>set</b> the set method name.
  * @author Alessandro Vurro
  *
  */
-
 @Retention(RUNTIME)
-@Target(FIELD)
-public @interface JMultiMap {
-
-	String[] attributes() default {};
-	Class<?> targetClass() default IMapper.class;
-	
+@Target({FIELD,TYPE})
+public @interface JMapAccessor {
+	String name() default Constants.DEFAULT_FIELD_VALUE;
+	String get() default Constants.DEFAULT_ACCESSOR_VALUE;
+	String set() default Constants.DEFAULT_ACCESSOR_VALUE;
 }
