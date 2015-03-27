@@ -18,7 +18,7 @@ Added the XML Schema relative to xml configuration.
 Now you can define get/set custom methods!.
 For more information see relative wiki page.
 
-*XmlHandler*
+*!XmlHandler*
 
 Added xsd declaration in generated xml.
 
