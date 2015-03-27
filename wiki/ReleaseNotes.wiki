@@ -1,4 +1,30 @@
 = Release Notes =
+== 1.3.0 - 27 March 2015 ==
+
+*XSD for XML configuration*
+
+Added the XML Schema relative to xml configuration.
+
+{{{
+<?xml version="1.0" encoding="UTF-8"?>
+<jmapper xmlns="https://jmapper-framework.googlecode.com"
+	xmlns:xsi="https://jmapper-framework.googlecode.com/svn"
+	xsi:noNamespaceSchemaLocation="https://jmapper-framework.googlecode.com/svn/jmapper.xsd">
+</jmapper>
+}}}
+
+*JMapAccessor*
+
+Now you can define get/set custom methods!.
+For more information see relative wiki page.
+
+*XmlHandler*
+
+Added xsd declaration in generated xml.
+
+*Exception rethrown*
+
+The internal exceptions are wrapped as RuntimeException and relaunched.
 
 == 1.2.2 - 15 December 2014 ==
 
