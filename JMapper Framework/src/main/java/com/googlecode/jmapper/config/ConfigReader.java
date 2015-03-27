@@ -265,8 +265,6 @@ public final class ConfigReader {
 	 */
 	public void loadJMapAccessor(MappedField configuredField, MappedField targetField) {
 		
-		//TODO settare in xml anche opposite
-		
 		// First checks xml configuration
 		xml.fillMappedField(configuredClass, configuredField)
 		   .fillMappedField(targetClass, targetField)
