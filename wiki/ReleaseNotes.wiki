@@ -15,7 +15,7 @@ Added the XML Schema relative to xml configuration.
 
 *JMapAccessor*
 
-Now you can define get/set custom methods! With @JMapAccessor and get and set attribute.<hr>For more information see relative wiki page.
+Now you can define get/set custom methods! With @JMapAccessor and get and set attribute.<br/>For more information see relative wiki page.
 
 *!XmlHandler*
 
