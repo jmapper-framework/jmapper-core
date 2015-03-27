@@ -24,7 +24,7 @@ Added xsd declaration in generated xml.
 
 *Exception rethrown*
 
-The internal exceptions are wrapped as RuntimeException and relaunched.
+The internal exceptions are wrapped as !RuntimeException and relaunched.
 
 == 1.2.2 - 15 December 2014 ==
 
