@@ -90,7 +90,7 @@ Since version 1.3.0 you can validate and use content assist for the XML configur
  -->
         <xs:complexType name="jmapperGlobal">
                 <xs:all>
-      <xs:element name="value" type="targetAttribute"/>
+                        <xs:element name="value" type="targetAttribute"/>
                         <xs:element name="attributes" type="jmapperTargetAttributes" minOccurs="0"/>
                         <xs:element name="classes" type="jmapperClasses" minOccurs="0"/>
                         <xs:element name="excluded" type="jmapperExcluded" minOccurs="0"/>
