@@ -8,10 +8,10 @@ In some cases we have the need to map two or more fields toward the same field.<
        
 The annotation to use is {{{@JGlobalMap}}} and must be applied to the class, it has the parameters: 
 
-  - {{{value}}}, it permits to define the target name
-  - {{{classes}}}, are the classes to which the field must belong
-  - {{{attributes}}},are the fields of the current class that will be part of the mapping
-  - {{{excluded}}}, are the fields of the current class that will be excluded from mapping
+  * {{{value}}}, it permits to define the target name
+  * {{{classes}}}, are the classes to which the field must belong
+  * {{{attributes}}},are the fields of the current class that will be part of the mapping
+  * {{{excluded}}}, are the fields of the current class that will be excluded from mapping
            
 === 1° example ===
            
