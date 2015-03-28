@@ -32,6 +32,7 @@ class Bean {
 With @JGlobalMap:
 {{{
 @JGlobalMap(value="properties",excluded={"field3"})
+// or @JGlobalMap(value="properties",attributes={"field1","field2"})
 class Bean {
            
    String field1;
