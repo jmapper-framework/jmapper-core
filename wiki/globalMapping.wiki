@@ -6,7 +6,12 @@ In some cases we have the need to map two or more fields toward the same field.<
         
 == Annotation ==
        
-The annotation to use is {{{@JGlobalMap}}} and must be applied to the class, it has the same parameters of {{{@JMap}}} with more one: {{{excluded}}}, with it we can exclude the  fields which do not fall in this mapping.
+The annotation to use is {{{@JGlobalMap}}} and must be applied to the class, it has the parameters: 
+
+  - {{{value}}}, it permits to define the target name
+  - {{{classes}}}, are the classes to which the field must belong
+  - {{{attributes}}},are the fields of the current class that will be part of the mapping
+  - {{{excluded}}}, are the fields of the current class that will be excluded from mapping
            
 === 1° example ===
            
