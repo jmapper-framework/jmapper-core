@@ -1,3 +1,15 @@
 #summary How to define get and set custom.
 
 = Custom accessor methods =
+
+It is not always possible to comply with the get and set prefixes, for this reason we have introduced this new important feature.<br>We have two possibility: with annotation @JMapConversion and in XML with attributes get and set.
+
+== Annotation ==
+
+@JMapConversion is possibile to use on field and on class (the meaning changes depending on the position).
+
+@JMapConversion containts three parameters:
+
+ * <b>name</b>: (Optional) the name of the field that has custom accessor methods, if you not define it, JMapper assumes that the custom methods refer to the field itself
+ * <b>get</b>: (Optional) Permits to define a custom get method
+ * <b>set</b>: (Optional) Permits to define a custom set method
