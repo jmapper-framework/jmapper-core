@@ -1,0 +1,3 @@
+#summary How to define get and set custom.
+
+= Custom accessor methods =
