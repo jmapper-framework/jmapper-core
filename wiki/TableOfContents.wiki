@@ -3,6 +3,7 @@
    * How to map
      * [basicMapping Basic Mapping]
      * [globalMapping Global Mapping]
+     * [CustomAccessors Custom accessor methods]
    * XML
      * [XSD Xml Schema]
      * [XmlHandling Xml handling]
