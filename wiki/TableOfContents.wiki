@@ -4,6 +4,7 @@
      * [basicMapping Basic Mapping]
      * [globalMapping Global Mapping]
    * XML
+     * [XSD Xml Schema]
      * [XmlHandling Xml handling]
    * Relations
      * [ImplicitRelations Implicit relations]
