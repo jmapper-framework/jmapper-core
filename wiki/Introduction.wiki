@@ -27,7 +27,7 @@ Before describing the features of the framework is good to do a little introduct
 The configurations are associated with the instance variables and may be present in the Destination and Source, then we will call *target field* the target field of the configuration and *mapped field* the field that contains the configuration.
 As a prerequisite classes used for mapping must comply with the [http://en.wikipedia.org/wiki/JavaBean Javabean conventions].
 
- Since <b>1.3.0</b> version it's possible define get and set custom.<br> For more info go to [CustomAccessors Custom accessor methods] wiki page.
+ Since <b>1.3.0</b> version it's possible define get and set custom methods.<br> For more info go to [CustomAccessors wiki] page.
 
 Below shows the classes that will be used in the following examples:
 {{{
