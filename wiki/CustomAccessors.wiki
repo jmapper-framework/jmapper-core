@@ -169,3 +169,5 @@ Class SrcBean {
    }
 }
 }}}
+
+<b>IMPORTANT!</b><i>@JMapAccessor on class has major visibility of @JMapAccessor on field.</i>
