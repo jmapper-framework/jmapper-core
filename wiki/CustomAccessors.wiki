@@ -94,7 +94,7 @@ Class SrcBean {
 }
 }}}
 
-<b>IMPORTANT!</b> The definition of custom accessor methods for the opposite field has less visibility of the same definition on the field itself.
+<b>   IMPORTANT!</b><i>The definition of custom accessor methods for the opposite field has less visibility of the same definition on the field itself.</i>
 
 Example:
 
@@ -170,4 +170,4 @@ Class SrcBean {
 }
 }}}
 
-<b>IMPORTANT!</b><i>@JMapAccessor on class has major visibility of @JMapAccessor on field.</i>
+<b>   IMPORTANT!</b><i>@JMapAccessor on class has major visibility of @JMapAccessor on field.</i>
