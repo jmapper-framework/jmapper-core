@@ -117,7 +117,7 @@ public class Annotation {
 	 * @param fieldName name to find
 	 * @return
 	 */
-	public static JMapAccessor getFieldAccessors(Field field, String fieldName){
+	private static JMapAccessor getFieldAccessors(Field field, String fieldName){
 		return getAccessor(field.getAnnotations(),fieldName);
 	}
 	
