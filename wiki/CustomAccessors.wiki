@@ -93,3 +93,42 @@ Class SrcBean {
    }
 }
 }}}
+
+<b>IMPORTANT!</b> The definition of custom accessor methods for the opposite field has less visibility of the same definition on the field itself.
+
+Example:
+
+=== 4° example ===
+{{{
+Class DestBean {
+
+   @JMapAccessors({
+      @JMapAccessor(name="srcField",get="UNREAD",set="SpecialSetField")
+      @JMapAccessor(get="SpecialGetField",set="SpecialSetField")
+   })
+   @JMap("srcField")
+   String destField;
+   
+   public String SpecialGetField(){
+      return destField;
+   }
+
+   public void SpecialSetField(String field){
+      this.destField= field;
+   }
+}
+
+Class SrcBean {
+
+   @JMapAccessor(get="SpecialGetField")
+   String srcField;
+
+   public String SpecialGetField(){
+      return srcField;
+   }
+
+   public void SpecialSetField(String field){
+      this.srcField= field;
+   }
+}
+}}}
