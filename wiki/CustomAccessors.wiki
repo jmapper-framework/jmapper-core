@@ -49,11 +49,11 @@ Class SrcBean {
    String srcField;
 
    public String SpecialGetField(){
-      return field;
+      return srcField;
    }
 
    public void SpecialSetField(String field){
-      this.field = field;
+      this.srcField= field;
    }
 }
 }}}
@@ -72,11 +72,11 @@ Class DestBean {
    String destField;
    
    public String SpecialGetField(){
-      return field;
+      return destField;
    }
 
    public void SpecialSetField(String field){
-      this.field = field;
+      this.destField= field;
    }
 }
 
@@ -85,11 +85,11 @@ Class SrcBean {
    String srcField;
 
    public String SpecialGetField(){
-      return field;
+      return srcField;
    }
 
    public void SpecialSetField(String field){
-      this.field = field;
+      this.srcField= field;
    }
 }
 }}}
