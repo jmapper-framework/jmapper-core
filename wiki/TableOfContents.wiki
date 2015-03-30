@@ -5,6 +5,7 @@
      * [globalMapping Global Mapping]
      * [CustomAccessors Custom accessor methods]
         * [CustomAccessors#Annotation Annotation]
+        * [CustomAccessors#XML XML]
    * XML
      * [XSD Xml Schema]
      * [XmlHandling Xml handling]
