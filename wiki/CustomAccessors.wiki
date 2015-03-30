@@ -1,6 +1,6 @@
 #summary How to define get and set custom.
 
-= Custom accessor methods =
+= Custom accessor methods = _since 1.3.0 version_
 
 It is not always possible to comply with the get and set prefixes, for this reason we have introduced this new important feature.<br>We have two possibility: with annotation @JMapConversion and in XML with attributes get and set.
 
