@@ -13,7 +13,6 @@ It is not always possible to comply with the get and set prefixes, for this reas
  * <b>get</b>: (Optional) Permits to define a custom get method
  * <b>set</b>: (Optional) Permits to define a custom set method
 
-=== 1° example ===
 {{{
 Class Bean {
 
@@ -34,7 +33,6 @@ Class Bean {
 
 As you can see custom accessor methods are easy to use, in this case we want to define get/set methods for that field for this reason the name is optional, by default Jmapper associates custom methods to the field that declares it.<br>You can use @JMapAccessor to define custom methods for the opposite field, follow an example:
 
-=== 2° example ===
 {{{
 Class DestBean {
 
@@ -60,7 +58,6 @@ Class SrcBean {
 
 You can do the two operations together, with @JMapAccessors:
 
-=== 3° example ===
 {{{
 Class DestBean {
 
@@ -97,8 +94,6 @@ Class SrcBean {
    <b>IMPORTANT!</b>   <i>The definition of custom accessor methods for the opposite field has less visibility of the same definition on the field itself.</i>
 
 Example:
-
-=== 4° example ===
 {{{
 Class DestBean {
 
@@ -135,7 +130,6 @@ Class SrcBean {
 
 You can do the same things on class:
 
-=== 5° example ===
 {{{
    @JMapAccessors({
       @JMapAccessor(name="srcField",get="UNREAD",set="SpecialSetField")
@@ -171,3 +165,39 @@ Class SrcBean {
 }}}
 
    <b>IMPORTANT!</b>   <i>@JMapAccessor on class has major visibility of @JMapAccessor on field.</i>
+
+== XML ==
+
+In xml configuration you can add the get/set custom methods in the attribute node, both in the current attribute and in the target attribute:
+
+{{{
+...
+<class  name="destBean">
+   <attribute name="dField" get="getDestField" set="setDestField">
+      <value name="sField" get="UNREAD" set="setSrcField"/>
+   </attribute>
+</class>
+<class  name="srcBean">
+   <attribute name="sField" get="getsField" />
+</class>
+...
+}}}
+
+   <b>IMPORTANT!</b>   <i>The definition of custom accessor methods for the opposite field has less visibility of the same definition on the field itself.</i>
+
+You can do the same work with global node:
+{{{
+...
+<class  name="DestBean">
+   <global>
+      <value name="sField" get="getSrcField" />
+      <attributes>
+         <attribute name="dField" get="getDestField" set="setDestField"/>
+      </attributes>
+   </global>
+   <attribute name="dField" get="UNREAD" set="UNREAD"/>
+</class>
+...
+}}}
+
+   <b>IMPORTANT!</b>   <i>The custom methods definition on global node has major visibility of it on attribute node.</i>
