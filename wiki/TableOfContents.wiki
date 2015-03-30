@@ -4,6 +4,7 @@
      * [basicMapping Basic Mapping]
      * [globalMapping Global Mapping]
      * [CustomAccessors Custom accessor methods]
+        * [CustomAccessors#Annotation Annotation]
    * XML
      * [XSD Xml Schema]
      * [XmlHandling Xml handling]
