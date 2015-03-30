@@ -132,3 +132,40 @@ Class SrcBean {
    }
 }
 }}}
+
+You can do the same things on class:
+
+=== 5° example ===
+{{{
+   @JMapAccessors({
+      @JMapAccessor(name="srcField",get="UNREAD",set="SpecialSetField")
+      @JMapAccessor(name="destField",get="SpecialGetField",set="SpecialSetField")
+   })
+   Class DestBean {
+
+   @JMap("srcField")
+   String destField;
+   
+   public String SpecialGetField(){
+      return destField;
+   }
+
+   public void SpecialSetField(String field){
+      this.destField= field;
+   }
+}
+
+Class SrcBean {
+
+   @JMapAccessor(get="SpecialGetField")
+   String srcField;
+
+   public String SpecialGetField(){
+      return srcField;
+   }
+
+   public void SpecialSetField(String field){
+      this.srcField= field;
+   }
+}
+}}}
