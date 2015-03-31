@@ -16,8 +16,10 @@ import com.googlecode.jmapper.integrationtest.configurations.bean.JMapAccClassDe
 import com.googlecode.jmapper.integrationtest.configurations.bean.JMapAccClassSrc;
 import com.googlecode.jmapper.integrationtest.configurations.bean.JMapAccDest;
 import com.googlecode.jmapper.integrationtest.configurations.bean.JMapAccDest2;
+import com.googlecode.jmapper.integrationtest.configurations.bean.JMapAccDest3;
 import com.googlecode.jmapper.integrationtest.configurations.bean.JMapAccSrc;
 import com.googlecode.jmapper.integrationtest.configurations.bean.JMapAccSrc2;
+import com.googlecode.jmapper.integrationtest.configurations.bean.JMapAccSrc3;
 import com.googlecode.jmapper.integrationtest.configurations.bean.Source;
 
 public class JMapAccessorTest extends TestCase {
@@ -73,19 +75,27 @@ public class JMapAccessorTest extends TestCase {
 	 * Test su accessor definiti per il target (con caso di utilizzo e non)
 	 */
 	public void testJMapAccessorXmlUse(){
-//		JMapper<JMapAccDest2, JMapAccSrc2> mapper = new JMapper<JMapAccDest2, JMapAccSrc2>(JMapAccDest2.class, JMapAccSrc2.class,ChooseConfig.DESTINATION,"configurations/accessors.xml");
-//		JMapAccDest2 destination = mapper.getDestination(new JMapAccSrc2("sourceF1", "sourceF2"));
-//		assertEquals(destination.getDestField1(), "sourceF1");
-//		assertEquals(destination.getDestField2(), "sourceF2");
-		
-		JMapper<JMapAccDest2, JMapAccSrc2> mapper = new JMapper<JMapAccDest2, JMapAccSrc2>(JMapAccDest2.class, JMapAccSrc2.class,ChooseConfig.DESTINATION,"configurations/accessors2.xml");
+		JMapper<JMapAccDest2, JMapAccSrc2> mapper = new JMapper<JMapAccDest2, JMapAccSrc2>(JMapAccDest2.class, JMapAccSrc2.class,ChooseConfig.DESTINATION,"configurations/accessors.xml");
 		JMapAccDest2 destination = mapper.getDestination(new JMapAccSrc2("sourceF1", "sourceF2"));
+		assertEquals(destination.getDestField1(), "sourceF1");
+		assertEquals(destination.getDestField2(), "sourceF2");
+		
+		mapper = new JMapper<JMapAccDest2, JMapAccSrc2>(JMapAccDest2.class, JMapAccSrc2.class,ChooseConfig.DESTINATION,"configurations/accessors2.xml");
+		destination = mapper.getDestination(new JMapAccSrc2("sourceF1", "sourceF2"));
 		assertEquals(destination.getDestField1(), "sourceF1");
 		assertEquals(destination.getDestField2(), "sourceF2");
 	}
 	
-	//TODO Test su maggiore visibilità di XML di Annotation
-	
+	/**
+	 * Test su campo mappato e campo target con stesso nome
+	 */
+	public void testComplexJMapAccessorUse(){
+		
+		JMapper<JMapAccDest3, JMapAccSrc3> mapper = new JMapper<JMapAccDest3, JMapAccSrc3>(JMapAccDest3.class, JMapAccSrc3.class, ChooseConfig.DESTINATION);
+		JMapAccDest3 destination = mapper.getDestination(new JMapAccSrc3("sourceF1"));
+		assertEquals(destination.getDestField(), "sourceF1");
+		
+	}
 	/**
 	 * Test sul messaggio di errore in caso di metodo custom errato
 	 */
