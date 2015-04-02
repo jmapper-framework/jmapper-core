@@ -46,6 +46,7 @@
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
+    <xs:attribute name="avoidSet" type="xs:boolean" default="false"/> 	  
 	</xs:complexType>
 	
 <!-- 
