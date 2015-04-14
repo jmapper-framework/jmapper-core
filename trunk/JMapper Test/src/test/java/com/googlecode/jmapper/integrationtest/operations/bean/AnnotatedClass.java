@@ -5,13 +5,10 @@ import com.googlecode.jmapper.annotations.JMap;
 
 public class AnnotatedClass {
 
-    @JMap(
-    		
-    		attributes={"field1Class1","field1Class2","field1Class3"}, 
+    @JMap(	attributes={"field1Class1","field1Class2","field1Class3"}, 
     		classes={Class1.class,Class2.class,Class3.class})
 	private String field1;
-    @JMap(
-    		attributes={"field2Class1","field2Class2","field2Class3"}, classes={Class1.class,Class2.class,Class3.class})
+    @JMap(  attributes={"field2Class1","field2Class2","field2Class3"}, classes={Class1.class,Class2.class,Class3.class})
 	private String field2;
     @JMap(attributes={"field3Class1","field3Class2","field3Class3"}, classes={Class1.class,Class2.class,Class3.class})
 	private String field3;
