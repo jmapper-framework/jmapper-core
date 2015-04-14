@@ -128,7 +128,7 @@ public abstract class AComplexOperation extends AGeneralOperation{
 										      sharedCode(mapping)	   ,newLine,
 										"   }");
 			
-			if(!destinationType().isPrimitive())
+			if(!destinationType().isPrimitive() && !avoidSet)
 					write.append(write("else{"					   ,newLine,
 										 setDestination("null")    ,newLine,
 										"   }"					   ,newLine));

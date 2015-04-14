@@ -15,10 +15,8 @@
  */
 package com.googlecode.jmapper.xml.beans;
 
-import static com.googlecode.jmapper.config.Constants.DEFAULT_ACCESSOR_VALUE;
-
+import static com.googlecode.jmapper.util.GeneralUtility.isNull;
 import com.googlecode.jmapper.annotations.JMapConversion;
-import com.googlecode.jmapper.config.Constants;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 import com.thoughtworks.xstream.converters.extended.ToAttributedValueConverter;
@@ -43,17 +41,21 @@ public class XmlConversion {
 	/** conversion method type        */
 	@XStreamAsAttribute
 	public String type;
+	/** true if set must be avoid     */
+	@XStreamAsAttribute
+	public boolean avoidSet;
 	/** conversion method content     */
 	public String content;
 
     public XmlConversion(String name, String from, String to, String type,
-			String content) {
+			String content, boolean avoidSet) {
 		super();
 		this.name = name;
 		this.from = from;
 		this.to = to;
 		this.type = type;
 		this.content = content;
+		this.avoidSet = avoidSet;
 	}
     
 	public XmlConversion() {}
@@ -61,15 +63,17 @@ public class XmlConversion {
 	public String attributes(){
 		String result = " name= \""+name+"\"";
 		
-		if(from != null && !JMapConversion.ALL.equalsIgnoreCase(from))
+		if(!isNull(from) && !JMapConversion.ALL.equalsIgnoreCase(from))
 			result+=" from =\""+from+"\"";
 		
-		if(to != null && !JMapConversion.ALL.equalsIgnoreCase(to))
+		if(!isNull(to) && !JMapConversion.ALL.equalsIgnoreCase(to))
 			result+=" to =\""+to+"\"";
 		
-		if(type != null && !JMapConversion.Type.STATIC.name().equalsIgnoreCase(type))
+		if(!isNull(type) && !JMapConversion.Type.STATIC.name().equalsIgnoreCase(type))
 			result+=" type =\""+type+"\"";
 		
+		if(avoidSet)
+			result+=" avoidSet =\""+avoidSet+"\"";
 		return result;
 	}
 	@Override

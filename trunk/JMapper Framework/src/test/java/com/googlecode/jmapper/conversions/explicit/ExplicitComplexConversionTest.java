@@ -41,7 +41,7 @@ public class ExplicitComplexConversionTest extends AOperation<ConversionOperatio
 	protected void setUp() {
 		super.setUp();
 		try { operation.setDestinationClass(ArrayList.class);
-		ConversionMethod method = new ConversionMethod("conversion", new String[]{"aStringList2"}, new String[]{"aStringList"}, Type.STATIC,ParameterNumber.ONE, "");
+		ConversionMethod method = new ConversionMethod("conversion", new String[]{"aStringList2"}, new String[]{"aStringList"}, Type.STATIC,ParameterNumber.ONE, "",true);
 			  operation.setConversionMethod(method)
 			           .setMemberShip(Membership.DESTINATION);
 		} catch (Exception e) {}

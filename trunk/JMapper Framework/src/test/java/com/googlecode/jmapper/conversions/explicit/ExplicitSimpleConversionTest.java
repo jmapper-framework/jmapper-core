@@ -29,7 +29,7 @@ public class ExplicitSimpleConversionTest extends AOperation<BasicConversion> {
 	@Override
 	protected void setUp() {
 		super.setUp();
-		ConversionMethod method = new ConversionMethod("conversion", new String[]{"field"}, new String[]{"field"}, Type.STATIC,ParameterNumber.ONE, "");
+		ConversionMethod method = new ConversionMethod("conversion", new String[]{"field"}, new String[]{"field"}, Type.STATIC,ParameterNumber.ONE, "",false);
 		try{ operation.setConversionMethod(method)
                       .setMemberShip(Membership.DESTINATION);
 		}catch(Exception e){}

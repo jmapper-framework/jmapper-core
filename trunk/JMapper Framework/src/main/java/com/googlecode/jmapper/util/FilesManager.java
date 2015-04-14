@@ -40,6 +40,8 @@ import java.util.List;
 
 import com.googlecode.jmapper.annotations.JGlobalMap;
 import com.googlecode.jmapper.annotations.JMap;
+import com.googlecode.jmapper.annotations.JMapAccessor;
+import com.googlecode.jmapper.annotations.JMapAccessors;
 import com.googlecode.jmapper.config.Error;
 import com.googlecode.jmapper.exceptions.LoadingFileException;
 import com.googlecode.jmapper.xml.Attribute;
@@ -48,6 +50,7 @@ import com.googlecode.jmapper.xml.SimplyAttribute;
 import com.googlecode.jmapper.xml.beans.XmlJmapper;
 import com.thoughtworks.xstream.XStream;
 
+import static com.googlecode.jmapper.util.GeneralUtility.*;
 /**
  * FilesManager provides all the operations that allow the manipulation of files.
  *
@@ -110,8 +113,13 @@ public class FilesManager {
 			lines = addTargetClassesImport(lines, attributes,aClass);
 		}
 		
-		if(global != null)
+		if(!isNull(global))
 			lines = addImport(lines,aClass, JGlobalMap.class);
+		
+		if(containtsAccessors(global,attributes)){
+			lines = addImport(lines,aClass, JMapAccessor.class);
+			lines = addImport(lines,aClass, JMapAccessors.class);
+		}
 		
 		for (String line : lines) {
 			
@@ -146,18 +154,63 @@ public class FilesManager {
 	}
 	
 	/**
+	 * Returns true if global or attributes containts almost one declaration of custom methods accessor
+	 * @param global
+	 * @param attributes
+	 * @return
+	 */
+	private static boolean containtsAccessors(Global global,
+			List<Attribute> attributes) {
+		
+		if(!isNull(global)){
+			if(!isEmpty(global.getGet()) || !isEmpty(global.getSet()))
+				return true;
+			
+			if(!isEmpty(global.getAttributes()))
+				for (SimplyAttribute attribute : global.getAttributes()) 
+					if(!isEmpty(attribute.getGet()) || !isEmpty(attribute.getSet()))
+						return true;
+		}
+		
+		if(!isEmpty(attributes))
+			for (Attribute attribute : attributes) {
+				
+				if(!isEmpty(attribute.getGet()) || !isEmpty(attribute.getSet()))
+					return true;
+				
+				if(!isEmpty(attribute.getAttributes()))
+					for (SimplyAttribute targetAttribute : attribute.getAttributes()) 
+						if(!isEmpty(targetAttribute.getGet()) || !isEmpty(targetAttribute.getSet()))
+							return true;
+			}
+		
+		return false;
+	}
+
+	/**
 	 * This method transforms an Global in an annotation in String format.
 	 * @param global Global mapping to trasform
 	 * @return an annotation in String format
 	 */
 	private static String toAnnotation(Global global){
+		
+		// accessors definition
+		Attribute attribute = new Attribute(global.getValue(), global.getAttributes());
+		attribute.setGet(global.getGet());
+		attribute.setSet(global.getSet());
+		String accessor = toJMapAccessor(attribute);
+		StringBuilder str = new StringBuilder();
+		if(!isEmpty(accessor))
+			str.append(accessor);
+		
+		str.append("@JGlobalMap(");
+		
 		boolean before = false;
-		StringBuilder str = new StringBuilder("@JGlobalMap(");
 		if(global.getValue()!=null){
 			str.append("value=\""+global.getValue()+"\"");
 			before = true;
 		}
-		//TODO fixare anche "toAnnotation" global
+		
 		SimplyAttribute[] attributes = global.getAttributes();
 		if(attributes!=null){
 			if(before)str.append(", ");
@@ -200,17 +253,15 @@ public class FilesManager {
 	}
 	
 	/**
-	 * This method transforms an Attribute in an annotation in String format.
-	 * @param attribute Attribute to trasform
-	 * @return an annotation in String format
+	 * Build @JMap annotation from Attribute.
+	 * @param attribute
+	 * @return
 	 */
-	//TODO fixare anche "toAnnotation" attribute, in questo caso è facile convertire anche JMapAccessor
-	// per il campo della classe stessa, piu difficile per quella target
-	private static String toAnnotation(Attribute attribute){
+	private static String toJMap(Attribute attribute){
 		boolean before = false;
 		StringBuilder str = new StringBuilder("@JMap(");
 		if(attribute.getValue()!=null){
-			str.append("value=\""+attribute.getValue()+"\"");
+			str.append("value=\""+attribute.getValue().getName()+"\"");
 			before = true;
 		}
 		
@@ -240,6 +291,85 @@ public class FilesManager {
 		// If the brackets are empty, returns @JMap
 		if("@JMap()".equals(str.toString()))return "@JMap";
 		return str.toString();
+	}
+	
+	private static String toJMapAccessor(String get, String set, String name){
+		if(isEmpty(get) && isEmpty(set))  return "";
+		
+		StringBuilder str = new StringBuilder("@JMapAccessor(name=\""+name+"\"");
+
+		if(!isEmpty(get))
+			str.append(", get=\""+get+"\"");
+		
+		if(!isEmpty(set))
+			str.append(", set=\""+set+"\"");
+		
+		str.append(")");
+		return str.toString();
+	}
+	
+	/**
+	 * From SimplyAttribute to relative Annotation
+	 * @param attribute
+	 * @return
+	 */
+	private static String toJMapAccessor(SimplyAttribute attribute){
+		String get = attribute.getGet();
+		String set = attribute.getSet();
+		String name = attribute.getName();
+		return toJMapAccessor(get, set, name);
+	}
+	
+	/**
+	 * From an Attribute to relative Annotation
+	 * @param attribute
+	 * @return
+	 */
+	private static String toJMapAccessor(Attribute attribute){
+		String get = attribute.getGet();
+		String set = attribute.getSet();
+		String name = attribute.getName();
+		
+		StringBuilder result = new StringBuilder("@JMapAccessors({");
+		if(!isNull(attribute.getAttributes()))
+			for (SimplyAttribute targetAtr : attribute.getAttributes()){
+				String accessor = toJMapAccessor(targetAtr);
+				if(!isEmpty(accessor))
+					result.append("\n   "+accessor+",");
+			}
+		
+		
+		String accessor = toJMapAccessor(get, set, name);
+		if(!isEmpty(accessor))
+			result.append("\n   "+accessor);
+		else
+			// deleted last comma
+			result = new StringBuilder(result.substring(0, result.length()-1));
+			
+		if(result.toString().equals("@JMapAccessors({")) return "";
+		
+		return result.append("\n})\n").toString();
+	}
+	/**
+	 * This method transforms an Attribute in an annotation in String format.
+	 * @param attribute Attribute to trasform
+	 * @return an annotation in String format
+	 */
+	private static String toAnnotation(Attribute attribute){
+		
+		String accessor = toJMapAccessor(attribute);
+		String jMap = toJMap(attribute);
+		
+		StringBuilder result = new StringBuilder();
+		
+		if(!isEmpty(accessor))
+			result.append(accessor);
+		
+		if(!isEmpty(jMap))
+			result.append(jMap);
+		
+		return result.toString();
+		
 	}
 	
 	/**

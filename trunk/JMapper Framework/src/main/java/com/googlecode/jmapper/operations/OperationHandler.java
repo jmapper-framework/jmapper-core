@@ -123,10 +123,6 @@ public final class OperationHandler {
 			configReader.loadJMapAccessor(isDestConfigured?destinationMappedField:sourceMappedField, 
 										  isDestConfigured?sourceMappedField:destinationMappedField);
 			
-			verifiesAccessorMethods(destinationClass,destinationMappedField);
-			verifyGetterMethods(sourceClass,sourceMappedField);
-			
-			
 			boolean isUndefined = false;
 			
 			try{
@@ -143,6 +139,8 @@ public final class OperationHandler {
 			
 			AGeneralOperation operation = operationFactory.getOperation(destinationMappedField, sourceMappedField, info, dynamicMethodsToWrite);
 
+			boolean isAvoidSet = false;
+			
 			if(info.getInstructionType().isAConversion()){
 				conversionHandler.load(conversionAnalyzer)
 				                 .from(sourceField).to(destinationField);
@@ -152,7 +150,16 @@ public final class OperationHandler {
 				
 				operation.setConversionMethod(conversionHandler.getMethod())
 						 .setMemberShip      (conversionHandler.getMembership());
+				
+				isAvoidSet = conversionHandler.getMethod().isAvoidSet();
+				
+				operation.avoidDestinationSet(isAvoidSet);
 			}
+				
+			if(isAvoidSet)	verifyGetterMethods(destinationClass,destinationMappedField);
+			else		verifiesAccessorMethods(destinationClass,destinationMappedField);
+				
+			verifyGetterMethods(sourceClass,sourceMappedField);
 		}
 		
 		// checks if there isn't a correspondence between classes

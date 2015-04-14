@@ -81,7 +81,8 @@ public abstract class AGeneralOperation extends AGeneralOperationAccessor{
 		
 		
 		if(!isDPrimitive && isNullSetting())
-			content = write(setDestination("null"),newLine);
+			content = avoidSet ? write(newLine)
+							   : write(setDestination("null"),newLine);
 		
 		if(	   ((isDPrimitive || isSPrimitive) && isNullSetting())
 			|| ((isDPrimitive && mtd == ONLY_NULL_FIELDS)))
@@ -122,7 +123,11 @@ public abstract class AGeneralOperation extends AGeneralOperationAccessor{
 		switch (conversion.getParameterNumber()) {
 			case ZERO:return setDestination(conversionMethod+"()");
 			case ONE: return setDestination(conversionMethod+"("+getSource()+")");
-			case TWO: return setDestination(conversionMethod+"("+getDestination()+", "+getSource()+")");
+			case TWO: 
+				String mapping = conversionMethod+"("+getDestination()+", "+getSource()+")";
+				return conversion.isAvoidSet()
+						 ? new StringBuilder("   "+mapping+";")
+				         : setDestination(mapping);
 		}
 		
 		return null;

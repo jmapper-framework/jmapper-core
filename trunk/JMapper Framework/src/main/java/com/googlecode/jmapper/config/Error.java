@@ -17,13 +17,16 @@
 package com.googlecode.jmapper.config;
 
 import static com.googlecode.jmapper.config.Constants.*;
+
 import java.io.FileNotFoundException;
 import java.lang.reflect.Field;
+
 import com.googlecode.jmapper.exceptions.*;
 import com.googlecode.jmapper.generation.beans.Method;
 import com.googlecode.jmapper.xml.Attribute;
 import com.googlecode.jmapper.xml.XML;
 
+import static com.googlecode.jmapper.util.GeneralUtility.*;
 /**
  * This Class exposes all common methods to handle technical errors.
  * <br>The scope is to centralize the management of exceptions
@@ -64,7 +67,13 @@ public final class Error {
 	 * @param additionalInformation additional information relative to the javassist exception
 	 */
 	public static void bodyContainsIllegalCode(Method method, Exception additionalInformation){
-		throw new ConversionBodyIllegalCodeException(MSG.INSTANCE.message(conversionBodyIllegalCode,method.getClazz().getSimpleName(),method.getOriginalName(),""+additionalInformation.getMessage()));
+		Class<?> clazz = method.getClazz();
+		String originalName = method.getOriginalName();
+		String message = isNull(clazz) && isNull(originalName) 
+				?	MSG.INSTANCE.message(conversionIllegalSignature)
+				:   MSG.INSTANCE.message(conversionBodyIllegalCode,clazz.getSimpleName(),originalName,""+additionalInformation.getMessage());
+		
+		throw new ConversionBodyIllegalCodeException(message);
 	}
 	/**
 	 * Thrown when javassist don't find classes.

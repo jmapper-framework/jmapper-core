@@ -80,7 +80,7 @@ public class Converter {
 		
 		for (Field field : aClass.getDeclaredFields())
 			if(field.getAnnotation(JMap.class) != null)
-				xmlClass.attributes.add(toXmlAttribute(field));
+				xmlClass.attributes.add(toXmlAttribute(aClass,field));
 			
 		return xmlClass;
 	}
@@ -99,7 +99,8 @@ public class Converter {
 		
 		String name = xmlConversion.name;
 		String conversionType = xmlConversion.type;
-											   
+		boolean avoidSet = xmlConversion.avoidSet;
+		
 		Type type = conversionType == null ? JMapConversion.Type.STATIC // default type value
 				   		                   : conversionType.equalsIgnoreCase("STATIC")
 				   		                   		 ? Type.STATIC
@@ -121,7 +122,7 @@ public class Converter {
 		
 		ParameterNumber number = content.contains(source)?content.contains(destination)?TWO:ONE:ZERO;
 		
-		return new ConversionMethod(name, from, to, type, number,content);
+		return new ConversionMethod(name, from, to, type, number, content, avoidSet);
 	}
 	
 	/**
@@ -136,6 +137,7 @@ public class Converter {
 		String[] from = trim(conversion.from());
 		String[] to = trim(conversion.to());
 		Type type = conversion.type();
+		boolean avoidSet = conversion.avoidSet();
 		
 		ParameterNumber number = null;
 		String body = null;
@@ -163,11 +165,11 @@ public class Converter {
 				if(!body.contains(source) && body.contains(destination))
 					throw new DynamicConversionBodyException("the use of the destination isn't permitted without the use of the source");
 				
-				number = body.contains(source)?body.contains(destination)?TWO:ONE:ZERO;
+				number = body.contains(source)? body.contains(destination)?TWO:ONE:ZERO;
 			break;
 		}
 			
-		return new ConversionMethod(name, from, to, type, number, body);
+		return new ConversionMethod(name, from, to, type, number, body, avoidSet);
 	}
 	
 	/**
@@ -324,21 +326,22 @@ public class Converter {
 	
 	/**
 	 * This method transforms a Field given in input, into a XmlAttribute.
-	 * @param aField Field to transform in XmlAttribute
+	 * @param clazz field's class
+	 * @param field field to transform in XmlAttribute
 	 * @return a field converted to XmlAttribute
 	 */
-	public static XmlAttribute toXmlAttribute(Field aField){
-		JMap jMap = aField.getAnnotation(JMap.class);
+	public static XmlAttribute toXmlAttribute(Class<?> clazz, Field field){
+		JMap jMap = field.getAnnotation(JMap.class);
 		SimplyAttribute[] targetAttributes = toTargetAttributes(jMap.attributes());
 		
 		String get = null, set = null;
-		JMapAccessor jMapAccessor = Annotation.getFieldAccessors(aField);
+		JMapAccessor jMapAccessor = Annotation.getFieldAccessors(clazz,field);
 		if(!isNull(jMapAccessor)){
 			get = jMapAccessor.get();
 			set = jMapAccessor.set();
 		}
 		
-		return toXmlAttribute(aField.getName(),new Value(jMap.value()),get,set,targetAttributes,jMap.classes());
+		return toXmlAttribute(field.getName(),new Value(jMap.value()),get,set,targetAttributes,jMap.classes());
 	}
 	
 	/**
