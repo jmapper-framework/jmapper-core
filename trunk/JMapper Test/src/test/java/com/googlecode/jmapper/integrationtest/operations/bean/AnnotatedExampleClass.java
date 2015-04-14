@@ -3,39 +3,10 @@ import com.googlecode.jmapper.annotations.JMap;
 
 public class AnnotatedExampleClass {
 
-Accessors(
-})
-Accessors(
-})
-Accessors(
-})
-Accessors(
-})
-Accessors(
-})
+@JMap(value="primo", attributes={"field1Class1", "field1Class2", "field1Class3"}, classes={Class1.class, Class2.class, Class3.class})
 	  private String field1;
-Accessors(
-})
-Accessors(
-})
-Accessors(
-})
-Accessors(
-})
-Accessors(
-})
 @JMap(value="secondo", attributes={"field2Class1", "field2Class2", "field2Class3"}, classes={Class1.class, Class2.class, Class3.class})
 	  private String field2;
-Accessors(
-})
-Accessors(
-})
-Accessors(
-})
-Accessors(
-})
-@JMapAccessors(
-})
 @JMap(value="terzo", attributes={"field3Class1", "field3Class2", "field3Class3"}, classes={Class1.class, Class2.class, Class3.class})
 	  private String field3;
 	
