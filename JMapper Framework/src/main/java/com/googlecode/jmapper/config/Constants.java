@@ -42,6 +42,7 @@ public final class Constants {
 	public static final String dynamicConversionParameterException = "dynamicConversionParameterException";
 	public static final String conversionParameterException = "conversionParameterException";
 	public static final String conversionBodyIllegalCode = "conversionBodyIllegalCode";
+	public static final String conversionIllegalSignature = "conversionIllegalSignature";
 	public static final String noRelationshipException = "noRelationshipException";
 	public static final String xmlMappingGlobalExistException = "xmlMappingGlobalExistException";
 	public static final String xmlMappingGlobalDoesNotExistException = "xmlMappingGlobalDoesNotExistException"; 

@@ -49,7 +49,9 @@ public abstract class AGeneralOperationAccessor {
 	protected ConversionMethod conversion;
 	/** membership of the conversion method */
 	protected Membership conversionMembership = Membership.INEXISTENT;
-			
+	/** true if destination set method should not be used */		
+	protected boolean avoidSet = false;
+	
 	/**
 	 * Setting of the conversion method
 	 * @param conversion the method used to convert
@@ -119,6 +121,16 @@ public abstract class AGeneralOperationAccessor {
 	public final AGeneralOperationAccessor setSourceField(MappedField aSourceField) {	
 		sourceField = aSourceField;			 
 		return this;	
+	}
+	
+	/**
+	 * True if the set destination method shouldn't be used
+	 * @param avoidSet
+	 * @return
+	 */
+	public final AGeneralOperationAccessor avoidDestinationSet(boolean avoidSet){
+		this.avoidSet = avoidSet;
+		return this;
 	}
 	
 	/**

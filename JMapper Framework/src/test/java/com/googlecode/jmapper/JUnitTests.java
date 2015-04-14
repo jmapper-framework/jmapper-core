@@ -4,6 +4,7 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 import com.googlecode.jmapper.conversions.explicit.ExplicitComplexConversion2Test;
+import com.googlecode.jmapper.conversions.explicit.ExplicitComplexConversion3Test;
 import com.googlecode.jmapper.conversions.explicit.ExplicitComplexConversionTest;
 import com.googlecode.jmapper.conversions.explicit.ExplicitSimpleConversion2Test;
 import com.googlecode.jmapper.conversions.explicit.ExplicitSimpleConversionTest;
@@ -57,6 +58,8 @@ public class JUnitTests {
 			suite.addTestSuite(ExplicitComplexConversionTest.class);
 			// test on explicit conversion between complex fields (two parameters)
 			suite.addTestSuite(ExplicitComplexConversion2Test.class);
+			// test on static/dynamic avoid set
+			suite.addTestSuite(ExplicitComplexConversion3Test.class);
 			// test on explicit conversion between simple fields
 			suite.addTestSuite(ExplicitSimpleConversionTest.class);
 			// test on explicit conversion between primitive fields

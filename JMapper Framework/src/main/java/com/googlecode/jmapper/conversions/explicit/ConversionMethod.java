@@ -44,8 +44,15 @@ public class ConversionMethod {
 	private ParameterNumber parameterNumber;
 	/** the body conversion method */
 	private String content;
+	/** true if set must be avoid */
+	private boolean avoidSet;
 	
-	
+	public boolean isAvoidSet() {
+		return avoidSet;
+	}
+	public void setAvoidSet(boolean avoidSet) {
+		this.avoidSet = avoidSet;
+	}
 	public ParameterNumber getParameterNumber() {
 		return parameterNumber;
 	}
@@ -83,9 +90,6 @@ public class ConversionMethod {
 		this.type = type;
 	}
 	
-	public ConversionMethod() {}
-	
-	
 	/**
 	 * @param name
 	 * @param from
@@ -95,7 +99,7 @@ public class ConversionMethod {
 	 * @param content
 	 */
 	public ConversionMethod(String name, String[] from, String[] to, Type type,
-			ParameterNumber parameterNumber, String content) {
+			ParameterNumber parameterNumber, String content, boolean avoidSet) {
 		super();
 		this.name = name;
 		this.from = from;
@@ -103,12 +107,13 @@ public class ConversionMethod {
 		this.type = type;
 		this.parameterNumber = parameterNumber;
 		this.content = content;
+		this.avoidSet = avoidSet;
 	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + (avoidSet ? 1231 : 1237);
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
 		result = prime * result + Arrays.hashCode(from);
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
@@ -127,6 +132,8 @@ public class ConversionMethod {
 		if (getClass() != obj.getClass())
 			return false;
 		ConversionMethod other = (ConversionMethod) obj;
+		if (avoidSet != other.avoidSet)
+			return false;
 		if (content == null) {
 			if (other.content != null)
 				return false;
@@ -152,7 +159,9 @@ public class ConversionMethod {
 		return "ConversionMethod [name=" + name + ", from="
 				+ Arrays.toString(from) + ", to=" + Arrays.toString(to)
 				+ ", type=" + type + ", parameterNumber=" + parameterNumber
-				+ ", content=" + content + "]";
+				+ ", content=" + content + ", avoidSet=" + avoidSet + "]";
 	}
+
+	
 	
 }

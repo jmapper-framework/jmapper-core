@@ -36,5 +36,5 @@ public @interface JMapConversion {
 	String[] from() default {ALL};
 	String[] to() default {ALL};
 	Type type() default Type.STATIC;
-	
+	boolean avoidSet() default false;
 }

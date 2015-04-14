@@ -74,10 +74,10 @@ public class MappedCollectionOperation extends ARecursiveOperation {
 		
 		return write(replace$("   $newInstance(destination)"
 			 + newLine + "   Object[] $source = $getSource().toArray();"
-			 + newLine + "   for(int $i = $source.length-1;$i >=0;$i--){"
+			 + newLine + "   for(int $i = 0;$i<$source.length;$i++){"
 			 + newLine + "   $sClass $sItem = ($sClass) $source[$i];"
 			 + newLine + 	"$mapping"
-			 + newLine + "   $destination.add($i,$dItem);"
+			 + newLine + "   $destination.add($dItem);"
 			 + newLine + "   }"
 			 + newLine + 	content + newLine,vars));
 		

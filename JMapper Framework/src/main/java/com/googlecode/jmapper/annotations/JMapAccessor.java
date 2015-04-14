@@ -29,7 +29,8 @@ import com.googlecode.jmapper.config.Constants;
  * it has three fields: name, get and set.<br>
  * <b>name</b> identifies the field name.<br>
  * <b>get</b> the get method name.<br>
- * <b>set</b> the set method name.
+ * <b>set</b> the set method name.<br>
+ * <b>classes</b> to define the range of membership of this definition.
  * @author Alessandro Vurro
  *
  */
@@ -39,4 +40,5 @@ public @interface JMapAccessor {
 	String name() default Constants.DEFAULT_FIELD_VALUE;
 	String get() default Constants.DEFAULT_ACCESSOR_VALUE;
 	String set() default Constants.DEFAULT_ACCESSOR_VALUE;
+	Class<?>[] classes() default {};
 }

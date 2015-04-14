@@ -28,6 +28,8 @@ import com.thoughtworks.xstream.annotations.XStreamImplicit;
 @XStreamAlias("jmapper")
 public class XmlJmapper {
 
+	private static String XSD_FILE = "jmapper-1.3.1.xsd";
+	
 	/** list of classes node */
 	@XStreamImplicit(itemFieldName="class")
 	public List<XmlClass> classes;
@@ -45,7 +47,7 @@ public class XmlJmapper {
 			"\n<jmapper\n"+ 
 		            "xmlns=\"https://jmapper-framework.googlecode.com\""+
 					"xmlns:xsi=\"https://jmapper-framework.googlecode.com/svn\""+
-					"xsi:noNamespaceSchemaLocation=\"jmapper.xsd\">"+
+					"xsi:noNamespaceSchemaLocation=\""+XSD_FILE+"\">"+
 					
 					str+
 					

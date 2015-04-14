@@ -16,6 +16,7 @@
 package com.googlecode.jmapper.annotations;
 
 import static com.googlecode.jmapper.util.ClassesManager.getAllMethods;
+import static com.googlecode.jmapper.util.GeneralUtility.isEmpty;
 import static com.googlecode.jmapper.util.GeneralUtility.isNull;
 
 import java.lang.reflect.Field;
@@ -52,10 +53,10 @@ public class Annotation {
 	 */
 	public static void fillOppositeField(Class<?> configuredClass, MappedField configuredField, MappedField targetField) {
 		
-		JMapAccessor accessor = getClassAccessors(configuredClass, targetField.getValue().getName());
+		JMapAccessor accessor = getClassAccessors(configuredClass, targetField.getValue().getName(),true);
 		
 		if(accessor == null)
-			accessor = getFieldAccessors(configuredField.getValue(), targetField.getValue().getName());
+			accessor = getFieldAccessors(configuredClass, configuredField.getValue(),true, targetField.getValue().getName());
 		
 		if(accessor == null) return;
 		
@@ -71,14 +72,15 @@ public class Annotation {
 	
 	/**
 	 * Fill the MappedField given as input with the custom accessors (if defined).
+	 * @param configuredClass field's class
 	 * @param mappedFields
 	 */
 	public static void fillMappedField(Class<?> configuredClass, MappedField mappedField){
 		
-		JMapAccessor accessor = getClassAccessors(configuredClass, mappedField.getValue().getName());
+		JMapAccessor accessor = getClassAccessors(configuredClass, mappedField.getValue().getName(),false);
 		
 		if(accessor == null)
-			accessor = getFieldAccessors(mappedField.getValue());
+			accessor = getFieldAccessors(configuredClass,mappedField.getValue());
 		
 		if(accessor == null) return;
 			
@@ -94,67 +96,90 @@ public class Annotation {
 	
 	/**
 	 * Returns JMapAccessor relative to this field, null if not present.
+	 * @param clazz field's class
 	 * @param field to check
 	 * @return
 	 */
-	public static JMapAccessor getFieldAccessors(Field field){
-		return getFieldAccessors(field, field.getName(),Constants.DEFAULT_FIELD_VALUE);
+	public static JMapAccessor getFieldAccessors(Class<?> clazz, Field field){
+		return getFieldAccessors(clazz,field,false, field.getName(),Constants.DEFAULT_FIELD_VALUE);
+	}
+	
+	/**
+	 * Checks if this field contains a definition of accessors for the name given as input.
+	 * @param clazz class to check
+	 * @param field field to check
+	 * @param isOpposite true if accessor methods to check belong to the opposite field, false otherwise
+	 * @param fieldNames name to find
+	 * @return
+	 */
+	private static JMapAccessor getFieldAccessors(Class<?> clazz, Field field,boolean isOpposite, String... fieldNames){
+		for (String fieldName : fieldNames) {
+			JMapAccessor accessor = getAccessor(clazz,field.getAnnotations(),fieldName,isOpposite);
+			if(!isNull(accessor)) return accessor;
+		}
+		return null;
 	}
 	
 	/**
 	 * Checks if this field contains a definition of accessors for the name given as input.
 	 * @param clazz class to check
 	 * @param fieldName name to find
+	 * @param isOpposite true if accessor methods to check belong to the opposite field, false otherwise
 	 * @return
 	 */
-	public static JMapAccessor getClassAccessors(Class<?> clazz, String fieldName){
-		return getAccessor(clazz.getAnnotations(),fieldName);
-	}
-	
-	/**
-	 * Checks if this field contains a definition of accessors for the name given as input.
-	 * @param field field to check
-	 * @param fieldName name to find
-	 * @return
-	 */
-	private static JMapAccessor getFieldAccessors(Field field, String fieldName){
-		return getAccessor(field.getAnnotations(),fieldName);
+	public static JMapAccessor getClassAccessors(Class<?> clazz, String fieldName, boolean isOpposite){
+		return getAccessor(clazz, clazz.getAnnotations(),fieldName,isOpposite);
 	}
 	
 	/**
 	 * It finds between annotations if exists a JMapAccessor relative to the field with this name.
 	 * @param annotations annotations to check
 	 * @param fieldName field name
+	 * @param isOpposite true if accessor methods to check belong to the opposite field, false otherwise
 	 * @return
 	 */
-	private static JMapAccessor getAccessor(java.lang.annotation.Annotation[] annotations, String fieldName){
+	private static JMapAccessor getAccessor(Class<?> clazz, java.lang.annotation.Annotation[] annotations, String fieldName, boolean isOpposite){
 		for (java.lang.annotation.Annotation annotation : annotations) {
 			if(annotation.annotationType() == JMapAccessors.class){
 				JMapAccessors jmapAccessors = (JMapAccessors)annotation;
 				for (JMapAccessor jmapAccessor : jmapAccessors.value()) 
-					if(jmapAccessor.name().equals(fieldName)) return jmapAccessor;
+					if(isValid(jmapAccessor,fieldName,clazz,isOpposite)) return jmapAccessor;
 				
 			}
 			if(annotation.annotationType() == JMapAccessor.class){
 				JMapAccessor jmapAccessor = (JMapAccessor)annotation;
-					if(jmapAccessor.name().equals(fieldName)) return jmapAccessor;
+					if(isValid(jmapAccessor,fieldName,clazz,isOpposite)) return jmapAccessor;
 			}
 		}
 		return null;
 	}
+	
 	/**
-	 * Checks if this field contains a definition of accessors for the names given as input.
-	 * @param field to check
-	 * @param configNames name to find
-	 * @return
+	 * @param accessor accessor to analyze
+	 * @param fieldName field to check
+	 * @param targetClass class to check
+	 * @param isOpposite true if this accessor describe target field
+	 * @return True if this accessor meets the criteria, false otherwise
 	 */
-	public static JMapAccessor getFieldAccessors(Field field, String... configNames){
-		for (String configName : configNames) {
-			JMapAccessor accessor = getFieldAccessors(field, configName);
-			if(!isNull(accessor)) return accessor;
+	private static boolean isValid(JMapAccessor accessor, String fieldName, Class<?> targetClass, boolean isOpposite){
+		if(isEmpty(accessor.classes())) 
+			return accessor.name().equals(fieldName);
+		
+		for (Class<?> mappedClass : accessor.classes()) {
+			
+			if(accessor.name().equals(fieldName)){
+				
+				if(isOpposite){
+					if(mappedClass != targetClass)
+						return true;
+				}else
+					if(mappedClass == targetClass)
+						return true;
+			}
 		}
 		
-		return null;
+		return false;
+		
 	}
 	/**
 	 * Returns a list of ConversionMethod that belong to the class given as input.

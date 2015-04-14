@@ -27,21 +27,24 @@ public class XmlConverterTest extends TestCase{
 	}
 	
 	public void testToConversionMethod2() throws SecurityException, NoSuchMethodException{
-		XmlConversion xml = new XmlConversion("get", "source", "destination", "static", "content");
+		XmlConversion xml = new XmlConversion("get", "source", "destination", "static", "content",false);
 		ConversionMethod method = Converter.toConversionMethod(xml);
 		assertEquals("get", method.getName());
 		assertEquals("source", method.getFrom()[0]);
 		assertEquals("destination", method.getTo()[0]);
 		assertEquals("STATIC", method.getType().toString());
 		assertEquals("content", method.getContent());
+		assertFalse(method.isAvoidSet());
 		
-		xml = new XmlConversion("get", "source", "destination", null, "content");
+		xml = new XmlConversion("get", "source", "destination", null, "content",false);
 		method = Converter.toConversionMethod(xml);
 		assertEquals("get", method.getName());
 		assertEquals("source", method.getFrom()[0]);
 		assertEquals("destination", method.getTo()[0]);
 		assertEquals("STATIC", method.getType().toString());
 		assertEquals("content", method.getContent());
+		assertFalse(method.isAvoidSet());
+		
 	}
 
 	public void testGlobal(){
@@ -73,13 +76,13 @@ public class XmlConverterTest extends TestCase{
 	public void testToXmlAttribute() throws SecurityException, NoSuchFieldException, ClassNotFoundException{
 		
 		// FROM ANNOTATIONS
-		XmlAttribute xmlAttribute = Converter.toXmlAttribute(AnnotatedClass.class.getDeclaredField("field"));
+		XmlAttribute xmlAttribute = Converter.toXmlAttribute(AnnotatedClass.class,AnnotatedClass.class.getDeclaredField("field"));
 		field1(xmlAttribute);
 		
 		Attribute attribute = Converter.toAttribute(xmlAttribute);
 		field1(attribute);
 		
-		xmlAttribute = Converter.toXmlAttribute(AnnotatedClass.class.getDeclaredField("field2"));
+		xmlAttribute = Converter.toXmlAttribute(AnnotatedClass.class,AnnotatedClass.class.getDeclaredField("field2"));
 		field2(xmlAttribute);
 		
 		attribute = Converter.toAttribute(xmlAttribute);
