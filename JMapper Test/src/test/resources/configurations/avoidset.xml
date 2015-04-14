@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmapper xmlns="https://jmapper-framework.googlecode.com"
+	xmlns:xsi="https://jmapper-framework.googlecode.com/svn"
+	xsi:noNamespaceSchemaLocation="https://jmapper-framework.googlecode.com/svn/jmapper-1.3.1.xsd">
+	
+	<class name="com.googlecode.jmapper.integrationtest.others.bean.DestAvoidSet">
+		<global/>
+		<conversion name="conversion" from="field" type="STATIC" avoidSet="true">
+			${destination}.append(${source}.toString());
+		</conversion>
+		<conversion name="conversion2" from="field2" type="DYNAMIC" avoidSet="true">
+			${destination}.add("avoidSetDYNAMICXML" + ${source}.toString());
+		</conversion>
+	</class>
+</jmapper>

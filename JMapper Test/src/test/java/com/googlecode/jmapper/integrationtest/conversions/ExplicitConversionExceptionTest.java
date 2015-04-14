@@ -4,11 +4,13 @@ import static com.googlecode.jmapper.util.GeneralUtility.newLine;
 
 import com.googlecode.jmapper.exceptions.JMapperException;
 import com.googlecode.jmapper.integrationtest.conversions.bean.DException;
+import com.googlecode.jmapper.integrationtest.conversions.bean.DestStaticSignatureWrong;
 import com.googlecode.jmapper.integrationtest.conversions.bean.ObjFirstD;
 import com.googlecode.jmapper.integrationtest.conversions.bean.ObjFirstS;
 import com.googlecode.jmapper.integrationtest.conversions.bean.ObjSecondS;
 import com.googlecode.jmapper.integrationtest.conversions.bean.ObjThirdS;
 import com.googlecode.jmapper.integrationtest.conversions.bean.SException;
+import com.googlecode.jmapper.integrationtest.conversions.bean.SrcStaticSignatureWrong;
 import com.googlecode.jmapper.integrationtest.operations.bean.BeanS;
 
 import java.io.ByteArrayOutputStream;
@@ -31,6 +33,14 @@ public class ExplicitConversionExceptionTest extends TestCase {
 		PropertyConfigurator.configure("log4j.properties");
 		log = new ByteArrayOutputStream();  
 		Logger.getLogger(JMapper.class).addAppender(new WriterAppender(new SimpleLayout(), log));
+	}
+	
+	public void testStaticConversionWrongSignature(){
+		log.reset();
+		try{
+			new JMapper<DestStaticSignatureWrong, SrcStaticSignatureWrong>(DestStaticSignatureWrong.class,SrcStaticSignatureWrong.class); 
+		}catch(JMapperException e){}
+		assertEquals("ERROR - ConversionBodyIllegalCodeException: error in static conversion: probably is an incompatibility of signature, the expected input fields do not match with the real ones, checks the configured class."+newLine, log.toString());
 	}
 	
 	public void testParameterNumber(){

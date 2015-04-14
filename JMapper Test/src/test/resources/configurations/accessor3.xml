@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmapper xmlns="https://jmapper-framework.googlecode.com"
+	xmlns:xsi="https://jmapper-framework.googlecode.com/svn"
+	xsi:noNamespaceSchemaLocation="https://jmapper-framework.googlecode.com/svn/jmapper-1.3.1.xsd">
+	<class
+		name="com.googlecode.jmapper.integrationtest.operations.bean.AnnotatedExampleClass3">
+		<global>
+			<value name="sField1" get="sField1Get" set="sField1Set"/>
+			<attributes>
+				<attribute name="gsf2" get="gsf2g" set="gsf2s"/>
+			</attributes>
+		</global>
+		<attribute name="field" get="getDestField1" set="setDestField1">
+			<value name="sField1" get="sField1Get" set="sField1Set"/>
+			<attributes>
+				<attribute name="sf2" get="sf2g" set="sf2s"/>
+				<attribute name="sf3" get="sf3g" set="sf3s"/>
+			</attributes>
+		</attribute>
+	</class>
+</jmapper>

@@ -12,6 +12,8 @@ public class OthersTests {
 
 		/* Tests on primitive and wrapper classes */
 		suite.addTestSuite(BooleanGetTest.class);
+		/* Tests on avoid set method */
+		suite.addTestSuite(AvoidSetTest.class);
 
 		// $JUnit-END$
 		return suite;

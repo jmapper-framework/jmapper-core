@@ -33,6 +33,9 @@ public class OperationTests {
 			suite.addTestSuite(CollectionConversionDSTest.class);
 			suite.addTestSuite(MappedCollectionSTest.class);
 			suite.addTestSuite(MappedCollectionDSTest.class);
+			suite.addTestSuite(MappedSetSTest.class);
+			suite.addTestSuite(MappedSetDSTest.class);
+			
 		
 		/*	Tests on map classes				   */
 			suite.addTestSuite(MapDSTest.class);
