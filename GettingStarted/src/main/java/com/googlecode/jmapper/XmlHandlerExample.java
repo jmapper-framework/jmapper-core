@@ -8,6 +8,7 @@ import com.googlecode.jmapper.bean.Class2;
 import com.googlecode.jmapper.bean.Class3;
 import com.googlecode.jmapper.xml.Attribute;
 import com.googlecode.jmapper.xml.Global;
+import com.googlecode.jmapper.xml.SimplyAttribute;
 import com.googlecode.jmapper.xml.XmlHandler;
 
 
@@ -18,7 +19,11 @@ public class XmlHandlerExample {
 		
 		XmlHandler xmlHandler = new XmlHandler();
 
-		String[] attributes = new String[]{"field1Class1","field1Class2","field1Class3"};
+		SimplyAttribute[] attributes = 	new SimplyAttribute[]{
+				             new SimplyAttribute("field1Class1"),
+				             new SimplyAttribute("field1Class2"),
+				             new SimplyAttribute("field1Class3")};
+		
 		Class<?>[]  classes = new Class []{Class1.class,Class2.class,Class3.class};
 		Attribute attribute = new Attribute("field1", attributes, classes);
 		
@@ -28,7 +33,11 @@ public class XmlHandlerExample {
 		
 		xmlHandler.addGlobal(AnnotatedClass.class, global);
 		
-		attributes           = new String[]{"field2Class1","field2Class2","field2Class3"};
+		attributes           = new SimplyAttribute[]{
+							  new SimplyAttribute("field2Class1"),
+							  new SimplyAttribute("field2Class2"),
+							  new SimplyAttribute("field2Class3")};
+		
 		classes 			 = new Class []{Class1.class,Class2.class,Class3.class};
 		Attribute attribute2 = new Attribute("field2", attributes, classes);
 		
