@@ -286,11 +286,20 @@ public final class GeneralUtility {
 	}
 	
 	/**
-	 * Returns true if the string is empty, false otherwise.
+	 * Returns true if the str is empty, false otherwise.
 	 * @param str string to check
-	 * @return true if the string is empty, false otherwise
+	 * @return true if the str is empty, false otherwise
 	 */
 	public static boolean isEmpty(String str){
+		return str == null || str.length() <= 0;
+	}
+	
+	/**
+	 * Returns true if the str is empty, false otherwise.
+	 * @param str string to check
+	 * @return true if the str is empty, false otherwise
+	 */
+	public static boolean isEmpty(StringBuilder str){
 		return str == null || str.length() <= 0;
 	}
 	
