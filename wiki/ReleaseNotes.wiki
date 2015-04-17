@@ -1,4 +1,38 @@
 = Release Notes =
+== 1.3.1 - 17 April 2015 ==
+*class parameter in JMapAccessor*
+
+Added class parameter in JMapAccessor to avoid cases where target and mapped fields have the same name for example:
+{{{
+public class Destination{
+	
+   @JMapAccessors({
+     @JMapAccessor(name="field",get="get",set="set", classes={Source.class}),
+     @JMapAccessor(name="field",get="get",set="set", classes={Destination.class})
+   })
+   private String field;
+}
+}}}
+
+*avoid set method in explicit conversions*
+
+Now you can avoid the use of set method for the destination instance.
+In Annotation:
+{{{
+@JMapConversion(avoidSet=true)
+}}}
+In XML:
+{{{
+<conversion name="conversion" avoidSet="true">
+   conversion body
+</conversion>
+}}}
+This is usefull when destination fields are obtainable only by the get method
+
+*JMapAccessor handled in XMlHandler*
+
+The methods from and to XML are updated to work with JMapAccessor too.
+
 == 1.3.0 - 27 March 2015 ==
 
 *XSD for XML configuration*
