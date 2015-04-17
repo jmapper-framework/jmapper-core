@@ -1,7 +1,0 @@
-package com.googlecode.jmapper.integrationtest.operations;
-
-import com.googlecode.jmapper.integrationtest.operations.bean.${testName}D;
-import com.googlecode.jmapper.integrationtest.operations.bean.${testName}S;
-import com.googlecode.jmapper.integrationtest.BuilderS;
-
-public class ${testName}STest extends BuilderS<${testName}D,${testName}S> {}

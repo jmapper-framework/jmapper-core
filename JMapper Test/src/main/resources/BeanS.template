@@ -1,7 +1,0 @@
-package com.googlecode.jmapper.integrationtest.operations.bean;
-
-public class ${testName}S {
-	
-	public ${testName}S() {}
-		
-}
