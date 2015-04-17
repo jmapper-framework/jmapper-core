@@ -23,7 +23,6 @@ import com.googlecode.jmapper.xml.Global;
 import com.googlecode.jmapper.xml.XML;
 import com.googlecode.jmapper.xml.XmlHandler;
 
-//TODO va a puttane jmapaccessor
 public class XmlHandler2Test extends TestCase {
 
 	private final static XmlHandler xmlHandler = new XmlHandler();

@@ -15,6 +15,7 @@ import com.googlecode.jmapper.xml.XmlHandler;
 
 public class XmlHandler4Test extends TestCase{
 	ByteArrayOutputStream log;
+	XmlHandler xmlHandler = new XmlHandler("accessor3.xml");
 	
 	public XmlHandler4Test(){
 		log = new ByteArrayOutputStream();
@@ -28,7 +29,10 @@ public class XmlHandler4Test extends TestCase{
 	}
 	
 	public void testFromXmlToAnnotationAccessor(){
-		XmlHandler xmlHandler = new XmlHandler("accessor3.xml");
 		xmlHandler.fromXmlToAnnotation(AnnotatedExampleClass3.class);
+	}
+	
+	public void testCleanAnnotatedClass(){
+		xmlHandler.cleanAnnotatedClassAll(AnnotatedExampleClass3.class);
 	}
 }

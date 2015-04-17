@@ -15,8 +15,7 @@ public class XmlTests {
 				suite.addTestSuite(XmlHandlerTest.class);	
 				suite.addTestSuite(XmlHandler2Test.class);
 				suite.addTestSuite(XmlHandler3Test.class);
-				// test di scrittura dei accessors da xml
-				//suite.addTestSuite(XmlHandler4Test.class);
+				suite.addTestSuite(XmlHandler4Test.class);
 			//$JUnit-END$
 			return suite;
 	}
