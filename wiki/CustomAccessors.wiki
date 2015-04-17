@@ -11,7 +11,7 @@ It is not always possible to comply with the get and set prefixes, for this reas
  * <b>name</b>: (Optional) the name of the field that has custom accessor methods, if you not define it, JMapper assumes that the custom methods refer to the field itself
  * <b>get</b>: (Optional) Permits to define a custom get method
  * <b>set</b>: (Optional) Permits to define a custom set method
-
+ * <b>classes</b> (since 1.3.1 version): (Optional) allows to limit the configuration to a range of classes
 {{{
 Class Bean {
 
@@ -163,6 +163,17 @@ Class SrcBean {
 }
 }}}
 
+<b>classes</b> parameter permits to avoid cases where target and mapped fields have the same name for example:
+{{{
+public class Destination{
+        
+   @JMapAccessors({
+     @JMapAccessor(name="field",get="get",set="set", classes={Source.class}),
+     @JMapAccessor(name="field",get="get",set="set", classes={Destination.class})
+   })
+   private String field;
+}
+}}}
    <b>IMPORTANT!</b>   <i>@JMapAccessor on class has major visibility of @JMapAccessor on field.</i>
 
 == XML ==
