@@ -110,7 +110,7 @@ JMapConversion has three parameters: from, to and type.
 ||String[] from||names of the source fields||ALL||
 ||String[] to||names of the destination fields||ALL||
 ||Type type||conversion type||STATIC||
-||(since 1.3.1)Boolean avoidSet||avoid set method usage||false||
+||Boolean avoidSet (since *1.3.1*)||avoid set method usage||false||
 
 The parameters from and to indicate which fields will be part of the conversion.
 The *from* indicates the source, the *to* indicates the recipient, the default value for each is ALL.
@@ -128,7 +128,7 @@ In the xml definition the conversion is defined using the *<**conversion**>* nod
 ||from||names of the source fields (separated by commas:"field","field2")||ALL||
 ||to||names of the destination fields(separated by commas:"field","field2")||ALL||
 ||type||conversion type||STATIC||
-||(since 1.3.1)avoidSet||avoid set method usage||false||
+||avoidSet (since *1.3.1*)||avoid set method usage||false||
 
 The *name* attribute permits to define a name to the current conversion method, this attribute is *mandatory*.
 
