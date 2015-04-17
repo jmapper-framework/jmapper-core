@@ -1,3 +1,5 @@
+<b>We are in migration phase, please visit https://code.google.com/p/jmapper-framework/ for more information.</b>
+
 JMapper Framework is a java bean to java bean mapper, allows you to perform the passage of data dinamically with annotations and / or XML.<br>With JMapper you can:
 
   * create and enrich target objects
@@ -38,7 +40,7 @@ Destination destination = (Destination) mapper.getDestination(source);
 ```
 destination ["id", "sourceField", null]
 ```
-With JMapper we have all the advantages of dynamic mapping with the performance of static code, with 0 memory consumption
+With JMapper we have all the advantages of dynamic mapping with the performance of static code, with 0 memory consumption.
 
 ```
 <dependency>
