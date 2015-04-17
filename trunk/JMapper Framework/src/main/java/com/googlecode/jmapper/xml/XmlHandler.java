@@ -199,7 +199,7 @@ public class XmlHandler {
 	}
 	
 	/**
-	* Eliminates all classes annotated, from Xml configuration.
+	* Eliminates all annotated classes from XML configuration.
 	* @return this instance of XmlHandler
 	*/
 	public XmlHandler deleteAnnotatedClasses(){

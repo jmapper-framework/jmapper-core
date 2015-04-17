@@ -343,10 +343,12 @@ public class FilesManager {
 		if(!isEmpty(accessor))
 			result.append("\n   "+accessor);
 		else
-			// deleted last comma
-			result = new StringBuilder(result.substring(0, result.length()-1));
+			if(result.toString().equals("@JMapAccessors({")) 
+				return "";
+			else
+				// deleted last comma
+				result = new StringBuilder(result.substring(0, result.length()-1));
 			
-		if(result.toString().equals("@JMapAccessors({")) return "";
 		
 		return result.append("\n})\n").toString();
 	}
@@ -512,7 +514,7 @@ public class FilesManager {
 				
 				if(cleanAll || (classFound && annotatedFields > 0)){
 					
-					HashMap<String,Object> cleanLine = cleanLine(line,moreLines,JMap.class);
+					HashMap<String,Object> cleanLine = cleanLine(line,moreLines,JMapAccessors.class,JMapAccessor.class,JMap.class);
 					boolean newLine = (Boolean) cleanLine.get("newLine");
 					String result = (String) cleanLine.get("result");
 					
@@ -526,7 +528,9 @@ public class FilesManager {
 				}
 			}
 			
-			// for all other cases
+			if(line.trim().equals("})"))
+				continue;
+
 			linesToWrite.add(line);
 		}
 		
@@ -543,7 +547,7 @@ public class FilesManager {
 	 * @annotation annotation to remove
 	 * @return an HashMap with two variables: newLine and result
 	 */
-	private static HashMap<String, Object> cleanLine(String line,boolean moreLines, Class<?> annotation){
+	private static HashMap<String, Object> cleanLine(String line,boolean moreLines, Class<?>... annotation){
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("newLine", moreLines);
 		map.put("result", null);
@@ -554,7 +558,8 @@ public class FilesManager {
 			String result = verifyLine(line);
 			if(!"newLine".equals(result)){
 				map.put("newLine", false);
-				if(result.trim().length()>0)map.put("result", result);
+				if(result.trim().length()>0 && !result.trim().equals(","))
+					map.put("result", result);
 			}
 			return map;
 		}
@@ -566,7 +571,10 @@ public class FilesManager {
 			map.put("newLine", true);
 			result = result.substring(0,result.length() - "newLine".length());
 		}
-		if(result.trim().length()>0)map.put("result", result);
+		
+		if(result.trim().length()>0)
+			map.put("result", result);
+		
 		return map;
 	}
 	
@@ -605,11 +613,17 @@ public class FilesManager {
 	 * @param annotation annotation to remove
 	 * @return the line cleaned
 	 */
-	private static String subtractAnnotation(String line, Class<?> annotation){
-		String jmap = "@"+annotation.getSimpleName();
-		
+	private static String subtractAnnotation(String line, Class<?>... annotations){
+		String jmap = null;
+		int jmapBegin = -1;
 		String result = "";
-		int jmapBegin = line.indexOf(jmap);
+		
+		for (Class<?> annotation : annotations) {
+			jmap = "@"+annotation.getSimpleName();
+			jmapBegin = line.indexOf(jmap);
+			if(jmapBegin != -1)break;
+		}
+		
 		// if there is something before the annotation, it retrieves
 		if(jmapBegin>0)result = line.substring(0,jmapBegin);
 				
@@ -633,7 +647,11 @@ public class FilesManager {
 		if(jmapEnd == -1) return result+"newLine";
 		
 		// if the closure exists, add to the result string remaining
-		if(line.length() > ++jmapEnd)return	result += line.substring(jmapEnd,line.length());
+		if(line.length() > ++jmapEnd){
+			String afterAnnotation = line.substring(jmapEnd,line.length());
+			if(!afterAnnotation.trim().equals(","))
+			   return result += afterAnnotation;
+		}
 		return result;
 	}
 	
@@ -729,10 +747,15 @@ public class FilesManager {
 	 * @return the resultant lines
 	 */
 	private static List<String> deleteImport(List<String> lines){
+		return deleteSpecificImports(lines, JMap.class,JGlobalMap.class, JMapAccessors.class, JMapAccessor.class);
+	}
+	
+	private static List<String> deleteSpecificImports(List<String> lines, Class<?>... annotations){
+		List<String> result = lines;
+		for (Class<?> annotation : annotations) 
+			result = deleteSpecificImport(result, annotation);
 		
-		List<String> result = deleteSpecificImport(lines, JMap.class);
-		return deleteSpecificImport(result, JGlobalMap.class);
-		
+		return result;
 	}
 	
 	private static List<String> deleteSpecificImport(List<String> lines, Class<?> annotation){
