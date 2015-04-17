@@ -47,5 +47,5 @@ With JMapper we have all the advantages of dynamic mapping with the performance 
    <version>1.3.1</version>
 </dependency>
 ```
-Not using Maven or any other software project management? Follow this [link](http://search.maven.org/#browse%7C642809664) to download the dependencies.<br><b>Required java 1.5+</b>
+Not using Maven or any other software project management? Follow this [link](http://search.maven.org/#browse%7C642809664) to download the jar.<br><b>Required java 1.5+</b>
 
