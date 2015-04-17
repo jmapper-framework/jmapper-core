@@ -2,12 +2,11 @@ package com.googlecode.jmapper;
 
 import org.apache.log4j.PropertyConfigurator;
 
-import com.googlecode.jmapper.JMapper;
+import com.googlecode.jmapper.api.enums.MappingType;
+import com.googlecode.jmapper.api.enums.NullPointerControl;
 import com.googlecode.jmapper.bean.Destination;
 import com.googlecode.jmapper.bean.Source;
 import com.googlecode.jmapper.enums.ChooseConfig;
-import com.googlecode.jmapper.enums.MappingType;
-import com.googlecode.jmapper.enums.NullPointerControl;
 
 
 public class JMapperExample {
