@@ -50,7 +50,7 @@ With JMapper we have all the advantages of dynamic mapping with the performance 
 </dependency>
 ```
 
-<b>JMapper Group:</b> https://groups.google.com/forum/#!forum/jmapper-framework
+<b>JMapper Group:</b> https://groups.google.com/forum/#!forum/jmapper-framework<br>
 <b>Documentation:</b> http://jmapper-framework.github.io/jmapper-core
 
 Not using Maven or any other software project management? Follow this [link](http://search.maven.org/#browse%7C642809664) to download the jar.<br><b>Required java 1.5+</b>
