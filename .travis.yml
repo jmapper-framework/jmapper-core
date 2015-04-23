@@ -1,5 +1,5 @@
 language: java
-
+before-install: cd "JMapper Framework"
 jdk:
   - openjdk6
   - openjdk7
