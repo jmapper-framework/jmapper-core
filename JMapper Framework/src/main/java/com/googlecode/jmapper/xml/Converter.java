@@ -373,7 +373,7 @@ public class Converter {
 		
 		if(!isNull(value)){
 			String targetName = value.getName();
-			if(!isNull(targetName) && (!targetName.isEmpty() || DEFAULT_FIELD_VALUE.equals(targetName)) ){
+			if(!isNull(targetName) && (!isEmpty(targetName) || DEFAULT_FIELD_VALUE.equals(targetName)) ){
 				xmlAttribute.value = new XmlValueName();
 				xmlAttribute.value.name = getValue(targetName,name);
 			}
