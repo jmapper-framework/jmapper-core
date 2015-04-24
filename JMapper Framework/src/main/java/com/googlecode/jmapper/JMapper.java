@@ -61,7 +61,7 @@ import com.googlecode.jmapper.generation.MapperBuilder;
  * For example:
  * <pre><code>	
  * Source source = new Source("id", "sourceField", "other");
- * JMapper<Destination,Source> jmapper = new JMapper<Destination,Source>(Destination.class, Source.class);
+ * JMapper&lt;Destination,Source&gt; jmapper = new JMapper&lt;Destination,Source&gt;(Destination.class, Source.class);
  * // new instance
  * Destination destination = jmapper.getDestination(source); 
  * // enrichment
@@ -81,9 +81,9 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
 	 * <tr>
 	 * <td><code>NullPointerControl</code></td><td><code>SOURCE</code></td>
 	 * </tr><tr>
-	 * <td><code>MappingType</code> of Destination</td><td><code>ALL_FIELDS<code></td>
+	 * <td><code>MappingType</code> of Destination</td><td><code>ALL_FIELDS</code></td>
 	 * </tr><tr>
-	 * <td><code>MappingType</code> of Source</td><td><code>ALL_FIELDS<code></td>
+	 * <td><code>MappingType</code> of Source</td><td><code>ALL_FIELDS</code></td>
 	 * </tr>
 	 * </table>
 	 * @param source instance that contains the data
@@ -106,9 +106,9 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
 	 * <tr>
 	 * <td><code>NullPointerControl</code></td><td><code>NOT_ANY</code></td>
 	 * </tr><tr>
-	 * <td><code>MappingType</code> of Destination</td><td><code>ALL_FIELDS<code></td>
+	 * <td><code>MappingType</code> of Destination</td><td><code>ALL_FIELDS</code></td>
 	 * </tr><tr>
-	 * <td><code>MappingType</code> of Source</td><td><code>ALL_FIELDS<code></td>
+	 * <td><code>MappingType</code> of Source</td><td><code>ALL_FIELDS</code></td>
 	 * </tr>
 	 * </table>
 	 * @param source instance that contains the data
@@ -133,9 +133,9 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
 	 * <tr>
 	 * <td><code>NullPointerControl</code></td><td><code>ALL</code></td>
 	 * </tr><tr>
-	 * <td><code>MappingType</code> of Destination</td><td><code>ALL_FIELDS<code></td>
+	 * <td><code>MappingType</code> of Destination</td><td><code>ALL_FIELDS</code></td>
 	 * </tr><tr>
-	 * <td><code>MappingType</code> of Source</td><td><code>ALL_FIELDS<code></td>
+	 * <td><code>MappingType</code> of Source</td><td><code>ALL_FIELDS</code></td>
 	 * </tr>
 	 * </table>
 	 * @param destination instance to enrich
@@ -158,9 +158,9 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
 	 * <tr>
 	 * <td><code>NullPointerControl</code></td><td><code>NOT_ANY</code></td>
 	 * </tr><tr>
-	 * <td><code>MappingType</code> of Destination</td><td><code>ALL_FIELDS<code></td>
+	 * <td><code>MappingType</code> of Destination</td><td><code>ALL_FIELDS</code></td>
 	 * </tr><tr>
-	 * <td><code>MappingType</code> of Source</td><td><code>ALL_FIELDS<code></td>
+	 * <td><code>MappingType</code> of Source</td><td><code>ALL_FIELDS</code></td>
 	 * </tr>
 	 * </table>
 	 * @param destination instance to enrich
@@ -182,7 +182,7 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
 	 * <tr>
 	 * <td><code>NullPointerControl</code></td><td><code>SOURCE</code></td>
 	 * </tr><tr>
-	 * <td><code>MappingType</code> of Destination</td><td><code>ALL_FIELDS<code></td>
+	 * <td><code>MappingType</code> of Destination</td><td><code>ALL_FIELDS</code></td>
 	 * </tr><tr>
 	 * <td><code>MappingType</code> of Source</td><td>mtSource</td>
 	 * </tr>
@@ -203,7 +203,7 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
 	 * <tr>
 	 * <td><code>NullPointerControl</code></td><td>nullPointerControl</td>
 	 * </tr><tr>
-	 * <td><code>MappingType</code> of Destination</td><td><code>ALL_FIELDS<code></td>
+	 * <td><code>MappingType</code> of Destination</td><td><code>ALL_FIELDS</code></td>
 	 * </tr><tr>
 	 * <td><code>MappingType</code> of Source</td><td>mtSource</td>
 	 * </tr>

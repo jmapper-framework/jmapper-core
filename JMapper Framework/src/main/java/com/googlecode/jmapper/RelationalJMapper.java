@@ -62,7 +62,7 @@ import com.googlecode.jmapper.xml.XML;
 	Class2 class2 = new Class2("field1Class2", "field2Class2", "field3Class2");
 	Class3 class3 = new Class3("field1Class3", "field2Class3", "field3Class3");
 		
-	RelationalJMapper<AnnotatedClass> rm = new RelationalJMapper<AnnotatedClass>(AnnotatedClass.class);
+	RelationalJMapper&lt;AnnotatedClass&gt; rm = new RelationalJMapper&lt;AnnotatedClass&gt;(AnnotatedClass.class);
 		
 	manyToOne = rm.manyToOne(class1);
 	manyToOne = rm.manyToOne(class2);
@@ -71,7 +71,7 @@ import com.googlecode.jmapper.xml.XML;
  * oneToMany example:
  * <pre><code>	AnnotatedClass annotatedClass = new AnnotatedClass("field1", "field2", "field3");
 		
-	RelationalJMapper<AnnotatedClass> rm = new RelationalJMapper<AnnotatedClass>(AnnotatedClass.class);
+	RelationalJMapper&lt;AnnotatedClass&gt; rm = new RelationalJMapper&lt;AnnotatedClass&gt;(AnnotatedClass.class);
 		
 	Class1 class1 = rm.setDestinationClass(Class1.class).oneToMany(annotatedClass);
 	Class2 class2 = rm.setDestinationClass(Class2.class).oneToMany(annotatedClass);
@@ -274,9 +274,9 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	 * <tr>
 	 * <td><code>NullPointerControl</code></td><td><code>SOURCE</code></td>
 	 * </tr><tr>
-	 * <td><code>MappingType</code> of Destination</td><td><code>ALL_FIELDS<code></td>
+	 * <td><code>MappingType</code> of Destination</td><td><code>ALL_FIELDS</code></td>
 	 * </tr><tr>
-	 * <td><code>MappingType</code> of Source</td><td><code>ALL_FIELDS<code></td>
+	 * <td><code>MappingType</code> of Source</td><td><code>ALL_FIELDS</code></td>
 	 * </tr>
 	 * </table>
 	 * @param source instance of Target Class type that contains the data
@@ -295,9 +295,9 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	 * <tr>
 	 * <td><code>NullPointerControl</code></td><td><code>NOT_ANY</code></td>
 	 * </tr><tr>
-	 * <td><code>MappingType</code> of Destination</td><td><code>ALL_FIELDS<code></td>
+	 * <td><code>MappingType</code> of Destination</td><td><code>ALL_FIELDS</code></td>
 	 * </tr><tr>
-	 * <td><code>MappingType</code> of Source</td><td><code>ALL_FIELDS<code></td>
+	 * <td><code>MappingType</code> of Source</td><td><code>ALL_FIELDS</code></td>
 	 * </tr>
 	 * </table>
 	 * @param source instance of Target Class type that contains the data
@@ -317,9 +317,9 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	 * <tr>
 	 * <td><code>NullPointerControl</code></td><td><code>ALL</code></td>
 	 * </tr><tr>
-	 * <td><code>MappingType</code> of Destination</td><td><code>ALL_FIELDS<code></td>
+	 * <td><code>MappingType</code> of Destination</td><td><code>ALL_FIELDS</code></td>
 	 * </tr><tr>
-	 * <td><code>MappingType</code> of Source</td><td><code>ALL_FIELDS<code></td>
+	 * <td><code>MappingType</code> of Source</td><td><code>ALL_FIELDS</code></td>
 	 * </tr>
 	 * </table>
 	 * @param destination instance of Configured Class type to enrich
@@ -340,9 +340,9 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	 * <tr>
 	 * <td><code>NullPointerControl</code></td><td><code>NOT_ANY</code></td>
 	 * </tr><tr>
-	 * <td><code>MappingType</code> of Destination</td><td><code>ALL_FIELDS<code></td>
+	 * <td><code>MappingType</code> of Destination</td><td><code>ALL_FIELDS</code></td>
 	 * </tr><tr>
-	 * <td><code>MappingType</code> of Source</td><td><code>ALL_FIELDS<code></td>
+	 * <td><code>MappingType</code> of Source</td><td><code>ALL_FIELDS</code></td>
 	 * </tr>
 	 * </table>
 	 * @param destination instance of Configured Class type to enrich
@@ -362,7 +362,7 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	 * <tr>
 	 * <td><code>NullPointerControl</code></td><td><code>SOURCE</code></td>
 	 * </tr><tr>
-	 * <td><code>MappingType</code> of Destination</td><td><code>ALL_FIELDS<code></td>
+	 * <td><code>MappingType</code> of Destination</td><td><code>ALL_FIELDS</code></td>
 	 * </tr><tr>
 	 * <td><code>MappingType</code> of Source</td><td>mtSource</td>
 	 * </tr>
@@ -384,7 +384,7 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	 * <tr>
 	 * <td><code>NullPointerControl</code></td><td>nullPointerControl</td>
 	 * </tr><tr>
-	 * <td><code>MappingType</code> of Destination</td><td><code>ALL_FIELDS<code></td>
+	 * <td><code>MappingType</code> of Destination</td><td><code>ALL_FIELDS</code></td>
 	 * </tr><tr>
 	 * <td><code>MappingType</code> of Source</td><td>mtSource</td>
 	 * </tr>
@@ -458,9 +458,9 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	 * <tr>
 	 * <td><code>NullPointerControl</code></td><td><code>SOURCE</code></td>
 	 * </tr><tr>
-	 * <td><code>MappingType</code> of Destination</td><td><code>ALL_FIELDS<code></td>
+	 * <td><code>MappingType</code> of Destination</td><td><code>ALL_FIELDS</code></td>
 	 * </tr><tr>
-	 * <td><code>MappingType</code> of Source</td><td><code>ALL_FIELDS<code></td>
+	 * <td><code>MappingType</code> of Source</td><td><code>ALL_FIELDS</code></td>
 	 * </tr>
 	 * </table>
 	 * @param destinationClass class to create
@@ -481,9 +481,9 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	 * <tr>
 	 * <td><code>NullPointerControl</code></td><td><code>NOT_ANY</code></td>
 	 * </tr><tr>
-	 * <td><code>MappingType</code> of Destination</td><td><code>ALL_FIELDS<code></td>
+	 * <td><code>MappingType</code> of Destination</td><td><code>ALL_FIELDS</code></td>
 	 * </tr><tr>
-	 * <td><code>MappingType</code> of Source</td><td><code>ALL_FIELDS<code></td>
+	 * <td><code>MappingType</code> of Source</td><td><code>ALL_FIELDS</code></td>
 	 * </tr>
 	 * </table>
 	 * @param source instance of Configured Class that contains the data
@@ -503,9 +503,9 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	 * <tr>
 	 * <td><code>NullPointerControl</code></td><td><code>ALL</code></td>
 	 * </tr><tr>
-	 * <td><code>MappingType</code> of Destination</td><td><code>ALL_FIELDS<code></td>
+	 * <td><code>MappingType</code> of Destination</td><td><code>ALL_FIELDS</code></td>
 	 * </tr><tr>
-	 * <td><code>MappingType</code> of Source</td><td><code>ALL_FIELDS<code></td>
+	 * <td><code>MappingType</code> of Source</td><td><code>ALL_FIELDS</code></td>
 	 * </tr>
 	 * </table>
 	 * @param destination instance of Target Class to enrich
@@ -526,9 +526,9 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	 * <tr>
 	 * <td><code>NullPointerControl</code></td><td><code>NOT_ANY</code></td>
 	 * </tr><tr>
-	 * <td><code>MappingType</code> of Destination</td><td><code>ALL_FIELDS<code></td>
+	 * <td><code>MappingType</code> of Destination</td><td><code>ALL_FIELDS</code></td>
 	 * </tr><tr>
-	 * <td><code>MappingType</code> of Source</td><td><code>ALL_FIELDS<code></td>
+	 * <td><code>MappingType</code> of Source</td><td><code>ALL_FIELDS</code></td>
 	 * </tr>
 	 * </table>
 	 * @param destination instance of Target Class to enrich
@@ -548,7 +548,7 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	 * <tr>
 	 * <td><code>NullPointerControl</code></td><td><code>SOURCE</code></td>
 	 * </tr><tr>
-	 * <td><code>MappingType</code> of Destination</td><td><code>ALL_FIELDS<code></td>
+	 * <td><code>MappingType</code> of Destination</td><td><code>ALL_FIELDS</code></td>
 	 * </tr><tr>
 	 * <td><code>MappingType</code> of Source</td><td>mtSource</td>
 	 * </tr>
@@ -571,7 +571,7 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	 * <tr>
 	 * <td><code>NullPointerControl</code></td><td>nullPointerControl</td>
 	 * </tr><tr>
-	 * <td><code>MappingType</code> of Destination</td><td><code>ALL_FIELDS<code></td>
+	 * <td><code>MappingType</code> of Destination</td><td><code>ALL_FIELDS</code></td>
 	 * </tr><tr>
 	 * <td><code>MappingType</code> of Source</td><td>mtSource</td>
 	 * </tr>
