@@ -17,13 +17,13 @@
 package com.googlecode.jmapper;
 
 /**
- * <p>This Interface contains all potential combinations between the enumerations:
+ * <p>This Interface contains all potential combinations between the enumerations:</p> 
  * <ul>
  * <li><code>NullPointerControl</code></li>
  * <li><code>MappingType</code> of &lt;D&gt;</li>
  * <li><code>MappingType</code> of &lt;S&gt;</li>
  * </ul>
- * </p> 
+ * 
  * @author Alessandro Vurro
  *
  * @param <D> Type of the Destination Class

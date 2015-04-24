@@ -73,7 +73,7 @@ public class Annotation {
 	/**
 	 * Fill the MappedField given as input with the custom accessors (if defined).
 	 * @param configuredClass field's class
-	 * @param mappedFields
+	 * @param mappedField mapped field
 	 */
 	public static void fillMappedField(Class<?> configuredClass, MappedField mappedField){
 		
@@ -125,7 +125,7 @@ public class Annotation {
 	 * @param clazz class to check
 	 * @param fieldName name to find
 	 * @param isOpposite true if accessor methods to check belong to the opposite field, false otherwise
-	 * @return
+	 * @return JMapAccessor if exists, null otherwise
 	 */
 	public static JMapAccessor getClassAccessors(Class<?> clazz, String fieldName, boolean isOpposite){
 		return getAccessor(clazz, clazz.getAnnotations(),fieldName,isOpposite);
@@ -136,7 +136,7 @@ public class Annotation {
 	 * @param annotations annotations to check
 	 * @param fieldName field name
 	 * @param isOpposite true if accessor methods to check belong to the opposite field, false otherwise
-	 * @return
+	 * @return JMapAccessor if exists, null otherwise
 	 */
 	private static JMapAccessor getAccessor(Class<?> clazz, java.lang.annotation.Annotation[] annotations, String fieldName, boolean isOpposite){
 		for (java.lang.annotation.Annotation annotation : annotations) {
@@ -220,7 +220,7 @@ public class Annotation {
 	
 	/**
 	 * Returns true if the class is configured in annotation, false otherwise.
-	 * @param aClass a class
+	 * @param clazz a class
 	 * @return true if the class is configured in annotation, false otherwise
 	 */
 	public static boolean isMapped(Class<?> clazz){

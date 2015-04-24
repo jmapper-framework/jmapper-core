@@ -49,8 +49,8 @@ public enum MSG {
 			
 	/**
 	 * Select the key message and replaces the values passed as input with placeholders.
-	 * @param key
-	 * @param values
+	 * @param key message key
+	 * @param values content to replaces
 	 * @return returns the resulting string
 	 */
 	public String message(String key,String... values){

@@ -46,6 +46,8 @@ public final class Error {
 	/**
 	 * Thrown when the explicit conversion method defined has a null pointer.<br>
 	 * Used in the generated code, in case of dynamic methods defined.
+	 * @param e javassist exception
+	 * @param methodName method name
 	 * @param className class name
 	 */
 	public static void illegalCode(Exception e, String methodName, String className){
@@ -54,6 +56,8 @@ public final class Error {
 	/**
 	 * Thrown when the explicit conversion method defined has a null pointer.<br>
 	 * Used in the generated code, in case of dynamic methods defined.
+	 * @param e javassist exception
+	 * @param methodName method name
 	 * @param className class name
 	 * @param path xml path file
 	 */
@@ -203,7 +207,8 @@ public final class Error {
 	}
 	/**
 	 * Thrown if class is present in xml file.
-	 * @param aClass Class analyzed
+	  * @param path xml path
+	* @param aClass Class analyzed
 	 */
 	public static void xmlClassExistent(String path, Class<?> aClass){
 		throw new XmlMappingClassExistException (MSG.INSTANCE.message(xmlMappingClassExistException1,aClass.getSimpleName(),path));

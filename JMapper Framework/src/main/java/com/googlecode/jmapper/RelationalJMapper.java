@@ -40,42 +40,49 @@ import com.googlecode.jmapper.xml.XML;
  * RelationalJMapper takes as input one configured Class.<br>
  * For configured Class, we mean a Class that contains fields configured with annotation or XML.<br>
  * It is mandatory that all fields have defined classes.<br>
- * For example:<pre><code>class Destination {
+ * For example:
+ * <pre><code>
+ * class Destination {
  * 
- *   {@code @JMap}(  attributes={"field1Class1","field1Class2","field1Class3"}, 
+ *   @JMap(  attributes={"field1Class1","field1Class2","field1Class3"}, 
  *   	  classes={Class1.class,Class2.class,Class3.class})
  *	 private String field1;
- *   {@code @JMap}(  attributes={"field2Class1","field2Class2","field2Class3"}, 
+ *   @JMap(  attributes={"field2Class1","field2Class2","field2Class3"}, 
  *   	  classes={Class1.class,Class2.class,Class3.class})
  *	 private String field2;
- *   {@code @JMap}(  attributes={"field3Class1","field3Class2","field3Class3"}, 
+ *   @JMap(  attributes={"field3Class1","field3Class2","field3Class3"}, 
  *   	  classes={Class1.class,Class2.class,Class3.class})
  *	 private String field3;
  *  
  *  // getter and setter
- * }</pre></code>
+ * }
+ * </code></pre>
  * then invoke the methods manyToOne or oneToMany.<br><br>
  * With manyToOne method, the mapped classes are the source and the configured Class is the destination.<br>
  * manyToOne example:
- * <pre><code>	AnnotatedClass manyToOne = null;
-	Class1 class1 = new Class1("field1Class1", "field2Class1", "field3Class1");
-	Class2 class2 = new Class2("field1Class2", "field2Class2", "field3Class2");
-	Class3 class3 = new Class3("field1Class3", "field2Class3", "field3Class3");
-		
-	RelationalJMapper&lt;AnnotatedClass&gt; rm = new RelationalJMapper&lt;AnnotatedClass&gt;(AnnotatedClass.class);
-		
-	manyToOne = rm.manyToOne(class1);
-	manyToOne = rm.manyToOne(class2);
-	manyToOne = rm.manyToOne(class3);</code></pre>
+ * <pre><code>
+ *         AnnotatedClass manyToOne = null;
+ *	Class1 class1 = new Class1("field1Class1", "field2Class1", "field3Class1");
+ *	Class2 class2 = new Class2("field1Class2", "field2Class2", "field3Class2");
+ *	Class3 class3 = new Class3("field1Class3", "field2Class3", "field3Class3");
+ *		
+ *	RelationalJMapper&lt;AnnotatedClass&gt; rm = new RelationalJMapper&lt;AnnotatedClass&gt;(AnnotatedClass.class);
+ *		
+ *	manyToOne = rm.manyToOne(class1);
+ *	manyToOne = rm.manyToOne(class2);
+ *	manyToOne = rm.manyToOne(class3);
+ *	</code></pre>
  * With oneToMany method, the mapped classes are the destination and the configured Class is the source.<br>
  * oneToMany example:
- * <pre><code>	AnnotatedClass annotatedClass = new AnnotatedClass("field1", "field2", "field3");
-		
-	RelationalJMapper&lt;AnnotatedClass&gt; rm = new RelationalJMapper&lt;AnnotatedClass&gt;(AnnotatedClass.class);
-		
-	Class1 class1 = rm.setDestinationClass(Class1.class).oneToMany(annotatedClass);
-	Class2 class2 = rm.setDestinationClass(Class2.class).oneToMany(annotatedClass);
-	Class3 class3 = rm.setDestinationClass(Class3.class).oneToMany(annotatedClass);</code></pre>  
+ * <pre><code>
+ *         AnnotatedClass annotatedClass = new AnnotatedClass("field1", "field2", "field3");
+ *		
+ *	RelationalJMapper&lt;AnnotatedClass&gt; rm = new RelationalJMapper&lt;AnnotatedClass&gt;(AnnotatedClass.class);
+ *		
+ *	Class1 class1 = rm.setDestinationClass(Class1.class).oneToMany(annotatedClass);
+ *	Class2 class2 = rm.setDestinationClass(Class2.class).oneToMany(annotatedClass);
+ *	Class3 class3 = rm.setDestinationClass(Class3.class).oneToMany(annotatedClass);
+ *  </code></pre>  
  * For more information see {@link RelationalJMapper#manyToOne manyToOne} and {@link RelationalJMapper#oneToMany oneToMany} Methods<br>
  *
  * @author Alessandro Vurro
