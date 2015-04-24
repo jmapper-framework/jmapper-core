@@ -260,8 +260,8 @@ public final class ConfigReader {
 	/**
 	 * Fill fields with they custom methods.
 	 * 
-	 * @param configuredField
-	 * @param targetField
+	 * @param configuredField configured field
+	 * @param targetField target field
 	 */
 	public void loadJMapAccessor(MappedField configuredField, MappedField targetField) {
 		

@@ -61,8 +61,8 @@ public final class OperationAnalyzer {
 	
 	/**
 	 * This method analyzes the fields, calculates the info and returns true if operation is undefined.
-	 * @param destination
-	 * @param source
+	 * @param destination destination field
+	 * @param source source field
 	 * @return returns true if an operation between fields exists
 	 * @see InfoOperation
 	 */

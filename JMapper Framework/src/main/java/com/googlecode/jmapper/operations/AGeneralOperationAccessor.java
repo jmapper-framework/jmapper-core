@@ -74,7 +74,7 @@ public abstract class AGeneralOperationAccessor {
 		
 	/**
 	 * Setting of the first part of the getDestination path.
-	 * @param initialDGetPath
+	 * @param initialDGetPath path relative to get method of destination instance
 	 * @return this instance
 	 */
 	public final AGeneralOperationAccessor initialDGetPath(String initialDGetPath) {
@@ -84,7 +84,7 @@ public abstract class AGeneralOperationAccessor {
 	
 	/**
 	 * Setting of the first part of the setDestination path.
-	 * @param initialDSetPath
+	 * @param initialDSetPath path relative to set method of destination instance
 	 * @return this instance
 	 */
 	public final AGeneralOperationAccessor initialDSetPath(String initialDSetPath) {
@@ -94,7 +94,7 @@ public abstract class AGeneralOperationAccessor {
 	
 	/**
 	 * Setting of the first part of the initialSGetPath path.
-	 * @param initialSGetPath
+	 * @param initialSGetPath path relative to get method of source instance
 	 * @return this instance
 	 */
 	public final AGeneralOperationAccessor initialSGetPath(String initialSGetPath) {
@@ -105,7 +105,7 @@ public abstract class AGeneralOperationAccessor {
 	
 	/**
 	 * Setting of destination field.
-	 * @param aDestinationField
+	 * @param aDestinationField destination field
 	 * @return this instance
 	 */
 	public final AGeneralOperationAccessor setDestinationField(MappedField aDestinationField) {	
@@ -115,7 +115,7 @@ public abstract class AGeneralOperationAccessor {
 	
 	/**
 	 * Setting of source field.
-	 * @param aSourceField
+	 * @param aSourceField source field
 	 * @return this instance
 	 */
 	public final AGeneralOperationAccessor setSourceField(MappedField aSourceField) {	
@@ -124,8 +124,8 @@ public abstract class AGeneralOperationAccessor {
 	}
 	
 	/**
-	 * True if the set destination method shouldn't be used
-	 * @param avoidSet
+	 * True if the set destination method shouldn't be used.
+	 * @param avoidSet avoid set
 	 * @return
 	 */
 	public final AGeneralOperationAccessor avoidDestinationSet(boolean avoidSet){
@@ -184,21 +184,21 @@ public abstract class AGeneralOperationAccessor {
 	
 	/**
 	 * Setting of destination mapping type. 
-	 * @param mappingTypeD
+	 * @param mappingTypeD mapping type for destination
 	 * @return this instance
 	 */
 	public final AGeneralOperationAccessor setMtd(MappingType mappingTypeD) { mtd = mappingTypeD; return this;	}
 	
 	/**
 	 * Setting of source mapping type.
-	 * @param mappingTypeS
+	 * @param mappingTypeS mapping type for source
 	 * @return this instance
 	 */
 	public final AGeneralOperationAccessor setMts(MappingType mappingTypeS) { mts = mappingTypeS; return this;	}
 	
 	/**
 	 * Setting of operation informations.
-	 * @param aInfo
+	 * @param aInfo operation informations
 	 * @return this instance
 	 */
 	public final AGeneralOperationAccessor setInfoOperation(InfoOperation aInfo) { info = aInfo;	return this;}

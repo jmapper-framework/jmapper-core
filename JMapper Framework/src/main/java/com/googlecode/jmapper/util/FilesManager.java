@@ -433,7 +433,7 @@ public class FilesManager {
 	 * @param file file to rewrite
 	 * @param aClass Class that represent the file
 	 * @param cleanAll true if all annotation should be delete, false otherwise
-	 * @throws IOException
+	 * @throws IOException in case of read or write errors
 	 */
 	public static void cleanClass(File file,Class<?> aClass,boolean cleanAll) throws IOException{
 		writeFile(file,linesToWrite(file, aClass, cleanAll));
@@ -791,6 +791,7 @@ public class FilesManager {
 	/**
 	 * Method used to check the file existence, for test purpose.
 	 * @param path Path of the file to check
+	 * @return true if exists and it's file
 	 */
 	public static boolean verifyFileExistence(String path){
 		File file = new File(path);
@@ -819,8 +820,8 @@ public class FilesManager {
 	/**
 	 * Returns a list with the paths of all java classes.
 	 * @return a List with the paths of all java classes
-	 * @throws FileNotFoundException
-	 * @throws LoadingFileException
+	 * @throws FileNotFoundException if file not found
+	 * @throws LoadingFileException if isn't possible load this file
 	 */
 	public static List<String> classesPath() throws FileNotFoundException, LoadingFileException {
 		List<File> files = getJavaFiles(); 
@@ -835,9 +836,9 @@ public class FilesManager {
 	/**
 	 * Returns a list with all annotated files.
 	 * @return a List with all annotated files 
-	 * @throws FileNotFoundException 
-	 * @throws LoadingFileException
-	 * @throws IOException
+	 * @throws FileNotFoundException if file not found
+	 * @throws LoadingFileException if isn't possible load this file
+	 * @throws IOException other cases
 	 */
 	public static List<File> annotatedFiles() throws FileNotFoundException, LoadingFileException, IOException{
 		
@@ -851,9 +852,9 @@ public class FilesManager {
 	/**
 	 * Returns a list with all annotated classes
 	 * @return a List with all annotated classes 
-	 * @throws LoadingFileException
-	 * @throws IOException
-	 * @throws ClassNotFoundException
+	 * @throws LoadingFileException if isn't possible load this file
+	 * @throws ClassNotFoundException class not found
+	 * @throws IOException other cases
 	 */
 	public static List<Class<?>> annotatedClasses() throws LoadingFileException, IOException, ClassNotFoundException{
 		
@@ -869,7 +870,7 @@ public class FilesManager {
 	 * Returns the package of the class represented by this file.
 	 * @param file file to check
 	 * @return the package of this class
-	 * @throws IOException
+	 * @throws IOException problems with reading the file
 	 */
 	private static String getPackage(File file) throws IOException{
 		for (String line : readFile(file))
@@ -884,8 +885,8 @@ public class FilesManager {
 	 * Returns a list of files that are of *.java type.
 	 * @param suffix
 	 * @return a list with files that have this suffix
-	 * @throws FileNotFoundException
-	 * @throws LoadingFileException
+	 * @throws FileNotFoundException if file not found
+	 * @throws LoadingFileException if isn't possible load this file
 	 */
 	private static List<File> getJavaFiles() throws FileNotFoundException, LoadingFileException{
 		List<File> files = new ArrayList<File>();
@@ -912,7 +913,7 @@ public class FilesManager {
 	 * Returns true if the file, relative to path, containts the @JMap annotation.
 	 * @param path file path
 	 * @return true if the file, relative to path, contains the @JMap annotation
-	 * @throws IOException
+	 * @throws IOException in case of file manipulation problems
 	 */
 	public static boolean isFileAnnotated(String path, Class<?> aClass) throws IOException{
 		return isFileAnnotated(new File(path), aClass);
@@ -921,7 +922,7 @@ public class FilesManager {
 	 * Returns true if the file, containts the @JMap annotation.
 	 * @param file file to check
 	 * @return true if this file contains the @JMap annotation
-	 * @throws IOException
+	 * @throws IOException in case of file manipulation problems
 	 */
 	private static boolean isFileAnnotated(File file, Class<?> aClass) throws IOException{
 		
@@ -947,7 +948,7 @@ public class FilesManager {
 	/**
 	 * @param file
 	 * @return true if this file contains the @JMap annotation
-	 * @throws IOException
+	 * @throws IOException in case of file manipulation problems
 	 */
 	private static boolean isFileAnnotated(File file) throws IOException{
 		for (String line : readFile(file))
@@ -960,7 +961,7 @@ public class FilesManager {
 	 * Returns a list with the file lines.
 	 * @param file file to read
 	 * @return a List with the file lines
-	 * @throws IOException
+	 * @throws IOException in case of file manipulation problems
 	 */
 	private static List<String> readFile(File file) throws IOException{
 		FileReader fr=new FileReader(file);
@@ -977,7 +978,7 @@ public class FilesManager {
 	 * Writes the lines given in input in file.
 	 * @param file file to write
 	 * @param lines lines to write
-	 * @throws IOException
+	 * @throws IOException in case of file manipulation problems
 	 */
 	private static void writeFile(File file, List<String> lines) throws IOException{
 		if (!file.exists()) file.createNewFile();
@@ -996,7 +997,7 @@ public class FilesManager {
 	/**
 	 * This method writes the xml file starting from an XmlJmapper object, following the xmlPath.
 	 * @param jmapper XmlJmapper object that will be used for write the xml mapping file
-	 * @throws IOException
+	 * @throws IOException in case of file manipulation problems
 	 */
 	public static void write(XmlJmapper jmapper, String xmlPath) throws IOException{
 		XStream xstream = new XStream();
@@ -1010,7 +1011,7 @@ public class FilesManager {
 	 * 
 	 * @param xmlPath path to xml file
 	 * @return XmlJmapper object
-	 * @throws FileNotFoundException 
+	 * @throws FileNotFoundException if file not found
 	 */
 	public static XmlJmapper readAtDevelopmentTime(String xmlPath) throws FileNotFoundException{
 		return toXmlJmapper(xmlPath,new FileInputStream(searchFile(xmlPath)));
@@ -1022,8 +1023,8 @@ public class FilesManager {
 	 * 
 	 * @param xmlPath path to xml file
 	 * @return XmlJmapper object
-	 * @throws IOException 
-	 * @throws MalformedURLException 
+	 * @throws MalformedURLException in case of malformed url
+	 * @throws IOException other cases
 	 */
 	public static XmlJmapper readAtRuntime(String xmlPath) throws MalformedURLException, IOException{
 		return toXmlJmapper(xmlPath,loadResource(xmlPath));
@@ -1034,7 +1035,7 @@ public class FilesManager {
 	 * @param path file path
 	 * @param is stream to convert
 	 * @return an enriched XmlJmapper object
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException if file not found
 	 */
 	private static XmlJmapper toXmlJmapper(String path, InputStream is) throws FileNotFoundException{
 		XStream xstream = new XStream();

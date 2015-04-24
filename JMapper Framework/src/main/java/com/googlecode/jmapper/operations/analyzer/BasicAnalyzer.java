@@ -43,7 +43,7 @@ public final class BasicAnalyzer implements IOperationAnalyzer{
 
 	/**
 	 * Takes as input an xml object that represents the xml configuration.
-	 * @param aXml xml object
+	 * @param xml xml object
 	 */
 	public BasicAnalyzer(XML xml) {
 		this.xml = xml;

@@ -50,6 +50,7 @@ public abstract class AComplexOperation extends AGeneralOperation{
 	protected abstract StringBuilder fieldToCreate();
 	
 	/**
+	 * @param content content shared
 	 * @return a StringBuilder containing the shared code between fieldToCreate and existingField methods
 	 * @see AComplexOperation#fieldToCreate
 	 * @see AComplexOperation#existingField

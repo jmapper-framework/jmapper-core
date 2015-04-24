@@ -180,7 +180,12 @@ public class ConversionHandler {
 		return configClass.getSimpleName()+"$";
 	}
 	
-	/** Default constructor. */
+	/**
+	 * Default constructor.
+	 * @param xml xml to check
+	 * @param destinationClass destination class
+	 * @param sourceClass source class
+	 */
 	public ConversionHandler(XML xml, Class<?> destinationClass, Class<?> sourceClass) {
 		super();
 		this.xml = xml;

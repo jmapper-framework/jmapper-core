@@ -34,8 +34,8 @@ public class ResourceLoader {
 	 * Returns an instance of inputStream if resource exists, null otherwise.
 	 * @param resource resource to load
 	 * @return an inputStream of resource if exists, null otherwise
-	 * @throws MalformedURLException
-	 * @throws IOException
+	 * @throws MalformedURLException if url is malformed
+	 * @throws IOException if is impossible to open the stream
 	 */
 	public static InputStream loadResource(String resource) throws MalformedURLException, IOException{
 		resource = resource.trim();

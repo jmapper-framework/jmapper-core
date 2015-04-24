@@ -98,7 +98,7 @@ public class Annotation {
 	 * Returns JMapAccessor relative to this field, null if not present.
 	 * @param clazz field's class
 	 * @param field to check
-	 * @return
+	 * @return JMapAccessor if exists, null otherwise
 	 */
 	public static JMapAccessor getFieldAccessors(Class<?> clazz, Field field){
 		return getFieldAccessors(clazz,field,false, field.getName(),Constants.DEFAULT_FIELD_VALUE);
@@ -110,7 +110,7 @@ public class Annotation {
 	 * @param field field to check
 	 * @param isOpposite true if accessor methods to check belong to the opposite field, false otherwise
 	 * @param fieldNames name to find
-	 * @return
+	 * @return JMapAccessor if exists, null otherwise
 	 */
 	private static JMapAccessor getFieldAccessors(Class<?> clazz, Field field,boolean isOpposite, String... fieldNames){
 		for (String fieldName : fieldNames) {

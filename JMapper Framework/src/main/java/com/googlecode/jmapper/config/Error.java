@@ -144,7 +144,7 @@ public final class Error {
 	
 	/**
 	 * Thrown when global mapping is absent from XML configuration file.
-	 * @param aClass
+	 * @param aClass class
 	 */
 	public static void xmlGlobalExistent(Class<?> aClass) {
 		throw new XmlMappingGlobalExistException(MSG.INSTANCE.message(xmlMappingGlobalExistException, aClass.getSimpleName()));
@@ -152,14 +152,14 @@ public final class Error {
 	
 	/**
 	 * Thrown when global mapping is absent from XML configuration file.
-	 * @param aClass
+	 * @param aClass class
 	 */
 	public static void xmlGlobalInexistent(Class<?> aClass) {
 		throw new XmlMappingGlobalDoesNotExistException(MSG.INSTANCE.message(xmlMappingGlobalDoesNotExistException, aClass.getSimpleName()));
 	}
 	/**
 	 * Thrown when class doesn't exist from XML configuration file.
-	 * @param className
+	 * @param className class name
 	 */
 	public static void xmlMappingClassDoesNotExist(String className){
 		throw new XmlMappingClassDoesNotExistException(MSG.INSTANCE.message(xmlMappingClassDoesNotExistException2,className));
@@ -247,15 +247,15 @@ public final class Error {
 	  ####################################
 	*/
 	/**
-	 * Thrown when the file can't be loaded.
+	 * @throws LoadingFileException Thrown when the file can't be loaded.
 	 */
 	public static void unableLoadingFile() throws LoadingFileException{
 		throw new LoadingFileException(MSG.INSTANCE.message(loadingFileException2,Constants.MSG_FILE));	
 	}
 	/**
-	 * Thrown when the file isn't found.
+	 * @throws FileNotFoundException Thrown when the file isn't found.
 	 */
-	 public static void fileNotFound() throws FileNotFoundException{
+	public static void fileNotFound() throws FileNotFoundException{
 		 throw new FileNotFoundException(MSG.INSTANCE.message(FileNotFoundException2,Constants.MSG_FILE));
 	}
 	
@@ -266,9 +266,11 @@ public final class Error {
 	*/
 	
 	/**
-	 * Thrown when the file isn't found.
+	 * 
+	 * @param path file path
+	 * @throws FileNotFoundException Thrown when the file isn't found.
 	 */
-	 public static void fileNotFound(String path) throws FileNotFoundException{
+	public static void fileNotFound(String path) throws FileNotFoundException{
 		throw new FileNotFoundException(MSG.INSTANCE.message(FileNotFoundException1,path));
 	}
 	

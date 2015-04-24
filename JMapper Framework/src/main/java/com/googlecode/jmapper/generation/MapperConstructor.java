@@ -261,7 +261,9 @@ public class MapperConstructor extends MapperConstructorAccessor{
 
 	/**
 	 * The algorithm is recursive, the setting of the name needs to be done externally.
-	 * @param name the mapper class name */
+	 * @param name the mapper class name 
+	 * @return this instance
+	 * */
 	public MapperConstructor setMapperName(String name){
 		mapperName = name;
 		return this;

@@ -35,10 +35,10 @@ import com.googlecode.jmapper.generation.MapperBuilder;
  * <pre><code>
  * class Destination {
  * 
- *  {@code @JMap}
+ *  &#64;JMap
  *  String id;
  * 
- *  {@code @JMap("sourceField")}
+ *  &#64;JMap("sourceField")
  *  String destinationField;
  *  
  *  String other;

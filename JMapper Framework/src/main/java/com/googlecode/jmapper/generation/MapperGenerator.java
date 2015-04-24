@@ -52,8 +52,8 @@ public class MapperGenerator {
 	 * @param mapping parameter that containts the mappings
 	 * @param dynamicMethods dynamic methods to add
 	 * @return a new instance of IMapper interface, following the mappingBuilder specifications
-	 * @throws Exception 
-	 * @throws NotFoundException 
+	 * @throws NotFoundException if class to generate doesn't exists 
+	 * @throws Exception other cases
 	 */
 	public static Class<?> generateMapperClass(MapperConstructor mapping, Set<Method> dynamicMethods) throws NotFoundException, Exception{
 		
@@ -82,8 +82,7 @@ public class MapperGenerator {
 	 * @param constructors constructors of the class that will be generated
 	 * @param methods methods of the class that will be generated
 	 * @return the generated Class
-	 * @throws Exception 
-	 * @throws NotFoundException 
+	 * @throws Exception in case of illegal code
 	 */
 	private static Class<?> generateClass(String clazzName,List<Constructor> constructors,List<Method>	methods) throws Exception {
 		try{
@@ -127,7 +126,7 @@ public class MapperGenerator {
 	 * This method transforms classes in CtClass[]
 	 * @param classes
 	 * @return CtClass[] version of classes parameter
-	 * @throws Exception
+	 * @throws Exception in case of not found class
 	 */
 	private static CtClass[] toCtClass(Class<?>... classes) throws Exception{
 		ClassPool cp = ClassPool.getDefault();

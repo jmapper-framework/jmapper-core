@@ -91,12 +91,12 @@ public class ConversionMethod {
 	}
 	
 	/**
-	 * @param name
-	 * @param from
-	 * @param to
-	 * @param type
-	 * @param parameterNumber
-	 * @param content
+	 * @param name name
+	 * @param from source fields
+	 * @param to destination fields
+	 * @param type conversion type
+	 * @param parameterNumber parameters number
+	 * @param content conversion method content
 	 */
 	public ConversionMethod(String name, String[] from, String[] to, Type type,
 			ParameterNumber parameterNumber, String content, boolean avoidSet) {

@@ -98,7 +98,7 @@ public final class GeneralUtility {
 	
 	/**
 	 * Returns true if aClass is a wrapper or primitive class, false otherwise.
-	 * @param aClass
+	 * @param aClass class to check
 	 * @return returns true if aClass is a wrapper or primitive class, false otherwise
 	 */
 	public static boolean isBasic(Class<?> aClass){
@@ -107,7 +107,7 @@ public final class GeneralUtility {
 
 	/**
 	 * Returns true if str is an access modifier, false otherwise.
-	 * @param str
+	 * @param str string to check
 	 * @return returns true if str is an access modifier, false otherwise
 	 */
 	public static boolean isAccessModifier(String str){
@@ -123,6 +123,7 @@ public final class GeneralUtility {
 	 * Returns a list equivalent to the array given as input.
 	 * 
 	 * @param anArrayToConvert a generic Array to convert in a List
+	 * @param <T> array type
 	 * @return a List
 	 */
 	public static <T> List<T> toList(T[] anArrayToConvert)	{
@@ -137,6 +138,7 @@ public final class GeneralUtility {
 	 * 
 	 * @param aListToEnrich a List to enrich
 	 * @param anArrayToAdd an array to add
+	 * @param <T> list and array type
 	 */
 	public static <T> void enrichList(List<T> aListToEnrich, T[] anArrayToAdd)	{
 		if(anArrayToAdd!=null) aListToEnrich.addAll(Arrays.asList(anArrayToAdd));
@@ -144,7 +146,7 @@ public final class GeneralUtility {
 	
 	/**
 	 * Returns true if the specified Class parameter is a Collection, Map or Array, false otherwise.
-	 * @param aClass
+	 * @param aClass class to check
 	 * @return returns true if the specified Class parameter is a Collection, Map or Array, false otherwise
 	 * @see GeneralUtility#collectionIsAssignableFrom(Class) collectionIsAssignableFrom
 	 * @see GeneralUtility#mapIsAssignableFrom(Class) mapIsAssignableFrom
@@ -222,7 +224,7 @@ public final class GeneralUtility {
 	}
 	
 	/**
-	 * @param fieldName
+	 * @param fieldName field name
 	 * @return returns a getMethod name of the string given in input
 	 */
 	public static String mGet(String fieldName) {
@@ -230,7 +232,7 @@ public final class GeneralUtility {
 	}
 	
 	/**
-	 * @param fieldName
+	 * @param fieldName field name
 	 * @return returns a setMethod name of the string given in input
 	 */
 	public static String mSet(String fieldName) {
@@ -238,7 +240,7 @@ public final class GeneralUtility {
 	}
 	
 	/**
-	 * @param fieldName
+	 * @param fieldName field name
 	 * @return returns a isMethod name of the string given in input
 	 */
 	private static String mIs (String fieldName) {
@@ -247,8 +249,8 @@ public final class GeneralUtility {
 	
 	/**
 	 * if clazz is a boolean, this method calls mIs(field), in other cases this method calls the mGet(field)
-	 * @param clazz
-	 * @param field
+	 * @param clazz field class
+	 * @param field field
 	 * @return a get method name of the field
 	 * @see GeneralUtility#mIs(String)
 	 * @see GeneralUtility#mGet(String)
@@ -258,7 +260,7 @@ public final class GeneralUtility {
 	}	
 	
 	/**
-	 * @param clazz
+	 * @param clazz class to check
 	 * @return True if clazz is boolean (primitive or wrapper), false otherwise.
 	 */
 	public static boolean isBoolean(Class<?> clazz){
@@ -357,6 +359,13 @@ public final class GeneralUtility {
 		return replace(text, vars, "$");
 	}
 	
+	/**
+	 * Replaces the variables present in the text and returns the result.<br>
+	 * @param text text to edit
+	 * @param vars map with the string to replace as key and the respective value as value
+	 * @param prefix prefix
+	 * @return the text resultant
+	 */
 	private  static String replace (String text, Map<String, String> vars, String prefix){
 		for (Entry<String, String> var : vars.entrySet())
 			text = text.replaceAll(Pattern.quote(prefix+var.getKey()), var.getValue());

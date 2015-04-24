@@ -91,11 +91,10 @@ public class OperationFactory {
 	
 	/**
 	 * Returns an operation relative to operation to perform.
-	 * @param operationType operation type
-	 * @param sourceField source field
 	 * @param destinationField destination field
+	 * @param sourceField source field
 	 * @param info info operation
-	 * @param dynamicMethodsToWrite 
+	 * @param dynamicMethodsToWrite dynamic methods to write
 	 * @return a new instance of AGeneralOperation
 	 */
 	public AGeneralOperation getOperation(MappedField destinationField, MappedField sourceField, InfoOperation info, Set<Method> dynamicMethodsToWrite){

@@ -45,8 +45,8 @@ public final class ClassesManager {
 	 * this method verify that the istruction: 
 	 * <p><code> destination.putAll(source) </code><p>is permitted 
 	 * 
-	 * @param destination
-	 * @param source
+	 * @param destination destination field
+	 * @param source source field
 	 * @return true if the istruction destination.putAll(source) is permitted
 	 */
 	public static boolean isPutAllPermitted(Field destination,Field source){
@@ -62,8 +62,8 @@ public final class ClassesManager {
 	 * this method verify that the istruction: 
 	 * <p><code> destination.addAll(source) </code><p>is permitted 
 	 * 
-	 * @param destination
-	 * @param source
+	 * @param destination destination field
+	 * @param source source field
 	 * @return true if the istruction destination.addAll(source) is permitted
 	 */
 	public static boolean isAddAllPermitted(Field destination,Field source){
@@ -92,8 +92,8 @@ public final class ClassesManager {
 	 * <p><code> destination = source </code>
 	 * <p>is permitted, checking their generics also
 	 * 
-	 * @param destination
-	 * @param source
+	 * @param destination destination field
+	 * @param source source field
 	 * @return true if destination is assignable from source
 	 */
 	public static boolean isAssignableFrom(Field destination,Field source)  {
@@ -106,8 +106,8 @@ public final class ClassesManager {
 	}
 	/**
 	 * Returns true if destination is assignable from source analyzing autoboxing also.
-	 * @param destination
-	 * @param source
+	 * @param destination destination class
+	 * @param source source class
 	 * @return true if destination is assignable from source analyzing autoboxing also.
 	 */
 	public static boolean isAssignableFrom(Class<?> destination,Class<?> source){
@@ -240,6 +240,10 @@ public final class ClassesManager {
 		return false;
 	}
 	
+	/**
+	 * @param str string to split
+	 * @return pair split index
+	 */
 	private static int pairSplitIndex(String str){
 		
 		int openBracket = 0;
@@ -257,7 +261,7 @@ public final class ClassesManager {
 		return 0;
 	}
 	/**
-	 * @param field
+	 * @param field field to check
 	 * @return returns a string that specified the structure of the field, including its generic
 	 */
 	public static String getGenericString(Field field){
@@ -301,8 +305,8 @@ public final class ClassesManager {
 	
 	/**
 	 * Returns true if destination and source have the same structure.
-	 * @param destination
-	 * @param source
+	 * @param destination destination field
+	 * @param source source field
 	 * @return returns true if destination and source have the same structure
 	 */
 	public static boolean areEqual(Field destination,Field source){
@@ -351,6 +355,7 @@ public final class ClassesManager {
 	 * returns true if almost one class is configured, false otherwise.
 	 * @param dClass class to verify
 	 * @param sClass class to verify
+	 * @param xml xml to check
 	 * @return true if almost one class is configured, false otherwise.
 	 */
 	public static boolean areMappedObjects(Class<?> dClass,Class<?> sClass,XML xml){
@@ -360,6 +365,7 @@ public final class ClassesManager {
 	/**
 	 * Returns true if the class is configured in annotation or xml, false otherwise.
 	 * @param aClass a class
+	 * @param xml xml to check
 	 * @return true if the class is configured in annotation or xml, false otherwise
 	 */
 	private static boolean isMapped(Class<?> aClass,XML xml){
@@ -451,7 +457,6 @@ public final class ClassesManager {
 	 * Verifies that the accessor methods are compliant with the naming convention.
 	 * @param clazz a class to check
 	 * @param fields fields to control
-	 * @see <a href="http://en.wikipedia.org/wiki/JavaBean">javaBean conventions</a>
 	 */
 	public static void verifiesAccessorMethods(Class<?> clazz, MappedField... fields){
 		verifyGetterMethods(clazz, fields);
@@ -462,7 +467,6 @@ public final class ClassesManager {
 	 * Verifies that the getter methods are compliant with the naming convention.
 	 * @param clazz a class to check
 	 * @param fields fields to control
-	 * @see <a href="http://en.wikipedia.org/wiki/JavaBean">javaBean conventions</a>
 	 */
 	public static void verifyGetterMethods(Class<?> clazz, MappedField... fields){
 		
@@ -504,7 +508,6 @@ public final class ClassesManager {
 	 * Verifies that the setter methods are compliant with the naming convention.
 	 * @param clazz a class to check
 	 * @param fields fields to control
-	 * @see <a href="http://en.wikipedia.org/wiki/JavaBean">javaBean conventions</a>
 	 */
 	private static void verifySetterMethods(Class<?> clazz, MappedField... fields){
 		String methodName = null;
@@ -582,12 +585,12 @@ public final class ClassesManager {
 	 * Extracts the generic class from the type of Mappedfield given as input.<br>
 	 * Example:
 	 * <code><br>MyClass {
-	 * <br>List&ltString&gt aList;
+	 * <br>List&lt;String&gt; aList;
 	 * <br> get and set...
 	 * <br>}
 	 * <br>
 	 * <br>Field aField = MyClass.class.getDeclaredField("aList");
-	 * <br>Class<?> generic = getCollectionItemClass(aField);
+	 * <br>Class&lt;?&gt; generic = getCollectionItemClass(aField);
 	 * <br>assertEqual(generic,String.class);</code>
 	 * @param generic a Field 
 	 * @return a Class contained in the class type of the field, returns null if no generics 
@@ -600,12 +603,12 @@ public final class ClassesManager {
 	 * Extracts the generic class from the type of field given as input.<br>
 	 * Example:
 	 * <code><br>MyClass {
-	 * <br>List&ltString&gt aList;
+	 * <br>List&lt;String&gt; aList;
 	 * <br> get and set...
 	 * <br>}
 	 * <br>
 	 * <br>Field aField = MyClass.class.getDeclaredField("aList");
-	 * <br>Class<?> generic = getCollectionItemClass(aField);
+	 * <br>Class&lt;?&gt; generic = getCollectionItemClass(aField);
 	 * <br>assertEqual(generic,String.class);</code>
 	 * @param generic a Field 
 	 * @return a Class contained in the class type of the field, returns null if no generics 
@@ -621,12 +624,12 @@ public final class ClassesManager {
 	 * Extracts the generic class from the type of Mappedfield given as input.<br>
 	 * Example:
 	 * <code><br>MyClass {
-	 * <br>Map&ltString, Integer&gt aMap;
+	 * <br>Map&lt;String, Integer&gt; aMap;
 	 * <br> get and set...
 	 * <br>}
 	 * <br>
 	 * <br>Field aField = MyClass.class.getDeclaredField("aMap");
-	 * <br>Class<?> generic = getGenericMapKeyItem(aField);
+	 * <br>Class&lt;?&gt; generic = getGenericMapKeyItem(aField);
 	 * <br>assertEqual(generic,String.class);</code>
 	 * @param generic a Field 
 	 * @return a Class contained in the class type of the field
@@ -639,12 +642,12 @@ public final class ClassesManager {
 	 * Extracts the generic class from the type of Mappedfield given as input.<br>
 	 * Example:
 	 * <code><br>MyClass {
-	 * <br>Map&ltString, Integer&gt aMap;
+	 * <br>Map&lt;String, Integer&gt; aMap;
 	 * <br> get and set...
 	 * <br>}
 	 * <br>
 	 * <br>Field aField = MyClass.class.getDeclaredField("aMap");
-	 * <br>Class<?> generic = getGenericMapKeyItem(aField);
+	 * <br>Class&lt;?&gt; generic = getGenericMapKeyItem(aField);
 	 * <br>assertEqual(generic,String.class);</code>
 	 * @param generic a Field 
 	 * @return a Class contained in the class type of the field
@@ -660,12 +663,12 @@ public final class ClassesManager {
 	 * Extracts the generic class from the type of Mappedfield given as input.<br>
 	 * Example:
 	 * <code><br>MyClass {
-	 * <br>Map&ltString, Integer&gt aMap;
+	 * <br>Map&lt;String, Integer&gt; aMap;
 	 * <br> get and set...
 	 * <br>}
 	 * <br>
 	 * <br>Field aField = MyClass.class.getGenericMapValueItem("aMap");
-	 * <br>Class<?> generic = getGenericMapKeyItem(aField);
+	 * <br>Class&lt;?&gt; generic = getGenericMapKeyItem(aField);
 	 * <br>assertEqual(generic,Integer.class);</code>
 	 * @param generic a Field 
 	 * @return a Class contained in the class type of the field
@@ -678,12 +681,12 @@ public final class ClassesManager {
 	 * Extracts the generic class from the type of field given as input.<br>
 	 * Example:
 	 * <code><br>MyClass {
-	 * <br>Map&ltString, Integer&gt aMap;
+	 * <br>Map&lt;String, Integer&gt; aMap;
 	 * <br> get and set...
 	 * <br>}
 	 * <br>
 	 * <br>Field aField = MyClass.class.getGenericMapValueItem("aMap");
-	 * <br>Class<?> generic = getGenericMapKeyItem(aField);
+	 * <br>Class&lt;?&gt; generic = getGenericMapKeyItem(aField);
 	 * <br>assertEqual(generic,Integer.class);</code>
 	 * @param generic a Field 
 	 * @return a Class contained in the class type of the field
@@ -704,7 +707,7 @@ public final class ClassesManager {
 	 * <br>}
 	 * <br>
 	 * <br>Field aField = MyClass.class.getDeclaredField("anArray");
-	 * <br>Class<?> item = getArrayItemClass(aField);
+	 * <br>Class&lt;?&gt; item = getArrayItemClass(aField);
 	 * <br>assertEqual(item,MyObj.class);</code>
 	 * @param field a Field 
 	 * @return a Class contained in the class type of the field

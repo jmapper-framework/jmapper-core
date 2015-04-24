@@ -57,7 +57,10 @@ public class MapperBuilder {
 		}
 	}
 
-	/** @return the existent mapper class */
+	/**
+	 * @param <D> Destination Class
+	 * @param <S> Source Class
+	 * @return the existent mapper class */
 	public <D, S> Class<IMapper<D, S>> get() {
 		
 		try {
@@ -68,7 +71,13 @@ public class MapperBuilder {
 		}
 	}
 
-	/** @return the generated mapper class */
+	/** 
+	 * @param <D> Destination Class
+	 * @param <S> Source Class
+	 * @return the generated mapper class 
+	 * @throws NotFoundException if class doesn't exists
+	 * @throws Exception in other cases such as illegalcode
+	 * */
 	public <D, S> Class<IMapper<D, S>> generate() throws NotFoundException,
 			Exception {
 		
