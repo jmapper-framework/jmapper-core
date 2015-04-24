@@ -13,6 +13,8 @@ JMapper Framework is a java bean to java bean mapper, allows you to perform the 
 
 ##the most important feature is the ease of use
 
+[![Join the chat at https://gitter.im/jmapper-framework/jmapper-core](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/jmapper-framework/jmapper-core?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 <b>Configuration</b>
 
 ```
