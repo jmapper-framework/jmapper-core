@@ -45,19 +45,19 @@ public class MappedArrayOperation extends ARecursiveOperation {
 		vars.put("source"                  ,s(getSourceConverted()));
 		vars.put("destination"             ,c("dep"));
 		vars.put("i"                       ,c("index"));
-		vars.put("index"                   ,c("counter"));
+		vars.put("counter"                 ,c("counter"));
 		vars.put("getDestination()"        ,s(getDestination()));
 		vars.put("setDestination(result)"  ,s(setDestination(c("newDestination"))));
 		vars.put("result"                  ,c("newDestination"));
 		
 		return write(replace$("   $dClass[] $destination = $getDestination();"
 				  + newLine + "   $dClass[] $result = new $dClass[$destination.length + $source.length];"
-				  + newLine + "   int $index = 0;"
+				  + newLine + "   int $counter = 0;"
 				  + newLine + "   for(int $i = $destination.length-1;$i >=0;$i--){"
-				  + newLine + "   $result[$index++] = $destination[$i];"
+				  + newLine + "   $result[$counter++] = $destination[$i];"
 				  + newLine + "   }"
 				  + newLine + "   for(int $i = $source.length-1;$i >=0;$i--){"
-				  + newLine + "   $result[$index++] = $source[$i];"
+				  + newLine + "   $result[$counter++] = $source[$i];"
 				  + newLine + "   }"
 				  + newLine +     "$setDestination(result)",vars));
 	}
