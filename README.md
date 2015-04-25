@@ -51,10 +51,10 @@ With JMapper we have all the advantages of dynamic mapping with the performance 
    <version>1.3.1</version>
 </dependency>
 ```
-**Do you like the project? think it has good potential?**
+**Do you like the project? think it has good potential?**<br>
 Let us know any malfunctions, new features and more through the [JMapper Framework group](https://groups.google.com/forum/#!forum/jmapper-framework).<br>
 
-<b>[Here](https://code.google.com/p/jmapper-framework/wiki/Introduction?tm=6) you can find the complete documentation</b>
+<b>for a complete guide consult the [wiki](https://code.google.com/p/jmapper-framework/wiki/Introduction?tm=6) pages</b>
 
 Not using Maven or any other software project management? Follow this [link](http://search.maven.org/#browse%7C642809664) to download the jar.<br><b>Required java 1.5+</b>
 
