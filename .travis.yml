@@ -1,6 +1,6 @@
 language: java
 before_install: cd "JMapper Framework"
-install: mvn install -DskipTests=true -Dgpg.skip=true
+install: mvn install -DskipTests=false -Dgpg.skip=true
 jdk:
   - openjdk6
   - openjdk7
