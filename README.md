@@ -44,11 +44,11 @@ Destination destination = (Destination) mapper.getDestination(source);
 ```
 destination ["id", "sourceField", null]
 ```
-With JMapper we have all the advantages of dynamic mapping with the performance of static code, with 0 memory consumption.<br>**Required java 1.5+**<br><br>
+*With JMapper we have all the advantages of dynamic mapping with the performance of static code, with 0 memory consumption.*<br><br>
 **Dependency information**
 <br>[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.googlecode.jmapper-framework/jmapper-core/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.googlecode.jmapper-framework/jmapper-core) [![Dependency Status] (https://www.versioneye.com/user/projects/5539172d1d2989cb78000002/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5539172d1d2989cb78000002) 
 
-<b>for a complete guide consult the [wiki](https://code.google.com/p/jmapper-framework/wiki/Introduction?tm=6) pages</b><br><br>
+**For a complete guide**<br>[wiki](https://code.google.com/p/jmapper-framework/wiki/Introduction?tm=6) pages<br><br>
 **Do you like the project? think it has good potential?**<br>
 Let us know any malfunctions, new features and more through the [JMapper Framework group](https://groups.google.com/forum/#!forum/jmapper-framework).<br><br>
 **You want to do a friendly chat?**<br>
