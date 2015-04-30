@@ -1,6 +1,6 @@
 #JMapper Framework
 
-  [![Build Status](https://travis-ci.org/jmapper-framework/jmapper-core.svg?branch=master)](https://travis-ci.org/jmapper-framework/jmapper-core)  [![Dependency Status] (https://www.versioneye.com/user/projects/5539172d1d2989cb78000002/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5539172d1d2989cb78000002) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.googlecode.jmapper-framework/jmapper-core/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.googlecode.jmapper-framework/jmapper-core)
+  [![Build Status](https://travis-ci.org/jmapper-framework/jmapper-core.svg?branch=master)](https://travis-ci.org/jmapper-framework/jmapper-core)  [![Coverage Status](https://coveralls.io/repos/jmapper-framework/jmapper-core/badge.svg)](https://coveralls.io/r/jmapper-framework/jmapper-core)
 
 <b>We are in migration phase, please visit [code.google.com/p/jmapper-framework](https://code.google.com/p/jmapper-framework/) for more informations.</b>
 
@@ -44,16 +44,10 @@ Destination destination = (Destination) mapper.getDestination(source);
 ```
 destination ["id", "sourceField", null]
 ```
-With JMapper we have all the advantages of dynamic mapping with the performance of static code, with 0 memory consumption.
+With JMapper we have all the advantages of dynamic mapping with the performance of static code, with 0 memory consumption.<br>**Required java 1.5+**<br><br>
+**Dependency information**
+<br>[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.googlecode.jmapper-framework/jmapper-core/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.googlecode.jmapper-framework/jmapper-core) [![Dependency Status] (https://www.versioneye.com/user/projects/5539172d1d2989cb78000002/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5539172d1d2989cb78000002) 
 
-```
-<dependency>
-   <groupId>com.googlecode.jmapper-framework</groupId>
-   <artifactId>jmapper-core</artifactId>
-   <version>1.3.1</version>
-</dependency>
-```
-<b>Required java 1.5+</b><br><br>
 <b>for a complete guide consult the [wiki](https://code.google.com/p/jmapper-framework/wiki/Introduction?tm=6) pages</b><br><br>
 **Do you like the project? think it has good potential?**<br>
 Let us know any malfunctions, new features and more through the [JMapper Framework group](https://groups.google.com/forum/#!forum/jmapper-framework).<br><br>
