@@ -54,11 +54,12 @@ With JMapper we have all the advantages of dynamic mapping with the performance 
 </dependency>
 ```
 <b>Required java 1.5+</b><br><br>
+<b>for a complete guide consult the [wiki](https://code.google.com/p/jmapper-framework/wiki/Introduction?tm=6) pages</b><br><br>
 **Do you like the project? think it has good potential?**<br>
 Let us know any malfunctions, new features and more through the [JMapper Framework group](https://groups.google.com/forum/#!forum/jmapper-framework).<br><br>
 **You want to do a friendly chat?**<br>
 [![Join the chat at https://gitter.im/jmapper-framework/jmapper-core](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/jmapper-framework/jmapper-core?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)<br><br>
-<b>for a complete guide consult the [wiki](https://code.google.com/p/jmapper-framework/wiki/Introduction?tm=6) pages</b><br><br>
+
 **Follow us on twitter**<br>
 <a href="https://twitter.com/jmapper_av"><img src="http://www.teachthought.com/wp-content/uploads/2012/10/twitter-logo-break.png" width="120" height="120" /></a>
 
