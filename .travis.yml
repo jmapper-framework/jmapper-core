@@ -2,7 +2,7 @@ language: java
 before_install: cd "JMapper Framework"
 install: mvn install -DskipTests=false -Dgpg.skip=true
 after_success:
-  - mvn clean cobertura:cobertura coveralls:report
+  - mvn clean -DTRAVIS_JOB_ID=$JMapperCore cobertura:cobertura coveralls:report
   
 jdk:
   - openjdk6
