@@ -1,8 +1,8 @@
 #JMapper Framework
 
-  [![Build Status](https://travis-ci.org/jmapper-framework/jmapper-core.svg?branch=master)](https://travis-ci.org/jmapper-framework/jmapper-core)  [![Coverage Status](https://coveralls.io/repos/jmapper-framework/jmapper-core/badge.svg)](https://coveralls.io/r/jmapper-framework/jmapper-core)
+  [![Build Status](https://travis-ci.org/jmapper-framework/jmapper-core.svg?branch=master)](https://travis-ci.org/jmapper-framework/jmapper-core)
 
-<b>We are in migration phase, please visit [code.google.com/p/jmapper-framework](https://code.google.com/p/jmapper-framework/) for more informations.</b>
+<b>We are in migration phase, please visit [code.google.com/p/jmapper-framework](https://code.google.com/p/jmapper-framework/) for more information.</b>
 
 JMapper Framework is a java bean to java bean mapper, allows you to perform the passage of data dinamically with annotations and / or XML.<br>With JMapper you can:
 
