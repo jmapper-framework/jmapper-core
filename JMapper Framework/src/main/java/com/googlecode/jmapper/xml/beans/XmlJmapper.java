@@ -18,8 +18,11 @@ package com.googlecode.jmapper.xml.beans;
 
 
 import java.util.List;
+
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 /**
  * This bean represents the xml mapping file.
  * @author Alessandro Vurro
@@ -28,8 +31,21 @@ import com.thoughtworks.xstream.annotations.XStreamImplicit;
 @XStreamAlias("jmapper")
 public class XmlJmapper {
 
-	private static String XSD_FILE = "jmapper-1.3.1.xsd";
 	
+	 @XStreamAsAttribute
+	 final String xmlns = "https://jmapper-framework.googlecode.com";
+
+	 @XStreamAsAttribute 
+	 @XStreamAlias("xmlns:xsi")
+	 final String xmlnsXsi= "https://jmapper-framework.googlecode.com/svn";
+
+	 @XStreamOmitField
+	 private String XSD_FILE = xmlnsXsi + "/jmapper-1.3.1.xsd";
+	 
+	 @XStreamAsAttribute 
+	 @XStreamAlias("xsi:noNamespaceSchemaLocation")
+	 final String xsi= XSD_FILE;
+
 	/** list of classes node */
 	@XStreamImplicit(itemFieldName="class")
 	public List<XmlClass> classes;

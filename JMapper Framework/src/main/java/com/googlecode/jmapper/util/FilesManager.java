@@ -43,6 +43,7 @@ import com.googlecode.jmapper.annotations.JMap;
 import com.googlecode.jmapper.annotations.JMapAccessor;
 import com.googlecode.jmapper.annotations.JMapAccessors;
 import com.googlecode.jmapper.config.Error;
+import com.googlecode.jmapper.exceptions.JMapperException;
 import com.googlecode.jmapper.exceptions.LoadingFileException;
 import com.googlecode.jmapper.xml.Attribute;
 import com.googlecode.jmapper.xml.Global;
@@ -804,7 +805,11 @@ public class FilesManager {
 	 * @return the File with this name
 	 */
 	public static File searchFile(String name){
-		return searchFile(new File(applicationRoot),name);
+		File file = searchFile(new File(applicationRoot),name);
+		if(isNull(file))
+			throw new JMapperException(new FileNotFoundException(name + "file not found"));
+		
+		return file;
 	}
 	
 	private static File searchFile(File file,String name){
@@ -1002,7 +1007,8 @@ public class FilesManager {
 	public static void write(XmlJmapper jmapper, String xmlPath) throws IOException{
 		XStream xstream = new XStream();
 		xstream.processAnnotations(XmlJmapper.class);
-		writeFile(new File(xmlPath),list(xstream.toXML(jmapper)));
+		String encoding = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+		writeFile(new File(xmlPath),list(encoding + xstream.toXML(jmapper)));
 	}
 	
 	/**
