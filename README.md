@@ -51,6 +51,15 @@ destination ["id", "sourceField", null]
 **For a complete guide**<br>[wiki](https://code.google.com/p/jmapper-framework/wiki/Introduction?tm=6) pages<br><br>
 **Do you like the project? think it has good potential?**<br>
 Let us know any malfunctions, new features and more through the [JMapper Framework group](https://groups.google.com/forum/#!forum/jmapper-framework).<br><br>
+
+**Do you want to contribute to the development of JMapper?**<br> 
+There are many features to be implemented, such as:
+- Eclipse plugin
+- Integration with Hibernate, Apache Camel and other frameworks
+- Fluent API that generate XML configuration
+- and more..
+
+contact us for more information (with gitter or email: jmapper.framework@gmail.com).<br><br>
 **You want to do a friendly chat?**<br>
 [![Join the chat at https://gitter.im/jmapper-framework/jmapper-core](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/jmapper-framework/jmapper-core?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)<br><br>
 
