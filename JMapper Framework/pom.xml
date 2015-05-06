@@ -12,30 +12,25 @@
   <version>1.3.1</version>
   
   <description>
-  JMapper is a framework that permits to write dynamic mapping, bringing several advantages as:
-  create and enrich target objects,
-  apply a specific logic to the mapping (only valued fields, only null fields, etc..),
-  automated management of the XML file,
-  possibility of implementing the 1 to N and N to 1 relationships,
-  define explicit conversions,
-  define inherited configurations,
+  JMapper Framework, is a java bean mapper based on javassist that exposes 
+  interesting features as relational mapping, dynamic conversions and more
   </description>
   
-  <url>http://code.google.com/p/jmapper-framework/</url> 
-  
-  <licenses>
-    <license>
-      <name>The Apache Software License, Version 2.0</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
-  
-  <scm>
-    <connection>scm:svn:http://jmapper-framework.googlecode.com/svn/trunk/</connection>
-    <developerConnection>scm:svn:https://jmapper-framework.googlecode.com/svn/trunk/</developerConnection>
-    <url>http://jmapper-framework.googlecode.com/svn/trunk/</url>
-  </scm>
+  <url>http://jmapper-framework.github.io/jmapper-core</url>
+
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	
+	<scm>
+		<connection>scm:git:git@github.com:jmapper-framework/jmapper-core.git</connection>
+		<developerConnection>scm:git:git@github.com:jmapper-framework/jmapper-core.git</developerConnection>
+		<url>git@github.com:jmapper-framework/jmapper-core.git</url>
+	</scm>
   
   <developers>
   	<developer>
@@ -119,9 +114,6 @@
 			    <groupId>org.eluder.coveralls</groupId>
 			    <artifactId>coveralls-maven-plugin</artifactId>
 			    <version>3.1.0</version>
-			    <configuration>
-			        <repoToken>yourcoverallsprojectrepositorytoken</repoToken>
-			    </configuration>
 			</plugin>
 			<plugin>
 			    <groupId>org.codehaus.mojo</groupId>
