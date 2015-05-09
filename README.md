@@ -8,8 +8,8 @@ JMapper Framework is a java bean to java bean mapper, allows you to perform the 
 
   * create and enrich target objects
   * apply a specific logic to the mapping (apply mapping only on null fields for example)
-  * Annotation <-> XML converter and other utilies
-  * implement the 1 to N and N to 1 relationships
+  * Annotation <-> XML converter and other utility methods
+  * implement the 1 -> N and N -> 1 relationships
   * implement explicit conversions
   * apply inherited configurations
 
