@@ -17,7 +17,7 @@ package com.googlecode.jmapper;
 
 import static com.googlecode.jmapper.generation.MapperBuilder.from;
 import javassist.NotFoundException;
-
+import static com.googlecode.jmapper.util.GeneralUtility.isNull;
 import com.googlecode.jmapper.api.IJMapper;
 import com.googlecode.jmapper.api.enums.MappingType;
 import com.googlecode.jmapper.api.enums.NullPointerControl;
@@ -389,8 +389,8 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
 	 */
 	public  JMapper(final Class<D> destination,final Class<S> source,final ChooseConfig config,final String xmlPath) {
 		try{
-			if(destination == null) 	  Error.nullMappedClass("Destination");
-			if(source == null)            Error.nullMappedClass("Source");
+			if(isNull(destination)) 	  Error.nullMappedClass("Destination");
+			if(isNull(source))            Error.nullMappedClass("Source");
 			if(destination.isInterface()) Error.interfaceClass("Destination");
 			if(source.isInterface()) 	  Error.interfaceClass("Source");
 			
@@ -410,6 +410,4 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
 				                                        :mapper.<D,S>generate();
 		return mapperClass.newInstance();
 	}
-    //TODO il cast nell xml non è accettato da javassist capire perche e poi cercare di far funzionare i primitivi
-    // anche nelle conversioni esplicite
 }

@@ -16,24 +16,20 @@
 package com.googlecode.jmapper.conversions.explicit;
 
 import static com.googlecode.jmapper.annotations.JMapConversion.Type.STATIC;
-import static com.googlecode.jmapper.conversions.explicit.ConversionPlaceholder.destinationNamePattern;
-import static com.googlecode.jmapper.conversions.explicit.ConversionPlaceholder.destinationPattern;
-import static com.googlecode.jmapper.conversions.explicit.ConversionPlaceholder.destinationTypePattern;
-import static com.googlecode.jmapper.conversions.explicit.ConversionPlaceholder.destinationValue;
-import static com.googlecode.jmapper.conversions.explicit.ConversionPlaceholder.sourceNamePattern;
-import static com.googlecode.jmapper.conversions.explicit.ConversionPlaceholder.sourcePattern;
-import static com.googlecode.jmapper.conversions.explicit.ConversionPlaceholder.sourceTypePattern;
-import static com.googlecode.jmapper.conversions.explicit.ConversionPlaceholder.sourceValue;
+import static com.googlecode.jmapper.conversions.explicit.ConversionPlaceholder.*;
 import static com.googlecode.jmapper.enums.ConfigurationType.ANNOTATION;
 import static com.googlecode.jmapper.util.GeneralUtility.newLine;
+
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
 import com.googlecode.jmapper.enums.ConfigurationType;
 import com.googlecode.jmapper.enums.Membership;
 import com.googlecode.jmapper.generation.beans.Method;
+import com.googlecode.jmapper.operations.beans.MappedField;
 import com.googlecode.jmapper.xml.XML;
 
 /**
@@ -211,25 +207,29 @@ public class ConversionHandler {
 	
 	/**
 	 * Source field definition.
-	 * @param field source field
+	 * @param sourceMappedField source field
 	 * @return this instance of ConversionHandler
 	 */
-	public ConversionHandler from(Field field){
-		this.sourceField = field;
+	public ConversionHandler from(MappedField sourceMappedField){
+		this.sourceField = sourceMappedField.getValue();
 		placeholders.put(sourceTypePattern, sourceField.getType().getName());
 		placeholders.put(sourceNamePattern, sourceField.getName());
+		placeholders.put(sourceGetPattern, sourceMappedField.getMethod());
+		placeholders.put(sourceSetPattern, sourceMappedField.setMethod());
 		return this;
 	}
 	
 	/**
 	 * Destination field definition.
-	 * @param field destination field
+	 * @param destinationMappedField destination field
 	 * @return this instance of ConversionHandler
 	 */
-	public ConversionHandler to(Field field){
-		this.destinationField = field;
+	public ConversionHandler to(MappedField destinationMappedField){
+		this.destinationField = destinationMappedField.getValue(); 
 		placeholders.put(destinationTypePattern, destinationField.getType().getName());
 		placeholders.put(destinationNamePattern, destinationField.getName());
+		placeholders.put(destinationGetPattern, destinationMappedField.getMethod());
+		placeholders.put(destinationSetPattern, destinationMappedField.setMethod());
 		return this;
 	}
 

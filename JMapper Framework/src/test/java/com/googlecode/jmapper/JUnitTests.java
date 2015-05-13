@@ -44,6 +44,7 @@ import com.googlecode.jmapper.operations.simple.BasicConversionTest;
 import com.googlecode.jmapper.operations.simple.BasicOperationTest;
 import com.googlecode.jmapper.operations.simple.BoxingOperationTest;
 import com.googlecode.jmapper.operations.simple.UnboxingOperationTest;
+import com.googlecode.jmapper.util.ClassesManagerTest;
 import com.googlecode.jmapper.xml.XmlConverterTest;
 import com.googlecode.jmapper.xml.util.XmlUtilityTest;
 
@@ -172,6 +173,10 @@ public class JUnitTests {
 			// test on operationAnalyzer class
 			suite.addTestSuite(OperationAnalyzerTest.class);
 		
+		/*   Tests on utilities methods             */
+			
+			// test on genericString method
+			suite.addTestSuite(ClassesManagerTest.class);
 			
 		return suite;
 	}

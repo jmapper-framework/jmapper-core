@@ -43,6 +43,14 @@ public class ConversionPlaceholder {
 	public static final String destinationTypePattern = Pattern.quote("${destination.type}");
 	/** indicates the name of destination field */
 	public static final String destinationNamePattern = Pattern.quote("${destination.name}");
+	/** indicates the get method of source field */
+	public static final String sourceGetPattern = Pattern.quote("${source.get}");
+	/** indicates the set method of source field */
+	public static final String sourceSetPattern = Pattern.quote("${source.set}");
+	/** indicates the get method of destination field */
+	public static final String destinationGetPattern = Pattern.quote("${destination.get}");
+	/** indicates the set method of destination field */
+	public static final String destinationSetPattern = Pattern.quote("${destination.set}");
 	
 	/** the source reference value */
 	public static final String sourceValue = "source";

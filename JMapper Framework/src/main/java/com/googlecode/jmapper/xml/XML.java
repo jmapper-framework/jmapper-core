@@ -58,13 +58,13 @@ public final class XML {
 	 * @throws MalformedURLException 
 	 */
 	public XML(boolean atRuntime, String xmlPath) throws MalformedURLException, IOException{
-		if(xmlPath != null){
+		if(!isNull(xmlPath)){
 			xmlJmapper = atRuntime?readAtRuntime(xmlPath):readAtDevelopmentTime(xmlPath);
 			this.xmlPath = atRuntime?xmlPath:fullPathOf(xmlPath);
 		}
 		
-		if(xmlJmapper == null)xmlJmapper = new XmlJmapper();
-		if(xmlJmapper.classes == null)xmlJmapper.classes = new ArrayList<XmlClass>();
+		if(isNull(xmlJmapper))xmlJmapper = new XmlJmapper();
+		if(isNull(xmlJmapper.classes))xmlJmapper.classes = new ArrayList<XmlClass>();
 	}
 	
 	/**

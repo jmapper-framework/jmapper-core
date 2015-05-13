@@ -17,6 +17,7 @@
 package com.googlecode.jmapper.operations;
 
 import static com.googlecode.jmapper.config.Constants.THE_FIELD_IS_NOT_CONFIGURED;
+import static com.googlecode.jmapper.util.ClassesManager.findSetterMethods;
 import static com.googlecode.jmapper.util.ClassesManager.getListOfFields;
 import static com.googlecode.jmapper.util.ClassesManager.retrieveField;
 import static com.googlecode.jmapper.util.ClassesManager.verifiesAccessorMethods;
@@ -140,26 +141,34 @@ public final class OperationHandler {
 			AGeneralOperation operation = operationFactory.getOperation(destinationMappedField, sourceMappedField, info, dynamicMethodsToWrite);
 
 			boolean isAvoidSet = false;
+			boolean isConversion = info.getInstructionType().isAConversion();
 			
-			if(info.getInstructionType().isAConversion()){
-				conversionHandler.load(conversionAnalyzer)
-				                 .from(sourceField).to(destinationField);
+			if(isConversion)
+				isAvoidSet = conversionAnalyzer.getMethod().isAvoidSet();
+			
+			if(isAvoidSet)	verifyGetterMethods(destinationClass,destinationMappedField);
+			else		verifiesAccessorMethods(destinationClass,destinationMappedField);
+			
+			verifyGetterMethods(sourceClass,sourceMappedField);
+			findSetterMethods(sourceClass,sourceMappedField);
+			
+			operation.avoidDestinationSet(isAvoidSet);
+
+			if(isConversion){
 				
-				if(conversionHandler.toBeCreated())
-					dynamicMethodsToWrite.add(conversionHandler.loadMethod());
+				conversionHandler.load(conversionAnalyzer)
+				                 .from(sourceMappedField).to(destinationMappedField);
+				
+				if(conversionHandler.toBeCreated()){
+					Method method = conversionHandler.loadMethod();
+					System.out.println(method.getBody());
+					dynamicMethodsToWrite.add(method);
+				}
 				
 				operation.setConversionMethod(conversionHandler.getMethod())
 						 .setMemberShip      (conversionHandler.getMembership());
-				
-				isAvoidSet = conversionHandler.getMethod().isAvoidSet();
-				
-				operation.avoidDestinationSet(isAvoidSet);
 			}
 				
-			if(isAvoidSet)	verifyGetterMethods(destinationClass,destinationMappedField);
-			else		verifiesAccessorMethods(destinationClass,destinationMappedField);
-				
-			verifyGetterMethods(sourceClass,sourceMappedField);
 		}
 		
 		// checks if there isn't a correspondence between classes

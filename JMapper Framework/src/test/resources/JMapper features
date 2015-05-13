@@ -1,16 +1,38 @@
   Sviluppo componenti esterni come procedere ?     
      Integrazione con Hibernate, Apache Camel, XMLBeans, JAXB
      eclipse plugin
-     
+ 
   Sviluppo di configurazione tramite API ? 
-     permettere la creazione della configurazione sia tramite codice che tramite Spring, 
-     cos√¨ da poter sfruttare a pieno il framework, es l'utilizzo del SpEL (http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/expressions.html)
-     oppure permettere di costruire la configurazione tramite i bean per poi trasformarli in XML
+  	 Creare delle fluent API che permettono di costruire il file xml.
+  	 Utilizzare le classi configurate con XSTREAM in modo da chiamare il toString() sul nodo root per avere
+  	 l'xml completo.
+  	 es:
+  	 new JMapperAPI().
+		addClass(NomeClasse.class).
+			addGlobal(""). // con e senza stringa per il value
+			    addAttributes().
+			       addAttribute("name","get","set",Class<?>).
+			toGlobal().
+				addExcluded().
+				    addAttribute("name","get","set",Class<?>).
+			toGlobal().
+		toClass().
+			addAttribute().
+			addAttribute(campi).
+				addTargetAttribute().
+				
+			addConversion().
+			addConversion(campi).
+				body().
+		toRoot().
+		toString();
+  	 
+  	 Ritornando una stringa si da la possibilit‡ di utilizzare altri tool per la definizione
+  	 dell'xml ad esempio:
+  	    dom4j - http://dom4j.sourceforge.net/dom4j-1.6.1/index.html
+  	    mycila - http://code.mycila.com/xmltool/
+  	    
      
-  Migliorie da apportare alla configurazione XML:
-     possibilit√† di utilizzare dei propri placeholder, come in spring (PropertyPlaceholderConfigurer)
-     oppure di definire dei placeholder sul campo stesso
-
 Versione 1.2.2 RILASCIATA:
 
  - aggiunta gestione errori dei metodi dinamici relativi:
@@ -22,39 +44,51 @@ Versione 1.2.2 RILASCIATA:
  - aggiunta gestione get dei campi boolean
  - renderlo OSGI compatibile
  - gestito gli analyzer in un vettore e non con una sequenza di if.
- 
 
 
 Versione 1.3.0 RILASCIATA:
    
  - definizione dell xsd per content assist da eclipse
- - Possibilit√† di definire get e set custom, vedi JMapAccessor file.
+ - Possibilit‡† di definire get e set custom, vedi JMapAccessor file.
 
 Versione 1.3.1 RILASCIATA:
 
  - aggiunta di class in JMapConversion per differenziare set/get del campo corrente da quello target nel 
    caso in cui abbiano lo stesso nome
  - permettere di omettere il set in caso di conversioni sia statiche che dinamiche e in tal caso di farlo void
-   e quindi senza fare return. (ricordare nella documentazione che in static √® possibile farlo void
-   e in dynamic √® possibile evitare il return sapendo che il viene ritornato un null.
+   e quindi senza fare return. (ricordare nella documentazione che in static Ë possibile farlo void
+   e in dynamic Ë possibile evitare il return sapendo che il viene ritornato un null.
  - gestire il passaggio da JMapAccessor al relativo xml e viceversa   
  
+Versione 1.3.2
 
+ - permettere di utilizzare nelle conversioni dinamiche i get e set sia custom che no
+   i placeholder saranno: ${*.get} e ${*.set} dove * sta per destination o source
+   
+Versione 1.3.3
+
+ - permettere l'uso dei regex nella definizione dei nomi
+    
+Versione 1.4.0 
+
+ - interfacciare JMapper per funzionare con javassist, janino e bytebuddy
+ - di default usare bytebuddy o janino
+  
 2.0.0
 
  - Multiple Mapping
    
-  - Con la classe RelationalJMapper si ha la possibilit√† di implementare una relazione 1 a N o N a 1 tra
+  - Con la classe RelationalJMapper si ha la possibilit‡† di implementare una relazione 1 a N o N a 1 tra
     la classe configurata e quelle target.
-    Ma la relazione che c'√® tra i campi della classe configurata e i campi delle classi target √® sempre 1 a 1 (con @JMap).
-    Ci√≤ vuol dire che in caso di conversioni dinamiche non √® permesso configurare 
+    Ma la relazione che c'Ë tra i campi della classe configurata e i campi delle classi target Ë sempre 1 a 1 (con @JMap).
+    CiÚ vuol dire che in caso di conversioni dinamiche non Ë permesso configurare 
     direttamente un campo con N altri, ma invece bisogna configurare gli N campi verso il campo interessato.
-    Con la versione 1.2.0 √® possibile (tramite JGlobalMap) mappare N campi verso uno.
-    Ci√≤ che manca √® la possibilit√† di mappare un campo verso N.
+    Con la versione 1.2.0 Ë possibile (tramite JGlobalMap) mappare N campi verso uno.
+    CiÚ che manca Ë la possibilit√† di mappare un campo verso N.
 
     Obiettivo
    
-      L'intento √® quello di configurare 1 campo verso N altri:
+      L'intento Ë quello di configurare 1 campo verso N altri:
            
       ANNOTATION
            
@@ -81,7 +115,7 @@ Versione 1.3.1 RILASCIATA:
            
       XML
            
-           Per esprimere lo stesso concetto in xml si utilizzer√† il nodo multiAttribute, es:
+           Per esprimere lo stesso concetto in xml si utilizzer‡† il nodo multiAttribute, es:
            
   	 <multiAttribute name="field1">
      	      <target class="com.myapplication.Target" attributes="field1,field2,field3" />
@@ -92,21 +126,10 @@ Versione 1.3.1 RILASCIATA:
            che contiene la lista dei campi separati da una virgola.
            Per riflettere invece JMultiMaps baster√† dichiarare piu nodi target. 
 
-3.0.0
-
-	Mapping su livelli diversi:
-  - possibilit√† di mappare livelli diversi di campi es: JMap("user.name")    
-
-    creare dei metodi dinamici che creano un get splittando per .
-		   
-3.1.0
-
-  - permettere l'uso dei regex nella definizione dei nomi
-  
-3.2.0
+2.1.0
 
    - aggiunta dell'annotation @JMapPlaceHolder(key="",value="") sui campi e classe.
-    questo permetter√† in fase di conversione DINAMICA di utilizzare i placeholder per funzioni particolari come:
+    questo permetter‡† in fase di conversione DINAMICA di utilizzare i placeholder per funzioni particolari come:
 
 	conversione da resulSet a bean: resultSet.getString(${destination.placeholder.field.key})
 	
@@ -130,28 +153,23 @@ Versione 1.3.1 RILASCIATA:
   	In questo modo si da la possibilit√† di mappare una HashMap, resultSet, properties con un bean e viceversa 
 
 	i placeholder su global sono intesi come generici a tutti i campi
-	
-3.3.0
 
-	Possibilit√† di definire N configurazioni sia in Annotation che in XML sulla stessa classe.
+2.2.0
+- possibilit‡† di definire configurazioni xml generiche senza creare classi (template):
+    
+	Possibilit‡† di definire N template sia in Annotation che in XML sulla stessa classe.
 	In modo da mappare un sotto insieme di campi del bean stesso per volta.
 	ad esempio:
 		bean con 4 campi: 2 campi con template1 e gli altri due col template2
-		e permettere la stessa funzionalit√† con l'annotation @JsonView per utilizzare il templating
+		e permettere la stessa funzionalit‡† con l'annotation @JsonView per utilizzare il templating
 		
-3.4.0
 
-  - possibilit√† di definire configurazioni xml generiche senza creare classi:
-    
-     Nei casi in cui serve generalizzare una configurazione e/o conversioni,
-     non deve essere obbligatorio creare una classe in caso di configurazione XML.
-     Il template permetter√† quindi di definire configurazioni e/o conversioni comuni, senza dover definire alcuna classe.
-
+	
 4.0.0
 
  - DEFAULT BEHAVIORs
   
-   i comportamenti predefiniti tornano utili in tutti quei casi in cui il mapping √® preferibile 
+   i comportamenti predefiniti tornano utili in tutti quei casi in cui il mapping Ë preferibile 
    applicarlo al "tipo" piuttosto che al "nome" del campo. 
    Ad essere analizzati quindi sono i tipi dei campi, non servir√† quindi dichiarare i nomi dei campi interessati.
    Un esempio pu√≤ essere la conversione da String a Date:

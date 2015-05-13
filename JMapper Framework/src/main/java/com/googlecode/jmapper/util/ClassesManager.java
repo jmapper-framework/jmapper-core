@@ -145,43 +145,68 @@ public final class ClassesManager {
 				return isAssignableFrom(Class.forName(genericD),Class.forName(genericS));
 			}
 		
+		// destination class
+		String dBeforeBracket = "";
+		// source class
+		String sBeforeBracket = "";
+		// destination class defined in the generic
+		String dAfterBracket = "";
+		// source class defined in the generic
+		String sAfterBracket = "";			
+		
 		// if generics exists
-		if(dStartBracket!=-1 && sStartBracket!=-1 && dEndBracket!=-1 && sEndBracket!=-1){
-			
+		if(dStartBracket!=-1 && dEndBracket!=-1){
 			// destination class
-			String dBeforeBracket = genericD.substring(0, dStartBracket).trim();
-			// source class
-			String sBeforeBracket = genericS.substring(0, sStartBracket).trim();
+			dBeforeBracket = genericD.substring(0, dStartBracket).trim();
 			// destination class defined in the generic
-			String dAfterBracket = genericD.substring(dStartBracket+1,dEndBracket);
+			dAfterBracket = genericD.substring(dStartBracket+1,dEndBracket);
+		}
+		
+		// if generics exists
+		if(sStartBracket!=-1 && sEndBracket!=-1){
+			// source class
+			sBeforeBracket = genericS.substring(0, sStartBracket).trim();
 			// source class defined in the generic
-			String sAfterBracket = genericS.substring(sStartBracket+1,sEndBracket);
-			
-			boolean isAssignableFrom = isFirst?functionsAreAllowed(isAddAllFunction, isPutAllFunction, classD, classS):
-											   isAssignableFrom(Class.forName(dBeforeBracket),Class.forName(sBeforeBracket));
-			
-			if(isAddAllFunction)
-				return isAssignableFrom && isAssignableFrom(dAfterBracket, sAfterBracket, null, null, false, false, false);
-			
-			if(isPutAllFunction){
+			sAfterBracket = genericS.substring(sStartBracket+1,sEndBracket);
+		}
+		
+		if(isEmpty(dBeforeBracket) && !isEmpty(sBeforeBracket))
+			dBeforeBracket = genericD;
+		
+		if(!isEmpty(dBeforeBracket) && isEmpty(sBeforeBracket))
+			sBeforeBracket = genericS;
+		
+		boolean isAssignableFrom = false;
+		
+		if(!isEmpty(dBeforeBracket) && !isEmpty(sBeforeBracket))
+			isAssignableFrom = isFirst?functionsAreAllowed(isAddAllFunction, isPutAllFunction, classD, classS):
+									   isAssignableFrom(Class.forName(dBeforeBracket),Class.forName(sBeforeBracket));
+		
+			if(!isEmpty(dAfterBracket) && !isEmpty(sAfterBracket)){
 				
-				int dSplitIndex = pairSplitIndex(dAfterBracket);
-				String dKey = dAfterBracket.substring(0, dSplitIndex).trim();
-				String dValue = dAfterBracket.substring(dSplitIndex+1).trim();
+				if(isAddAllFunction)
+					return isAssignableFrom && isAssignableFrom(dAfterBracket, sAfterBracket, null, null, false, false, false);
 				
-				int sSplitIndex = pairSplitIndex(sAfterBracket);
-				String sKey = sAfterBracket.substring(0, sSplitIndex).trim();
-				String sValue = sAfterBracket.substring(sSplitIndex+1).trim();
+				if(isPutAllFunction){
+					
+					int dSplitIndex = pairSplitIndex(dAfterBracket);
+					String dKey = dAfterBracket.substring(0, dSplitIndex).trim();
+					String dValue = dAfterBracket.substring(dSplitIndex+1).trim();
+					
+					int sSplitIndex = pairSplitIndex(sAfterBracket);
+					String sKey = sAfterBracket.substring(0, sSplitIndex).trim();
+					String sValue = sAfterBracket.substring(sSplitIndex+1).trim();
+					
+					return isAssignableFrom 
+					   &&  isAssignableFrom(dKey, sKey, null, null, false, false, false)
+					   &&  isAssignableFrom(dValue, sValue, null, null, false, false, false);
+				}
 				
-				return isAssignableFrom 
-				   &&  isAssignableFrom(dKey, sKey, null, null, false, false, false)
-				   &&  isAssignableFrom(dValue, sValue, null, null, false, false, false);
+				return  isAssignableFrom && dAfterBracket.equals(sAfterBracket);
 			}
 			
-			return  isAssignableFrom && dAfterBracket.equals(sAfterBracket);
-		}
+			return isAssignableFrom;
 	  }catch (Exception e) { return false; }
-	  return false;
 	}
 	
 	/**
@@ -261,32 +286,31 @@ public final class ClassesManager {
 		return 0;
 	}
 	/**
+	 * Splits the fieldDescription to obtain his class type,generics inclusive.
 	 * @param field field to check
 	 * @return returns a string that specified the structure of the field, including its generic
 	 */
 	public static String getGenericString(Field field){
-		return getGenericString(field.toGenericString());
-	}
-	
-	/**
-	 * Splits the fieldDescription to obtain his class type,generics inclusive.
-	 * @param fieldDescription String to analyze
-	 * @return class type, generics inclusive
-	 */
-	private static String getGenericString(String fieldDescription){
 		
+		String fieldDescription = field.toGenericString();
 		List<String> splitResult = new ArrayList<String>();
 		char[] charResult = fieldDescription.toCharArray();
 		
 		boolean isFinished = false;
-		
 		int separatorIndex = fieldDescription.indexOf(" ");
 		int previousIndex = 0;
 		
 		while(!isFinished){
 			
 			// if previous character is "," don't cut the string
-			if(charResult[separatorIndex-1]!=','){
+			int position = separatorIndex-1;
+			char specialChar = charResult[position];
+			if(specialChar!=',' && specialChar != '?' && 
+					(specialChar != 's' || 
+					fieldDescription.substring(position - "extends".length() , position)
+					.equals("extends")
+					)
+			){
 				splitResult.add(fieldDescription.substring(previousIndex, separatorIndex));
 				previousIndex = separatorIndex+1;
 			}
@@ -302,7 +326,7 @@ public final class ClassesManager {
 		
 		return null;
 	}
-	
+		
 	/**
 	 * Returns true if destination and source have the same structure.
 	 * @param destination destination field
@@ -505,6 +529,17 @@ public final class ClassesManager {
 	}
 
 	/**
+	 * Find and store setter methods.
+	 * @param clazz a class to check
+	 * @param fields fields to control
+	 */
+	public static void findSetterMethods(Class<?> clazz, MappedField... fields){
+		try{verifySetterMethods(clazz, fields);
+		}catch(Exception e){}
+		
+	}
+	
+	/**
 	 * Verifies that the setter methods are compliant with the naming convention.
 	 * @param clazz a class to check
 	 * @param fields fields to control
@@ -556,6 +591,10 @@ public final class ClassesManager {
 	 */
 	private static String obtainGenericContent(String structure){
 		String item = structure.substring(structure.indexOf("<")+1, structure.indexOf(">"));
+		int internalGeneric = item.indexOf("<");
+		if(internalGeneric != -1)
+			item = item.substring(0, internalGeneric);
+		
 		return item.equals("?")?"java.lang.Object":item;
 	}
 	
