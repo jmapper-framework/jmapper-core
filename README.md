@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/jmapper-framework/jmapper-core.png?label=ready&title=Ready)](https://waffle.io/jmapper-framework/jmapper-core)
 #JMapper Framework
 
   [![Build Status](https://travis-ci.org/jmapper-framework/jmapper-core.svg?branch=master)](https://travis-ci.org/jmapper-framework/jmapper-core)
