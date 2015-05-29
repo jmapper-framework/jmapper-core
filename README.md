@@ -1,4 +1,3 @@
-[![Stories in Ready](https://badge.waffle.io/jmapper-framework/jmapper-core.png?label=ready&title=Ready)](https://waffle.io/jmapper-framework/jmapper-core)
 #JMapper Framework
 
   [![Build Status](https://travis-ci.org/jmapper-framework/jmapper-core.svg?branch=master)](https://travis-ci.org/jmapper-framework/jmapper-core)
@@ -47,6 +46,8 @@ destination ["id", "sourceField", null]
 ```
 *With JMapper we have all the advantages of dynamic mapping with the performance of static code, with 0 memory consumption.*<br>
 **Required java 5+**<br><br>
+**issues status**
+<br>[![Stories in Ready](https://badge.waffle.io/jmapper-framework/jmapper-core.png?label=ready&title=Ready)](https://waffle.io/jmapper-framework/jmapper-core)<br><br>
 **Dependency information**
 <br>[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.googlecode.jmapper-framework/jmapper-core/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.googlecode.jmapper-framework/jmapper-core) [![Dependency Status] (https://www.versioneye.com/user/projects/5539172d1d2989cb78000002/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5539172d1d2989cb78000002)<br>
 
