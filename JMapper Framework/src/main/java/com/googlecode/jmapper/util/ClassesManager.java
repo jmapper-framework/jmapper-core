@@ -357,22 +357,31 @@ public final class ClassesManager {
 	}
 	
 	/**
-	 * Returns true if exist a field with this name in aClass, false otherwise.
+	 * Returns the field name if exist a field that match with this name in aClass, null otherwise.
 	 * @param aClass a class to control
 	 * @param name field to find
 	 * @return true if exist a field with this name in aClass, false otherwise
 	 */
-	public static boolean existField(Class<?> aClass,String name){
-		try { aClass.getDeclaredField(name); return true; } 
-		catch (NoSuchFieldException e) {
-			Class<?> superclass = aClass.getSuperclass();
-			while(superclass != Object.class){
-				try { superclass.getDeclaredField(name); return true; } 
-				catch (NoSuchFieldException e1) {}
-				superclass = superclass.getSuperclass();
-			}
-			return false;
+	public static String existField(Class<?> aClass,String name){
+		String result = getField(aClass, name);
+		
+		if(!isNull(result)) 
+			return result;
+		
+		Class<?> superclass = aClass.getSuperclass();
+		while(superclass != Object.class){
+			result = getField(superclass, name);
+			if(!isNull(result)) 
+				return result;
+			superclass = superclass.getSuperclass();
 		}
+		return result;
+	}
+	
+	private static String getField(Class<?> aClass,String regex){
+		for (Field field : aClass.getDeclaredFields()) 
+			if(field.getName().matches(regex)) return field.getName();
+		return null;
 	}
 	
 	/**

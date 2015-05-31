@@ -1,4 +1,38 @@
-  Sviluppo componenti esterni come procedere ?     
+     
+Versione 1.2.2 RILASCIATA:
+
+ - aggiunta gestione errori dei metodi dinamici relativi:
+   alla scrittura errata di metodi e al passaggio di variabili null
+ - aggiunta gestione del setting dei primitivi in mapping complessi
+ - aggiornate le dipendenze: xstream, slf4j e javassist
+ - aggiunto printStackTrace oltre alla gestione con log 
+ - in caso di creazione di collection in destination l'ordine degli elementi viene rispettato
+ - aggiunta gestione get dei campi boolean
+ - renderlo OSGI compatibile
+ - gestito gli analyzer in un vettore e non con una sequenza di if.
+
+
+Versione 1.3.0 RILASCIATA:
+   
+ - definizione dell xsd per content assist da eclipse
+ - Possibilità  di definire get e set custom, vedi JMapAccessor file.
+
+Versione 1.3.1 RILASCIATA:
+
+ - aggiunta di class in JMapConversion per differenziare set/get del campo corrente da quello target nel 
+   caso in cui abbiano lo stesso nome
+ - permettere di omettere il set in caso di conversioni sia statiche che dinamiche e in tal caso di farlo void
+   e quindi senza fare return. (ricordare nella documentazione che in static è possibile farlo void
+   e in dynamic è possibile evitare il return sapendo che il viene ritornato un null.
+ - gestire il passaggio da JMapAccessor al relativo xml e viceversa   
+ 
+Versione 1.3.2 RILASCIATA:
+
+ - permettere di utilizzare nelle conversioni dinamiche i get e set sia custom che no
+   i placeholder saranno: ${*.get} e ${*.set} dove * sta per destination o source
+   
+ -----------------------------------------------------------------------------------------  
+     Sviluppo componenti esterni come procedere ?     
      Integrazione con Hibernate, Apache Camel, XMLBeans, JAXB
      eclipse plugin
  
@@ -32,38 +66,7 @@
   	    dom4j - http://dom4j.sourceforge.net/dom4j-1.6.1/index.html
   	    mycila - http://code.mycila.com/xmltool/
   	    
-     
-Versione 1.2.2 RILASCIATA:
 
- - aggiunta gestione errori dei metodi dinamici relativi:
-   alla scrittura errata di metodi e al passaggio di variabili null
- - aggiunta gestione del setting dei primitivi in mapping complessi
- - aggiornate le dipendenze: xstream, slf4j e javassist
- - aggiunto printStackTrace oltre alla gestione con log 
- - in caso di creazione di collection in destination l'ordine degli elementi viene rispettato
- - aggiunta gestione get dei campi boolean
- - renderlo OSGI compatibile
- - gestito gli analyzer in un vettore e non con una sequenza di if.
-
-
-Versione 1.3.0 RILASCIATA:
-   
- - definizione dell xsd per content assist da eclipse
- - Possibilità  di definire get e set custom, vedi JMapAccessor file.
-
-Versione 1.3.1 RILASCIATA:
-
- - aggiunta di class in JMapConversion per differenziare set/get del campo corrente da quello target nel 
-   caso in cui abbiano lo stesso nome
- - permettere di omettere il set in caso di conversioni sia statiche che dinamiche e in tal caso di farlo void
-   e quindi senza fare return. (ricordare nella documentazione che in static è possibile farlo void
-   e in dynamic è possibile evitare il return sapendo che il viene ritornato un null.
- - gestire il passaggio da JMapAccessor al relativo xml e viceversa   
- 
-Versione 1.3.2
-
- - permettere di utilizzare nelle conversioni dinamiche i get e set sia custom che no
-   i placeholder saranno: ${*.get} e ${*.set} dove * sta per destination o source
    
 Versione 1.3.3
 

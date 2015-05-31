@@ -32,7 +32,10 @@ import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
+
 import org.apache.commons.collections.bidimap.DualHashBidiMap;
+
+import com.googlecode.jmapper.xml.SimplyAttribute;
 
 /**
  * Utility class that allows you to identify the type of classes given as input, 
@@ -331,10 +334,24 @@ public final class GeneralUtility {
 	 * @param element
 	 * @return true if element exists in array, false otherwise
 	 */
-	public static <T> boolean isPresent(T[] array, T element){
+	public static boolean isPresent(SimplyAttribute[] array, SimplyAttribute element){
 		if(array != null)
-			for (T item : array)
-				if(item.equals(element))
+			for (SimplyAttribute item : array)
+				if(element.getName().matches(item.getName()))
+					return true;
+		return false;
+	}
+	
+	/**
+	 * Verifies the presence of the element in array.
+	 * @param array
+	 * @param element
+	 * @return true if element exists in array, false otherwise
+	 */
+	public static boolean isPresent(String[] array, String element){
+		if(array != null)
+			for (String item : array)
+				if(element.matches(item))
 					return true;
 		return false;
 	}

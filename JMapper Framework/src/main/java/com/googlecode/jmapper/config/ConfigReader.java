@@ -85,24 +85,28 @@ public final class ConfigReader {
 	 */
 	private String getValue(final List<String> attributes,final List<Class<?>> classes,String value,final String mappedFieldName,final Class<?> configuredClass,final Class<?> targetClass){
 		
-		String targetFieldName = getValue(value,mappedFieldName);
+		String regex = getValue(value,mappedFieldName);
 		String mappedClassName = configuredClass.getSimpleName();
 		String targetClassName = targetClass.getSimpleName();
 
 		/* 		IF ATTRIBUTES AND CLASSES ARE EMPTY		 */ 
 		if( attributes.isEmpty() && classes.isEmpty() ){
-			if(existField(targetClass,targetFieldName))
+			String targetFieldName = existField(targetClass,regex);
+			if(!isNull(targetFieldName))
 				return targetFieldName;
 
-			Error.mapping(mappedFieldName, mappedClassName, targetFieldName, targetClassName);
+			Error.mapping(mappedFieldName, mappedClassName, regex, targetClassName);
 		}
 		
 		/* 		IF ATTRIBUTES IS EMPTY AND CLASSES NOT		 */
 		if( attributes.isEmpty() && !classes.isEmpty() ){
-			if(classes.contains(targetClass) && existField(targetClass,targetFieldName)) 
-				return targetFieldName;
+			if(classes.contains(targetClass)){
+				String targetFieldName = existField(targetClass,regex);
+				if(!isNull(targetFieldName))
+					return targetFieldName;
+			}
 		
-			Error.mapping(mappedFieldName, mappedClassName, targetFieldName, targetClassName);
+			Error.mapping(mappedFieldName, mappedClassName, regex, targetClassName);
 		}
 		
 		/* 		IF  ATTRIBUTES AND CLASSES ARE VALUED AND THEY HAVE THE SAME LENGTH		 */
@@ -111,12 +115,13 @@ public final class ConfigReader {
 				if(classes.contains(targetClass)){
 					// get the attribute from attributes, positioned at the same index of targetClass in classes
 					value = attributes.get(classes.indexOf(targetClass));
-					targetFieldName = getValue(value,mappedFieldName);
+					regex = getValue(value,mappedFieldName);
 					
-					if(existField(targetClass,targetFieldName))	
+					String targetFieldName = existField(targetClass,regex);
+					if(!isNull(targetFieldName))
 						return targetFieldName;
 					
-					Error.mapping(mappedFieldName, mappedClassName, targetFieldName, targetClassName);
+					Error.mapping(mappedFieldName, mappedClassName, regex, targetClassName);
 				}else
 					Error.mapping(mappedFieldName, mappedClassName, targetClassName);
 			else
@@ -124,11 +129,14 @@ public final class ConfigReader {
 			
 		/* 		IF ATTRIBUTES IS FULL AND CLASSES IS EMPTY		 */
 		if( !attributes.isEmpty() && classes.isEmpty() )
-			for (String str : attributes)
+			for (String str : attributes){
+				regex = getValue(str,mappedFieldName);
 				// if exist the target field in targetClass 
-				if(existField(targetClass,getValue(str,mappedFieldName))) 
-					//returns the corresponding name if it exists, otherwise nulls
-					return getValue(str,mappedFieldName);
+				String targetFieldName = existField(targetClass,regex);
+				if(!isNull(targetFieldName))
+					//returns the corresponding name
+					return targetFieldName;
+			}
 			
 		Error.mapping(mappedFieldName, configuredClass,targetClass);
 		
@@ -176,7 +184,7 @@ public final class ConfigReader {
 			for(Attribute attribute :xml.attributesLoad().get(clazz.getName())){
 				
 				// verifies that exists the attribute written in XML in the configured Class
-				if(!existField(clazz,attribute.getName()))	
+				if(isNull(existField(clazz,attribute.getName())))	
 					Error.attributeAbsent(clazz, attribute);
 				
 				// if the field given in input isn't equal to xmlField continue with the cycle
