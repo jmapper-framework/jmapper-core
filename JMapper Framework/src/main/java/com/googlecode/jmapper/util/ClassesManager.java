@@ -305,12 +305,25 @@ public final class ClassesManager {
 			// if previous character is "," don't cut the string
 			int position = separatorIndex-1;
 			char specialChar = charResult[position];
-			if(specialChar!=',' && specialChar != '?' && 
-					(specialChar != 's' || 
-					fieldDescription.substring(position - "extends".length() , position)
-					.equals("extends")
-					)
-			){
+			boolean isSpecialChar = true;
+			if(specialChar!=',' && specialChar != '?'){ 
+				
+				if(specialChar == 's'){
+					String specialString = null;
+					try{
+						specialString = fieldDescription.substring(position - "extends".length(), position+1);
+						if(isNull(specialString) || !specialString.equals(" extends"))
+							isSpecialChar = false;
+					
+					}catch(IndexOutOfBoundsException e){
+						isSpecialChar = false;
+					}
+				
+				}else
+					isSpecialChar = false;
+			}
+			
+			if(!isSpecialChar){
 				splitResult.add(fieldDescription.substring(previousIndex, separatorIndex));
 				previousIndex = separatorIndex+1;
 			}
