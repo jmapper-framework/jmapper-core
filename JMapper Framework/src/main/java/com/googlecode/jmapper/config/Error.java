@@ -518,5 +518,14 @@ public final class Error {
 		throw new MalformedBeanException(MSG.INSTANCE.message(malformedBeanException1,aClass.getSimpleName()));
 	}
 	
+	/**
+	 * 
+	 * @param path file path
+	 * @throws FileNotFoundException Thrown when the xml isn't found.
+	 */
+	public static void xmlNotFound(String path) throws FileNotFoundException{
+		throw new FileNotFoundException(MSG.INSTANCE.message(FileNotFoundException3,path));
+		
+	}
 	
 }

@@ -75,5 +75,6 @@ public final class Constants {
 	public static final String illegalArgumentException1 = "illegalArgumentException1";
 	public static final String FileNotFoundException1 = "FileNotFoundException1";
 	public static final String FileNotFoundException2 = "FileNotFoundException2";
+	public static final String FileNotFoundException3 = "FileNotFoundException3";
 	public static final String loadingFileException2 = "loadingFileException2";
 }

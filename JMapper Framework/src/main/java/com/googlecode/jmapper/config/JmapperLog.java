@@ -24,7 +24,7 @@ import com.googlecode.jmapper.JMapper;
 import com.googlecode.jmapper.exceptions.JMapperException;
 
 /**
- * Custom logger to semplify exceptions handle.
+ * Custom logger to semplify exceptions handling.
  * 
  * @author Alessandro Vurro
  *
@@ -43,6 +43,5 @@ public class JmapperLog {
 	 */
 	public static void ERROR(Exception e) throws JMapperException{
 		logger.error("{}: {}",e.getClass().getSimpleName(),e.getMessage());
-		throw new JMapperException(e);
 	}
 }

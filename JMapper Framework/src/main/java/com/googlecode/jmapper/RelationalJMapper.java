@@ -244,10 +244,9 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	 * @param clazz class to instantiate
 	 * @return a new instance of Class given as input
 	 */
-	private <I> I newInstance(Exception exception, Class<I> clazz){
+	private <I> I logAndReturnNull(Exception exception){
 		JmapperLog.ERROR(exception); 
-		try                 { return (I) clazz.newInstance(); } 
-		catch (Exception e) { return null; }
+		return null;
 	}
 	
 	/**
@@ -260,7 +259,7 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 		try{
 			if(clazz == null)throw new IllegalArgumentException("it's mandatory define the destination class");
 		}catch (Exception e) {JmapperLog.ERROR(e);return null;}
-		return newInstance(exception,clazz);
+		return logAndReturnNull(exception);
 	}
 	/**
 	 * Returns the desired JMapper instance.
@@ -293,7 +292,7 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	 */
 	public <S> T manyToOne(final S source) {
 		try{ return this.<T,S>getJMapper(relationalManyToOneMapper,source).getDestination(source); }
-		catch (Exception e) { return newInstance(e,configuredClass);}
+		catch (Exception e) { return logAndReturnNull(e);}
 	}
 	
 	/**
@@ -314,7 +313,7 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	 */
 	public <S> T manyToOneWithoutControl(final S source) {
 		try{ return this.<T,S>getJMapper(relationalManyToOneMapper,source).getDestinationWithoutControl(source); }
-		catch (Exception e) { return newInstance(e,configuredClass); }
+		catch (Exception e) { return logAndReturnNull(e); }
 	}
 	
 	/**
@@ -337,7 +336,7 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	 */
 	public <S> T manyToOne(T destination,final S source) {
 		try{ return this.<T,S>getJMapper(relationalManyToOneMapper,source).getDestination(destination,source); }
-		catch (Exception e) { return newInstance(e,configuredClass); }
+		catch (Exception e) { return logAndReturnNull(e); }
 	}
 	
 	/**
@@ -360,7 +359,7 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	 */
 	public <S> T manyToOneWithoutControl(T destination,final S source) {
 		try{ return this.<T,S>getJMapper(relationalManyToOneMapper,source).getDestinationWithoutControl(destination,source); }
-		catch (Exception e) { return newInstance(e,configuredClass); }
+		catch (Exception e) { return logAndReturnNull(e); }
 	}
 
 	/**
@@ -382,7 +381,7 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	 */
 	public <S> T manyToOne(final S source,final MappingType mtSource) {
 		try{ return this.<T,S>getJMapper(relationalManyToOneMapper,source).getDestination(source,mtSource); }
-		catch (Exception e) { return newInstance(e,configuredClass); }
+		catch (Exception e) { return logAndReturnNull(e); }
 	}
 	
 	/**
@@ -405,7 +404,7 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	 */
 	public <S> T manyToOne(final S source,final NullPointerControl nullPointerControl,final MappingType mtSource) {
 		try{ return this.<T,S>getJMapper(relationalManyToOneMapper,source).getDestination(source,nullPointerControl,mtSource); }
-		catch (Exception e) { return newInstance(e,configuredClass); }
+		catch (Exception e) { return logAndReturnNull(e); }
 	}
 	
 	/**
@@ -430,7 +429,7 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	 */
 	public <S> T manyToOne(T destination,final S source,final MappingType mtDestination,final MappingType mtSource) {
 		try{ return this.<T,S>getJMapper(relationalManyToOneMapper,source).getDestination(destination, source, mtDestination,mtSource); }
-		catch (Exception e) { return newInstance(e,configuredClass); }
+		catch (Exception e) { return logAndReturnNull(e); }
 	}
 	
 	/**
@@ -456,7 +455,7 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	 */
 	public <S> T manyToOne(T destination,final S source,final NullPointerControl nullPointerControl,final MappingType mtDestination,final MappingType mtSource) {
 		try{ return this.<T,S>getJMapper(relationalManyToOneMapper,source).getDestination(destination, source, nullPointerControl, mtDestination, mtSource); }
-		catch (Exception e) { return newInstance(e,configuredClass); }
+		catch (Exception e) { return logAndReturnNull(e); }
 	}
 	
 	/**
@@ -523,7 +522,7 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	 */
 	public <D> D oneToMany(D destination,final T source) {
 		try{ return this.<D,T>getJMapper(relationalOneToManyMapper,destination.getClass()).getDestination(destination,source); }
-		catch (Exception e) { return (D) this.newInstance(e,destination.getClass()); }
+		catch (Exception e) { return this.logAndReturnNull(e); }
 	}
 	
 	/**
@@ -546,7 +545,7 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	 */
 	public <D> D oneToManyWithoutControl(D destination,final T source) {
 		try{ return this.<D,T>getJMapper(relationalOneToManyMapper,destination.getClass()).getDestinationWithoutControl(destination,source); }
-		catch (Exception e) { return (D) this.newInstance(e,destination.getClass()); }
+		catch (Exception e) { return this.logAndReturnNull(e); }
 	}
 
 	/**
@@ -617,7 +616,7 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	 */
 	public <D> D oneToMany(D destination,final T source,final MappingType mtDestination,final MappingType mtSource) {
 		try{ return this.<D,T>getJMapper(relationalOneToManyMapper,destination.getClass()).getDestination(destination, source, mtDestination,mtSource); }
-		catch (Exception e) { return (D) this.newInstance(e,destination.getClass()); }
+		catch (Exception e) { return this.logAndReturnNull(e); }
 	}
 	
 	/**
@@ -643,6 +642,6 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	 */
 	public <D> D oneToMany(D destination,final T source,final NullPointerControl nullPointerControl,final MappingType mtDestination,final MappingType mtSource) {
 		try{ return this.<D,T>getJMapper(relationalOneToManyMapper,destination.getClass()).getDestination(destination, source, nullPointerControl, mtDestination, mtSource);}
-		catch (Exception e) { return (D) this.newInstance(e,destination.getClass()); }
+		catch (Exception e) { return this.logAndReturnNull(e); }
 	}
 }

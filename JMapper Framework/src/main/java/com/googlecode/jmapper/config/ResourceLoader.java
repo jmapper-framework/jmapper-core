@@ -58,6 +58,9 @@ public class ResourceLoader {
 	    if (isNull(result) && resource.contains(":")) 
 	        result = new URL(resource);
 	    
+	    if(isNull(result))
+	    	Error.xmlNotFound(resource);
+	    
 	    return result.openStream();
 	}
 
