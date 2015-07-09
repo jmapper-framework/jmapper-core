@@ -68,7 +68,7 @@ public class MappedMapOperationTest extends AOperation<MappedMapOperation>{
 		
 		expected = "   if(destination.getADMappedMap()!=null){"+
 		 newLine + "   if(source.getASMappedMap()!=null){"+
-		 newLine + "   java.util.HashMap mapOfDestination$i = new java.util.HashMap();"+
+		 newLine + "   java.util.HashMap mapOfDestination$z = new java.util.HashMap();"+
 		 newLine + "   Object[] mapOfSource$i = source.getASMappedMap().entrySet().toArray();"+
 		 newLine + "   for(int index$i = mapOfSource$i.length-1;index$i >=0;index$i--){"+
 		 newLine + "   java.util.Map.Entry entryItem$i = (java.util.Map.Entry) mapOfSource$i[index$i];"+
@@ -80,16 +80,16 @@ public class MappedMapOperationTest extends AOperation<MappedMapOperation>{
 		 newLine + "   com.googlecode.jmapper.bean.TargetObject destinationValueObj$i = new com.googlecode.jmapper.bean.TargetObject();"+
 		 newLine + "   destinationValueObj$i.setField(sourceValueObj$i.getField());"+
 		 newLine + 
-		 newLine + "   mapOfDestination$i.put(destinationKeyObj$i, destinationValueObj$i);"+
+		 newLine + "   mapOfDestination$z.put(destinationKeyObj$i, destinationValueObj$i);"+
 		 newLine + "   }"+
-		 newLine + "   destination.getADMappedMap().putAll(mapOfDestination$i);"+
+		 newLine + "   destination.getADMappedMap().putAll(mapOfDestination$z);"+
 		 newLine +
 		 newLine + "   }else{"+
 		 newLine + "   destination.setADMappedMap(null);"+
 		 newLine + "   }"+
 		 newLine + "   }else{"+
 		 newLine + "   if(source.getASMappedMap()!=null){"+
-		 newLine + "   java.util.HashMap mapOfDestination$y = new java.util.HashMap();"+
+		 newLine + "   java.util.HashMap mapOfDestination$z = new java.util.HashMap();"+
 		 newLine + "   Object[] mapOfSource$y = source.getASMappedMap().entrySet().toArray();"+
 		 newLine + "   for(int index$y = mapOfSource$y.length-1;index$y >=0;index$y--){"+
 		 newLine + "   java.util.Map.Entry entryItem$y = (java.util.Map.Entry) mapOfSource$y[index$y];"+
@@ -101,9 +101,9 @@ public class MappedMapOperationTest extends AOperation<MappedMapOperation>{
 		 newLine + "   com.googlecode.jmapper.bean.TargetObject destinationValueObj$y = new com.googlecode.jmapper.bean.TargetObject();"+
 		 newLine + "   destinationValueObj$y.setField(sourceValueObj$y.getField());"+
 		 newLine + 
-		 newLine + "   mapOfDestination$y.put(destinationKeyObj$y, destinationValueObj$y);"+
+		 newLine + "   mapOfDestination$z.put(destinationKeyObj$y, destinationValueObj$y);"+
 		 newLine + "   }"+
-		 newLine + "   destination.setADMappedMap(mapOfDestination$y);"+
+		 newLine + "   destination.setADMappedMap(mapOfDestination$z);"+
 		 newLine +
 		 newLine + "   }else{"+
 		 newLine + "   destination.setADMappedMap(null);"+
@@ -145,7 +145,7 @@ public class MappedMapOperationTest extends AOperation<MappedMapOperation>{
 		
 		expected = "   if(source.getASMappedMap()!=null){"+
 		 newLine + "   if(destination.getADMappedMap()!=null){"+
-		 newLine + "   java.util.HashMap mapOfDestination$i = new java.util.HashMap();"+
+		 newLine + "   java.util.HashMap mapOfDestination$z = new java.util.HashMap();"+
 		 newLine + "   Object[] mapOfSource$i = source.getASMappedMap().entrySet().toArray();"+
 		 newLine + "   for(int index$i = mapOfSource$i.length-1;index$i >=0;index$i--){"+
 		 newLine + "   java.util.Map.Entry entryItem$i = (java.util.Map.Entry) mapOfSource$i[index$i];"+
@@ -161,12 +161,12 @@ public class MappedMapOperationTest extends AOperation<MappedMapOperation>{
 		 newLine + "   destinationValueObj$i.setField(sourceValueObj$i.getField());"+
 		 newLine + "   }"+
 		 newLine + 
-		 newLine + "   mapOfDestination$i.put(destinationKeyObj$i, destinationValueObj$i);"+
+		 newLine + "   mapOfDestination$z.put(destinationKeyObj$i, destinationValueObj$i);"+
 		 newLine + "   }"+
-		 newLine + "   destination.getADMappedMap().putAll(mapOfDestination$i);"+
+		 newLine + "   destination.getADMappedMap().putAll(mapOfDestination$z);"+
 		 newLine +
 		 newLine + "   }else{"+
-		 newLine + "   java.util.HashMap mapOfDestination$y = new java.util.HashMap();"+
+		 newLine + "   java.util.HashMap mapOfDestination$z = new java.util.HashMap();"+
 		 newLine + "   Object[] mapOfSource$y = source.getASMappedMap().entrySet().toArray();"+
 		 newLine + "   for(int index$y = mapOfSource$y.length-1;index$y >=0;index$y--){"+
 		 newLine + "   java.util.Map.Entry entryItem$y = (java.util.Map.Entry) mapOfSource$y[index$y];"+
@@ -182,9 +182,9 @@ public class MappedMapOperationTest extends AOperation<MappedMapOperation>{
 		 newLine + "   destinationValueObj$y.setField(sourceValueObj$y.getField());"+
 		 newLine + "   }"+
 		 newLine + 
-		 newLine + "   mapOfDestination$y.put(destinationKeyObj$y, destinationValueObj$y);"+
+		 newLine + "   mapOfDestination$z.put(destinationKeyObj$y, destinationValueObj$y);"+
 		 newLine + "   }"+
-		 newLine + "   destination.setADMappedMap(mapOfDestination$y);"+
+		 newLine + "   destination.setADMappedMap(mapOfDestination$z);"+
 		 newLine +
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;

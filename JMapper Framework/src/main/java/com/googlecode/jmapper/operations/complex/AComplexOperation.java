@@ -18,7 +18,9 @@ package com.googlecode.jmapper.operations.complex;
 
 import static com.googlecode.jmapper.api.enums.MappingType.ALL_FIELDS;
 import static com.googlecode.jmapper.api.enums.MappingType.ONLY_NULL_FIELDS;
-import static com.googlecode.jmapper.util.GeneralUtility.newLine;
+import static com.googlecode.jmapper.util.GeneralUtility.*;
+
+import org.hamcrest.core.IsNull;
 
 import com.googlecode.jmapper.operations.AGeneralOperation;
 
@@ -34,10 +36,23 @@ public abstract class AComplexOperation extends AGeneralOperation{
 	/** destination class */
 	private Class<?> destinationClass;
 	
+	private String sourceConverted;
+	
 	/** 
 	 * @return Returns the name of the object shared between existingField and fieldToCreate methods.
 	 * */
-	protected Object getSourceConverted(){return new Object();}
+	protected Object getSourceConverted(){
+		if(isNull(sourceConverted))
+			sourceConverted = getSourceConvertedName();
+		return sourceConverted;
+	}
+	
+	/**
+	 * @return the name of the source converted
+	 */
+	protected String getSourceConvertedName(){
+		return "defaultName";
+	};
 	
 	/**
 	 * @return a StringBuilder containing the mapping for an existing field

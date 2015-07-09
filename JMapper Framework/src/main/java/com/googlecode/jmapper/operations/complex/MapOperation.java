@@ -33,7 +33,7 @@ import com.googlecode.jmapper.operations.info.InfoMapOperation;
 public class MapOperation extends AComplexOperation {
 	
 	@Override
-	protected Object getSourceConverted() {
+	protected String getSourceConvertedName() {
 		return c("mapOfDestination");
 	}
 	

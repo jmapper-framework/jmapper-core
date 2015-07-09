@@ -33,7 +33,7 @@ import java.util.Map;
 public class CollectionOperation extends AComplexOperation {
 	
 	@Override
-	protected Object getSourceConverted() {
+	protected String getSourceConvertedName() {
 		return c("collectionOfDestination");
 	}
 	

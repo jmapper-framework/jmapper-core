@@ -92,7 +92,7 @@ public abstract class AOperation<T extends AGeneralOperation> extends TestCase {
 	protected abstract void NullValued();
 	
 	public void verify(){
-		assertEquals(replace$(expected,"i",""+(i),"y",""+(++i)), actual);
+		assertEquals(replace$(expected,"i",""+(i),"y",""+(i+1),"z",""+(i-1)), actual);
 	}
 	
 	public void testAllAll(){

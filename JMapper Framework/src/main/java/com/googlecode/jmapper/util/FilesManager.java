@@ -803,11 +803,12 @@ public class FilesManager {
 	 * Returns the file that has the name given as input, null otherwise.
 	 * @param name file name
 	 * @return the File with this name
+	 * @throws FileNotFoundException 
 	 */
-	public static File searchFile(String name){
+	public static File searchFile(String name) throws FileNotFoundException{
 		File file = searchFile(new File(applicationRoot),name);
 		if(isNull(file))
-			throw new JMapperException(new FileNotFoundException(name + "file not found"));
+			Error.fileNotFound(name);
 		
 		return file;
 	}
@@ -1055,8 +1056,9 @@ public class FilesManager {
 	 * Starting from filename returns its path.
 	 * @param fileName file name
 	 * @return the absolute path
+	 * @throws FileNotFoundException 
 	 */
-	public static String fullPathOf(String fileName){
+	public static String fullPathOf(String fileName) throws FileNotFoundException{
 		return searchFile(fileName).getAbsolutePath();
 	}
 

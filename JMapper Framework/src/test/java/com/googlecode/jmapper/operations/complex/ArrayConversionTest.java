@@ -53,15 +53,15 @@ public class ArrayConversionTest extends AOperation<ArrayOperation>{
 		expected = "   if(destination.getIntegerArray()!=null){"+
 		 newLine + "   if(source.getStringArray()!=null){"+
 		 newLine + "   java.lang.String[] arrayOfSource$i = source.getStringArray();"+
-		 newLine + "   java.lang.Integer[] arrayOfDestination$i = new java.lang.Integer[arrayOfSource$i.length];"+
+		 newLine + "   java.lang.Integer[] arrayOfDestination$z = new java.lang.Integer[arrayOfSource$i.length];"+
 		 newLine + "   for(int index$i = arrayOfSource$i.length-1;index$i >=0;index$i--){"+
 		 newLine + "   java.lang.String objectOfSoure$i = (java.lang.String) arrayOfSource$i[index$i];"+
 		 newLine + "   java.lang.Integer objectOfDestination$i = new Integer(objectOfSoure$i);"+
-		 newLine + "   arrayOfDestination$i[index$i] = objectOfDestination$i;"+
+		 newLine + "   arrayOfDestination$z[index$i] = objectOfDestination$i;"+
 		 newLine + "   }"+
 		 newLine + "   java.lang.Integer[] dep$i = destination.getIntegerArray();"+
-		 newLine + "   java.lang.Integer[] newDestination$i = (java.lang.Integer[]) java.util.Arrays.copyOf(dep$i, dep$i.length + arrayOfDestination$i.length);"+
-		 newLine + "   System.arraycopy(arrayOfDestination$i, 0, newDestination$i, dep$i.length, arrayOfDestination$i.length);"+
+		 newLine + "   java.lang.Integer[] newDestination$i = (java.lang.Integer[]) java.util.Arrays.copyOf(dep$i, dep$i.length + arrayOfDestination$z.length);"+
+		 newLine + "   System.arraycopy(arrayOfDestination$z, 0, newDestination$i, dep$i.length, arrayOfDestination$z.length);"+
 		 newLine + "   destination.setIntegerArray(newDestination$i);"+
 	 	 newLine + 
 		 newLine + "   }else{"+
@@ -70,13 +70,13 @@ public class ArrayConversionTest extends AOperation<ArrayOperation>{
 		 newLine + "   }else{"+
 		 newLine + "   if(source.getStringArray()!=null){"+
 		 newLine + "   java.lang.String[] arrayOfSource$y = source.getStringArray();"+
-		 newLine + "   java.lang.Integer[] arrayOfDestination$y = new java.lang.Integer[arrayOfSource$y.length];"+
+		 newLine + "   java.lang.Integer[] arrayOfDestination$z = new java.lang.Integer[arrayOfSource$y.length];"+
 		 newLine + "   for(int index$y = arrayOfSource$y.length-1;index$y >=0;index$y--){"+
 		 newLine + "   java.lang.String objectOfSoure$y = (java.lang.String) arrayOfSource$y[index$y];"+
 		 newLine + "   java.lang.Integer objectOfDestination$y = new Integer(objectOfSoure$y);"+
-		 newLine + "   arrayOfDestination$y[index$y] = objectOfDestination$y;"+
+		 newLine + "   arrayOfDestination$z[index$y] = objectOfDestination$y;"+
 		 newLine + "   }"+
-		 newLine + "   destination.setIntegerArray(arrayOfDestination$y);"+
+		 newLine + "   destination.setIntegerArray(arrayOfDestination$z);"+
 		 newLine + 
 		 newLine + "   }else{"+
 		 newLine + "   destination.setIntegerArray(null);"+
@@ -108,26 +108,26 @@ public class ArrayConversionTest extends AOperation<ArrayOperation>{
 		expected = "   if(source.getStringArray()!=null){"+
 		 newLine + "   if(destination.getIntegerArray()!=null){"+
 		 newLine + "   java.lang.String[] arrayOfSource$i = source.getStringArray();"+
-		 newLine + "   java.lang.Integer[] arrayOfDestination$i = new java.lang.Integer[arrayOfSource$i.length];"+
+		 newLine + "   java.lang.Integer[] arrayOfDestination$z = new java.lang.Integer[arrayOfSource$i.length];"+
 		 newLine + "   for(int index$i = arrayOfSource$i.length-1;index$i >=0;index$i--){"+
 		 newLine + "   java.lang.String objectOfSoure$i = (java.lang.String) arrayOfSource$i[index$i];"+
 		 newLine + "   java.lang.Integer objectOfDestination$i = new Integer(objectOfSoure$i);"+
-		 newLine + "   arrayOfDestination$i[index$i] = objectOfDestination$i;"+
+		 newLine + "   arrayOfDestination$z[index$i] = objectOfDestination$i;"+
 		 newLine + "   }"+
 		 newLine + "   java.lang.Integer[] dep$i = destination.getIntegerArray();"+
-		 newLine + "   java.lang.Integer[] newDestination$i = (java.lang.Integer[]) java.util.Arrays.copyOf(dep$i, dep$i.length + arrayOfDestination$i.length);"+
-		 newLine + "   System.arraycopy(arrayOfDestination$i, 0, newDestination$i, dep$i.length, arrayOfDestination$i.length);"+
+		 newLine + "   java.lang.Integer[] newDestination$i = (java.lang.Integer[]) java.util.Arrays.copyOf(dep$i, dep$i.length + arrayOfDestination$z.length);"+
+		 newLine + "   System.arraycopy(arrayOfDestination$z, 0, newDestination$i, dep$i.length, arrayOfDestination$z.length);"+
 		 newLine + "   destination.setIntegerArray(newDestination$i);"+
 		 newLine + 
 		 newLine + "   }else{"+
 		 newLine + "   java.lang.String[] arrayOfSource$y = source.getStringArray();"+
-		 newLine + "   java.lang.Integer[] arrayOfDestination$y = new java.lang.Integer[arrayOfSource$y.length];"+
+		 newLine + "   java.lang.Integer[] arrayOfDestination$z = new java.lang.Integer[arrayOfSource$y.length];"+
 		 newLine + "   for(int index$y = arrayOfSource$y.length-1;index$y >=0;index$y--){"+
 		 newLine + "   java.lang.String objectOfSoure$y = (java.lang.String) arrayOfSource$y[index$y];"+
 		 newLine + "   java.lang.Integer objectOfDestination$y = new Integer(objectOfSoure$y);"+
-		 newLine + "   arrayOfDestination$y[index$y] = objectOfDestination$y;"+
+		 newLine + "   arrayOfDestination$z[index$y] = objectOfDestination$y;"+
 		 newLine + "   }"+
-		 newLine + "   destination.setIntegerArray(arrayOfDestination$y);"+
+		 newLine + "   destination.setIntegerArray(arrayOfDestination$z);"+
 		 newLine + 
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;

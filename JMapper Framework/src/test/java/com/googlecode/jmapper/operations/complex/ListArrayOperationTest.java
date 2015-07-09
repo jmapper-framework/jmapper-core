@@ -53,15 +53,15 @@ public class ListArrayOperationTest extends AOperation<ListArrayOperation> {
 
 		expected = "   if(destination.getAStringList()!=null){"+
 		 newLine + "   if(source.getStringArray()!=null){"+
-		 newLine + "   java.util.ArrayList listArrayOfDestination$i = new java.util.ArrayList(java.util.Arrays#asList(source.getStringArray()));"+
-		 newLine + "   destination.getAStringList().addAll(listArrayOfDestination$i);"+
+		 newLine + "   java.util.ArrayList listArrayOfDestination$z = new java.util.ArrayList(java.util.Arrays#asList(source.getStringArray()));"+
+		 newLine + "   destination.getAStringList().addAll(listArrayOfDestination$z);"+
 		 newLine + "   }else{"+
 		 newLine + "   destination.setAStringList(null);"+
 		 newLine + "   }"+
 		 newLine + "   }else{"+
 		 newLine + "   if(source.getStringArray()!=null){"+
-		 newLine + "   java.util.ArrayList listArrayOfDestination$y = new java.util.ArrayList(java.util.Arrays#asList(source.getStringArray()));"+
-		 newLine + "   destination.setAStringList(listArrayOfDestination$y);"+
+		 newLine + "   java.util.ArrayList listArrayOfDestination$z = new java.util.ArrayList(java.util.Arrays#asList(source.getStringArray()));"+
+		 newLine + "   destination.setAStringList(listArrayOfDestination$z);"+
 		 newLine + "   }else{"+
 		 newLine + "   destination.setAStringList(null);"+
 		 newLine + "   }"+
@@ -84,11 +84,11 @@ public class ListArrayOperationTest extends AOperation<ListArrayOperation> {
 		
 		expected = "   if(source.getStringArray()!=null){"+
 		 newLine + "   if(destination.getAStringList()!=null){"+
-		 newLine + "   java.util.ArrayList listArrayOfDestination$i = new java.util.ArrayList(java.util.Arrays#asList(source.getStringArray()));"+
-		 newLine + "   destination.getAStringList().addAll(listArrayOfDestination$i);"+
+		 newLine + "   java.util.ArrayList listArrayOfDestination$z = new java.util.ArrayList(java.util.Arrays#asList(source.getStringArray()));"+
+		 newLine + "   destination.getAStringList().addAll(listArrayOfDestination$z);"+
 		 newLine + "   }else{"+
-		 newLine + "   java.util.ArrayList listArrayOfDestination$y = new java.util.ArrayList(java.util.Arrays#asList(source.getStringArray()));"+
-		 newLine + "   destination.setAStringList(listArrayOfDestination$y);"+
+		 newLine + "   java.util.ArrayList listArrayOfDestination$z = new java.util.ArrayList(java.util.Arrays#asList(source.getStringArray()));"+
+		 newLine + "   destination.setAStringList(listArrayOfDestination$z);"+
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;
 		

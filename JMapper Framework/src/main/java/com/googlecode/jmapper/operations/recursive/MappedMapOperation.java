@@ -38,7 +38,7 @@ import com.googlecode.jmapper.operations.info.InfoMapOperation;
 public class MappedMapOperation extends ARecursiveOperation {
 
 	@Override
-	protected Object getSourceConverted() {
+	protected String getSourceConvertedName() {
 		return c("mapOfDestination");
 	}
 	

@@ -68,7 +68,7 @@ public class MapConversion2Test extends AOperation<MapOperation>{
 		
 		expected = "   if(destination.getADConversionMap()!=null){"+
 		 newLine + "   if(source.getASConversionMap()!=null){"+
-		 newLine + "   java.util.TreeMap mapOfDestination$i = new java.util.TreeMap();"+
+		 newLine + "   java.util.TreeMap mapOfDestination$z = new java.util.TreeMap();"+
 		 newLine + "   Object[] mapOfSource$i = source.getASConversionMap().entrySet().toArray();"+
 		 newLine + "   for(int index$i = mapOfSource$i.length-1;index$i >=0;index$i--){"+
 		 newLine + "   java.util.Map.Entry entryItem$i = (java.util.Map.Entry) mapOfSource$i[index$i];"+
@@ -76,16 +76,16 @@ public class MapConversion2Test extends AOperation<MapOperation>{
 		 newLine + "   java.lang.String sourceValueObj$i = (java.lang.String) entryItem$i.getValue();"+
 		 newLine + "   java.lang.String destinationKeyObj$i = sourceKeyObj$i.toString();"+
 		 newLine + "   java.lang.Integer destinationValueObj$i = new Integer(sourceValueObj$i);"+
-		 newLine + "   mapOfDestination$i.put(destinationKeyObj$i, destinationValueObj$i);"+
+		 newLine + "   mapOfDestination$z.put(destinationKeyObj$i, destinationValueObj$i);"+
 		 newLine + "   }"+
-		 newLine + "   destination.getADConversionMap().putAll(mapOfDestination$i);"+
+		 newLine + "   destination.getADConversionMap().putAll(mapOfDestination$z);"+
 		 newLine + 
 		 newLine + "   }else{"+
 		 newLine + "   destination.setADConversionMap(null);"+
 		 newLine + "   }"+
 		 newLine + "   }else{"+
 		 newLine + "   if(source.getASConversionMap()!=null){"+
-		 newLine + "   java.util.TreeMap mapOfDestination$y = new java.util.TreeMap();"+
+		 newLine + "   java.util.TreeMap mapOfDestination$z = new java.util.TreeMap();"+
 		 newLine + "   Object[] mapOfSource$y = source.getASConversionMap().entrySet().toArray();"+
 		 newLine + "   for(int index$y = mapOfSource$y.length-1;index$y >=0;index$y--){"+
 		 newLine + "   java.util.Map.Entry entryItem$y = (java.util.Map.Entry) mapOfSource$y[index$y];"+
@@ -93,9 +93,9 @@ public class MapConversion2Test extends AOperation<MapOperation>{
 		 newLine + "   java.lang.String sourceValueObj$y = (java.lang.String) entryItem$y.getValue();"+
 		 newLine + "   java.lang.String destinationKeyObj$y = sourceKeyObj$y.toString();"+
 		 newLine + "   java.lang.Integer destinationValueObj$y = new Integer(sourceValueObj$y);"+
-		 newLine + "   mapOfDestination$y.put(destinationKeyObj$y, destinationValueObj$y);"+
+		 newLine + "   mapOfDestination$z.put(destinationKeyObj$y, destinationValueObj$y);"+
 		 newLine + "   }"+
-		 newLine + "   destination.setADConversionMap(mapOfDestination$y);"+
+		 newLine + "   destination.setADConversionMap(mapOfDestination$z);"+
 		 newLine + 
 		 newLine + "   }else{"+
 		 newLine + "   destination.setADConversionMap(null);"+
@@ -129,7 +129,7 @@ public class MapConversion2Test extends AOperation<MapOperation>{
 		
 		expected = "   if(source.getASConversionMap()!=null){"+
 		 newLine + "   if(destination.getADConversionMap()!=null){"+
-		 newLine + "   java.util.TreeMap mapOfDestination$i = new java.util.TreeMap();"+
+		 newLine + "   java.util.TreeMap mapOfDestination$z = new java.util.TreeMap();"+
 		 newLine + "   Object[] mapOfSource$i = source.getASConversionMap().entrySet().toArray();"+
 		 newLine + "   for(int index$i = mapOfSource$i.length-1;index$i >=0;index$i--){"+
 		 newLine + "   java.util.Map.Entry entryItem$i = (java.util.Map.Entry) mapOfSource$i[index$i];"+
@@ -137,12 +137,12 @@ public class MapConversion2Test extends AOperation<MapOperation>{
 		 newLine + "   java.lang.String sourceValueObj$i = (java.lang.String) entryItem$i.getValue();"+
 		 newLine + "   java.lang.String destinationKeyObj$i = sourceKeyObj$i.toString();"+
 		 newLine + "   java.lang.Integer destinationValueObj$i = new Integer(sourceValueObj$i);"+
-		 newLine + "   mapOfDestination$i.put(destinationKeyObj$i, destinationValueObj$i);"+
+		 newLine + "   mapOfDestination$z.put(destinationKeyObj$i, destinationValueObj$i);"+
 		 newLine + "   }"+
-		 newLine + "   destination.getADConversionMap().putAll(mapOfDestination$i);"+
+		 newLine + "   destination.getADConversionMap().putAll(mapOfDestination$z);"+
 		 newLine + 
 		 newLine + "   }else{"+
-		 newLine + "   java.util.TreeMap mapOfDestination$y = new java.util.TreeMap();"+
+		 newLine + "   java.util.TreeMap mapOfDestination$z = new java.util.TreeMap();"+
 		 newLine + "   Object[] mapOfSource$y = source.getASConversionMap().entrySet().toArray();"+
 		 newLine + "   for(int index$y = mapOfSource$y.length-1;index$y >=0;index$y--){"+
 		 newLine + "   java.util.Map.Entry entryItem$y = (java.util.Map.Entry) mapOfSource$y[index$y];"+
@@ -150,9 +150,9 @@ public class MapConversion2Test extends AOperation<MapOperation>{
 		 newLine + "   java.lang.String sourceValueObj$y = (java.lang.String) entryItem$y.getValue();"+
 		 newLine + "   java.lang.String destinationKeyObj$y = sourceKeyObj$y.toString();"+
 		 newLine + "   java.lang.Integer destinationValueObj$y = new Integer(sourceValueObj$y);"+
-		 newLine + "   mapOfDestination$y.put(destinationKeyObj$y, destinationValueObj$y);"+
+		 newLine + "   mapOfDestination$z.put(destinationKeyObj$y, destinationValueObj$y);"+
 		 newLine + "   }"+
-		 newLine + "   destination.setADConversionMap(mapOfDestination$y);"+
+		 newLine + "   destination.setADConversionMap(mapOfDestination$z);"+
 		 newLine + 
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;

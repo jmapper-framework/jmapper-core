@@ -33,7 +33,7 @@ import com.googlecode.jmapper.generation.MapperConstructor;
 public class MappedArrayListOperation extends ARecursiveOperation {
 
 	@Override
-	protected Object getSourceConverted() {
+	protected String getSourceConvertedName() {
 		return c("arrayListOfDestination");
 	}
 	

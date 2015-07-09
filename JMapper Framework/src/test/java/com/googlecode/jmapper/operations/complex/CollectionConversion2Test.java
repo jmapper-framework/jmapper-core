@@ -58,28 +58,28 @@ public class CollectionConversion2Test extends AOperation<CollectionOperation>{
 		
 		expected = "   if(destination.getAListString()!=null){"+
 		 newLine + "   if(source.getASetInteger()!=null){"+
-		 newLine + "   java.util.ArrayList collectionOfDestination$i = new java.util.ArrayList();"+
+		 newLine + "   java.util.ArrayList collectionOfDestination$z = new java.util.ArrayList();"+
 		 newLine + "   Object[] collectionOfSource$i = source.getASetInteger().toArray();"+
 		 newLine + "   for(int index$i = collectionOfSource$i.length-1;index$i >=0;index$i--){"+
 		 newLine + "   java.lang.Integer objectOfSource$i = (java.lang.Integer) collectionOfSource$i[index$i];"+
 		 newLine + "   java.lang.String objectOfDestination$i = objectOfSource$i.toString();"+
-		 newLine + "   collectionOfDestination$i.add(objectOfDestination$i);"+
+		 newLine + "   collectionOfDestination$z.add(objectOfDestination$i);"+
 		 newLine + "   }"+
-		 newLine + "   destination.getAListString().addAll(collectionOfDestination$i);"+
+		 newLine + "   destination.getAListString().addAll(collectionOfDestination$z);"+
 		 newLine + 
 		 newLine + "   }else{"+
 		 newLine + "   destination.setAListString(null);"+
 		 newLine + "   }"+
 		 newLine + "   }else{"+
 		 newLine + "   if(source.getASetInteger()!=null){"+
-		 newLine + "   java.util.ArrayList collectionOfDestination$y = new java.util.ArrayList();"+
+		 newLine + "   java.util.ArrayList collectionOfDestination$z = new java.util.ArrayList();"+
 		 newLine + "   Object[] collectionOfSource$y = source.getASetInteger().toArray();"+
 		 newLine + "   for(int index$y = collectionOfSource$y.length-1;index$y >=0;index$y--){"+
 		 newLine + "   java.lang.Integer objectOfSource$y = (java.lang.Integer) collectionOfSource$y[index$y];"+
 		 newLine + "   java.lang.String objectOfDestination$y = objectOfSource$y.toString();"+
-		 newLine + "   collectionOfDestination$y.add(objectOfDestination$y);"+
+		 newLine + "   collectionOfDestination$z.add(objectOfDestination$y);"+
 		 newLine + "   }"+
-		 newLine + "   destination.setAListString(collectionOfDestination$y);"+
+		 newLine + "   destination.setAListString(collectionOfDestination$z);"+
 		 newLine + 
 		 newLine + "   }else{"+
 		 newLine + "   destination.setAListString(null);"+
@@ -110,24 +110,24 @@ public class CollectionConversion2Test extends AOperation<CollectionOperation>{
 		
 		expected = "   if(source.getASetInteger()!=null){"+
 		 newLine + "   if(destination.getAListString()!=null){"+
-		 newLine + "   java.util.ArrayList collectionOfDestination$i = new java.util.ArrayList();"+
+		 newLine + "   java.util.ArrayList collectionOfDestination$z = new java.util.ArrayList();"+
 		 newLine + "   Object[] collectionOfSource$i = source.getASetInteger().toArray();"+
 		 newLine + "   for(int index$i = collectionOfSource$i.length-1;index$i >=0;index$i--){"+
 		 newLine + "   java.lang.Integer objectOfSource$i = (java.lang.Integer) collectionOfSource$i[index$i];"+
 		 newLine + "   java.lang.String objectOfDestination$i = objectOfSource$i.toString();"+
-		 newLine + "   collectionOfDestination$i.add(objectOfDestination$i);"+
+		 newLine + "   collectionOfDestination$z.add(objectOfDestination$i);"+
 		 newLine + "   }"+
-		 newLine + "   destination.getAListString().addAll(collectionOfDestination$i);"+
+		 newLine + "   destination.getAListString().addAll(collectionOfDestination$z);"+
 		 newLine + 
 		 newLine + "   }else{"+
-		 newLine + "   java.util.ArrayList collectionOfDestination$y = new java.util.ArrayList();"+
+		 newLine + "   java.util.ArrayList collectionOfDestination$z = new java.util.ArrayList();"+
 		 newLine + "   Object[] collectionOfSource$y = source.getASetInteger().toArray();"+
 		 newLine + "   for(int index$y = collectionOfSource$y.length-1;index$y >=0;index$y--){"+
 		 newLine + "   java.lang.Integer objectOfSource$y = (java.lang.Integer) collectionOfSource$y[index$y];"+
 		 newLine + "   java.lang.String objectOfDestination$y = objectOfSource$y.toString();"+
-		 newLine + "   collectionOfDestination$y.add(objectOfDestination$y);"+
+		 newLine + "   collectionOfDestination$z.add(objectOfDestination$y);"+
 		 newLine + "   }"+
-		 newLine + "   destination.setAListString(collectionOfDestination$y);"+
+		 newLine + "   destination.setAListString(collectionOfDestination$z);"+
 		 newLine + 
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;

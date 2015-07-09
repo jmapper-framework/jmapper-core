@@ -32,7 +32,7 @@ public class ArrayOperation extends AComplexOperation {
 	
 	/** @return Returns the name of the object shared between existingField and fieldToCreate methods.*/
 	@Override
-	protected Object getSourceConverted(){
+	protected String getSourceConvertedName(){
 		return c("arrayOfDestination");
 	}
 	

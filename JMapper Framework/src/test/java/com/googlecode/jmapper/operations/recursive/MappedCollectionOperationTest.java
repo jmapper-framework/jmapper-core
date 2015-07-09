@@ -60,32 +60,32 @@ public class MappedCollectionOperationTest extends AOperation<MappedCollectionOp
 		
 		expected = "   if(destination.getATargetList()!=null){"+
 		 newLine + "   if(source.getAMappedSet()!=null){"+
-		 newLine + "   java.util.ArrayList collectionOfDestination$i = new java.util.ArrayList();"+
+		 newLine + "   java.util.ArrayList collectionOfDestination$z = new java.util.ArrayList();"+
 		 newLine + "   Object[] collectionOfSource$i = source.getAMappedSet().toArray();"+
 		 newLine + "   for(int index$i = 0;index$i<collectionOfSource$i.length;index$i++){"+
 		 newLine + "   com.googlecode.jmapper.bean.MappedObject objectOfSoure$i = (com.googlecode.jmapper.bean.MappedObject) collectionOfSource$i[index$i];"+
 		 newLine + "   com.googlecode.jmapper.bean.TargetObject objectOfDestination$i = new com.googlecode.jmapper.bean.TargetObject();"+
 		 newLine + "   objectOfDestination$i.setField(objectOfSoure$i.getField());"+
 		 newLine + 
-		 newLine + "   collectionOfDestination$i.add(objectOfDestination$i);"+
+		 newLine + "   collectionOfDestination$z.add(objectOfDestination$i);"+
 		 newLine + "   }"+
-		 newLine + "   destination.getATargetList().addAll(collectionOfDestination$i);"+
+		 newLine + "   destination.getATargetList().addAll(collectionOfDestination$z);"+
 		 newLine + 
 		 newLine + "   }else{"+
 		 newLine + "   destination.setATargetList(null);"+
 		 newLine + "   }"+
 		 newLine + "   }else{"+
 		 newLine + "   if(source.getAMappedSet()!=null){"+
-		 newLine + "   java.util.ArrayList collectionOfDestination$y = new java.util.ArrayList();"+
+		 newLine + "   java.util.ArrayList collectionOfDestination$z = new java.util.ArrayList();"+
 		 newLine + "   Object[] collectionOfSource$y = source.getAMappedSet().toArray();"+
 		 newLine + "   for(int index$y = 0;index$y<collectionOfSource$y.length;index$y++){"+
 		 newLine + "   com.googlecode.jmapper.bean.MappedObject objectOfSoure$y = (com.googlecode.jmapper.bean.MappedObject) collectionOfSource$y[index$y];"+
 		 newLine + "   com.googlecode.jmapper.bean.TargetObject objectOfDestination$y = new com.googlecode.jmapper.bean.TargetObject();"+
 		 newLine + "   objectOfDestination$y.setField(objectOfSoure$y.getField());"+
 		 newLine + 
-		 newLine + "   collectionOfDestination$y.add(objectOfDestination$y);"+
+		 newLine + "   collectionOfDestination$z.add(objectOfDestination$y);"+
 		 newLine + "   }"+
-		 newLine + "   destination.setATargetList(collectionOfDestination$y);"+
+		 newLine + "   destination.setATargetList(collectionOfDestination$z);"+
 		 newLine + 
 		 newLine + "   }else{"+
 		 newLine + "   destination.setATargetList(null);"+
@@ -120,7 +120,7 @@ public class MappedCollectionOperationTest extends AOperation<MappedCollectionOp
 		
 		expected = "   if(source.getAMappedSet()!=null){"+
 		 newLine + "   if(destination.getATargetList()!=null){"+
-		 newLine + "   java.util.ArrayList collectionOfDestination$i = new java.util.ArrayList();"+
+		 newLine + "   java.util.ArrayList collectionOfDestination$z = new java.util.ArrayList();"+
 		 newLine + "   Object[] collectionOfSource$i = source.getAMappedSet().toArray();"+
 		 newLine + "   for(int index$i = 0;index$i<collectionOfSource$i.length;index$i++){"+
 		 newLine + "   com.googlecode.jmapper.bean.MappedObject objectOfSoure$i = (com.googlecode.jmapper.bean.MappedObject) collectionOfSource$i[index$i];"+
@@ -129,12 +129,12 @@ public class MappedCollectionOperationTest extends AOperation<MappedCollectionOp
 		 newLine + "   objectOfDestination$i.setField(objectOfSoure$i.getField());"+
 		 newLine + "   }"+
 		 newLine + 
-		 newLine + "   collectionOfDestination$i.add(objectOfDestination$i);"+
+		 newLine + "   collectionOfDestination$z.add(objectOfDestination$i);"+
 		 newLine + "   }"+
-		 newLine + "   destination.getATargetList().addAll(collectionOfDestination$i);"+
+		 newLine + "   destination.getATargetList().addAll(collectionOfDestination$z);"+
 		 newLine + 
 		 newLine + "   }else{"+
-		 newLine + "   java.util.ArrayList collectionOfDestination$y = new java.util.ArrayList();"+
+		 newLine + "   java.util.ArrayList collectionOfDestination$z = new java.util.ArrayList();"+
 		 newLine + "   Object[] collectionOfSource$y = source.getAMappedSet().toArray();"+
 		 newLine + "   for(int index$y = 0;index$y<collectionOfSource$y.length;index$y++){"+
 		 newLine + "   com.googlecode.jmapper.bean.MappedObject objectOfSoure$y = (com.googlecode.jmapper.bean.MappedObject) collectionOfSource$y[index$y];"+
@@ -143,9 +143,9 @@ public class MappedCollectionOperationTest extends AOperation<MappedCollectionOp
 		 newLine + "   objectOfDestination$y.setField(objectOfSoure$y.getField());"+
 		 newLine + "   }"+
 		 newLine + 
-		 newLine + "   collectionOfDestination$y.add(objectOfDestination$y);"+
+		 newLine + "   collectionOfDestination$z.add(objectOfDestination$y);"+
 		 newLine + "   }"+
-		 newLine + "   destination.setATargetList(collectionOfDestination$y);"+
+		 newLine + "   destination.setATargetList(collectionOfDestination$z);"+
 		 newLine + 
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;
