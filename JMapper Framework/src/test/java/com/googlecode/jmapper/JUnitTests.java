@@ -28,8 +28,10 @@ import com.googlecode.jmapper.operations.complex.CollectionOperationTest;
 import com.googlecode.jmapper.operations.complex.ListArrayConversionTest;
 import com.googlecode.jmapper.operations.complex.ListArrayOperationTest;
 import com.googlecode.jmapper.operations.complex.MapConversion2Test;
+import com.googlecode.jmapper.operations.complex.MapConversion3Test;
 import com.googlecode.jmapper.operations.complex.MapConversionTest;
 import com.googlecode.jmapper.operations.complex.MapOperationTest;
+import com.googlecode.jmapper.operations.recursive.MappedArrayListOperationTest;
 import com.googlecode.jmapper.operations.recursive.MappedArrayOperationTest;
 import com.googlecode.jmapper.operations.recursive.MappedCollectionOperationTest;
 import com.googlecode.jmapper.operations.recursive.MappedListArrayOperationTest;
@@ -140,7 +142,8 @@ public class JUnitTests {
 			suite.addTestSuite(MappedListArrayOperationTest.class);
 			// test between a mapped destination Array and a mapped source List
 			suite.addTestSuite(MappedListArrayOperationTest.class);
-						
+			// test between a mapped destination List and a mapped source Array			
+			suite.addTestSuite(MappedArrayListOperationTest.class);
 			
 		/*	Tests on Maps                           */
 			
@@ -154,6 +157,8 @@ public class JUnitTests {
 			suite.addTestSuite(MappedMapOperationTest.class);
 			// test between mapped Maps: destination Map<MappedObject, String> and source SortedMap<TargetObject, String>
 			suite.addTestSuite(MappedMapOperation2Test.class);
+			// conversion test between maps
+			suite.addTestSuite(MapConversion3Test.class);
 			
 		/*	Tests on Mapped Objects                 */
 			
