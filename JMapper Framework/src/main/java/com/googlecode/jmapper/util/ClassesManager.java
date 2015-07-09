@@ -599,6 +599,7 @@ public final class ClassesManager {
 	 * returns the location of the configuration, null if both classes are configured. 
 	 * @param dItem class to analyze
 	 * @param sItem class to analyze
+	 * @param xml mapping xml 
 	 * @return the location of the configuration, null if both classes are configured. 
 	 */
 	public static ChooseConfig configChosen(Class<?>dItem,Class<?>sItem,XML xml){
@@ -630,8 +631,9 @@ public final class ClassesManager {
 	 * <br>
 	 * <br>String aFieldValue = getFieldValue(new MyClass("example"),"aField");
 	 * <br>assertEqual("example",aFieldValue);</code>
-	 * @param obj
-	 * @param fieldName
+	 * @param obj used to obtain relative class
+	 * @param fieldName field name
+	 * @param <T> used to avoid explicit cast
 	 * @return the value of a field from an object
 	 */
 	@SuppressWarnings("unchecked")

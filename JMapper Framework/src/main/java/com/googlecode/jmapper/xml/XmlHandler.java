@@ -64,7 +64,7 @@ public class XmlHandler {
 	/**
 	 * Cleans up the annotated classes, given as input, from the configuration.<br>
 	 * If the class has inner classes and they are mapped, their configuration will be removed.
-	 * @param classes 
+	 * @param classes classes to clean
 	 * @return this instance of XmlHandler
 	 */
 	public XmlHandler cleanAnnotatedClassAll(Class<?>... classes){
@@ -75,7 +75,7 @@ public class XmlHandler {
 	 * Cleans up the annotated classes, given as input, from the configuration.<br>
 	 * If the class has inner classes and they are mapped, their configuration will be not removed.<br>
 	 * Global mapping must be inlined.
-	 * @param classes 
+	 * @param classes classes to clean
 	 * @return this instance of XmlHandler
 	 */
 	public XmlHandler cleanAnnotatedClass(Class<?>... classes){

@@ -273,6 +273,7 @@ public final class GeneralUtility {
 	/**
 	 * Add elements to an ArrayList.
 	 * @param elements to be added
+	 * @param <E> define items type
 	 * @return the collection, given in input, enriched
 	 */
 	public static <E> ArrayList<E>  list(E...elements ){
@@ -330,8 +331,8 @@ public final class GeneralUtility {
 	
 	/**
 	 * Verifies the presence of the element in array.
-	 * @param array
-	 * @param element
+	 * @param array array to check
+	 * @param element element to search
 	 * @return true if element exists in array, false otherwise
 	 */
 	public static boolean isPresent(SimplyAttribute[] array, SimplyAttribute element){
@@ -344,8 +345,8 @@ public final class GeneralUtility {
 	
 	/**
 	 * Verifies the presence of the element in array.
-	 * @param array
-	 * @param element
+	 * @param array array to check
+	 * @param element element to search
 	 * @return true if element exists in array, false otherwise
 	 */
 	public static boolean isPresent(String[] array, String element){

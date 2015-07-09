@@ -194,7 +194,7 @@ public class ConversionHandler {
 	
 	/**
 	 * Loads analyzer configurations 
-	 * @param analyzer 
+	 * @param analyzer conversion analyzer
 	 * @return this instance of ConversionHandler
 	 */
 	public ConversionHandler load(ConversionAnalyzer analyzer){

@@ -126,7 +126,7 @@ public abstract class AGeneralOperationAccessor {
 	/**
 	 * True if the set destination method shouldn't be used.
 	 * @param avoidSet avoid set
-	 * @return
+	 * @return this instance
 	 */
 	public final AGeneralOperationAccessor avoidDestinationSet(boolean avoidSet){
 		this.avoidSet = avoidSet;
@@ -149,7 +149,7 @@ public abstract class AGeneralOperationAccessor {
 	
 	/**
 	 * Invokes toString() method on object.
-	 * @param obj 
+	 * @param obj obj to treat
 	 * @return obj.toString()
 	 */
 	protected String s(Object obj){

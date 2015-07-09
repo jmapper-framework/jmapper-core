@@ -54,8 +54,8 @@ public final class XML {
 	 * Xml file can be loaded in two ways: at runtime and development time.
 	 * @param atRuntime true if xml file must be loaded at runtime, false at development time
 	 * @param xmlPath path of xml file
-	 * @throws IOException 
-	 * @throws MalformedURLException 
+	 * @throws IOException other cases 
+	 * @throws MalformedURLException in case of malformed xml path
 	 */
 	public XML(boolean atRuntime, String xmlPath) throws MalformedURLException, IOException{
 		if(!isNull(xmlPath)){
@@ -273,7 +273,7 @@ public final class XML {
 	}
 	/**
 	 * This method remove a specific Class from Xml Configuration File
-	 * @param aClass
+	 * @param aClass class to delete
 	 * @return this instance of XML
 	 */
 	public XML deleteClass(Class<?> aClass){
@@ -310,8 +310,8 @@ public final class XML {
 	
 	/**
 	 * This method adds the attributes to an existing Class.
-	 * @param aClass
-	 * @param attributes
+	 * @param aClass class to which add attributes
+	 * @param attributes attributes to add
 	 * @return this instance of XML
 	 */
 	public XML addAttributes(Class<?> aClass,Attribute[] attributes){
@@ -326,8 +326,8 @@ public final class XML {
 	
 	/**
 	 * This method deletes the attributes to an existing Class.
-	 * @param aClass
-	 * @param attributes
+	 * @param aClass class to which delete the attributes
+	 * @param attributes attributes to delete
 	 * @return this instance of XML
 	 */
 	public XML deleteAttributes(Class<?> aClass,String[] attributes){

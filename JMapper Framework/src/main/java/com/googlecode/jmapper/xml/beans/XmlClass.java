@@ -41,7 +41,7 @@ public class XmlClass {
 	public XmlClass() {}
 	
 	/**
-	 * @param name
+	 * @param name class name
 	 */
 	public XmlClass(String name) {
 		super();

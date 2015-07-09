@@ -75,7 +75,7 @@ public class Attribute {
 	
 	/**
 	 * Giving only the field name, JMapper assumes that the name of the target field is equal.
-	 * @param name
+	 * @param name attribute name
 	 */
 	public Attribute(String name){
 		this(name,new Value(Constants.DEFAULT_FIELD_VALUE));

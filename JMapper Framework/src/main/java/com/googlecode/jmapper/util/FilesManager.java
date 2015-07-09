@@ -20,6 +20,7 @@ import static com.googlecode.jmapper.config.ResourceLoader.loadResource;
 import static com.googlecode.jmapper.util.GeneralUtility.containsAll;
 import static com.googlecode.jmapper.util.GeneralUtility.fileSeparator;
 import static com.googlecode.jmapper.util.GeneralUtility.isEmpty;
+import static com.googlecode.jmapper.util.GeneralUtility.isNull;
 import static com.googlecode.jmapper.util.GeneralUtility.list;
 
 import java.io.BufferedReader;
@@ -43,15 +44,12 @@ import com.googlecode.jmapper.annotations.JMap;
 import com.googlecode.jmapper.annotations.JMapAccessor;
 import com.googlecode.jmapper.annotations.JMapAccessors;
 import com.googlecode.jmapper.config.Error;
-import com.googlecode.jmapper.exceptions.JMapperException;
 import com.googlecode.jmapper.exceptions.LoadingFileException;
 import com.googlecode.jmapper.xml.Attribute;
 import com.googlecode.jmapper.xml.Global;
 import com.googlecode.jmapper.xml.SimplyAttribute;
 import com.googlecode.jmapper.xml.beans.XmlJmapper;
 import com.thoughtworks.xstream.XStream;
-
-import static com.googlecode.jmapper.util.GeneralUtility.*;
 /**
  * FilesManager provides all the operations that allow the manipulation of files.
  *
@@ -69,8 +67,8 @@ public class FilesManager {
 	 * @param global global mapping
 	 * @param attributes attributes of this Class
 	 * @param aClass class to rewrite
-	 * @throws NoSuchFieldException 
-	 * @throws IOException  
+	 * @throws NoSuchFieldException thrown if the field doesn't exists
+	 * @throws IOException in case of file manipulation problems
 	 */	
 	public static void addConfigurationToClass(String path,Global global,List<Attribute> attributes,Class<?> aClass) throws NoSuchFieldException, IOException {
 		writeFile(new File(path),linesToWrite(path, global, attributes, aClass));
@@ -803,7 +801,7 @@ public class FilesManager {
 	 * Returns the file that has the name given as input, null otherwise.
 	 * @param name file name
 	 * @return the File with this name
-	 * @throws FileNotFoundException 
+	 * @throws FileNotFoundException thrown if the file isn't found
 	 */
 	public static File searchFile(String name) throws FileNotFoundException{
 		File file = searchFile(new File(applicationRoot),name);
@@ -918,6 +916,7 @@ public class FilesManager {
 	/**
 	 * Returns true if the file, relative to path, containts the @JMap annotation.
 	 * @param path file path
+	 * @param aClass class to check
 	 * @return true if the file, relative to path, contains the @JMap annotation
 	 * @throws IOException in case of file manipulation problems
 	 */
@@ -1003,13 +1002,13 @@ public class FilesManager {
 	/**
 	 * This method writes the xml file starting from an XmlJmapper object, following the xmlPath.
 	 * @param jmapper XmlJmapper object that will be used for write the xml mapping file
+	 * @param xmlPath xml mapping file path
 	 * @throws IOException in case of file manipulation problems
 	 */
 	public static void write(XmlJmapper jmapper, String xmlPath) throws IOException{
 		XStream xstream = new XStream();
 		xstream.processAnnotations(XmlJmapper.class);
-		String encoding = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-		writeFile(new File(xmlPath),list(encoding + xstream.toXML(jmapper)));
+		writeFile(new File(xmlPath),list(xstream.toXML(jmapper)));
 	}
 	
 	/**
@@ -1056,7 +1055,7 @@ public class FilesManager {
 	 * Starting from filename returns its path.
 	 * @param fileName file name
 	 * @return the absolute path
-	 * @throws FileNotFoundException 
+	 * @throws FileNotFoundException thrown if file not found
 	 */
 	public static String fullPathOf(String fileName) throws FileNotFoundException{
 		return searchFile(fileName).getAbsolutePath();

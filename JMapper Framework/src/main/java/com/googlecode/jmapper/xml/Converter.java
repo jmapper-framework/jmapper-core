@@ -174,7 +174,7 @@ public class Converter {
 	
 	/**
 	 * This method transforms a XmlAttribute into an Attribute.
-	 * @param xmlAttribute
+	 * @param xmlAttribute xml attribute node
 	 * @return an instance of Attribute
 	 */
 	public static Attribute toAttribute(XmlAttribute xmlAttribute) {
@@ -209,7 +209,7 @@ public class Converter {
 	
 	/**
 	 * This method transforms a XmlGlobal into a Global.
-	 * @param xmlGlobal
+	 * @param xmlGlobal xml global node
 	 * @return an instance of Global
 	 */
 	public static Global toGlobal(XmlGlobal xmlGlobal){
@@ -314,8 +314,8 @@ public class Converter {
 	
 	/**
 	 * Conversion from attributes in String array form to TargetAttribute array form.
-	 * @param attributes
-	 * @return
+	 * @param attributes attributes to convert
+	 * @return the converted array of SimplyAttribute type
 	 */
 	public static SimplyAttribute[] toTargetAttributes(String[] attributes){
 		SimplyAttribute[] targetAttributes = new SimplyAttribute[attributes.length];

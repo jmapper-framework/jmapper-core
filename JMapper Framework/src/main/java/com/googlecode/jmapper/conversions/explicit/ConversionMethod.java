@@ -97,6 +97,7 @@ public class ConversionMethod {
 	 * @param type conversion type
 	 * @param parameterNumber parameters number
 	 * @param content conversion method content
+	 * @param avoidSet true if the set method must be avoided
 	 */
 	public ConversionMethod(String name, String[] from, String[] to, Type type,
 			ParameterNumber parameterNumber, String content, boolean avoidSet) {

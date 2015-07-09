@@ -36,9 +36,9 @@ public class XmlBuilder {
 
 	/**
 	 * Returns an XML instance with the purpose to retrieve the xml file at runtime.
-	 * @return an xml instance
-	 * @throws MalformedURLException
-	 * @throws IOException
+	 * @return an xml instance 
+	 * @throws MalformedURLException in case of malformed xml path 
+	 * @throws IOException other cases
 	 */
 	public XML atRuntime() throws MalformedURLException, IOException{
 		return new XML(true, path);
@@ -47,8 +47,8 @@ public class XmlBuilder {
 	/**
 	 * Returns an XML instance with the purpose to retrieve the xml file at development time.
 	 * @return an xml instance
-	 * @throws MalformedURLException
-	 * @throws IOException
+	 * @throws MalformedURLException in case of malformed xml path
+	 * @throws IOException other cases
 	 */
 	public XML atDevelopmentTime() throws MalformedURLException, IOException{
 		return new XML(false, path);
