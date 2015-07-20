@@ -30,6 +30,14 @@ Versione 1.3.2 RILASCIATA:
 
  - permettere di utilizzare nelle conversioni dinamiche i get e set sia custom che no
    i placeholder saranno: ${*.get} e ${*.set} dove * sta per destination o source
+
+Versione 1.3.3 RILASCIATA:
+
+ - permettere l'uso dei regex nella definizione dei nomi 
+ 
+Versione 1.3.3.1 RILASCIATA:
+
+ - fix di 3 bug
    
  -----------------------------------------------------------------------------------------  
      Sviluppo componenti esterni come procedere ?     
@@ -68,15 +76,16 @@ Versione 1.3.2 RILASCIATA:
   	    
 
    
-Versione 1.3.3
 
- - permettere l'uso dei regex nella definizione dei nomi
     
 Versione 1.4.0 
 
- - interfacciare JMapper per funzionare con javassist, janino e bytebuddy
- - di default usare bytebuddy o janino
-  
+ - interfacciare JMapper per funzionare con javassist, janino e bytebuddy (di default usare bytebuddy o janino)
+
+Versione 1.5.0
+
+ - permettere funzioni di projection e flatten
+ 
 2.0.0
 
  - Multiple Mapping
