@@ -19,20 +19,15 @@ package com.googlecode.jmapper.generation;
 import static com.googlecode.jmapper.util.GeneralUtility.list;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javassist.CannotCompileException;
 import javassist.ClassClassPath;
 import javassist.ClassPool;
-import javassist.CtClass;
-import javassist.CtConstructor;
-import javassist.CtMethod;
-import javassist.NotFoundException;
+
+import org.reflections.Reflections;
 
 import com.googlecode.jmapper.IMapper;
-import com.googlecode.jmapper.config.Error;
 import com.googlecode.jmapper.generation.beans.Constructor;
 import com.googlecode.jmapper.generation.beans.Method;
 
@@ -52,10 +47,9 @@ public class MapperGenerator {
 	 * @param mapping parameter that containts the mappings
 	 * @param dynamicMethods dynamic methods to add
 	 * @return a new instance of IMapper interface, following the mappingBuilder specifications
-	 * @throws NotFoundException if class to generate doesn't exists 
-	 * @throws Exception other cases
+	 * @throws Throwable 
 	 */
-	public static Class<?> generateMapperClass(MapperConstructor mapping, Set<Method> dynamicMethods) throws NotFoundException, Exception{
+	public static Class<?> generateMapperClass(MapperConstructor mapping, Set<Method> dynamicMethods) throws Throwable{
 		
 		// adds empty constructor
 		ArrayList<Constructor> constructors = list(new Constructor());
@@ -71,69 +65,13 @@ public class MapperGenerator {
 									.setBody("{"+mappings.get(method.getName())+"}"));
 		
 		String className = mapping.getMapperName();
-		return generateClass(className, constructors, methods);
-	}
-	
-	/**
-	 * Generates the class starting from some data.
-	 * 
-	 * @param clazzName The class that will be generated
-	 * @param superClazzName superClass of clazzName
-	 * @param constructors constructors of the class that will be generated
-	 * @param methods methods of the class that will be generated
-	 * @return the generated Class
-	 * @throws Exception in case of illegal code
-	 */
-	private static Class<?> generateClass(String clazzName,List<Constructor> constructors,List<Method>	methods) throws Exception {
-		try{
-			ClassPool cp = ClassPool.getDefault();
-			// create the class
-			CtClass cc = cp.makeClass(clazzName);
-			
-			// adds the interface
-			cc.addInterface(cp.get(IMapper.class.getName()));
-			
-			// adds constructor
-			for (Constructor constructor : constructors) {
-				// create constructor
-				CtConstructor ctConstructor = new CtConstructor(
-						toCtClass(constructor.getParameters()), cc);
-				// set body constructor
-				ctConstructor.setBody(constructor.getBody());
-				// add constructor to CtClass
-				cc.addConstructor(ctConstructor);	
-			}
-			
-			// adds methods
-			for (Method method : methods) {
-				try{// create method
-					CtMethod ctMethod = new CtMethod(toCtClass(method.getReturnType())[0],method.getName(), toCtClass(method.getParameters()), cc);
-					// set body method
-					ctMethod.setBody(method.getBody());
-					// add method to CtClass
-					cc.addMethod(ctMethod); }
-				catch (CannotCompileException e) { Error.bodyContainsIllegalCode(method,e); } 
-			}
-			
-			Class<?> generetedClass = cc.toClass();
-			cc.defrost();
-			return generetedClass;
-		}catch (NotFoundException e) { Error.notFoundException(e); }
-		return null;
-	}
-	
-	/**
-	 * This method transforms classes in CtClass[]
-	 * @param classes
-	 * @return CtClass[] version of classes parameter
-	 * @throws Exception in case of not found class
-	 */
-	private static CtClass[] toCtClass(Class<?>... classes) throws Exception{
-		ClassPool cp = ClassPool.getDefault();
-		CtClass[] parameters = new CtClass[classes.length];
-		for(int i=0;i<classes.length;i++)
-			parameters[i]=cp.get(classes[i].getName());
 		
-		return parameters;
+		Set<Class<? extends ICodeGenerator>> generators = new Reflections("com.googlecode.jmapper.generation").getSubTypesOf(ICodeGenerator.class);
+		
+		ICodeGenerator generator = generators.isEmpty()? new JavassistGenerator():generators.iterator().next().newInstance();
+		
+		return generator.generate(className, constructors, methods);
 	}
+	
+
 }

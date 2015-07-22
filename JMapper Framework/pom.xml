@@ -135,7 +135,13 @@
 	</build>
   
   <dependencies>
-  
+	
+	<dependency>
+	    <groupId>org.reflections</groupId>
+	    <artifactId>reflections</artifactId>
+	    <version>0.9.10</version>
+	</dependency>
+  	
   	<dependency>
 		<groupId>com.googlecode.jmapper-framework</groupId>
 		<artifactId>jmapper-api</artifactId>

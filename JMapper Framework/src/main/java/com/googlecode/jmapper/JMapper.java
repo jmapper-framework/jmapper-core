@@ -16,8 +16,8 @@
 package com.googlecode.jmapper;
 
 import static com.googlecode.jmapper.generation.MapperBuilder.from;
-import javassist.NotFoundException;
 import static com.googlecode.jmapper.util.GeneralUtility.isNull;
+
 import com.googlecode.jmapper.api.IJMapper;
 import com.googlecode.jmapper.api.enums.MappingType;
 import com.googlecode.jmapper.api.enums.NullPointerControl;
@@ -401,10 +401,10 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
 					                        .analyzing(config)
 					                        .presentIn(xmlPath));  
 			
-		}catch (Exception e) { JmapperLog.ERROR(e); }
+		}catch (Throwable e) { JmapperLog.ERROR(e); }
 	}
 	
-    private IMapper<D,S> createMapper(MapperBuilder mapper) throws NotFoundException, Exception{
+    private IMapper<D,S> createMapper(MapperBuilder mapper) throws Throwable{
 	    
 		Class<IMapper<D,S>> mapperClass = mapper.exist()?mapper.<D,S>get()
 				                                        :mapper.<D,S>generate();

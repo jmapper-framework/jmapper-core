@@ -17,8 +17,8 @@ package com.googlecode.jmapper.generation;
 
 import static com.googlecode.jmapper.generation.MapperGenerator.generateMapperClass;
 import static com.googlecode.jmapper.util.ClassesManager.mapperClassName;
-import static com.googlecode.jmapper.xml.XmlBuilder.loadXml;
 import static com.googlecode.jmapper.util.GeneralUtility.isNull;
+import static com.googlecode.jmapper.xml.XmlBuilder.loadXml;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -27,8 +27,6 @@ import com.googlecode.jmapper.IMapper;
 import com.googlecode.jmapper.config.Error;
 import com.googlecode.jmapper.enums.ChooseConfig;
 import com.googlecode.jmapper.generation.beans.Method;
-
-import javassist.NotFoundException;
 
 /**
  * MapperBuilder increases the readability of the code to retrieve the
@@ -75,11 +73,9 @@ public class MapperBuilder {
 	 * @param <D> Destination Class
 	 * @param <S> Source Class
 	 * @return the generated mapper class 
-	 * @throws NotFoundException if class doesn't exists
-	 * @throws Exception in other cases such as illegalcode
+	 * @throws Throwable 
 	 * */
-	public <D, S> Class<IMapper<D, S>> generate() throws NotFoundException,
-			Exception {
+	public <D, S> Class<IMapper<D, S>> generate() throws Throwable {
 		
 		// if defined the dynamic methods are treated differently
 		// a reference to this list is passed to the MapperConstructor and filled recursively

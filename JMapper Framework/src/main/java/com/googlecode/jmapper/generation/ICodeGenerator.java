@@ -13,35 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.googlecode.jmapper.generation;
 
-package com.googlecode.jmapper.config;
+import java.util.List;
 
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.googlecode.jmapper.JMapper;
-import com.googlecode.jmapper.exceptions.JMapperException;
+import com.googlecode.jmapper.generation.beans.Constructor;
+import com.googlecode.jmapper.generation.beans.Method;
 
 /**
- * Custom logger to semplify exceptions handling.
+ * Implements this interface if you want define a custom code generation.
  * 
  * @author Alessandro Vurro
  *
  */
-public class JmapperLog {
-
-	/** logger */
-	private static final Logger logger = LoggerFactory.getLogger(JMapper.class);
-	
-	private JmapperLog(){}
+public interface ICodeGenerator {
 	
 	/**
-	 * This method handles error log.
-	 * 
-	 * @param e exception to handle
+	 * Generates a class with this parameters.
+	 * @param clazzName class name
+	 * @param constructors list of costructors
+	 * @param methods list of methods
+	 * @return the generated class
+	 * @throws Throwable
 	 */
-	public static void ERROR(Throwable e) throws JMapperException{
-		logger.error("{}: {}",e.getClass().getSimpleName(),e.getMessage());
-	}
+	Class<?> generate(String clazzName,List<Constructor> constructors,List<Method>	methods) throws Throwable;
+
 }

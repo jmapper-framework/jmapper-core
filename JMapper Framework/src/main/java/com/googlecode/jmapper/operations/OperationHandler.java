@@ -159,11 +159,8 @@ public final class OperationHandler {
 				conversionHandler.load(conversionAnalyzer)
 				                 .from(sourceMappedField).to(destinationMappedField);
 				
-				if(conversionHandler.toBeCreated()){
-					Method method = conversionHandler.loadMethod();
-					System.out.println(method.getBody());
-					dynamicMethodsToWrite.add(method);
-				}
+				if(conversionHandler.toBeCreated())
+					dynamicMethodsToWrite.add(conversionHandler.loadMethod());
 				
 				operation.setConversionMethod(conversionHandler.getMethod())
 						 .setMemberShip      (conversionHandler.getMembership());
