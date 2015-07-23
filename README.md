@@ -2,7 +2,7 @@
 
   [![Build Status](https://travis-ci.org/jmapper-framework/jmapper-core.svg?branch=master)](https://travis-ci.org/jmapper-framework/jmapper-core)
 
-JMapper Framework is a java bean to java bean mapper, allows you to perform the passage of data dinamically with annotations and / or XML.<br>With JMapper you can:
+JMapper Framework is a java bean to java bean mapper, it allows to perform the passage of data dinamically with **annotations** and / or **XML**.<br>With JMapper you can:
 
   * create and enrich target objects
   * apply a specific logic to the mapping (apply mapping only on null fields for example)
