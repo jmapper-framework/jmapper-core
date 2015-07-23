@@ -15,7 +15,7 @@ JMapper Framework is a java bean to java bean mapper, allows you to perform the 
 
 <b>Configuration</b>
 
-```
+```java
 class Destination{                      class Source{
     @JMap
     private String id;                      private String id;
@@ -29,7 +29,7 @@ class Destination{                      class Source{
 
 <b>Usage</b>
 
-```
+```java
 Source source = new Source("id", "sourceField", "other");
 
 JMapper mapper = new JMapper(Destination.class, Source.class);
@@ -39,7 +39,7 @@ Destination destination = (Destination) mapper.getDestination(source);
 
 <b>Result</b>
 
-```
+```java
 destination ["id", "sourceField", null]
 ```
 *With JMapper we have all the advantages of dynamic mapping with the performance of static code, with 0 memory consumption.*<br>
