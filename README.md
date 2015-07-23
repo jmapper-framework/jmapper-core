@@ -4,12 +4,12 @@
 
 JMapper Framework is a java bean to java bean mapper, it allows to perform the passage of data dinamically with **annotations** and / or **XML**.<br>With JMapper you can:
 
-  * create and enrich target objects
-  * apply a specific logic to the mapping (apply mapping only on null fields for example)
+  * **create** and **enrich** target objects
+  * apply a **specific logic** to the mapping (apply mapping only on null fields for example)
   * Annotation <-> XML converter and other utility methods
-  * implement the 1 -> N and N -> 1 relationships
-  * implement explicit conversions
-  * apply inherited configurations
+  * implement the **One to Many** and **Many to One** relationships
+  * implement **explicit conversions**
+  * apply **inherited configurations**
 
 ##the most important feature is the ease of use
 
