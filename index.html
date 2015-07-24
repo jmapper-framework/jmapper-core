@@ -49,30 +49,27 @@
 
 <p><strong>Configuration</strong></p>
 
-<pre><code>class Destination{                      class Source{
-    @JMap
-    private String id;                      private String id;
-    @JMap("sourceField")                    
-    private String destinationField;        private String sourceField;
-    private String other;                   private String other;
+<div class="highlight highlight-java"><pre><span class="pl-k">class</span> <span class="pl-en">Destination</span>{                      <span class="pl-k">class</span> <span class="pl-en">Source</span>{
+    <span class="pl-k">@JMap</span>
+    <span class="pl-k">private</span> <span class="pl-smi">String</span> id;                      <span class="pl-k">private</span> <span class="pl-smi">String</span> id;
+    <span class="pl-k">@JMap</span>(<span class="pl-s"><span class="pl-pds">"</span>sourceField<span class="pl-pds">"</span></span>)                    
+    <span class="pl-k">private</span> <span class="pl-smi">String</span> destinationField;        <span class="pl-k">private</span> <span class="pl-smi">String</span> sourceField;
+    <span class="pl-k">private</span> <span class="pl-smi">String</span> other;                   <span class="pl-k">private</span> <span class="pl-smi">String</span> other;
 
-    // getters and setters...               // getters and setters...
-}                                       }
-</code></pre>
+    <span class="pl-c">// getters and setters...               // getters and setters...</span>
+}                                       }</pre></div>
 
 <p><strong>Usage</strong></p>
 
-<pre><code>Source source = new Source("id", "sourceField", "other");
+<div class="highlight highlight-java"><pre><span class="pl-smi">Source</span> source <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">Source</span>(<span class="pl-s"><span class="pl-pds">"</span>id<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>sourceField<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>other<span class="pl-pds">"</span></span>);
 
-JMapper mapper = new JMapper(Destination.class, Source.class);
+<span class="pl-smi">JMapper</span> mapper <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">JMapper</span>(<span class="pl-smi">Destination</span><span class="pl-k">.</span>class, <span class="pl-smi">Source</span><span class="pl-k">.</span>class);
 
-Destination destination = (Destination) mapper.getDestination(source);
-</code></pre>
+<span class="pl-smi">Destination</span> destination <span class="pl-k">=</span> (<span class="pl-smi">Destination</span>) mapper<span class="pl-k">.</span>getDestination(source);</pre></div>
 
 <p><strong>Result</strong></p>
 
-<pre><code>destination ["id", "sourceField", null]
-</code></pre>
+<div class="highlight highlight-java"><pre>destination [<span class="pl-s"><span class="pl-pds">"</span>id<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>sourceField<span class="pl-pds">"</span></span>, <span class="pl-c1">null</span>]</pre></div>
 
 <p><em>With JMapper we have all the advantages of dynamic mapping with the performance of static code, with 0 memory consumption.</em><br><br>
 <strong>Dependency information</strong>
