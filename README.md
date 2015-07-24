@@ -32,9 +32,9 @@ class Destination{                      class Source{
 ```java
 Source source = new Source("id", "sourceField", "other");
 
-JMapper mapper = new JMapper(Destination.class, Source.class);
+JMapper<Destination.class, Source.class> mapper = new JMapper<>(Destination.class, Source.class);
 
-Destination destination = (Destination) mapper.getDestination(source);
+Destination destination = mapper.getDestination(source);
 ```
 
 <b>Result</b>
