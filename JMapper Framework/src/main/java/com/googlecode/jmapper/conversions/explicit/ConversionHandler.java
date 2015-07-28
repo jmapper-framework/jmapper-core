@@ -25,6 +25,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.regex.Matcher;
+
+import static com.googlecode.jmapper.util.GeneralUtility.isNull;
 
 import com.googlecode.jmapper.enums.ConfigurationType;
 import com.googlecode.jmapper.enums.Membership;
@@ -120,8 +123,10 @@ public class ConversionHandler {
 		
 		// Method body definition
 		body += methodDefined.getContent();
-		for (Entry<String, String> pair : placeholders.entrySet()) 
-			body = body.replaceAll(pair.getKey(), pair.getValue());
+		for (Entry<String, String> pair : placeholders.entrySet())
+			// only if the placeholder is used
+			if(!isNull(pair.getValue()))
+				body = body.replaceAll(pair.getKey(),  Matcher.quoteReplacement(pair.getValue()));
 		
 		return methodToGenerate.setBody(body+"}catch(java.lang.Exception e){"+error()+"}return "+defaultPrimitiveValue(destinationClass)+";}");
 	}

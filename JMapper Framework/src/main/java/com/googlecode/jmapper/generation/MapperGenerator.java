@@ -21,6 +21,7 @@ import static com.googlecode.jmapper.util.GeneralUtility.list;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import javassist.ClassClassPath;
 import javassist.ClassPool;
@@ -66,12 +67,25 @@ public class MapperGenerator {
 		
 		String className = mapping.getMapperName();
 		
-		Set<Class<? extends ICodeGenerator>> generators = new Reflections("com.googlecode.jmapper.generation").getSubTypesOf(ICodeGenerator.class);
+		// loading of all implementations of ICodeGenerator interface
+		Set<Class<? extends ICodeGenerator>> generators = new Reflections("com.googlecode.jmapper.generation.impl").getSubTypesOf(ICodeGenerator.class);
 		
+		// if no explicit implementation is provided use the dafault generator
 		ICodeGenerator generator = generators.isEmpty()? new JavassistGenerator():generators.iterator().next().newInstance();
+		
+		// manages here all special characters
+		for (Method method : methods) 
+			method.setBody(replace(method.getBody()));
 		
 		return generator.generate(className, constructors, methods);
 	}
 	
-
+	/**
+	 * Replacement for special charaters.
+	 * @param str string to replace
+	 * @return string replaced
+	 */
+	private static String replace(String str){
+		return str.replaceAll(Pattern.quote("$"), "\\$");
+	}
 }

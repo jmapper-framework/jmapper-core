@@ -81,7 +81,8 @@ Versione 1.3.3.1 RILASCIATA:
 Versione 1.4.0 
 
  - interfacciare JMapper per funzionare con javassist, janino e bytebuddy (di default usare bytebuddy o janino)
-
+ - bug fixed https://github.com/jmapper-framework/jmapper-core/issues/8
+ 
 Versione 1.5.0
 
  - permettere funzioni di projection e flatten
@@ -165,8 +166,55 @@ Versione 1.5.0
   	In questo modo si da la possibilit√† di mappare una HashMap, resultSet, properties con un bean e viceversa 
 
 	i placeholder su global sono intesi come generici a tutti i campi
+	
+	IMPLEMENTARE KEY DI DEFAULT
+	
+	ovvero ommettendo la key si intende che la chiave Ë il nome del campo stesso.
 
 2.2.0
+
+   Dare la possibilit‡ di definire un metodo da richiamare all'interno delle conversioni dinamiche.
+   
+   Ad esempio in caso di un mapping tra un Properties e un Bean, sarebbe utile 
+   permettere di applicare una conversione della chiave delle properties a tutti i mapping,
+   evitando quindi di definire un placeholder per campo ad esempio:
+   
+   Properties
+   
+    user.name = ""
+    user.psw = ""
+   
+   Bean
+   	
+   	userName;
+   	userPsw;
+   	
+   il metodo che dovrebbe essere concesso scrivere dovrebbe essere ad esempio:
+   
+   public String destNameConversion(String destName){
+   	  String[] words = destName.split(per uppercase);
+   	  String result = "";
+   	  for(String word: words){
+   	   result += word.toLowerCase() + "."
+   	  }
+   	  
+   	  return result.subString(0,result.length()-1);
+   }
+   
+   Magari creare una classe di utilit‡ con metodi statici di conversione come:
+   
+     fromCamelCaseTo(char separator){
+     
+      String[] words = destName.split(per uppercase);
+   	  String result = "";
+   	  for(String word: words)
+   	   result += word + separator
+   	  
+   	  
+   	  return result.subString(0,result.length()-1);
+     }
+     
+2.3.0
 - possibilit‡† di definire configurazioni xml generiche senza creare classi (template):
     
 	Possibilit‡† di definire N template sia in Annotation che in XML sulla stessa classe.

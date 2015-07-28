@@ -16,6 +16,7 @@
 package com.googlecode.jmapper.generation;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javassist.CannotCompileException;
 import javassist.ClassPool;
