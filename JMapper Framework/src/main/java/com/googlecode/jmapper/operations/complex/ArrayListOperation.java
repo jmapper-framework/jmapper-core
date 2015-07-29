@@ -45,8 +45,9 @@ public class ArrayListOperation extends AComplexOperation {
 		vars.put("setDestination(result)",s(setDestination(c("newDestination"))));
 		vars.put("destination"           ,c("dep"));
 		vars.put("getDestination()"      ,s(getDestination()));
-	
-	   return write(replace$( "   $dClass[] $destination = $getDestination();"
+
+		//TODO sostituire tutte le concatenazioni con StringBuilder
+		return write(replace$( "   $dClass[] $destination = $getDestination();"
 				  + newLine + "   $dClass[] $result = ($dClass[])java.util.Arrays.copyOf($destination, $destination.length + $source.length);"
 				  + newLine + "   System.arraycopy($source, 0, $result, $destination.length, $source.length);"
 				  + newLine +     "$setDestination(result)", vars));

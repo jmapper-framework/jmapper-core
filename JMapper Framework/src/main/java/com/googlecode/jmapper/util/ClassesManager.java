@@ -367,7 +367,8 @@ public final class ClassesManager {
 		if(isEmpty(resource)) 
 			return className;
 		
-		// if resource is a content, the mapper 
+		// if resource is a content, the mapper must be regenerated, 
+		// to ensure this, to the name is appended a random integer
 		if(!isPath(resource))
 			return className+= String.valueOf(new Random().nextInt());
 		
