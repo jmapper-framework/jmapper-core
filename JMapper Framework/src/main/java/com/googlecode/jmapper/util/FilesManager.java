@@ -1061,4 +1061,11 @@ public class FilesManager {
 		return searchFile(fileName).getAbsolutePath();
 	}
 
+	/**
+	 * @param resource resource to check
+	 * @return true if resource is a content and not a path
+	 */
+	public static boolean isPath(String resource){
+		return !resource.endsWith(".xml") || !resource.endsWith(".properties");
+	}
 }

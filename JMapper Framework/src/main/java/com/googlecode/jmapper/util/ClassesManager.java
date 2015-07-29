@@ -25,6 +25,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import com.googlecode.jmapper.annotations.Annotation;
 import com.googlecode.jmapper.config.Constants;
@@ -33,6 +34,7 @@ import com.googlecode.jmapper.enums.ChooseConfig;
 import com.googlecode.jmapper.operations.beans.MappedField;
 import com.googlecode.jmapper.xml.XML;
 
+import static com.googlecode.jmapper.util.FilesManager.isPath;
 /**
  * Utility class that allows you to manage classes.
  * @author Alessandro Vurro
@@ -355,18 +357,24 @@ public final class ClassesManager {
 	 * 
 	 * @param destination class of Destination
 	 * @param source class of Source
-	 * @param path xml path
+	 * @param resource a resource that represents an xml path or a content
 	 * @return Returns a string containing the names of the classes passed as input
 	 */
-	public static String mapperClassName(Class<?> destination,Class<?> source,String path){
+	public static String mapperClassName(Class<?> destination, Class<?> source, String resource){
+		
 		String className = destination.getName().replaceAll("\\.","") + source.getName().replaceAll("\\.","");
-		if(path != null && path.length()>0){
-			String[]dep = path.split("\\\\");
-			if(dep.length<=1)dep = path.split("/");
-			String xml = dep[dep.length-1];
-			className += xml.replaceAll("\\.","").replaceAll(" ","");
-		}
-		return className;
+		
+		if(isEmpty(resource)) 
+			return className;
+		
+		// if resource is a content, the mapper 
+		if(!isPath(resource))
+			return className+= String.valueOf(new Random().nextInt());
+		
+		String[]dep = resource.split("\\\\");
+		if(dep.length<=1)dep = resource.split("/");
+		String xml = dep[dep.length-1];
+		return className += xml.replaceAll("\\.","").replaceAll(" ","");
 	}
 	
 	/**
