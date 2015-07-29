@@ -18,6 +18,7 @@ package com.googlecode.jmapper.config;
 
 import static com.googlecode.jmapper.util.GeneralUtility.isNull;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -40,6 +41,11 @@ public class ResourceLoader {
 	public static InputStream loadResource(String resource) throws MalformedURLException, IOException{
 		resource = resource.trim();
 	    
+		// if is a content and not a path
+		if(!resource.endsWith(".xml") && !resource.endsWith(".properties"))
+			return new ByteArrayInputStream(resource.getBytes());
+		
+		
 	    URL result = Thread.currentThread().getContextClassLoader().getResource(resource);
 
 	    // Could not find resource. Try with the classloader that loaded this class.
