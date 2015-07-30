@@ -21,6 +21,8 @@ import static com.googlecode.jmapper.util.GeneralUtility.*;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.googlecode.jmapper.util.GeneralUtility;
+
 /**
  * This Class represents the mappings between Arrays as destination fields and Lists as source fields.
  * @author Alessandro Vurro
@@ -47,10 +49,10 @@ public class ArrayListOperation extends AComplexOperation {
 		vars.put("getDestination()"      ,s(getDestination()));
 
 		//TODO sostituire tutte le concatenazioni con StringBuilder
-		return write(replace$( "   $dClass[] $destination = $getDestination();"
-				  + newLine + "   $dClass[] $result = ($dClass[])java.util.Arrays.copyOf($destination, $destination.length + $source.length);"
-				  + newLine + "   System.arraycopy($source, 0, $result, $destination.length, $source.length);"
-				  + newLine +     "$setDestination(result)", vars));
+		return write(replace$(GeneralUtility.write("   $dClass[] $destination = $getDestination();"
+				  ,newLine, "   $dClass[] $result = ($dClass[])java.util.Arrays.copyOf($destination, $destination.length + $source.length);"
+				  ,newLine, "   System.arraycopy($source, 0, $result, $destination.length, $source.length);"
+				  ,newLine,     "$setDestination(result)"), vars));
 	}
 
 	@Override
@@ -85,14 +87,15 @@ public class ArrayListOperation extends AComplexOperation {
 		if(conversion.equals(sItem))
 			return write(replace$("   $dClass[] $destination = ($dClass[])$getSource().toArray(new $dClass[$getSource().size()]);$nl$content$nl",vars));
 		
-		return write(replace$("   Object[] $source = $getSource().toArray();"
-				  + newLine + "   $dClass[] $destination = new $dClass[$source.length];"
-				  + newLine + "   for(int $i = $source.length-1;$i >=0;$i--){"
-				  + newLine + "   $sClass $sItem = ($sClass) $source[$i];"
-				  + newLine + "   $dClass $dItem = $conversion;"
-				  + newLine + "   $destination[$i] = $dItem;"
-				  + newLine + "   }"
-				  + newLine + content + newLine,vars));
+		return write(replace$(GeneralUtility.write(
+		              "   Object[] $source = $getSource().toArray();"
+		    ,newLine, "   $dClass[] $destination = new $dClass[$source.length];"
+		    ,newLine, "   for(int $i = $source.length-1;$i >=0;$i--){"
+		    ,newLine, "   $sClass $sItem = ($sClass) $source[$i];"
+		    ,newLine, "   $dClass $dItem = $conversion;"
+		    ,newLine, "   $destination[$i] = $dItem;"
+		    ,newLine, "   }"
+		    ,newLine, content.toString(), newLine),vars));
 	}
 	
 	/** the count is used to differentiate local variables in case of recursive mappings.
