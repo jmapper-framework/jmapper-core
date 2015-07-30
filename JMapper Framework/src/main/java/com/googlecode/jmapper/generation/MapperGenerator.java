@@ -23,9 +23,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import javassist.ClassClassPath;
-import javassist.ClassPool;
-
 import org.reflections.Reflections;
 
 import com.googlecode.jmapper.IMapper;
@@ -39,11 +36,6 @@ import com.googlecode.jmapper.generation.beans.Method;
  */
 public class MapperGenerator {
 
-	static{
-		// ClassPool initialization
-		ClassPool.getDefault().insertClassPath(new ClassClassPath(IMapper.class));
-	}
-	
 	/** 
 	 * @param mapping parameter that containts the mappings
 	 * @param dynamicMethods dynamic methods to add

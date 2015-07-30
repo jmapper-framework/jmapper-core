@@ -166,19 +166,24 @@ public class ConversionHandler {
 			methodName = !isPath ? "illegalCodeContent":"illegalCode";
 			if(!conversions.isEmpty() && !isNull(conversions.get(configClass.getName()))){
 				
-				if(!isPath) 
-					resource = doubleQuotesHandling(resource);
+				// if is a content, the double quotes must be handled
+				if(!isPath) resource = doubleQuotesHandling(resource);
 				
 				paramater = write(",\"",resource,"\"");
 			}
-			
 		}
 		return write("com.googlecode.jmapper.config.Error.",methodName,"(e,\"",methodToGenerate.getOriginalName(),"\",\"",configClass.getSimpleName(),"\"",paramater,");");
 	}
 	
+	/**
+	 * this method handles double quotes.
+	 * @param resource string to convert
+	 * @return string converted
+	 */
 	private String doubleQuotesHandling(String resource){
 		return resource.replaceAll("\"", Matcher.quoteReplacement("\\\""));
 	}
+	
 	/**@return the defined name, if null a random string will be returned */
 	private String definedName(){
 		return prefix()+methodDefined.getName();

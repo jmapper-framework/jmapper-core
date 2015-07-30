@@ -18,6 +18,7 @@ package com.googlecode.jmapper.generation;
 import java.util.List;
 
 import javassist.CannotCompileException;
+import javassist.ClassClassPath;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtConstructor;
@@ -36,7 +37,12 @@ import com.googlecode.jmapper.generation.beans.Method;
  *
  */
 public class JavassistGenerator implements ICodeGenerator {
-
+	
+	static{
+		// ClassPool initialization
+		ClassPool.getDefault().insertClassPath(new ClassClassPath(IMapper.class));
+	}
+	
 	public Class<?> generate(String clazzName, List<Constructor> constructors,
 			List<Method> methods) throws Throwable {
 		try{
