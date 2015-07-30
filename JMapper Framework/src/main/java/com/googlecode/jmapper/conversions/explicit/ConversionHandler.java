@@ -18,8 +18,8 @@ package com.googlecode.jmapper.conversions.explicit;
 import static com.googlecode.jmapper.annotations.JMapConversion.Type.STATIC;
 import static com.googlecode.jmapper.conversions.explicit.ConversionPlaceholder.*;
 import static com.googlecode.jmapper.enums.ConfigurationType.ANNOTATION;
-import static com.googlecode.jmapper.util.GeneralUtility.newLine;
-
+import static com.googlecode.jmapper.util.GeneralUtility.*;
+import static com.googlecode.jmapper.util.FilesManager.isPath;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.List;
@@ -27,7 +27,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 
-import static com.googlecode.jmapper.util.GeneralUtility.isNull;
 
 import com.googlecode.jmapper.enums.ConfigurationType;
 import com.googlecode.jmapper.enums.Membership;
@@ -127,7 +126,7 @@ public class ConversionHandler {
 			// only if the placeholder is used
 			if(!isNull(pair.getValue()))
 				body = body.replaceAll(pair.getKey(),  Matcher.quoteReplacement(pair.getValue()));
-		
+		//TODO sostituire tutte le concatenazioni con StringBuilder
 		return methodToGenerate.setBody(body+"}catch(java.lang.Exception e){"+error()+"}return "+defaultPrimitiveValue(destinationClass)+";}");
 	}
 	
@@ -156,10 +155,30 @@ public class ConversionHandler {
 	 */
 	private String error(){
 		Map<String, List<ConversionMethod>> conversions = xml.conversionsLoad();
-		return "com.googlecode.jmapper.config.Error.illegalCode(e,\""+ methodToGenerate.getOriginalName()+"\",\""+configClass.getSimpleName()+"\""
-			+ (!conversions.isEmpty() && conversions.get(configClass.getName())!=null?", \"" + xml.getXmlPath()+"\"":"")+");";
+		
+		String methodName = "illegalCode";
+		String paramater = "";
+		String resource = xml.getXmlPath();
+		
+		if(!isNull(resource)){
+			
+			boolean isPath = isPath(resource);
+			methodName = !isPath ? "illegalCodeContent":"illegalCode";
+			if(!conversions.isEmpty() && !isNull(conversions.get(configClass.getName()))){
+				
+				if(!isPath) 
+					resource = doubleQuotesHandling(resource);
+				
+				paramater = write(",\"",resource,"\"");
+			}
+			
+		}
+		return write("com.googlecode.jmapper.config.Error.",methodName,"(e,\"",methodToGenerate.getOriginalName(),"\",\"",configClass.getSimpleName(),"\"",paramater,");");
 	}
 	
+	private String doubleQuotesHandling(String resource){
+		return resource.replaceAll("\"", Matcher.quoteReplacement("\\\""));
+	}
 	/**@return the defined name, if null a random string will be returned */
 	private String definedName(){
 		return prefix()+methodDefined.getName();

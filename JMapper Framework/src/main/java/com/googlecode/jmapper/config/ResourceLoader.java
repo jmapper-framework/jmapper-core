@@ -41,7 +41,7 @@ public class ResourceLoader {
 	public static InputStream loadResource(String resource) throws MalformedURLException, IOException{
 		resource = resource.trim();
 	    
-		// if is a content and not a path
+		// if resource is a content and not a path
 		if(!isPath(resource))
 			return new ByteArrayInputStream(resource.getBytes("UTF-8"));
 		

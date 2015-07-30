@@ -390,4 +390,26 @@ public final class GeneralUtility {
 		
 		return text;
 	}
+	
+	/**
+	 * Semplifies the concatenation of strings
+	 * @param strings strings to concatenate
+	 * @return string result
+	 */
+	public static String write(String...strings){
+		return write(new StringBuilder(), strings);
+	}
+	
+	/**
+	 * Semplifies the concatenation of strings
+	 * @param sb an existing StringBuilder to use
+	 * @param strings strings to concatenate
+	 * @return string result
+	 */
+	public static String write(StringBuilder sb, String... strings){
+		for (String string : strings) 
+			sb.append(string);
+			
+		return sb.toString();
+	}
 }

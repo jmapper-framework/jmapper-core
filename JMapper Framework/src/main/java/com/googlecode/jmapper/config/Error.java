@@ -43,10 +43,11 @@ public final class Error {
 	  ####################################
 	*/
 	
+	
 	/**
 	 * Thrown when the explicit conversion method defined has a null pointer.<br>
 	 * Used in the generated code, in case of dynamic methods defined.
-	 * @param e javassist exception
+	 * @param e byteCode library exception
 	 * @param methodName method name
 	 * @param className class name
 	 */
@@ -56,7 +57,7 @@ public final class Error {
 	/**
 	 * Thrown when the explicit conversion method defined has a null pointer.<br>
 	 * Used in the generated code, in case of dynamic methods defined.
-	 * @param e javassist exception
+	 * @param e byteCode library exception
 	 * @param methodName method name
 	 * @param className class name
 	 * @param path xml path file
@@ -66,9 +67,20 @@ public final class Error {
 	}
 	
 	/**
+	 * Thrown when the explicit conversion method defined has a null pointer.<br>
+	 * Used in the generated code, in case of dynamic methods defined.
+	 * @param e byteCode library exception
+	 * @param methodName method name
+	 * @param className class name
+	 * @param content xml path file
+	 */
+	public static void illegalCodeContent(Exception e, String methodName, String className, String content){
+		throw new IllegalCodeException(MSG.INSTANCE.message(nullPointerContent,methodName,className,content,e.getClass().getSimpleName(),""+e.getMessage()));
+	}
+	/**
 	 * Thrown when the code contained in the body method is illegal.
 	 * @param method method to adjust
-	 * @param additionalInformation additional information relative to the javassist exception
+	 * @param additionalInformation additional information relative to the byteCode library exception
 	 */
 	public static void bodyContainsIllegalCode(Method method, Exception additionalInformation){
 		Class<?> clazz = method.getClazz();
@@ -80,7 +92,7 @@ public final class Error {
 		throw new ConversionBodyIllegalCodeException(message);
 	}
 	/**
-	 * Thrown when javassist don't find classes.
+	 * Thrown when byteCode library don't find classes.
 	 * @param e exception to handle
 	 */
 	public static void notFoundException(Exception e){

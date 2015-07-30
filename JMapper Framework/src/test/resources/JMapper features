@@ -82,6 +82,7 @@ Versione 1.4.0
 
  - interfacciare JMapper per funzionare con javassist, janino e bytebuddy (di default usare bytebuddy o janino)
  - bug fixed https://github.com/jmapper-framework/jmapper-core/issues/8
+ - XML configuration as String
  
 Versione 1.5.0
 

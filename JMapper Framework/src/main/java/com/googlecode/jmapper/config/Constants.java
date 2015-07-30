@@ -33,6 +33,7 @@ public final class Constants {
 	public static final String MSG_FILE = "com/googlecode/jmapper/config/jmapper.msg.properties";
 	
 	public static final String customMethodException = "customMethodException";
+	public static final String nullPointerContent = "nullPointerContent";
 	public static final String nullPointer = "nullPointer";
 	public static final String nullPointerPath = "nullPointerPath";
 	public static final String illegalCode = "illegalCode";
