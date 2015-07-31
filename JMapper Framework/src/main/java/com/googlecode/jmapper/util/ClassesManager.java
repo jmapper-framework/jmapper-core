@@ -18,14 +18,24 @@ package com.googlecode.jmapper.util;
 
 import static com.googlecode.jmapper.util.AutoBoxing.boxingOperations;
 import static com.googlecode.jmapper.util.AutoBoxing.unBoxingOperations;
-import static com.googlecode.jmapper.util.GeneralUtility.*;
-
+import static com.googlecode.jmapper.util.FilesManager.isPath;
+import static com.googlecode.jmapper.util.GeneralUtility.collectionIsAssignableFrom;
+import static com.googlecode.jmapper.util.GeneralUtility.enrichList;
+import static com.googlecode.jmapper.util.GeneralUtility.getMethod;
+import static com.googlecode.jmapper.util.GeneralUtility.isAccessModifier;
+import static com.googlecode.jmapper.util.GeneralUtility.isBoolean;
+import static com.googlecode.jmapper.util.GeneralUtility.isEmpty;
+import static com.googlecode.jmapper.util.GeneralUtility.isNull;
+import static com.googlecode.jmapper.util.GeneralUtility.mGet;
+import static com.googlecode.jmapper.util.GeneralUtility.mSet;
+import static com.googlecode.jmapper.util.GeneralUtility.mapIsAssignableFrom;
+import static com.googlecode.jmapper.util.GeneralUtility.toList;
+import static com.googlecode.jmapper.util.GeneralUtility.write;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 
 import com.googlecode.jmapper.annotations.Annotation;
 import com.googlecode.jmapper.config.Constants;
@@ -33,8 +43,6 @@ import com.googlecode.jmapper.config.Error;
 import com.googlecode.jmapper.enums.ChooseConfig;
 import com.googlecode.jmapper.operations.beans.MappedField;
 import com.googlecode.jmapper.xml.XML;
-
-import static com.googlecode.jmapper.util.FilesManager.isPath;
 /**
  * Utility class that allows you to manage classes.
  * @author Alessandro Vurro
@@ -370,12 +378,12 @@ public final class ClassesManager {
 		// if resource is a content, the mapper must be regenerated, 
 		// to ensure this, to the name is appended a random integer
 		if(!isPath(resource))
-			return className+= String.valueOf(new Random().nextInt());
+			return write(className, String.valueOf(resource.hashCode()));
 		
 		String[]dep = resource.split("\\\\");
 		if(dep.length<=1)dep = resource.split("/");
 		String xml = dep[dep.length-1];
-		return className += xml.replaceAll("\\.","").replaceAll(" ","");
+		return write(className, xml.replaceAll("\\.","").replaceAll(" ",""));
 	}
 	
 	/**
