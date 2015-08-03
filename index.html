@@ -63,7 +63,7 @@
 
 <div class="highlight highlight-java"><pre><span class="pl-smi">Source</span> source <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">Source</span>(<span class="pl-s"><span class="pl-pds">"</span>id<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>sourceField<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>other<span class="pl-pds">"</span></span>);
 
-<span class="pl-k">JMapper&lt;<span class="pl-smi">Destination</span>.</span>class, <span class="pl-smi">Source</span><span class="pl-k">.</span>class<span class="pl-k">&gt;</span> mapper <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-k">JMapper&lt;&gt;</span>(<span class="pl-smi">Destination</span><span class="pl-k">.</span>class, <span class="pl-smi">Source</span><span class="pl-k">.</span>class);
+<span class="pl-k">JMapper&lt;<span class="pl-smi">Destination</span>, <span class="pl-smi">Source</span>&gt;</span> mapper <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-k">JMapper&lt;&gt;</span>(<span class="pl-smi">Destination</span><span class="pl-k">.</span>class, <span class="pl-smi">Source</span><span class="pl-k">.</span>class);
 
 <span class="pl-smi">Destination</span> destination <span class="pl-k">=</span> mapper<span class="pl-k">.</span>getDestination(source);</pre></div>
 
