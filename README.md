@@ -1,15 +1,12 @@
-#JMapper Framework
+#JMapper Framework [![Build Status](https://travis-ci.org/jmapper-framework/jmapper-core.svg?branch=master)](https://travis-ci.org/jmapper-framework/jmapper-core)
 
-  [![Build Status](https://travis-ci.org/jmapper-framework/jmapper-core.svg?branch=master)](https://travis-ci.org/jmapper-framework/jmapper-core)
-
-#News
-Released version 1.4.0!<br>
-what we can do now:
+###Released version 1.4.0!<br>
+features introduced:
   * [xml configuration as String](https://github.com/jmapper-framework/jmapper-core/wiki/Costructors#xml-configuration-as-string)
   * [bytecode generation strategy](https://github.com/jmapper-framework/jmapper-core/wiki/Bytecode-Generator)
 
 ____
-JMapper Framework is a java bean to java bean mapper, it allows to perform the passage of data dinamically with **annotations** and / or **XML**.<br>With JMapper you can:
+JMapper is a java bean to java bean mapper, it allows to perform the passage of data dinamically with **annotations** and / or **XML**.<br>With JMapper you can:
 
   * **create** and **enrich** target objects
   * apply a **specific logic**
