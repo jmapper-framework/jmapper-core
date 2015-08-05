@@ -56,7 +56,7 @@ destination ["id", "sourceField", null]
 **Dependency information**
 <br>[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.googlecode.jmapper-framework/jmapper-core/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.googlecode.jmapper-framework/jmapper-core) [![Dependency Status] (https://www.versioneye.com/user/projects/5539172d1d2989cb78000002/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5539172d1d2989cb78000002)<br>
 
-**For a complete guide**<br>[wiki](https://code.google.com/p/jmapper-framework/wiki/Introduction?tm=6) pages<br><br>
+**For a complete guide**<br>[wiki](https://github.com/jmapper-framework/jmapper-core/wiki) pages<br><br>
 **Do you like the project? think it has good potential?**<br>
 Let us know any malfunctions, new features and more through the [JMapper Framework group](https://groups.google.com/forum/#!forum/jmapper-framework).<br><br>
 
