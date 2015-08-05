@@ -19,24 +19,13 @@ package com.googlecode.jmapper.util;
 import static com.googlecode.jmapper.util.AutoBoxing.boxingOperations;
 import static com.googlecode.jmapper.util.AutoBoxing.unBoxingOperations;
 import static com.googlecode.jmapper.util.FilesManager.isPath;
-import static com.googlecode.jmapper.util.GeneralUtility.collectionIsAssignableFrom;
-import static com.googlecode.jmapper.util.GeneralUtility.enrichList;
-import static com.googlecode.jmapper.util.GeneralUtility.getMethod;
-import static com.googlecode.jmapper.util.GeneralUtility.isAccessModifier;
-import static com.googlecode.jmapper.util.GeneralUtility.isBoolean;
-import static com.googlecode.jmapper.util.GeneralUtility.isEmpty;
-import static com.googlecode.jmapper.util.GeneralUtility.isNull;
-import static com.googlecode.jmapper.util.GeneralUtility.mGet;
-import static com.googlecode.jmapper.util.GeneralUtility.mSet;
-import static com.googlecode.jmapper.util.GeneralUtility.mapIsAssignableFrom;
-import static com.googlecode.jmapper.util.GeneralUtility.toList;
-import static com.googlecode.jmapper.util.GeneralUtility.write;
+import static com.googlecode.jmapper.util.GeneralUtility.*;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import com.googlecode.jmapper.annotations.Annotation;
 import com.googlecode.jmapper.config.Constants;
 import com.googlecode.jmapper.config.Error;
@@ -464,6 +453,41 @@ public final class ClassesManager {
 			enrichList(listOfFields, superclass.getDeclaredFields());
 			superclass = superclass.getSuperclass();
 		}
+		
+		return excludeSerialVersionUID(
+			      excludeSyntethicFields(listOfFields)
+			   );
+	}
+	
+	/**
+	 * It exclude from list all synthetic fields.
+	 * @param listOfFields list to check
+	 * @return filtered list
+	 */
+	private static List<Field> excludeSyntethicFields(List<Field> listOfFields){
+		List<Field> listOfNotSyntethicFields = new ArrayList<Field>();
+		for (Field field : listOfFields) 
+			if(!field.isSynthetic())
+				listOfNotSyntethicFields.add(field);
+		
+		return listOfNotSyntethicFields;
+	}
+	
+	/**
+	 * It exclude from list the serialVersionUID field.
+	 * @param listOfFields list to check
+	 * @return filtered list
+	 */
+	private static List<Field> excludeSerialVersionUID(List<Field> listOfFields){
+		Field serialVersionUID = null;
+		for (Field field : listOfFields) 
+			if("serialVersionUID".equals(field.getName())){
+				serialVersionUID = field;
+				break;
+			}
+		
+		if(!isNull(serialVersionUID))
+			listOfFields.remove(serialVersionUID);
 		
 		return listOfFields;
 	}
