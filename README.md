@@ -1,6 +1,5 @@
 #JMapper Framework [![Build Status](https://travis-ci.org/jmapper-framework/jmapper-core.svg?branch=master)](https://travis-ci.org/jmapper-framework/jmapper-core)
-
-###Released version 1.4.0!<br>
+###Released version 1.4.0!
 features introduced:
   * [xml configuration as String](https://github.com/jmapper-framework/jmapper-core/wiki/Costructors#xml-configuration-as-string)
   * [bytecode generation strategy](https://github.com/jmapper-framework/jmapper-core/wiki/Bytecode-Generator)
