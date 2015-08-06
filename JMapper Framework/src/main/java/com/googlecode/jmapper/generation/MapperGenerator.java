@@ -36,6 +36,7 @@ import com.googlecode.jmapper.generation.beans.Method;
  */
 public class MapperGenerator {
 
+	
 	/** 
 	 * @param mapping parameter that containts the mappings
 	 * @param dynamicMethods dynamic methods to add
@@ -59,6 +60,7 @@ public class MapperGenerator {
 		
 		String className = mapping.getMapperName();
 		
+		//TODO da gestire in modo statico, evitare il ricalcolo
 		// loading of all implementations of ICodeGenerator interface
 		Set<Class<? extends ICodeGenerator>> generators = new Reflections("com.googlecode.jmapper.generation.impl").getSubTypesOf(ICodeGenerator.class);
 		

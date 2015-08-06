@@ -1,3 +1,10 @@
+    -----------------------------------------------------------------------------------------  
+     Sviluppo componenti esterni come procedere ?     
+     Integrazione con Hibernate, Apache Camel, XMLBeans, JAXB
+     eclipse plugin
+ 
+
+  	    
      
 Versione 1.2.2 RILASCIATA:
 
@@ -38,55 +45,17 @@ Versione 1.3.3 RILASCIATA:
 Versione 1.3.3.1 RILASCIATA:
 
  - fix di 3 bug
-   
- -----------------------------------------------------------------------------------------  
-     Sviluppo componenti esterni come procedere ?     
-     Integrazione con Hibernate, Apache Camel, XMLBeans, JAXB
-     eclipse plugin
- 
-  Sviluppo di configurazione tramite API ? 
-  	 Creare delle fluent API che permettono di costruire il file xml.
-  	 Utilizzare le classi configurate con XSTREAM in modo da chiamare il toString() sul nodo root per avere
-  	 l'xml completo.
-  	 es:
-  	 new JMapperAPI().
-		addClass(NomeClasse.class).
-			addGlobal(""). // con e senza stringa per il value
-			    addAttributes().
-			       addAttribute("name","get","set",Class<?>).
-			toGlobal().
-				addExcluded().
-				    addAttribute("name","get","set",Class<?>).
-			toGlobal().
-		toClass().
-			addAttribute().
-			addAttribute(campi).
-				addTargetAttribute().
-				
-			addConversion().
-			addConversion(campi).
-				body().
-		toRoot().
-		toString();
-  	 
-  	 Ritornando una stringa si da la possibilità di utilizzare altri tool per la definizione
-  	 dell'xml ad esempio:
-  	    dom4j - http://dom4j.sourceforge.net/dom4j-1.6.1/index.html
-  	    mycila - http://code.mycila.com/xmltool/
-  	    
 
-   
+Versione 1.4.0 RILASCIATA:
 
-    
-Versione 1.4.0 
-
- - interfacciare JMapper per funzionare con javassist, janino e bytebuddy (di default usare bytebuddy o janino)
+ - staccata la generazione del bytecode
  - bug fixed https://github.com/jmapper-framework/jmapper-core/issues/8
- - XML configuration as String
+ - XML configuration as String  
  
 Versione 1.5.0
 
  - permettere funzioni di projection e flatten
+ - implementare altri bytecode generator tramite dipendenze maven
  
 2.0.0
 
@@ -171,6 +140,39 @@ Versione 1.5.0
 	IMPLEMENTARE KEY DI DEFAULT
 	
 	ovvero ommettendo la key si intende che la chiave è il nome del campo stesso.
+
+
+-----------------------------------------------------------
+
+  Sviluppo di configurazione tramite API ? 
+  	 Creare delle fluent API che permettono di costruire il file xml.
+  	 Utilizzare le classi configurate con XSTREAM in modo da chiamare il toString() sul nodo root per avere
+  	 l'xml completo.
+  	 es:
+  	 new JMapperAPI().
+		addClass(NomeClasse.class).
+			addGlobal(""). // con e senza stringa per il value
+			    addAttributes().
+			       addAttribute("name","get","set",Class<?>).
+			toGlobal().
+				addExcluded().
+				    addAttribute("name","get","set",Class<?>).
+			toGlobal().
+		toClass().
+			addAttribute().
+			addAttribute(campi).
+				addTargetAttribute().
+				
+			addConversion().
+			addConversion(campi).
+				body().
+		toRoot().
+		toString();
+
+------------------------------------------------------------
+
+
+
 
 2.2.0
 
