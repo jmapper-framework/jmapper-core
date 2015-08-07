@@ -27,7 +27,7 @@ public class JMapperException extends RuntimeException {
 	 */
 	private static final long serialVersionUID = -1081046869129532086L;
 
-	public JMapperException(Exception ex) {
-		super(ex);
+	public JMapperException(Throwable e) {
+		super(e);
 	}
 }

@@ -16,7 +16,7 @@
 
 package com.googlecode.jmapper.generation;
 
-import static com.googlecode.jmapper.util.GeneralUtility.list;
+import static com.googlecode.jmapper.util.GeneralUtility.*;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -36,6 +36,8 @@ import com.googlecode.jmapper.generation.beans.Method;
  */
 public class MapperGenerator {
 
+	/** Generators defined */
+	private static Set<Class<? extends ICodeGenerator>> generators;
 	
 	/** 
 	 * @param mapping parameter that containts the mappings
@@ -60,9 +62,9 @@ public class MapperGenerator {
 		
 		String className = mapping.getMapperName();
 		
-		//TODO da gestire in modo statico, evitare il ricalcolo
-		// loading of all implementations of ICodeGenerator interface
-		Set<Class<? extends ICodeGenerator>> generators = new Reflections("com.googlecode.jmapper.generation.impl").getSubTypesOf(ICodeGenerator.class);
+		if(isNull(generators))
+			// loading of all implementations of ICodeGenerator interface
+			generators = new Reflections("com.googlecode.jmapper.generation.impl").getSubTypesOf(ICodeGenerator.class);
 		
 		// if no explicit implementation is provided use the dafault generator
 		ICodeGenerator generator = generators.isEmpty()? new JavassistGenerator():generators.iterator().next().newInstance();

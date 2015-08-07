@@ -96,8 +96,8 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
             return mapper.nullVSouAllAll(source);
         } catch (Exception e) {
             JmapperLog.ERROR(e);
-            return null;
         }
+        return null;
 	}
 	
 	/**
@@ -121,9 +121,8 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
             return mapper.nullVNotAllAll(source);
         } catch (Exception e) {
             JmapperLog.ERROR(e);
-            return null;
         }
-
+        return null;
 	}
 	
 	/**
@@ -147,8 +146,10 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
 	public D getDestination(D destination,final S source){
         try {
             return mapper.vVAllAllAll(destination, source);
-        }catch (Exception e) { JmapperLog.ERROR(e); return null;}
-
+        }catch (Exception e) { 
+        	JmapperLog.ERROR(e); 
+        }
+        return null;
 	}
 	
 	/**
@@ -172,8 +173,10 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
 	public D getDestinationWithoutControl(D destination,final S source){
         try {
             return mapper.vVNotAllAll(destination, source);
-        } catch (Exception e) { JmapperLog.ERROR(e); return null;}
-
+        } catch (Exception e) { 
+        	JmapperLog.ERROR(e); 
+        }
+        return null;
 	}
 		
 	/**
@@ -230,7 +233,9 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
         							case ONLY_VALUED_FIELDS:	return mapper.nullVNotAllValued(source);
         							case ONLY_NULL_FIELDS:		return mapper.get(source);}}
 	       
-	       }catch (Exception e) { JmapperLog.ERROR(e);}
+	       }catch (Exception e) { 
+	    	   JmapperLog.ERROR(e);
+	       }
 	       return null;
 	}
 	
@@ -336,7 +341,9 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
     														case ONLY_VALUED_FIELDS: 	return mapper.vVNotNullValued(destination,source); 
     														case ONLY_NULL_FIELDS:		return destination;}}
     		}
-	    }catch (Exception e) { JmapperLog.ERROR(e); e.printStackTrace();}
+	    }catch (Exception e) { 
+	    	JmapperLog.ERROR(e); 
+	    }
 	    return null;
 	}
 	
@@ -401,7 +408,9 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
 					                        .analyzing(config)
 					                        .presentIn(xmlPath));  
 			
-		}catch (Throwable e) { JmapperLog.ERROR(e); }
+		}catch (Throwable e) { 
+			JmapperLog.ERROR(e); 
+		}
 	}
 	
     private IMapper<D,S> createMapper(MapperBuilder mapper) throws Throwable{
