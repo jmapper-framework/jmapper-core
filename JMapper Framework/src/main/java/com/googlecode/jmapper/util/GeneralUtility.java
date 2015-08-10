@@ -31,6 +31,7 @@ import java.util.SortedMap;
 import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.collections.bidimap.DualHashBidiMap;
@@ -386,9 +387,9 @@ public final class GeneralUtility {
 	 */
 	private  static String replace (String text, Map<String, String> vars, String prefix){
 		for (Entry<String, String> var : vars.entrySet())
-			text = text.replaceAll(Pattern.quote(prefix+var.getKey()), var.getValue());
+				text = text.replaceAll(Pattern.quote(prefix+var.getKey()), Matcher.quoteReplacement(var.getValue()));
 		
-		return text;
+		return text; 
 	}
 	
 	/**
