@@ -454,42 +454,21 @@ public final class ClassesManager {
 			superclass = superclass.getSuperclass();
 		}
 		
-		return excludeSerialVersionUID(
-			      excludeSyntethicFields(listOfFields)
-			   );
+		return getFilteredFields(listOfFields);
 	}
 	
 	/**
-	 * It exclude from list all synthetic fields.
+	 * It exclude from list all synthetic fields and serialVersionUID.
 	 * @param listOfFields list to check
 	 * @return filtered list
 	 */
-	private static List<Field> excludeSyntethicFields(List<Field> listOfFields){
-		List<Field> listOfNotSyntethicFields = new ArrayList<Field>();
+	private static List<Field> getFilteredFields(List<Field> listOfFields){
+		List<Field> fitleredFields = new ArrayList<Field>();
 		for (Field field : listOfFields) 
-			if(!field.isSynthetic())
-				listOfNotSyntethicFields.add(field);
+			if(!field.isSynthetic() && !"serialVersionUID".equals(field.getName()))
+				fitleredFields.add(field);
 		
-		return listOfNotSyntethicFields;
-	}
-	
-	/**
-	 * It exclude from list the serialVersionUID field.
-	 * @param listOfFields list to check
-	 * @return filtered list
-	 */
-	private static List<Field> excludeSerialVersionUID(List<Field> listOfFields){
-		Field serialVersionUID = null;
-		for (Field field : listOfFields) 
-			if("serialVersionUID".equals(field.getName())){
-				serialVersionUID = field;
-				break;
-			}
-		
-		if(!isNull(serialVersionUID))
-			listOfFields.remove(serialVersionUID);
-		
-		return listOfFields;
+		return fitleredFields;
 	}
 	
 	/**

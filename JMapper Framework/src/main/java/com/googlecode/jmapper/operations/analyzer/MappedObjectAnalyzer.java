@@ -30,7 +30,7 @@ import com.googlecode.jmapper.xml.XML;
  * @author Alessandro Vurro
  *
  */
-public final class ObjectAnalyzer implements IOperationAnalyzer{
+public final class MappedObjectAnalyzer implements IOperationAnalyzer{
 
 	/** xml object */
 	private final XML xml;
@@ -39,7 +39,7 @@ public final class ObjectAnalyzer implements IOperationAnalyzer{
 	 * Takes as input an xml object that represents the xml configuration.
 	 * @param aXml xml object
 	 */
-	public ObjectAnalyzer(XML aXml) {
+	public MappedObjectAnalyzer(XML aXml) {
 		xml = aXml;
 	}
 	

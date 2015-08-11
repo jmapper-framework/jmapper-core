@@ -27,7 +27,7 @@ import com.googlecode.jmapper.operations.analyzer.ArrayListAnalyzer;
 import com.googlecode.jmapper.operations.analyzer.BasicAnalyzer;
 import com.googlecode.jmapper.operations.analyzer.CollectionAnalyzer;
 import com.googlecode.jmapper.operations.analyzer.MapAnalyzer;
-import com.googlecode.jmapper.operations.analyzer.ObjectAnalyzer;
+import com.googlecode.jmapper.operations.analyzer.MappedObjectAnalyzer;
 import com.googlecode.jmapper.operations.info.InfoOperation;
 import com.googlecode.jmapper.xml.XML;
 
@@ -52,7 +52,7 @@ public final class OperationAnalyzer {
 		analyzers = Arrays.<IOperationAnalyzer>asList(
 								new BasicAnalyzer(xml),		// 	BASIC OPERATION
 								new ArrayAnalyzer(xml),		// ARRAYS OPERATION
-								new ObjectAnalyzer(xml),	// OBJECTS OPERATION
+								new MappedObjectAnalyzer(xml),// MAPPED OBJECTS OPERATION
 								new CollectionAnalyzer(xml),// COLLECTIONS OPERATION
 								new MapAnalyzer(xml),		// MAPS OPERATION
 								new ArrayListAnalyzer(xml)	// ARRAY <-> LIST OPERATION

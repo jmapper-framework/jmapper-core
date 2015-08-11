@@ -9,7 +9,7 @@
   <artifactId>jmapper-core</artifactId>
   <packaging>jar</packaging>
   <name>JMapper Framework</name>
-  <version>1.4.0</version>
+  <version>1.4.1</version>
   
   <description>
   JMapper Framework is a java bean mapper based on javassist. JMapper exposes 
@@ -37,7 +37,7 @@
   		<id>alessandro.vurro</id>
   		<name>Alessandro Vurro</name>
   		<email>alessandro.vurro@gmail.com</email>
-  		<roles><role>project leader</role></roles>
+  		<roles><role>author</role></roles>
   	</developer>
   </developers>
   
