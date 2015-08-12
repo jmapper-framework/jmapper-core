@@ -298,7 +298,7 @@ public final class GeneralUtility {
 	 * @return true if the str is empty, false otherwise
 	 */
 	public static boolean isEmpty(String str){
-		return isNull(str) || str.isEmpty();
+		return isNull(str) || str.length() <= 0;
 	}
 	
 	/**
