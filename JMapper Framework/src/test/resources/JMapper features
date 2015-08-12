@@ -63,7 +63,14 @@ Versione 1.4.1:
 Versione 1.5.0
 
  - permettere funzioni di projection e flatten (vedere nestedMapping)
+
+Versione 1.5.1
+ 
  - implementare altri bytecode generator tramite dipendenze maven
+ 
+Versione 1.6.0
+
+ - implementare conversioni di oggetti java come StringBuilder <-> String, Date <-> Calendar
  
 2.0.0
 
