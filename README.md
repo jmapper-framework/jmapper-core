@@ -1,8 +1,8 @@
 #JMapper Framework [![Build Status](https://travis-ci.org/jmapper-framework/jmapper-core.svg?branch=master)](https://travis-ci.org/jmapper-framework/jmapper-core)
-###Released version 1.4.0!
-features introduced:
-  * [xml configuration as String](https://github.com/jmapper-framework/jmapper-core/wiki/Costructors#xml-configuration-as-string)
-  * [bytecode generation strategy](https://github.com/jmapper-framework/jmapper-core/wiki/Bytecode-Generator)
+###Released version 1.4.1!
+some bug fixed:
+  * issue [#14](https://github.com/jmapper-framework/jmapper-core/issues/14) closed: special characters (as $) are handled in basic mapping
+  * issue [#15](https://github.com/jmapper-framework/jmapper-core/issues/15) closed: synthetic and serialVersionUID fields are ignored by the mapping. 
 
 ____
 JMapper is a java bean to java bean mapper, it allows to perform the passage of data dinamically with **annotations** and / or **XML**.<br>With JMapper you can:
