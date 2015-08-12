@@ -30,7 +30,7 @@ import com.googlecode.jmapper.operations.analyzer.MapAnalyzer;
 import com.googlecode.jmapper.operations.analyzer.MappedObjectAnalyzer;
 import com.googlecode.jmapper.operations.info.InfoOperation;
 import com.googlecode.jmapper.xml.XML;
-
+import static com.googlecode.jmapper.util.GeneralUtility.isNull;
 /**
  * OperationAnalyzer analyzes the fields and returns the informations relating the operation to be performed.
  * @author Alessandro Vurro
@@ -75,7 +75,7 @@ public final class OperationAnalyzer {
 				info = analyzer.getInfoOperation(destination, source);
 		
 		// if the operation has not been identified
-		if(info == null) info = undefinedOperation();
+		if(isNull(info)) info = undefinedOperation();
 		
 		boolean conversionMethodExists = conversionAnalyzer.fieldsToCheck(destination,source);
 		

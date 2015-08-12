@@ -289,7 +289,7 @@ public final class GeneralUtility {
 	 * @return true if collection is empty, false otherwise
 	 */
 	public static boolean isEmpty(Collection<?> collection){
-		return collection == null || collection.size() <= 0;
+		return isNull(collection) || collection.isEmpty();
 	}
 	
 	/**
@@ -298,7 +298,7 @@ public final class GeneralUtility {
 	 * @return true if the str is empty, false otherwise
 	 */
 	public static boolean isEmpty(String str){
-		return str == null || str.length() <= 0;
+		return isNull(str) || str.isEmpty();
 	}
 	
 	/**
@@ -307,7 +307,7 @@ public final class GeneralUtility {
 	 * @return true if the str is empty, false otherwise
 	 */
 	public static boolean isEmpty(StringBuilder str){
-		return str == null || str.length() <= 0;
+		return isNull(str) || str.length() <= 0;
 	}
 	
 	/**
@@ -316,7 +316,7 @@ public final class GeneralUtility {
 	 * @return true if the string is empty, false otherwise
 	 */
 	public static boolean isEmpty(Object[] array){
-		return array == null || array.length <= 0;
+		return isNull(array) || array.length <= 0;
 	}
 	
 	/**
@@ -337,7 +337,7 @@ public final class GeneralUtility {
 	 * @return true if element exists in array, false otherwise
 	 */
 	public static boolean isPresent(SimplyAttribute[] array, SimplyAttribute element){
-		if(array != null)
+		if(!isNull(array))
 			for (SimplyAttribute item : array)
 				if(element.getName().matches(item.getName()))
 					return true;
@@ -351,7 +351,7 @@ public final class GeneralUtility {
 	 * @return true if element exists in array, false otherwise
 	 */
 	public static boolean isPresent(String[] array, String element){
-		if(array != null)
+		if(!isNull(array))
 			for (String item : array)
 				if(element.matches(item))
 					return true;

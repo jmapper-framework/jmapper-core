@@ -55,10 +55,10 @@ public class Annotation {
 		
 		JMapAccessor accessor = getClassAccessors(configuredClass, targetField.getValue().getName(),true);
 		
-		if(accessor == null)
+		if(isNull(accessor))
 			accessor = getFieldAccessors(configuredClass, configuredField.getValue(),true, targetField.getValue().getName());
 		
-		if(accessor == null) return;
+		if(isNull(accessor)) return;
 		
 		if(    targetField.getMethod().equals(Constants.DEFAULT_ACCESSOR_VALUE) 
 			&& !accessor.get().equals(Constants.DEFAULT_ACCESSOR_VALUE))
@@ -79,10 +79,10 @@ public class Annotation {
 		
 		JMapAccessor accessor = getClassAccessors(configuredClass, mappedField.getValue().getName(),false);
 		
-		if(accessor == null)
+		if(isNull(accessor))
 			accessor = getFieldAccessors(configuredClass,mappedField.getValue());
 		
-		if(accessor == null) return;
+		if(isNull(accessor)) return;
 			
 		if(    mappedField.getMethod().equals(Constants.DEFAULT_ACCESSOR_VALUE)
 			&& !accessor.get().equals(Constants.DEFAULT_ACCESSOR_VALUE))
@@ -162,25 +162,22 @@ public class Annotation {
 	 * @return True if this accessor meets the criteria, false otherwise
 	 */
 	private static boolean isValid(JMapAccessor accessor, String fieldName, Class<?> targetClass, boolean isOpposite){
+
 		if(isEmpty(accessor.classes())) 
 			return accessor.name().equals(fieldName);
 		
-		for (Class<?> mappedClass : accessor.classes()) {
-			
-			if(accessor.name().equals(fieldName)){
-				
+		for (Class<?> mappedClass : accessor.classes()) 
+			if(accessor.name().equals(fieldName))
 				if(isOpposite){
 					if(mappedClass != targetClass)
 						return true;
 				}else
 					if(mappedClass == targetClass)
 						return true;
-			}
-		}
 		
 		return false;
-		
 	}
+	
 	/**
 	 * Returns a list of ConversionMethod that belong to the class given as input.
 	 * @param clazz class to check
@@ -226,8 +223,7 @@ public class Annotation {
 	public static boolean isMapped(Class<?> clazz){
 		if(clazz.getAnnotation(JGlobalMap.class)!=null) return true;
 		for (Field it : clazz.getDeclaredFields()) 
-			if(it.getAnnotation(JMap.class)!=null      || 
-			   it.getAnnotation(JMultiMap.class)!=null) 
+			if(!isNull(it.getAnnotation(JMap.class))) 
 				return true;
 		
 		return false;

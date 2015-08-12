@@ -15,7 +15,7 @@
  */
 package com.googlecode.jmapper.operations;
 
-import static com.googlecode.jmapper.util.GeneralUtility.implementationClass;
+import static com.googlecode.jmapper.util.GeneralUtility.*;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -110,7 +110,7 @@ public class OperationFactory {
 		if(operationType.isRecursive())
 			((ARecursiveOperation) operation).setDynamicMethodsToWrite(dynamicMethodsToWrite)
 			 							     .setXml(xml)
-			                                 .setConfigChosen(info.getConfigChosen()==null // if both classes are configured
+			                                 .setConfigChosen(isNull(info.getConfigChosen()) // if both classes are configured
 									                    	  ?configurationChosen		   // returns the configuration chosen
 											                  :info.getConfigChosen());    // else returns the configuration retrieved
 		// common settings

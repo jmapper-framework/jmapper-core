@@ -32,6 +32,6 @@ import com.googlecode.jmapper.IMapper;
 public @interface JMultiMap {
 
 	String[] attributes() default {};
-	Class<?> targetClass() default IMapper.class;
+	Class<?> targetClass();
 	
 }

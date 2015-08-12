@@ -1,0 +1,54 @@
+
+   Nested Mapping
+   
+   il mapping tra campi su livelli diversi avviene tramite le parentesi angolari.
+   
+   < mapping >
+   
+   - Di default i campi esplicitati devono avere un get e un set standard oppure definiti con il JMapAccessor
+   
+   Annotation 
+     
+     @JMap("<campo.campo>") 
+   
+   XML 
+    
+     <attribute..>
+        <value name="<campo.campo>"/>
+     </atrtibute>
+   
+   
+   parentesi vuote indicano il metodo get:
+   
+     <getCampoCustom().field>
+     
+   LATO SVILUPPO
+   
+    - se ci sono le parentesi angolari è nestedMapping
+       - se c'è solo quella di apertura o di chiusura gestire con messaggio di errore
+       
+    - splitto per punto
+      
+      -prendo il primo elemento
+         - per il primo elemento devo avere la classe e da li recuperare get e set del campo
+     
+      -per elementi intermedi ( ovvero non finali )
+         recupero get e set del campo
+         
+      -per elemento finale
+         recupero get e set del campo
+         creo l'operazione relativa
+         
+   RECUPERO DEL GET E SET
+   
+      il recupero deve seguire questi criteri:
+      
+        - verificare che ci sia il get esplicito nel mapping, es: "<field.getNested()>"
+        - se non c'è verificare get e set custom ( XML maggiore visibilità, inoltre la loro definizione nella classe stessa hanno piu
+                                                     visibilità della stessa nella classe esterna)      
+        - se non c'è verificare get e set di default
+        - se non ci sono, exception dettagliata
+        
+       Istanziare ConfigReader per cercare get e set custom
+            
+   
