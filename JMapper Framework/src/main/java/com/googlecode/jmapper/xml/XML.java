@@ -107,7 +107,7 @@ public final class XML {
 	}
 	
 	/** @return a Map with class name as key and a the global as value */
-	public Map<String, Global> globalsLoad(){
+	public Map<String, Global> loadGlobals(){
 		Map<String, Global> map = new HashMap<String, Global>();
 		
 		try{	// if xml mapping file isn't empty
@@ -121,7 +121,7 @@ public final class XML {
 	}
 	
 	/** @return a Map with class name as key and a list of Attributes as value */
-	public Map<String, List<Attribute>> attributesLoad(){
+	public Map<String, List<Attribute>> loadAttributes(){
 		Map<String, List<Attribute>> map = new HashMap<String, List<Attribute>>();
 		
 		try{	// if xml mapping file isn't empty
@@ -172,7 +172,7 @@ public final class XML {
 	public List<ConversionMethod> getConversionMethods (Class<?> clazz){
 		List<ConversionMethod> conversions = new ArrayList<ConversionMethod>();
 		Map<String, List<ConversionMethod>> conversionsMap = this.conversionsLoad();
-		for (Class<?> classToCheck : getAllsuperclasses(clazz)){
+		for (Class<?> classToCheck : getAllsuperClasses(clazz)){
 			List<ConversionMethod> methods = conversionsMap.get(classToCheck.getName());
 			if(methods != null)conversions.addAll(methods);
 		}
@@ -455,13 +455,26 @@ public final class XML {
 	}
 	
 	/**
-	 * Returns true if the class is configured in xml, false otherwise.
-	 * @param clazz a class
+	 * Returns true if the class is configured in xml (also checking the super classes), false otherwise.
+	 * @param classToCheck class to check
 	 * @return true if the class is configured in xml, false otherwise
 	 */
-	public boolean isMapped(Class<?> clazz){
-		return !isNull  (globalsLoad().get(clazz.getName()))
-			|| !isEmpty(attributesLoad().get(clazz.getName()));
+	public boolean isInheritedMapped(Class<?> classToCheck){
+				
+		for (Class<?> clazz : getAllsuperClasses(classToCheck))
+			if(isMapped(clazz))return true;
+				
+		return false;
+	}
+	
+	/**
+	 * Returns true if the class is configured in xml, false otherwise.
+	 * @param classToCheck class to check
+	 * @return true if the class is configured in xml, false otherwise
+	 */
+	public boolean isMapped(Class<?> classToCheck){
+		return    !isNull(loadGlobals().get(classToCheck.getName()))
+			   || !isEmpty(loadAttributes().get(classToCheck.getName()));
 	}
 	
 	/**
@@ -471,7 +484,14 @@ public final class XML {
 	 * @return
 	 */
 	private Attribute getGlobalAttribute(MappedField configuredField, Class<?> configuredClass){
-		Global global = globalsLoad().get(configuredClass.getName());
+		
+		Global global = null;
+		Map<String, Global> globals = loadGlobals();
+		
+		for (Class<?> clazz : getAllsuperClasses(configuredClass)) {
+			global = globals.get(clazz.getName());
+			if(!isNull(global))break;
+		}
 		
 		if(!isNull(global) && !isNull(global.getAttributes()))
 			for (SimplyAttribute globalAttribute : global.getAttributes()) {
@@ -495,10 +515,10 @@ public final class XML {
 	 */
 	private Attribute getAttribute(MappedField configuredField, Class<?> configuredClass){
 		// If configuredClass exists in XML configuration file
-		for (Class<?> clazz : getAllsuperclasses(configuredClass))
+		for (Class<?> clazz : getAllsuperClasses(configuredClass))
 			if (isMapped(clazz))
 				// loads all configured attributes
-				for (Attribute attribute : attributesLoad().get(clazz.getName())) {
+				for (Attribute attribute : loadAttributes().get(clazz.getName())) {
 
 					// verifies that exists the attribute written in XML in
 					// the configured Class
@@ -543,7 +563,7 @@ public final class XML {
 	 */
 	public XML fillOppositeField(Class<?> configuredClass, MappedField configuredField, MappedField targetField) {
 		Attribute attribute = null;
-		Global global = globalsLoad().get(configuredClass.getName());
+		Global global = loadGlobals().get(configuredClass.getName());
 		if(!isNull(global)){
 			
 			String value = global.getValue();

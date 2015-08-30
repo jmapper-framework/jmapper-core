@@ -175,7 +175,7 @@ public class XmlHandler {
 	
 	private void overrideAnnotatedClass(Class<?> clazz,boolean overrideAll){
 		
-			 if(Annotation.isMapped(clazz) && xml.isMapped(clazz)){
+			 if(Annotation.isInheritedMapped(clazz) && xml.isInheritedMapped(clazz)){
 				 XmlClass xmlClass = Converter.toXmlClass(clazz);
 				 
 				 Attribute[] attributes = null;
@@ -194,7 +194,7 @@ public class XmlHandler {
 			 }
 			 if(overrideAll)
 				 for (Class<?> it : clazz.getClasses())
-						if(it.isMemberClass() && Annotation.isMapped(clazz) && xml.isMapped(clazz)) 
+						if(it.isMemberClass() && Annotation.isInheritedMapped(clazz) && xml.isInheritedMapped(clazz)) 
 							overrideAnnotatedClass(it,true);
 	}
 	
@@ -262,8 +262,8 @@ public class XmlHandler {
 	 * @return this instance of XmlHandler
 	 */
 	public XmlHandler fromXmlToAnnotation(Class<?>... classes){
-		try{ Map<String, List<Attribute>> xmlAttributes = xml.attributesLoad();
-		     Map<String, Global> xmlGlobal = xml.globalsLoad();
+		try{ Map<String, List<Attribute>> xmlAttributes = xml.loadAttributes();
+		     Map<String, Global> xmlGlobal = xml.loadGlobals();
 		     
 		     List<String> simplyClasses = FilesManager.classesPath();
 		
@@ -287,7 +287,7 @@ public class XmlHandler {
 	* @return this instance of XmlHandler
 	*/
     public XmlHandler fromXmlToAnnotation(){
-	   try{ for (String className : xml.attributesLoad().keySet()) 
+	   try{ for (String className : xml.loadAttributes().keySet()) 
 	    		fromXmlToAnnotation(Class.forName(className));
 	   }catch (Exception e) {JmapperLog.ERROR(e);}
 		return this;
@@ -369,7 +369,7 @@ public class XmlHandler {
 	private XmlHandler addClasses(boolean addAll,Class<?>... classes ){
 		
 		for (Class<?> clazz : classes){
-			if(Annotation.isMapped(clazz))
+			if(Annotation.isInheritedMapped(clazz))
 				xml.addAnnotatedClass(clazz); 
 			
 			if(addAll)
@@ -465,7 +465,7 @@ public class XmlHandler {
 	 */
 	private XmlHandler deleteClasses(Class<?>... classes){
 		for(Class<?> clazz : classes)
-			if(xml.isMapped(clazz)) xml.deleteClass(clazz);
+			if(xml.isInheritedMapped(clazz)) xml.deleteClass(clazz);
 		return this;
 	}
 	

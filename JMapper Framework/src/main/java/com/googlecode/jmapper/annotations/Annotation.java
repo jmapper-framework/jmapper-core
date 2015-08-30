@@ -33,6 +33,7 @@ import com.googlecode.jmapper.exceptions.DynamicConversionMethodException;
 import com.googlecode.jmapper.exceptions.DynamicConversionParameterException;
 import com.googlecode.jmapper.operations.beans.MappedField;
 import com.googlecode.jmapper.xml.Converter;
+import static com.googlecode.jmapper.util.ClassesManager.*;
 
 /**
  * This is an utility class, the purpose is to centralize annotations handling.
@@ -217,13 +218,17 @@ public class Annotation {
 	
 	/**
 	 * Returns true if the class is configured in annotation, false otherwise.
-	 * @param clazz a class
+	 * @param classToCheck class to check
 	 * @return true if the class is configured in annotation, false otherwise
 	 */
-	public static boolean isMapped(Class<?> clazz){
-		if(clazz.getAnnotation(JGlobalMap.class)!=null) return true;
-		for (Field it : clazz.getDeclaredFields()) 
-			if(!isNull(it.getAnnotation(JMap.class))) 
+	public static boolean isInheritedMapped(Class<?> classToCheck){
+		
+		for (Class<?> clazz : getAllsuperClasses(classToCheck)) 
+			if(!isNull(clazz.getAnnotation(JGlobalMap.class))) 
+				return true;
+
+		for (Field field : getListOfFields(classToCheck)) 
+			if(!isNull(field.getAnnotation(JMap.class))) 
 				return true;
 		
 		return false;

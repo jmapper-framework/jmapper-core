@@ -21,6 +21,7 @@ import java.lang.reflect.Field;
 import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.googlecode.jmapper.annotations.Annotation;
@@ -32,9 +33,15 @@ import com.googlecode.jmapper.api.enums.NullPointerControl;
 import com.googlecode.jmapper.config.Error;
 import com.googlecode.jmapper.config.JmapperLog;
 import com.googlecode.jmapper.enums.ChooseConfig;
+import com.googlecode.jmapper.exceptions.ClassNotMappedException;
+import com.googlecode.jmapper.exceptions.MappingErrorException;
 import com.googlecode.jmapper.xml.Attribute;
 import com.googlecode.jmapper.xml.Global;
+import com.googlecode.jmapper.xml.SimplyAttribute;
 import com.googlecode.jmapper.xml.XML;
+
+import static com.googlecode.jmapper.util.ClassesManager.*;
+import static com.googlecode.jmapper.util.GeneralUtility.*;
 
 /**
  * RelationalJMapper takes as input one configured Class.<br>
@@ -96,21 +103,24 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	private Class<T> configuredClass;
 	
 	/** map that has the target class names as keys and relative JMapper as values */
-	private final HashMap<String,JMapper> relationalOneToManyMapper;
+	private final HashMap<String,JMapper> relationalOneToManyMapper = new HashMap<String, JMapper>();
 	
 	/** map that has the target class names as keys and relative JMapper as values */
-	private final HashMap<String,JMapper> relationalManyToOneMapper;
+	private final HashMap<String,JMapper> relationalManyToOneMapper = new HashMap<String, JMapper>();;
 
 	/**
 	 * Takes in input only the annotated Class
 	 * @param configuredClass configured class
 	 */
 	public RelationalJMapper(final Class<T> configuredClass){
-		this.relationalOneToManyMapper = new HashMap<String, JMapper>();
-		this.relationalManyToOneMapper = new HashMap<String, JMapper>();
 		this.configuredClass = configuredClass;
-		try{	init();
-		}catch (Exception e) {JmapperLog.ERROR(e);}
+		try{
+			init();
+		}catch(ClassNotMappedException e){
+			JmapperLog.ERROR(e);
+		}catch(MappingErrorException e){
+			JmapperLog.ERROR(e);
+		}
 	}
 	
 	/**
@@ -119,11 +129,19 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	 * @param xmlPath XML path
 	 */
 	public RelationalJMapper(final Class<T> configuredClass, String xmlPath){
-		this.relationalOneToManyMapper = new HashMap<String, JMapper>();
-		this.relationalManyToOneMapper = new HashMap<String, JMapper>();
 		this.configuredClass = configuredClass;
-		try{	init(xmlPath);
-		}catch (Exception e) {JmapperLog.ERROR(e);}
+		
+		try {
+			init(xmlPath);
+		} catch (MalformedURLException e) {
+			JmapperLog.ERROR(e);
+		} catch (IOException e) {
+			JmapperLog.ERROR(e);
+		}catch(ClassNotMappedException e){
+			JmapperLog.ERROR(e);
+		}catch(MappingErrorException e){
+			JmapperLog.ERROR(e);
+		}
 	}
 	
 	/**
@@ -135,7 +153,7 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	private void init(String xmlPath) throws MalformedURLException, IOException{
 		
 		XML xml = new XML(true, xmlPath);
-		if(!xml.isMapped(configuredClass))
+		if(!xml.isInheritedMapped(configuredClass))
 			Error.classNotMapped(configuredClass);
 		
 		for (Class<?> classe :getClasses(xml)){
@@ -151,19 +169,37 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	 */
 	private Set<Class<?>> getClasses(XML xml){
 		HashSet<Class<?>> result = new HashSet<Class<?>>();
-		Global global = xml.globalsLoad().get(configuredClass.getName());
-		if(global != null){
-			addClasses(global.getClasses(),result);
-			if(global.getExcluded()!=null)
-				for (Attribute attribute : xml.attributesLoad().get(configuredClass.getName()))
-					for (String fieldName : global.getExcluded())
-						if(attribute.getName().equals(fieldName))
-							addClasses(attribute.getClasses(),result,attribute.getName());
-			return result;
-		}
 		
-		for (Attribute attribute : xml.attributesLoad().get(configuredClass.getName()))
-			addClasses(attribute.getClasses(),result,attribute.getName());
+		// in case of override only the last global configuration must be analyzed
+		Global global = null;
+		
+		for (Class<?> clazz : getAllsuperClasses(configuredClass)) {
+			// only if global configuration is null will be searched global configuration on super classes
+			if(isNull(global)){
+				  
+				global = xml.loadGlobals().get(clazz.getName());
+				if(!isNull(global)){
+					addClasses(global.getClasses(),result);
+					if(global.getExcluded()!=null)
+						for (Attribute attribute : xml.loadAttributes().get(clazz.getName()))
+							for (String fieldName : global.getExcluded())
+								if(attribute.getName().equals(fieldName))
+									addClasses(attribute.getClasses(),result,attribute.getName());
+				}
+			}
+			
+			List<Attribute> attributes = xml.loadAttributes().get(clazz.getName());
+			
+			if(!isNull(attributes))
+				for (Attribute attribute : attributes)
+					if(    isNull(global) 
+						|| isPresent(global.getExcluded(), attribute.getName())
+					    || ( !isEmpty(global.getAttributes()) 
+						     && !isPresent(global.getAttributes(), new SimplyAttribute(attribute.getName()))
+						   )
+					   )
+					addClasses(attribute.getClasses(),result,attribute.getName());
+		}
 				
 		return result;
 	}
@@ -173,7 +209,7 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	 */
 	private void init(){
 	
-		if(!Annotation.isMapped(configuredClass))
+		if(!Annotation.isInheritedMapped(configuredClass))
 			Error.classNotMapped(configuredClass);
 		
 		for (Class<?> classe :getClasses()){
@@ -187,26 +223,37 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	 * @return a List of Target Classes
 	 */
 	private Set<Class<?>> getClasses() {
-		
 		HashSet<Class<?>> result = new HashSet<Class<?>>();
-		JGlobalMap jGlobalMap = configuredClass.getAnnotation(JGlobalMap.class);
-		if(jGlobalMap != null){
-			addClasses(jGlobalMap.classes(),result);
-			if(jGlobalMap.excluded() != null)
-				for (Field field : configuredClass.getDeclaredFields()){ 
-					JMap jMap = field.getAnnotation(JMap.class);
-					if(jMap!=null) 
-						for (String fieldName : jGlobalMap.excluded()) 
-							if(field.getName().equals(fieldName))
-								addClasses(jMap.classes(),result,field.getName());
-						
+		
+		// in case of override only the last global configuration must be analyzed
+		JGlobalMap jGlobalMap = null;
+		
+		for (Class<?> clazz : getAllsuperClasses(configuredClass)) {
+			
+			// only if global configuration is null will be searched global configuration on super classes
+			if(isNull(jGlobalMap)){
+				
+				jGlobalMap = clazz.getAnnotation(JGlobalMap.class);
+				//if the field configuration is defined in the global map
+				if(!isNull(jGlobalMap)){
+					addClasses(jGlobalMap.classes(),result);
+					if(!isNull(jGlobalMap.excluded()))
+						for (Field field : getListOfFields(configuredClass)){ 
+							JMap jMap = field.getAnnotation(JMap.class);
+							if(!isNull(jMap)) 
+								for (String fieldName : jGlobalMap.excluded()) 
+									if(field.getName().equals(fieldName))
+										addClasses(jMap.classes(),result,field.getName());
+						}
+					
+					return result;
 				}
-			return result;
+			}
 		}
 		
-		for (Field field : configuredClass.getDeclaredFields()){ 
+		for (Field field : getListOfFields(configuredClass)){ 
 			JMap jMap = field.getAnnotation(JMap.class);
-			if(jMap!=null) addClasses(jMap.classes(),result,field.getName());
+			if(!isNull(jMap)) addClasses(jMap.classes(),result,field.getName());
 		}	
 		
 		return result;	
@@ -233,7 +280,7 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	 */
 	private void addClasses(Class<?>[] classes, HashSet<Class<?>> result){
 		
-		if(classes == null || classes.length==0)	
+		if(isNull(classes) || classes.length==0)	
 			Error.globalClassesAbsent(configuredClass);
 		
 		for (Class<?> classe : classes)	result.add(classe);

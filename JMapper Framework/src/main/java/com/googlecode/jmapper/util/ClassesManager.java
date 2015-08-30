@@ -421,7 +421,7 @@ public final class ClassesManager {
 	 * @return true if the class is configured in annotation or xml, false otherwise
 	 */
 	private static boolean isMapped(Class<?> aClass,XML xml){
-		return xml.isMapped(aClass) || Annotation.isMapped(aClass);
+		return xml.isInheritedMapped(aClass) || Annotation.isInheritedMapped(aClass);
 	}
 		
 	/**
@@ -429,11 +429,11 @@ public final class ClassesManager {
 	 * @param aClass class to check
 	 * @return a classes list
 	 */
-	public static List<Class<?>> getAllsuperclasses(Class<?> aClass){
+	public static List<Class<?>> getAllsuperClasses(Class<?> aClass){
 		List<Class<?>> result = new ArrayList<Class<?>>();
 		result.add(aClass);
 		Class<?> superclass = aClass.getSuperclass();
-		while(superclass != Object.class){
+		while(!isNull(superclass) && superclass != Object.class){
 			result.add(superclass);
 			superclass = superclass.getSuperclass();
 		}
@@ -446,13 +446,10 @@ public final class ClassesManager {
 	 * @return a list of aClass fields
 	 */
 	public static List<Field> getListOfFields(Class<?> aClass){
-		List<Field> listOfFields = toList(aClass.getDeclaredFields());
+		List<Field> listOfFields = new ArrayList<Field>();
 		
-		Class<?> superclass = aClass.getSuperclass();
-		while(superclass != Object.class){
-			enrichList(listOfFields, superclass.getDeclaredFields());
-			superclass = superclass.getSuperclass();
-		}
+		for (Class<?> clazz : getAllsuperClasses(aClass)) 
+			enrichList(listOfFields, clazz.getDeclaredFields());
 		
 		return getFilteredFields(listOfFields);
 	}

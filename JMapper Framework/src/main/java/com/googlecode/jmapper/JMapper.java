@@ -401,8 +401,14 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
 			if(destination.isInterface()) Error.interfaceClass("Destination");
 			if(source.isInterface()) 	  Error.interfaceClass("Source");
 			
-			try{	             		  destination.newInstance();	            }
-			catch (Exception e){ 	      Error.emptyConstructorAbsent(destination);}
+			try{
+			
+				// checks if destination is instantiable
+				destination.newInstance();	            
+
+			}catch(InstantiationException e){
+				Error.emptyConstructorAbsent(destination);
+			}
 			
 			this.mapper = createMapper(from(source).to(destination)
 					                        .analyzing(config)
