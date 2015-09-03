@@ -1,32 +1,33 @@
 
    Nested Mapping
    
-   il mapping tra campi su livelli diversi avviene tramite le parentesi angolari.
+   il mapping tra campi su livelli diversi avviene tramite la chiocciola @.
+   Questo perch√® √® l'unico carattere non usato nel regex, non usabile nella definizione dei nomi delle variabili
+   e usabile in xml.
    
-   < mapping >
+   @mapping
    
    - Di default i campi esplicitati devono avere un get e un set standard oppure definiti con il JMapAccessor
    
    Annotation 
      
-     @JMap("<campo.campo>") 
+     @JMap("@campo.campo") 
    
    XML 
     
      <attribute..>
-        <value name="<campo.campo>"/>
+        <value name="@campo.campo"/>
      </atrtibute>
    
    
    parentesi vuote indicano il metodo get:
    
-     <getCampoCustom().field>
+     @getCampoCustom().field
      
    LATO SVILUPPO
    
-    - se ci sono le parentesi angolari Ë nestedMapping
-       - se c'Ë solo quella di apertura o di chiusura gestire con messaggio di errore
-       
+    - se c'√® la @ iniziale allora √® nestedMapping
+        
     - splitto per punto
       
       -prendo il primo elemento
@@ -43,10 +44,10 @@
    
       il recupero deve seguire questi criteri:
       
-        - verificare che ci sia il get esplicito nel mapping, es: "<field.getNested()>"
-        - se non c'Ë verificare get e set custom ( XML maggiore visibilit‡, inoltre la loro definizione nella classe stessa hanno piu
-                                                     visibilit‡ della stessa nella classe esterna)      
-        - se non c'Ë verificare get e set di default
+        - verificare che ci sia il get esplicito nel mapping, es: "@field.getNested()"
+        - se non c'√® verificare get e set custom ( XML maggiore visibilit√†, inoltre la loro definizione nella classe stessa hanno piu
+                                                     visibilit√† della stessa nella classe esterna)      
+        - se non c'√® verificare get e set di default
         - se non ci sono, exception dettagliata
         
        Istanziare ConfigReader per cercare get e set custom
