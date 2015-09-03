@@ -4,6 +4,7 @@
    il mapping tra campi su livelli diversi avviene tramite la chiocciola @.
    Questo perchè è l'unico carattere non usato nel regex, non usabile nella definizione dei nomi delle variabili
    e usabile in xml.
+  
    
    @mapping
    
