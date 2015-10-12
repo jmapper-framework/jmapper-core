@@ -63,7 +63,7 @@ There are many features to be implemented, such as:
 - and more..
 
 contact us (jmapper.framework@gmail.com) for more information.<br><br>
-**You want to do a friendly chat?**<br>
+**Do you want to do a friendly chat?**<br>
 [![Join the chat at https://gitter.im/jmapper-framework/jmapper-core](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/jmapper-framework/jmapper-core?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)<br><br>
 
 **Follow us on twitter**<br>
