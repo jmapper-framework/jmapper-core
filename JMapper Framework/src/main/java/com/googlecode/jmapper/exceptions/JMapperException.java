@@ -16,7 +16,7 @@
 package com.googlecode.jmapper.exceptions;
 
 /**
- * Exception thrown as wrapper of all exceptions thrown by the framework.
+ * Exception wrapper of all exceptions thrown by the framework.
  * @author Alessandro Vurro
  *
  */

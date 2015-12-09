@@ -13,22 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.googlecode.jmapper.exceptions;
 
 /**
- * Exception thrown when Class does not respect the naming convention.
+ * Exception thrown when the nested mapping is invalid.
  * @author Alessandro Vurro
  *
  */
-public class MalformedBeanException extends MappingException {
+public class InvalidNestedMappingException extends MappingException {
+
+	public InvalidNestedMappingException(String str) {
+		super(str);
+	}
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -7962098853064335814L;
+	private static final long serialVersionUID = -1394972573794535662L;
 
-	public MalformedBeanException(String str) {
-		super(str);
-	}
 }

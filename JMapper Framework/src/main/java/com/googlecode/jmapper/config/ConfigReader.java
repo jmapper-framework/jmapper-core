@@ -18,7 +18,7 @@ package com.googlecode.jmapper.config;
 
 import static com.googlecode.jmapper.config.Constants.DEFAULT_FIELD_VALUE;
 import static com.googlecode.jmapper.config.Constants.THE_FIELD_IS_NOT_CONFIGURED;
-import static com.googlecode.jmapper.util.ClassesManager.existField;
+import static com.googlecode.jmapper.util.ClassesManager.fieldName;
 import static com.googlecode.jmapper.util.ClassesManager.getAllsuperClasses;
 import static com.googlecode.jmapper.util.GeneralUtility.*;
 
@@ -48,6 +48,7 @@ public final class ConfigReader {
 	private final Class<?> configuredClass;
 	/** target class */
 	private final Class<?> targetClass;
+	
 	/** xml object */
 	private final XML xml;
 	
@@ -91,7 +92,7 @@ public final class ConfigReader {
 
 		/* 		IF ATTRIBUTES AND CLASSES ARE EMPTY		 */ 
 		if( attributes.isEmpty() && classes.isEmpty() ){
-			String targetFieldName = existField(targetClass,regex);
+			String targetFieldName = fieldName(targetClass,regex);
 			if(!isNull(targetFieldName))
 				return targetFieldName;
 
@@ -101,7 +102,7 @@ public final class ConfigReader {
 		/* 		IF ATTRIBUTES IS EMPTY AND CLASSES NOT		 */
 		if( attributes.isEmpty() && !classes.isEmpty() ){
 			if(classes.contains(targetClass)){
-				String targetFieldName = existField(targetClass,regex);
+				String targetFieldName = fieldName(targetClass,regex);
 				if(!isNull(targetFieldName))
 					return targetFieldName;
 			}
@@ -117,7 +118,7 @@ public final class ConfigReader {
 					value = attributes.get(classes.indexOf(targetClass));
 					regex = getValue(value,mappedFieldName);
 					
-					String targetFieldName = existField(targetClass,regex);
+					String targetFieldName = fieldName(targetClass,regex);
 					if(!isNull(targetFieldName))
 						return targetFieldName;
 					
@@ -132,7 +133,7 @@ public final class ConfigReader {
 			for (String str : attributes){
 				regex = getValue(str,mappedFieldName);
 				// if exist the target field in targetClass 
-				String targetFieldName = existField(targetClass,regex);
+				String targetFieldName = fieldName(targetClass,regex);
 				if(!isNull(targetFieldName))
 					//returns the corresponding name
 					return targetFieldName;
@@ -193,7 +194,7 @@ public final class ConfigReader {
 		  for(Attribute attribute :xml.loadAttributes().get(clazz.getName())){
 				
 			// verifies that exists the attribute written in XML in the configured Class
-			if(isNull(existField(clazz,attribute.getName())))	
+			if(isNull(fieldName(clazz,attribute.getName())))	
 				Error.attributeAbsent(clazz, attribute);
 				
 			// if the field given in input isn't equal to xmlField continue with the cycle
@@ -286,7 +287,18 @@ public final class ConfigReader {
 	 * @param configuredField configured field
 	 * @param targetField target field
 	 */
-	public void loadJMapAccessor(MappedField configuredField, MappedField targetField) {
+	public void loadAccessors(MappedField configuredField, MappedField targetField) {
+		loadAccessors(targetClass, configuredField, targetField);
+	}
+	
+	/**
+	 * Fill fields with they custom methods.
+	 * 
+	 * @param targetClass class of the target field
+	 * @param configuredField configured field
+	 * @param targetField target field
+	 */
+	private void loadAccessors(Class<?> targetClass, MappedField configuredField, MappedField targetField) {
 		
 		// First checks xml configuration
 		xml.fillMappedField(configuredClass, configuredField)

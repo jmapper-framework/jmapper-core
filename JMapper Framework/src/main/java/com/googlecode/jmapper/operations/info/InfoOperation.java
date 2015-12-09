@@ -22,13 +22,13 @@ import com.googlecode.jmapper.enums.OperationType;
 
 /**
  * InfoOperation represents the operation to be performed, taking with him such information as:<br>
- * the type of operation, the conversion type and configuration to be analyzed.
+ * the type of operation, the conversion type and the configuration location.
  * @author Alessandro Vurro
  *
  */
 public class InfoOperation {
 
-	private OperationType instructionType;
+	private OperationType operationType;
 	private ConversionType conversionType;
 	private ChooseConfig configChosen;
 	
@@ -36,8 +36,8 @@ public class InfoOperation {
 		this.configChosen = configChosen;
 		return this;
 	}
-	public InfoOperation setInstructionType(OperationType instructionType) {
-		this.instructionType = instructionType;
+	public InfoOperation setInstructionType(OperationType operationType) {
+		this.operationType = operationType;
 		return this;
 	}
 	public InfoOperation setConversionType(ConversionType conversionType) {
@@ -45,8 +45,8 @@ public class InfoOperation {
 		return this;
 	}
 	
-	public ChooseConfig getConfigChosen() {			return configChosen;	}
-	public OperationType getInstructionType() {	return instructionType;	}
+	public ChooseConfig getConfigChosen() {		return configChosen;	}
+	public OperationType getOperationType() {	return operationType;	}
 	public ConversionType getConversionType() {	return conversionType;	}
 	
 	public InfoOperation() {}

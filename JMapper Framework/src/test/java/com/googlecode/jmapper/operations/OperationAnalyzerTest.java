@@ -109,7 +109,7 @@ public class OperationAnalyzerTest extends TestCase {
 		Field typeField2 = retrieveField(Fields.class, type2);
 		OperationAnalyzer operationAnalyzer = new OperationAnalyzer(new XML(), new ConversionAnalyzer(new XML(), ChooseConfig.DESTINATION, Fields.class, Fields.class));
 		operationAnalyzer.isUndefined(typeField, typeField2);
-		OperationType operationType = operationAnalyzer.getInfo().getInstructionType();
+		OperationType operationType = operationAnalyzer.getInfo().getOperationType();
 		assertEquals("destination field: "+type+" source field: "+type2,instructionTypes, operationType);
 	}
 	private void verifyInstructionType(OperationType instructionTypes, String[] types) throws ClassNotFoundException{

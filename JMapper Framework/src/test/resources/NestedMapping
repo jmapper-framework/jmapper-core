@@ -1,54 +1,35 @@
 
    Nested Mapping
    
-   il mapping tra campi su livelli diversi avviene tramite le parentesi angolari.
+   il mapping tra campi su livelli diversi avviene tramite la @.
    
-   < mapping >
+   @mapping
    
-   - Di default i campi esplicitati devono avere un get e un set standard oppure definiti con il JMapAccessor
+   - Di default i campi esplicitati devono avere un get e un set standard oppure esplicitamente definiti
    
    Annotation 
      
-     @JMap("<campo.campo>") 
+     @JMap("@campo.campo") 
    
    XML 
     
      <attribute..>
-        <value name="<campo.campo>"/>
-     </atrtibute>
-   
-   
-   parentesi vuote indicano il metodo get:
-   
-     <getCampoCustom().field>
+        <value name="@campo.campo"/>
+     </attribute>
      
    LATO SVILUPPO
    
-    - se ci sono le parentesi angolari è nestedMapping
-       - se c'è solo quella di apertura o di chiusura gestire con messaggio di errore
-       
-    - splitto per punto
-      
-      -prendo il primo elemento
-         - per il primo elemento devo avere la classe e da li recuperare get e set del campo
-     
-      -per elementi intermedi ( ovvero non finali )
-         recupero get e set del campo
-         
-      -per elemento finale
-         recupero get e set del campo
-         creo l'operazione relativa
-         
-   RECUPERO DEL GET E SET
+
+Devo tener conto dei MappingType di Destination e Source
+e soprattutto se sono in creazione o arricchimento 
+
+posso lasciar creare l'operazione
+
+Creare un operazione nested che prende e richiama l'operazione creata sopra
+
+Vedere i test di stampa dei mapping per capire come richiamarli
    
-      il recupero deve seguire questi criteri:
-      
-        - verificare che ci sia il get esplicito nel mapping, es: "<field.getNested()>"
-        - se non c'è verificare get e set custom ( XML maggiore visibilità, inoltre la loro definizione nella classe stessa hanno piu
-                                                     visibilità della stessa nella classe esterna)      
-        - se non c'è verificare get e set di default
-        - se non ci sono, exception dettagliata
-        
-       Istanziare ConfigReader per cercare get e set custom
-            
    
+initialDGetPath è utilizzato per richiamare poi il campo,
+dopo aver fatto il nested mapping basterà cambiare questa variabile
+con il nome della variabile creata.

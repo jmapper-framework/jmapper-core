@@ -522,7 +522,7 @@ public final class XML {
 
 					// verifies that exists the attribute written in XML in
 					// the configured Class
-					if (isNull(existField(clazz, attribute.getName())))
+					if (isNull(fieldName(clazz, attribute.getName())))
 						Error.attributeAbsent(clazz, attribute);
 
 					// if the field given in input isn't equal to xmlField

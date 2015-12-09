@@ -540,4 +540,13 @@ public final class Error {
 		
 	}
 	
+	/**
+	 * @param configuredClass configured class
+	 * @param configuredField configured field
+	 * @param targetClass target class
+	 */
+	public static void invalidNestedMapping(Class<?> configuredClass, Field configuredField, Class<?> targetClass) {
+		throw new InvalidNestedMappingException(MSG.INSTANCE.message(InvalidNestedMappingException, configuredClass.getSimpleName(), configuredField.getName(), targetClass.getSimpleName()));
+	}
+	
 }

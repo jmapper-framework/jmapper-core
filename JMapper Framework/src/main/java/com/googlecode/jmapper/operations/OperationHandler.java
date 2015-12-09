@@ -16,13 +16,13 @@
 
 package com.googlecode.jmapper.operations;
 
-import static com.googlecode.jmapper.config.Constants.THE_FIELD_IS_NOT_CONFIGURED;
+import static com.googlecode.jmapper.config.Constants.*;
 import static com.googlecode.jmapper.util.ClassesManager.findSetterMethods;
 import static com.googlecode.jmapper.util.ClassesManager.getListOfFields;
 import static com.googlecode.jmapper.util.ClassesManager.retrieveField;
 import static com.googlecode.jmapper.util.ClassesManager.verifiesAccessorMethods;
 import static com.googlecode.jmapper.util.ClassesManager.verifyGetterMethods;
-
+import static com.googlecode.jmapper.config.NestedMappingHandler.*;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +33,7 @@ import com.googlecode.jmapper.config.Error;
 import com.googlecode.jmapper.conversions.explicit.ConversionAnalyzer;
 import com.googlecode.jmapper.conversions.explicit.ConversionHandler;
 import com.googlecode.jmapper.enums.ChooseConfig;
+import com.googlecode.jmapper.exceptions.InvalidNestedMappingException;
 import com.googlecode.jmapper.generation.beans.Method;
 import com.googlecode.jmapper.operations.beans.MappedField;
 import com.googlecode.jmapper.operations.complex.AComplexOperation;
@@ -108,23 +109,65 @@ public final class OperationHandler {
 		
 	   	for (Field configuredField : getListOfFields(configuredClass)) {
 		
-	   		String targetFieldName = configReader.retrieveTargetFieldName(configuredField);
+	   		String targetFieldName = null;
+	   		
+	   		try{
+	   			targetFieldName = configReader.retrieveTargetFieldName(configuredField);
+	   		}catch(InvalidNestedMappingException e){
+	   			//TODO aggiungere targetFieldName nella exception
+				 Error.invalidNestedMapping(configuredClass, configuredField, targetClass);
+			}
 			
 			if(targetFieldName == THE_FIELD_IS_NOT_CONFIGURED) continue;
 				
-			Field targetField = retrieveField(targetClass,targetFieldName);
-				
+			Field targetField = null;
+			
+			if(isNestedMapping(targetFieldName))
+				try{ 
+					 targetField = getNestedField(targetClass, targetFieldName);
+				}catch(InvalidNestedMappingException e){
+					 Error.invalidNestedMapping(configuredClass, configuredField, targetClass);
+				}
+			else
+				targetField = retrieveField(targetClass,targetFieldName);
+			
+			
+			MappedField configuredMappedField = new MappedField(configuredField);
+			MappedField targetMappedField     = new MappedField(targetField);
+
+			MappedField destinationMappedField = isDestConfigured?configuredMappedField:targetMappedField;
+			MappedField sourceMappedField = isDestConfigured?targetMappedField:configuredMappedField;
+
 			Field destinationField = isDestConfigured?configuredField:targetField;
 			Field sourceField      = isDestConfigured?targetField:configuredField;
-				
-			MappedField destinationMappedField = new MappedField(destinationField);
-			MappedField sourceMappedField = new MappedField(sourceField);
 			
 			//load and check the get/set custom methods of destination and source fields
-			configReader.loadJMapAccessor(isDestConfigured?destinationMappedField:sourceMappedField, 
-										  isDestConfigured?sourceMappedField:destinationMappedField);
+			configReader.loadAccessors(configuredMappedField, targetMappedField);
 			
 			boolean isUndefined = false;
+			
+			//TODO NestedMapping -> 
+			//
+			// il recupero del campo innestato va fatto sulla classe non configurata, ovvero quella target
+			//
+			//
+			// l'ideale è lasciar fare il calcolo dell'operazione per poi aggiungere questa
+			// logica con un decorator
+			//
+			// va trovata l'operazione da effettuare tra i campi
+			// quello che va aggiunto il path da invocare per ottenerli
+			// la ricerca dell'operazione va mantenuta, va trovato il modo di fare il get del target
+			// e quindi l'invocazione dei campi innestati.
+			//
+			// Il decoretor quindi deve aggiungere solo il path per recuperare i campi
+			//
+			// il nested mapping deve essere in grado di essere utilizzato in qualsiasi operazione
+			//
+			// inoltre va considerato il mappingType e se è creazionale o di arricchimento
+			// in caso creazionale vanno creati i bean innestati
+			// in caso di arricchimento bisogna considerare i MappingType
+			//
+			
 			
 			try{
 				isUndefined = operationAnalyzer.isUndefined(destinationField, sourceField);
@@ -141,7 +184,7 @@ public final class OperationHandler {
 			AGeneralOperation operation = operationFactory.getOperation(destinationMappedField, sourceMappedField, info, dynamicMethodsToWrite);
 
 			boolean isAvoidSet = false;
-			boolean isConversion = info.getInstructionType().isAConversion();
+			boolean isConversion = info.getOperationType().isAConversion();
 			
 			if(isConversion)
 				isAvoidSet = conversionAnalyzer.getMethod().isAvoidSet();

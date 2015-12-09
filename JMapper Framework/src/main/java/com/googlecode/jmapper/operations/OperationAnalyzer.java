@@ -79,7 +79,7 @@ public final class OperationAnalyzer {
 		
 		boolean conversionMethodExists = conversionAnalyzer.fieldsToCheck(destination,source);
 		
-		OperationType operationType = info.getInstructionType(); 
+		OperationType operationType = info.getOperationType(); 
 			
 		if(operationType.isUndefined() && !conversionMethodExists)return true;
 		

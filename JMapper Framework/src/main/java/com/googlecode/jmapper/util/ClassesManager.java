@@ -17,6 +17,7 @@
 package com.googlecode.jmapper.util;
 
 import static com.googlecode.jmapper.util.AutoBoxing.boxingOperations;
+import static com.googlecode.jmapper.config.NestedMappingHandler.*;
 import static com.googlecode.jmapper.util.AutoBoxing.unBoxingOperations;
 import static com.googlecode.jmapper.util.FilesManager.isPath;
 import static com.googlecode.jmapper.util.GeneralUtility.*;
@@ -30,6 +31,7 @@ import com.googlecode.jmapper.annotations.Annotation;
 import com.googlecode.jmapper.config.Constants;
 import com.googlecode.jmapper.config.Error;
 import com.googlecode.jmapper.enums.ChooseConfig;
+import com.googlecode.jmapper.exceptions.InvalidNestedMappingException;
 import com.googlecode.jmapper.operations.beans.MappedField;
 import com.googlecode.jmapper.xml.XML;
 /**
@@ -376,30 +378,40 @@ public final class ClassesManager {
 	}
 	
 	/**
-	 * Returns the field name if exist a field that match with this name in aClass, null otherwise.
+	 * This method returns the name of the field whose name matches with regex.
 	 * @param aClass a class to control
-	 * @param name field to find
-	 * @return true if exist a field with this name in aClass, false otherwise
+	 * @param regex field name
+	 * @return true if exists a field with this name in aClass, false otherwise
 	 */
-	public static String existField(Class<?> aClass,String name){
-		String result = getField(aClass, name);
+	public static String fieldName(Class<?> aClass,String regex){
 		
-		if(!isNull(result)) 
-			return result;
-		
-		Class<?> superclass = aClass.getSuperclass();
-		while(superclass != Object.class){
-			result = getField(superclass, name);
-			if(!isNull(result)) 
-				return result;
-			superclass = superclass.getSuperclass();
+		if(isNestedMapping(regex)){
+			if(isNestedMappingValid(aClass, regex))
+				return regex;
+			
+			throw new InvalidNestedMappingException("invalid nested mapping");
 		}
+		
+		String result = null;
+
+		for(Class<?> clazz: getAllsuperClasses(aClass))
+			if(!isNull(result = getFieldName(clazz, regex))) 
+				return result;
+		
 		return result;
 	}
 	
-	private static String getField(Class<?> aClass,String regex){
+	/**
+	 * This method returns the name of the field whose name matches with regex.
+	 * @param aClass class to check
+	 * @param regex regex used to find the field
+	 * @return the field name if exists, null otherwise
+	 */
+	private static String getFieldName(Class<?> aClass,String regex){
 		for (Field field : aClass.getDeclaredFields()) 
-			if(field.getName().matches(regex)) return field.getName();
+			if(field.getName().matches(regex)) 
+				return field.getName();
+		
 		return null;
 	}
 	
@@ -504,13 +516,13 @@ public final class ClassesManager {
 	 * Returns a field with a specific name from class given as input.
 	 * 
 	 * @param clazz class to handle
-	 * @param fieldName name of field to retrieve
+	 * @param regex name of field to retrieve
 	 * @return field if exist, null otherwise
 	 */
-	public static Field retrieveField(Class<?> clazz, String fieldName){
+	public static Field retrieveField(Class<?> clazz, String regex){
 		
 		for (Field field : getListOfFields(clazz))	
-			if(field.getName().equals(fieldName)) 
+			if(field.getName().equals(regex)) 
 				return field;
 				
 		return null;

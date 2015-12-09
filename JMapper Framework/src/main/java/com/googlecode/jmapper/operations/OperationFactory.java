@@ -98,7 +98,7 @@ public class OperationFactory {
 	 * @return a new instance of AGeneralOperation
 	 */
 	public AGeneralOperation getOperation(MappedField destinationField, MappedField sourceField, InfoOperation info, Set<Method> dynamicMethodsToWrite){
-		OperationType operationType = info.getInstructionType();
+		OperationType operationType = info.getOperationType();
 		AGeneralOperation operation = getOperation(operationType);
 		 
 		if(operationType.isBasic())

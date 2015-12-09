@@ -419,7 +419,13 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
 		}
 	}
 	
-    private IMapper<D,S> createMapper(MapperBuilder mapper) throws Throwable{
+    /**
+     * This method is synchornized to avoid creations of the same instance
+     * @param mapper mapper generator
+     * @return mapper instance
+     * @throws Throwable
+     */
+    private synchronized IMapper<D,S> createMapper(MapperBuilder mapper) throws Throwable{
 	    
 		Class<IMapper<D,S>> mapperClass = mapper.exist()?mapper.<D,S>get()
 				                                        :mapper.<D,S>generate();
