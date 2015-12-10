@@ -1,8 +1,6 @@
 #JMapper Framework [![Build Status](https://travis-ci.org/jmapper-framework/jmapper-core.svg?branch=master)](https://travis-ci.org/jmapper-framework/jmapper-core)
-###Released version 1.4.2!
-some bug fixed:
-  * issue [#18](https://github.com/jmapper-framework/jmapper-core/issues/18) closed: now is possible to use the inherited mapping with RelationalJMapper
-
+###In the next release: Nested mapping
+We are working on nested mapping. It will be available in a few weeks! stay tuned!
 ____
 JMapper is a java bean to java bean mapper, it allows to perform the passage of data dinamically with **annotations** and / or **XML**.<br>With JMapper you can:
 
