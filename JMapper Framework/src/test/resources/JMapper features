@@ -18,19 +18,18 @@ Versione 1.2.2 RILASCIATA:
  - renderlo OSGI compatibile
  - gestito gli analyzer in un vettore e non con una sequenza di if.
 
-
 Versione 1.3.0 RILASCIATA:
    
  - definizione dell xsd per content assist da eclipse
- - Possibilit� di definire get e set custom, vedi JMapAccessor file.
+ - Possibilità  di definire get e set custom, vedi JMapAccessor file.
 
 Versione 1.3.1 RILASCIATA:
 
  - aggiunta di class in JMapConversion per differenziare set/get del campo corrente da quello target nel 
    caso in cui abbiano lo stesso nome
  - permettere di omettere il set in caso di conversioni sia statiche che dinamiche e in tal caso di farlo void
-   e quindi senza fare return. (ricordare nella documentazione che in static � possibile farlo void
-   e in dynamic � possibile evitare il return sapendo che il viene ritornato un null.
+   e quindi senza fare return. (ricordare nella documentazione che in static è possibile farlo void
+   e in dynamic è possibile evitare il return sapendo che il viene ritornato un null.
  - gestire il passaggio da JMapAccessor al relativo xml e viceversa   
  
 Versione 1.3.2 RILASCIATA:
@@ -52,13 +51,18 @@ Versione 1.4.0 RILASCIATA:
  - bug fixed https://github.com/jmapper-framework/jmapper-core/issues/8
  - XML configuration as String  
  
-Versione 1.4.1:
+Versione 1.4.1 RILASCIATA:
 
  - bug fixed https://github.com/jmapper-framework/jmapper-core/issues/15
    i campi synthetic e UUID sono esclusi dal mapping
    
  - bug fixed https://github.com/jmapper-framework/jmapper-core/issues/14
-   il simbolo $ utilizzato nel basic mapping ora � gestito
+   il simbolo $ utilizzato nel basic mapping ora è gestito
+
+Versione 1.4.2 RILASCIATA:
+
+  - bug fixed https://github.com/jmapper-framework/jmapper-core/issues/18
+    fixato il mapping ereditario, sia base che relazionale
     
 Versione 1.5.0
 
@@ -76,17 +80,17 @@ Versione 1.6.0
 
  - Multiple Mapping
    
-  - Con la classe RelationalJMapper si ha la possibilit� di implementare una relazione 1 a N o N a 1 tra
+  - Con la classe RelationalJMapper si ha la possibilità  di implementare una relazione 1 a N o N a 1 tra
     la classe configurata e quelle target.
-    Ma la relazione che c'� tra i campi della classe configurata e i campi delle classi target � sempre 1 a 1 (con @JMap).
-    Ci� vuol dire che in caso di conversioni dinamiche non � permesso configurare 
+    Ma la relazione che c'è tra i campi della classe configurata e i campi delle classi target è sempre 1 a 1 (con @JMap).
+    Ciò vuol dire che in caso di conversioni dinamiche non è permesso configurare 
     direttamente un campo con N altri, ma invece bisogna configurare gli N campi verso il campo interessato.
-    Con la versione 1.2.0 � possibile (tramite JGlobalMap) mappare N campi verso uno.
-    Ci� che manca � la possibilità di mappare un campo verso N.
+    Con la versione 1.2.0 è possibile (tramite JGlobalMap) mappare N campi verso uno.
+    Ciò che manca è la possibilitÃ  di mappare un campo verso N.
 
     Obiettivo
    
-      L'intento � quello di configurare 1 campo verso N altri:
+      L'intento è quello di configurare 1 campo verso N altri:
            
       ANNOTATION
            
@@ -100,7 +104,7 @@ Versione 1.6.0
            @JMultiMap permette di configurare un campo contemporaneamente con N altri. Omettendo la targetClass si indica
            al framework di considerare quella in input al costruttore, omettendo gli attributes si indica al framework che
            tutti i campi della classe target sono coinvolti.
-           Nel caso in cui ci sia l'esigenza di dichiarare il multimapping verso altri campi di altre classi basterà
+           Nel caso in cui ci sia l'esigenza di dichiarare il multimapping verso altri campi di altre classi basterÃ 
            usare piu volte l'annotation @JMultiMap es:
            
        	class Esempio {
@@ -113,7 +117,7 @@ Versione 1.6.0
            
       XML
            
-           Per esprimere lo stesso concetto in xml si utilizzer� il nodo multiAttribute, es:
+           Per esprimere lo stesso concetto in xml si utilizzerà  il nodo multiAttribute, es:
            
   	 <multiAttribute name="field1">
      	      <target class="com.myapplication.Target" attributes="field1,field2,field3" />
@@ -122,12 +126,12 @@ Versione 1.6.0
            multiAttribute ha un attributo name che corrisponde al nome del campo configurato e N nodi target,
            il nodo target rispecchia l'annotation @JMultiMap, ovvero ha un attributo class e un attributo attributes,
            che contiene la lista dei campi separati da una virgola.
-           Per riflettere invece JMultiMaps basterà dichiarare piu nodi target. 
+           Per riflettere invece JMultiMaps basterÃ  dichiarare piu nodi target. 
 
 2.1.0
 
    - aggiunta dell'annotation @JMapPlaceHolder(key="",value="") sui campi e classe.
-    questo permetter� in fase di conversione DINAMICA di utilizzare i placeholder per funzioni particolari come:
+    questo permetterà  in fase di conversione DINAMICA di utilizzare i placeholder per funzioni particolari come:
 
 	conversione da resulSet a bean: resultSet.getString(${destination.placeholder.field.key})
 	
@@ -148,13 +152,13 @@ Versione 1.6.0
 		</global>
 	
 	- Prevedere una classe custom che permetta il mapping rapido di strutture dati con bean.
-  	In questo modo si da la possibilità di mappare una HashMap, resultSet, properties con un bean e viceversa 
+  	In questo modo si da la possibilitÃ  di mappare una HashMap, resultSet, properties con un bean e viceversa 
 
 	i placeholder su global sono intesi come generici a tutti i campi
 	
 	IMPLEMENTARE KEY DI DEFAULT
 	
-	ovvero ommettendo la key si intende che la chiave � il nome del campo stesso.
+	ovvero ommettendo la key si intende che la chiave è il nome del campo stesso.
 
 
 -----------------------------------------------------------
@@ -191,7 +195,7 @@ Versione 1.6.0
 
 2.2.0
 
-   Dare la possibilit� di definire un metodo da richiamare all'interno delle conversioni dinamiche.
+   Dare la possibilità di definire un metodo da richiamare all'interno delle conversioni dinamiche.
    
    Ad esempio in caso di un mapping tra un Properties e un Bean, sarebbe utile 
    permettere di applicare una conversione della chiave delle properties a tutti i mapping,
@@ -219,7 +223,7 @@ Versione 1.6.0
    	  return result.subString(0,result.length()-1);
    }
    
-   Magari creare una classe di utilit� con metodi statici di conversione come:
+   Magari creare una classe di utilità con metodi statici di conversione come:
    
      fromCamelCaseTo(char separator){
      
@@ -233,13 +237,13 @@ Versione 1.6.0
      }
      
 2.3.0
-- possibilit� di definire configurazioni xml generiche senza creare classi (template):
+- possibilità  di definire configurazioni xml generiche senza creare classi (template):
     
-	Possibilit� di definire N template sia in Annotation che in XML sulla stessa classe.
+	Possibilità  di definire N template sia in Annotation che in XML sulla stessa classe.
 	In modo da mappare un sotto insieme di campi del bean stesso per volta.
 	ad esempio:
 		bean con 4 campi: 2 campi con template1 e gli altri due col template2
-		e permettere la stessa funzionalit� con l'annotation @JsonView per utilizzare il templating
+		e permettere la stessa funzionalità  con l'annotation @JsonView per utilizzare il templating
 		
 
 	
@@ -247,10 +251,10 @@ Versione 1.6.0
 
  - DEFAULT BEHAVIORs
   
-   i comportamenti predefiniti tornano utili in tutti quei casi in cui il mapping � preferibile 
+   i comportamenti predefiniti tornano utili in tutti quei casi in cui il mapping è preferibile 
    applicarlo al "tipo" piuttosto che al "nome" del campo. 
-   Ad essere analizzati quindi sono i tipi dei campi, non servirà quindi dichiarare i nomi dei campi interessati.
-   Un esempio può essere la conversione da String a Date:
+   Ad essere analizzati quindi sono i tipi dei campi, non servirÃ  quindi dichiarare i nomi dei campi interessati.
+   Un esempio puÃ² essere la conversione da String a Date:
 
    @DefaultBehavior
    class DateBehaviors {
@@ -266,7 +270,7 @@ Versione 1.6.0
       }
    }
    
-   Oppure quando il campo di destinazione è una lista e i campi sorgenti sono oggetti: in questo caso il 
+   Oppure quando il campo di destinazione Ã¨ una lista e i campi sorgenti sono oggetti: in questo caso il 
    comportamento predefinito consisterebbe nel effettuare diversi add.
    
    @DefaultBehavior
@@ -285,7 +289,7 @@ Versione 1.6.0
       }
    }
   
-   Lo stesso criterio lo si può usare quando ad essere configurati sono un StringBuilder/StringBuffer con diverse stringhe.
+   Lo stesso criterio lo si puÃ² usare quando ad essere configurati sono un StringBuilder/StringBuffer con diverse stringhe.
   
    @DefaultBehaviors
    class ListBehaviors {
@@ -305,6 +309,6 @@ Versione 1.6.0
    
    Per usufruire di questa feature bisogna contrassegnare la classe con l'annotation @DefaultBehavior
    e contrassegnare i metodi che creano il destination con @Creation e quelli che lo arricchiscono con @Enrichment
-   è possibile aggiungere infiniti metodi. con qualsiasi tipo di input ed output, ad essere valutati saranno i tipi di input e
+   Ã¨ possibile aggiungere infiniti metodi. con qualsiasi tipo di input ed output, ad essere valutati saranno i tipi di input e
    output dei metodi.
   

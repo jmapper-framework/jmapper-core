@@ -1,8 +1,6 @@
 #JMapper Framework [![Build Status](https://travis-ci.org/jmapper-framework/jmapper-core.svg?branch=master)](https://travis-ci.org/jmapper-framework/jmapper-core)
-###Released version 1.4.2!
-some bug fixed:
-  * issue [#18](https://github.com/jmapper-framework/jmapper-core/issues/18) closed: now is possible to use the inherited mapping with RelationalJMapper
-
+###In the next release: Nested mapping
+We are working on nested mapping. It will be available in a few weeks! stay tuned!
 ____
 JMapper is a java bean to java bean mapper, it allows to perform the passage of data dinamically with **annotations** and / or **XML**.<br>With JMapper you can:
 
@@ -63,7 +61,7 @@ There are many features to be implemented, such as:
 - and more..
 
 contact us (jmapper.framework@gmail.com) for more information.<br><br>
-**You want to do a friendly chat?**<br>
+**Do you want to do a friendly chat?**<br>
 [![Join the chat at https://gitter.im/jmapper-framework/jmapper-core](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/jmapper-framework/jmapper-core?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)<br><br>
 
 **Follow us on twitter**<br>
