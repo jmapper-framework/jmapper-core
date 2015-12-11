@@ -389,7 +389,7 @@ public final class ClassesManager {
 			if(isNestedMappingValid(aClass, regex))
 				return regex;
 			
-			throw new InvalidNestedMappingException("invalid nested mapping");
+			throw new InvalidNestedMappingException(regex);
 		}
 		
 		String result = null;

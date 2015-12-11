@@ -114,23 +114,15 @@ public final class OperationHandler {
 	   		try{
 	   			targetFieldName = configReader.retrieveTargetFieldName(configuredField);
 	   		}catch(InvalidNestedMappingException e){
-	   			//TODO aggiungere targetFieldName nella exception
-				 Error.invalidNestedMapping(configuredClass, configuredField, targetClass);
+	   		     // catch and rethrown the exception with more information
+				 Error.invalidNestedMapping(configuredClass, configuredField, targetClass, e.getMessage());
 			}
 			
 			if(targetFieldName == THE_FIELD_IS_NOT_CONFIGURED) continue;
 				
-			Field targetField = null;
-			
-			if(isNestedMapping(targetFieldName))
-				try{ 
-					 targetField = getNestedField(targetClass, targetFieldName);
-				}catch(InvalidNestedMappingException e){
-					 Error.invalidNestedMapping(configuredClass, configuredField, targetClass);
-				}
-			else
-				targetField = retrieveField(targetClass,targetFieldName);
-			
+			Field targetField = isNestedMapping(targetFieldName)
+					 				?getNestedField(targetClass, targetFieldName)
+					 				:retrieveField(targetClass,targetFieldName);
 			
 			MappedField configuredMappedField = new MappedField(configuredField);
 			MappedField targetMappedField     = new MappedField(targetField);
@@ -172,7 +164,7 @@ public final class OperationHandler {
 			try{
 				isUndefined = operationAnalyzer.isUndefined(destinationField, sourceField);
 			}catch(Exception e){
-				// catch and rethrown the exception with more informations.
+				// catch and rethrown the exception with more information
 				Error.badConversion(destinationField, destinationClass, sourceField, sourceClass,e.getMessage());
 			}
 			

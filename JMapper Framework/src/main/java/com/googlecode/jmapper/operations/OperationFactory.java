@@ -101,6 +101,7 @@ public class OperationFactory {
 		OperationType operationType = info.getOperationType();
 		AGeneralOperation operation = getOperation(operationType);
 		 
+		//TODO l'inserimento in lista va spostato da qui, in operation handler va messo
 		if(operationType.isBasic())
 			simpleOperations.add((ASimpleOperation) operation);	
 			
