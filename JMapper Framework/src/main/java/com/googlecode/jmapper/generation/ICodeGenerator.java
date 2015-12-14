@@ -34,7 +34,7 @@ public interface ICodeGenerator {
 	 * @param constructors list of costructors
 	 * @param methods list of methods
 	 * @return the generated class
-	 * @throws Throwable
+	 * @throws Throwable any error made ​​by the generation of the mapper
 	 */
 	Class<?> generate(String clazzName,List<Constructor> constructors,List<Method>	methods) throws Throwable;
 

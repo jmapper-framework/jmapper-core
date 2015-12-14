@@ -23,7 +23,6 @@ public class NestedMappingHandler {
 	 * This method returns the name of the field whose name matches with regex.
 	 * @param aClass class to check
 	 * @param regex regex used to find the field
-	 * @return the field name if exists, null otherwise
 	 */
 	public static void nestedMappingValidyChecks(Class<?> aClass,String regex){
 		

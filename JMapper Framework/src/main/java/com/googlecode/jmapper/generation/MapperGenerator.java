@@ -43,7 +43,7 @@ public class MapperGenerator {
 	 * @param mapping parameter that containts the mappings
 	 * @param dynamicMethods dynamic methods to add
 	 * @return a new instance of IMapper interface, following the mappingBuilder specifications
-	 * @throws Throwable 
+	 * @throws Throwable any error made ​​by the generation of the mapper
 	 */
 	public static Class<?> generateMapperClass(MapperConstructor mapping, Set<Method> dynamicMethods) throws Throwable{
 		

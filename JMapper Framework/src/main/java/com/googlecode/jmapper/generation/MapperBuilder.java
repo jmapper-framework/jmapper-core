@@ -73,7 +73,7 @@ public class MapperBuilder {
 	 * @param <D> Destination Class
 	 * @param <S> Source Class
 	 * @return the generated mapper class 
-	 * @throws Throwable 
+	 * @throws Throwable any error made ​​by the generation of the mapper
 	 * */
 	public <D, S> Class<IMapper<D, S>> generate() throws Throwable {
 		
