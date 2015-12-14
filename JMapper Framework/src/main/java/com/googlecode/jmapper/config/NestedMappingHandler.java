@@ -6,6 +6,7 @@ import static com.googlecode.jmapper.config.Constants.NESTED_MAPPING_STARTS_SYMB
 import java.lang.reflect.Field;
 
 import com.googlecode.jmapper.exceptions.InvalidNestedMappingException;
+import com.googlecode.jmapper.util.ClassesManager;
 public class NestedMappingHandler {
 
 	/**
@@ -24,13 +25,21 @@ public class NestedMappingHandler {
 	 * @param regex regex used to find the field
 	 * @return the field name if exists, null otherwise
 	 */
-	public static boolean isNestedMappingValid(Class<?> aClass,String regex){
+	public static void nestedMappingValidyChecks(Class<?> aClass,String regex){
 		
-		// qui ho la classe di partenza e il path, devo verificare
-		// che il path sia valido, quindi verificare classe per classe
-		// se ci sono i campi e i metodi di accesso (in modo ricorsivo)
+		// splitto la stringa
+		
+		// primo split con aClass -> verifico accessor
+		
+		// secondo split con classe di primo split -> verifico accessor
+		
+		// ....
+		
+		// ultimo split con class penultimo split -> verifico accessor
+		
+		
 		// se ci sono errori lanciare exception, con indicazioni del campo inestato mal configurato
-		return false;
+		throw new InvalidNestedMappingException(regex);
 	}
 	
 	/**
@@ -42,9 +51,22 @@ public class NestedMappingHandler {
 	 */
 	public static Field getNestedField(Class<?> aClass,String regex) throws InvalidNestedMappingException{
 		
-		if(!isNestedMappingValid(aClass, regex))
-			throw new InvalidNestedMappingException("invalid nested mapping");
-				
-		return null;
+		//non tornerà mai null, o il campo nidificato o exception
+		// questo ritorno è solo di appoggio
+		return ClassesManager.retrieveField(aClass, regex);
+	}
+	
+	/**
+	 * This method returns the nested class that contains the field to map (if exists), throws an InvalidNestedMappingException otherwise.
+	 * @param aClass class to check
+	 * @param regex regex used to find the nested field
+	 * @return the nested class if exists, null otherwise
+	 * @throws InvalidNestedMappingException in case of an invalid nested mapping
+	 */
+	public static Class<?> getNestedClass(Class<?> aClass,String regex) throws InvalidNestedMappingException{
+		
+		//non tornerà mai null, o la classe nidificata o exception
+		// il ritorno della classe stessa è di appoggio
+		return aClass;
 	}
 }

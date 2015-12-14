@@ -120,7 +120,9 @@ public final class OperationHandler {
 			
 			if(targetFieldName == THE_FIELD_IS_NOT_CONFIGURED) continue;
 				
-			Field targetField = isNestedMapping(targetFieldName)
+			boolean isNestedMapping = isNestedMapping(targetFieldName);
+			
+			Field targetField = isNestedMapping
 					 				?getNestedField(targetClass, targetFieldName)
 					 				:retrieveField(targetClass,targetFieldName);
 			
@@ -134,7 +136,11 @@ public final class OperationHandler {
 			Field sourceField      = isDestConfigured?targetField:configuredField;
 			
 			//load and check the get/set custom methods of destination and source fields
-			configReader.loadAccessors(configuredMappedField, targetMappedField);
+			
+			if(isNestedMapping)
+				configReader.loadAccessors(getNestedClass(targetClass, targetFieldName),configuredMappedField, targetMappedField);
+			else
+				configReader.loadAccessors(configuredMappedField, targetMappedField);
 			
 			boolean isUndefined = false;
 			

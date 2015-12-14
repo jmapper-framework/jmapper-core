@@ -386,10 +386,8 @@ public final class ClassesManager {
 	public static String fieldName(Class<?> aClass,String regex){
 		
 		if(isNestedMapping(regex)){
-			if(isNestedMappingValid(aClass, regex))
-				return regex;
-			
-			throw new InvalidNestedMappingException(regex);
+			nestedMappingValidyChecks(aClass, regex);
+		    return regex;
 		}
 		
 		String result = null;

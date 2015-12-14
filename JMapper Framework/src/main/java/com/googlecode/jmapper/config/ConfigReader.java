@@ -298,7 +298,7 @@ public final class ConfigReader {
 	 * @param configuredField configured field
 	 * @param targetField target field
 	 */
-	private void loadAccessors(Class<?> targetClass, MappedField configuredField, MappedField targetField) {
+	public void loadAccessors(Class<?> targetClass, MappedField configuredField, MappedField targetField) {
 		
 		// First checks xml configuration
 		xml.fillMappedField(configuredClass, configuredField)

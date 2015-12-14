@@ -15,6 +15,8 @@
  */
 package com.googlecode.jmapper.exceptions;
 
+import java.util.HashMap;
+
 /**
  * Exception thrown when the nested mapping is invalid.
  * @author Alessandro Vurro
@@ -22,6 +24,14 @@ package com.googlecode.jmapper.exceptions;
  */
 public class InvalidNestedMappingException extends MappingException {
 
+	private HashMap<String, String> messages;
+	
+	public HashMap<String, String> getMessages() {
+		return messages;
+	}
+
+	public static String REGEX = "REGEX";
+	
 	public InvalidNestedMappingException(String str) {
 		super(str);
 	}
