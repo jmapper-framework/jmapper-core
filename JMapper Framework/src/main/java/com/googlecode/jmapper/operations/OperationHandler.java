@@ -16,13 +16,18 @@
 
 package com.googlecode.jmapper.operations;
 
-import static com.googlecode.jmapper.config.Constants.*;
+import static com.googlecode.jmapper.config.Constants.THE_FIELD_IS_NOT_CONFIGURED;
+import static com.googlecode.jmapper.config.NestedMappingHandler.getNestedClass;
+import static com.googlecode.jmapper.config.NestedMappingHandler.getNestedField;
+import static com.googlecode.jmapper.config.NestedMappingHandler.isNestedMapping;
 import static com.googlecode.jmapper.util.ClassesManager.findSetterMethods;
 import static com.googlecode.jmapper.util.ClassesManager.getListOfFields;
 import static com.googlecode.jmapper.util.ClassesManager.retrieveField;
 import static com.googlecode.jmapper.util.ClassesManager.verifiesAccessorMethods;
 import static com.googlecode.jmapper.util.ClassesManager.verifyGetterMethods;
-import static com.googlecode.jmapper.config.NestedMappingHandler.*;
+import static com.googlecode.jmapper.util.GeneralUtility.implementationClass;
+import static com.googlecode.jmapper.util.GeneralUtility.isNull;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,11 +38,13 @@ import com.googlecode.jmapper.config.Error;
 import com.googlecode.jmapper.conversions.explicit.ConversionAnalyzer;
 import com.googlecode.jmapper.conversions.explicit.ConversionHandler;
 import com.googlecode.jmapper.enums.ChooseConfig;
+import com.googlecode.jmapper.enums.OperationType;
 import com.googlecode.jmapper.exceptions.InvalidNestedMappingException;
 import com.googlecode.jmapper.generation.beans.Method;
 import com.googlecode.jmapper.operations.beans.MappedField;
 import com.googlecode.jmapper.operations.complex.AComplexOperation;
 import com.googlecode.jmapper.operations.info.InfoOperation;
+import com.googlecode.jmapper.operations.recursive.ARecursiveOperation;
 import com.googlecode.jmapper.operations.simple.ASimpleOperation;
 import com.googlecode.jmapper.xml.XML;
 
@@ -76,7 +83,6 @@ public final class OperationHandler {
 	/** explicit conversion handler */
 	private final ConversionHandler conversionHandler;
 	/** operation factory */
-	private final OperationFactory operationFactory;
 	
 	public OperationHandler(Class<?> aDestinationClass, Class<?> aSourceClass, ChooseConfig aConfigurationChosen, XML aXml) {
 		
@@ -98,7 +104,6 @@ public final class OperationHandler {
 		conversionHandler = new ConversionHandler(xml,destinationClass,sourceClass);
 		conversionAnalyzer = new ConversionAnalyzer(xml,configurationChosen,destinationClass,sourceClass);
 		operationAnalyzer = new OperationAnalyzer(xml, conversionAnalyzer);
-		operationFactory = new OperationFactory(xml, configurationChosen, simpleOperations, complexOperations);
 	}
 	
 	/**
@@ -136,11 +141,8 @@ public final class OperationHandler {
 			Field sourceField      = isDestConfigured?targetField:configuredField;
 			
 			//load and check the get/set custom methods of destination and source fields
-			
-			if(isNestedMapping)
-				configReader.loadAccessors(getNestedClass(targetClass, targetFieldName),configuredMappedField, targetMappedField);
-			else
-				configReader.loadAccessors(configuredMappedField, targetMappedField);
+			if(isNestedMapping)	configReader.loadAccessors(getNestedClass(targetClass, targetFieldName),configuredMappedField, targetMappedField);
+			else				configReader.loadAccessors(configuredMappedField, targetMappedField);
 			
 			boolean isUndefined = false;
 			
@@ -166,7 +168,6 @@ public final class OperationHandler {
 			// in caso di arricchimento bisogna considerare i MappingType
 			//
 			
-			
 			try{
 				isUndefined = operationAnalyzer.isUndefined(destinationField, sourceField);
 			}catch(Exception e){
@@ -179,17 +180,39 @@ public final class OperationHandler {
 			
 			InfoOperation info = operationAnalyzer.getInfo();
 			
-			AGeneralOperation operation = operationFactory.getOperation(destinationMappedField, sourceMappedField, info, dynamicMethodsToWrite);
+			OperationType operationType = info.getOperationType();
 
+			AGeneralOperation operation = OperationFactory.getOperation(operationType);
+			
+			if(operationType.isBasic())
+				simpleOperations.add((ASimpleOperation) operation);	
+				
+			if(operationType.isComplex())
+				complexOperations.add(((AComplexOperation) operation)
+						.setDestinationClass(defineStructure(destinationMappedField.getValue(), sourceMappedField.getValue())));
+					
+			if(operationType.isRecursive())
+				((ARecursiveOperation) operation).setDynamicMethodsToWrite(dynamicMethodsToWrite)
+				 							     .setXml(xml)
+				                                 .setConfigChosen(isNull(info.getConfigChosen()) // if both classes are configured
+										                    	  ?configurationChosen		     // returns the configuration chosen
+												                  :info.getConfigChosen());      // else returns the configuration retrieved
+			// common settings
+			operation.setDestinationField(destinationMappedField)
+					 .setSourceField(sourceMappedField)
+					 .setInfoOperation(info);
+			
 			boolean isAvoidSet = false;
 			boolean isConversion = info.getOperationType().isAConversion();
 			
 			if(isConversion)
 				isAvoidSet = conversionAnalyzer.getMethod().isAvoidSet();
 			
+			// verifies destination accessors
 			if(isAvoidSet)	verifyGetterMethods(destinationClass,destinationMappedField);
 			else		verifiesAccessorMethods(destinationClass,destinationMappedField);
 			
+			// verifies source accessors
 			verifyGetterMethods(sourceClass,sourceMappedField);
 			findSetterMethods(sourceClass,sourceMappedField);
 			
@@ -200,6 +223,7 @@ public final class OperationHandler {
 				conversionHandler.load(conversionAnalyzer)
 				                 .from(sourceMappedField).to(destinationMappedField);
 				
+				// in case of dynamic conversion
 				if(conversionHandler.toBeCreated())
 					dynamicMethodsToWrite.add(conversionHandler.loadMethod());
 				
@@ -213,7 +237,46 @@ public final class OperationHandler {
 		if(simpleOperations.isEmpty() && complexOperations.isEmpty())
 				Error.absentRelationship(configuredClass, targetClass);	
 	}
+	
+	/**
+	 * This method defines the destination structure for this operation.
+	 * If destination class is an interface, a relative implementation will be found.
+	 * 
+	 * @param destination destination field
+	 * @param source source field
+	 */
+	private Class<?> defineStructure(Field destination, Field source){
 		
+		Class<?> destinationClass = destination.getType();
+		Class<?> sourceClass = source.getType();
+		
+		Class<?> result = null;
+		
+		// if destination is an interface
+		if(destinationClass.isInterface())
+			// if source is an interface
+			if(sourceClass.isInterface())
+					// retrieves the implementation of the destination interface
+					result = (Class<?>) implementationClass.get(destinationClass.getName());
+			// if source is an implementation	
+			else{
+				// retrieves source interface
+				Class<?> sourceInterface = sourceClass.getInterfaces()[0];
+				// if the destination and source interfaces are equal
+				if(destinationClass == sourceInterface)
+					// assigns implementation to destination
+					result = sourceClass;
+				// if they are different
+				else
+					// destination gets the implementation of his interface
+					result = (Class<?>) implementationClass.get(destinationClass.getName());
+			}
+		// if destination is an implementation
+		else
+			result = destinationClass;
+		
+		return result;
+	}		
 	/**@return list of simple operations */
 	public List<ASimpleOperation> getSimpleOperations()   {	return simpleOperations;	}
 	

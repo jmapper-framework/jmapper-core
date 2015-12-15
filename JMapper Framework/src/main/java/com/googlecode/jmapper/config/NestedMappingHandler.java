@@ -1,6 +1,7 @@
 package com.googlecode.jmapper.config;
 
 import static com.googlecode.jmapper.config.Constants.NESTED_MAPPING_ENDS_SYMBOL;
+import static com.googlecode.jmapper.config.Constants.NESTED_MAPPING_SPLIT_SYMBOL;
 import static com.googlecode.jmapper.config.Constants.NESTED_MAPPING_STARTS_SYMBOL;
 
 import java.lang.reflect.Field;
@@ -20,24 +21,50 @@ public class NestedMappingHandler {
 	}
 	
 	/**
+	 * @param nestedMappingPath nested mapping path
+	 * @return a list with splitted fields
+	 */
+	private static String[] nestedFields(String nestedMappingPath){
+		return nestedMappingPath
+				 .substring(NESTED_MAPPING_STARTS_SYMBOL.length(), nestedMappingPath.length() - NESTED_MAPPING_ENDS_SYMBOL.length())
+		         .split(NESTED_MAPPING_SPLIT_SYMBOL);
+	}
+	
+	private static void checkGetAccessor(Class<?> aClass, String nestedField){
+		// deve controllare che ci siano i get
+	}
+	
+	private static void checkAccessors(Class<?> aClass, String nestedField){
+		// deve controllare che ci siano i get e set
+	}
+	
+	private static Class<?> getFieldClass(Class<?> aClass,String nestedField){
+		// ritorna la classe del campo
+		return null;
+	}
+	
+	/**
 	 * This method returns the name of the field whose name matches with regex.
 	 * @param aClass class to check
 	 * @param regex regex used to find the field
 	 */
 	public static void nestedMappingValidyChecks(Class<?> aClass,String regex){
 		
-		// splitto la stringa
+			
+		Class<?> nestedClass = aClass;
+		String[] nestedFields = nestedFields(regex);
 		
-		// primo split con aClass -> verifico accessor
+		// from first field to second-last it's only checked get accessor 
+		for(int i = 0; i< nestedFields.length-1;i++){
+			String nestedField = nestedFields[i];
+			checkGetAccessor(nestedClass, nestedField);
+			nestedClass = getFieldClass(nestedClass, nestedField);
+		}
 		
-		// secondo split con classe di primo split -> verifico accessor
+		// the last fields in the path must have get and set accessors
+		checkAccessors(nestedClass, nestedFields[nestedFields.length-1]);
 		
-		// ....
-		
-		// ultimo split con class penultimo split -> verifico accessor
-		
-		
-		// se ci sono errori lanciare exception, con indicazioni del campo inestato mal configurato
+		//TODO questa exception va lanciata nei metodi interni, con in aggiunta (nella mappa) i campi mal configurati
 		throw new InvalidNestedMappingException(regex);
 	}
 	
@@ -46,9 +73,8 @@ public class NestedMappingHandler {
 	 * @param aClass class to check
 	 * @param regex regex used to find the nested field
 	 * @return the nested field if exists, null otherwise
-	 * @throws InvalidNestedMappingException in case of an invalid nested mapping
 	 */
-	public static Field getNestedField(Class<?> aClass,String regex) throws InvalidNestedMappingException{
+	public static Field getNestedField(Class<?> aClass,String regex){
 		
 		//non tornerà mai null, o il campo nidificato o exception
 		// questo ritorno è solo di appoggio
@@ -56,13 +82,12 @@ public class NestedMappingHandler {
 	}
 	
 	/**
-	 * This method returns the nested class that contains the field to map (if exists), throws an InvalidNestedMappingException otherwise.
+	 * This method returns the nested class that contains the field to map, throws an InvalidNestedMappingException otherwise in errors case.
 	 * @param aClass class to check
 	 * @param regex regex used to find the nested field
 	 * @return the nested class if exists, null otherwise
-	 * @throws InvalidNestedMappingException in case of an invalid nested mapping
 	 */
-	public static Class<?> getNestedClass(Class<?> aClass,String regex) throws InvalidNestedMappingException{
+	public static Class<?> getNestedClass(Class<?> aClass,String regex){
 		
 		//non tornerà mai null, o la classe nidificata o exception
 		// il ritorno della classe stessa è di appoggio
