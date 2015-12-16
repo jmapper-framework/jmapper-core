@@ -32,7 +32,6 @@ import com.googlecode.jmapper.exceptions.MappingException;
 import com.googlecode.jmapper.operations.beans.MappedField;
 import com.googlecode.jmapper.operations.info.NestedMappedField;
 import com.googlecode.jmapper.operations.info.NestedMappingInfo;
-import com.googlecode.jmapper.util.ClassesManager;
 import com.googlecode.jmapper.xml.XML;
 
 
@@ -94,9 +93,10 @@ public class NestedMappingHandler {
 	
 	/**
 	 * This method returns the name of the field whose name matches with regex.
-	 * @param XML xml
+	 * @param xml xml configuration
 	 * @param aClass class to check
 	 * @param regex regex used to find the field
+	 * @return NestedMappingInfo
 	 */
 	public static NestedMappingInfo loadNestedMappingInformation(XML xml, Class<?> aClass,String regex){
 		NestedMappingInfo info = new NestedMappingInfo();

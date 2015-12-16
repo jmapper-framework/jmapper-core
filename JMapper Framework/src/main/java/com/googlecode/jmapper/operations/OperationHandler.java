@@ -84,6 +84,12 @@ public final class OperationHandler {
 	private final ConversionHandler conversionHandler;
 	/** operation factory */
 	
+	/**
+	 * @param aDestinationClass destination class
+	 * @param aSourceClass source class
+	 * @param aConfigurationChosen configuration chosen
+	 * @param aXml xml configuration
+	 */
 	public OperationHandler(Class<?> aDestinationClass, Class<?> aSourceClass, ChooseConfig aConfigurationChosen, XML aXml) {
 		
 		// initialization of operation lists and xml

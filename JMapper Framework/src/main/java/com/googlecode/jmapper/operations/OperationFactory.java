@@ -40,7 +40,7 @@ public class OperationFactory {
 	
 	/**
 	 * Operation factory.
-	 * @param operationType
+	 * @param operationType operation type
 	 * @return the operation instance relative to this operationType
 	 */
 	public static AGeneralOperation getOperation(OperationType operationType){
