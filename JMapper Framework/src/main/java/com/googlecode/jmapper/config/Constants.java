@@ -59,6 +59,7 @@ public final class Constants {
 	public static final String mappingNotFoundException1 = "mappingNotFoundException1";
 	public static final String mappingNotFoundException1path = "mappingNotFoundException1path";
 	public static final String nullMappedClassException1 = "nullMappedClassException1";
+	public static final String mappingErrorException5 = "mappingErrorException5";
 	public static final String mappingErrorException4 = "mappingErrorException4";
 	public static final String mappingErrorException3 = "mappingErrorException3";
 	public static final String mappingErrorException2 = "mappingErrorException2";

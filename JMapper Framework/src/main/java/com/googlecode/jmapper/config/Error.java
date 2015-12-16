@@ -388,6 +388,15 @@ public final class Error {
 	public static void mapping(String mappedFieldName, String mappedClassName, String targetFieldName, String targetClassName){
 		throw new MappingErrorException(MSG.INSTANCE.message(mappingErrorException4,mappedFieldName,mappedClassName, targetFieldName,targetClassName));
 	}
+	
+	/**
+	 * Thrown when the target field doesn't exist.
+	 * @param targetFieldName name of the target field
+	 * @param targetClassName name of the target field's class
+	 */
+	public static void inexistentField(String targetFieldName, String targetClassName){
+		throw new MappingErrorException(MSG.INSTANCE.message(mappingErrorException5, targetFieldName, targetClassName));
+	}
 	/**
 	 * Thrown if the attribute doesn't exist in aClass.
 	 * @param aClass class that not contains aField
@@ -545,9 +554,10 @@ public final class Error {
 	 * @param configuredField configured field
 	 * @param targetClass target class
 	 * @param targetFieldName invalid nested mapping path
+	 * @param moreInfo more information
 	 */
-	public static void invalidNestedMapping(Class<?> configuredClass, Field configuredField, Class<?> targetClass, String targetFieldName) {
-		throw new InvalidNestedMappingException(MSG.INSTANCE.message(InvalidNestedMappingException, configuredClass.getSimpleName(), configuredField.getName(), targetClass.getSimpleName(), targetFieldName));
+	public static void invalidNestedMapping(Class<?> configuredClass, Field configuredField, Class<?> targetClass, String targetFieldName, String moreInfo) {
+		throw new InvalidNestedMappingException(MSG.INSTANCE.message(InvalidNestedMappingException, configuredClass.getSimpleName(), configuredField.getName(), targetClass.getSimpleName(), targetFieldName, moreInfo));
 	}
 	
 }

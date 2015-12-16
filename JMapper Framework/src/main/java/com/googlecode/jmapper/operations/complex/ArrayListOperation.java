@@ -15,8 +15,10 @@
  */
 package com.googlecode.jmapper.operations.complex;
 
-import static com.googlecode.jmapper.util.ClassesManager.*;
-import static com.googlecode.jmapper.util.GeneralUtility.*;
+import static com.googlecode.jmapper.util.ClassesManager.getArrayItemClass;
+import static com.googlecode.jmapper.util.ClassesManager.getCollectionItemClass;
+import static com.googlecode.jmapper.util.GeneralUtility.newLine;
+import static com.googlecode.jmapper.util.GeneralUtility.replace$;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -48,7 +50,6 @@ public class ArrayListOperation extends AComplexOperation {
 		vars.put("destination"           ,c("dep"));
 		vars.put("getDestination()"      ,s(getDestination()));
 
-		//TODO sostituire tutte le concatenazioni con StringBuilder
 		return write(replace$(GeneralUtility.write("   $dClass[] $destination = $getDestination();"
 				  ,newLine, "   $dClass[] $result = ($dClass[])java.util.Arrays.copyOf($destination, $destination.length + $source.length);"
 				  ,newLine, "   System.arraycopy($source, 0, $result, $destination.length, $source.length);"

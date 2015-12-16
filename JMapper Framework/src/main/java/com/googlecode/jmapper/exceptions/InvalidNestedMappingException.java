@@ -31,9 +31,11 @@ public class InvalidNestedMappingException extends MappingException {
 	}
 
 	public static String REGEX = "REGEX";
+	public static String FIELD = "FIELD";
 	
 	public InvalidNestedMappingException(String str) {
 		super(str);
+		messages = new HashMap<String, String>();
 	}
 
 	/**

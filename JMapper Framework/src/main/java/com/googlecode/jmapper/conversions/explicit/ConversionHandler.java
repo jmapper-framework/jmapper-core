@@ -126,7 +126,6 @@ public class ConversionHandler {
 			// only if the placeholder is used
 			if(!isNull(pair.getValue()))
 				body = body.replaceAll(pair.getKey(),  Matcher.quoteReplacement(pair.getValue()));
-		//TODO sostituire tutte le concatenazioni con StringBuilder
 		return methodToGenerate.setBody(body+"}catch(java.lang.Exception e){"+error()+"}return "+defaultPrimitiveValue(destinationClass)+";}");
 	}
 	

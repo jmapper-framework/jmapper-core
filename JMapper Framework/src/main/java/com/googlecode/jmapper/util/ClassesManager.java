@@ -16,22 +16,33 @@
 
 package com.googlecode.jmapper.util;
 
+import static com.googlecode.jmapper.operations.NestedMappingHandler.isNestedMapping;
 import static com.googlecode.jmapper.util.AutoBoxing.boxingOperations;
-import static com.googlecode.jmapper.config.NestedMappingHandler.*;
 import static com.googlecode.jmapper.util.AutoBoxing.unBoxingOperations;
 import static com.googlecode.jmapper.util.FilesManager.isPath;
-import static com.googlecode.jmapper.util.GeneralUtility.*;
+import static com.googlecode.jmapper.util.GeneralUtility.collectionIsAssignableFrom;
+import static com.googlecode.jmapper.util.GeneralUtility.enrichList;
+import static com.googlecode.jmapper.util.GeneralUtility.getMethod;
+import static com.googlecode.jmapper.util.GeneralUtility.isAccessModifier;
+import static com.googlecode.jmapper.util.GeneralUtility.isBoolean;
+import static com.googlecode.jmapper.util.GeneralUtility.isEmpty;
+import static com.googlecode.jmapper.util.GeneralUtility.isNull;
+import static com.googlecode.jmapper.util.GeneralUtility.mGet;
+import static com.googlecode.jmapper.util.GeneralUtility.mSet;
+import static com.googlecode.jmapper.util.GeneralUtility.mapIsAssignableFrom;
+import static com.googlecode.jmapper.util.GeneralUtility.toList;
+import static com.googlecode.jmapper.util.GeneralUtility.write;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import com.googlecode.jmapper.annotations.Annotation;
 import com.googlecode.jmapper.config.Constants;
 import com.googlecode.jmapper.config.Error;
 import com.googlecode.jmapper.enums.ChooseConfig;
-import com.googlecode.jmapper.exceptions.InvalidNestedMappingException;
 import com.googlecode.jmapper.operations.beans.MappedField;
 import com.googlecode.jmapper.xml.XML;
 /**
@@ -385,11 +396,9 @@ public final class ClassesManager {
 	 */
 	public static String fieldName(Class<?> aClass,String regex){
 		
-		if(isNestedMapping(regex)){
-			nestedMappingValidyChecks(aClass, regex);
+		if(isNestedMapping(regex))
 		    return regex;
-		}
-		
+				
 		String result = null;
 
 		for(Class<?> clazz: getAllsuperClasses(aClass))
@@ -553,8 +562,6 @@ public final class ClassesManager {
 			if(!isNull(customGet) && !customGet.equals(Constants.DEFAULT_ACCESSOR_VALUE))
 				
 				try{					clazz.getMethod(customGet);
-										// store the getMethod name
-										field.getMethod(customGet);
 										continue;
 				}catch(Exception e) {	Error.customMethod("get", customGet, clazz);	}
 			
@@ -593,7 +600,7 @@ public final class ClassesManager {
 	 * @param clazz a class to check
 	 * @param fields fields to control
 	 */
-	private static void verifySetterMethods(Class<?> clazz, MappedField... fields){
+	public static void verifySetterMethods(Class<?> clazz, MappedField... fields){
 		String methodName = null;
 		String fieldName = null;
 		Class<?> fieldType = null;
