@@ -68,14 +68,90 @@ Versione 1.5.0
 
  - permettere funzioni di projection e flatten (vedere nestedMapping)
 
-Versione 1.5.1
- 
- - implementare altri bytecode generator tramite dipendenze maven
- 
-Versione 1.6.0
+--------- PERIODO DI REVISIONE ----------
 
- - implementare conversioni di oggetti java come StringBuilder <-> String, Date <-> Calendar
- 
+ - implementare altri bytecode generator tramite dipendenze maven
+ - aggiornare il wiki con pagina tip&tricks sul come sfruttare i regex
+ - esempio reale con mappingType
+
+-----------------------------------------
+
+Versione 1.5.1
+ - conversione StringBuilder String
+ - conversione di enumeration
+ - conversione Date Calendar
+
+
+Versione 1.6.0
+  
+  - creare classi configurate che hanno map, properties, e altre strutture generiche:
+  
+  			esempio:
+  			
+  			class mapStandard<K,V>{
+  			
+  				private Map <K,V> map
+  				
+  				//conversion from map
+  				
+  				//conversion to map
+  			}
+  			
+  			il bean di destinazione dovr‡ implementare un interfaccia che avr‡ i metodi
+  			
+  			@JGlobalMap("map")
+  			interface jmapperMapWithConversion{
+  			
+  				fromFieldToMap(String field);
+  				
+  				fromMapToField(String mapKey);
+  				
+  			}
+  			
+  			oppure l'interfaccia:
+  			
+  			@JGlobalMap("map")
+  			interface jmapperMap{
+  				
+  			}
+  			
+  - creare metodi statici di utili‡ da poter richiamare nei metodi dinamici:
+  
+
+   Dare la possibilit√† di definire un metodo da richiamare all'interno delle conversioni dinamiche.
+   
+   Properties
+   
+    user.name = ""
+    user.psw = ""
+   
+   Bean
+   	
+   	userName;
+   	userPsw;
+   	
+     fromCamelCaseToSeparator(char separator){
+     
+      String[] words = destName.split(per uppercase);
+   	  String result = "";
+   	  for(String word: words)
+   	   result += word + separator
+   	  
+   	  
+   	  return result.subString(0,result.length()-1);
+     }
+     
+     fromSeparatorToCamelCase(char separator){
+     
+      String[] words = destName.split(per uppercase);
+   	  String result = "";
+   	  for(String word: words)
+   	   result += word + separator
+   	  
+   	  
+   	  return result.subString(0,result.length()-1);
+     }
+      
 2.0.0
 
  - Multiple Mapping
@@ -189,52 +265,6 @@ Versione 1.6.0
 		toString();
 
 ------------------------------------------------------------
-
-
-
-
-2.2.0
-
-   Dare la possibilit√† di definire un metodo da richiamare all'interno delle conversioni dinamiche.
-   
-   Ad esempio in caso di un mapping tra un Properties e un Bean, sarebbe utile 
-   permettere di applicare una conversione della chiave delle properties a tutti i mapping,
-   evitando quindi di definire un placeholder per campo ad esempio:
-   
-   Properties
-   
-    user.name = ""
-    user.psw = ""
-   
-   Bean
-   	
-   	userName;
-   	userPsw;
-   	
-   il metodo che dovrebbe essere concesso scrivere dovrebbe essere ad esempio:
-   
-   public String destNameConversion(String destName){
-   	  String[] words = destName.split(per uppercase);
-   	  String result = "";
-   	  for(String word: words){
-   	   result += word.toLowerCase() + "."
-   	  }
-   	  
-   	  return result.subString(0,result.length()-1);
-   }
-   
-   Magari creare una classe di utilit√† con metodi statici di conversione come:
-   
-     fromCamelCaseTo(char separator){
-     
-      String[] words = destName.split(per uppercase);
-   	  String result = "";
-   	  for(String word: words)
-   	   result += word + separator
-   	  
-   	  
-   	  return result.subString(0,result.length()-1);
-     }
      
 2.3.0
 - possibilit√†¬† di definire configurazioni xml generiche senza creare classi (template):

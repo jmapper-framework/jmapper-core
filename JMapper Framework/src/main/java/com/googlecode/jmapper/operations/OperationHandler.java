@@ -170,12 +170,25 @@ public final class OperationHandler {
 
 			AGeneralOperation operation = OperationFactory.getOperation(operationType);
 			
-			//TODO ottengo l'operazione e ho tutte le informazioni riguardanti il path nell oggetto NestedMappingInfo
-			// devo costruire le operazioni con le informazioni del mapping
 			
-			// in fase di creazione vanno istanziate le classi intermedie
-			// in fase di arricchimento basta recuperare quelle esistenti
-			// il tutto considerando il mapping type
+			/*
+			 * Arrivato a questo punto ho le informazioni del nested mapping
+			 * 
+			 * isDestConfigured? costruisco path a source: costruisco path a destination
+			 * 
+			 * sia che sia source che destination i path vanno costruiti ciclando su tutti i nestedField tranne l'ultimo che cambia
+			 * in base che sia get o set:
+			 * String pathIniziale = getNF1().getNF2()
+			 * String pathGet = pathIniziale + getNF3()
+			 * String pathSet = pathIniziale + setNF3()
+			 * 
+			 * Destination getDestination = 
+			 * operation.initialDGetPath("destination");
+			 * operation.initialDSetPath("destination");
+			 * operation.initialSGetPath("source");
+			 * 
+			 * 
+			 * */
 			
 			if(operationType.isBasic())
 				simpleOperations.add((ASimpleOperation) operation);	
