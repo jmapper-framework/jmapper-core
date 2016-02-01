@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 - 2015 Alessandro Vurro.
+ * Copyright (C) 2012 - 2016 Alessandro Vurro.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,8 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.googlecode.jmapper.operations.beans.MappedField;
+
 /**
  * Information relative to nested mapping path.
  * 
@@ -27,10 +29,31 @@ import java.util.List;
  */
 public class NestedMappingInfo {
 
-	List<NestedMappedField> nestedFields;
+	/** list of couples of field-class relatives to nested path */
+	private List<NestedMappedField> nestedFields;
 
-	public NestedMappingInfo() {
+	/** true if the nested path is relative to the source */
+	private final boolean isSource;
+
+	/** configured class */
+	private Class<?> configuredClass;
+	
+	/** configured field */
+	private Field configuredField;
+	
+	public NestedMappingInfo(boolean isSource) {
 		nestedFields = new ArrayList<NestedMappedField>();
+		this.isSource = isSource;
+	}
+	
+	
+	public boolean isSource() {
+		return isSource;
+	}
+
+
+	public boolean isLastField(NestedMappedField field){
+		return this.nestedFields.get(nestedFields.size()-1) == field;
 	}
 	
 	public List<NestedMappedField> getNestedFields() {
@@ -45,11 +68,39 @@ public class NestedMappingInfo {
 		this.nestedFields.add(nestedField);
 	}
 	
+	public Field getFirstNestedField(){
+		return nestedFields.get(0).getField().getValue();
+	}
+	
+	public Class<?> getFirstNestedClass(){
+		return nestedFields.get(0).getFieldClass();
+	}
+	
+	public MappedField getLastNestedMappedField(){
+		return nestedFields.get(nestedFields.size() - 1).getField();
+	}
+	
 	public Field getLastNestedField(){
-		return nestedFields.get(nestedFields.size() - 1).getField().getValue();
+		return getLastNestedMappedField().getValue();
 	}
 	
 	public Class<?> getLastNestedClass(){
 		return nestedFields.get(nestedFields.size() - 1).getFieldClass();
+	}
+
+	public Class<?> getConfiguredClass() {
+		return configuredClass;
+	}
+
+	public void setConfiguredClass(Class<?> targetClass) {
+		this.configuredClass = targetClass;
+	}
+
+	public Field getConfiguredField() {
+		return configuredField;
+	}
+
+	public void setConfiguredField(Field configuredField) {
+		this.configuredField = configuredField;
 	}
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 - 2015 Alessandro Vurro.
+ * Copyright (C) 2012 - 2016 Alessandro Vurro.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,6 +37,7 @@ public final class Constants {
 	public static final String CONTENT_ALREADY_DEFINED = "not needed";
 	public static final String MSG_FILE = "com/googlecode/jmapper/config/jmapper.msg.properties";
 	
+	public static final String nestedBeanNullException = "nestedBeanNullException";
 	public static final String customMethodException = "customMethodException";
 	public static final String nullPointerContent = "nullPointerContent";
 	public static final String nullPointer = "nullPointer";

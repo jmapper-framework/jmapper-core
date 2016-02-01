@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 - 2015 Alessandro Vurro.
+ * Copyright (C) 2012 - 2016 Alessandro Vurro.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +19,12 @@ import static com.googlecode.jmapper.api.enums.MappingType.ONLY_NULL_FIELDS;
 import static com.googlecode.jmapper.conversions.implicit.ConversionHandler.getConversion;
 import static com.googlecode.jmapper.util.ClassesManager.isBoxing;
 import static com.googlecode.jmapper.util.ClassesManager.isUnBoxing;
+import static com.googlecode.jmapper.util.GeneralUtility.isNull;
 import static com.googlecode.jmapper.util.GeneralUtility.newLine;
 
 import com.googlecode.jmapper.enums.ConversionType;
+import com.googlecode.jmapper.operations.beans.MappedField;
+import com.googlecode.jmapper.operations.info.NestedMappedField;
 
 /**
  * This abstract class represents an abstract operation that adds, 
@@ -32,12 +35,118 @@ import com.googlecode.jmapper.enums.ConversionType;
  */
 public abstract class AGeneralOperation extends AGeneralOperationAccessor{
 	
+	/** @return the nested mapping */
+	protected StringBuilder getNestedMapping() {
+		
+		if(isNull(this.nestedMappingInfo)) 
+			return null;
+		
+		return this.nestedMappingInfo.isSource() 
+				? calculateSourceNestedMapping() 
+				: calculateDestinationNestedMapping();
+	}
+	
+	private StringBuilder calculateSourceNestedMapping(){
+		StringBuilder mapping = new StringBuilder();
+		
+		// this represent the intermediate variables
+		String actualField = this.initialSGetPath;
+		int index = 0;
+		String nestedField = "nestedField"+ ++index;
+		for (NestedMappedField nestedMappedField : this.nestedMappingInfo.getNestedFields()) {
+			
+			
+			MappedField field = nestedMappedField.getField();
+			Class<?> nestedClass = field.getValue().getType();
+			tryCatch(mapping, nestedClass, nestedField, actualField, field);
+
+			// in case of last no mapping necessary, but wrote only for checks null field
+			if(this.nestedMappingInfo.isLastField(nestedMappedField)) 
+				break;
+			
+			actualField = nestedField;
+			nestedField = "nestedField" + ++index;
+		}
+		this.initialSGetPath = actualField;
+		return mapping;
+	}
+	
+	private void tryCatch(StringBuilder mapping, Class<?> nestedClass, String nestedField, String actualField, MappedField mappedField){
+		String getField = mappedField.getMethod();
+		String destinationClass = this.nestedMappingInfo.getConfiguredClass().getSimpleName();
+		String destinationField = this.nestedMappingInfo.getConfiguredField().getName();
+		String sourceClass = this.nestedMappingInfo.getFirstNestedClass().getSimpleName();
+		String sourceField = this.nestedMappingInfo.getFirstNestedField().getName();
+		
+	   write(mapping, "   ",nestedClass.getName()," ",nestedField," = null;", 
+			newLine,  "   try{", 
+			newLine,  "      ",nestedField," = ",actualField,".",getField,"();",
+            newLine,  "   }catch(",NullPointerException.class.getName()," e){",
+            newLine,  "      com.googlecode.jmapper.config.Error.nestedBeanNull(\"",mappedField.getName(),"\", \"",destinationClass,"\", \"",destinationField,"\", \"",sourceClass,"\", \"",sourceField,"\");",
+            newLine,  "   }", newLine);
+	}
+	
+	private StringBuilder calculateDestinationNestedMapping(){
+		StringBuilder mapping = new StringBuilder();
+		
+		// this represent the intermediate variables
+		String actualField = this.initialDGetPath;
+		int index = 0;
+		String nestedField = "nestedField"+ ++index;
+		for (NestedMappedField nestedMappedField : this.nestedMappingInfo.getNestedFields()) {
+			
+			// in case of last no mapping necessary
+			if(this.nestedMappingInfo.isLastField(nestedMappedField)) 
+				break;
+			
+			MappedField field = nestedMappedField.getField();
+			Class<?> nestedClass = field.getValue().getType();
+			nestedMapping(mapping, nestedClass, nestedField, actualField, field);
+			
+			actualField = nestedField;
+			nestedField = "nestedField" + ++index;
+		}
+		this.initialDSetPath = actualField;
+		this.initialDGetPath = actualField;
+		
+		return mapping;
+	}
+	
+	
+	/*
+	 *   Se invece è definita sulla destinazione, allora deve essere prevista la creazione degli elementi intermedi
+	 *   ovvero:
+	 *   ClasseCampo campo = initialPath.getCampo();
+	 *   if(campo == null){
+	 *      campo = new Campo();
+	 *      initialPath.setCampo(campo);
+	 *   }
+	 *   
+	 *   ClasseCampo2 campo2 = campo.getCampo2();
+	 *   if(campo2 == null){
+	 *      campo2 = new Campo2();
+	 *      campo.setCampo2(campo2);
+	 *   }
+	 *   
+	 *   ecc... fino ad arrivare al penultimo elemento della catena
+	 *   */
+	private void nestedMapping(StringBuilder mapping, Class<?> nestedClass, String nestedField, String actualField, MappedField mappedField){
+		String getField = mappedField.getMethod();
+		String setField = mappedField.setMethod();
+		
+	   write(mapping, "   ",nestedClass.getName()," ",nestedField," = ",actualField,".",getField,"();", 
+			newLine,  "   if(", nestedField," == null){", 
+			newLine,  "      ",nestedField," = new ",nestedClass.getName(),"();",
+			newLine,  "      ",actualField,".",setField,"(",nestedField,");", 
+			newLine,  "   }", newLine);
+	}
+	
 	/**
 	 * @return a StringBuilder calculated at runtime representing the complete set destination path.
 	 * <br>for example: destination.setField;
 	 */
-	protected final StringBuilder setDestination() {	
-		return write(initialDSetPath,".",destinationField.setMethod());		
+	protected final StringBuilder setDestination() {
+		return write(initialDSetPath,".",destinationField.setMethod());
 	}
 	
 	/**
@@ -54,15 +163,15 @@ public abstract class AGeneralOperation extends AGeneralOperationAccessor{
 	 * <br>for example: destination.getField()
 	 */
 	protected final StringBuilder getDestination() {
-		return write(initialDGetPath,".",destinationField.getMethod(),"()");
+		return write(initialDGetPath,".",destinationField.getMethod(),"()"); 
 	}
 
 	/**
 	 * @return a StringBuilder calculated at runtime representing the complete get source path.
 	 * <br>for example: source.getField()
 	 */
-	protected final StringBuilder getSource() {	
-		return write(initialSGetPath,".",sourceField.getMethod(),"()");			
+	protected final StringBuilder getSource() {
+		return write(initialSGetPath,".",sourceField.getMethod(),"()");
 	}
 
 	/**
@@ -178,4 +287,5 @@ public abstract class AGeneralOperation extends AGeneralOperationAccessor{
 	protected boolean theSourceIsToBeConverted(){
 		return !info.getConversionType().isAbsent();
 	}
+	
 }

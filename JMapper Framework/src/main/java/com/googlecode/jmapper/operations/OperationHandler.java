@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 - 2015 Alessandro Vurro.
+ * Copyright (C) 2012 - 2016 Alessandro Vurro.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -128,9 +128,10 @@ public final class OperationHandler {
 			
 			Field targetField = null;
 			NestedMappingInfo nestedMappingInfo = null;
+			
 			if(isNestedMapping)
 				try{	
-					nestedMappingInfo = loadNestedMappingInformation(xml, targetClass, targetFieldName);
+					nestedMappingInfo = loadNestedMappingInformation(xml, targetClass, targetFieldName, sourceClass, destinationClass, configuredField);
 				    targetField = nestedMappingInfo.getLastNestedField();
 				}catch(InvalidNestedMappingException e){
 				    // catch and rethrown the exception with more information
@@ -140,7 +141,9 @@ public final class OperationHandler {
 			
 			
 			MappedField configuredMappedField = new MappedField(configuredField);
-			MappedField targetMappedField     = new MappedField(targetField);
+			
+			MappedField targetMappedField     = isNestedMapping ?nestedMappingInfo.getLastNestedMappedField()
+					                                            :new MappedField(targetField);
 
 			MappedField destinationMappedField = isDestConfigured?configuredMappedField:targetMappedField;
 			MappedField sourceMappedField = isDestConfigured?targetMappedField:configuredMappedField;
@@ -170,26 +173,6 @@ public final class OperationHandler {
 
 			AGeneralOperation operation = OperationFactory.getOperation(operationType);
 			
-			
-			/*
-			 * Arrivato a questo punto ho le informazioni del nested mapping
-			 * 
-			 * isDestConfigured? costruisco path a source: costruisco path a destination
-			 * 
-			 * sia che sia source che destination i path vanno costruiti ciclando su tutti i nestedField tranne l'ultimo che cambia
-			 * in base che sia get o set:
-			 * String pathIniziale = getNF1().getNF2()
-			 * String pathGet = pathIniziale + getNF3()
-			 * String pathSet = pathIniziale + setNF3()
-			 * 
-			 * Destination getDestination = 
-			 * operation.initialDGetPath("destination");
-			 * operation.initialDSetPath("destination");
-			 * operation.initialSGetPath("source");
-			 * 
-			 * 
-			 * */
-			
 			if(operationType.isBasic())
 				simpleOperations.add((ASimpleOperation) operation);	
 				
@@ -206,7 +189,9 @@ public final class OperationHandler {
 			// common settings
 			operation.setDestinationField(destinationMappedField)
 					 .setSourceField(sourceMappedField)
-					 .setInfoOperation(info);
+					 .setInfoOperation(info)
+					 .setNestedMappingInfo(nestedMappingInfo);
+						
 			
 			boolean isAvoidSet = false;
 			boolean isConversion = info.getOperationType().isAConversion();
@@ -214,13 +199,15 @@ public final class OperationHandler {
 			if(isConversion)
 				isAvoidSet = conversionAnalyzer.getMethod().isAvoidSet();
 			
-			// verifies destination accessors
-			if(isAvoidSet)	verifyGetterMethods(destinationClass,destinationMappedField);
-			else		verifiesAccessorMethods(destinationClass,destinationMappedField);
+			// verifies destination accessors only if isn't a nested field
+			if(!isNestedMapping || targetClass != destinationClass)
+				if(isAvoidSet)	verifyGetterMethods(destinationClass,destinationMappedField);
+				else		verifiesAccessorMethods(destinationClass,destinationMappedField);
 			
-			// verifies source accessors
-			verifyGetterMethods(sourceClass,sourceMappedField);
-			findSetterMethods(sourceClass,sourceMappedField);
+			// verifies source accessors only if isn't a nested field
+			if(!isNestedMapping || targetClass != sourceClass)
+				verifyGetterMethods(sourceClass,sourceMappedField);
+				findSetterMethods(sourceClass,sourceMappedField);
 			
 			operation.avoidDestinationSet(isAvoidSet);
 

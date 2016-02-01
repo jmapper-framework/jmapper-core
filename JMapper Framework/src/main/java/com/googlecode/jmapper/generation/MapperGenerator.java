@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 - 2015 Alessandro Vurro.
+ * Copyright (C) 2012 - 2016 Alessandro Vurro.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@ public class MapperGenerator {
 	 * @param mapping parameter that containts the mappings
 	 * @param dynamicMethods dynamic methods to add
 	 * @return a new instance of IMapper interface, following the mappingBuilder specifications
-	 * @throws Throwable any error made â€‹â€‹by the generation of the mapper
+	 * @throws Throwable any error made €‹by the generation of the mapper
 	 */
 	public static Class<?> generateMapperClass(MapperConstructor mapping, Set<Method> dynamicMethods) throws Throwable{
 		

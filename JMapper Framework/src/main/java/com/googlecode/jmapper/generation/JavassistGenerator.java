@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 - 2015 Alessandro Vurro.
+ * Copyright (C) 2012 - 2016 Alessandro Vurro.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -71,7 +71,8 @@ public class JavassistGenerator implements ICodeGenerator {
 					ctMethod.setBody(method.getBody());
 					// add method to CtClass
 					cc.addMethod(ctMethod); }
-				catch (CannotCompileException e) { Error.bodyContainsIllegalCode(method,e); } 
+				catch (CannotCompileException e) { 
+					Error.bodyContainsIllegalCode(method,e); } 
 			}
 			
 			Class<?> generetedClass = cc.toClass();

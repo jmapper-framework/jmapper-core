@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 - 2015 Alessandro Vurro.
+ * Copyright (C) 2012 - 2016 Alessandro Vurro.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ import static com.googlecode.jmapper.util.GeneralUtility.newLine;
 public class BasicConversion extends ASimpleOperation {
 
 	@Override
-	public StringBuilder write() {
+	public StringBuilder mapping() {
 		// add and return a mapping type control
 		return this.addMappingTypeControl(write(applyExplicitConversion(),newLine));
 	}

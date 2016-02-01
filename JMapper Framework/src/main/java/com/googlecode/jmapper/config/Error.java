@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 - 2015 Alessandro Vurro.
+ * Copyright (C) 2012 - 2016 Alessandro Vurro.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,11 +39,26 @@ import static com.googlecode.jmapper.util.GeneralUtility.*;
 public final class Error {
 	/*
 	  ####################################
-	  #	   MapperGenerator exceptions    #
+	  #	   Nested mapping exceptions     #
 	  ####################################
 	*/
 	
-	
+	/**
+	 * Thrown when the source field is null in a mapping of nested type.
+	 * @param currentField current field
+	 * @param destinationClass destination class
+	 * @param destinationField destination field
+	 * @param sourceClass source class
+	 * @param sourceField source field
+	 */
+	public static void nestedBeanNull(String currentField, String destinationClass, String destinationField, String sourceClass, String sourceField){
+		throw new NestedBeanNullException(MSG.INSTANCE.message(nestedBeanNullException,currentField,destinationClass,destinationField,sourceClass,sourceField));
+	}
+	/*
+	  ####################################
+	  #	   MapperGenerator exceptions    #
+	  ####################################
+	*/
 	/**
 	 * Thrown when the explicit conversion method defined has a null pointer.<br>
 	 * Used in the generated code, in case of dynamic methods defined.

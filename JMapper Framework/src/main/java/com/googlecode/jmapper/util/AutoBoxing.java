@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 - 2015 Alessandro Vurro.
+ * Copyright (C) 2012 - 2016 Alessandro Vurro.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,7 +53,7 @@ public final class AutoBoxing {
 					}
 			};
 	
-	/** boxingOperations contains all combinations of boxing operations.
+	/** unboxingOperations contains all combinations of unboxing operations.
 	 *  key = Wrapper Class name, value = primitive Class name */
 	public static final HashMap<String, String[]> unBoxingOperations =
 					

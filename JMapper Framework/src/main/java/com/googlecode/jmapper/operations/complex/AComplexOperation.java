@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 - 2015 Alessandro Vurro.
+ * Copyright (C) 2012 - 2016 Alessandro Vurro.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -85,7 +85,9 @@ public abstract class AComplexOperation extends AGeneralOperation{
 	 * @return a StringBuilder containing the mapping operation
 	 */
 	public final StringBuilder write(boolean isNewInstance) {
-		return addMappingTypeControl(genericFlow(isNewInstance));
+		StringBuilder nestedMapping = getNestedMapping();
+		StringBuilder mapping = addMappingTypeControl(genericFlow(isNewInstance));
+		return isNull(nestedMapping)?mapping:nestedMapping.append(mapping);
 	}
 	
 	/**

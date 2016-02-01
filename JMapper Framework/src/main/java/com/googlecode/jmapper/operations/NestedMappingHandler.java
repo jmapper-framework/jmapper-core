@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 - 2015 Alessandro Vurro.
+ * Copyright (C) 2012 - 2016 Alessandro Vurro.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -90,21 +90,28 @@ public class NestedMappingHandler {
 		verifySetterMethods(aClass,field);
 		return field;
 	}
-	
+
 	/**
-	 * This method returns the name of the field whose name matches with regex.
+	 * This method returns a bean with nested mapping information.
 	 * @param xml xml configuration
-	 * @param aClass class to check
-	 * @param regex regex used to find the field
+	 * @param targetClass class to check
+	 * @param nestedMappingPath path that define nested mapping
+	 * @param sourceClass sourceClass used to indentify nested mapping
+	 * @param destinationClass destinationClass used to indentify nested mapping
+	 * @param configuredField used only for the explanation of the errors
 	 * @return NestedMappingInfo
 	 */
-	public static NestedMappingInfo loadNestedMappingInformation(XML xml, Class<?> aClass,String regex){
-		NestedMappingInfo info = new NestedMappingInfo();
+	public static NestedMappingInfo loadNestedMappingInformation(XML xml, Class<?> targetClass,String nestedMappingPath, Class<?> sourceClass, Class<?> destinationClass, Field configuredField){
 		
+		boolean isSourceClass = targetClass == sourceClass;
+		
+		NestedMappingInfo info = new NestedMappingInfo(isSourceClass);
+		info.setConfiguredClass(isSourceClass?destinationClass:sourceClass);
+		info.setConfiguredField(configuredField);
 		try{
 		
-			Class<?> nestedClass = aClass;
-			String[] nestedFields = nestedFields(regex);
+			Class<?> nestedClass = targetClass;
+			String[] nestedFields = nestedFields(nestedMappingPath);
 			Field field = null;
 			
 			// from first field to second-last it's only checked get accessor 
@@ -115,10 +122,14 @@ public class NestedMappingHandler {
 				if(isNull(field))
 					Error.inexistentField(nestedFieldName, nestedClass.getSimpleName());
 				
+				//TODO NestedMapping -> effettuare test su verifica solo get e entrambi
 				// verifies if is exists a get method for this nested field
-				MappedField nestedField = checkGetAccessor(xml, nestedClass, field);
+				// in case of nested mapping relative to source, only get methods will be checked
+				// in case of nested mapping relative to destination, get and set methods will be checked
+				MappedField nestedField = isSourceClass ? checkGetAccessor(xml, nestedClass, field) 
+						                                : checkAccessors(xml, nestedClass, field);
 				
-				// storage information relatiing to the piece of path
+				// storage information relating to the piece of path
 				info.addNestedField(new NestedMappedField(nestedField, nestedClass));
 				
 				nestedClass = field.getType();
@@ -139,7 +150,7 @@ public class NestedMappingHandler {
 			
 		}catch(MappingException e){
 			
-			InvalidNestedMappingException exception = new InvalidNestedMappingException(regex);
+			InvalidNestedMappingException exception = new InvalidNestedMappingException(nestedMappingPath);
 			exception.getMessages().put(InvalidNestedMappingException.FIELD, e.getMessage());
 			throw exception;
 		}

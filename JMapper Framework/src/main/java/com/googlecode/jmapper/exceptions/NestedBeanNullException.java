@@ -13,11 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package com.googlecode.jmapper.enums;
+package com.googlecode.jmapper.exceptions;
 
 /**
- * This enumeration defines the membership of the conversion method of the operation.
+ * Exception thrown when a nested bean (relative to Source) is null.
  * @author Alessandro Vurro
+ *
  */
-public enum Membership { DESTINATION, SOURCE, INEXISTENT, MAPPER }
+public class NestedBeanNullException extends MappingException {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3712064938003346836L;
+
+	public NestedBeanNullException(String str) {
+		super(str);
+	}
+
+}

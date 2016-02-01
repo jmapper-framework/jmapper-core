@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 - 2015 Alessandro Vurro.
+ * Copyright (C) 2012 - 2016 Alessandro Vurro.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,8 @@
 
 package com.googlecode.jmapper.operations.simple;
 
+import static com.googlecode.jmapper.util.GeneralUtility.isNull;
+
 import com.googlecode.jmapper.operations.AGeneralOperation;
 
 /**
@@ -27,7 +29,16 @@ import com.googlecode.jmapper.operations.AGeneralOperation;
 public abstract class ASimpleOperation extends AGeneralOperation {
 
 	/**
+	 * @return a StringBuilder that contains the mapping operation handling nested field too
+	 */
+	public StringBuilder write(){
+		StringBuilder nestedMapping = getNestedMapping();
+		StringBuilder mapping = mapping();
+		return isNull(nestedMapping)?mapping:nestedMapping.append(mapping);
+	}
+	
+	/**
 	 * @return a StringBuilder containing the mapping operation
 	 */
-	public abstract StringBuilder write();
+	public abstract StringBuilder mapping();
 }

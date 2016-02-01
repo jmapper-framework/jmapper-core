@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 - 2015 Alessandro Vurro.
+ * Copyright (C) 2012 - 2016 Alessandro Vurro.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import com.googlecode.jmapper.conversions.explicit.ConversionMethod;
 import com.googlecode.jmapper.enums.Membership;
 import com.googlecode.jmapper.operations.beans.MappedField;
 import com.googlecode.jmapper.operations.info.InfoOperation;
+import com.googlecode.jmapper.operations.info.NestedMappingInfo;
 
 /**
  * This Abstract class is a container of data, the purpose is to separate the data from the logic.
@@ -51,7 +52,20 @@ public abstract class AGeneralOperationAccessor {
 	protected Membership conversionMembership = Membership.INEXISTENT;
 	/** true if destination set method should not be used */		
 	protected boolean avoidSet = false;
+	/** nested mapping information */
+	protected NestedMappingInfo nestedMappingInfo;
 	
+	
+	/** @return nested mapping information */
+	public NestedMappingInfo getNestedMappingInfo() {
+		return nestedMappingInfo;
+	}
+
+	/** @param nestedMappingInfo nested mapping information */
+	public void setNestedMappingInfo(NestedMappingInfo nestedMappingInfo) {
+		this.nestedMappingInfo = nestedMappingInfo;
+	}
+
 	/**
 	 * Setting of the conversion method
 	 * @param conversion the method used to convert
