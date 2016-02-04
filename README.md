@@ -2,7 +2,7 @@
 ### 1.5.0 version released!
 [Nested Mapping](https://github.com/jmapper-framework/jmapper-core/wiki/Nested-Mapping) implemented! have fun :)
 ____
-JMapper - fast as the hand-written code with zero compromise, choose between Annotation and XML.<br>
+#####Fast as the hand-written code with zero compromise, choose between Annotation and XML.<br>
 Most relevant features:
 
   * [create](https://github.com/jmapper-framework/jmapper-core/wiki/getDestination-method) and [enrich](https://github.com/jmapper-framework/jmapper-core/wiki/getDestination-method) target objects
