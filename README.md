@@ -2,14 +2,17 @@
 ### 1.5.0 version released!
 [Nested Mapping](https://github.com/jmapper-framework/jmapper-core/wiki/Nested-Mapping) implemented! have fun :)
 ____
-JMapper is a java bean to java bean mapper, it allows to perform the passage of data dinamically with **annotations** and / or **XML**.<br>With JMapper you can:
+JMapper - fast as the hand-written code with zero compromise, choose between Annotation and XML.<br>
+Most relevant features:
 
-  * **create** and **enrich** target objects
-  * apply a **specific logic**
-  * Annotation - XML convertion
-  * implement the **One to Many** and **Many to One** relationships
-  * implement explicit conversions
-  * apply inherited configurations
+  * [create](https://github.com/jmapper-framework/jmapper-core/wiki/getDestination-method) and [enrich](https://github.com/jmapper-framework/jmapper-core/wiki/getDestination-method) target objects
+  * apply a [**specific logic**](https://github.com/jmapper-framework/jmapper-core/wiki/Enumerations)
+  * [Configuration Converter](https://github.com/jmapper-framework/jmapper-core/wiki/Xml-Hander)
+  * [One to Many](https://github.com/jmapper-framework/jmapper-core/wiki/One-To-Many) and [Many to One](https://github.com/jmapper-framework/jmapper-core/wiki/Many-To-One) relations
+  * [explicit conversions](https://github.com/jmapper-framework/jmapper-core/wiki/Conversion-examples)
+  * [inherited configurations](https://github.com/jmapper-framework/jmapper-core/wiki/Inheritance-examples)
+  * [nested mappings](https://github.com/jmapper-framework/jmapper-core/wiki/Nested-Mapping)
+  * and more..
 
 ##the most important feature is the ease of use
 
