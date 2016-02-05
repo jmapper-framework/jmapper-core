@@ -2,12 +2,12 @@
 ### 1.5.0 version released!
 [Nested Mapping](https://github.com/jmapper-framework/jmapper-core/wiki/Nested-Mapping) implemented! have fun :)
 ____
-#####Fast as the hand-written code with zero compromise, choose between Annotation and XML.<br>
+#####Fast as hand-written code with zero compromise, choose between Annotation and XML.<br>
 Most relevant features:
 
   * [create](https://github.com/jmapper-framework/jmapper-core/wiki/getDestination-method) and [enrich](https://github.com/jmapper-framework/jmapper-core/wiki/getDestination-method) target objects
   * apply a [specific logic](https://github.com/jmapper-framework/jmapper-core/wiki/Enumerations)
-  * [configuration Converter](https://github.com/jmapper-framework/jmapper-core/wiki/Xml-Hander)
+  * [XmlHandler](https://github.com/jmapper-framework/jmapper-core/wiki/Xml-Hander) to semplify configuration writing
   * [One to Many](https://github.com/jmapper-framework/jmapper-core/wiki/One-To-Many) and [Many to One](https://github.com/jmapper-framework/jmapper-core/wiki/Many-To-One) relations
   * [explicit conversions](https://github.com/jmapper-framework/jmapper-core/wiki/Conversion-examples)
   * [inherited configurations](https://github.com/jmapper-framework/jmapper-core/wiki/Inheritance-examples)
