@@ -19,7 +19,7 @@ import java.util.List;
 
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 import com.thoughtworks.xstream.converters.extended.NamedCollectionConverter;
-
+import static com.googlecode.jmapper.util.GeneralUtility.isEmpty;
 /**
  * This bean represents the global node.
  * @author Alessandro Vurro
@@ -27,41 +27,43 @@ import com.thoughtworks.xstream.converters.extended.NamedCollectionConverter;
  */
 public class XmlGlobal {
 	
-	/** value node */
-	public XmlGlobalValue value;
-	/** list of target attributes */
+	/** value node that represents the target attribute */
+	public XmlTargetAttribute value;
+	
+	/** list of attributes in the mapping */
 	@XStreamConverter(value=NamedCollectionConverter.class, useImplicitType=false,
-		      strings={"attribute"}, types={XmlGlobalAttribute.class})
-	public List<XmlGlobalAttribute> attributes;
+		      strings={"attribute"}, types={XmlTargetAttribute.class})
+	public List<XmlTargetAttribute> attributes;
+	
 	/** list of target classes */
 	public List<XmlTargetClass> classes;
-	/** list of target excluded attributes */
-	
+
+	/** list of attributes excluded from the mapping */
 	@XStreamConverter(value=NamedCollectionConverter.class, useImplicitType=false,
-		      strings={"attribute"}, types={XmlGlobalExcludedAttribute.class})
-	public List<XmlGlobalExcludedAttribute> excluded;
+		      strings={"attribute"}, types={XmlExcludedAttribute.class})
+	public List<XmlExcludedAttribute> excluded;
 
 	@Override
 	public String toString() {
 		String result = "";
 		if(value != null)
-			result += "\n         "+value;
+			result += "\n         "+value.toValue();
 		
-		if(attributes != null){
+		if(!isEmpty(attributes)){
 			result += "\n         <attributes>";
-			for (XmlGlobalAttribute it : attributes) 
+			for (XmlTargetAttribute it : attributes) 
 			result += "\n            "+it;
 			result += "\n         </attributes>";
 		}
-		if(classes != null){
+		if(!isEmpty(classes)){
 			result += "\n         <classes>";
 			for (XmlTargetClass it : classes) 
 			result += "\n            "+it;
 			result += "\n         </classes>";		
 		}
-		if(excluded != null){
+		if(!isEmpty(excluded)){
 			result += "\n         <excluded>";
-			for (XmlGlobalExcludedAttribute it : excluded) 
+			for (XmlExcludedAttribute it : excluded) 
 			result += "\n            "+it;
 			result += "\n         </excluded>";		
 		}

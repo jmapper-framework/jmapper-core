@@ -15,7 +15,7 @@
  */
 package com.googlecode.jmapper.xml;
 
-import com.googlecode.jmapper.xml.beans.XmlGlobalAttribute;
+import com.googlecode.jmapper.xml.beans.XmlTargetAttribute;
 
 /**
  * This Class is a java bean that represents the attributes mapped to target fields.
@@ -29,7 +29,7 @@ public class SimplyAttribute {
 	private String get;
 	private String set;
 	
-	public SimplyAttribute(XmlGlobalAttribute xmlTargetAttribute) {
+	public SimplyAttribute(XmlTargetAttribute xmlTargetAttribute) {
 		this.name = xmlTargetAttribute.name;
 		this.get = xmlTargetAttribute.get;
 		this.set = xmlTargetAttribute.set;

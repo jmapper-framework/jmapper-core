@@ -60,6 +60,10 @@ public class XmlConversion {
     
 	public XmlConversion() {}
 	
+	public XmlConversion(String name){
+		this.name = name;
+	}
+	
 	public String attributes(){
 		String result = " name= \""+name+"\"";
 		

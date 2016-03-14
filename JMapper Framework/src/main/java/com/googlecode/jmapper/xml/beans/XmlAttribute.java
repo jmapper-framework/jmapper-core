@@ -40,13 +40,19 @@ public class XmlAttribute {
 	@XStreamAsAttribute
 	public String set;
 	/** value node */
-	public XmlValueName value;
+	public XmlTargetAttribute value;
 	/** list of target attributes */
 	@XStreamConverter(value=NamedCollectionConverter.class, useImplicitType=false,
-		      strings={"attribute"}, types={XmlGlobalAttribute.class})
-	public List<XmlGlobalAttribute> attributes;
+		      strings={"attribute"}, types={XmlTargetAttribute.class})
+	public List<XmlTargetAttribute> attributes;
 	/** list of target classes */
 	public List<XmlTargetClass> classes;
+	
+	public XmlAttribute() {}
+	
+	public XmlAttribute(String name){
+		this.name = name;	
+	}
 	
 	public String attributes(){
 		String result = " name= \""+name+"\"";
@@ -61,14 +67,32 @@ public class XmlAttribute {
 	}
 	
 	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		XmlAttribute other = (XmlAttribute) obj;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
+
+
+	@Override
 	public String toString() {
 		String result = "";
 		if(value != null)
-			result += "\n         "+value;
+			result += "\n         "+value.toValue();
 			
 		if(attributes != null){
 			result += "\n         <attributes>";
-			for (XmlGlobalAttribute it : attributes) 
+			for (XmlTargetAttribute it : attributes) 
 			result += "\n            "+it;
 			result += "\n         </attributes>";
 		}

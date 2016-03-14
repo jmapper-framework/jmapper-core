@@ -15,7 +15,7 @@
  */
 package com.googlecode.jmapper.xml;
 
-import com.googlecode.jmapper.xml.beans.XmlValueName;
+import com.googlecode.jmapper.xml.beans.XmlTargetAttribute;
 
 /**
  * This Class is a java bean that represents the value node.
@@ -29,7 +29,7 @@ public class Value {
 	private String get;
 	private String set;
 	
-	public Value(XmlValueName value) {
+	public Value(XmlTargetAttribute value) {
 		this.name = value.name;
 		this.get = value.get;
 		this.set = value.set;

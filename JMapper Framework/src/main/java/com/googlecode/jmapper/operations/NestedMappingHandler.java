@@ -122,7 +122,6 @@ public class NestedMappingHandler {
 				if(isNull(field))
 					Error.inexistentField(nestedFieldName, nestedClass.getSimpleName());
 				
-				//TODO NestedMapping -> effettuare test su verifica solo get e entrambi
 				// verifies if is exists a get method for this nested field
 				// in case of nested mapping relative to source, only get methods will be checked
 				// in case of nested mapping relative to destination, get and set methods will be checked

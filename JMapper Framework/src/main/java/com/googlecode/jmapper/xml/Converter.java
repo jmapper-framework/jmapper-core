@@ -24,7 +24,8 @@ import static com.googlecode.jmapper.conversions.explicit.ConversionMethod.Param
 import static com.googlecode.jmapper.conversions.explicit.ConversionMethod.ParameterNumber.ZERO;
 import static com.googlecode.jmapper.conversions.explicit.ConversionPlaceholder.destination;
 import static com.googlecode.jmapper.conversions.explicit.ConversionPlaceholder.source;
-import static com.googlecode.jmapper.util.GeneralUtility.*;
+import static com.googlecode.jmapper.util.GeneralUtility.isEmpty;
+import static com.googlecode.jmapper.util.GeneralUtility.isNull;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -51,11 +52,9 @@ import com.googlecode.jmapper.xml.beans.XmlAttribute;
 import com.googlecode.jmapper.xml.beans.XmlClass;
 import com.googlecode.jmapper.xml.beans.XmlConversion;
 import com.googlecode.jmapper.xml.beans.XmlGlobal;
-import com.googlecode.jmapper.xml.beans.XmlGlobalValue;
-import com.googlecode.jmapper.xml.beans.XmlGlobalAttribute;
+import com.googlecode.jmapper.xml.beans.XmlTargetAttribute;
+import com.googlecode.jmapper.xml.beans.XmlExcludedAttribute;
 import com.googlecode.jmapper.xml.beans.XmlTargetClass;
-import com.googlecode.jmapper.xml.beans.XmlGlobalExcludedAttribute;
-import com.googlecode.jmapper.xml.beans.XmlValueName;
 
 /**
  * Converter simplifies the manipulation of xml mapping file and annotations.
@@ -280,10 +279,9 @@ public class Converter {
 	private static XmlGlobal toXmlGlobal(String value, String get, String set, SimplyAttribute[] attributes, Class<?>[] classes, String[] excluded){
 		
 		XmlGlobal xmlGlobal = new XmlGlobal();
-		xmlGlobal.value = new XmlGlobalValue();
 		
 		if(!isEmpty(value))
-			xmlGlobal.value.name = value;
+			xmlGlobal.value = new XmlTargetAttribute(value);
 		
 		if(!isEmpty(get))
 			xmlGlobal.value.get = get;
@@ -292,9 +290,9 @@ public class Converter {
 			xmlGlobal.value.set = set;
 		
 		if(!isEmpty(attributes)){
-			xmlGlobal.attributes = new ArrayList<XmlGlobalAttribute>();
+			xmlGlobal.attributes = new ArrayList<XmlTargetAttribute>();
 			for (SimplyAttribute attribute : attributes)
-				xmlGlobal.attributes.add(new XmlGlobalAttribute(attribute));
+				xmlGlobal.attributes.add(new XmlTargetAttribute(attribute));
 		}
 		
 		if(!isEmpty(classes)){
@@ -304,9 +302,9 @@ public class Converter {
 		}
 		
 		if(!isEmpty(excluded)){
-			xmlGlobal.excluded = new ArrayList<XmlGlobalExcludedAttribute>();
+			xmlGlobal.excluded = new ArrayList<XmlExcludedAttribute>();
 			for (String attribute : excluded)
-				xmlGlobal.excluded.add(new XmlGlobalExcludedAttribute(attribute));
+				xmlGlobal.excluded.add(new XmlExcludedAttribute(attribute));
 		}
 		
 		return xmlGlobal;
@@ -373,16 +371,14 @@ public class Converter {
 		
 		if(!isNull(value)){
 			String targetName = value.getName();
-			if(!isNull(targetName) && (!isEmpty(targetName) || DEFAULT_FIELD_VALUE.equals(targetName)) ){
-				xmlAttribute.value = new XmlValueName();
-				xmlAttribute.value.name = getValue(targetName,name);
-			}
+			if(!isNull(targetName) && (!isEmpty(targetName) || DEFAULT_FIELD_VALUE.equals(targetName)) )
+				xmlAttribute.value = new XmlTargetAttribute(getValue(targetName,name));
 		}
 
 		if(!isEmpty(attributes)){
-			xmlAttribute.attributes = new ArrayList<XmlGlobalAttribute>();
+			xmlAttribute.attributes = new ArrayList<XmlTargetAttribute>();
 			for (SimplyAttribute attribute : attributes)
-				xmlAttribute.attributes.add(new XmlGlobalAttribute(getValue(attribute.getName(),name),attribute.getGet(), attribute.getSet()));
+				xmlAttribute.attributes.add(new XmlTargetAttribute(getValue(attribute.getName(),name),attribute.getGet(), attribute.getSet()));
 		}
 
 		if(!isEmpty(classes)){
