@@ -16,7 +16,7 @@
 package com.googlecode.jmapper.api;
 
 /**
- * Used to standardize API -> XStream convertions. 
+ * Used to standardize API - XStream convertions. 
  * 
  * @author Alessandro Vurro
  *
