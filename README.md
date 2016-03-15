@@ -1,6 +1,7 @@
 #JMapper Framework [![Build Status](https://travis-ci.org/jmapper-framework/jmapper-core.svg?branch=master)](https://travis-ci.org/jmapper-framework/jmapper-core)
-### 1.5.0 version released!
-[Nested Mapping](https://github.com/jmapper-framework/jmapper-core/wiki/Nested-Mapping) implemented! have fun :)
+>if you like the project add a star, encourages us to do better :)
+
+
 ____
 #####Fast as hand-written code with zero compromise, choose between Annotation and XML.<br>
 Most relevant features:
