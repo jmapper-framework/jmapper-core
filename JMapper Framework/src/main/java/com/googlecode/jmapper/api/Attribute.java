@@ -83,6 +83,17 @@ public class Attribute implements Convertible<XmlAttribute>{
 	}
 	
 	/**
+	 * Value setting.
+	 * 
+	 * @param targetAttribute target field.
+	 * @return this instance Attribute
+	 */
+	public Attribute value(String targetAttribute){
+		xmlAttribute.value = new TargetAttribute(targetAttribute).toXStream();
+		return this;
+	}
+	
+	/**
 	 * Permits to define target attributes.
 	 * It is recommended to use this method only if you want to define custom methods, otherwise {@link #targetAttributes(String...) targetAttributes} is recommended.
 	 * @param attributes target attributes
