@@ -6,7 +6,7 @@ Now you can also configure via API! We will update the wiki very soon!
 
 --------
 
-#####Fast as hand-written code with zero compromise, choose between Annotation and XML.<br>
+#####Fast as hand-written code with zero compromise, choose between Annotation, XML and API.<br>
 Most relevant features:
 
   * [One to Many](https://github.com/jmapper-framework/jmapper-core/wiki/One-To-Many) and [Many to One](https://github.com/jmapper-framework/jmapper-core/wiki/Many-To-One) relations
