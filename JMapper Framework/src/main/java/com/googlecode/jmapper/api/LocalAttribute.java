@@ -21,7 +21,7 @@ package com.googlecode.jmapper.api;
  * @author Alessandro Vurro
  *
  */
-public class LocalAttribute extends GeneralAttribute {
+class LocalAttribute extends GeneralAttribute {
 
 	public LocalAttribute(String name) {
 		super(name);

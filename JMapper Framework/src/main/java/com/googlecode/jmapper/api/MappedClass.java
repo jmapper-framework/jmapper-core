@@ -22,12 +22,12 @@ import com.googlecode.jmapper.xml.beans.XmlClass;
 import com.googlecode.jmapper.xml.beans.XmlConversion;
 
 /**
- * JMapperClass permits to handle the configuration for a specific class.
+ * MappedClass permits to handle the configuration for a specific class.
  * 
  * @author Alessandro Vurro
  *
  */
-public class MappedClass implements Convertible<XmlClass>{
+class MappedClass implements Convertible<XmlClass>{
 
 	/** xstream class */
 	private XmlClass xmlClass;
@@ -49,33 +49,31 @@ public class MappedClass implements Convertible<XmlClass>{
 	}
 	
 	/**
-	 * Permits to add one or more configured attributes.
-	 * @param jmapperAttributes classes to add
-	 * @return this instance of JMapperClass
+	 * Permits to add a configured attribute.
+	 * @param attribute attribute to add
+	 * @return this instance of MappedClass
 	 */
-	public MappedClass attributes(Attribute... jmapperAttributes){
-		for (Attribute jmapperAttribute : jmapperAttributes)
-			this.xmlClass.attributes.add(jmapperAttribute.toXStream());
+	public MappedClass add(Attribute attribute){
+		this.xmlClass.attributes.add(attribute.toXStream());
 		return this;
 	}
 	
 	/**
-	 * Permits to add one or more conversions.
-	 * @param jmapperConversions classes to add
-	 * @return this instance of JMapperClass
+	 * Permits to add o conversion method.
+	 * @param conversion conversion method to add
+	 * @return this instance of MappedClass
 	 */
-	public MappedClass conversions(Conversion... jmapperConversions){
-		for (Conversion jmapperConversion : jmapperConversions)
-			this.xmlClass.conversions.add(jmapperConversion.toXStream());
+	public MappedClass add(Conversion conversion){
+		this.xmlClass.conversions.add(conversion.toXStream());
 		return this;
 	}
 		
 	/**
 	 * Add global mapping.
 	 * @param global global mapping
-	 * @return this instance of JMapperClass
+	 * @return this instance of MappedClass
 	 */
-	public MappedClass global(Global global){
+	public MappedClass add(Global global){
 		this.xmlClass.global = global.toXStream();
 		return this;
 	}

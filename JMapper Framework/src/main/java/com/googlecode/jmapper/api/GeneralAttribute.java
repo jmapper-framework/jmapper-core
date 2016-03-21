@@ -23,7 +23,7 @@ import com.googlecode.jmapper.xml.beans.XmlTargetAttribute;
  * @author Alessandro Vurro
  *
  */
-public class GeneralAttribute {
+class GeneralAttribute {
 
 	/** target attribute */
 	private XmlTargetAttribute targetAttribute;

@@ -77,7 +77,7 @@ public class MapperBuilder {
 	 * */
 	public <D, S> Class<IMapper<D, S>> generate() throws Throwable {
 		
-		// if defined the dynamic methods are treated differently
+		// the dynamic methods are treated differently from normal methods in the mapping.
 		// a reference to this list is passed to the MapperConstructor and filled recursively
 		Set<Method> dynamicMethodsToWrite = new HashSet<Method>();
 

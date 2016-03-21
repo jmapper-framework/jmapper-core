@@ -413,4 +413,18 @@ public final class GeneralUtility {
 			
 		return sb.toString();
 	}
+	
+	/**
+	 * Returns a concatenation of strings separated by charSeparator. 
+	 * @param charSeparator separator used between strings
+	 * @param strings strings to join
+	 * @return resulting string
+	 */
+	public static String join(String charSeparator, String... strings){
+		String result = strings[0];
+		for(int i = 1; i < strings.length-1; i++)
+			result += charSeparator + strings[i];
+		
+		return result;
+	}
 }

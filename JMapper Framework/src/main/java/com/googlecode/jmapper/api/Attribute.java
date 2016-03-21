@@ -21,12 +21,12 @@ import com.googlecode.jmapper.xml.beans.XmlAttribute;
 import com.googlecode.jmapper.xml.beans.XmlTargetAttribute;
 import com.googlecode.jmapper.xml.beans.XmlTargetClass;
 /**
- * JMapperAttribute permits to configure an attribute.
+ * Attribute permits to configure an attribute.
  * 
  * @author Alessandro Vurro
  *
  */
-public class Attribute implements Convertible<XmlAttribute>{
+class Attribute implements Convertible<XmlAttribute>{
 
 	/** represents the value node */
 	private XmlAttribute xmlAttribute;
@@ -54,7 +54,7 @@ public class Attribute implements Convertible<XmlAttribute>{
 	/**
 	 * Permits to define a custom get method for this attribute.
 	 * @param get get method to use
-	 * @return this instance of JMapperAttribute
+	 * @return this instance of Attribute
 	 */
 	public Attribute customGet(String get){
 		xmlAttribute.get = get;
@@ -64,7 +64,7 @@ public class Attribute implements Convertible<XmlAttribute>{
 	/**
 	 * Permits to define a custom set method for this attribute.
 	 * @param set set method to use
-	 * @return this instance of JMapperAttribute
+	 * @return this instance of Attribute
 	 */
 	public Attribute customSet(String set){
 		xmlAttribute.set = set;
@@ -74,19 +74,19 @@ public class Attribute implements Convertible<XmlAttribute>{
 	/**
 	 * Value setting.
 	 * 
-	 * @param value target field.
-	 * @return this instance JMapperAttribute
+	 * @param targetAttribute target field.
+	 * @return this instance Attribute
 	 */
-	public Attribute value(TargetAttribute value){
-		xmlAttribute.value = value.toXStream();
+	public Attribute value(TargetAttribute targetAttribute){
+		xmlAttribute.value = targetAttribute.toXStream();
 		return this;
 	}
 	
 	/**
-	 * Attributes to include in mapping.
-	 * 
-	 * @param attributes included attributes
-	 * @return this instance of JMapperGlobal
+	 * Permits to define target attributes.<br/>
+	 * It is recommended to use this method only if you want to define custom methods, otherwise {@link #targetAttributes(String...) targetAttributes} is recommended.
+	 * @param attributes target attributes
+	 * @return this instance of Attribute
 	 */
 	public Attribute targetAttributes(TargetAttribute... attributes){
 		
@@ -97,14 +97,27 @@ public class Attribute implements Convertible<XmlAttribute>{
 	}
 	
 	/**
+	 * Permits to define target attributes passing in input only the names in string format.<br/>
+	 * @param attributes target attributes
+	 * @return this instance of Attribute
+	 */
+	public Attribute targetAttributes(String... attributes){
+		
+		for (String attribute : attributes)
+			xmlAttribute.attributes.add(new TargetAttribute(attribute).toXStream());
+		
+		return this;
+	}
+	
+	/**
 	 * Target classes.
 	 * @param classes target classes
-	 * @return this instance of JMapperAttribute
+	 * @return this instance of Attribute
 	 */
-	public Attribute targetClasses(TargetClass... classes){
+	public Attribute targetClasses(Class<?>... classes){
 		
-		for (TargetClass targetClass : classes) 
-			xmlAttribute.classes.add(targetClass.toXStream());
+		for (Class<?> targetClass : classes) 
+			xmlAttribute.classes.add(new TargetClass(targetClass).toXStream());
 		
 		return this;
 	}

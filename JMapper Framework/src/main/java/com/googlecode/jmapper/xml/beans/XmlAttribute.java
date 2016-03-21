@@ -16,6 +16,7 @@
 package com.googlecode.jmapper.xml.beans;
 
 import static com.googlecode.jmapper.config.Constants.DEFAULT_ACCESSOR_VALUE;
+import static com.googlecode.jmapper.util.GeneralUtility.isNull;
 
 import java.util.List;
 
@@ -57,10 +58,10 @@ public class XmlAttribute {
 	public String attributes(){
 		String result = " name= \""+name+"\"";
 		
-		if(get != null && !DEFAULT_ACCESSOR_VALUE.equals(get))
+		if(!isNull(get) && !DEFAULT_ACCESSOR_VALUE.equals(get))
 			result+=" get =\""+get+"\"";
 		
-		if(set != null && !DEFAULT_ACCESSOR_VALUE.equals(set))
+		if(!isNull(set) && !DEFAULT_ACCESSOR_VALUE.equals(set))
 			result+=" set =\""+set+"\"";
 		
 		return result;

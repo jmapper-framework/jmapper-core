@@ -9,7 +9,7 @@
   <artifactId>jmapper-core</artifactId>
   <packaging>jar</packaging>
   <name>JMapper Framework</name>
-  <version>1.5.0</version>
+  <version>1.6.0</version>
   
   <description>
   JMapper Framework is a java bean mapper based on javassist. JMapper exposes 
@@ -176,7 +176,7 @@
 	<dependency>
 		<groupId>com.thoughtworks.xstream</groupId>
 		<artifactId>xstream</artifactId>
-		<version>1.4.8</version>
+		<version>1.4.9</version>
 	</dependency>
 	
 	<dependency>

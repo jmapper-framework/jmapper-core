@@ -22,22 +22,13 @@ import com.googlecode.jmapper.xml.beans.XmlGlobal;
 import com.googlecode.jmapper.xml.beans.XmlTargetAttribute;
 import com.googlecode.jmapper.xml.beans.XmlTargetClass;
 
-//TODO XSD aggiustarlo
-// onlyNameAttribute -> onlyName
-// jmapperExcluded -> excludedAttributes
-// jmapperClass -> class
-// jmapperGlobal -> global
-// jmapperTargetAttributes -> attributes
-// targetAttribute -> attribute
-// jmapperAttribute -> mappedAttribute
-
 /**
  * Global mapping configuration.
  * 
  * @author Alessandro Vurro
  *
  */
-public class Global implements Convertible<XmlGlobal>{
+class Global implements Convertible<XmlGlobal>{
 
 	/** xml global node */
 	private XmlGlobal global;
@@ -52,24 +43,36 @@ public class Global implements Convertible<XmlGlobal>{
 	/**
 	 * Value setting.
 	 * 
-	 * @param value target field.
+	 * @param targetAttribute target field.
 	 * @return this instance JMapperGlobal
 	 */
-	public Global value(TargetAttribute value){
-		global.value = value.toXStream();
+	public Global value(TargetAttribute targetAttribute){
+		global.value = targetAttribute.toXStream();
 		return this;
 	}
 	
 	/**
 	 * Attributes to include in mapping.
 	 * 
-	 * @param attributes included attributes
+	 * @param includedAattributes included attributes
 	 * @return this instance of JMapperGlobal
 	 */
-	public Global includedAttributes(LocalAttribute... attributes){
+	public Global includedAttributes(LocalAttribute... includedAattributes){
 		
-		for (LocalAttribute attribute : attributes)
+		for (LocalAttribute attribute : includedAattributes)
 			global.attributes.add(attribute.toXStream());
+		
+		return this;
+	}
+	
+	/**
+	 * Attributes to include in mapping.
+	 * @param includedAttributes names of the attributes to include in the mapping
+	 * @return this instance of JMapperGlobal
+	 */
+	public Global includedAttributes(String... includedAttributes){
+		for (String attribute : includedAttributes)
+			global.attributes.add(new LocalAttribute(attribute).toXStream());
 		
 		return this;
 	}

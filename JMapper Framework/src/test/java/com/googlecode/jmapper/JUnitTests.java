@@ -52,7 +52,7 @@ import com.googlecode.jmapper.xml.util.XmlUtilityTest;
 
 public class JUnitTests {
 
-	public static Test suite() {
+	public static Test suite() { 
 		TestSuite suite = new TestSuite(JUnitTests.class.getName());
 		
 		/*	Tests on explicit conversion          */

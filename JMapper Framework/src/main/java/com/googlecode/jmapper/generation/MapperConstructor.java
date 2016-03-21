@@ -26,6 +26,7 @@ import static com.googlecode.jmapper.api.enums.NullPointerControl.SOURCE;
 import static com.googlecode.jmapper.util.GeneralUtility.newLine;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -53,7 +54,7 @@ public class MapperConstructor extends MapperConstructorAccessor{
 	 * Returns a Map where the keys are the mappings names and relative values are the mappings.
 	 * @return a Map with all mapping combinations
 	 */
-	public java.util.Map<String,String> getMappings(){
+	public Map<String,String> getMappings(){
 		
 		HashMap<String, String> mappings      = new HashMap<String, String> ();
 		HashMap<String, Boolean> destInstance = new HashMap<String, Boolean>();

@@ -33,14 +33,14 @@ public class XmlJmapper {
 
 	
 	 @XStreamAsAttribute
-	 final String xmlns = "https://jmapper-framework.googlecode.com";
+	 final String xmlns = "http://jmapper-framework.github.io";
 
 	 @XStreamAsAttribute 
 	 @XStreamAlias("xmlns:xsi")
-	 final String xmlnsXsi= "https://jmapper-framework.googlecode.com/svn";
+	 final String xmlnsXsi= "http://jmapper-framework.github.io/jmapper-core";
 
 	 @XStreamOmitField
-	 private String XSD_FILE = xmlnsXsi + "/jmapper-1.3.1.xsd";
+	 private String XSD_FILE = xmlnsXsi + "/jmapper-1.6.0.xsd";
 	 
 	 @XStreamAsAttribute 
 	 @XStreamAlias("xsi:noNamespaceSchemaLocation")
@@ -60,10 +60,10 @@ public class XmlJmapper {
 		
 		return 
 		    "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"+
-			"\n<jmapper\n"+ 
-		            "xmlns=\"https://jmapper-framework.googlecode.com\""+
-					"xmlns:xsi=\"https://jmapper-framework.googlecode.com/svn\""+
-					"xsi:noNamespaceSchemaLocation=\""+XSD_FILE+"\">"+
+			"<jmapper\n"+ 
+		            "   xmlns=\""+xmlns+"\"\n"+
+					"   xmlns:xsi=\""+xmlnsXsi+"\"\n"+
+					"   xsi:noNamespaceSchemaLocation=\""+XSD_FILE+"\">"+
 					
 					str+
 					

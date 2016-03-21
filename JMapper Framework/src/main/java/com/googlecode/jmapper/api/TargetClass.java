@@ -23,7 +23,7 @@ import com.googlecode.jmapper.xml.beans.XmlTargetClass;
  * @author Alessandro Vurro
  *
  */
-public class TargetClass implements Convertible<XmlTargetClass>{
+class TargetClass implements Convertible<XmlTargetClass>{
 
 	/** xml target class*/
 	private XmlTargetClass xmlTargetClass;

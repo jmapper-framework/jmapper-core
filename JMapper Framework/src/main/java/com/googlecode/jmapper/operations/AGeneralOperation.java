@@ -112,24 +112,6 @@ public abstract class AGeneralOperation extends AGeneralOperationAccessor{
 		return mapping;
 	}
 	
-	
-	/*
-	 *   Se invece è definita sulla destinazione, allora deve essere prevista la creazione degli elementi intermedi
-	 *   ovvero:
-	 *   ClasseCampo campo = initialPath.getCampo();
-	 *   if(campo == null){
-	 *      campo = new Campo();
-	 *      initialPath.setCampo(campo);
-	 *   }
-	 *   
-	 *   ClasseCampo2 campo2 = campo.getCampo2();
-	 *   if(campo2 == null){
-	 *      campo2 = new Campo2();
-	 *      campo.setCampo2(campo2);
-	 *   }
-	 *   
-	 *   ecc... fino ad arrivare al penultimo elemento della catena
-	 *   */
 	private void nestedMapping(StringBuilder mapping, Class<?> nestedClass, String nestedField, String actualField, MappedField mappedField){
 		String getField = mappedField.getMethod();
 		String setField = mappedField.setMethod();

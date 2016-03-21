@@ -19,6 +19,7 @@ import static com.googlecode.jmapper.generation.MapperBuilder.from;
 import static com.googlecode.jmapper.util.GeneralUtility.isNull;
 
 import com.googlecode.jmapper.api.IJMapper;
+import com.googlecode.jmapper.api.JMapperAPI;
 import com.googlecode.jmapper.api.enums.MappingType;
 import com.googlecode.jmapper.api.enums.NullPointerControl;
 import com.googlecode.jmapper.config.Error;
@@ -355,7 +356,7 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
 	 * @param source the Source Class
 	 */
 	public JMapper(final Class<D> destination,final  Class<S> source) {
-		this(destination,source,null,null);
+		this(destination,source, undefinedConfig());
 	}
 	
 	/**
@@ -368,9 +369,34 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
 	 * @see ChooseConfig
 	 */
 	public JMapper(final Class<D> destination,final Class<S> source,final ChooseConfig chooseConfig) {
-		this(destination,source,chooseConfig,null);
+		this(destination,source,chooseConfig,undefinedXML());
 	}
 	
+	/**
+	 * Constructs a JMapper that handles two classes: the class of destination and the class of source.
+	 * <br>Taking configuration by API.
+	 *  
+	 * @param destination the Destination Class
+	 * @param source the Source Class
+	 * @param api JMapperAPI configuration
+	 * @see ChooseConfig
+	 */
+	public JMapper(final Class<D> destination,final Class<S> source,final JMapperAPI api) {
+		this(destination,source,api.toXStream().toString());
+	}
+	
+	/**
+	 * Constructs a JMapper that handles two classes: the class of destination and the class of source.
+	 * <br>Taking configuration by API.
+	 *  
+	 * @param destination the Destination Class
+	 * @param source the Source Class
+	 * @param api JMapperAPI configuration
+	 * @see ChooseConfig
+	 */
+	public JMapper(final Class<D> destination,final Class<S> source, final ChooseConfig config, final JMapperAPI api) {
+		this(destination, source, config, api.toXStream().toString());
+	}
 	/**
 	 * Constructs a JMapper that handles two classes: the class of destination and the class of source.
 	 * <br>Taking as input the path to the xml file.
@@ -431,4 +457,21 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
 				                                        :mapper.<D,S>generate();
 		return mapperClass.newInstance();
 	}
+    
+    /**
+     * This method is used to call a signature passing a null ChooseConfig instance.
+     * @return
+     */
+    private static ChooseConfig undefinedConfig(){
+		return null;
+	}
+
+    /**
+     * This method is used to call a signature passing a null String instance.
+     * @return
+     */
+    private static String undefinedXML(){
+		return null;
+	}
+	
 }

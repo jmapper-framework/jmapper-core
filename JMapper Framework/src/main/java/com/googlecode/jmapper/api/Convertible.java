@@ -22,7 +22,7 @@ package com.googlecode.jmapper.api;
  *
  * @param <XML> xml classes
  */
-public interface Convertible <XML>{
+interface Convertible <XML>{
 
 	/**
 	 * Converts this bean to XStream bean.

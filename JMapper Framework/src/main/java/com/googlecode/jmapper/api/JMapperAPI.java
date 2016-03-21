@@ -37,18 +37,112 @@ public class JMapperAPI implements Convertible<XmlJmapper>{
 	}
 	
 	/**
-	 * Permits to add one or more configured classes.
-	 * @param jmapperClasses classes to add
+	 * Permits to add a configured class.
+	 * @param mappedClass class to add
 	 * @return this instance of JMapperAPI
 	 */
-	public JMapperAPI classes(MappedClass... jmapperClasses){
-		for (MappedClass jmapperClass : jmapperClasses)
-			root.classes.add(jmapperClass.toXStream());
+	public JMapperAPI add(MappedClass mappedClass){
+		root.classes.add(mappedClass.toXStream());
 		return this;
 	}
 
 	public XmlJmapper toXStream() {
 		return root;
 	}
+	
+	/**
+	 * Permits to define a MappedClass bean.
+	 * @param mappedClass class to configure
+	 * @return an instance of MappedClass
+	 */
+	public static MappedClass mappedClass(Class<?> mappedClass){
+		return new MappedClass(mappedClass);
+	}
+
+	/**
+	 * Permits to define a MappedClass bean.
+	 * @param mappedClassName the complete name of the class to configure
+	 * @return an instance of MappedClass
+	 */
+	public static MappedClass mappedClass(String mappedClassName){
+		return new MappedClass(mappedClassName);
+	}
+
+	/**
+	 * Permits to define an attribute to map.
+	 * @param name name of this attribute
+	 * @return an instance of Attribute
+	 */
+	public static Attribute attribute(String name){
+		return new Attribute(name);
+	}
+	
+	/**
+	 * Permits to define an attribute to map.
+	 * @param name name of this attribute
+	 * @param customGet custom get method
+	 * @param customSet custom set method
+	 * @return an instance of Attribute
+	 */
+	public static Attribute attribute(String name, String customGet, String customSet){
+		return new Attribute(name, customGet, customSet);
+	}
+	
+	/**
+	 * Permits to define a target attribute.
+	 * @param name target attribute name
+	 * @return an instance of TargetAttribute
+	 */
+	public static TargetAttribute targetAttribute(String name){
+		return new TargetAttribute(name);
+	}
+	
+	/**
+	 * Permits to define a target attribute.
+	 * @param name target attribute name
+	 * @param customGet custom get method
+	 * @param customSet custom set method
+	 * @return an instance of TargetAttribute
+	 */
+	public static TargetAttribute targetAttribute(String name, String customGet, String customSet){
+		return new TargetAttribute(name, customGet, customSet);
+	}
+	
+	/**
+	 * Permits to define a local attribute.
+	 * @param name local attribute name
+	 * @return an instance of LocalAttribute
+	 */
+	public static LocalAttribute localAttribute(String name){
+		return new LocalAttribute(name);
+	}
+	
+	/**
+	 * Permits to define a local attribute.
+	 * @param name local attribute name
+	 * @param customGet custom get method
+	 * @param customSet custom set method
+	 * @return an instance of LocalAttribute
+	 */
+	public static LocalAttribute localAttribute(String name, String customGet, String customSet){
+		return new LocalAttribute(name, customGet, customSet);
+	}
+	
+	/**
+	 * Permits to define a conversion method.
+	 * @param name name of this conversion method
+	 * @return an instance of Conversion
+	 */
+	public static Conversion conversion(String name){
+		return new Conversion(name);
+	}
+	
+	/**
+	 * @return an instance of Global
+	 */
+	public static Global global(){
+		return new Global();
+	}
+	
 	
 }
