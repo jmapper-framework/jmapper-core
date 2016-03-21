@@ -26,7 +26,7 @@ import com.googlecode.jmapper.xml.beans.XmlTargetClass;
  * @author Alessandro Vurro
  *
  */
-class Attribute implements Convertible<XmlAttribute>{
+public class Attribute implements Convertible<XmlAttribute>{
 
 	/** represents the value node */
 	private XmlAttribute xmlAttribute;
