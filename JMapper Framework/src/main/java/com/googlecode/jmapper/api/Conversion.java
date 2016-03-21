@@ -24,7 +24,7 @@ import static com.googlecode.jmapper.util.GeneralUtility.join;
  * @author Alessandro Vurro
  *
  */
-class Conversion implements Convertible<XmlConversion>{
+public class Conversion implements Convertible<XmlConversion>{
 
 	private XmlConversion conversion;
 	
