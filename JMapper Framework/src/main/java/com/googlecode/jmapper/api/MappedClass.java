@@ -27,7 +27,7 @@ import com.googlecode.jmapper.xml.beans.XmlConversion;
  * @author Alessandro Vurro
  *
  */
-class MappedClass implements Convertible<XmlClass>{
+public class MappedClass implements Convertible<XmlClass>{
 
 	/** xstream class */
 	private XmlClass xmlClass;

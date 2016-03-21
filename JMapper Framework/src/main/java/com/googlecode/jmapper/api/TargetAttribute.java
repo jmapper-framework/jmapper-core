@@ -23,7 +23,7 @@ import com.googlecode.jmapper.xml.beans.XmlTargetAttribute;
  * @author Alessandro Vurro
  *
  */
-class TargetAttribute extends GeneralAttribute implements Convertible<XmlTargetAttribute>{
+public class TargetAttribute extends GeneralAttribute implements Convertible<XmlTargetAttribute>{
 
 	public TargetAttribute(String name) {
 		super(name);

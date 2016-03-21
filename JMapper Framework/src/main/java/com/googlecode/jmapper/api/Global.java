@@ -28,7 +28,7 @@ import com.googlecode.jmapper.xml.beans.XmlTargetClass;
  * @author Alessandro Vurro
  *
  */
-class Global implements Convertible<XmlGlobal>{
+public class Global implements Convertible<XmlGlobal>{
 
 	/** xml global node */
 	private XmlGlobal global;
