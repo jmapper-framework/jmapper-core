@@ -391,6 +391,7 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
 	 *  
 	 * @param destination the Destination Class
 	 * @param source the Source Class
+	 * @param config the configuration to load
 	 * @param api JMapperAPI configuration
 	 * @see ChooseConfig
 	 */

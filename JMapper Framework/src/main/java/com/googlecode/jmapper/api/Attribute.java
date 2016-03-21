@@ -83,7 +83,7 @@ public class Attribute implements Convertible<XmlAttribute>{
 	}
 	
 	/**
-	 * Permits to define target attributes.<br/>
+	 * Permits to define target attributes.
 	 * It is recommended to use this method only if you want to define custom methods, otherwise {@link #targetAttributes(String...) targetAttributes} is recommended.
 	 * @param attributes target attributes
 	 * @return this instance of Attribute
@@ -97,7 +97,7 @@ public class Attribute implements Convertible<XmlAttribute>{
 	}
 	
 	/**
-	 * Permits to define target attributes passing in input only the names in string format.<br/>
+	 * Permits to define target attributes passing in input only the names in string format.
 	 * @param attributes target attributes
 	 * @return this instance of Attribute
 	 */
