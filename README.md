@@ -1,5 +1,4 @@
 #JMapper Framework [![Build Status](https://travis-ci.org/jmapper-framework/jmapper-core.svg?branch=master)](https://travis-ci.org/jmapper-framework/jmapper-core)
->if you like the project add a star, encourages us to do better :)
 
 **Released 1.6.0 version!**<br>
 Now you can also configure via API! We will update the wiki very soon!
