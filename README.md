@@ -13,10 +13,11 @@ Most relevant features:
   * [dynamic conversions](https://github.com/jmapper-framework/jmapper-core/wiki/Conversion-examples), whose body adapts to every relationship
   * [inherited configurations](https://github.com/jmapper-framework/jmapper-core/wiki/Inheritance-examples), you can split the configuration along the hierarchy
   * and more..
+   
+  
+**especially its use is intuitive**
 
-##the most important feature is the ease of use
-
-##Configuration
+###Configuration
 Below it is shown the same configuration in the three types allowed
 ####Annotation
 ```java
@@ -52,7 +53,8 @@ JMapperAPI jmapperAPI = new JMapperAPI()
              .add(attribute("destinationField")
                      .value("sourceField")));
 ```
-##JMapper instance
+
+###JMapper instance
 ```java
 JMapper<Destination, Source> mapper;
 ```
@@ -68,12 +70,12 @@ mapper = new JMapper<>(Destination.class, Source.class, xml);
 ```java
 mapper = new JMapper<>(Destination.class, Source.class, jmapperAPI);
 ```
-##Usage
+###Usage
 ```java
 Source source = new Source("id", "sourceField", "other");
 Destination destination = mapper.getDestination(source);
 ```
-##Result
+###Result
 ```java
 destination ["id", "sourceField", null]
 ```
