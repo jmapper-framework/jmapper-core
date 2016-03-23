@@ -58,7 +58,6 @@ JMapper<Destination, Source> mapper;
 ```
 ####Annotation
 ```java
-// Annotation
 mapper = new JMapper<>(Destination.class, Source.class);
 ```
 ####XML
