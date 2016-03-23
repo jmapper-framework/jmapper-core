@@ -9,8 +9,8 @@ Now you can also configure via API! We will update the wiki very soon!
 Most relevant features:
 
   * [One to Many](https://github.com/jmapper-framework/jmapper-core/wiki/One-To-Many) and [Many to One](https://github.com/jmapper-framework/jmapper-core/wiki/Many-To-One) relations
-  * [dynamic conversions](https://github.com/jmapper-framework/jmapper-core/wiki/Conversion-examples)(whose body adapts to every relationship)
-  * [inherited configurations](https://github.com/jmapper-framework/jmapper-core/wiki/Inheritance-examples)(u can split the configuration along the hierarchy)
+  * [dynamic conversions](https://github.com/jmapper-framework/jmapper-core/wiki/Conversion-examples), whose body adapts to every relationship
+  * [inherited configurations](https://github.com/jmapper-framework/jmapper-core/wiki/Inheritance-examples), you can split the configuration along the hierarchy
   * [nested mappings](https://github.com/jmapper-framework/jmapper-core/wiki/Nested-Mapping)
   * and more..
 
