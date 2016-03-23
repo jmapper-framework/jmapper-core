@@ -5,19 +5,20 @@ Now you can also configure via API! We will update the wiki very soon!
 
 --------
 
-#####Fast as hand-written code with zero compromise, choose between Annotation, XML and API.<br>
+#####Fast as hand-written code with zero compromise.
+#####Write the configuration using what you prefer: Annotation, XML and API.
 Most relevant features:
 
-  * [One to Many](https://github.com/jmapper-framework/jmapper-core/wiki/One-To-Many) and [Many to One](https://github.com/jmapper-framework/jmapper-core/wiki/Many-To-One) relations
+  * [One to Many](https://github.com/jmapper-framework/jmapper-core/wiki/One-To-Many) and [Many to One](https://github.com/jmapper-framework/jmapper-core/wiki/Many-To-One) relationship
   * [dynamic conversions](https://github.com/jmapper-framework/jmapper-core/wiki/Conversion-examples), whose body adapts to every relationship
   * [inherited configurations](https://github.com/jmapper-framework/jmapper-core/wiki/Inheritance-examples), you can split the configuration along the hierarchy
-  * [nested mappings](https://github.com/jmapper-framework/jmapper-core/wiki/Nested-Mapping)
   * and more..
 
 ##the most important feature is the ease of use
 
-<b>Configuration</b>
-
+##Configuration
+Below it is shown the same configuration in the three types allowed
+####Annotation
 ```java
 class Destination{                      class Source{
     @JMap
@@ -29,19 +30,51 @@ class Destination{                      class Source{
     // getters and setters...               // getters and setters...
 }                                       }
 ```
-
-<b>Usage</b>
-
+####XML
+```xml
+<jmapper>
+  <class name="it.jmapper.bean.Destination">
+    <attribute name="id">
+      <value name="id"/>
+    </attribute>
+    <attribute name="destinationField">
+      <value name="sourceField">
+    </attribute>
+  </class>
+</jmapper>
+```
+####API
+```java
+JMapperAPI jmapperAPI = new JMapperAPI()
+    .add(mappedClass(Destination.class)
+             .add(attribute("id")
+                     .value("id"))
+             .add(attribute("destinationField")
+                     .value("sourceField")));
+```
+##JMapper instance
+```java
+JMapper<Destination, Source> mapper;
+```
+####Annotation
+```java
+// Annotation
+mapper = new JMapper<>(Destination.class, Source.class);
+```
+####XML
+```java
+mapper = new JMapper<>(Destination.class, Source.class, xml);
+```
+####API
+```java
+mapper = new JMapper<>(Destination.class, Source.class, jmapperAPI);
+```
+##Usage
 ```java
 Source source = new Source("id", "sourceField", "other");
-
-JMapper<Destination, Source> mapper = new JMapper<>(Destination.class, Source.class);
-
 Destination destination = mapper.getDestination(source);
 ```
-
-<b>Result</b>
-
+##Result
 ```java
 destination ["id", "sourceField", null]
 ```
