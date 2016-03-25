@@ -94,7 +94,6 @@ Let us know any malfunctions, new features and more through the [JMapper Framewo
 There are many features to be implemented, such as:
 - Eclipse plugin
 - Integration with Hibernate, Apache Camel and other frameworks
-- Fluent API that generate XML configuration
 - and more..
 
 contact us (jmapper.framework@gmail.com) for more information.<br><br>
