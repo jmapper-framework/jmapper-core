@@ -31,25 +31,39 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <p><a href="https://travis-ci.org/jmapper-framework/jmapper-core"><img src="https://travis-ci.org/jmapper-framework/jmapper-core.svg?branch=master" alt="Build Status"></a></p>
+        <h1>
+<a id="jmapper-framework-" class="anchor" href="#jmapper-framework-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>JMapper Framework <a href="https://travis-ci.org/jmapper-framework/jmapper-core"><img src="https://travis-ci.org/jmapper-framework/jmapper-core.svg?branch=master" alt="Build Status"></a>
+</h1>
 
-<p>JMapper Framework is a java bean to java bean mapper, allows you to perform the passage of data dinamically with annotations and / or XML.<br>With JMapper you can:</p>
+<h5>
+<a id="fast-as-hand-written-code-with-zero-compromise" class="anchor" href="#fast-as-hand-written-code-with-zero-compromise" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Fast as hand-written code with zero compromise.</h5>
+
+<h5>
+<a id="write-the-configuration-using-what-you-prefer-annotation-xml-and-api" class="anchor" href="#write-the-configuration-using-what-you-prefer-annotation-xml-and-api" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Write the configuration using what you prefer: Annotation, XML and API.</h5>
+
+<p>Most relevant features:</p>
 
 <ul>
-<li>create and enrich target objects</li>
-<li>apply a specific logic to the mapping (apply mapping only on null fields for example)</li>
-<li>Annotation &lt;-&gt; XML converter and other utilies</li>
-<li>implement the 1 to N and N to 1 relationships</li>
-<li>implement explicit conversions</li>
-<li>apply inherited configurations</li>
+<li>
+<a href="https://github.com/jmapper-framework/jmapper-core/wiki/One-To-Many">One to Many</a> and <a href="https://github.com/jmapper-framework/jmapper-core/wiki/Many-To-One">Many to One</a> relationship</li>
+<li>
+<a href="https://github.com/jmapper-framework/jmapper-core/wiki/Conversion-examples">dynamic conversions</a>, whose body adapts to every relationship</li>
+<li>
+<a href="https://github.com/jmapper-framework/jmapper-core/wiki/Inheritance-examples">inherited configurations</a>, you can split the configuration along the hierarchy</li>
+<li>and more..</li>
 </ul>
 
+<p><strong>especially its use is intuitive</strong></p>
+
 <h2>
-<a id="the-most-important-feature-is-the-ease-of-use" class="anchor" href="#the-most-important-feature-is-the-ease-of-use" aria-hidden="true"><span class="octicon octicon-link"></span></a>the most important feature is the ease of use</h2>
+<a id="configuration" class="anchor" href="#configuration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Configuration</h2>
 
-<p><strong>Configuration</strong></p>
+<p>Below it is shown the same configuration in the three types allowed</p>
 
-<div class="highlight highlight-java"><pre><span class="pl-k">class</span> <span class="pl-en">Destination</span>{                      <span class="pl-k">class</span> <span class="pl-en">Source</span>{
+<h5>
+<a id="annotation" class="anchor" href="#annotation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Annotation</h5>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-k">class</span> <span class="pl-en">Destination</span>{                      <span class="pl-k">class</span> <span class="pl-en">Source</span>{
     <span class="pl-k">@JMap</span>
     <span class="pl-k">private</span> <span class="pl-smi">String</span> id;                      <span class="pl-k">private</span> <span class="pl-smi">String</span> id;
     <span class="pl-k">@JMap</span>(<span class="pl-s"><span class="pl-pds">"</span>sourceField<span class="pl-pds">"</span></span>)                    
@@ -59,28 +73,86 @@
     <span class="pl-c">// getters and setters...               // getters and setters...</span>
 }                                       }</pre></div>
 
-<p><strong>Usage</strong></p>
+<h5>
+<a id="xml" class="anchor" href="#xml" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>XML</h5>
 
-<div class="highlight highlight-java"><pre><span class="pl-smi">Source</span> source <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">Source</span>(<span class="pl-s"><span class="pl-pds">"</span>id<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>sourceField<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>other<span class="pl-pds">"</span></span>);
+<div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">jmapper</span>&gt;
+  &lt;<span class="pl-ent">class</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>it.jmapper.bean.Destination<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">attribute</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>id<span class="pl-pds">"</span></span>&gt;
+      &lt;<span class="pl-ent">value</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>id<span class="pl-pds">"</span></span>/&gt;
+    &lt;/<span class="pl-ent">attribute</span>&gt;
+    &lt;<span class="pl-ent">attribute</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>destinationField<span class="pl-pds">"</span></span>&gt;
+      &lt;<span class="pl-ent">value</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>sourceField<span class="pl-pds">"</span></span>&gt;
+    &lt;/<span class="pl-ent">attribute</span>&gt;
+  &lt;/<span class="pl-ent">class</span>&gt;
+&lt;/<span class="pl-ent">jmapper</span>&gt;</pre></div>
 
-<span class="pl-k">JMapper&lt;<span class="pl-smi">Destination</span>, <span class="pl-smi">Source</span>&gt;</span> mapper <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-k">JMapper&lt;&gt;</span>(<span class="pl-smi">Destination</span><span class="pl-k">.</span>class, <span class="pl-smi">Source</span><span class="pl-k">.</span>class);
+<h5>
+<a id="api" class="anchor" href="#api" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>API</h5>
 
+<div class="highlight highlight-source-java"><pre><span class="pl-smi">JMapperAPI</span> jmapperAPI <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">JMapperAPI</span>()
+    .add(mappedClass(<span class="pl-smi">Destination</span><span class="pl-k">.</span>class)
+             .add(attribute(<span class="pl-s"><span class="pl-pds">"</span>id<span class="pl-pds">"</span></span>)
+                     .value(<span class="pl-s"><span class="pl-pds">"</span>id<span class="pl-pds">"</span></span>))
+             .add(attribute(<span class="pl-s"><span class="pl-pds">"</span>destinationField<span class="pl-pds">"</span></span>)
+                     .value(<span class="pl-s"><span class="pl-pds">"</span>sourceField<span class="pl-pds">"</span></span>)));</pre></div>
+
+<h2>
+<a id="creation" class="anchor" href="#creation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Creation</h2>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-k">JMapper&lt;<span class="pl-smi">Destination</span>, <span class="pl-smi">Source</span>&gt;</span> mapper;</pre></div>
+
+<h5>
+<a id="annotation-1" class="anchor" href="#annotation-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Annotation</h5>
+
+<div class="highlight highlight-source-java"><pre>mapper <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-k">JMapper&lt;&gt;</span>(<span class="pl-smi">Destination</span><span class="pl-k">.</span>class, <span class="pl-smi">Source</span><span class="pl-k">.</span>class);</pre></div>
+
+<h5>
+<a id="xml-1" class="anchor" href="#xml-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>XML</h5>
+
+<div class="highlight highlight-source-java"><pre>mapper <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-k">JMapper&lt;&gt;</span>(<span class="pl-smi">Destination</span><span class="pl-k">.</span>class, <span class="pl-smi">Source</span><span class="pl-k">.</span>class, xml);</pre></div>
+
+<h5>
+<a id="api-1" class="anchor" href="#api-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>API</h5>
+
+<div class="highlight highlight-source-java"><pre>mapper <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-k">JMapper&lt;&gt;</span>(<span class="pl-smi">Destination</span><span class="pl-k">.</span>class, <span class="pl-smi">Source</span><span class="pl-k">.</span>class, jmapperAPI);</pre></div>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-smi">Source</span> source <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">Source</span>(<span class="pl-s"><span class="pl-pds">"</span>id<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>sourceField<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>other<span class="pl-pds">"</span></span>);
 <span class="pl-smi">Destination</span> destination <span class="pl-k">=</span> mapper<span class="pl-k">.</span>getDestination(source);</pre></div>
 
-<p><strong>Result</strong></p>
+<h2>
+<a id="result" class="anchor" href="#result" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Result</h2>
 
-<div class="highlight highlight-java"><pre>destination [<span class="pl-s"><span class="pl-pds">"</span>id<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>sourceField<span class="pl-pds">"</span></span>, <span class="pl-c1">null</span>]</pre></div>
+<div class="highlight highlight-source-java"><pre>destination [<span class="pl-s"><span class="pl-pds">"</span>id<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>sourceField<span class="pl-pds">"</span></span>, <span class="pl-c1">null</span>]</pre></div>
 
-<p><em>With JMapper we have all the advantages of dynamic mapping with the performance of static code, with 0 memory consumption.</em><br><br>
+<p><em>With JMapper we have all the advantages of dynamic mapping with the performance of static code, with 0 memory consumption.</em><br>
+<strong>Required java 5+</strong><br><br>
+<strong>issues status</strong>
+<br><a href="https://waffle.io/jmapper-framework/jmapper-core"><img src="https://badge.waffle.io/jmapper-framework/jmapper-core.png?label=In%20Progress&amp;title=In%20Progress" alt="Stories in Progress"></a><br><br>
 <strong>Dependency information</strong>
 <br><a href="https://maven-badges.herokuapp.com/maven-central/com.googlecode.jmapper-framework/jmapper-core"><img src="https://maven-badges.herokuapp.com/maven-central/com.googlecode.jmapper-framework/jmapper-core/badge.svg" alt="Maven Central"></a> <a href="https://www.versioneye.com/user/projects/5539172d1d2989cb78000002"><img src="https://www.versioneye.com/user/projects/5539172d1d2989cb78000002/badge.svg?style=flat" alt="Dependency Status"></a><br></p>
 
 <p><strong>For a complete guide</strong><br><a href="https://github.com/jmapper-framework/jmapper-core/wiki">wiki</a> pages<br><br>
 <strong>Do you like the project? think it has good potential?</strong><br>
-Let us know any malfunctions, new features and more through the <a href="https://groups.google.com/forum/#!forum/jmapper-framework">JMapper Framework group</a>.<br><br>
-<strong>You want to do a friendly chat?</strong><br>
-<a href="https://gitter.im/jmapper-framework/jmapper-core?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/Join%20Chat.svg" alt="Join the chat at https://gitter.im/jmapper-framework/jmapper-core"></a><br><br>
-<strong>Follow us on twitter</strong><br>
+Let us know any malfunctions, new features and more through the <a href="https://groups.google.com/forum/#!forum/jmapper-framework">JMapper Framework group</a>.<br><br></p>
+
+<p><strong>Do you want to contribute to the development of JMapper?</strong><br> 
+There are many features to be implemented, such as:</p>
+
+<ul>
+<li>Eclipse plugin</li>
+<li>Integration with Hibernate, Apache Camel and other frameworks</li>
+<li>and more..</li>
+</ul>
+
+<p>contact us (<a href="mailto:jmapper.framework@gmail.com">jmapper.framework@gmail.com</a>) for more information.<br><br>
+<strong>Do you want to do a friendly chat?</strong><br>
+<a href="https://gitter.im/jmapper-framework/jmapper-core?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/Join%20Chat.svg" alt="Join the chat at https://gitter.im/jmapper-framework/jmapper-core"></a><br><br></p>
+
+<p><strong>Follow us on twitter</strong><br>
 <a href="https://twitter.com/jmapper_av"><img src="http://www.teachthought.com/wp-content/uploads/2012/10/twitter-logo-break.png" width="120" height="120"></a></p>
       </section>
     </div>
