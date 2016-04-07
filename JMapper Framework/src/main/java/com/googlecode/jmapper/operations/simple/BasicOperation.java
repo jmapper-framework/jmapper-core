@@ -32,6 +32,7 @@ public class BasicOperation extends ASimpleOperation{
 
 	public StringBuilder mapping() {
 
+		System.out.println("");
 		Object content = setDestination(applyImplicitConversion(info.getConversionType(), destinationType(), sourceType(), getSource()));
 				           
 		// add and return a mapping type control

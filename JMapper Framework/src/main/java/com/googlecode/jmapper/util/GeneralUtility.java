@@ -16,6 +16,8 @@
 
 package com.googlecode.jmapper.util;
 
+import static com.googlecode.jmapper.util.ClassesManager.isAssignableFrom;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -37,7 +39,6 @@ import java.util.regex.Pattern;
 import org.apache.commons.collections.bidimap.DualHashBidiMap;
 
 import com.googlecode.jmapper.xml.SimplyAttribute;
-
 /**
  * Utility class that allows you to identify the type of classes given as input, 
  * to obtain name of methods starting from name of fields and more useful functions.
@@ -97,8 +98,26 @@ public final class GeneralUtility {
 						add(Character.class.getName());
 						add(Boolean.class.getName());
 						add(String.class.getName());
+						add(Object.class.getName());
 					}
 			};
+	
+	/**
+	 * @param destination destination class
+	 * @param source source class
+	 * @return true if is a case of cast, false otherwise.
+	 */
+	public static boolean isCastCase(Class<?> destination,Class<?> source){
+		return areBasic(destination, source) && !isAssignableFrom(destination, source) && isObject(source);
+	}
+			
+	/**
+	 * @param clazz class to analyze
+	 * @return true if this class is of Object type, false otherwise.
+	 */
+	public static boolean isObject(Class<?> clazz){
+		return clazz.equals(Object.class);
+	}
 	
 	/**
 	 * Returns true if aClass is a wrapper or primitive class, false otherwise.

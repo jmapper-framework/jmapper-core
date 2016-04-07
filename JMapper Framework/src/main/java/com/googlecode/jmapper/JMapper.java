@@ -421,7 +421,7 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
 	 * @param xmlPath xml configuration path
 	 * @see ChooseConfig
 	 */
-	public  JMapper(final Class<D> destination,final Class<S> source,final ChooseConfig config,final String xmlPath) {
+	public JMapper(final Class<D> destination,final Class<S> source,final ChooseConfig config,final String xmlPath) {
 		try{
 			if(isNull(destination)) 	  Error.nullMappedClass("Destination");
 			if(isNull(source))            Error.nullMappedClass("Source");
@@ -452,7 +452,7 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
      * @return mapper instance
      * @throws Throwable
      */
-    private synchronized IMapper<D,S> createMapper(MapperBuilder mapper) throws Throwable{
+    private static synchronized <D,S> IMapper<D,S> createMapper(MapperBuilder mapper) throws Throwable{
 	    
 		Class<IMapper<D,S>> mapperClass = mapper.exist()?mapper.<D,S>get()
 				                                        :mapper.<D,S>generate();

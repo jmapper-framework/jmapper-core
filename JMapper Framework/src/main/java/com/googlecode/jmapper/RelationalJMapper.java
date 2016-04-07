@@ -28,6 +28,7 @@ import com.googlecode.jmapper.annotations.Annotation;
 import com.googlecode.jmapper.annotations.JGlobalMap;
 import com.googlecode.jmapper.annotations.JMap;
 import com.googlecode.jmapper.api.IRelationalJMapper;
+import com.googlecode.jmapper.api.JMapperAPI;
 import com.googlecode.jmapper.api.enums.MappingType;
 import com.googlecode.jmapper.api.enums.NullPointerControl;
 import com.googlecode.jmapper.config.Error;
@@ -124,9 +125,18 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	}
 	
 	/**
-	 * Takes in input only the configured Class and the xml mapping path.
+	 * Takes in input the configured Class and the configuration in API format.
 	 * @param configuredClass configured class
-	 * @param xmlPath XML path
+	 * @param jmapperAPI the configuration
+	 */
+	public RelationalJMapper(final Class<T> configuredClass, JMapperAPI jmapperAPI){
+		this(configuredClass, jmapperAPI.toXStream().toString());
+	}
+	
+	/**
+	 * Takes in input only the configured Class and the xml mapping path or the xml as String format.
+	 * @param configuredClass configured class
+	 * @param xmlPath XML path or xml as String
 	 */
 	public RelationalJMapper(final Class<T> configuredClass, String xmlPath){
 		this.configuredClass = configuredClass;

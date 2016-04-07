@@ -19,6 +19,7 @@ import static com.googlecode.jmapper.api.enums.MappingType.ONLY_NULL_FIELDS;
 import static com.googlecode.jmapper.conversions.implicit.ConversionHandler.getConversion;
 import static com.googlecode.jmapper.util.ClassesManager.isBoxing;
 import static com.googlecode.jmapper.util.ClassesManager.isUnBoxing;
+import static com.googlecode.jmapper.util.GeneralUtility.isCastCase;
 import static com.googlecode.jmapper.util.GeneralUtility.isNull;
 import static com.googlecode.jmapper.util.GeneralUtility.newLine;
 
@@ -236,9 +237,15 @@ public abstract class AGeneralOperation extends AGeneralOperationAccessor{
 	protected final Object applyImplicitConversion(final ConversionType conversionType,final Class<?> dClass,final Class<?> sClass,final Object sourceContent){
 		
 			if(!conversionType.isAbsent()){
+
+				// add conversion
 				if(!conversionType.isUndefined())
-					// add conversion
 					return getConversion(conversionType,sourceContent);
+				
+				// in case of explicit cast, for example: Integer i = (Integer) object;
+				if(isCastCase(dClass, sClass))
+					return write("(",dClass.getName(),")",sourceContent);
+				
 				
 			// if info is undefined, probably is an autoboxing operation
 			}else{
