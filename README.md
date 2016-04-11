@@ -1,7 +1,7 @@
 #JMapper Framework [![Build Status](https://travis-ci.org/jmapper-framework/jmapper-core.svg?branch=master)](https://travis-ci.org/jmapper-framework/jmapper-core)
 
 #####Fast as hand-written code with zero compromise.
-#####Write the configuration using what you prefer: Annotation, XML and API.
+#####Write the configuration using what you prefer: Annotation, XML or API.
 Most relevant features:
 
   * [One to Many](https://github.com/jmapper-framework/jmapper-core/wiki/One-To-Many) and [Many to One](https://github.com/jmapper-framework/jmapper-core/wiki/Many-To-One) relationship
