@@ -69,7 +69,7 @@ Versione 1.5.0 RILASCIATA:
  - Nested Mapping
  - copyright aggiornato
 
-Versione 1.6.0
+Versione 1.6.0 RILASCIATA:
 
  - API 
    	 Creare delle fluent API che permettono di costruire il file xml.
@@ -78,9 +78,19 @@ Versione 1.6.0
   	 
 Versione 1.6.1
   	 
+ - bug fixed https://github.com/jmapper-framework/jmapper-core/issues/27
+   RelationalJMapper non prendeva JmapperAPI in input
+ - bug fixed https://github.com/jmapper-framework/jmapper-core/issues/27
+   risolto problema legato al multi threading
+ - bug fixed https://github.com/jmapper-framework/jmapper-core/issues/30
+   implementato il cast tra source di tipo Object e destination di tipo primitivo/wrapper 
+ 
  - conversione StringBuilder String
- - conversione di enumeration
+ - conversione di enumeration String
  - conversione Date Calendar
+ - Classe di utilità per l'introspezione della configurazione
+ - valutare la possibilità di gestire il npe sul nestemapping del source per dar la possibilità
+   di scegliere che azione intraprendere
  - implementare altri bytecode generator tramite dipendenze maven (anche per android)
   	 
 2.0.0
