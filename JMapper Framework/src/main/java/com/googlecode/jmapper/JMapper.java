@@ -404,11 +404,11 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
 	 *  
 	 * @param destination the Destination Class
 	 * @param source the Source Class
-	 * @param xmlPath xml configuration path
+	 * @param xml xml configuration as content or path format
 	 * @see ChooseConfig
 	 */
-	public JMapper(final Class<D> destination,final Class<S> source,final String xmlPath) {
-		this(destination,source,null,xmlPath);
+	public JMapper(final Class<D> destination,final Class<S> source,final String xml) {
+		this(destination,source,null,xml);
 	}
 	
 	/**
@@ -418,10 +418,10 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
 	 * @param destination the Destination Class
 	 * @param source the Source Class
 	 * @param config the configuration to load
-	 * @param xmlPath xml configuration path
+	 * @param xml xml configuration as content or path format
 	 * @see ChooseConfig
 	 */
-	public JMapper(final Class<D> destination,final Class<S> source,final ChooseConfig config,final String xmlPath) {
+	public JMapper(final Class<D> destination,final Class<S> source,final ChooseConfig config,final String xml) {
 		try{
 			if(isNull(destination)) 	  Error.nullMappedClass("Destination");
 			if(isNull(source))            Error.nullMappedClass("Source");
@@ -439,7 +439,7 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
 			
 			this.mapper = createMapper(from(source).to(destination)
 					                        .analyzing(config)
-					                        .presentIn(xmlPath));  
+					                        .presentIn(xml));  
 			
 		}catch (Throwable e) { 
 			JmapperLog.ERROR(e); 
