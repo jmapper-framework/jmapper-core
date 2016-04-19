@@ -56,7 +56,7 @@ public class NestedMappingHandler {
 	 * @param nestedMappingPath nested mapping path
 	 * @return a list with splitted fields
 	 */
-	private static String[] nestedFields(String nestedMappingPath){
+	public static String[] nestedFields(String nestedMappingPath){
 		return nestedMappingPath
 				 .substring(NESTED_MAPPING_STARTS_SYMBOL.length(), nestedMappingPath.length() - NESTED_MAPPING_ENDS_SYMBOL.length())
 		         .split(NESTED_MAPPING_SPLIT_SYMBOL);

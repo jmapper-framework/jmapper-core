@@ -17,6 +17,7 @@
 package com.googlecode.jmapper.xml;
 
 import static com.googlecode.jmapper.util.FilesManager.fullPathOf;
+import static com.googlecode.jmapper.util.FilesManager.isPath;
 import static com.googlecode.jmapper.util.FilesManager.readAtDevelopmentTime;
 import static com.googlecode.jmapper.util.FilesManager.readAtRuntime;
 import static com.googlecode.jmapper.util.GeneralUtility.*;
@@ -57,10 +58,17 @@ public final class XML {
 	 * @throws IOException other cases 
 	 * @throws MalformedURLException in case of malformed xml path
 	 */
+	//TODO XML -> bisogna differenziare da Path e contenuto
+	// inoltre gli stessi errori si hanno con la configurazione API
+	// quindi sarebbe meglio generalizzarli
 	public XML(boolean atRuntime, String xmlPath) throws MalformedURLException, IOException{
 		if(!isNull(xmlPath)){
 			xmlJmapper = atRuntime?readAtRuntime(xmlPath):readAtDevelopmentTime(xmlPath);
-			this.xmlPath = atRuntime?xmlPath:fullPathOf(xmlPath);
+			
+			if(isPath(xmlPath))
+				this.xmlPath = atRuntime?xmlPath:fullPathOf(xmlPath);
+			else
+				this.xmlPath = "";//TODO scrivere il messaggio da visualizzare
 		}
 		
 		if(isNull(xmlJmapper))xmlJmapper = new XmlJmapper();
@@ -73,6 +81,14 @@ public final class XML {
 	public XML(){
 		xmlJmapper = new XmlJmapper();
 		xmlJmapper.classes = new ArrayList<XmlClass>();
+	}
+	
+	/**
+	 * Returns an XStream version of this XML.
+	 * @return xstream bean
+	 */
+	public XmlJmapper toXStream(){
+		return xmlJmapper;
 	}
 	
 	/**  xml path */

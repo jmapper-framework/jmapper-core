@@ -377,8 +377,6 @@ public final class ClassesManager {
 		if(isEmpty(resource)) 
 			return className;
 		
-		// if resource is a content, the mapper must be regenerated, 
-		// to ensure this, to the name is appended a random integer
 		if(!isPath(resource))
 			return write(className, String.valueOf(resource.hashCode()));
 		
