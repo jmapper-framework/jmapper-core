@@ -60,11 +60,14 @@ public class MappedListArrayOperation extends ARecursiveOperation{
 		
 		Map<String, String> vars = new HashMap<String, String>();
 		
+		String sourceLength = c("sourceLength");
+
 		vars.put("sClass"				   ,itemSClass.getName());
-		vars.put("newInstance(destination)",s(newInstance(getSourceConverted())));
+		vars.put("newInstance(destination)",s(newInstance(getSourceConverted(), sourceLength)));
 		vars.put("destination"             ,s(getSourceConverted()));
 		vars.put("source"                  ,c("collectionOfSource"));
 		vars.put("getSource()"             ,s(getSource()));
+		vars.put("sLength"                 , sourceLength);
 		vars.put("i"                       ,c("index"));
 		vars.put("sItem"				   ,sItem);
 		vars.put("dItem"				   ,dItem);
@@ -72,9 +75,10 @@ public class MappedListArrayOperation extends ARecursiveOperation{
 		
 		count++;
 		
-		return write(replace$("   $newInstance(destination)"
-				  + newLine + "   $sClass[] $source = $getSource();"
-				  + newLine + "   for(int $i = $source.length-1;$i >=0;$i--){"
+		return write(replace$("   $sClass[] $source = $getSource();"
+				  + newLine + "   int $sLength = $source.length;"
+			      + newLine + "   $newInstance(destination)"
+				  + newLine + "   for(int $i = 0;$i<$sLength;$i++){"
 				  + newLine + "   $sClass $sItem = $source[$i];"
 				  + newLine + 	  "$mapping"
 				  + newLine + "   $destination.add($dItem);"

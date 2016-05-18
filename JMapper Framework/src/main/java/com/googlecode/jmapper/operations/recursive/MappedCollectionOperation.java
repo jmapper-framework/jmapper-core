@@ -16,9 +16,10 @@
 
 package com.googlecode.jmapper.operations.recursive;
 
-import static com.googlecode.jmapper.api.enums.MappingType.*;
+import static com.googlecode.jmapper.api.enums.MappingType.ALL_FIELDS;
 import static com.googlecode.jmapper.util.ClassesManager.getCollectionItemClass;
-import static com.googlecode.jmapper.util.GeneralUtility.*;
+import static com.googlecode.jmapper.util.GeneralUtility.newLine;
+import static com.googlecode.jmapper.util.GeneralUtility.replace$;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -59,27 +60,31 @@ public class MappedCollectionOperation extends ARecursiveOperation {
 										.mapping(newInstance, ALL_FIELDS, getMts()));
 		
 		Map<String, String> vars = new HashMap<String, String>();
-		
+	
+		String sourceLength = c("sourceLength");
+
 		vars.put("sClass"                  ,itemSClass.getName());
-		vars.put("newInstance(destination)",s(newInstance(getSourceConverted())));
+		vars.put("newInstance(destination)",s(newInstance(getSourceConverted(),sourceLength)));
 		vars.put("destination"             ,s(getSourceConverted()));
 		vars.put("source"                  ,c("collectionOfSource"));
 		vars.put("getSource()"             ,s(getSource()));
+		vars.put("sLength"                 , sourceLength);
 		vars.put("i"                       ,c("index"));
 		vars.put("sItem"                   ,sItem);
 		vars.put("dItem"                   ,dItem);
-		vars.put("mapping"				   ,mapping);
-		
+		vars.put("mapping"	  ,mapping);
+
 		count++;
-		
-		return write(replace$("   $newInstance(destination)"
-			 + newLine + "   Object[] $source = $getSource().toArray();"
-			 + newLine + "   for(int $i = 0;$i<$source.length;$i++){"
-			 + newLine + "   $sClass $sItem = ($sClass) $source[$i];"
-			 + newLine + 	"$mapping"
-			 + newLine + "   $destination.add($dItem);"
-			 + newLine + "   }"
-			 + newLine + 	content + newLine,vars));
+
+		return write(replace$("   Object[] $source = $getSource().toArray();"
+		+ newLine + "   int $sLength = $source.length;"
+		+ newLine + "   $newInstance(destination)" 
+		+ newLine + "   for(int $i = 0;$i<$sLength;$i++){"
+		+ newLine + "   $sClass $sItem = ($sClass) $source[$i];"
+		+ newLine + "$mapping"
+		+ newLine + "   $destination.add($dItem);"
+		+ newLine + "   }"
+		+ newLine + content + newLine,vars));
 		
 	}
 	

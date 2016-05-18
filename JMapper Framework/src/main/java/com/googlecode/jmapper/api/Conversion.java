@@ -48,7 +48,7 @@ public class Conversion implements Convertible<XmlConversion>{
 	/**
 	 * Permits to define source fields.
 	 *
-	 * @param fields
+	 * @param fields source fields
 	 * @return this instance of Conversion
 	 */
 	public Conversion from(String... fields){
@@ -59,7 +59,7 @@ public class Conversion implements Convertible<XmlConversion>{
 	/**
 	 * Permits to define destination fields.
 	 *
-	 * @param fields
+	 * @param fields destination fields
 	 * @return this instance of Conversion
 	 */
 	public Conversion to(String... fields){

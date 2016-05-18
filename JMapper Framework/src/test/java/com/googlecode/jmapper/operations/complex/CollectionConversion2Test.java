@@ -40,9 +40,10 @@ public class CollectionConversion2Test extends AOperation<CollectionOperation>{
 	protected void AllAll() {
 		
 		expected = "   if(source.getASetInteger()!=null){"+
-		 newLine + "   java.util.ArrayList collectionOfDestination$i = new java.util.ArrayList();"+
 		 newLine + "   Object[] collectionOfSource$i = source.getASetInteger().toArray();"+
-		 newLine + "   for(int index$i = collectionOfSource$i.length-1;index$i >=0;index$i--){"+
+		 newLine + "   int sourceLength$i = collectionOfSource$i.length;"+
+		 newLine + "   java.util.ArrayList collectionOfDestination$i = new java.util.ArrayList(sourceLength$i);"+
+		 newLine + "   for(int index$i = 0;index$i < sourceLength$i;index$i++){"+
 		 newLine + "   java.lang.Integer objectOfSource$i = (java.lang.Integer) collectionOfSource$i[index$i];"+
 		 newLine + "   java.lang.String objectOfDestination$i = objectOfSource$i.toString();"+
 		 newLine + "   collectionOfDestination$i.add(objectOfDestination$i);"+
@@ -58,9 +59,10 @@ public class CollectionConversion2Test extends AOperation<CollectionOperation>{
 		
 		expected = "   if(destination.getAListString()!=null){"+
 		 newLine + "   if(source.getASetInteger()!=null){"+
-		 newLine + "   java.util.ArrayList collectionOfDestination$z = new java.util.ArrayList();"+
 		 newLine + "   Object[] collectionOfSource$i = source.getASetInteger().toArray();"+
-		 newLine + "   for(int index$i = collectionOfSource$i.length-1;index$i >=0;index$i--){"+
+		 newLine + "   int sourceLength$i = collectionOfSource$i.length;"+
+		 newLine + "   java.util.ArrayList collectionOfDestination$z = new java.util.ArrayList(sourceLength$i);"+
+		 newLine + "   for(int index$i = 0;index$i < sourceLength$i;index$i++){"+
 		 newLine + "   java.lang.Integer objectOfSource$i = (java.lang.Integer) collectionOfSource$i[index$i];"+
 		 newLine + "   java.lang.String objectOfDestination$i = objectOfSource$i.toString();"+
 		 newLine + "   collectionOfDestination$z.add(objectOfDestination$i);"+
@@ -72,9 +74,10 @@ public class CollectionConversion2Test extends AOperation<CollectionOperation>{
 		 newLine + "   }"+
 		 newLine + "   }else{"+
 		 newLine + "   if(source.getASetInteger()!=null){"+
-		 newLine + "   java.util.ArrayList collectionOfDestination$z = new java.util.ArrayList();"+
 		 newLine + "   Object[] collectionOfSource$y = source.getASetInteger().toArray();"+
-		 newLine + "   for(int index$y = collectionOfSource$y.length-1;index$y >=0;index$y--){"+
+		 newLine + "   int sourceLength$y = collectionOfSource$y.length;"+
+		 newLine + "   java.util.ArrayList collectionOfDestination$z = new java.util.ArrayList(sourceLength$y);"+
+		 newLine + "   for(int index$y = 0;index$y < sourceLength$y;index$y++){"+
 		 newLine + "   java.lang.Integer objectOfSource$y = (java.lang.Integer) collectionOfSource$y[index$y];"+
 		 newLine + "   java.lang.String objectOfDestination$y = objectOfSource$y.toString();"+
 		 newLine + "   collectionOfDestination$z.add(objectOfDestination$y);"+
@@ -94,9 +97,10 @@ public class CollectionConversion2Test extends AOperation<CollectionOperation>{
 	protected void AllValued() {
 		
 		expected = "   if(source.getASetInteger()!=null){"+
-		 newLine + "   java.util.ArrayList collectionOfDestination$i = new java.util.ArrayList();"+
-		 newLine + "   Object[] collectionOfSource$i = source.getASetInteger().toArray();"+
-		 newLine + "   for(int index$i = collectionOfSource$i.length-1;index$i >=0;index$i--){"+
+ 		 newLine + "   Object[] collectionOfSource$i = source.getASetInteger().toArray();"+
+		 newLine + "   int sourceLength$i = collectionOfSource$i.length;"+
+		 newLine + "   java.util.ArrayList collectionOfDestination$i = new java.util.ArrayList(sourceLength$i);"+
+		 newLine + "   for(int index$i = 0;index$i < sourceLength$i;index$i++){"+
 		 newLine + "   java.lang.Integer objectOfSource$i = (java.lang.Integer) collectionOfSource$i[index$i];"+
 		 newLine + "   java.lang.String objectOfDestination$i = objectOfSource$i.toString();"+
 		 newLine + "   collectionOfDestination$i.add(objectOfDestination$i);"+
@@ -110,9 +114,10 @@ public class CollectionConversion2Test extends AOperation<CollectionOperation>{
 		
 		expected = "   if(source.getASetInteger()!=null){"+
 		 newLine + "   if(destination.getAListString()!=null){"+
-		 newLine + "   java.util.ArrayList collectionOfDestination$z = new java.util.ArrayList();"+
 		 newLine + "   Object[] collectionOfSource$i = source.getASetInteger().toArray();"+
-		 newLine + "   for(int index$i = collectionOfSource$i.length-1;index$i >=0;index$i--){"+
+		 newLine + "   int sourceLength$i = collectionOfSource$i.length;"+
+		 newLine + "   java.util.ArrayList collectionOfDestination$z = new java.util.ArrayList(sourceLength$i);"+
+		 newLine + "   for(int index$i = 0;index$i < sourceLength$i;index$i++){"+
 		 newLine + "   java.lang.Integer objectOfSource$i = (java.lang.Integer) collectionOfSource$i[index$i];"+
 		 newLine + "   java.lang.String objectOfDestination$i = objectOfSource$i.toString();"+
 		 newLine + "   collectionOfDestination$z.add(objectOfDestination$i);"+
@@ -120,9 +125,10 @@ public class CollectionConversion2Test extends AOperation<CollectionOperation>{
 		 newLine + "   destination.getAListString().addAll(collectionOfDestination$z);"+
 		 newLine + 
 		 newLine + "   }else{"+
-		 newLine + "   java.util.ArrayList collectionOfDestination$z = new java.util.ArrayList();"+
 		 newLine + "   Object[] collectionOfSource$y = source.getASetInteger().toArray();"+
-		 newLine + "   for(int index$y = collectionOfSource$y.length-1;index$y >=0;index$y--){"+
+		 newLine + "   int sourceLength$y = collectionOfSource$y.length;"+
+		 newLine + "   java.util.ArrayList collectionOfDestination$z = new java.util.ArrayList(sourceLength$y);"+
+		 newLine + "   for(int index$y = 0;index$y < sourceLength$y;index$y++){"+
 		 newLine + "   java.lang.Integer objectOfSource$y = (java.lang.Integer) collectionOfSource$y[index$y];"+
 		 newLine + "   java.lang.String objectOfDestination$y = objectOfSource$y.toString();"+
 		 newLine + "   collectionOfDestination$z.add(objectOfDestination$y);"+
@@ -141,9 +147,10 @@ public class CollectionConversion2Test extends AOperation<CollectionOperation>{
 		
 		expected = "   if(destination.getAListString()!=null){"+
 		 newLine + "   if(source.getASetInteger()!=null){"+
-		 newLine + "   java.util.ArrayList collectionOfDestination$i = new java.util.ArrayList();"+
 		 newLine + "   Object[] collectionOfSource$i = source.getASetInteger().toArray();"+
-		 newLine + "   for(int index$i = collectionOfSource$i.length-1;index$i >=0;index$i--){"+
+		 newLine + "   int sourceLength$i = collectionOfSource$i.length;"+
+		 newLine + "   java.util.ArrayList collectionOfDestination$i = new java.util.ArrayList(sourceLength$i);"+
+		 newLine + "   for(int index$i = 0;index$i < sourceLength$i;index$i++){"+
 		 newLine + "   java.lang.Integer objectOfSource$i = (java.lang.Integer) collectionOfSource$i[index$i];"+
 		 newLine + "   java.lang.String objectOfDestination$i = objectOfSource$i.toString();"+
 		 newLine + "   collectionOfDestination$i.add(objectOfDestination$i);"+
@@ -164,9 +171,10 @@ public class CollectionConversion2Test extends AOperation<CollectionOperation>{
 
 		expected = "   if(destination.getAListString()!=null){"+
 		 newLine + "   if(source.getASetInteger()!=null){"+
-		 newLine + "   java.util.ArrayList collectionOfDestination$i = new java.util.ArrayList();"+
 		 newLine + "   Object[] collectionOfSource$i = source.getASetInteger().toArray();"+
-		 newLine + "   for(int index$i = collectionOfSource$i.length-1;index$i >=0;index$i--){"+
+		 newLine + "   int sourceLength$i = collectionOfSource$i.length;"+
+		 newLine + "   java.util.ArrayList collectionOfDestination$i = new java.util.ArrayList(sourceLength$i);"+
+		 newLine + "   for(int index$i = 0;index$i < sourceLength$i;index$i++){"+
 		 newLine + "   java.lang.Integer objectOfSource$i = (java.lang.Integer) collectionOfSource$i[index$i];"+
 		 newLine + "   java.lang.String objectOfDestination$i = objectOfSource$i.toString();"+
 		 newLine + "   collectionOfDestination$i.add(objectOfDestination$i);"+
@@ -198,9 +206,10 @@ public class CollectionConversion2Test extends AOperation<CollectionOperation>{
 
 		expected = "   if(destination.getAListString()==null){"+
 		 newLine + "   if(source.getASetInteger()!=null){"+
-		 newLine + "   java.util.ArrayList collectionOfDestination$i = new java.util.ArrayList();"+
 		 newLine + "   Object[] collectionOfSource$i = source.getASetInteger().toArray();"+
-		 newLine + "   for(int index$i = collectionOfSource$i.length-1;index$i >=0;index$i--){"+
+		 newLine + "   int sourceLength$i = collectionOfSource$i.length;"+
+		 newLine + "   java.util.ArrayList collectionOfDestination$i = new java.util.ArrayList(sourceLength$i);"+
+		 newLine + "   for(int index$i = 0;index$i < sourceLength$i;index$i++){"+
 		 newLine + "   java.lang.Integer objectOfSource$i = (java.lang.Integer) collectionOfSource$i[index$i];"+
 		 newLine + "   java.lang.String objectOfDestination$i = objectOfSource$i.toString();"+
 		 newLine + "   collectionOfDestination$i.add(objectOfDestination$i);"+

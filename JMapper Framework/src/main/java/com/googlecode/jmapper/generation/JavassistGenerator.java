@@ -29,7 +29,7 @@ import com.googlecode.jmapper.IMapper;
 import com.googlecode.jmapper.config.Error;
 import com.googlecode.jmapper.generation.beans.Constructor;
 import com.googlecode.jmapper.generation.beans.Method;
-
+import static com.googlecode.jmapper.util.GeneralUtility.isNull;
 /**
  * Javassist implementation.
  * 
@@ -43,12 +43,14 @@ public class JavassistGenerator implements ICodeGenerator {
 		ClassPool.getDefault().insertClassPath(new ClassClassPath(IMapper.class));
 	}
 	
-	public Class<?> generate(String clazzName, List<Constructor> constructors,
-			List<Method> methods) throws Throwable {
+	public Class<?> generate(String clazzName, List<Constructor> constructors, List<Method> methods) throws Throwable {
+		
+		CtClass cc = null;
+		
 		try{
 			ClassPool cp = ClassPool.getDefault();
 			// create the class
-			CtClass cc = cp.makeClass(clazzName);
+			cc = cp.makeClass(clazzName);
 			
 			// adds the interface
 			cc.addInterface(cp.get(IMapper.class.getName()));
@@ -76,9 +78,16 @@ public class JavassistGenerator implements ICodeGenerator {
 			}
 			
 			Class<?> generetedClass = cc.toClass();
-			cc.defrost();
 			return generetedClass;
-		}catch (NotFoundException e) { Error.notFoundException(e); }
+			
+		}catch (NotFoundException e) { 
+			Error.notFoundException(e); 
+			
+		}finally{
+			if(!isNull(cc)) 
+				cc.defrost();
+		}
+		
 		return null;
 	}
 	

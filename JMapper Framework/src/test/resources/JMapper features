@@ -80,7 +80,7 @@ Versione 1.6.0.1 RILASCIATA:
   	 
  - bug fixed https://github.com/jmapper-framework/jmapper-core/issues/27
    RelationalJMapper non prendeva JmapperAPI in input
- - bug fixed https://github.com/jmapper-framework/jmapper-core/issues/27
+ - bug fixed https://github.com/jmapper-framework/jmapper-core/issues/29
    risolto problema legato al multi threading
  - bug fixed https://github.com/jmapper-framework/jmapper-core/issues/30
    implementato il cast tra source di tipo Object e destination di tipo primitivo/wrapper 
@@ -94,8 +94,10 @@ Versione 1.6.1
  - ConfigHelper
  - JMapperCache
  - implementare bytecode generators
+ - creare collection in destinazione della stessa grandezza del source
  - la conversione List<wrapper> <-> List<bean> non è agevole, pensare ad una miglioria
-	magari dalla definizione del nested mapping stesso esempio ${nestedField(0).field} 
+	magari dalla definizione del nested mapping stesso esempio ${nestedField(0).field}
+	 
 2.0.0
 
  - Multiple Mapping

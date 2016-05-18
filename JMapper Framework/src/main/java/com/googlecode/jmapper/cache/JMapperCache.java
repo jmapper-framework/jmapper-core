@@ -51,6 +51,9 @@ public class JMapperCache {
 	 * 
 	 * @param destination the Destination Class
 	 * @param source the Source Class
+	 * @param <D> Destination class
+	 * @param <S> Source Class
+	 * @return the mapper instance
 	 */
 	public static <D,S> IJMapper<D, S> getMapper(final Class<D> destination, final Class<S> source){
 		return getMapper(destination,source, undefinedConfig());
@@ -63,7 +66,9 @@ public class JMapperCache {
 	 * @param destination the Destination Class
 	 * @param source the Source Class
 	 * @param chooseConfig the configuration to load
-	 * @see ChooseConfig
+	 * @param <D> Destination class
+	 * @param <S> Source Class
+	 * @return the mapper instance
 	 */
 	public static <D,S> IJMapper<D, S> getMapper(final Class<D> destination,final Class<S> source,final ChooseConfig chooseConfig) {
 		return getMapper(destination,source,chooseConfig,undefinedXML());
@@ -76,7 +81,9 @@ public class JMapperCache {
 	 * @param destination the Destination Class
 	 * @param source the Source Class
 	 * @param api JMapperAPI configuration
-	 * @see ChooseConfig
+	 * @param <D> Destination class
+	 * @param <S> Source Class
+	 * @return the mapper instance
 	 */
 	public static <D,S> IJMapper<D, S> getMapper(final Class<D> destination,final Class<S> source,final JMapperAPI api) {
 		return getMapper(destination,source,api.toXStream().toString());
@@ -90,7 +97,9 @@ public class JMapperCache {
 	 * @param source the Source Class
 	 * @param config the configuration to load
 	 * @param api JMapperAPI configuration
-	 * @see ChooseConfig
+	 * @param <D> Destination class
+	 * @param <S> Source Class
+	 * @return the mapper instance
 	 */
 	public static <D,S> IJMapper<D, S> getMapper(final Class<D> destination,final Class<S> source, final ChooseConfig config, final JMapperAPI api) {
 		return getMapper(destination, source, config, api.toXStream().toString());
@@ -102,7 +111,9 @@ public class JMapperCache {
 	 * @param destination the Destination Class
 	 * @param source the Source Class
 	 * @param xml xml configuration as content or path format
-	 * @see ChooseConfig
+	 * @param <D> Destination class
+	 * @param <S> Source Class
+	 * @return the mapper instance
 	 */
 	public static <D,S> IJMapper<D, S> getMapper(final Class<D> destination,final Class<S> source,final String xml) {
 		return getMapper(destination,source,null,xml);
@@ -116,7 +127,9 @@ public class JMapperCache {
 	 * @param source the Source Class
 	 * @param config the configuration to load
 	 * @param xml xml configuration as content or path format
-	 * @see ChooseConfig
+	 * @param <D> Destination class
+	 * @param <S> Source Class
+	 * @return the mapper instance
 	 */
 	@SuppressWarnings("unchecked")
 	public static synchronized <D,S> IJMapper<D, S> getMapper(final Class<D> destination,final Class<S> source,final ChooseConfig config,final String xml) {
@@ -135,6 +148,8 @@ public class JMapperCache {
 	 * Returns an instance of RelationalJMapper from cache if exists, in alternative a new instance.
 	 * <br>Takes in input only the annotated Class
 	 * @param configuredClass configured class
+	 * @param <T> Mapped class type
+	 * @return the mapper instance
 	 */
 	public static <T> IRelationalJMapper<T> getRelationalMapper(final Class<T> configuredClass){
 		return getRelationalMapper(configuredClass, undefinedXML());
@@ -145,6 +160,8 @@ public class JMapperCache {
 	 * <br>Takes in input the configured Class and the configuration in API format.
 	 * @param configuredClass configured class
 	 * @param jmapperAPI the configuration
+	 * @param <T> Mapped class type
+	 * @return the mapper instance
 	 */
 	public static <T> IRelationalJMapper<T> getRelationalMapper(final Class<T> configuredClass, JMapperAPI jmapperAPI){
 		return getRelationalMapper(configuredClass, jmapperAPI.toXStream().toString());
@@ -155,6 +172,8 @@ public class JMapperCache {
 	 * <br>Takes in input only the configured Class and the xml mapping path or the xml as String format.
 	 * @param configuredClass configured class
 	 * @param xml XML path or xml as String
+	 * @param <T> Mapped class type
+	 * @return the mapper instance
 	 */
 	@SuppressWarnings("unchecked")
 	public static synchronized <T> IRelationalJMapper<T> getRelationalMapper(final Class<T> configuredClass, String xml){
@@ -172,7 +191,7 @@ public class JMapperCache {
 	}
 	 /**
      * This method is used to call a signature passing a null ChooseConfig instance.
-     * @return
+     * @return a ChooseConfig not valorized
      */
     private static ChooseConfig undefinedConfig(){
 		return null;
@@ -180,7 +199,7 @@ public class JMapperCache {
 
     /**
      * This method is used to call a signature passing a null String instance.
-     * @return
+     * @return an XML not valorized
      */
     private static String undefinedXML(){
 		return null;
@@ -190,6 +209,7 @@ public class JMapperCache {
 	 * Returns a unique name that identify this relationalMapper.
 	 * 
 	 * @param configuredClass configured class
+	 * @param resource resource to analyze
 	 * @return Returns a string that represents the identifier for this relationalMapper instance
 	 */
 	private static String relationalMapperName(Class<?> configuredClass, String resource){

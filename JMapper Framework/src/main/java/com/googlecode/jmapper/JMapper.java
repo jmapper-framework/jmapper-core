@@ -68,8 +68,8 @@ import com.googlecode.jmapper.generation.MapperBuilder;
  * // enrichment
  * jmapper.getDestination(destination, source);</code></pre>
  * @author Alessandro Vurro
- * @param <D> Type of the Destination Class
- * @param <S> Type of Source Class
+ * @param <D> Destination class
+ * @param <S> Source Class
  */
 public final class JMapper<D,S> implements IJMapper<D, S>{
 	

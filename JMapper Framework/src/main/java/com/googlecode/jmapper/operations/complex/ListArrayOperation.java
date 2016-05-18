@@ -56,6 +56,8 @@ public class ListArrayOperation extends AComplexOperation{
 		
 		Map<String, String> vars = new HashMap<String, String>();
 		
+		String sourceLength = c("sourceLength");
+
 		vars.put("dClass"                  ,dItemType.getName());
 		vars.put("sClass"                  ,sItemType.getName());
 		vars.put("dItem"				   ,c("objectOfDestination"));
@@ -64,8 +66,9 @@ public class ListArrayOperation extends AComplexOperation{
 		vars.put("destination"             ,s(destination));
 		vars.put("i"                       ,c("index"));
 		vars.put("getSource()"             ,s(getSource()));
+		vars.put("sLength"                 , sourceLength);
 		vars.put("conversion"              ,s(conversion));
-		vars.put("newInstance(destination)",s(newInstance(destination)));
+		vars.put("newInstance(destination)",s(newInstance(destination, sourceLength)));
 		
 		count++;
 		
@@ -84,9 +87,10 @@ public class ListArrayOperation extends AComplexOperation{
 			 return write(sb,content);
 		}
 		
-		return write(replace$("   $newInstance(destination)"
-				  + newLine + "   $sClass[] $source = $getSource();"
-				  + newLine + "   for(int $i = $source.length-1;$i >=0;$i--){"
+		return write(replace$("   $sClass[] $source = $getSource();"
+				  + newLine + "   int $sLength = $source.length;"
+				  + newLine + "   $newInstance(destination)"
+				  + newLine + "   for(int $i = 0;$i<$sLength;$i++){"
 				  + newLine + "   $sClass $sItem = ($sClass) $source[$i];"
 				  + newLine + "   $dClass $dItem = $conversion;"
 				  + newLine + "   $destination.add($dItem);"

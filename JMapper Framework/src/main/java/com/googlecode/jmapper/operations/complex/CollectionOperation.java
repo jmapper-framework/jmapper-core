@@ -83,22 +83,26 @@ public class CollectionOperation extends AComplexOperation {
 		
 		Map<String, String> vars = new HashMap<String, String>();
 		
+		String sourceLength = c("sourceLength");
+
 		vars.put("dClass"                  ,itemDClass.getName());
 		vars.put("sClass"                  ,itemSClass.getName());
 		vars.put("dItem"				   ,c("objectOfDestination"));
 		vars.put("sItem"                   ,s(sItem));
+		vars.put("sLength"                 , sourceLength);
 		vars.put("source"                  ,c("collectionOfSource"));
 		vars.put("destination"             ,s(getSourceConverted()));
 		vars.put("i"                       ,c("index"));
 		vars.put("getSource()"             ,s(getSource()));
 		vars.put("conversion"              ,s(conversion));
-		vars.put("newInstance(destination)",s(newInstance(getSourceConverted())));
+		vars.put("newInstance(destination)",s(newInstance(getSourceConverted(),sourceLength)));
 		
 		count++;
-		
-		return write(replace$("   $newInstance(destination)"
-				  + newLine + "   Object[] $source = $getSource().toArray();"
-				  + newLine + "   for(int $i = $source.length-1;$i >=0;$i--){"
+
+		return write(replace$("   Object[] $source = $getSource().toArray();"
+				  + newLine + "   int $sLength = $source.length;"
+				  + newLine + "   $newInstance(destination)"
+				  + newLine + "   for(int $i = 0;$i < $sLength;$i++){"
 				  + newLine + "   $sClass $sItem = ($sClass) $source[$i];"
 				  + newLine + "   $dClass $dItem = $conversion;"
 				  + newLine + "   $destination.add($dItem);"

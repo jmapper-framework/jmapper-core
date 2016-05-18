@@ -1,8 +1,5 @@
 package com.googlecode.jmapper;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
-
 import com.googlecode.jmapper.conversions.explicit.ExplicitComplexConversion2Test;
 import com.googlecode.jmapper.conversions.explicit.ExplicitComplexConversion3Test;
 import com.googlecode.jmapper.conversions.explicit.ExplicitComplexConversionTest;
@@ -50,9 +47,13 @@ import com.googlecode.jmapper.util.ClassesManagerTest;
 import com.googlecode.jmapper.xml.XmlConverterTest;
 import com.googlecode.jmapper.xml.util.XmlUtilityTest;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 public class JUnitTests {
 
 	public static Test suite() { 
+		
 		TestSuite suite = new TestSuite(JUnitTests.class.getName());
 		
 		/*	Tests on explicit conversion          */
