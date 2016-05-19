@@ -9,7 +9,7 @@
   <artifactId>jmapper-core</artifactId>
   <packaging>jar</packaging>
   <name>JMapper Framework</name>
-  <version>1.6.0.1</version>
+  <version>1.6.1.CR1</version>
   
   <description>
   JMapper Framework is a java bean mapper based on javassist. JMapper exposes 
