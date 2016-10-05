@@ -68,7 +68,7 @@ public final class XML {
 			if(isPath(xmlPath))
 				this.xmlPath = atRuntime?xmlPath:fullPathOf(xmlPath);
 			else
-				this.xmlPath = "";//TODO scrivere il messaggio da visualizzare
+				this.xmlPath = "";//TODO XML -> scrivere il messaggio da visualizzare 
 		}
 		
 		if(isNull(xmlJmapper))xmlJmapper = new XmlJmapper();

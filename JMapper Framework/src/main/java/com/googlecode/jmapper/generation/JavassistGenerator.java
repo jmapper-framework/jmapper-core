@@ -15,21 +15,25 @@
  */
 package com.googlecode.jmapper.generation;
 
+import static com.googlecode.jmapper.util.GeneralUtility.isEmpty;
+import static com.googlecode.jmapper.util.GeneralUtility.isNull;
+
 import java.util.List;
+
+import com.googlecode.jmapper.DestinationFactory;
+import com.googlecode.jmapper.IMapper;
+import com.googlecode.jmapper.Mapper;
+import com.googlecode.jmapper.config.Error;
+import com.googlecode.jmapper.generation.beans.Method;
 
 import javassist.CannotCompileException;
 import javassist.ClassClassPath;
 import javassist.ClassPool;
 import javassist.CtClass;
-import javassist.CtConstructor;
 import javassist.CtMethod;
+import javassist.CtNewConstructor;
+import javassist.Modifier;
 import javassist.NotFoundException;
-
-import com.googlecode.jmapper.IMapper;
-import com.googlecode.jmapper.config.Error;
-import com.googlecode.jmapper.generation.beans.Constructor;
-import com.googlecode.jmapper.generation.beans.Method;
-import static com.googlecode.jmapper.util.GeneralUtility.isNull;
 /**
  * Javassist implementation.
  * 
@@ -40,43 +44,49 @@ public class JavassistGenerator implements ICodeGenerator {
 	
 	static{
 		// ClassPool initialization
+		ClassPool.getDefault().insertClassPath(new ClassClassPath(DestinationFactory.class));
 		ClassPool.getDefault().insertClassPath(new ClassClassPath(IMapper.class));
+		ClassPool.getDefault().insertClassPath(new ClassClassPath(Mapper.class));
 	}
 	
-	public Class<?> generate(String clazzName, List<Constructor> constructors, List<Method> methods) throws Throwable {
+	public Class<?> generate(String clazzName, List<Method> methods) throws Throwable {
 		
 		CtClass cc = null;
 		
 		try{
 			ClassPool cp = ClassPool.getDefault();
+			
 			// create the class
 			cc = cp.makeClass(clazzName);
 			
-			// adds the interface
-			cc.addInterface(cp.get(IMapper.class.getName()));
+			// adds the superclass
+			cc.setSuperclass(cp.get(Mapper.class.getName()));
 			
 			// adds constructor
-			for (Constructor constructor : constructors) {
-				// create constructor
-				CtConstructor ctConstructor = new CtConstructor(toCtClass(constructor.getParameters()), cc);
-				// set body constructor
-				ctConstructor.setBody(constructor.getBody());
-				// add constructor to CtClass
-				cc.addConstructor(ctConstructor);	
-			}
+			CtNewConstructor.defaultConstructor(cc);
 			
 			// adds methods
 			for (Method method : methods) {
-				try{// create method
-					CtMethod ctMethod = new CtMethod(toCtClass(method.getReturnType())[0],method.getName(), toCtClass(method.getParameters()), cc);
+				try{
+					
+					CtClass[] returnTypes = toCtClass(method.getReturnType());
+					CtClass[] parameters = toCtClass(method.getParameters());
+					
+					CtClass returnType = isEmpty(returnTypes) ? CtClass.voidType : returnTypes[0];
+					
+					// create method
+					CtMethod ctMethod = new CtMethod(returnType, method.getName(), parameters, cc);
+					// add method to CtClass
+					cc.addMethod(ctMethod); 
 					// set body method
 					ctMethod.setBody(method.getBody());
-					// add method to CtClass
-					cc.addMethod(ctMethod); }
-				catch (CannotCompileException e) { 
-					Error.bodyContainsIllegalCode(method,e); } 
+				
+				} catch (CannotCompileException e) { 
+					Error.bodyContainsIllegalCode(method,e); 
+				} 
 			}
 			
+			cc.setModifiers(cc.getModifiers() & ~Modifier.ABSTRACT);
 			Class<?> generetedClass = cc.toClass();
 			return generetedClass;
 			
@@ -99,6 +109,10 @@ public class JavassistGenerator implements ICodeGenerator {
 	 */
 	private static CtClass[] toCtClass(Class<?>... classes) throws Exception{
 		ClassPool cp = ClassPool.getDefault();
+		
+		if(isEmpty(classes) || isNull(classes[0])) 
+			return null;
+		
 		CtClass[] parameters = new CtClass[classes.length];
 		for(int i=0;i<classes.length;i++)
 			parameters[i]=cp.get(classes[i].getName());

@@ -40,7 +40,7 @@ public abstract class AComplexOperation extends AGeneralOperation{
 	/** 
 	 * @return Returns the name of the object shared between existingField and fieldToCreate methods.
 	 * */
-	protected Object getSourceConverted(){
+	protected String getSourceConverted(){
 		if(isNull(sourceConverted))
 			sourceConverted = getSourceConvertedName();
 		return sourceConverted;

@@ -179,8 +179,8 @@ public final class OperationHandler {
 			if(operationType.isComplex())
 				complexOperations.add(((AComplexOperation) operation)
 						.setDestinationClass(defineStructure(destinationMappedField.getValue(), sourceMappedField.getValue())));
-					
-			if(operationType.isRecursive())
+			
+ 			if(operationType.isRecursive())
 				((ARecursiveOperation) operation).setDynamicMethodsToWrite(dynamicMethodsToWrite)
 				 							     .setXml(xml)
 				                                 .setConfigChosen(isNull(info.getConfigChosen()) // if both classes are configured

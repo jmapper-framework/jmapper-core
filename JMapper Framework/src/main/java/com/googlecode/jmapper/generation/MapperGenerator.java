@@ -16,7 +16,7 @@
 
 package com.googlecode.jmapper.generation;
 
-import static com.googlecode.jmapper.util.GeneralUtility.*;
+import static com.googlecode.jmapper.util.GeneralUtility.isNull;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -26,7 +26,6 @@ import java.util.regex.Pattern;
 import org.reflections.Reflections;
 
 import com.googlecode.jmapper.IMapper;
-import com.googlecode.jmapper.generation.beans.Constructor;
 import com.googlecode.jmapper.generation.beans.Method;
 
 /**
@@ -47,18 +46,17 @@ public class MapperGenerator {
 	 */
 	public static Class<?> generateMapperClass(MapperConstructor mapping, Set<Method> dynamicMethods) throws Throwable{
 		
-		// adds empty constructor
-		ArrayList<Constructor> constructors = list(new Constructor());
-
 		// adds methods to generate
 		Map<String, String> mappings = mapping.getMappings();
 
 		ArrayList<Method> methods = new ArrayList<Method>(dynamicMethods);
+		
 		for (java.lang.reflect.Method method : IMapper.class.getDeclaredMethods())
-									// construction of the method signature
-			methods.add(new Method(method.getReturnType(), method.getParameterTypes(), method.getName())
-									// construction of the method body
-									.setBody("{"+mappings.get(method.getName())+"}"));
+			if(mappings.containsKey(method.getName()))
+				// construction of the method signature
+				methods.add(new Method(method.getReturnType(), method.getParameterTypes(), method.getName())
+						// construction of the method body
+						.setBody("{"+mappings.get(method.getName())+"}"));
 		
 		String className = mapping.getMapperName();
 		
@@ -73,7 +71,7 @@ public class MapperGenerator {
 		for (Method method : methods) 
 			method.setBody(replace(method.getBody()));
 		
-		return generator.generate(className, constructors, methods);
+		return generator.generate(className, methods);
 	}
 	
 	/**

@@ -33,7 +33,7 @@ import com.googlecode.jmapper.operations.beans.MappedField;
 import com.googlecode.jmapper.operations.info.NestedMappedField;
 import com.googlecode.jmapper.operations.info.NestedMappingInfo;
 import com.googlecode.jmapper.xml.XML;
-
+import static com.googlecode.jmapper.config.Constants.ELVIS_OPERATOR;
 
 /**
  * Nested mapping Handler.
@@ -60,6 +60,29 @@ public class NestedMappingHandler {
 		return nestedMappingPath
 				 .substring(NESTED_MAPPING_STARTS_SYMBOL.length(), nestedMappingPath.length() - NESTED_MAPPING_ENDS_SYMBOL.length())
 		         .split(NESTED_MAPPING_SPLIT_SYMBOL);
+	}
+	
+	/**
+	 * It checks the presence of the elvis operator and how it is used.
+	 * @param nestedFieldName field name to check
+	 * @return true if is used an elvis operator, false otherwise, for all other cases a MappingException will be thrown 
+	 */
+	public static boolean elvisOperatorDefined(String nestedFieldName){
+		if(nestedFieldName.contains(ELVIS_OPERATOR))
+			if(!nestedFieldName.startsWith(ELVIS_OPERATOR))
+				throw new MappingException("Elvis operator bust be the first symbol after dot notation");
+			else
+				return true;
+		
+		return false;
+	}
+	
+	/**
+	 * @param nestedFieldName nested field filtered
+	 * @return the filtered name of this field
+	 */
+	public static String elvisOperatorFilter(String nestedFieldName){
+		return nestedFieldName.substring(1);
 	}
 	
 	/**
@@ -117,6 +140,11 @@ public class NestedMappingHandler {
 			// from first field to second-last it's only checked get accessor 
 			for(int i = 0; i< nestedFields.length-1;i++){
 				String nestedFieldName = nestedFields[i];
+				
+				boolean elvisOperatorDefined = elvisOperatorDefined(nestedFieldName);
+				if(elvisOperatorDefined)
+					nestedFieldName = elvisOperatorFilter(nestedFieldName);
+				
 				field = retrieveField(nestedClass, nestedFieldName);
 				
 				if(isNull(field))
@@ -129,13 +157,18 @@ public class NestedMappingHandler {
 						                                : checkAccessors(xml, nestedClass, field);
 				
 				// storage information relating to the piece of path
-				info.addNestedField(new NestedMappedField(nestedField, nestedClass));
+				info.addNestedField(new NestedMappedField(nestedField, nestedClass, elvisOperatorDefined));
 				
 				nestedClass = field.getType();
 			}
 			
 			// the last fields in the path must have get and set accessors
 			String lastNestedFieldName = nestedFields[nestedFields.length-1];
+			
+			boolean elvisOperatorDefined = elvisOperatorDefined(lastNestedFieldName);
+			if(elvisOperatorDefined)
+				lastNestedFieldName = elvisOperatorFilter(lastNestedFieldName);
+			
 			field = retrieveField(nestedClass,lastNestedFieldName);
 			
 			if(isNull(field))
@@ -144,8 +177,8 @@ public class NestedMappingHandler {
 			// verifies if is exists get and set methods for the last nested field
 			MappedField nestedField = checkAccessors(xml, nestedClass, field);
 			
-			// storage information relatiing to the last piece of path
-			info.addNestedField(new NestedMappedField(nestedField, nestedClass));
+			// storage information relating to the last piece of path
+			info.addNestedField(new NestedMappedField(nestedField, nestedClass, elvisOperatorDefined));
 			
 		}catch(MappingException e){
 			

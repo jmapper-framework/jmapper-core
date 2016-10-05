@@ -78,7 +78,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin> 
 			<plugin>
 			  <groupId>org.apache.maven.plugins</groupId>
 			  <artifactId>maven-compiler-plugin</artifactId>
@@ -91,7 +91,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>3.0.0</version>
+				<version>3.0.1</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
@@ -104,7 +104,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.10.3</version>
+				<version>2.10.4</version>
 				<executions>
 					<execution>
 						<id>attach-javadocs</id>
@@ -117,7 +117,7 @@
 			<plugin>
 			    <groupId>org.eluder.coveralls</groupId>
 			    <artifactId>coveralls-maven-plugin</artifactId>
-			    <version>4.1.0</version>
+			    <version>4.2.0</version>
 			</plugin>
 			<plugin>
 			    <groupId>org.codehaus.mojo</groupId>

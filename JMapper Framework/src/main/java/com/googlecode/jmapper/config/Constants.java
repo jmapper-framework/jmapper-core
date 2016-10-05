@@ -28,6 +28,7 @@ public final class Constants {
 	public static final String NESTED_MAPPING_STARTS_SYMBOL = "${";
 	public static final String NESTED_MAPPING_ENDS_SYMBOL = "}";
 	public static final String NESTED_MAPPING_SPLIT_SYMBOL = "\\.";
+	public static final String ELVIS_OPERATOR = "?";
 	
 	public static final String THE_FIELD_IS_NOT_CONFIGURED = "THE_FIELD_IS_NOT_CONFIGURED";
 	public static final String DESTINATION_DEFAULT_NAME = "destination";
@@ -49,7 +50,7 @@ public final class Constants {
 	public static final String dynamicConversionParameterException = "dynamicConversionParameterException";
 	public static final String conversionParameterException = "conversionParameterException";
 	public static final String conversionBodyIllegalCode = "conversionBodyIllegalCode";
-	public static final String conversionIllegalSignature = "conversionIllegalSignature";
+	public static final String conversionBodyIllegalCode2 = "conversionBodyIllegalCode2";
 	public static final String noRelationshipException = "noRelationshipException";
 	public static final String xmlMappingGlobalExistException = "xmlMappingGlobalExistException";
 	public static final String xmlMappingGlobalDoesNotExistException = "xmlMappingGlobalDoesNotExistException"; 
@@ -86,4 +87,5 @@ public final class Constants {
 	public static final String FileNotFoundException3 = "FileNotFoundException3";
 	public static final String loadingFileException2 = "loadingFileException2";
 	public static final String InvalidNestedMappingException = "InvalidNestedMappingException";
+	public static final String absentFactoryAndEmptyConstructorException = "absentFactoryAndEmptyConstructorException";
 }

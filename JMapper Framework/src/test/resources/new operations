@@ -1,0 +1,10 @@
+
+  CREAZIONE NUOVE OPERAZIONI
+  
+  
+    - Creare l'Analyzer -> creare una classe che implementi l'interfaccia IOperationAnalyzer
+    - Creare l'operazione -> creare una classe che estenda AComplexOperation
+    - Aggiungere Tipologia nella enumerazione OperationType
+    - Aggiungere l'Analyzer in OperationAnalyzer
+    - Aggiungere l'operazione in OperationFactory
+    

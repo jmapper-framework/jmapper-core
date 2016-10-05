@@ -85,18 +85,34 @@ Versione 1.6.0.1 RILASCIATA:
  - bug fixed https://github.com/jmapper-framework/jmapper-core/issues/30
    implementato il cast tra source di tipo Object e destination di tipo primitivo/wrapper 
 
-Versione 1.6.1
+Versione 1.6.1.CR
 
- - aggiungere operazione del tipo set <-> Array 
- - conversione StringBuilder String
- - conversione di enumeration String
- - conversione Date Calendar
- - ConfigHelper
- - JMapperCache
+ V conversion StringBuffer String
+ V conversione StringBuilder String
+ V conversione di enumeration String
+ V conversione Date Calendar
+ V - JMapperCache
+ V - creare collection in destinazione della stessa grandezza del source
+ V - immutable objects
+ 
+ Versione 1.6.1
+ 
+  - completare ConfigHelper
+  - sistemare exception XML (che sarebbero anche API ora)
+  
+ 
+ Successivamente ? 
+ 
  - implementare bytecode generators
- - creare collection in destinazione della stessa grandezza del source
+ - aggiungere operazione del tipo set <-> Array 
  - la conversione List<wrapper> <-> List<bean> non è agevole, pensare ad una miglioria
 	magari dalla definizione del nested mapping stesso esempio ${nestedField(0).field}
+	
+	${users().name} con parentesi vuote si intende di passare ogni elemento della lista
+	nella lista target, ad esempio List<String> dest <- List<Bean> users
+	
+	${users(1).name} con indice si intende che solo quel campo di quel bean in quella posizione
+	va mappato nel campo target, ad esempio String dest <- List<Bean> users
 	 
 2.0.0
 
@@ -151,8 +167,9 @@ Versione 1.6.1
            Per riflettere invece JMultiMaps basteràƒ  dichiarare piu nodi target. 
 
 
- - package rinaming da com.googlecode.jmapper.* a com.jmapper.*
- - annotation renaming da JMap a Mapping
+ - package rinaming da com.googlecode.jmapper.* a com.github.jmapper.*
+ - annotation renaming:
+   da JMap a Mapping
    da JGlobalMap a GlobalMapping
    da JMapConversion a Conversion
    da JMapAccessor a Accessor

@@ -91,7 +91,7 @@ public class ArrayListAnalyzer implements IOperationAnalyzer{
 		}
 
 		if(isAssignableFrom(dItem,sItem))
-			return operation.setConversionType (ABSENT);
+			return operation.setConversionType(ABSENT);
 
 		// if components are primitive or wrapper types, apply implicit conversion
 		if(areBasic(dItem,sItem))

@@ -49,10 +49,20 @@ public class MappedMapOperationTest extends AOperation<MappedMapOperation>{
 		 newLine + "   java.util.Map.Entry entryItem$i = (java.util.Map.Entry) mapOfSource$i[index$i];"+
 		 newLine + "   com.googlecode.jmapper.bean.TargetObject sourceKeyObj$i = (com.googlecode.jmapper.bean.TargetObject) entryItem$i.getKey();"+
 		 newLine + "   com.googlecode.jmapper.bean.MappedObject sourceValueObj$i = (com.googlecode.jmapper.bean.MappedObject) entryItem$i.getValue();"+
-		 newLine + "   com.googlecode.jmapper.bean.MappedObject destinationKeyObj$i = new com.googlecode.jmapper.bean.MappedObject();"+
+newLine + "   com.googlecode.jmapper.bean.MappedObject destinationKeyObj$i = null;" +
+newLine + "   if(super.getDestinationFactory()!=null){" +
+newLine + "   destinationKeyObj$i = (com.googlecode.jmapper.bean.MappedObject) super.getDestinationFactory().make();" +
+newLine + "   }else{" +
+newLine + "   destinationKeyObj$i = new com.googlecode.jmapper.bean.MappedObject();" +
+newLine + "   }" + 
 		 newLine + "   destinationKeyObj$i.setField(sourceKeyObj$i.getField());"+
 		 newLine + 
-		 newLine + "   com.googlecode.jmapper.bean.TargetObject destinationValueObj$i = new com.googlecode.jmapper.bean.TargetObject();"+
+newLine + "   com.googlecode.jmapper.bean.TargetObject destinationValueObj$i = null;" +
+newLine + "   if(super.getDestinationFactory()!=null){" +
+newLine + "   destinationValueObj$i = (com.googlecode.jmapper.bean.TargetObject) super.getDestinationFactory().make();" +
+newLine + "   }else{" +
+newLine + "   destinationValueObj$i = new com.googlecode.jmapper.bean.TargetObject();" +
+newLine + "   }" + 
 		 newLine + "   destinationValueObj$i.setField(sourceValueObj$i.getField());"+
 		 newLine + 
 		 newLine + "   mapOfDestination$i.put(destinationKeyObj$i, destinationValueObj$i);"+
@@ -74,11 +84,21 @@ public class MappedMapOperationTest extends AOperation<MappedMapOperation>{
 		 newLine + "   java.util.Map.Entry entryItem$i = (java.util.Map.Entry) mapOfSource$i[index$i];"+
 		 newLine + "   com.googlecode.jmapper.bean.TargetObject sourceKeyObj$i = (com.googlecode.jmapper.bean.TargetObject) entryItem$i.getKey();"+
 		 newLine + "   com.googlecode.jmapper.bean.MappedObject sourceValueObj$i = (com.googlecode.jmapper.bean.MappedObject) entryItem$i.getValue();"+
-		 newLine + "   com.googlecode.jmapper.bean.MappedObject destinationKeyObj$i = new com.googlecode.jmapper.bean.MappedObject();"+
-		 newLine + "   destinationKeyObj$i.setField(sourceKeyObj$i.getField());"+
+		 newLine + "   com.googlecode.jmapper.bean.MappedObject destinationKeyObj$i = null;" +
+		 newLine + "   if(super.getDestinationFactory()!=null){" +
+		 newLine + "   destinationKeyObj$i = (com.googlecode.jmapper.bean.MappedObject) super.getDestinationFactory().make();" +
+		 newLine + "   }else{" +
+		 newLine + "   destinationKeyObj$i = new com.googlecode.jmapper.bean.MappedObject();" +
+		 newLine + "   }" + 
+newLine + "   destinationKeyObj$i.setField(sourceKeyObj$i.getField());"+
 		 newLine + 
-		 newLine + "   com.googlecode.jmapper.bean.TargetObject destinationValueObj$i = new com.googlecode.jmapper.bean.TargetObject();"+
-		 newLine + "   destinationValueObj$i.setField(sourceValueObj$i.getField());"+
+newLine + "   com.googlecode.jmapper.bean.TargetObject destinationValueObj$i = null;" +
+newLine + "   if(super.getDestinationFactory()!=null){" +
+newLine + "   destinationValueObj$i = (com.googlecode.jmapper.bean.TargetObject) super.getDestinationFactory().make();" +
+newLine + "   }else{" +
+newLine + "   destinationValueObj$i = new com.googlecode.jmapper.bean.TargetObject();" +
+newLine + "   }" + 
+newLine + "   destinationValueObj$i.setField(sourceValueObj$i.getField());"+
 		 newLine + 
 		 newLine + "   mapOfDestination$z.put(destinationKeyObj$i, destinationValueObj$i);"+
 		 newLine + "   }"+
@@ -95,11 +115,21 @@ public class MappedMapOperationTest extends AOperation<MappedMapOperation>{
 		 newLine + "   java.util.Map.Entry entryItem$y = (java.util.Map.Entry) mapOfSource$y[index$y];"+
 		 newLine + "   com.googlecode.jmapper.bean.TargetObject sourceKeyObj$y = (com.googlecode.jmapper.bean.TargetObject) entryItem$y.getKey();"+
 		 newLine + "   com.googlecode.jmapper.bean.MappedObject sourceValueObj$y = (com.googlecode.jmapper.bean.MappedObject) entryItem$y.getValue();"+
-		 newLine + "   com.googlecode.jmapper.bean.MappedObject destinationKeyObj$y = new com.googlecode.jmapper.bean.MappedObject();"+
-		 newLine + "   destinationKeyObj$y.setField(sourceKeyObj$y.getField());"+
+		 newLine + "   com.googlecode.jmapper.bean.MappedObject destinationKeyObj$y = null;" +
+		 newLine + "   if(super.getDestinationFactory()!=null){" +
+		 newLine + "   destinationKeyObj$y = (com.googlecode.jmapper.bean.MappedObject) super.getDestinationFactory().make();" +
+		 newLine + "   }else{" +
+		 newLine + "   destinationKeyObj$y = new com.googlecode.jmapper.bean.MappedObject();" +
+		 newLine + "   }" + 
+newLine + "   destinationKeyObj$y.setField(sourceKeyObj$y.getField());"+
 		 newLine + 
-		 newLine + "   com.googlecode.jmapper.bean.TargetObject destinationValueObj$y = new com.googlecode.jmapper.bean.TargetObject();"+
-		 newLine + "   destinationValueObj$y.setField(sourceValueObj$y.getField());"+
+newLine + "   com.googlecode.jmapper.bean.TargetObject destinationValueObj$y = null;" +
+newLine + "   if(super.getDestinationFactory()!=null){" +
+newLine + "   destinationValueObj$y = (com.googlecode.jmapper.bean.TargetObject) super.getDestinationFactory().make();" +
+newLine + "   }else{" +
+newLine + "   destinationValueObj$y = new com.googlecode.jmapper.bean.TargetObject();" +
+newLine + "   }" + 
+newLine + "   destinationValueObj$y.setField(sourceValueObj$y.getField());"+
 		 newLine + 
 		 newLine + "   mapOfDestination$z.put(destinationKeyObj$y, destinationValueObj$y);"+
 		 newLine + "   }"+
@@ -124,13 +154,24 @@ public class MappedMapOperationTest extends AOperation<MappedMapOperation>{
 		 newLine + "   java.util.Map.Entry entryItem$i = (java.util.Map.Entry) mapOfSource$i[index$i];"+
 		 newLine + "   com.googlecode.jmapper.bean.TargetObject sourceKeyObj$i = (com.googlecode.jmapper.bean.TargetObject) entryItem$i.getKey();"+
 		 newLine + "   com.googlecode.jmapper.bean.MappedObject sourceValueObj$i = (com.googlecode.jmapper.bean.MappedObject) entryItem$i.getValue();"+
-		 newLine + "   com.googlecode.jmapper.bean.MappedObject destinationKeyObj$i = new com.googlecode.jmapper.bean.MappedObject();"+
+		 newLine + "   com.googlecode.jmapper.bean.MappedObject destinationKeyObj$i = null;" +
+		 newLine + "   if(super.getDestinationFactory()!=null){" +
+		 newLine + "   destinationKeyObj$i = (com.googlecode.jmapper.bean.MappedObject) super.getDestinationFactory().make();" +
+		 newLine + "   }else{" +
+		 newLine + "   destinationKeyObj$i = new com.googlecode.jmapper.bean.MappedObject();" +
+		 newLine + "   }" + 
+
 		 newLine + "   if(sourceKeyObj$i.getField()!=null){"+
 		 newLine + "   destinationKeyObj$i.setField(sourceKeyObj$i.getField());"+
 		 newLine + "   }"+
 		 newLine + 
-		 newLine + "   com.googlecode.jmapper.bean.TargetObject destinationValueObj$i = new com.googlecode.jmapper.bean.TargetObject();"+
-		 newLine + "   if(sourceValueObj$i.getField()!=null){"+ 
+newLine + "   com.googlecode.jmapper.bean.TargetObject destinationValueObj$i = null;" +
+newLine + "   if(super.getDestinationFactory()!=null){" +
+newLine + "   destinationValueObj$i = (com.googlecode.jmapper.bean.TargetObject) super.getDestinationFactory().make();" +
+newLine + "   }else{" +
+newLine + "   destinationValueObj$i = new com.googlecode.jmapper.bean.TargetObject();" +
+newLine + "   }" + 
+newLine + "   if(sourceValueObj$i.getField()!=null){"+ 
 		 newLine + "   destinationValueObj$i.setField(sourceValueObj$i.getField());"+
 		 newLine + "   }"+
 		 newLine + 
@@ -151,13 +192,23 @@ public class MappedMapOperationTest extends AOperation<MappedMapOperation>{
 		 newLine + "   java.util.Map.Entry entryItem$i = (java.util.Map.Entry) mapOfSource$i[index$i];"+
 		 newLine + "   com.googlecode.jmapper.bean.TargetObject sourceKeyObj$i = (com.googlecode.jmapper.bean.TargetObject) entryItem$i.getKey();"+
 		 newLine + "   com.googlecode.jmapper.bean.MappedObject sourceValueObj$i = (com.googlecode.jmapper.bean.MappedObject) entryItem$i.getValue();"+
-		 newLine + "   com.googlecode.jmapper.bean.MappedObject destinationKeyObj$i = new com.googlecode.jmapper.bean.MappedObject();"+
+		 newLine + "   com.googlecode.jmapper.bean.MappedObject destinationKeyObj$i = null;" +
+		 newLine + "   if(super.getDestinationFactory()!=null){" +
+		 newLine + "   destinationKeyObj$i = (com.googlecode.jmapper.bean.MappedObject) super.getDestinationFactory().make();" +
+		 newLine + "   }else{" +
+		 newLine + "   destinationKeyObj$i = new com.googlecode.jmapper.bean.MappedObject();" +
+		 newLine + "   }" + 
 		 newLine + "   if(sourceKeyObj$i.getField()!=null){"+
 		 newLine + "   destinationKeyObj$i.setField(sourceKeyObj$i.getField());"+
 		 newLine + "   }"+ 
 		 newLine + 
-		 newLine + "   com.googlecode.jmapper.bean.TargetObject destinationValueObj$i = new com.googlecode.jmapper.bean.TargetObject();"+
-		 newLine + "   if(sourceValueObj$i.getField()!=null){"+
+	newLine + "   com.googlecode.jmapper.bean.TargetObject destinationValueObj$i = null;" +
+newLine + "   if(super.getDestinationFactory()!=null){" +
+newLine + "   destinationValueObj$i = (com.googlecode.jmapper.bean.TargetObject) super.getDestinationFactory().make();" +
+newLine + "   }else{" +
+newLine + "   destinationValueObj$i = new com.googlecode.jmapper.bean.TargetObject();" +
+newLine + "   }" + 
+newLine + "   if(sourceValueObj$i.getField()!=null){"+
 		 newLine + "   destinationValueObj$i.setField(sourceValueObj$i.getField());"+
 		 newLine + "   }"+
 		 newLine + 
@@ -172,13 +223,23 @@ public class MappedMapOperationTest extends AOperation<MappedMapOperation>{
 		 newLine + "   java.util.Map.Entry entryItem$y = (java.util.Map.Entry) mapOfSource$y[index$y];"+
 		 newLine + "   com.googlecode.jmapper.bean.TargetObject sourceKeyObj$y = (com.googlecode.jmapper.bean.TargetObject) entryItem$y.getKey();"+
 		 newLine + "   com.googlecode.jmapper.bean.MappedObject sourceValueObj$y = (com.googlecode.jmapper.bean.MappedObject) entryItem$y.getValue();"+
-		 newLine + "   com.googlecode.jmapper.bean.MappedObject destinationKeyObj$y = new com.googlecode.jmapper.bean.MappedObject();"+
-		 newLine + "   if(sourceKeyObj$y.getField()!=null){"+
+		 newLine + "   com.googlecode.jmapper.bean.MappedObject destinationKeyObj$y = null;" +
+		 newLine + "   if(super.getDestinationFactory()!=null){" +
+		 newLine + "   destinationKeyObj$y = (com.googlecode.jmapper.bean.MappedObject) super.getDestinationFactory().make();" +
+		 newLine + "   }else{" +
+		 newLine + "   destinationKeyObj$y = new com.googlecode.jmapper.bean.MappedObject();" +
+		 newLine + "   }" + 
+newLine + "   if(sourceKeyObj$y.getField()!=null){"+
 		 newLine + "   destinationKeyObj$y.setField(sourceKeyObj$y.getField());"+
 		 newLine + "   }"+
 		 newLine + 
-		 newLine + "   com.googlecode.jmapper.bean.TargetObject destinationValueObj$y = new com.googlecode.jmapper.bean.TargetObject();"+
-		 newLine + "   if(sourceValueObj$y.getField()!=null){"+
+		 newLine + "   com.googlecode.jmapper.bean.TargetObject destinationValueObj$y = null;" +
+newLine + "   if(super.getDestinationFactory()!=null){" +
+newLine + "   destinationValueObj$y = (com.googlecode.jmapper.bean.TargetObject) super.getDestinationFactory().make();" +
+newLine + "   }else{" +
+newLine + "   destinationValueObj$y = new com.googlecode.jmapper.bean.TargetObject();" +
+newLine + "   }" + 
+newLine + "   if(sourceValueObj$y.getField()!=null){"+
 		 newLine + "   destinationValueObj$y.setField(sourceValueObj$y.getField());"+
 		 newLine + "   }"+
 		 newLine + 
@@ -204,11 +265,21 @@ public class MappedMapOperationTest extends AOperation<MappedMapOperation>{
 		 newLine + "   java.util.Map.Entry entryItem$i = (java.util.Map.Entry) mapOfSource$i[index$i];"+
 		 newLine + "   com.googlecode.jmapper.bean.TargetObject sourceKeyObj$i = (com.googlecode.jmapper.bean.TargetObject) entryItem$i.getKey();"+
 		 newLine + "   com.googlecode.jmapper.bean.MappedObject sourceValueObj$i = (com.googlecode.jmapper.bean.MappedObject) entryItem$i.getValue();"+
-		 newLine + "   com.googlecode.jmapper.bean.MappedObject destinationKeyObj$i = new com.googlecode.jmapper.bean.MappedObject();"+
+		 newLine + "   com.googlecode.jmapper.bean.MappedObject destinationKeyObj$i = null;" +
+		 newLine + "   if(super.getDestinationFactory()!=null){" +
+		 newLine + "   destinationKeyObj$i = (com.googlecode.jmapper.bean.MappedObject) super.getDestinationFactory().make();" +
+		 newLine + "   }else{" +
+		 newLine + "   destinationKeyObj$i = new com.googlecode.jmapper.bean.MappedObject();" +
+		 newLine + "   }" + 
 		 newLine + "   destinationKeyObj$i.setField(sourceKeyObj$i.getField());"+
 		 newLine + 
-		 newLine + "   com.googlecode.jmapper.bean.TargetObject destinationValueObj$i = new com.googlecode.jmapper.bean.TargetObject();"+
-		 newLine + "   destinationValueObj$i.setField(sourceValueObj$i.getField());"+
+newLine + "   com.googlecode.jmapper.bean.TargetObject destinationValueObj$i = null;" +
+newLine + "   if(super.getDestinationFactory()!=null){" +
+newLine + "   destinationValueObj$i = (com.googlecode.jmapper.bean.TargetObject) super.getDestinationFactory().make();" +
+newLine + "   }else{" +
+newLine + "   destinationValueObj$i = new com.googlecode.jmapper.bean.TargetObject();" +
+newLine + "   }" + 
+newLine + "   destinationValueObj$i.setField(sourceValueObj$i.getField());"+
 		 newLine + 
 		 newLine + "   mapOfDestination$i.put(destinationKeyObj$i, destinationValueObj$i);"+
 		 newLine + "   }"+
@@ -234,13 +305,23 @@ public class MappedMapOperationTest extends AOperation<MappedMapOperation>{
 		 newLine + "   java.util.Map.Entry entryItem$i = (java.util.Map.Entry) mapOfSource$i[index$i];"+
 		 newLine + "   com.googlecode.jmapper.bean.TargetObject sourceKeyObj$i = (com.googlecode.jmapper.bean.TargetObject) entryItem$i.getKey();"+
 		 newLine + "   com.googlecode.jmapper.bean.MappedObject sourceValueObj$i = (com.googlecode.jmapper.bean.MappedObject) entryItem$i.getValue();"+
-		 newLine + "   com.googlecode.jmapper.bean.MappedObject destinationKeyObj$i = new com.googlecode.jmapper.bean.MappedObject();"+
-		 newLine + "   if(sourceKeyObj$i.getField()!=null){"+
+		 newLine + "   com.googlecode.jmapper.bean.MappedObject destinationKeyObj$i = null;" +
+		 newLine + "   if(super.getDestinationFactory()!=null){" +
+		 newLine + "   destinationKeyObj$i = (com.googlecode.jmapper.bean.MappedObject) super.getDestinationFactory().make();" +
+		 newLine + "   }else{" +
+		 newLine + "   destinationKeyObj$i = new com.googlecode.jmapper.bean.MappedObject();" +
+		 newLine + "   }" + 
+newLine + "   if(sourceKeyObj$i.getField()!=null){"+
 		 newLine + "   destinationKeyObj$i.setField(sourceKeyObj$i.getField());"+
 		 newLine + "   }"+ 
 		 newLine + 
-		 newLine + "   com.googlecode.jmapper.bean.TargetObject destinationValueObj$i = new com.googlecode.jmapper.bean.TargetObject();"+
-		 newLine + "   if(sourceValueObj$i.getField()!=null){"+
+newLine + "   com.googlecode.jmapper.bean.TargetObject destinationValueObj$i = null;" +
+newLine + "   if(super.getDestinationFactory()!=null){" +
+newLine + "   destinationValueObj$i = (com.googlecode.jmapper.bean.TargetObject) super.getDestinationFactory().make();" +
+newLine + "   }else{" +
+newLine + "   destinationValueObj$i = new com.googlecode.jmapper.bean.TargetObject();" +
+newLine + "   }" + 
+newLine + "   if(sourceValueObj$i.getField()!=null){"+
 		 newLine + "   destinationValueObj$i.setField(sourceValueObj$i.getField());"+
 		 newLine + "   }"+
 		 newLine + 
@@ -279,13 +360,23 @@ public class MappedMapOperationTest extends AOperation<MappedMapOperation>{
 		 newLine + "   java.util.Map.Entry entryItem$i = (java.util.Map.Entry) mapOfSource$i[index$i];"+
 		 newLine + "   com.googlecode.jmapper.bean.TargetObject sourceKeyObj$i = (com.googlecode.jmapper.bean.TargetObject) entryItem$i.getKey();"+
 		 newLine + "   com.googlecode.jmapper.bean.MappedObject sourceValueObj$i = (com.googlecode.jmapper.bean.MappedObject) entryItem$i.getValue();"+
-		 newLine + "   com.googlecode.jmapper.bean.MappedObject destinationKeyObj$i = new com.googlecode.jmapper.bean.MappedObject();"+
-		 newLine + "   if(sourceKeyObj$i.getField()!=null){"+
+		 newLine + "   com.googlecode.jmapper.bean.MappedObject destinationKeyObj$i = null;" +
+		 newLine + "   if(super.getDestinationFactory()!=null){" +
+		 newLine + "   destinationKeyObj$i = (com.googlecode.jmapper.bean.MappedObject) super.getDestinationFactory().make();" +
+		 newLine + "   }else{" +
+		 newLine + "   destinationKeyObj$i = new com.googlecode.jmapper.bean.MappedObject();" +
+		 newLine + "   }" + 
+newLine + "   if(sourceKeyObj$i.getField()!=null){"+
 		 newLine + "   destinationKeyObj$i.setField(sourceKeyObj$i.getField());"+
 		 newLine + "   }"+ 
 		 newLine + 
-		 newLine + "   com.googlecode.jmapper.bean.TargetObject destinationValueObj$i = new com.googlecode.jmapper.bean.TargetObject();"+
-		 newLine + "   if(sourceValueObj$i.getField()!=null){"+
+newLine + "   com.googlecode.jmapper.bean.TargetObject destinationValueObj$i = null;" +
+newLine + "   if(super.getDestinationFactory()!=null){" +
+newLine + "   destinationValueObj$i = (com.googlecode.jmapper.bean.TargetObject) super.getDestinationFactory().make();" +
+newLine + "   }else{" +
+newLine + "   destinationValueObj$i = new com.googlecode.jmapper.bean.TargetObject();" +
+newLine + "   }" + 
+newLine + "   if(sourceValueObj$i.getField()!=null){"+
 		 newLine + "   destinationValueObj$i.setField(sourceValueObj$i.getField());"+
 		 newLine + "   }"+
 		 newLine + 

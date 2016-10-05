@@ -16,17 +16,89 @@
 
 package com.googlecode.jmapper.config;
 
-import static com.googlecode.jmapper.config.Constants.*;
+import static com.googlecode.jmapper.config.Constants.FileNotFoundException1;
+import static com.googlecode.jmapper.config.Constants.FileNotFoundException2;
+import static com.googlecode.jmapper.config.Constants.FileNotFoundException3;
+import static com.googlecode.jmapper.config.Constants.InvalidNestedMappingException;
+import static com.googlecode.jmapper.config.Constants.absentFactoryAndEmptyConstructorException;
+import static com.googlecode.jmapper.config.Constants.classNotMappedException1;
+import static com.googlecode.jmapper.config.Constants.classNotMappedException2;
+import static com.googlecode.jmapper.config.Constants.conversionBodyIllegalCode;
+import static com.googlecode.jmapper.config.Constants.conversionBodyIllegalCode2;
+import static com.googlecode.jmapper.config.Constants.conversionParameterException;
+import static com.googlecode.jmapper.config.Constants.customMethodException;
+import static com.googlecode.jmapper.config.Constants.dynamicConversionBodyException;
+import static com.googlecode.jmapper.config.Constants.dynamicConversionMethodException;
+import static com.googlecode.jmapper.config.Constants.dynamicConversionParameterException;
+import static com.googlecode.jmapper.config.Constants.illegalArgumentException1;
+import static com.googlecode.jmapper.config.Constants.illegalCode;
+import static com.googlecode.jmapper.config.Constants.illegalCodePath;
+import static com.googlecode.jmapper.config.Constants.loadingFileException2;
+import static com.googlecode.jmapper.config.Constants.malformedBeanException1;
+import static com.googlecode.jmapper.config.Constants.malformedBeanException2;
+import static com.googlecode.jmapper.config.Constants.malformedBeanException3;
+import static com.googlecode.jmapper.config.Constants.mappingErrorException2;
+import static com.googlecode.jmapper.config.Constants.mappingErrorException2length;
+import static com.googlecode.jmapper.config.Constants.mappingErrorException3;
+import static com.googlecode.jmapper.config.Constants.mappingErrorException4;
+import static com.googlecode.jmapper.config.Constants.mappingErrorException5;
+import static com.googlecode.jmapper.config.Constants.mappingErrorRelationalException2;
+import static com.googlecode.jmapper.config.Constants.mappingErrorRelationalException3;
+import static com.googlecode.jmapper.config.Constants.nestedBeanNullException;
+import static com.googlecode.jmapper.config.Constants.noRelationshipException;
+import static com.googlecode.jmapper.config.Constants.nullMappedClassException1;
+import static com.googlecode.jmapper.config.Constants.nullPointer;
+import static com.googlecode.jmapper.config.Constants.nullPointerContent;
+import static com.googlecode.jmapper.config.Constants.nullPointerPath;
+import static com.googlecode.jmapper.config.Constants.undefinedMappingException;
+import static com.googlecode.jmapper.config.Constants.wrongMethodException1;
+import static com.googlecode.jmapper.config.Constants.xmlConversionNameException;
+import static com.googlecode.jmapper.config.Constants.xmlConversionParameterException;
+import static com.googlecode.jmapper.config.Constants.xmlConversionTypeException;
+import static com.googlecode.jmapper.config.Constants.xmlMappingAttributeDoesNotExistException2;
+import static com.googlecode.jmapper.config.Constants.xmlMappingAttributeExistException2;
+import static com.googlecode.jmapper.config.Constants.xmlMappingClassDoesNotExistException1;
+import static com.googlecode.jmapper.config.Constants.xmlMappingClassDoesNotExistException2;
+import static com.googlecode.jmapper.config.Constants.xmlMappingClassExistException1;
+import static com.googlecode.jmapper.config.Constants.xmlMappingGlobalDoesNotExistException;
+import static com.googlecode.jmapper.config.Constants.xmlMappingGlobalExistException;
+import static com.googlecode.jmapper.util.GeneralUtility.isNull;
 
 import java.io.FileNotFoundException;
 import java.lang.reflect.Field;
 
-import com.googlecode.jmapper.exceptions.*;
+import com.googlecode.jmapper.JMapper;
+import com.googlecode.jmapper.exceptions.AbsentFactoryAndEmptyConstructorException;
+import com.googlecode.jmapper.exceptions.AbsentRelationshipException;
+import com.googlecode.jmapper.exceptions.ClassNotMappedException;
+import com.googlecode.jmapper.exceptions.ConversionBodyIllegalCodeException;
+import com.googlecode.jmapper.exceptions.ConversionParameterException;
+import com.googlecode.jmapper.exceptions.DynamicConversionBodyException;
+import com.googlecode.jmapper.exceptions.DynamicConversionMethodException;
+import com.googlecode.jmapper.exceptions.DynamicConversionParameterException;
+import com.googlecode.jmapper.exceptions.IllegalCodeException;
+import com.googlecode.jmapper.exceptions.InvalidNestedMappingException;
+import com.googlecode.jmapper.exceptions.LoadingFileException;
+import com.googlecode.jmapper.exceptions.MalformedBeanException;
+import com.googlecode.jmapper.exceptions.MappingErrorException;
+import com.googlecode.jmapper.exceptions.MappingException;
+import com.googlecode.jmapper.exceptions.MappingNotFoundException;
+import com.googlecode.jmapper.exceptions.NestedBeanNullException;
+import com.googlecode.jmapper.exceptions.NullMappedClassException;
+import com.googlecode.jmapper.exceptions.UndefinedMappingException;
+import com.googlecode.jmapper.exceptions.WrongMethodException;
+import com.googlecode.jmapper.exceptions.XmlConversionNameException;
+import com.googlecode.jmapper.exceptions.XmlConversionParameterException;
+import com.googlecode.jmapper.exceptions.XmlConversionTypeException;
+import com.googlecode.jmapper.exceptions.XmlMappingAttributeDoesNotExistException;
+import com.googlecode.jmapper.exceptions.XmlMappingAttributeExistException;
+import com.googlecode.jmapper.exceptions.XmlMappingClassDoesNotExistException;
+import com.googlecode.jmapper.exceptions.XmlMappingClassExistException;
+import com.googlecode.jmapper.exceptions.XmlMappingGlobalDoesNotExistException;
+import com.googlecode.jmapper.exceptions.XmlMappingGlobalExistException;
 import com.googlecode.jmapper.generation.beans.Method;
 import com.googlecode.jmapper.xml.Attribute;
 import com.googlecode.jmapper.xml.XML;
-
-import static com.googlecode.jmapper.util.GeneralUtility.*;
 /**
  * This Class exposes all common methods to handle technical errors.
  * <br>The scope is to centralize the management of exceptions
@@ -59,6 +131,10 @@ public final class Error {
 	  #	   MapperGenerator exceptions    #
 	  ####################################
 	*/
+	
+	public static void absentFactoryAndEmptyConstructor(String destinationClassName){
+		throw new AbsentFactoryAndEmptyConstructorException(MSG.INSTANCE.message(absentFactoryAndEmptyConstructorException,destinationClassName));
+	}
 	/**
 	 * Thrown when the explicit conversion method defined has a null pointer.<br>
 	 * Used in the generated code, in case of dynamic methods defined.
@@ -99,10 +175,13 @@ public final class Error {
 	 */
 	public static void bodyContainsIllegalCode(Method method, Exception additionalInformation){
 		Class<?> clazz = method.getClazz();
+		if(isNull(clazz)) clazz = JMapper.class;
+		
 		String originalName = method.getOriginalName();
-		String message = isNull(clazz) && isNull(originalName) 
-				?	MSG.INSTANCE.message(conversionIllegalSignature)
-				:   MSG.INSTANCE.message(conversionBodyIllegalCode,clazz.getSimpleName(),originalName,""+additionalInformation.getMessage());
+		if(isNull(originalName)) originalName = method.getName();
+		
+		String message = clazz != JMapper.class ? MSG.INSTANCE.message(conversionBodyIllegalCode,clazz.getSimpleName(),originalName,""+additionalInformation.getMessage())
+				                                : MSG.INSTANCE.message(conversionBodyIllegalCode2,""+additionalInformation.getMessage());
 		
 		throw new ConversionBodyIllegalCodeException(message);
 	}

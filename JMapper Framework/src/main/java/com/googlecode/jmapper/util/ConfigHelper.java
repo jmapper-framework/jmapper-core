@@ -1,10 +1,26 @@
+/**
+ * Copyright (C) 2012 - 2016 Alessandro Vurro.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.googlecode.jmapper.util;
 
 import static com.googlecode.jmapper.operations.NestedMappingHandler.isNestedMapping;
 import static com.googlecode.jmapper.operations.NestedMappingHandler.nestedFields;
+import static com.googlecode.jmapper.util.ClassesManager.getAllsuperClasses;
 import static com.googlecode.jmapper.util.GeneralUtility.isEmpty;
 import static com.googlecode.jmapper.util.GeneralUtility.isNull;
-
+import java.util.List;
 import com.googlecode.jmapper.api.JMapperAPI;
 import com.googlecode.jmapper.config.JmapperLog;
 import com.googlecode.jmapper.xml.XML;
@@ -12,6 +28,17 @@ import com.googlecode.jmapper.xml.beans.XmlAttribute;
 import com.googlecode.jmapper.xml.beans.XmlClass;
 import com.googlecode.jmapper.xml.beans.XmlJmapper;
 
+//TODO test da effettuare
+// - gerarchie, verificare che anche una classe non configurata direttamente sia presa in esame
+/**
+ * ConfigHelper permits to know the relationship between fields at runtime.
+ * 
+ * 
+ * @author Alessandro Vurro
+ *
+ * @param <D> Destination class
+ * @param <S> Source Class
+ */
 public class ConfigHelper <D, S> {
 	
 	/** destination class */
@@ -95,20 +122,27 @@ public class ConfigHelper <D, S> {
 		this(destinationClass, sourceClass, api.toXStream());
 	}
 	
-	//TODO considerare le gerarchie
 	private ConfigHelper(Class<D> destinationClass, Class<S> sourceClass, XmlJmapper root) {
 		this.destinationClass = destinationClass;
 		this.sourceClass = sourceClass;
 		
+		List<Class<?>> destinationHierarchy = getAllsuperClasses(destinationClass);
+		List<Class<?>> sourceHierarchy = getAllsuperClasses(sourceClass);
+		
 		for (XmlClass xmlClass : root.classes) {
-			if(xmlClass.name.equals(destinationClass.getName())){
-				mappedClass = destinationClass;
-				
-			}
 			
-			if(isNull(mappedClass) && xmlClass.name.equals(sourceClass.getName())){
-				mappedClass = sourceClass;
-			}
+			for (Class<?> destinationHierarchyClass : destinationHierarchy) 
+				if(xmlClass.name.equals(destinationHierarchyClass.getName())){
+					mappedClass = destinationClass;
+					break;
+				}
+			
+			if(isNull(mappedClass))
+				for (Class<?> sourceHierarchyClass : sourceHierarchy) 
+					if(xmlClass.name.equals(sourceHierarchyClass.getName())){
+						mappedClass = sourceClass;
+						break;
+					}
 				
 			if(!isNull(mappedClass)) 
 				xmlMappedClass = xmlClass;
@@ -120,6 +154,9 @@ public class ConfigHelper <D, S> {
 		}
 	}
 	
+	//TODO test da effettuare
+	// se chiedo il source ed è il destination ad esser mappato
+	// se chiedo il source ed è il source ad esser mappato
 	public String getSourceFieldName(final String destinationFieldName){
 		
 		    // if the mapped class is the destination class
@@ -192,6 +229,9 @@ public class ConfigHelper <D, S> {
 		return "this return is never used";
 	}
 	
+	//TODO test da effettuare
+	// se chiedo il destination ed è il destination ad esser mappato
+	// se chiedo il destination ed è il source ad esser mappato
 	public String getDestinationFieldName(final String sourceFieldName){
 		
 		// if the mapped class is the destination class

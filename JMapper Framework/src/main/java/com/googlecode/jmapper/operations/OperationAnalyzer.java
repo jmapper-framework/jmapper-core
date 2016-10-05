@@ -26,8 +26,13 @@ import com.googlecode.jmapper.operations.analyzer.ArrayAnalyzer;
 import com.googlecode.jmapper.operations.analyzer.ArrayListAnalyzer;
 import com.googlecode.jmapper.operations.analyzer.BasicAnalyzer;
 import com.googlecode.jmapper.operations.analyzer.CollectionAnalyzer;
+import com.googlecode.jmapper.operations.analyzer.DateCalendarAnalyzer;
+import com.googlecode.jmapper.operations.analyzer.EnumEnumAnalyzer;
 import com.googlecode.jmapper.operations.analyzer.MapAnalyzer;
 import com.googlecode.jmapper.operations.analyzer.MappedObjectAnalyzer;
+import com.googlecode.jmapper.operations.analyzer.StringEnumAnalyzer;
+import com.googlecode.jmapper.operations.analyzer.StringStringBufferAnalyzer;
+import com.googlecode.jmapper.operations.analyzer.StringStringBuilderAnalyzer;
 import com.googlecode.jmapper.operations.info.InfoOperation;
 import com.googlecode.jmapper.xml.XML;
 import static com.googlecode.jmapper.util.GeneralUtility.isNull;
@@ -55,7 +60,12 @@ public final class OperationAnalyzer {
 								new MappedObjectAnalyzer(xml),// MAPPED OBJECTS OPERATION
 								new CollectionAnalyzer(xml),// COLLECTIONS OPERATION
 								new MapAnalyzer(xml),		// MAPS OPERATION
-								new ArrayListAnalyzer(xml)	// ARRAY <-> LIST OPERATION
+								new ArrayListAnalyzer(xml),	// ARRAY <-> LIST OPERATION
+								new StringStringBuilderAnalyzer(), // STRING <-> STRINGBUILDER OPERATION
+								new StringStringBufferAnalyzer(), // STRING <-> STRINGBUILDER OPERATION
+								new StringEnumAnalyzer(), // STRING <-> STRINGBUILDER OPERATION
+								new DateCalendarAnalyzer(), // STRING <-> STRINGBUILDER OPERATION
+								new EnumEnumAnalyzer()      // ENUM <-> ENUM OPERATION
 							);
 	}
 	

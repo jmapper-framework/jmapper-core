@@ -18,6 +18,7 @@ package com.googlecode.jmapper;
 import static com.googlecode.jmapper.generation.MapperBuilder.from;
 import static com.googlecode.jmapper.util.GeneralUtility.isNull;
 
+import com.googlecode.jmapper.DestinationFactory;
 import com.googlecode.jmapper.api.IJMapper;
 import com.googlecode.jmapper.api.JMapperAPI;
 import com.googlecode.jmapper.api.enums.MappingType;
@@ -428,15 +429,6 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
 			if(destination.isInterface()) Error.interfaceClass("Destination");
 			if(source.isInterface()) 	  Error.interfaceClass("Source");
 			
-			try{
-			
-				// checks if destination is instantiable
-				destination.newInstance();	            
-
-			}catch(InstantiationException e){
-				Error.emptyConstructorAbsent(destination);
-			}
-			
 			this.mapper = createMapper(from(source).to(destination)
 					                        .analyzing(config)
 					                        .presentIn(xml));  
@@ -454,8 +446,8 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
      */
     private static synchronized <D,S> IMapper<D,S> createMapper(MapperBuilder mapper) throws Throwable{
 	    
-		Class<IMapper<D,S>> mapperClass = mapper.exist()?mapper.<D,S>get()
-				                                        :mapper.<D,S>generate();
+		Class<Mapper<D,S>> mapperClass = mapper.exist()?mapper.<D,S>get()
+				                                       :mapper.<D,S>generate();
 		return mapperClass.newInstance();
 	}
     
@@ -475,4 +467,13 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
 		return null;
 	}
 	
+    /**
+     * Permits to define a destination factory, this is usefull in case of immutable objects.
+     * @param factory destination factory
+     * @return this instance of JMapper
+     */
+    public JMapper<D, S> destinationFactory(DestinationFactory<D> factory){
+    	this.mapper.setDestinationFactory(factory);
+    	return this;
+    }
 }

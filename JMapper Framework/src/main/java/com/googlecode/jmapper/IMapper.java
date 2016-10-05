@@ -16,6 +16,8 @@
 
 package com.googlecode.jmapper;
 
+import com.googlecode.jmapper.DestinationFactory;
+
 /**
  * <p>This Interface contains all potential combinations between the enumerations:</p> 
  * <ul>
@@ -461,5 +463,15 @@ public interface IMapper<D, S> {
 	 * @return destination enriched
 	 */
 	D vVNotNullValued(D destination,S source);  
+
+	/**
+	 * @return the DesinationFactory instance
+	 */
+	DestinationFactory<D> getDestinationFactory();
 	
+	/**
+	 * Permits to define a destination factory.
+	 * @param factory destination factory
+	 */
+	void setDestinationFactory(DestinationFactory<D> factory);
 }

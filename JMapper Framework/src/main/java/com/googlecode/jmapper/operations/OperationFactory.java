@@ -18,10 +18,19 @@ package com.googlecode.jmapper.operations;
 import com.googlecode.jmapper.enums.OperationType;
 import com.googlecode.jmapper.operations.complex.ArrayListOperation;
 import com.googlecode.jmapper.operations.complex.ArrayOperation;
+import com.googlecode.jmapper.operations.complex.CalendarDateOperation;
 import com.googlecode.jmapper.operations.complex.CollectionOperation;
 import com.googlecode.jmapper.operations.complex.ConversionOperation;
+import com.googlecode.jmapper.operations.complex.DateCalendarOperation;
+import com.googlecode.jmapper.operations.complex.EnumEnumOperation;
+import com.googlecode.jmapper.operations.complex.EnumStringOperation;
 import com.googlecode.jmapper.operations.complex.ListArrayOperation;
 import com.googlecode.jmapper.operations.complex.MapOperation;
+import com.googlecode.jmapper.operations.complex.StringBufferStringOperation;
+import com.googlecode.jmapper.operations.complex.StringBuilderStringOperation;
+import com.googlecode.jmapper.operations.complex.StringEnumOperation;
+import com.googlecode.jmapper.operations.complex.StringStringBufferOperation;
+import com.googlecode.jmapper.operations.complex.StringStringBuilderOperation;
 import com.googlecode.jmapper.operations.recursive.MappedArrayListOperation;
 import com.googlecode.jmapper.operations.recursive.MappedArrayOperation;
 import com.googlecode.jmapper.operations.recursive.MappedCollectionOperation;
@@ -58,9 +67,19 @@ public class OperationFactory {
 			case COLLECTION_WITH_MAPPED_ITEMS: return new MappedCollectionOperation();	
 			case MAP:	     				   return new MapOperation();				
 			case MAP_WITH_MAPPED_ITEMS: 	   return new MappedMapOperation();		
-			case CONVERSION: 				   return new ConversionOperation();		
+			case CONVERSION: 				   return new ConversionOperation();
+			case DATE_CALENDAR:				   return new DateCalendarOperation();
+			case STRING_ENUM: 				   return new StringEnumOperation();
+			case STRING_STRINGBUFFER:		   return new StringStringBufferOperation();
+			case STRING_STRINGBUILDER:		   return new StringStringBuilderOperation();
+			case CALENDAR_DATE:				   return new CalendarDateOperation();
+			case ENUM_STRING:				   return new EnumStringOperation();
+			case STRINGBUILDER_STRING:         return new StringBuilderStringOperation();
+			case STRINGBUFFER_STRING:		   return new StringBufferStringOperation();
+			case ENUM_ENUM: 				   return new EnumEnumOperation();
 			default: return null;
 		}
+		
 	}
 	
 }

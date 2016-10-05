@@ -24,6 +24,7 @@ import static com.googlecode.jmapper.api.enums.NullPointerControl.DESTINATION;
 import static com.googlecode.jmapper.api.enums.NullPointerControl.NOT_ANY;
 import static com.googlecode.jmapper.api.enums.NullPointerControl.SOURCE;
 import static com.googlecode.jmapper.util.GeneralUtility.newLine;
+import static com.googlecode.jmapper.util.GeneralUtility.write;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -128,6 +129,29 @@ public class MapperConstructor extends MapperConstructorAccessor{
 				                : str;
 	}
 
+	private String newInstance(Class<?> destinationClass, String destinationField){
+		
+		String destinationClassName = destinationClass.getName();
+		String emptyConstructor = "";
+		
+		try{
+			destinationClass.newInstance();
+			emptyConstructor = 
+			   write("else{",newLine,
+					 "   ",destinationField," = new ",destinationClassName,"();",newLine,
+			         "   }",newLine);
+		}catch(Exception e){
+			emptyConstructor = 
+			   write("else{",newLine,
+			         "   com.googlecode.jmapper.config.Error#absentFactoryAndEmptyConstructor(\"",destinationClass.getSimpleName(),"\");",newLine,
+					 "   }",newLine);
+		}
+		
+	    return write("   ",destinationClassName," ",destinationField," = null;",newLine,
+				     "   if(super.getDestinationFactory()!=null){",newLine,
+				     "   ", destinationField," = (",destinationClassName,") super.getDestinationFactory().make();",newLine,
+				     "   }",emptyConstructor);
+	}
 	/**
 	 * This method writes the mapping based on the value of the three MappingType taken in input.
 	 * 
@@ -142,10 +166,8 @@ public class MapperConstructor extends MapperConstructorAccessor{
 		
 		if(isNullSetting(makeDest, mtd, mts, sb)) return sb;
 		
-		if(makeDest){
-			String Destination = destination.getName();
-			sb.append("   "+Destination+" "+stringOfSetDestination+" = new "+Destination+"();"+newLine);
-		}
+		if(makeDest)
+			sb.append(newInstance(destination, stringOfSetDestination));
 		
 		for (ASimpleOperation simpleOperation : simpleOperations) 
 			sb.append(setOperation(simpleOperation,mtd,mts).write());

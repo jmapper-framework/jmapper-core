@@ -33,7 +33,12 @@ public class ObjectOperationTest extends AOperation<ObjectOperation>{
 	protected void AllAll() {
 		
 		expected = "   if(source.getMappedObject()!=null){"+
-		 newLine + "   com.googlecode.jmapper.bean.TargetObject obj$i = new com.googlecode.jmapper.bean.TargetObject();"+
+				 newLine + "   com.googlecode.jmapper.bean.TargetObject obj$i = null;" +
+		   	     newLine + "   if(super.getDestinationFactory()!=null){" +
+		   	     newLine + "   obj$i = (com.googlecode.jmapper.bean.TargetObject) super.getDestinationFactory().make();" +
+			     newLine + "   }else{" +
+		   	     newLine + "   obj$i = new com.googlecode.jmapper.bean.TargetObject();" +
+			     newLine + "   }" + 
 		 newLine + "   obj$i.setField(source.getMappedObject().getField());"+
 		 newLine + "   destination.setTargetObject(obj$i);"+
 		 newLine + "   }else{"+
@@ -52,7 +57,12 @@ public class ObjectOperationTest extends AOperation<ObjectOperation>{
 		 newLine + "   }"+
 		 newLine + "   }else{"+
 		 newLine + "   if(source.getMappedObject()!=null){"+
-		 newLine + "   com.googlecode.jmapper.bean.TargetObject obj$i = new com.googlecode.jmapper.bean.TargetObject();"+
+		 newLine + "   com.googlecode.jmapper.bean.TargetObject obj$i = null;" +
+   	     newLine + "   if(super.getDestinationFactory()!=null){" +
+   	     newLine + "   obj$i = (com.googlecode.jmapper.bean.TargetObject) super.getDestinationFactory().make();" +
+	     newLine + "   }else{" +
+   	     newLine + "   obj$i = new com.googlecode.jmapper.bean.TargetObject();" +
+	     newLine + "   }" + 
 		 newLine + "   obj$i.setField(source.getMappedObject().getField());"+
 		 newLine + "   destination.setTargetObject(obj$i);"+
 		 newLine + "   }else{"+
@@ -68,7 +78,12 @@ public class ObjectOperationTest extends AOperation<ObjectOperation>{
 	protected void AllValued() {
 		
 		expected = "   if(source.getMappedObject()!=null){"+
-		 newLine + "   com.googlecode.jmapper.bean.TargetObject obj$i = new com.googlecode.jmapper.bean.TargetObject();"+
+				 newLine + "   com.googlecode.jmapper.bean.TargetObject obj$i = null;" +
+		   	     newLine + "   if(super.getDestinationFactory()!=null){" +
+		   	     newLine + "   obj$i = (com.googlecode.jmapper.bean.TargetObject) super.getDestinationFactory().make();" +
+			     newLine + "   }else{" +
+		   	     newLine + "   obj$i = new com.googlecode.jmapper.bean.TargetObject();" +
+			     newLine + "   }" + 
 		 newLine + "   obj$i.setField(source.getMappedObject().getField());"+
 		 newLine + "   destination.setTargetObject(obj$i);"+
 		 newLine + "   }"+newLine;
@@ -83,7 +98,12 @@ public class ObjectOperationTest extends AOperation<ObjectOperation>{
 		 newLine + "   }"+
 		 newLine +
 		 newLine + "   }else{"+
-		 newLine + "   com.googlecode.jmapper.bean.TargetObject obj$i = new com.googlecode.jmapper.bean.TargetObject();"+
+		 newLine + "   com.googlecode.jmapper.bean.TargetObject obj$i = null;" +
+   	     newLine + "   if(super.getDestinationFactory()!=null){" +
+   	     newLine + "   obj$i = (com.googlecode.jmapper.bean.TargetObject) super.getDestinationFactory().make();" +
+	     newLine + "   }else{" +
+   	     newLine + "   obj$i = new com.googlecode.jmapper.bean.TargetObject();" +
+	     newLine + "   }" + 
 		 newLine + "   obj$i.setField(source.getMappedObject().getField());"+
 		 newLine + "   destination.setTargetObject(obj$i);"+
 		 newLine + "   }"+
@@ -147,7 +167,12 @@ public class ObjectOperationTest extends AOperation<ObjectOperation>{
 
 		expected = "   if(destination.getTargetObject()==null){"+
 		 newLine + "   if(source.getMappedObject()!=null){"+
-		 newLine + "   com.googlecode.jmapper.bean.TargetObject obj$i = new com.googlecode.jmapper.bean.TargetObject();"+
+		 newLine + "   com.googlecode.jmapper.bean.TargetObject obj$i = null;" +
+   	     newLine + "   if(super.getDestinationFactory()!=null){" +
+   	     newLine + "   obj$i = (com.googlecode.jmapper.bean.TargetObject) super.getDestinationFactory().make();" +
+	     newLine + "   }else{" +
+   	     newLine + "   obj$i = new com.googlecode.jmapper.bean.TargetObject();" +
+	     newLine + "   }" + 
 		 newLine + "   obj$i.setField(source.getMappedObject().getField());"+
 		 newLine + "   destination.setTargetObject(obj$i);"+
 		 newLine + "   }"+

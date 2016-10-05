@@ -26,12 +26,13 @@ public class NestedMappedField {
 
 	private MappedField field;
 	private Class<?> fieldClass;
+	private boolean elvisOperatorDefined;
 	
-	
-	public NestedMappedField(MappedField field, Class<?> fieldClass) {
+	public NestedMappedField(MappedField field, Class<?> fieldClass, boolean elvisOperatorDefined) {
 		super();
 		this.field = field;
 		this.fieldClass = fieldClass;
+		this.elvisOperatorDefined = elvisOperatorDefined;
 	}
 	
 	public MappedField getField() {
@@ -45,6 +46,14 @@ public class NestedMappedField {
 	}
 	public void setFieldClass(Class<?> fieldClass) {
 		this.fieldClass = fieldClass;
+	}
+
+	public boolean isElvisOperatorDefined() {
+		return elvisOperatorDefined;
+	}
+
+	public void setElvisOperatorDefined(boolean elvisOperatorDefined) {
+		this.elvisOperatorDefined = elvisOperatorDefined;
 	}
 	
 	

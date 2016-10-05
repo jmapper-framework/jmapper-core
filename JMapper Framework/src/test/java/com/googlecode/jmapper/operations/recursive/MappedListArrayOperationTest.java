@@ -47,7 +47,12 @@ public class MappedListArrayOperationTest extends
 		newLine + "   java.util.ArrayList listArrayOfDestination$i = new java.util.ArrayList(sourceLength$i);"+
 		newLine + "   for(int index$i = 0;index$i<sourceLength$i;index$i++){"+
 		newLine + "   com.googlecode.jmapper.bean.MappedObject objectOfSoure$i = collectionOfSource$i[index$i];"+
-		newLine + "   com.googlecode.jmapper.bean.TargetObject objectOfDestination$i = new com.googlecode.jmapper.bean.TargetObject();"+
+		newLine + "   com.googlecode.jmapper.bean.TargetObject objectOfDestination$i = null;" +
+   	    newLine + "   if(super.getDestinationFactory()!=null){" +
+   	    newLine + "   objectOfDestination$i = (com.googlecode.jmapper.bean.TargetObject) super.getDestinationFactory().make();" +
+	    newLine + "   }else{" +
+   	    newLine + "   objectOfDestination$i = new com.googlecode.jmapper.bean.TargetObject();" +
+        newLine + "   }" + 
 		newLine + "   objectOfDestination$i.setField(objectOfSoure$i.getField());"+
 		newLine + 
 		newLine + "   listArrayOfDestination$i.add(objectOfDestination$i);"+
@@ -68,7 +73,12 @@ public class MappedListArrayOperationTest extends
 		newLine + "   java.util.ArrayList listArrayOfDestination$z = new java.util.ArrayList(sourceLength$i);"+
 		newLine + "   for(int index$i = 0;index$i<sourceLength$i;index$i++){"+
 		newLine + "   com.googlecode.jmapper.bean.MappedObject objectOfSoure$i = collectionOfSource$i[index$i];"+
-		newLine + "   com.googlecode.jmapper.bean.TargetObject objectOfDestination$i = new com.googlecode.jmapper.bean.TargetObject();"+
+		 newLine + "   com.googlecode.jmapper.bean.TargetObject objectOfDestination$i = null;" +
+   	     newLine + "   if(super.getDestinationFactory()!=null){" +
+   	     newLine + "   objectOfDestination$i = (com.googlecode.jmapper.bean.TargetObject) super.getDestinationFactory().make();" +
+	     newLine + "   }else{" +
+   	     newLine + "   objectOfDestination$i = new com.googlecode.jmapper.bean.TargetObject();" +
+	     newLine + "   }" + 
 		newLine + "   objectOfDestination$i.setField(objectOfSoure$i.getField());"+
 		newLine + 
 		newLine + "   listArrayOfDestination$z.add(objectOfDestination$i);"+
@@ -85,7 +95,12 @@ public class MappedListArrayOperationTest extends
 		newLine + "   java.util.ArrayList listArrayOfDestination$z = new java.util.ArrayList(sourceLength$y);"+
 		newLine + "   for(int index$y = 0;index$y<sourceLength$y;index$y++){"+
 		newLine + "   com.googlecode.jmapper.bean.MappedObject objectOfSoure$y = collectionOfSource$y[index$y];"+
-		newLine + "   com.googlecode.jmapper.bean.TargetObject objectOfDestination$y = new com.googlecode.jmapper.bean.TargetObject();"+
+		 newLine + "   com.googlecode.jmapper.bean.TargetObject objectOfDestination$y = null;" +
+   	     newLine + "   if(super.getDestinationFactory()!=null){" +
+   	     newLine + "   objectOfDestination$y = (com.googlecode.jmapper.bean.TargetObject) super.getDestinationFactory().make();" +
+	     newLine + "   }else{" +
+   	     newLine + "   objectOfDestination$y = new com.googlecode.jmapper.bean.TargetObject();" +
+	     newLine + "   }" + 
 		newLine + "   objectOfDestination$y.setField(objectOfSoure$y.getField());"+
 		newLine + 
 		newLine + "   listArrayOfDestination$z.add(objectOfDestination$y);"+
@@ -110,7 +125,12 @@ public class MappedListArrayOperationTest extends
 		newLine + "   java.util.ArrayList listArrayOfDestination$i = new java.util.ArrayList(sourceLength$i);"+
 		newLine + "   for(int index$i = 0;index$i<sourceLength$i;index$i++){"+
 		newLine + "   com.googlecode.jmapper.bean.MappedObject objectOfSoure$i = collectionOfSource$i[index$i];"+
-		newLine + "   com.googlecode.jmapper.bean.TargetObject objectOfDestination$i = new com.googlecode.jmapper.bean.TargetObject();"+
+		 newLine + "   com.googlecode.jmapper.bean.TargetObject objectOfDestination$i = null;" +
+   	     newLine + "   if(super.getDestinationFactory()!=null){" +
+   	     newLine + "   objectOfDestination$i = (com.googlecode.jmapper.bean.TargetObject) super.getDestinationFactory().make();" +
+	     newLine + "   }else{" +
+   	     newLine + "   objectOfDestination$i = new com.googlecode.jmapper.bean.TargetObject();" +
+	     newLine + "   }" + 
 		newLine + "   if(objectOfSoure$i.getField()!=null){"+
 		newLine + "   objectOfDestination$i.setField(objectOfSoure$i.getField());"+
 		newLine + "   }"+
@@ -131,7 +151,12 @@ public class MappedListArrayOperationTest extends
 		newLine + "   java.util.ArrayList listArrayOfDestination$z = new java.util.ArrayList(sourceLength$i);"+
 		newLine + "   for(int index$i = 0;index$i<sourceLength$i;index$i++){"+
 		newLine + "   com.googlecode.jmapper.bean.MappedObject objectOfSoure$i = collectionOfSource$i[index$i];"+
-		newLine + "   com.googlecode.jmapper.bean.TargetObject objectOfDestination$i = new com.googlecode.jmapper.bean.TargetObject();"+
+		newLine + "   com.googlecode.jmapper.bean.TargetObject objectOfDestination$i = null;" +
+   	    newLine + "   if(super.getDestinationFactory()!=null){" +
+   	    newLine + "   objectOfDestination$i = (com.googlecode.jmapper.bean.TargetObject) super.getDestinationFactory().make();" +
+	    newLine + "   }else{" +
+   	    newLine + "   objectOfDestination$i = new com.googlecode.jmapper.bean.TargetObject();" +
+	    newLine + "   }" + 
 		newLine + "   if(objectOfSoure$i.getField()!=null){"+
 		newLine + "   objectOfDestination$i.setField(objectOfSoure$i.getField());"+
 		newLine + "   }"+
@@ -146,7 +171,12 @@ public class MappedListArrayOperationTest extends
 		newLine + "   java.util.ArrayList listArrayOfDestination$z = new java.util.ArrayList(sourceLength$y);"+
 		newLine + "   for(int index$y = 0;index$y<sourceLength$y;index$y++){"+
 		newLine + "   com.googlecode.jmapper.bean.MappedObject objectOfSoure$y = collectionOfSource$y[index$y];"+
-		newLine + "   com.googlecode.jmapper.bean.TargetObject objectOfDestination$y = new com.googlecode.jmapper.bean.TargetObject();"+
+		 newLine + "   com.googlecode.jmapper.bean.TargetObject objectOfDestination$y = null;" +
+   	     newLine + "   if(super.getDestinationFactory()!=null){" +
+   	     newLine + "   objectOfDestination$y = (com.googlecode.jmapper.bean.TargetObject) super.getDestinationFactory().make();" +
+	     newLine + "   }else{" +
+   	     newLine + "   objectOfDestination$y = new com.googlecode.jmapper.bean.TargetObject();" +
+	     newLine + "   }" + 
 		newLine + "   if(objectOfSoure$y.getField()!=null){"+
 		newLine + "   objectOfDestination$y.setField(objectOfSoure$y.getField());"+
 		newLine + "   }"+
@@ -172,7 +202,12 @@ public class MappedListArrayOperationTest extends
 		newLine + "   java.util.ArrayList listArrayOfDestination$i = new java.util.ArrayList(sourceLength$i);"+
 		newLine + "   for(int index$i = 0;index$i<sourceLength$i;index$i++){"+
 		newLine + "   com.googlecode.jmapper.bean.MappedObject objectOfSoure$i = collectionOfSource$i[index$i];"+
-		newLine + "   com.googlecode.jmapper.bean.TargetObject objectOfDestination$i = new com.googlecode.jmapper.bean.TargetObject();"+
+		newLine + "   com.googlecode.jmapper.bean.TargetObject objectOfDestination$i = null;" +
+   	    newLine + "   if(super.getDestinationFactory()!=null){" +
+   	    newLine + "   objectOfDestination$i = (com.googlecode.jmapper.bean.TargetObject) super.getDestinationFactory().make();" +
+	    newLine + "   }else{" +
+   	    newLine + "   objectOfDestination$i = new com.googlecode.jmapper.bean.TargetObject();" +
+	    newLine + "   }" + 
 		newLine + "   objectOfDestination$i.setField(objectOfSoure$i.getField());"+
 		newLine + 
 		newLine + "   listArrayOfDestination$i.add(objectOfDestination$i);"+
@@ -198,7 +233,12 @@ public class MappedListArrayOperationTest extends
 		newLine + "   java.util.ArrayList listArrayOfDestination$i = new java.util.ArrayList(sourceLength$i);"+
 		newLine + "   for(int index$i = 0;index$i<sourceLength$i;index$i++){"+
 		newLine + "   com.googlecode.jmapper.bean.MappedObject objectOfSoure$i = collectionOfSource$i[index$i];"+
-		newLine + "   com.googlecode.jmapper.bean.TargetObject objectOfDestination$i = new com.googlecode.jmapper.bean.TargetObject();"+
+		newLine + "   com.googlecode.jmapper.bean.TargetObject objectOfDestination$i = null;" +
+   	    newLine + "   if(super.getDestinationFactory()!=null){" +
+   	    newLine + "   objectOfDestination$i = (com.googlecode.jmapper.bean.TargetObject) super.getDestinationFactory().make();" +
+	    newLine + "   }else{" +
+   	    newLine + "   objectOfDestination$i = new com.googlecode.jmapper.bean.TargetObject();" +
+        newLine + "   }" + 
 		newLine + "   if(objectOfSoure$i.getField()!=null){"+
 		newLine + "   objectOfDestination$i.setField(objectOfSoure$i.getField());"+
 		newLine + "   }"+
@@ -239,7 +279,12 @@ public class MappedListArrayOperationTest extends
 		newLine + "   java.util.ArrayList listArrayOfDestination$i = new java.util.ArrayList(sourceLength$i);"+
 		newLine + "   for(int index$i = 0;index$i<sourceLength$i;index$i++){"+
 		newLine + "   com.googlecode.jmapper.bean.MappedObject objectOfSoure$i = collectionOfSource$i[index$i];"+
-		newLine + "   com.googlecode.jmapper.bean.TargetObject objectOfDestination$i = new com.googlecode.jmapper.bean.TargetObject();"+
+		newLine + "   com.googlecode.jmapper.bean.TargetObject objectOfDestination$i = null;" +
+   	    newLine + "   if(super.getDestinationFactory()!=null){" +
+   	    newLine + "   objectOfDestination$i = (com.googlecode.jmapper.bean.TargetObject) super.getDestinationFactory().make();" +
+	    newLine + "   }else{" +
+   	    newLine + "   objectOfDestination$i = new com.googlecode.jmapper.bean.TargetObject();" +
+	    newLine + "   }" + 
 		newLine + "   if(objectOfSoure$i.getField()!=null){"+
 		newLine + "   objectOfDestination$i.setField(objectOfSoure$i.getField());"+
 		newLine + "   }"+

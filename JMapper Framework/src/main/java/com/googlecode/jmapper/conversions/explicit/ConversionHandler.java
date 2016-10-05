@@ -171,7 +171,7 @@ public class ConversionHandler {
 				paramater = write(",\"",resource,"\"");
 			}
 		}
-		return write("com.googlecode.jmapper.config.Error.",methodName,"(e,\"",methodToGenerate.getOriginalName(),"\",\"",configClass.getSimpleName(),"\"",paramater,");");
+		return write("com.googlecode.jmapper.config.Error#",methodName,"(e,\"",methodToGenerate.getOriginalName(),"\",\"",configClass.getSimpleName(),"\"",paramater,");");
 	}
 	
 	/**

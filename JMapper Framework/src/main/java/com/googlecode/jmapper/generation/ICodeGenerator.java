@@ -17,7 +17,6 @@ package com.googlecode.jmapper.generation;
 
 import java.util.List;
 
-import com.googlecode.jmapper.generation.beans.Constructor;
 import com.googlecode.jmapper.generation.beans.Method;
 
 /**
@@ -31,11 +30,10 @@ public interface ICodeGenerator {
 	/**
 	 * Generates a class with this parameters.
 	 * @param clazzName class name
-	 * @param constructors list of costructors
 	 * @param methods list of methods
 	 * @return the generated class
 	 * @throws Throwable any error made ​​by the generation of the mapper
 	 */
-	Class<?> generate(String clazzName,List<Constructor> constructors,List<Method>	methods) throws Throwable;
+	Class<?> generate(String clazzName, List<Method> methods) throws Throwable;
 
 }

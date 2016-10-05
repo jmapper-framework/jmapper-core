@@ -66,7 +66,44 @@ public enum OperationType {
 	BASIC_CONVERSION,
 	
 	// instruction that contains an explicit complex conversion
-	CONVERSION;
+	CONVERSION,
+	
+	// it identifies cases where a conversion between String and StringBuilder must be applied
+	STRING_STRINGBUILDER,
+
+	// it identifies cases where a conversion between StringBuilder and String must be applied
+	STRINGBUILDER_STRING,
+
+	// it identifies cases where a conversion between String and StringBuffer must be applied
+	STRING_STRINGBUFFER,
+
+	// it identifies cases where a conversion between StringBuffer and String must be applied
+	STRINGBUFFER_STRING,
+
+	// it identifies cases where a conversion between String and Enum must be applied
+	STRING_ENUM,
+	
+	// it identifies cases where a conversion between two Enums must be applied
+	ENUM_ENUM,
+
+	// it identifies cases where a conversion between Enum and String must be applied
+	ENUM_STRING,
+	
+	// it identifies cases where a conversion between Date and Calendar must be applied
+	DATE_CALENDAR,
+	
+	// it identifies cases where a conversion between Calendar and Date must be applied
+	CALENDAR_DATE;
+		
+	public boolean isOther(){return this == STRING_STRINGBUILDER
+			 				    ||  this == STRINGBUILDER_STRING
+					 		    ||  this == STRING_STRINGBUFFER
+					 		    ||  this == STRINGBUFFER_STRING
+					 		    ||  this == STRING_ENUM
+					 		    ||  this == ENUM_ENUM
+					 		    ||  this == ENUM_STRING
+					 		    ||  this == CALENDAR_DATE
+							 	||  this == DATE_CALENDAR;}
 	
 	public boolean isUndefined(){return this == UNDEFINED;}
 	
@@ -82,6 +119,7 @@ public enum OperationType {
 	 public boolean isBasic(){	 return this == BASIC_INSTRUCTION || this == BASIC_CONVERSION; }
 	 
 	 public boolean isComplex(){ return isRecursive() 
+			  						 || isOther()
 			 						 || this == MAP  
 			 						 || this == COLLECTION
 			 						 || this == ARRAY
