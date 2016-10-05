@@ -441,7 +441,7 @@ public final class GeneralUtility {
 	 */
 	public static String join(String charSeparator, String... strings){
 		String result = strings[0];
-		for(int i = 1; i < strings.length-1; i++)
+		for(int i = 1; i < strings.length; i++)
 			result += charSeparator + strings[i];
 		
 		return result;
