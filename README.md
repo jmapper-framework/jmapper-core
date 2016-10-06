@@ -1,6 +1,6 @@
 #JMapper Framework [![Build Status](https://travis-ci.org/jmapper-framework/jmapper-core.svg?branch=master)](https://travis-ci.org/jmapper-framework/jmapper-core)
 
-> Version 1.6.0.1 Released! You can check the [release notes](https://github.com/jmapper-framework/jmapper-core/wiki/Release-Notes) for more information.
+> Version 1.6.1.RC1 Released! You can check the [release notes](https://github.com/jmapper-framework/jmapper-core/wiki/Release-Notes) for more information. Just a little patience, the wiki is being updated
 
 
 #####Fast as hand-written code with zero compromise.
