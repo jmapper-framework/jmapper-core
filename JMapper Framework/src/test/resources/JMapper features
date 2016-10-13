@@ -182,7 +182,10 @@ Versione 1.6.1.CR1 RILASCIATA:
    da JMapConversion a Conversion
    da JMapAccessor a Accessor
    da JMapAccessors a Accessors
-
+   Queste modifiche sia in Annotation che XML:
+     - in Global attributes in localAttributes  
+     - in Global excluded in excludedAttributes
+   
 Versione 2.1.0
   
   - creare classi configurate che hanno map, properties, e altre strutture generiche:
