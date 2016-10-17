@@ -97,9 +97,11 @@ Versione 1.6.1.CR1 RILASCIATA:
 
  Versione 1.6.1.CR2
 
-  - completare elvis operator
+  - completare safe navigation operator
   - completare ConfigHelper
- 
+  - ragionare sul fatto di utilizzare i nomi dei file xml oppure no
+V - adeguare il metodo targetClass di Global a quello di Attribute
+
  Versione 1.6.1
   
   - sistemare exception XML (che sarebbero anche API ora)
