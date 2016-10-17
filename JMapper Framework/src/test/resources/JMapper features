@@ -95,10 +95,6 @@ Versione 1.6.1.CR1 RILASCIATA:
  V - creare collection in destinazione della stessa grandezza del source
  V - immutable objects
 
-
-- sistemare wiki (immutable obj, jmapperCache, API, in caso di conversione di un nestedMapping come si comporta?)
-
-
  Versione 1.6.1.CR2
 
   - completare elvis operator
