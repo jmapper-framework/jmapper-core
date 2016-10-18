@@ -99,27 +99,18 @@ Versione 1.6.1.CR1 RILASCIATA:
 
   - completare safe navigation operator
   - completare ConfigHelper
-  - ragionare sul fatto di utilizzare i nomi dei file xml oppure no
+  - aggiungere operazione del tipo set <-> Array
 V - adeguare il metodo targetClass di Global a quello di Attribute
 
  Versione 1.6.1
   
   - sistemare exception XML (che sarebbero anche API ora)
-  
+  - ragionare sul fatto di utilizzare i nomi dei file xml oppure no
  
- Successivamente ? 
+ Versione 1.7.0
  
- - implementare bytecode generators
- - aggiungere operazione del tipo set <-> Array 
- - la conversione List<wrapper> <-> List<bean> non è agevole, pensare ad una miglioria
-	magari dalla definizione del nested mapping stesso esempio ${nestedField(0).field}
-	
-	${users().name} con parentesi vuote si intende di passare ogni elemento della lista
-	nella lista target, ad esempio List<String> dest <- List<Bean> users
-	
-	${users(1).name} con indice si intende che solo quel campo di quel bean in quella posizione
-	va mappato nel campo target, ad esempio String dest <- List<Bean> users
-	 
+  - default values
+  	 
 2.0.0
 
  - Multiple Mapping
@@ -185,6 +176,22 @@ V - adeguare il metodo targetClass di Global a quello di Attribute
      - in Global excluded in excludedAttributes
    
 Versione 2.1.0
+
+ - la conversione List<wrapper> <-> List<bean> non è agevole, pensare ad una miglioria
+ 
+	magari dalla definizione del nested mapping stesso esempio ${nestedField(0).field}
+	
+	${users().name} con parentesi vuote si intende di passare ogni elemento della lista
+	nella lista target, ad esempio List<String> dest <- List<Bean> users
+	
+	${users(1).name} con indice si intende che solo quel campo di quel bean in quella posizione
+	va mappato nel campo target, ad esempio String dest <- List<Bean> users
+	
+	OPPURE
+	
+	un attributo in più che permette di definire una conversione rapida, del tipo:
+	JMap("targetField", converter = "mappedField().name")
+
   
   - creare classi configurate che hanno map, properties, e altre strutture generiche:
   
