@@ -56,10 +56,9 @@ public abstract class AGeneralOperation extends AGeneralOperationAccessor{
 		String nestedField = "nestedField"+ ++index;
 		for (NestedMappedField nestedMappedField : this.nestedMappingInfo.getNestedFields()) {
 			
-			
-			MappedField field = nestedMappedField.getField();
-			Class<?> nestedClass = field.getValue().getType();
-			tryCatch(mapping, nestedClass, nestedField, actualField, field);
+			//TODO potrei volere il safeNavigation in alcuni punti e non in tutti
+			// quindi devo essere in grado di lanciare exception quando serve
+			tryCatch(mapping, nestedField, actualField, nestedMappedField);
 
 			// in case of last no mapping necessary, but wrote only for checks null field
 			if(this.nestedMappingInfo.isLastField(nestedMappedField)) 
@@ -72,7 +71,10 @@ public abstract class AGeneralOperation extends AGeneralOperationAccessor{
 		return mapping;
 	}
 	
-	private void tryCatch(StringBuilder mapping, Class<?> nestedClass, String nestedField, String actualField, MappedField mappedField){
+	private void tryCatch(StringBuilder mapping, String nestedField, String actualField, NestedMappedField nestedMappedField){
+		MappedField mappedField = nestedMappedField.getField();
+		Class<?> nestedClass = mappedField.getValue().getType();
+		
 		String getField = mappedField.getMethod();
 		String destinationClass = this.nestedMappingInfo.getConfiguredClass().getSimpleName();
 		String destinationField = this.nestedMappingInfo.getConfiguredField().getName();

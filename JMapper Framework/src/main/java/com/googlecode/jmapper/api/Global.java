@@ -96,10 +96,10 @@ public class Global implements Convertible<XmlGlobal>{
 	 * @param classes target classes
 	 * @return this instance of JMapperGlobal
 	 */
-	public Global targetClasses(TargetClass... classes){
+	public Global targetClasses(Class<?>... classes){
 		
-		for (TargetClass targetClass : classes) 
-			global.classes.add(targetClass.toXStream());
+		for (Class<?> targetClass : classes) 
+			global.classes.add(new TargetClass(targetClass).toXStream());
 		
 		return this;
 	}

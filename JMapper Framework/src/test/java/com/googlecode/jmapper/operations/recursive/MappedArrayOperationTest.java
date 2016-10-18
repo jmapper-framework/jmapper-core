@@ -1,9 +1,5 @@
 package com.googlecode.jmapper.operations.recursive;
 
-//TODO -> modificare tutti i test e poi rilasciare la versione
-// l'elvis operator lo rilascerò con la versione successiva
-
-//TODO wiki -> completare la sezione riguardante le API
 import static com.googlecode.jmapper.util.GeneralUtility.newLine;
 import java.lang.reflect.Field;
 import com.googlecode.jmapper.bean.ComplexClass;
