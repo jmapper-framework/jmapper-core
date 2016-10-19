@@ -37,7 +37,7 @@ public class ObjectOperation extends ARecursiveOperation {
 		
 		// name of new Object
 		String newObj = "obj"+count++;
-		return write(getMapper(newObj).mapping(newInstance, ALL_FIELDS, ALL_FIELDS),setDestination(newObj));
+		return write(getMapper(newObj).mapping(newInstance, ALL_FIELDS, getMts()),setDestination(newObj));
 	}
 	
 	/**

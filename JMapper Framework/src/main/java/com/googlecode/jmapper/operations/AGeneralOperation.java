@@ -56,6 +56,7 @@ public abstract class AGeneralOperation extends AGeneralOperationAccessor{
 		String nestedField = "nestedField"+ ++index;
 		for (NestedMappedField nestedMappedField : this.nestedMappingInfo.getNestedFields()) {
 			
+			//TODO tenere conto del MappingType!
 			//TODO potrei volere il safeNavigation in alcuni punti e non in tutti
 			// quindi devo essere in grado di lanciare exception quando serve
 			tryCatch(mapping, nestedField, actualField, nestedMappedField);

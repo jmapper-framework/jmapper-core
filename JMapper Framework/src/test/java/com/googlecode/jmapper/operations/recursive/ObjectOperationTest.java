@@ -84,9 +84,11 @@ public class ObjectOperationTest extends AOperation<ObjectOperation>{
 			     newLine + "   }else{" +
 		   	     newLine + "   obj$i = new com.googlecode.jmapper.bean.TargetObject();" +
 			     newLine + "   }" + 
-		 newLine + "   obj$i.setField(source.getMappedObject().getField());"+
-		 newLine + "   destination.setTargetObject(obj$i);"+
-		 newLine + "   }"+newLine;
+			     newLine + "   if(source.getMappedObject().getField()!=null){"+
+			     newLine + "   obj$i.setField(source.getMappedObject().getField());"+
+			     newLine + "   }"+
+			     newLine + "   destination.setTargetObject(obj$i);"+
+			     newLine + "   }"+newLine;
 		
 		write(newInstance);
 		verify();
@@ -104,8 +106,10 @@ public class ObjectOperationTest extends AOperation<ObjectOperation>{
 	     newLine + "   }else{" +
    	     newLine + "   obj$i = new com.googlecode.jmapper.bean.TargetObject();" +
 	     newLine + "   }" + 
-		 newLine + "   obj$i.setField(source.getMappedObject().getField());"+
-		 newLine + "   destination.setTargetObject(obj$i);"+
+	     newLine + "   if(source.getMappedObject().getField()!=null){"+
+	     newLine + "   obj$i.setField(source.getMappedObject().getField());"+
+	     newLine + "   }"+
+	     newLine + "   destination.setTargetObject(obj$i);"+
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;
 		
@@ -173,8 +177,11 @@ public class ObjectOperationTest extends AOperation<ObjectOperation>{
 	     newLine + "   }else{" +
    	     newLine + "   obj$i = new com.googlecode.jmapper.bean.TargetObject();" +
 	     newLine + "   }" + 
-		 newLine + "   obj$i.setField(source.getMappedObject().getField());"+
-		 newLine + "   destination.setTargetObject(obj$i);"+
+		 
+newLine + "   if(source.getMappedObject().getField()!=null){"+
+newLine + "   obj$i.setField(source.getMappedObject().getField());"+
+newLine + "   }"+
+newLine + "   destination.setTargetObject(obj$i);"+
 		 newLine + "   }"+
 		 newLine + "   }"+newLine;
 		
