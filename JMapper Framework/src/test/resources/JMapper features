@@ -96,11 +96,12 @@ Versione 1.6.1.CR1 RILASCIATA:
  V - immutable objects
 
  Versione 1.6.1.CR2
-
+  
+  - per il nested mapping bisogna considerare anche il MappingType!
   - completare safe navigation operator
   - completare ConfigHelper
   - aggiungere operazione del tipo set <-> Array
-  - aggiungere operazione del tipo List<primitivo[]> <-> primitivo[][]
+? - aggiungere operazione del tipo List<primitivo[]> <-> primitivo[][]
 V - adeguare il metodo targetClass di Global a quello di Attribute
 
  Versione 1.6.1
