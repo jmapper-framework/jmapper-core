@@ -1,5 +1,6 @@
 #JMapper Framework [![Build Status](https://travis-ci.org/jmapper-framework/jmapper-core.svg?branch=master)](https://travis-ci.org/jmapper-framework/jmapper-core)
 
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](paypal.me/avurro) to encourage the development of JMapper, my dream is to work on it full time
 > Version 1.6.1.CR1 Released! You can check the [release notes](https://github.com/jmapper-framework/jmapper-core/wiki/Release-Notes) for more information.<br>
 
 
