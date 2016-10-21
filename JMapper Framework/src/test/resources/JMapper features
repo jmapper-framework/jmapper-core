@@ -104,7 +104,7 @@ Versione 1.6.1.CR1 RILASCIATA:
 ? - aggiungere operazione del tipo List<primitivo[]> <-> primitivo[][]
 V - adeguare il metodo targetClass di Global a quello di Attribute
   - permettere di definire un destination factory anche per le classi annidate
-  
+  - verificare che il destination factory in caso di nestedMapping sia chiamato almeno per la classe più esterna
  Versione 1.6.1
   
   - sistemare exception XML (che sarebbero anche API ora)
