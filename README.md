@@ -84,7 +84,7 @@ destination ["id", "sourceField", null]
 <br>[![Dependency Status] (https://www.versioneye.com/user/projects/5539172d1d2989cb78000002/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5539172d1d2989cb78000002)<br>
 
 **Do you like the project? think it has good potential?**<br>
-Let us know any malfunctions, new features and more through the [JMapper Framework group](https://groups.google.com/forum/#!forum/jmapper-framework).<br><br>
+Let us know any malfunctions, new features and more through the [JMapper Framework group](https://groups.google.com/forum/#!forum/jmapper-framework).<br>
 
 **Would you like to contribute to the development of JMapper?**<br> 
 There are many features to be implemented, such as:
