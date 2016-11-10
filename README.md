@@ -89,7 +89,7 @@ destination ["id", "sourceField", null]
 **Do you like the project? think it has good potential?**<br>
 Let us know any malfunctions, new features and more through the [JMapper Framework group](https://groups.google.com/forum/#!forum/jmapper-framework).<br><br>
 
-**Do you want to contribute to the development of JMapper?**<br> 
+**Would you like to contribute to the development of JMapper?**<br> 
 There are many features to be implemented, such as:
 - Eclipse plugin
 - Integration with Hibernate, Apache Camel and other frameworks
