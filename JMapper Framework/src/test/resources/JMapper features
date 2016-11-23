@@ -116,6 +116,18 @@ V - adeguare il metodo targetClass di Global a quello di Attribute
   	 
 2.0.0
 
+ - package rinaming da com.googlecode.jmapper.* a com.github.jmapper.*
+ - annotation renaming:
+   da JMap a Mapping
+   da JGlobalMap a GlobalMapping
+   da JMapConversion a Conversion
+   da JMapAccessor a Accessor
+   da JMapAccessors a Accessors
+   Queste modifiche sia in Annotation che XML:
+     - in Global: attributes in localAttributes  
+     - in Global: excluded in excludedAttributes
+     
+     
  - Multiple Mapping
    
   - Con la classe RelationalJMapper si ha la possibilità   di implementare una relazione 1 a N o N a 1 tra
@@ -134,21 +146,23 @@ V - adeguare il metodo targetClass di Global a quello di Attribute
            
        	class Esempio {
            
-               @JMultiMap(targetClass=Target.class,attributes={"field1","field2","field3"}) 
+               @MultiMapping(targetClass=Target.class,attributes={"field1","field2","field3"}) 
                String field1;
                ...
            }
            
-           @JMultiMap permette di configurare un campo contemporaneamente con N altri. Omettendo la targetClass si indica
+           @MultiMapping permette di configurare un campo contemporaneamente con N altri. Omettendo la targetClass si indica
            al framework di considerare quella in input al costruttore, omettendo gli attributes si indica al framework che
            tutti i campi della classe target sono coinvolti.
            Nel caso in cui ci sia l'esigenza di dichiarare il multimapping verso altri campi di altre classi basteràƒ 
-           usare piu volte l'annotation @JMultiMap es:
+           usare piu volte l'annotation @MultiMapping es:
            
        	class Esempio {
            
-               @JMultiMap(targetClass=Target.class,attributes={"field1","field2","field3"})
-               @JMultiMap(targetClass=Other.class, attributes={"other1","other2","other3"})
+           	@MultiMappings({
+               @MultiMapping(targetClass=Target.class,attributes={"field1","field2","field3"}),
+               @MultiMapping(targetClass=Other.class, attributes={"other1","other2","other3"})
+            })
                String field1;
                ...
            }
@@ -167,16 +181,7 @@ V - adeguare il metodo targetClass di Global a quello di Attribute
            Per riflettere invece JMultiMaps basteràƒ  dichiarare piu nodi target. 
 
 
- - package rinaming da com.googlecode.jmapper.* a com.github.jmapper.*
- - annotation renaming:
-   da JMap a Mapping
-   da JGlobalMap a GlobalMapping
-   da JMapConversion a Conversion
-   da JMapAccessor a Accessor
-   da JMapAccessors a Accessors
-   Queste modifiche sia in Annotation che XML:
-     - in Global attributes in localAttributes  
-     - in Global excluded in excludedAttributes
+
    
 Versione 2.1.0
 

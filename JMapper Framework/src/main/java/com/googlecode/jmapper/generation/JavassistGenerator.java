@@ -87,7 +87,7 @@ public class JavassistGenerator implements ICodeGenerator {
 			}
 			
 			cc.setModifiers(cc.getModifiers() & ~Modifier.ABSTRACT);
-			Class<?> generetedClass = cc.toClass();
+			Class<?> generetedClass = cc.toClass(this.getClass().getClassLoader(), this.getClass().getProtectionDomain());
 			return generetedClass;
 			
 		}catch (NotFoundException e) { 

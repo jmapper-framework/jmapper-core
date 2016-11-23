@@ -140,7 +140,7 @@ public abstract class AComplexOperation extends AGeneralOperation{
 	 */
 	private StringBuilder sourceControl(StringBuilder mapping){
 		
-		if(getMts() == ALL_FIELDS){
+		if(getMts() == ALL_FIELDS && !sourceType().isPrimitive()){
 			StringBuilder write = write("   if(",getSource(),"!=null){",newLine,
 										      sharedCode(mapping)	   ,newLine,
 										"   }");
