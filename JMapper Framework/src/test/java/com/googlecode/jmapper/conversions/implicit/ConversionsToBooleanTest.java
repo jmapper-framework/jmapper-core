@@ -19,7 +19,7 @@ public class ConversionsToBooleanTest extends TestCase{
 		
 		byte b = 1;
 	
-		{	Boolean actual = new Boolean(b==0?false:true);
+		{	Boolean actual = b==0?Boolean.FALSE:Boolean.TRUE;
 			Boolean expected = true;
 			assertEquals(expected, actual);		}
 		
@@ -36,7 +36,7 @@ public class ConversionsToBooleanTest extends TestCase{
 		
 		short s = 1;
 	
-		{	Boolean actual = new Boolean(s==0?false:true);
+		{	Boolean actual = s==0?Boolean.FALSE:Boolean.TRUE;
 			Boolean expected = true;
 			assertEquals(expected, actual);		}
 		
@@ -53,7 +53,7 @@ public class ConversionsToBooleanTest extends TestCase{
 		
 		int i = 1;
 	
-		{	Boolean actual = new Boolean(i==0?false:true);
+		{	Boolean actual = i==0?Boolean.FALSE:Boolean.TRUE;
 			Boolean expected = true;
 			assertEquals(expected, actual);		}
 		
@@ -70,7 +70,7 @@ public class ConversionsToBooleanTest extends TestCase{
 		
 		long l = 1L;
 	
-		{	Boolean actual = new Boolean(l==0?false:true);
+		{	Boolean actual = l==0?Boolean.FALSE:Boolean.TRUE;
 			Boolean expected = true;
 			assertEquals(expected, actual);		}
 		
@@ -87,7 +87,7 @@ public class ConversionsToBooleanTest extends TestCase{
 		
 		float f = 1F;
 	
-		{	Boolean actual = new Boolean(f==0?false:true);
+		{	Boolean actual = f==0?Boolean.FALSE:Boolean.TRUE;
 			Boolean expected = true;
 			assertEquals(expected, actual);		}
 		
@@ -104,7 +104,7 @@ public class ConversionsToBooleanTest extends TestCase{
 		
 		double d = 1D;
 	
-		{	Boolean actual = new Boolean(d==0?false:true);
+		{	Boolean actual = d==0?Boolean.FALSE:Boolean.TRUE;
 			Boolean expected = true;
 			assertEquals(expected, actual);		}
 		
@@ -121,7 +121,7 @@ public class ConversionsToBooleanTest extends TestCase{
 		
 		char c = 'F';
 	
-		{	Boolean actual = new Boolean(c=='T'?true:c=='F'?false:null);
+		{	Boolean actual = c=='T'?Boolean.TRUE:c=='F'?Boolean.FALSE:null;
 			Boolean expected = false;
 			assertEquals(expected, actual);		}
 		
@@ -159,7 +159,7 @@ public class ConversionsToBooleanTest extends TestCase{
 		
 		Byte b = 1;
 	
-		{	Boolean actual = new Boolean(b.byteValue()==0?false:true);
+		{	Boolean actual = b.byteValue()==0?Boolean.FALSE:Boolean.TRUE;
 			Boolean expected = true;
 			assertEquals(expected, actual);		}
 		
@@ -176,7 +176,7 @@ public class ConversionsToBooleanTest extends TestCase{
 		
 		Short s = 1;
 	
-		{	Boolean actual = new Boolean(s.shortValue()==0?false:true);
+		{	Boolean actual = s.shortValue()==0?Boolean.FALSE:Boolean.TRUE;
 			Boolean expected = true;
 			assertEquals(expected, actual);		}
 		
@@ -210,7 +210,7 @@ public class ConversionsToBooleanTest extends TestCase{
 		
 		Long l = 1L;
 	
-		{	Boolean actual = new Boolean(l.longValue()==0?false:true);
+		{	Boolean actual = l.longValue()==0?Boolean.FALSE:Boolean.TRUE;
 			Boolean expected = true;
 			assertEquals(expected, actual);		}
 		
@@ -227,7 +227,7 @@ public class ConversionsToBooleanTest extends TestCase{
 		
 		Float f = 1.2F;
 	
-		{	Boolean actual = new Boolean(f.floatValue()==0?false:true);
+		{	Boolean actual = f.floatValue()==0?Boolean.FALSE:Boolean.TRUE;
 			Boolean expected = true;
 			assertEquals(expected, actual);		}
 		
@@ -261,7 +261,7 @@ public class ConversionsToBooleanTest extends TestCase{
 		
 		Character c = 'F';
 	
-		{	Boolean actual = new Boolean(c.charValue()=='T'?true:c.charValue()=='F'?false:null);
+		{	Boolean actual = c.charValue()=='T'?Boolean.TRUE:c.charValue()=='F'?Boolean.FALSE:null;
 			Boolean expected = false;
 			assertEquals(expected, actual);		}
 		

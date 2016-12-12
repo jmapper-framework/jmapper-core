@@ -26,9 +26,16 @@ public class NestedBeanNullException extends MappingException {
 	 * 
 	 */
 	private static final long serialVersionUID = -3712064938003346836L;
-
-	public NestedBeanNullException(String str) {
+	private boolean safeNavigationOperator;
+	
+	public NestedBeanNullException(String str, boolean safeNavigationOperator) {
 		super(str);
+		this.safeNavigationOperator = safeNavigationOperator;
 	}
 
+	public boolean isSafeNavigationOperator() {
+		return safeNavigationOperator;
+	}
+
+	
 }

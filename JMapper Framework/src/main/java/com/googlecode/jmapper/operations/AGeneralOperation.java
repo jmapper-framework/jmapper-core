@@ -54,11 +54,15 @@ public abstract class AGeneralOperation extends AGeneralOperationAccessor{
 		String actualField = this.initialSGetPath;
 		int index = 0;
 		String nestedField = "nestedField"+ ++index;
+
+		//TODO creo un try catch intorno all'operazione
+		// se va in errore vedo se era definito un safeOperator
+		// se è definito allora vado a vedere che tipo di mapping type
+		// del source ho e decido se passare null a destination
+		// oppure lasciare il valore originario
+		
 		for (NestedMappedField nestedMappedField : this.nestedMappingInfo.getNestedFields()) {
 			
-			//TODO tenere conto del MappingType!
-			//TODO potrei volere il safeNavigation in alcuni punti e non in tutti
-			// quindi devo essere in grado di lanciare exception quando serve
 			tryCatch(mapping, nestedField, actualField, nestedMappedField);
 
 			// in case of last no mapping necessary, but wrote only for checks null field
@@ -68,12 +72,21 @@ public abstract class AGeneralOperation extends AGeneralOperationAccessor{
 			actualField = nestedField;
 			nestedField = "nestedField" + ++index;
 		}
+		
+//TODO utilizzare questo spezzone per il try catch esterno sopra descritto
+//		write(mapping, "   }catch(",NestedBeanNullException.class.getName(), " e){",
+//			newLine,   "      if(!e.isSafeNavigationOperator()){",
+//			newLine,   "          throw e;",
+//			newLine,   "      }",
+//			newLine,   "   }",newLine);
+		
 		this.initialSGetPath = actualField;
 		return mapping;
 	}
 	
 	private void tryCatch(StringBuilder mapping, String nestedField, String actualField, NestedMappedField nestedMappedField){
 		MappedField mappedField = nestedMappedField.getField();
+		boolean safeNavigationOperatorDefined = nestedMappedField.isSafeNavigationOperatorDefined();
 		Class<?> nestedClass = mappedField.getValue().getType();
 		
 		String getField = mappedField.getMethod();
@@ -86,7 +99,7 @@ public abstract class AGeneralOperation extends AGeneralOperationAccessor{
 			newLine,  "   try{", 
 			newLine,  "      ",nestedField," = ",actualField,".",getField,"();",
             newLine,  "   }catch(",NullPointerException.class.getName()," e){",
-            newLine,  "      com.googlecode.jmapper.config.Error.nestedBeanNull(\"",mappedField.getName(),"\", \"",destinationClass,"\", \"",destinationField,"\", \"",sourceClass,"\", \"",sourceField,"\");",
+            newLine,  "      com.googlecode.jmapper.config.Error.nestedBeanNull(\"",mappedField.getName(),"\", \"",destinationClass,"\", \"",destinationField,"\", \"",sourceClass,"\", \"",sourceField,"\", ",safeNavigationOperatorDefined,");",
             newLine,  "   }", newLine);
 	}
 	

@@ -287,12 +287,13 @@ public class ConfigHelper <D, S> {
 					//classe source non configurata, impossibile recuperare il campo
 				}
 					
-				// if there are attributes defined, returns the attribute in targetClassIndex position
-				if(!isEmpty(xmlAttribute.attributes))
-					return checkNestedMapping(xmlAttribute.attributes.get(targetClassIndex).name);
+				String valueName = !isEmpty(xmlAttribute.attributes)
+						// if there are attributes defined, returns the attribute in targetClassIndex position
+						? xmlAttribute.attributes.get(targetClassIndex).name
+						: xmlAttribute.value.name;
 							
 				// return the value content
-				return checkNestedMapping(xmlAttribute.value.name);
+				return checkNestedMapping(valueName);
 				
 			}
 		}

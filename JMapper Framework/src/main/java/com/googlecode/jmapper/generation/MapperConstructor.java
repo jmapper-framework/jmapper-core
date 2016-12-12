@@ -146,7 +146,7 @@ public class MapperConstructor extends MapperConstructorAccessor{
 			         "   com.googlecode.jmapper.config.Error#absentFactoryAndEmptyConstructor(\"",destinationClass.getSimpleName(),"\");",newLine,
 					 "   }",newLine);
 		}
-		
+		//TODO incaso di classi anidate non va!
 	    return write("   ",destinationClassName," ",destinationField," = null;",newLine,
 				     "   if(super.getDestinationFactory()!=null){",newLine,
 				     "   ", destinationField," = (",destinationClassName,") super.getDestinationFactory().make();",newLine,

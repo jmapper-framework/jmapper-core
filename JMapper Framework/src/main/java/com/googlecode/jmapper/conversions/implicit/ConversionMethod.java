@@ -297,6 +297,7 @@ public final class ConversionMethod{
 	
 	
 	/*  BOOLEAN METHODS  */
+	//TODO rivedere queste conversioni, usare Boolean.FALSE e Boolean.TRUE
 	public static String FromStringToBoolean(final String source) { return "new Boolean("+source+")";			   }
 	public static String FrombyteToBoolean(final String source)   { return "new Boolean("+source+"==0?false:true)";}
 	public static String FromshortToBoolean(final String source)  { return "new Boolean("+source+"==0?false:true)";}

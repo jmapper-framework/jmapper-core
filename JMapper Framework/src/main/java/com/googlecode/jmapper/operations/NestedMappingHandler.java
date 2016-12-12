@@ -83,7 +83,7 @@ public class NestedMappingHandler {
 	 * @return the filtered name of this field
 	 */
 	public static String safeNavigationOperatorFilter(String nestedFieldName){
-		return nestedFieldName.substring(1);
+			return nestedFieldName.replaceAll("\\"+SAFE_NAVIGATION_OPERATOR,"");
 	}
 	
 	/**
@@ -138,14 +138,22 @@ public class NestedMappingHandler {
 			String[] nestedFields = nestedFields(nestedMappingPath);
 			Field field = null;
 			
-			// from first field to second-last it's only checked get accessor 
 			for(int i = 0; i< nestedFields.length;i++){
+				
 				String nestedFieldName = nestedFields[i];
 				
-				boolean elvisOperatorDefined = safeNavigationOperatorDefined(nestedFieldName);
-				if(elvisOperatorDefined)
-					nestedFieldName = safeNavigationOperatorFilter(nestedFieldName);
+				boolean elvisOperatorDefined = false;
 				
+				// the safe navigation operator is not valid for the last field
+				if(i < nestedFields.length - 1){
+					String nextNestedFieldName = nestedFields[i+1];
+					elvisOperatorDefined = safeNavigationOperatorDefined(nextNestedFieldName);
+					
+				}
+				
+				// name filtering
+				nestedFieldName = safeNavigationOperatorFilter(nestedFieldName);
+
 				field = retrieveField(nestedClass, nestedFieldName);
 				
 				if(isNull(field))
@@ -155,9 +163,9 @@ public class NestedMappingHandler {
 				// in case of nested mapping relative to source, only get methods will be checked
 				// in case of nested mapping relative to destination, get and set methods will be checked
 				MappedField nestedField = isSourceClass ? checkGetAccessor(xml, nestedClass, field) 
+						//TODO Nested Mapping -> in caso di avoidSet qui potremmo avere un problema
 						                                : checkAccessors(xml, nestedClass, field);
 				
-				//TODO il ? va associato al campo precedente e non a quello attuale
 				// storage information relating to the piece of path
 				info.addNestedField(new NestedMappedField(nestedField, nestedClass, elvisOperatorDefined));
 				

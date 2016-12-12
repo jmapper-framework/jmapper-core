@@ -39,12 +39,13 @@ public class MapperGenerator {
 	private static Set<Class<? extends ICodeGenerator>> generators;
 	
 	/** 
+	 * @param classLoader classLoader to use to generate and find the mapper
 	 * @param mapping parameter that containts the mappings
 	 * @param dynamicMethods dynamic methods to add
 	 * @return a new instance of IMapper interface, following the mappingBuilder specifications
 	 * @throws Throwable any error made €‹by the generation of the mapper
 	 */
-	public static Class<?> generateMapperClass(MapperConstructor mapping, Set<Method> dynamicMethods) throws Throwable{
+	public static Class<?> generateMapperClass(ClassLoader classLoader, MapperConstructor mapping, Set<Method> dynamicMethods) throws Throwable{
 		
 		// adds methods to generate
 		Map<String, String> mappings = mapping.getMappings();
@@ -71,7 +72,7 @@ public class MapperGenerator {
 		for (Method method : methods) 
 			method.setBody(replace(method.getBody()));
 		
-		return generator.generate(className, methods);
+		return generator.generate(classLoader, className, methods);
 	}
 	
 	/**

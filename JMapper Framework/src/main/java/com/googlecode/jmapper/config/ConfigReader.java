@@ -115,8 +115,8 @@ public final class ConfigReader {
 			if(attributes.size()==classes.size())
 				if(classes.contains(targetClass)){
 					// get the attribute from attributes, positioned at the same index of targetClass in classes
-					value = attributes.get(classes.indexOf(targetClass));
-					regex = getValue(value,mappedFieldName);
+					String targetClassValue = attributes.get(classes.indexOf(targetClass));
+					regex = getValue(targetClassValue,mappedFieldName);
 					
 					String targetFieldName = fieldName(targetClass,regex);
 					if(!isNull(targetFieldName))

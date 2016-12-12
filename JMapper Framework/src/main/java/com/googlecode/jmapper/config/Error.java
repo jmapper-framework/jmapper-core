@@ -123,8 +123,8 @@ public final class Error {
 	 * @param sourceClass source class
 	 * @param sourceField source field
 	 */
-	public static void nestedBeanNull(String currentField, String destinationClass, String destinationField, String sourceClass, String sourceField){
-		throw new NestedBeanNullException(MSG.INSTANCE.message(nestedBeanNullException,currentField,destinationClass,destinationField,sourceClass,sourceField));
+	public static void nestedBeanNull(String currentField, String destinationClass, String destinationField, String sourceClass, String sourceField, boolean safeNavigationOperator){
+		throw new NestedBeanNullException(MSG.INSTANCE.message(nestedBeanNullException,currentField,destinationClass,destinationField,sourceClass,sourceField), safeNavigationOperator);
 	}
 	/*
 	  ####################################
@@ -497,7 +497,7 @@ public final class Error {
 	 * @param aField the missing field
 	 */
 	public static void attributeAbsent(Class<?> aClass,Attribute aField){
-		throw new XmlMappingAttributeDoesNotExistException(MSG.INSTANCE.message(xmlMappingAttributeDoesNotExistException2,aClass.getSimpleName(),aField.getName()));
+		throw new XmlMappingAttributeDoesNotExistException(MSG.INSTANCE.message(xmlMappingAttributeDoesNotExistException2,aField.getName(),aClass.getSimpleName(),"API"));
 	}
 		
 	/*

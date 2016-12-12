@@ -29,11 +29,12 @@ public interface ICodeGenerator {
 	
 	/**
 	 * Generates a class with this parameters.
+	 * @param classLoader classLoader to use for the mapper generation
 	 * @param clazzName class name
 	 * @param methods list of methods
 	 * @return the generated class
-	 * @throws Throwable any error made ​​by the generation of the mapper
+	 * @throws Throwable any error made by the generation of the mapper
 	 */
-	Class<?> generate(String clazzName, List<Method> methods) throws Throwable;
+	Class<?> generate(ClassLoader classLoader, String clazzName, List<Method> methods) throws Throwable;
 
 }

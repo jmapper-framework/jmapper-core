@@ -48,7 +48,8 @@ public class MapperBuilder {
 	public boolean exist() {
 		
 		try {
-			Class.forName(mapperClassName(destination, source, path));
+			// it's important to find the mapper in the same class Loader of the app
+			destination.getClassLoader().loadClass(mapperClassName(destination, source, path));
 			return true;
 		} catch (ClassNotFoundException e) {
 			return false;
@@ -62,8 +63,9 @@ public class MapperBuilder {
 	public <D, S> Class<Mapper<D, S>> get() {
 		
 		try {
-			return (Class<Mapper<D, S>>) Class.forName(mapperClassName(
-					destination, source, path));
+			// it's important to find the mapper in the same class Loader of the app
+			return (Class<Mapper<D, S>>) destination.getClassLoader()
+					.loadClass(mapperClassName(destination, source, path));
 		} catch (Exception e) {
 			return null;
 		}
@@ -85,7 +87,7 @@ public class MapperBuilder {
 	       											 .setMapperName(mapperClassName(destination, source, path));
 	    
 		// the dynamic methods are written and added directly to the Mapper Class
-		Class<Mapper<D, S>> mapperClass = (Class<Mapper<D, S>>) generateMapperClass(mapperConstructor, dynamicMethodsToWrite);
+		Class<Mapper<D, S>> mapperClass = (Class<Mapper<D, S>>) generateMapperClass(destination.getClassLoader(), mapperConstructor, dynamicMethodsToWrite);
 
 		try {
 			// a new instance is created to check the mapper implementation

@@ -406,9 +406,9 @@ public final class GeneralUtility {
 	 */
 	private  static String replace (String text, Map<String, String> vars, String prefix){
 		for (Entry<String, String> var : vars.entrySet())
-				text = text.replaceAll(Pattern.quote(prefix+var.getKey()), Matcher.quoteReplacement(var.getValue()));
-		
-		return text; 
+			text = text.replaceAll(Pattern.quote(prefix+var.getKey()), Matcher.quoteReplacement(var.getValue()));
+	
+		return text;
 	}
 	
 	/**

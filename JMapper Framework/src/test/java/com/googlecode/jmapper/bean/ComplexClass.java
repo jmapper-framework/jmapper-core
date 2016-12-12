@@ -14,59 +14,59 @@ import com.googlecode.jmapper.annotations.JMapConversion;
 public class ComplexClass {
 
 	// used in ArrayOperationTest
-	String[] StringArray;
-	String[] StringArray2;
+	public String[] StringArray;
+	public String[] StringArray2;
 	
 	// used in ArrayConversionTest
-	Integer[] IntegerArray;
+	public Integer[] IntegerArray;
 
 	// used in MappedArrayOperationTest
-	TargetObject[] aTargetArray;
-	MappedObject[] aMappedArray;
+	public TargetObject[] aTargetArray;
+	public MappedObject[] aMappedArray;
 	
 	// used in CollectionOperationTest
-	ArrayList<String> aStringList;
-	ArrayList<String> aStringList2;
+	public ArrayList<String> aStringList;
+	public ArrayList<String> aStringList2;
 	
 	// used in CollectionConversionTest
-	List<String> aList;
-	Set<String> aSet;
+	public List<String> aList;
+	public Set<String> aSet;
 	
 	// used in CollectionConversion2Test
-	List<String> aListString;
-	Set<Integer> aSetInteger;
+	public List<String> aListString;
+	public Set<Integer> aSetInteger;
 
 	// used in MappedCollectionOperationTest
-	List<TargetObject> aTargetList;
-	Set<MappedObject> aMappedSet;
+	public List<TargetObject> aTargetList;
+	public Set<MappedObject> aMappedSet;
 	
 	// used in MapOperationTest
-	HashMap<String,String> aSimpleMap;
-	HashMap<String,String> aSimpleMap2;
+	public HashMap<String,String> aSimpleMap;
+	public HashMap<String,String> aSimpleMap2;
 
 	// used in MapConversionTest
-	SortedMap<String, String> aSortedMap;
-	Map<String,String> aMap;
+	public SortedMap<String, String> aSortedMap;
+	public Map<String,String> aMap;
 	
 	// used in MapConversion2Test
-	SortedMap<String, Integer> aDConversionMap;
-	Map<Integer,String> aSConversionMap;
+	public SortedMap<String, Integer> aDConversionMap;
+	public Map<Integer,String> aSConversionMap;
 	
 	// used in MapConversion2Test
-	SortedMap<String, String> aDConversionMap2;
-	Map<Integer,String> aSConversionMap2;
+	public SortedMap<String, String> aDConversionMap2;
+	public Map<Integer,String> aSConversionMap2;
 	
 	// used in MappedMapOperationTest
-	Map<MappedObject,TargetObject> aDMappedMap;
-	SortedMap<TargetObject, MappedObject> aSMappedMap;
+	public Map<MappedObject,TargetObject> aDMappedMap;
+	public SortedMap<TargetObject, MappedObject> aSMappedMap;
 	
 	// used in MappedMapOperationTest
-	Map<MappedObject, String> aDMappedMap2;
-	SortedMap<TargetObject, String> aSMappedMap2;
+	public Map<MappedObject, String> aDMappedMap2;
+	public SortedMap<TargetObject, String> aSMappedMap2;
 		
 	// used in ObjectOperationTest
-	MappedObject mappedObject;
-	TargetObject targetObject;
+	public MappedObject mappedObject;
+	public TargetObject targetObject;
 	
 	@JMapConversion(from={"aStringList2"},to={"aStringList"})
 	public ArrayList<String> conversion(ArrayList<String> aStringList2){

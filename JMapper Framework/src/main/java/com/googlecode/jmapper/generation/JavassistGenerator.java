@@ -49,7 +49,7 @@ public class JavassistGenerator implements ICodeGenerator {
 		ClassPool.getDefault().insertClassPath(new ClassClassPath(Mapper.class));
 	}
 	
-	public Class<?> generate(String clazzName, List<Method> methods) throws Throwable {
+	public Class<?> generate(ClassLoader classLoader, String clazzName, List<Method> methods) throws Throwable {
 		
 		CtClass cc = null;
 		
@@ -81,13 +81,14 @@ public class JavassistGenerator implements ICodeGenerator {
 					// set body method
 					ctMethod.setBody(method.getBody());
 				
-				} catch (CannotCompileException e) { 
+				} catch (CannotCompileException e) {
+					System.out.println(method.getBody());
 					Error.bodyContainsIllegalCode(method,e); 
 				} 
 			}
 			
 			cc.setModifiers(cc.getModifiers() & ~Modifier.ABSTRACT);
-			Class<?> generetedClass = cc.toClass(this.getClass().getClassLoader(), this.getClass().getProtectionDomain());
+			Class<?> generetedClass = cc.toClass(classLoader, this.getClass().getProtectionDomain());
 			return generetedClass;
 			
 		}catch (NotFoundException e) { 

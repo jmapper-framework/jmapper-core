@@ -583,8 +583,7 @@ public class FilesManager {
 	 */
 	private static boolean attributeToClean(String line){
 		String jmap = "@"+JMap.class.getSimpleName();
-		if(!line.contains(jmap))return false;
-		return true;
+		return line.contains(jmap);
 	}
 
 	/**
