@@ -44,7 +44,7 @@ public class MapConversion3Test extends AOperation<MapOperation>{
 	
 
 	@Override
-	protected void AllAll() {
+	protected void allAll() {
 		
 		expected = "   if(source.getASConversionMap2()!=null){"+
 		 newLine + "   java.util.TreeMap mapOfDestination$i = new java.util.TreeMap();"+
@@ -104,7 +104,7 @@ public class MapConversion3Test extends AOperation<MapOperation>{
 	}
 
 	@Override
-	protected void AllValued() {
+	protected void allValued() {
 		
 		expected = "   if(source.getASConversionMap2()!=null){"+
 		 newLine + "   java.util.TreeMap mapOfDestination$i = new java.util.TreeMap();"+
@@ -156,7 +156,7 @@ public class MapConversion3Test extends AOperation<MapOperation>{
 	}
 
 	@Override
-	protected void ValuedAll() {
+	protected void valuedAll() {
 		
 		expected = "   if(destination.getADConversionMap2()!=null){"+
 		 newLine + "   if(source.getASConversionMap2()!=null){"+
@@ -181,7 +181,7 @@ public class MapConversion3Test extends AOperation<MapOperation>{
 	}
 
 	@Override
-	protected void ValuedValued() {
+	protected void valuedValued() {
 		
 		expected = "   if(destination.getADConversionMap2()!=null){"+
 		 newLine + "   if(source.getASConversionMap2()!=null){"+
@@ -204,7 +204,7 @@ public class MapConversion3Test extends AOperation<MapOperation>{
 	}
 
 	@Override
-	protected void ValuedNull() {
+	protected void valuedNull() {
 		
 		expected = "   if(destination.getADConversionMap2()!=null){"+
 	     newLine + "   if(source.getASConversionMap2()==null){"+
@@ -217,7 +217,7 @@ public class MapConversion3Test extends AOperation<MapOperation>{
 	}
 
 	@Override
-	protected void NullValued() {
+	protected void nullValued() {
 
 		expected = "   if(destination.getADConversionMap2()==null){"+
 		 newLine + "   if(source.getASConversionMap2()!=null){"+

@@ -27,6 +27,12 @@ import com.googlecode.jmapper.generation.MapperConstructor;
  */
 public class ObjectOperation extends ARecursiveOperation {
 
+	/** the count is used to differentiate local variables in case of recursive mappings.
+	 *  Count is shared between all operation of this type, 
+	 *  it's static for ensure the uniqueness
+	 */ 
+	private static int count = 0;
+
 	@Override
 	protected StringBuilder existingField() {
 		return 	getMapper(getDName()).mapping(enrichment, getMtd(), getMts());
@@ -48,12 +54,4 @@ public class ObjectOperation extends ARecursiveOperation {
 	private MapperConstructor getMapper(String dName){
 		return new MapperConstructor(destinationType(), sourceType(), dName, dName, getSName(), configChosen, xml,methodsToGenerate);
 	}
-	
-	/** the count is used to differentiate local variables in case of recursive mappings.
-	 *  Count is shared between all operation of this type, 
-	 *  it's static for ensure the uniqueness
-	 */ 
-	private static int count = 0;
-
-	
 }

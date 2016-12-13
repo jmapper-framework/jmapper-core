@@ -142,7 +142,7 @@ public class ConversionsToBooleanTest extends TestCase{
 		
 		String s = "true";
 		
-		{	Boolean actual = new Boolean(s);
+		{	Boolean actual = Boolean.valueOf(s);
 			Boolean expected = true;
 			assertEquals(expected, actual);		}
 		
@@ -193,7 +193,7 @@ public class ConversionsToBooleanTest extends TestCase{
 		
 		Integer i = 1;
 	
-		{	Boolean actual = new Boolean(i.intValue()==0?false:true);
+		{	Boolean actual = i.intValue()==0?Boolean.FALSE:Boolean.TRUE;
 			Boolean expected = true;
 			assertEquals(expected, actual);		}
 		
@@ -244,7 +244,7 @@ public class ConversionsToBooleanTest extends TestCase{
 		
 		Double d = 1.2D;
 	
-		{	Boolean actual = new Boolean(d.doubleValue()==0?false:true);
+		{	Boolean actual = d.doubleValue()==0?Boolean.FALSE:Boolean.TRUE;
 			Boolean expected = true;
 			assertEquals(expected, actual);		}
 		

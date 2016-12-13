@@ -41,7 +41,7 @@ public class JmapperLog {
 	 * 
 	 * @param e exception to handle
 	 */
-	public static void ERROR(Throwable e) throws JMapperException{
+	public static void error(Throwable e) throws JMapperException{
 		logger.error("{}: {}",e.getClass().getSimpleName(),e.getMessage());
 		throw new JMapperException(e);
 	}

@@ -32,14 +32,14 @@ public class BasicConversion5Test extends AOperation<BasicOperation>{
     }
     
     @Override
-    protected void AllAll() {
+    protected void allAll() {
         expected = "   destination.setAIntField((int) source.getACharacterField().charValue());"+newLine;
         write();
         verify();
     }
 
     @Override
-    protected void AllValued() {
+    protected void allValued() {
         expected = "   if(source.getACharacterField()!=null){"+
          newLine + "   destination.setAIntField((int) source.getACharacterField().charValue());"+
          newLine + "   }"+newLine;
@@ -48,14 +48,14 @@ public class BasicConversion5Test extends AOperation<BasicOperation>{
     }
 
     @Override
-    protected void ValuedAll() {
+    protected void valuedAll() {
         expected = "   destination.setAIntField((int) source.getACharacterField().charValue());"+newLine;
         write();
         verify();   
     }
 
     @Override
-    protected void ValuedValued() {
+    protected void valuedValued() {
         expected = "   if(source.getACharacterField()!=null){"+
          newLine + "   destination.setAIntField((int) source.getACharacterField().charValue());"+
          newLine + "   }"+newLine;
@@ -64,14 +64,14 @@ public class BasicConversion5Test extends AOperation<BasicOperation>{
     }
 
     @Override
-    protected void ValuedNull() {
+    protected void valuedNull() {
         expected = newLine;
         write();
         verify();       
     }
 
     @Override
-    protected void NullValued() {
+    protected void nullValued() {
         expected = newLine;
         write();
         verify();       

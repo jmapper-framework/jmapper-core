@@ -56,51 +56,42 @@ public final class GeneralUtility {
 	public static final String fileSeparator = System.getProperty("file.separator");
 
 	/** implementationClass contains the interfaces names as key and their implementation  as value */
-	public static final DualHashBidiMap implementationClass = 
-			
-			new DualHashBidiMap(){
-
-					private static final long serialVersionUID = 8337845542097230683L;
-
-					{
-						put(Collection.class.getName(),	ArrayList.class);
-						put(List.class.getName(),		ArrayList.class);
-						put(Set.class.getName(),		HashSet.class);
-						put(Queue.class.getName(), 		LinkedList.class);
-						put(SortedSet.class.getName(), 	TreeSet.class);
-						put(Map.class.getName(), 		HashMap.class);
-						put(SortedMap.class.getName(), 	TreeMap.class);
-					}
-			};
-																
+	public static final DualHashBidiMap implementationClass = new DualHashBidiMap();
+	
 	/** basicTypes contains all the names of primitive and wrapper classes */
-	private static final ArrayList<String> basicTypes = 
+	private static final ArrayList<String> basicTypes = new ArrayList<String>();
+	
+	static{
+		
+		implementationClass.put(Collection.class.getName(),	ArrayList.class);
+		implementationClass.put(List.class.getName(),		ArrayList.class);
+		implementationClass.put(Set.class.getName(),		HashSet.class);
+		implementationClass.put(Queue.class.getName(), 		LinkedList.class);
+		implementationClass.put(SortedSet.class.getName(), 	TreeSet.class);
+		implementationClass.put(Map.class.getName(), 		HashMap.class);
+		implementationClass.put(SortedMap.class.getName(), 	TreeMap.class);
+		
+		basicTypes.add(byte.class.getName());
+		basicTypes.add(short.class.getName());
+		basicTypes.add(int.class.getName());
+		basicTypes.add(long.class.getName());
+		basicTypes.add(float.class.getName());
+		basicTypes.add(double.class.getName());
+		basicTypes.add(char.class.getName());
+		basicTypes.add(boolean.class.getName());
+		basicTypes.add(Byte.class.getName());
+		basicTypes.add(Short.class.getName());
+		basicTypes.add(Integer.class.getName());
+		basicTypes.add(Long.class.getName());
+		basicTypes.add(Float.class.getName());
+		basicTypes.add(Double.class.getName());
+		basicTypes.add(Character.class.getName());
+		basicTypes.add(Boolean.class.getName());
+		basicTypes.add(String.class.getName());
+		basicTypes.add(Object.class.getName());
+	}
+																
 			
-			new ArrayList<String>(){
-
-					private static final long serialVersionUID = -5567529960231273742L;
-
-					{
-						add(byte.class.getName());
-						add(short.class.getName());
-						add(int.class.getName());
-						add(long.class.getName());
-						add(float.class.getName());
-						add(double.class.getName());
-						add(char.class.getName());
-						add(boolean.class.getName());
-						add(Byte.class.getName());
-						add(Short.class.getName());
-						add(Integer.class.getName());
-						add(Long.class.getName());
-						add(Float.class.getName());
-						add(Double.class.getName());
-						add(Character.class.getName());
-						add(Boolean.class.getName());
-						add(String.class.getName());
-						add(Object.class.getName());
-					}
-			};
 	
 	/**
 	 * @param destination destination class

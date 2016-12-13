@@ -49,6 +49,4 @@ public class InfoOperation {
 	public OperationType getOperationType() {	return operationType;	}
 	public ConversionType getConversionType() {	return conversionType;	}
 	
-	public InfoOperation() {}
-	
 }

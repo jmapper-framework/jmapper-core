@@ -74,22 +74,22 @@ public abstract class AOperation<T extends AGeneralOperation> extends TestCase {
 	}
 	
 	/** method to be implemented to test the AllAll combination */
-	protected abstract void AllAll();
+	protected abstract void allAll();
 	
 	/** method to be implemented to test the AllValued combination */
-	protected abstract void AllValued();
+	protected abstract void allValued();
 	
 	/** method to be implemented to test the ValuedAll combination */
-	protected abstract void ValuedAll();
+	protected abstract void valuedAll();
 	
 	/** method to be implemented to test the ValuedValued combination */
-	protected abstract void ValuedValued();
+	protected abstract void valuedValued();
 	
 	/** method to be implemented to test the ValuedNull combination */
-	protected abstract void ValuedNull();
+	protected abstract void valuedNull();
 	
 	/** method to be implemented to test the NullValued combination */
-	protected abstract void NullValued();
+	protected abstract void nullValued();
 	
 	public void verify(){
 		assertEquals(replace$(expected,"i",""+(i),"y",""+(i+1),"z",""+(i-1)), actual);
@@ -99,42 +99,42 @@ public abstract class AOperation<T extends AGeneralOperation> extends TestCase {
 		operation.setMtd(MappingType.ALL_FIELDS)
 	    		 .setMts(MappingType.ALL_FIELDS);
 	
-		AllAll();
+		allAll();
 	}
 	
 	public void testAllValued(){
 		operation.setMtd(MappingType.ALL_FIELDS)
 		 		 .setMts(MappingType.ONLY_VALUED_FIELDS);
 	
-		AllValued();
+		allValued();
 	}
 	
 	public void testValuedAll(){
 		operation.setMtd(MappingType.ONLY_VALUED_FIELDS)
 		 		 .setMts(MappingType.ALL_FIELDS);
 
-		ValuedAll();
+		valuedAll();
 	}
 	
 	public void testValuedValued(){
 		operation.setMtd(MappingType.ONLY_VALUED_FIELDS)
 		 		 .setMts(MappingType.ONLY_VALUED_FIELDS);
 
-		ValuedValued();
+		valuedValued();
 	}
 	
 	public void testValuedNull(){
 		operation.setMtd(MappingType.ONLY_VALUED_FIELDS)
 		 		 .setMts(MappingType.ONLY_NULL_FIELDS);
 		
-		ValuedNull();
+		valuedNull();
 	}
 	
 	public void testNullValued(){
 		operation.setMtd(MappingType.ONLY_NULL_FIELDS)
 		 		 .setMts(MappingType.ONLY_VALUED_FIELDS);
 
-		NullValued();
+		nullValued();
 	}
 	
 	/**

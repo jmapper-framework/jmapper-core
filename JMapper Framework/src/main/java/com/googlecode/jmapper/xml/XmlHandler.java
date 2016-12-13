@@ -59,7 +59,7 @@ public class XmlHandler {
 	 */
 	public XmlHandler(String xmlPath) {
 		try{xml = loadXml(xmlPath).atDevelopmentTime();}
-		catch (Exception e) {JmapperLog.ERROR(e);}
+		catch (Exception e) {JmapperLog.error(e);}
 	}
 	/**
 	 * Cleans up the annotated classes, given as input, from the configuration.<br>
@@ -87,7 +87,7 @@ public class XmlHandler {
 	 */
     public XmlHandler cleanAnnotatedClass(){
     	try{ return  cleanAnnotatedClass (false,FilesManager.annotatedClasses());
-    	}catch (Exception e) {JmapperLog.ERROR(e);}
+    	}catch (Exception e) {JmapperLog.error(e);}
     	return this;
     }
     
@@ -99,7 +99,7 @@ public class XmlHandler {
 					if(file.getPath().contains(classPath))
 						FilesManager.cleanClass(file,clazz,cleanAll);
 			 }
-		}catch (Exception e) {JmapperLog.ERROR(e);}
+		}catch (Exception e) {JmapperLog.error(e);}
 		return this;
 	}
     /**
@@ -110,7 +110,7 @@ public class XmlHandler {
 	 */
 	public XmlHandler addAnnotatedClassAll(Class<?>... classes){
 	  try{ addClasses(true,classes);
-	  }catch (Exception e) {JmapperLog.ERROR(e);}
+	  }catch (Exception e) {JmapperLog.error(e);}
 	  return this;
 	}
 	
@@ -122,7 +122,7 @@ public class XmlHandler {
 	 */
 	public XmlHandler addAnnotatedClass(Class<?>... classes){
 	  try{ addClasses(false,classes);
-	  }catch (Exception e) {JmapperLog.ERROR(e);}
+	  }catch (Exception e) {JmapperLog.error(e);}
 	  return this;
 	}
 	
@@ -133,7 +133,7 @@ public class XmlHandler {
 	public XmlHandler addAnnotatedClass(){
       try{ List<Class<?>> annotatedClasses = FilesManager.annotatedClasses();
 	       addClasses(true,annotatedClasses.toArray(new Class[annotatedClasses.size()]));
-      }catch (Exception e) {JmapperLog.ERROR(e);}
+      }catch (Exception e) {JmapperLog.error(e);}
 	  return this;
     }
     
@@ -158,7 +158,7 @@ public class XmlHandler {
 	public XmlHandler overrideAnnotatedClass(Class<?>... classes){
 		try{ for(Class<?> clazz: classes)
 			 overrideAnnotatedClass(clazz,false);
-		}catch (Exception e) {JmapperLog.ERROR(e);}
+		}catch (Exception e) {JmapperLog.error(e);}
 		return this;
 	}
 	
@@ -169,7 +169,7 @@ public class XmlHandler {
 	public XmlHandler overrideAnnotatedClass(){
 		try{ for(Class<?> clazz: FilesManager.annotatedClasses())
 			 overrideAnnotatedClass(clazz,true);
-		}catch (Exception e) {JmapperLog.ERROR(e);}
+		}catch (Exception e) {JmapperLog.error(e);}
 		return this;
 	}
 	
@@ -208,9 +208,9 @@ public class XmlHandler {
 			 deleteAnnotatedClass(Class.forName(className));
 		 } catch (ClassNotFoundException e) {
 			 try{com.googlecode.jmapper.config.Error.xmlMappingClassDoesNotExist(className);
-			 }catch (Exception e2) {JmapperLog.ERROR(e2);}
-		 } catch (LoadingFileException e) {JmapperLog.ERROR(e);
-		 } catch (IOException e) {		   JmapperLog.ERROR(e);}
+			 }catch (Exception e2) {JmapperLog.error(e2);}
+		 } catch (LoadingFileException e) {JmapperLog.error(e);
+		 } catch (IOException e) {		   JmapperLog.error(e);}
 	  }
 	  
 	  xml.write();
@@ -279,7 +279,7 @@ public class XmlHandler {
 				if(!FilesManager.isFileAnnotated(path,classe))
 					FilesManager.addConfigurationToClass(path,xmlGlobal.get(classe.getName()),xmlAttributes.get(classe.getName()),classe);
 			 }
-		}catch (Exception e) {JmapperLog.ERROR(e);}
+		}catch (Exception e) {JmapperLog.error(e);}
 		return this;
 	}
 	/**
@@ -289,7 +289,7 @@ public class XmlHandler {
     public XmlHandler fromXmlToAnnotation(){
 	   try{ for (String className : xml.loadAttributes().keySet()) 
 	    		fromXmlToAnnotation(Class.forName(className));
-	   }catch (Exception e) {JmapperLog.ERROR(e);}
+	   }catch (Exception e) {JmapperLog.error(e);}
 		return this;
 	}
 
@@ -312,7 +312,7 @@ public class XmlHandler {
 	public XmlHandler addGlobal(Class<?> aClass, Global global){
 		try{ xml.addGlobal(aClass, global);
 			 xml.write();
-		}catch (Exception e) {JmapperLog.ERROR(e);}
+		}catch (Exception e) {JmapperLog.error(e);}
 		return this;
 	}
 	
@@ -324,7 +324,7 @@ public class XmlHandler {
 	public XmlHandler deleteGlobal(Class<?> aClass){
 		try{ xml.deleteGlobal(aClass);
 			 xml.write();
-		}catch (Exception e) {JmapperLog.ERROR(e);}
+		}catch (Exception e) {JmapperLog.error(e);}
 		return this;
 	}
 	
@@ -349,7 +349,7 @@ public class XmlHandler {
 	public XmlHandler addAttributes(Class<?> aClass,Attribute... attributes){
 		try{ xml.addAttributes(aClass, attributes);
 			 xml.write();
-		}catch (Exception e) {JmapperLog.ERROR(e);}
+		}catch (Exception e) {JmapperLog.error(e);}
 		return this;
 	}
 	
@@ -362,7 +362,7 @@ public class XmlHandler {
 	public XmlHandler deleteAttributes(Class<?> aClass,String... attributes){
 		try{ xml.deleteAttributes(aClass, attributes);
 			 xml.write();
-		}catch (Exception e) {JmapperLog.ERROR(e);}
+		}catch (Exception e) {JmapperLog.error(e);}
 		return this;
 	}	
 	
@@ -424,7 +424,7 @@ public class XmlHandler {
 	public XmlHandler addClass(Class<?> clazz,Attribute... attributes){
 		try{	xml.addClass(clazz, attributes);
 			    xml.write();
-		}catch (Exception e) {JmapperLog.ERROR(e);}
+		}catch (Exception e) {JmapperLog.error(e);}
 		return this;
 	}
 
@@ -438,7 +438,7 @@ public class XmlHandler {
 	public XmlHandler addClass(Class<?> clazz, Global global){
 		try{	xml.addClass(clazz, global);
 			    xml.write();
-		}catch (Exception e) {JmapperLog.ERROR(e);}
+		}catch (Exception e) {JmapperLog.error(e);}
 		return this;
 	}
 		
@@ -454,7 +454,7 @@ public class XmlHandler {
 	public XmlHandler addClass(Class<?> clazz, Global global, Attribute... attributes){
 		try{	xml.addClass(clazz, global, attributes);
 			    xml.write();
-		}catch (Exception e) {JmapperLog.ERROR(e);}
+		}catch (Exception e) {JmapperLog.error(e);}
 		return this;
 	}
 	
@@ -478,7 +478,7 @@ public class XmlHandler {
 		try{ for (Class<?> clazz : classes)
 			 xml.deleteClass(clazz);
 			 xml.write();
-		}catch (Exception e) {JmapperLog.ERROR(e);}
+		}catch (Exception e) {JmapperLog.error(e);}
 		return this;
 	}
 	
@@ -492,7 +492,7 @@ public class XmlHandler {
 		try{ xml.deleteClass(aClass);
 			 xml.addClass(aClass, attributes);
 			 xml.write();
-		}catch (Exception e) {JmapperLog.ERROR(e);}
+		}catch (Exception e) {JmapperLog.error(e);}
 		return this;
 	}
 	
@@ -518,7 +518,7 @@ public class XmlHandler {
 		try{ xml.deleteClass(aClass);
 			 xml.addClass(aClass, global, attributes);
 			 xml.write();
-		}catch (Exception e) {JmapperLog.ERROR(e);}
+		}catch (Exception e) {JmapperLog.error(e);}
 		return this;
 	}
 	/**

@@ -64,7 +64,7 @@ public class ConfigHelper <D, S> {
 			return new XML(true, xml).toXStream();
 		} catch (Exception e) {
 			//TODO lanciare exception
-			JmapperLog.ERROR(e);
+			JmapperLog.error(e);
 			throw new RuntimeException();
 		}
 	}

@@ -14,5 +14,4 @@ public class MappedObject2 {
 		this.field = field;
 	}
 	
-	public MappedObject2() {}
 }

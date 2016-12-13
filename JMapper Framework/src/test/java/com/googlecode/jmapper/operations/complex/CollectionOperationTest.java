@@ -41,7 +41,7 @@ public class CollectionOperationTest extends AOperation<CollectionOperation>{
 	}
 	
 	@Override
-	protected void AllAll() {
+	protected void allAll() {
 		
 		expected = "   if(source.getAStringList2()!=null){"+
 		 newLine + "   destination.setAStringList(source.getAStringList2());"+
@@ -71,7 +71,7 @@ public class CollectionOperationTest extends AOperation<CollectionOperation>{
 	}
 
 	@Override
-	protected void AllValued() {
+	protected void allValued() {
 		
 		expected = "   if(source.getAStringList2()!=null){"+
 		 newLine + "   destination.setAStringList(source.getAStringList2());"+
@@ -93,7 +93,7 @@ public class CollectionOperationTest extends AOperation<CollectionOperation>{
 	}
 
 	@Override
-	protected void ValuedAll() {
+	protected void valuedAll() {
 		
 		expected = "   if(destination.getAStringList()!=null){"+
 		 newLine + "   if(source.getAStringList2()!=null){"+
@@ -108,7 +108,7 @@ public class CollectionOperationTest extends AOperation<CollectionOperation>{
 	}
 
 	@Override
-	protected void ValuedValued() {
+	protected void valuedValued() {
 
 		expected = "   if(destination.getAStringList()!=null){"+
 		 newLine + "   if(source.getAStringList2()!=null){"+
@@ -121,7 +121,7 @@ public class CollectionOperationTest extends AOperation<CollectionOperation>{
 	}
 
 	@Override
-	protected void ValuedNull() {
+	protected void valuedNull() {
 		
 		expected = "   if(destination.getAStringList()!=null){"+
 	     newLine + "   if(source.getAStringList2()==null){"+
@@ -134,7 +134,7 @@ public class CollectionOperationTest extends AOperation<CollectionOperation>{
 	}
 
 	@Override
-	protected void NullValued() {
+	protected void nullValued() {
 
 		expected = "   if(destination.getAStringList()==null){"+
 		 newLine + "   if(source.getAStringList2()!=null){"+

@@ -118,9 +118,9 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 		try{
 			init();
 		}catch(ClassNotMappedException e){
-			JmapperLog.ERROR(e);
+			JmapperLog.error(e);
 		}catch(MappingErrorException e){
-			JmapperLog.ERROR(e);
+			JmapperLog.error(e);
 		}
 	}
 	
@@ -144,13 +144,13 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 		try {
 			init(xmlPath);
 		} catch (MalformedURLException e) {
-			JmapperLog.ERROR(e);
+			JmapperLog.error(e);
 		} catch (IOException e) {
-			JmapperLog.ERROR(e);
+			JmapperLog.error(e);
 		}catch(ClassNotMappedException e){
-			JmapperLog.ERROR(e);
+			JmapperLog.error(e);
 		}catch(MappingErrorException e){
-			JmapperLog.ERROR(e);
+			JmapperLog.error(e);
 		}
 	}
 	
@@ -302,7 +302,7 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	 * @return a new instance of Class given as input
 	 */
 	private <I> I logAndReturnNull(Exception exception){
-		JmapperLog.ERROR(exception); 
+		JmapperLog.error(exception); 
 		return null;
 	}
 	
@@ -315,7 +315,7 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	private <I> I destinationClassControl(Exception exception, Class<I> clazz){
 		try{
 			if(clazz == null)throw new IllegalArgumentException("it's mandatory define the destination class");
-		}catch (Exception e) {JmapperLog.ERROR(e);return null;}
+		}catch (Exception e) {JmapperLog.error(e);return null;}
 		return logAndReturnNull(exception);
 	}
 	/**

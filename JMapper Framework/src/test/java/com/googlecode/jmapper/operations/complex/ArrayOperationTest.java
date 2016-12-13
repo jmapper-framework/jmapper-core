@@ -30,7 +30,7 @@ public class ArrayOperationTest extends AOperation<ArrayOperation>{
 	}
 	
 	@Override
-	protected void AllAll() {
+	protected void allAll() {
 		
 		expected = "   if(source.getStringArray2()!=null){"+
 		 newLine + "   destination.setStringArray(source.getStringArray2());"+
@@ -63,7 +63,7 @@ public class ArrayOperationTest extends AOperation<ArrayOperation>{
 	}
 
 	@Override
-	protected void AllValued() {
+	protected void allValued() {
 		
 		expected = "   if(source.getStringArray2()!=null){"+
 		 newLine + "   destination.setStringArray(source.getStringArray2());"+
@@ -88,7 +88,7 @@ public class ArrayOperationTest extends AOperation<ArrayOperation>{
 	}
 
 	@Override
-	protected void ValuedAll() {
+	protected void valuedAll() {
 
 		expected = "   if(destination.getStringArray()!=null){"+
 		 newLine + "   if(source.getStringArray2()!=null){"+
@@ -106,7 +106,7 @@ public class ArrayOperationTest extends AOperation<ArrayOperation>{
 	}
 
 	@Override
-	protected void ValuedValued() {
+	protected void valuedValued() {
 
 		expected = "   if(destination.getStringArray()!=null){"+
 		 newLine + "   if(source.getStringArray2()!=null){"+
@@ -122,7 +122,7 @@ public class ArrayOperationTest extends AOperation<ArrayOperation>{
 	}
 
 	@Override
-	protected void ValuedNull() {
+	protected void valuedNull() {
 		
 		expected = "   if(destination.getStringArray()!=null){"+
 	     newLine + "   if(source.getStringArray2()==null){"+
@@ -135,7 +135,7 @@ public class ArrayOperationTest extends AOperation<ArrayOperation>{
 	}
 
 	@Override
-	protected void NullValued() {
+	protected void nullValued() {
 		
 		expected = "   if(destination.getStringArray()==null){"+
 		 newLine + "   if(source.getStringArray2()!=null){"+

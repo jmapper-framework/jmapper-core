@@ -29,7 +29,7 @@ public class MappedArrayOperationTest extends AOperation<MappedArrayOperation>{
 	}
 	
 	@Override
-	protected void AllAll() {
+	protected void allAll() {
 		
 		expected = "   if(source.getAMappedArray()!=null){"+
 		 newLine + "   com.googlecode.jmapper.bean.MappedObject[] arrayOfSource$i = source.getAMappedArray();"+
@@ -113,7 +113,7 @@ public class MappedArrayOperationTest extends AOperation<MappedArrayOperation>{
 	}
 
 	@Override
-	protected void AllValued() {
+	protected void allValued() {
 		
 		expected = "   if(source.getAMappedArray()!=null){"+
 		 newLine + "   com.googlecode.jmapper.bean.MappedObject[] arrayOfSource$i = source.getAMappedArray();"+
@@ -196,7 +196,7 @@ public class MappedArrayOperationTest extends AOperation<MappedArrayOperation>{
 	}
 
 	@Override
-	protected void ValuedAll() {
+	protected void valuedAll() {
 
 		expected = "   if(destination.getATargetArray()!=null){"+
 		 newLine + "   if(source.getAMappedArray()!=null){"+
@@ -235,7 +235,7 @@ public class MappedArrayOperationTest extends AOperation<MappedArrayOperation>{
 	}
 
 	@Override
-	protected void ValuedValued() {
+	protected void valuedValued() {
 
 		expected = "   if(destination.getATargetArray()!=null){"+
 		 newLine + "   if(source.getAMappedArray()!=null){"+
@@ -274,7 +274,7 @@ public class MappedArrayOperationTest extends AOperation<MappedArrayOperation>{
 	}
 
 	@Override
-	protected void ValuedNull() {
+	protected void valuedNull() {
 		
 		expected = "   if(destination.getATargetArray()!=null){"+
 	     newLine + "   if(source.getAMappedArray()==null){"+
@@ -287,7 +287,7 @@ public class MappedArrayOperationTest extends AOperation<MappedArrayOperation>{
 	}
 
 	@Override
-	protected void NullValued() {
+	protected void nullValued() {
 		
 		expected = "   if(destination.getATargetArray()==null){"+
 		 newLine + "   if(source.getAMappedArray()!=null){"+

@@ -41,7 +41,6 @@ public class InfoMapOperation extends InfoOperation{
 	private ConversionType valueConversionType;
 	private ChooseConfig valueConfigChosen;
 	
-	public InfoMapOperation() {}
 	public void keyValueUndefined(){
 		keyInstructionType = OperationType.UNDEFINED;
 		keyConversionType = ConversionType.UNDEFINED;

@@ -30,7 +30,7 @@ public class ArrayListConversionTest extends AOperation<ArrayListOperation> {
 	}
 
 	@Override
-	protected void AllAll() {
+	protected void allAll() {
 		
 		expected = "   if(source.getASetInteger()!=null){"+
 		 newLine + "   Object[] sourceArray$i = source.getASetInteger().toArray();"+
@@ -87,7 +87,7 @@ public class ArrayListConversionTest extends AOperation<ArrayListOperation> {
 	}
 
 	@Override
-	protected void AllValued() {
+	protected void allValued() {
 		
 		expected = "   if(source.getASetInteger()!=null){"+
 		 newLine + "   Object[] sourceArray$i = source.getASetInteger().toArray();"+
@@ -136,7 +136,7 @@ public class ArrayListConversionTest extends AOperation<ArrayListOperation> {
 	}
 
 	@Override
-	protected void ValuedAll() {
+	protected void valuedAll() {
 		
 		expected = "   if(destination.getStringArray()!=null){"+
 		 newLine + "   if(source.getASetInteger()!=null){"+
@@ -162,7 +162,7 @@ public class ArrayListConversionTest extends AOperation<ArrayListOperation> {
 	}
 
 	@Override
-	protected void ValuedValued() {
+	protected void valuedValued() {
 
 		expected = "   if(destination.getStringArray()!=null){"+
 		 newLine + "   if(source.getASetInteger()!=null){"+
@@ -187,7 +187,7 @@ public class ArrayListConversionTest extends AOperation<ArrayListOperation> {
 	}
 
 	@Override
-	protected void ValuedNull() {
+	protected void valuedNull() {
 		
 		expected = "   if(destination.getStringArray()!=null){"+
 		 newLine + "   if(source.getASetInteger()==null){"+
@@ -200,7 +200,7 @@ public class ArrayListConversionTest extends AOperation<ArrayListOperation> {
 	}
 
 	@Override
-	protected void NullValued() {
+	protected void nullValued() {
 
 		expected = "   if(destination.getStringArray()==null){"+
 		 newLine + "   if(source.getASetInteger()!=null){"+

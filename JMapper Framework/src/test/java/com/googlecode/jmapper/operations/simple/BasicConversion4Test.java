@@ -34,21 +34,21 @@ public class BasicConversion4Test extends AOperation<BasicOperation>{
 	}
 	
 	@Override
-	protected void AllAll() {
+	protected void allAll() {
 		expected = "   destination.setAStringField(Integer.toString(source.getAIntField()));"+newLine;
 		write();
 		verify();
 	}
 
 	@Override
-	protected void AllValued() {
+	protected void allValued() {
 		expected = "   destination.setAStringField(Integer.toString(source.getAIntField()));"+newLine;
 		write();
 		verify();
 	}
 
 	@Override
-	protected void ValuedAll() {
+	protected void valuedAll() {
 		expected = "   if(destination.getAStringField()!=null){"+
 		 newLine + "   destination.setAStringField(Integer.toString(source.getAIntField()));"+
 	     newLine + "   }"+newLine;
@@ -57,7 +57,7 @@ public class BasicConversion4Test extends AOperation<BasicOperation>{
 	}
 
 	@Override
-	protected void ValuedValued() {
+	protected void valuedValued() {
 		expected = "   if(destination.getAStringField()!=null){"+
 	     newLine + "   destination.setAStringField(Integer.toString(source.getAIntField()));"+
 	     newLine + "   }"+newLine;
@@ -66,14 +66,14 @@ public class BasicConversion4Test extends AOperation<BasicOperation>{
 	}
 
 	@Override
-	protected void ValuedNull() {
+	protected void valuedNull() {
 		expected = newLine;
 		write();
 		verify();		
 	}
 
 	@Override
-	protected void NullValued() {
+	protected void nullValued() {
 		expected = "   if(destination.getAStringField()==null){"+
 		 newLine + "   destination.setAStringField(Integer.toString(source.getAIntField()));"+
 		 newLine + "   }"+newLine;

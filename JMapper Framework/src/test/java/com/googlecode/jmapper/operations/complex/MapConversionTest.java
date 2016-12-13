@@ -37,7 +37,7 @@ public class MapConversionTest extends AOperation<MapOperation>{
 	}
 	
 	@Override
-	protected void AllAll() {
+	protected void allAll() {
 		
 		expected = "   if(source.getAMap()!=null){"+
 		 newLine + "   java.util.TreeMap complexMap$i = new java.util.TreeMap();"+
@@ -71,7 +71,7 @@ public class MapConversionTest extends AOperation<MapOperation>{
 	}
 
 	@Override
-	protected void AllValued() {
+	protected void allValued() {
 		
 		
 		
@@ -99,7 +99,7 @@ public class MapConversionTest extends AOperation<MapOperation>{
 	}
 
 	@Override
-	protected void ValuedAll() {
+	protected void valuedAll() {
 		
 		expected = "   if(destination.getASortedMap()!=null){"+
 		 newLine + "   if(source.getAMap()!=null){"+
@@ -114,7 +114,7 @@ public class MapConversionTest extends AOperation<MapOperation>{
 	}
 
 	@Override
-	protected void ValuedValued() {
+	protected void valuedValued() {
 
 		expected = "   if(destination.getASortedMap()!=null){"+
 		 newLine + "   if(source.getAMap()!=null){"+
@@ -127,7 +127,7 @@ public class MapConversionTest extends AOperation<MapOperation>{
 	}
 
 	@Override
-	protected void ValuedNull() {
+	protected void valuedNull() {
 		
 		expected = "   if(destination.getASortedMap()!=null){"+
 	     newLine + "   if(source.getAMap()==null){"+
@@ -140,7 +140,7 @@ public class MapConversionTest extends AOperation<MapOperation>{
 	}
 
 	@Override
-	protected void NullValued() {
+	protected void nullValued() {
 
 		expected = "   if(destination.getASortedMap()==null){"+
 		 newLine + "   if(source.getAMap()!=null){"+

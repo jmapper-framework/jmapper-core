@@ -30,7 +30,7 @@ public class ObjectOperationTest extends AOperation<ObjectOperation>{
 
 	
 	@Override
-	protected void AllAll() {
+	protected void allAll() {
 		
 		expected = "   if(source.getMappedObject()!=null){"+
 				 newLine + "   com.googlecode.jmapper.bean.TargetObject obj$i = null;" +
@@ -75,7 +75,7 @@ public class ObjectOperationTest extends AOperation<ObjectOperation>{
 	}
 
 	@Override
-	protected void AllValued() {
+	protected void allValued() {
 		
 		expected = "   if(source.getMappedObject()!=null){"+
 				 newLine + "   com.googlecode.jmapper.bean.TargetObject obj$i = null;" +
@@ -118,7 +118,7 @@ public class ObjectOperationTest extends AOperation<ObjectOperation>{
 	}
 
 	@Override
-	protected void ValuedAll() {
+	protected void valuedAll() {
 		
 		expected = "   if(destination.getTargetObject()!=null){"+
 		 newLine + "   if(source.getMappedObject()!=null){"+
@@ -136,7 +136,7 @@ public class ObjectOperationTest extends AOperation<ObjectOperation>{
 	}
 
 	@Override
-	protected void ValuedValued() {
+	protected void valuedValued() {
 
 		expected = "   if(destination.getTargetObject()!=null){"+
 		 newLine + "   if(source.getMappedObject()!=null){"+
@@ -154,7 +154,7 @@ public class ObjectOperationTest extends AOperation<ObjectOperation>{
 	}
 
 	@Override
-	protected void ValuedNull() {
+	protected void valuedNull() {
 		
 		expected = "   if(destination.getTargetObject()!=null){"+
 	     newLine + "   if(source.getMappedObject()==null){"+
@@ -167,7 +167,7 @@ public class ObjectOperationTest extends AOperation<ObjectOperation>{
 	}
 
 	@Override
-	protected void NullValued() {
+	protected void nullValued() {
 
 		expected = "   if(destination.getTargetObject()==null){"+
 		 newLine + "   if(source.getMappedObject()!=null){"+

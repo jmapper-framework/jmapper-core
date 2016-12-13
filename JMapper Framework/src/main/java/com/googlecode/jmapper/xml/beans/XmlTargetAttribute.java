@@ -38,6 +38,9 @@ public class XmlTargetAttribute {
 	@XStreamAsAttribute
 	public String set;
 	
+	public static final String attributeNode = "attribute";
+	public static final String valueNode = "value";
+
 	/**
 	 * @param name name of this attribute
 	 */
@@ -65,9 +68,6 @@ public class XmlTargetAttribute {
 		get = attribute.getGet();
 		set = attribute.getSet();
 	}
-
-	public static final String attributeNode = "attribute";
-	public static final String valueNode = "value";
 	
 	@Override
 	public String toString() {

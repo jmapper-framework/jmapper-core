@@ -43,15 +43,11 @@ import static com.googlecode.jmapper.util.GeneralUtility.isNull;
  */
 public final class OperationAnalyzer {
 	
-	/** xml object */
-	private XML xml;
-	
 	private List<IOperationAnalyzer> analyzers;
 	private ConversionAnalyzer conversionAnalyzer;
 	private InfoOperation info;
 	
-	public OperationAnalyzer(XML aXml, ConversionAnalyzer conversionAnalyzer) {
-		xml = aXml;
+	public OperationAnalyzer(XML xml, ConversionAnalyzer conversionAnalyzer) {
 		this.conversionAnalyzer = conversionAnalyzer;
 
 		analyzers = Arrays.<IOperationAnalyzer>asList(

@@ -16,7 +16,10 @@ public class XmlUtilityTest extends TestCase {
 	@SuppressWarnings("unchecked")
 	public void testSubtractJMap(){
 		
-		Method subtractJMap,verifyLine,cleanLine;
+		Method subtractJMap;
+		Method verifyLine;
+		Method cleanLine;
+		
 		try {
 			subtractJMap = FilesManager.class.getDeclaredMethod("subtractAnnotation", String.class, new Class<?>[]{}.getClass());
 			verifyLine = FilesManager.class.getDeclaredMethod("verifyLine", String.class);

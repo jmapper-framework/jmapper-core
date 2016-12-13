@@ -31,6 +31,12 @@ import com.googlecode.jmapper.operations.info.InfoMapOperation;
  *
  */
 public class MapOperation extends AComplexOperation {
+
+	/** the count is used to differentiate local variables in case of recursive mappings.
+	 *  Count is shared between all operation of this type, 
+	 *  it's static for ensure the uniqueness
+	 */ 
+	private static int count = 0;
 	
 	@Override
 	protected String getSourceConvertedName() {
@@ -120,12 +126,6 @@ public class MapOperation extends AComplexOperation {
 			  newLine , "   }",
 			  newLine , 	content , newLine);
 	}
-	
-	/** the count is used to differentiate local variables in case of recursive mappings.
-	 *  Count is shared between all operation of this type, 
-	 *  it's static for ensure the uniqueness
-	 */ 
-	private static int count = 0;
 	
 	/**
 	 * Appends the count to string.

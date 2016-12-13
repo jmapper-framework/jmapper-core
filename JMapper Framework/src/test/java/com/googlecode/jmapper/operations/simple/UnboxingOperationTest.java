@@ -33,14 +33,14 @@ public class UnboxingOperationTest extends AOperation<BasicOperation> {
 	}
 
 	@Override
-	protected void AllAll() {
+	protected void allAll() {
 		expected = "   destination.setAIntField(source.getAIntegerField().intValue());"+newLine;
 		write();
 		verify();
 	}
 
 	@Override
-	protected void AllValued() {
+	protected void allValued() {
 		expected = "   if(source.getAIntegerField()!=null){"+
 		 newLine + "   destination.setAIntField(source.getAIntegerField().intValue());"+
 		 newLine + "   }" + newLine;
@@ -49,14 +49,14 @@ public class UnboxingOperationTest extends AOperation<BasicOperation> {
 	}
 
 	@Override
-	protected void ValuedAll() {
+	protected void valuedAll() {
 		expected = "   destination.setAIntField(source.getAIntegerField().intValue());"+newLine;
 		write();
 		verify();
 	}
 
 	@Override
-	protected void ValuedValued() {
+	protected void valuedValued() {
 		expected = "   if(source.getAIntegerField()!=null){"+
 		 newLine + "   destination.setAIntField(source.getAIntegerField().intValue());"+
 		 newLine + "   }" + newLine;
@@ -65,14 +65,14 @@ public class UnboxingOperationTest extends AOperation<BasicOperation> {
 	}
 
 	@Override
-	protected void ValuedNull() {
+	protected void valuedNull() {
 		expected = newLine;
 		write();
 		verify();
 	}
 
 	@Override
-	protected void NullValued() {
+	protected void nullValued() {
 		expected = newLine;
 		write();
 		verify();

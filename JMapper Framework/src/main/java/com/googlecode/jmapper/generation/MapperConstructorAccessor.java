@@ -102,11 +102,11 @@ public abstract class MapperConstructorAccessor {
 		
 		if(isNull(xml.getXmlPath())) return null;
 		
-    	if(isNull(cc)||cc == ChooseConfig.DESTINATION)
-			if(xml.isInheritedMapped(destination))	return ChooseConfig.DESTINATION;
+    	if((isNull(cc)||cc == ChooseConfig.DESTINATION) && xml.isInheritedMapped(destination))	
+    		return ChooseConfig.DESTINATION;
 	
-		if(isNull(cc)||cc == ChooseConfig.SOURCE)
-			if(xml.isInheritedMapped(source))		return  ChooseConfig.SOURCE;
+		if((isNull(cc)||cc == ChooseConfig.SOURCE) && xml.isInheritedMapped(source))
+			return  ChooseConfig.SOURCE;
 		
 		return null;
     }

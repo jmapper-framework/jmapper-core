@@ -29,6 +29,12 @@ import java.util.Map;
  */
 public class ListArrayOperation extends AComplexOperation{
 
+	/** the count is used to differentiate local variables in case of recursive mappings.
+	 *  Count is shared between all operation of this type, 
+	 *  it's static for ensure the uniqueness
+	 */ 
+	private static int count = 0;
+	
 	/** @return Returns the name of the object shared between existingField and fieldToCreate methods.*/
 	@Override
 	protected String getSourceConvertedName(){
@@ -97,12 +103,6 @@ public class ListArrayOperation extends AComplexOperation{
 				  + newLine + "   }"
 				  + newLine + 	  content + newLine,vars));
 	}
-	
-	/** the count is used to differentiate local variables in case of recursive mappings.
-	 *  Count is shared between all operation of this type, 
-	 *  it's static for ensure the uniqueness
-	 */ 
-	private static int count = 0;
 	
 	/**
 	 * Appends the count to string.

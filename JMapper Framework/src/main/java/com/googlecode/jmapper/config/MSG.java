@@ -43,7 +43,7 @@ public enum MSG {
 			 try                   { properties.load (stream);  } 
 			 catch (IOException e) { Error.unableLoadingFile(); }
 			
-		}catch (Exception e) { JmapperLog.ERROR(e);}
+		}catch (Exception e) { JmapperLog.error(e);}
 		
 	}
 			

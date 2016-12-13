@@ -31,7 +31,7 @@ public class ArrayConversionTest extends AOperation<ArrayOperation>{
 	
 	
 	@Override
-	protected void AllAll() {
+	protected void allAll() {
 				
 		expected = "   if(source.getStringArray()!=null){"+
 		 newLine + "   java.lang.String[] arrayOfSource$i = source.getStringArray();"+
@@ -88,7 +88,7 @@ public class ArrayConversionTest extends AOperation<ArrayOperation>{
 	}
 
 	@Override
-	protected void AllValued() {
+	protected void allValued() {
 		
 		expected = "   if(source.getStringArray()!=null){"+
 		 newLine + "   java.lang.String[] arrayOfSource$i = source.getStringArray();"+
@@ -137,7 +137,7 @@ public class ArrayConversionTest extends AOperation<ArrayOperation>{
 	}
 
 	@Override
-	protected void ValuedAll() {
+	protected void valuedAll() {
 
 		expected = "   if(destination.getIntegerArray()!=null){"+
 		 newLine + "   if(source.getStringArray()!=null){"+
@@ -163,7 +163,7 @@ public class ArrayConversionTest extends AOperation<ArrayOperation>{
 	}
 
 	@Override
-	protected void ValuedValued() {
+	protected void valuedValued() {
 
 		expected = "   if(destination.getIntegerArray()!=null){"+
 		 newLine + "   if(source.getStringArray()!=null){"+
@@ -187,7 +187,7 @@ public class ArrayConversionTest extends AOperation<ArrayOperation>{
 	}
 
 	@Override
-	protected void ValuedNull() {
+	protected void valuedNull() {
 		
 		expected = "   if(destination.getIntegerArray()!=null){"+
 	     newLine + "   if(source.getStringArray()==null){"+
@@ -200,7 +200,7 @@ public class ArrayConversionTest extends AOperation<ArrayOperation>{
 	}
 
 	@Override
-	protected void NullValued() {
+	protected void nullValued() {
 		
 		expected = "   if(destination.getIntegerArray()==null){"+
 		 newLine + "   if(source.getStringArray()!=null){"+

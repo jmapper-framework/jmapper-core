@@ -20,14 +20,14 @@ package com.googlecode.jmapper.api;
  * 
  * @author Alessandro Vurro
  *
- * @param <XML> xml classes
+ * @param <E> xml classes
  */
-interface Convertible <XML>{
+interface Convertible <E>{
 
 	/**
 	 * Converts this bean to XStream bean.
 	 * @return an xstream bean
 	 */
-     public XML toXStream();
+     public E toXStream();
 	
 }

@@ -46,14 +46,14 @@ public class ExplicitSimpleConversionTest extends AOperation<BasicConversion> {
 	}
 	
 	@Override
-	protected void AllAll() {
+	protected void allAll() {
 		expected = "   destination.setAField(destination.conversion(source.getAField()));"+newLine;
 		write();
 		verify();
 	}
 
 	@Override
-	protected void AllValued() {
+	protected void allValued() {
 		expected = "   if(source.getAField()!=null){"+
 		 newLine + "   destination.setAField(destination.conversion(source.getAField()));"+
 		 newLine + "   }"+newLine;
@@ -62,7 +62,7 @@ public class ExplicitSimpleConversionTest extends AOperation<BasicConversion> {
 	}
 
 	@Override
-	protected void ValuedAll() {
+	protected void valuedAll() {
 		expected = "   if(destination.getAField()!=null){"+
 		 newLine + "   destination.setAField(destination.conversion(source.getAField()));"+
 	     newLine + "   }"+newLine;
@@ -71,7 +71,7 @@ public class ExplicitSimpleConversionTest extends AOperation<BasicConversion> {
 	}
 
 	@Override
-	protected void ValuedValued() {
+	protected void valuedValued() {
 		expected = "   if(destination.getAField()!=null){"+
 	     newLine + "   if(source.getAField()!=null){"+
 	     newLine + "   destination.setAField(destination.conversion(source.getAField()));"+
@@ -82,7 +82,7 @@ public class ExplicitSimpleConversionTest extends AOperation<BasicConversion> {
 	}
 
 	@Override
-	protected void ValuedNull() {
+	protected void valuedNull() {
 		expected = "   if(destination.getAField()!=null){"+
 	     newLine + "   if(source.getAField()==null){"+
 	     newLine + "   destination.setAField(null);"+
@@ -93,7 +93,7 @@ public class ExplicitSimpleConversionTest extends AOperation<BasicConversion> {
 	}
 
 	@Override
-	protected void NullValued() {
+	protected void nullValued() {
 		expected = "   if(destination.getAField()==null){"+
 		 newLine + "   if(source.getAField()!=null){"+
 		 newLine + "   destination.setAField(destination.conversion(source.getAField()));"+

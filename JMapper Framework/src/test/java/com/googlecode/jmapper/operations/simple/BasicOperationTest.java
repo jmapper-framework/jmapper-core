@@ -34,14 +34,14 @@ public class BasicOperationTest extends AOperation<BasicOperation>{
 	}
 	
 	@Override
-	protected void AllAll() {
+	protected void allAll() {
 		expected = "   destination.setAField(source.getAField());"+newLine;
 		write();
 		verify();
 	}
 
 	@Override
-	protected void AllValued() {
+	protected void allValued() {
 		expected = "   if(source.getAField()!=null){"+
 		 newLine + "   destination.setAField(source.getAField());"+
 		 newLine + "   }"+newLine;
@@ -50,7 +50,7 @@ public class BasicOperationTest extends AOperation<BasicOperation>{
 	}
 
 	@Override
-	protected void ValuedAll() {
+	protected void valuedAll() {
 		expected = "   if(destination.getAField()!=null){"+
 		 newLine + "   destination.setAField(source.getAField());"+
 	     newLine + "   }"+newLine;
@@ -59,7 +59,7 @@ public class BasicOperationTest extends AOperation<BasicOperation>{
 	}
 
 	@Override
-	protected void ValuedValued() {
+	protected void valuedValued() {
 		expected = "   if(destination.getAField()!=null){"+
 	     newLine + "   if(source.getAField()!=null){"+
 	     newLine + "   destination.setAField(source.getAField());"+
@@ -70,7 +70,7 @@ public class BasicOperationTest extends AOperation<BasicOperation>{
 	}
 
 	@Override
-	protected void ValuedNull() {
+	protected void valuedNull() {
 		expected = "   if(destination.getAField()!=null){"+
 	     newLine + "   if(source.getAField()==null){"+
 	     newLine + "   destination.setAField(null);"+
@@ -81,7 +81,7 @@ public class BasicOperationTest extends AOperation<BasicOperation>{
 	}
 
 	@Override
-	protected void NullValued() {
+	protected void nullValued() {
 		expected = "   if(destination.getAField()==null){"+
 		 newLine + "   if(source.getAField()!=null){"+
 		 newLine + "   destination.setAField(source.getAField());"+

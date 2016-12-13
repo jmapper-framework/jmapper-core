@@ -48,7 +48,7 @@ public class ExplicitComplexConversion2Test extends AOperation<ConversionOperati
 	}
 	
 	@Override
-	protected void AllAll() {
+	protected void allAll() {
 		
 		expected = "   if(source.getAStringList2()!=null){"+
 		 newLine + "   destination.setAStringList(destination.conversion(destination.getAStringList(), source.getAStringList2()));"+
@@ -78,7 +78,7 @@ public class ExplicitComplexConversion2Test extends AOperation<ConversionOperati
 	}
 
 	@Override
-	protected void AllValued() {
+	protected void allValued() {
 		
 		expected = "   if(source.getAStringList2()!=null){"+
 		 newLine + "   destination.setAStringList(destination.conversion(destination.getAStringList(), source.getAStringList2()));"+
@@ -100,7 +100,7 @@ public class ExplicitComplexConversion2Test extends AOperation<ConversionOperati
 	}
 
 	@Override
-	protected void ValuedAll() {
+	protected void valuedAll() {
 		
 		expected = "   if(destination.getAStringList()!=null){"+
 		 newLine + "   if(source.getAStringList2()!=null){"+
@@ -115,7 +115,7 @@ public class ExplicitComplexConversion2Test extends AOperation<ConversionOperati
 	}
 
 	@Override
-	protected void ValuedValued() {
+	protected void valuedValued() {
 
 		expected = "   if(destination.getAStringList()!=null){"+
 		 newLine + "   if(source.getAStringList2()!=null){"+
@@ -128,7 +128,7 @@ public class ExplicitComplexConversion2Test extends AOperation<ConversionOperati
 	}
 
 	@Override
-	protected void ValuedNull() {
+	protected void valuedNull() {
 		
 		expected = "   if(destination.getAStringList()!=null){"+
 	     newLine + "   if(source.getAStringList2()==null){"+
@@ -141,7 +141,7 @@ public class ExplicitComplexConversion2Test extends AOperation<ConversionOperati
 	}
 
 	@Override
-	protected void NullValued() {
+	protected void nullValued() {
 
 		expected = "   if(destination.getAStringList()==null){"+
 		 newLine + "   if(source.getAStringList2()!=null){"+

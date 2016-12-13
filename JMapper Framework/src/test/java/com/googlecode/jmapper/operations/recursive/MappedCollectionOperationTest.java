@@ -37,7 +37,7 @@ public class MappedCollectionOperationTest extends AOperation<MappedCollectionOp
 	}
 	
 	@Override
-	protected void AllAll() {
+	protected void allAll() {
 		
 		expected = "   if(source.getAMappedSet()!=null){"+
 		 newLine + "   Object[] collectionOfSource$i = source.getAMappedSet().toArray();"+
@@ -115,7 +115,7 @@ public class MappedCollectionOperationTest extends AOperation<MappedCollectionOp
 	}
 
 	@Override
-	protected void AllValued() {
+	protected void allValued() {
 		
 		expected = "   if(source.getAMappedSet()!=null){"+
 		 newLine + "   Object[] collectionOfSource$i = source.getAMappedSet().toArray();"+
@@ -191,7 +191,7 @@ public class MappedCollectionOperationTest extends AOperation<MappedCollectionOp
 	}
 
 	@Override
-	protected void ValuedAll() {
+	protected void valuedAll() {
 		
 		expected = "   if(destination.getATargetList()!=null){"+
 		 newLine + "   if(source.getAMappedSet()!=null){"+
@@ -222,7 +222,7 @@ public class MappedCollectionOperationTest extends AOperation<MappedCollectionOp
 	}
 
 	@Override
-	protected void ValuedValued() {
+	protected void valuedValued() {
 
 		expected = "   if(destination.getATargetList()!=null){"+
 		 newLine + "   if(source.getAMappedSet()!=null){"+
@@ -253,7 +253,7 @@ public class MappedCollectionOperationTest extends AOperation<MappedCollectionOp
 	}
 
 	@Override
-	protected void ValuedNull() {
+	protected void valuedNull() {
 		
 		expected = "   if(destination.getATargetList()!=null){"+
 	     newLine + "   if(source.getAMappedSet()==null){"+
@@ -266,7 +266,7 @@ public class MappedCollectionOperationTest extends AOperation<MappedCollectionOp
 	}
 
 	@Override
-	protected void NullValued() {
+	protected void nullValued() {
 
 		expected = "   if(destination.getATargetList()==null){"+
 		 newLine + "   if(source.getAMappedSet()!=null){"+

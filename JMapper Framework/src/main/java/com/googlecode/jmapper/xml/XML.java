@@ -132,7 +132,7 @@ public final class XML {
 					   if(xmlClass.global != null)
 						   map.put(xmlClass.name, Converter.toGlobal(xmlClass.global));
 					   					
-		}catch (Exception e) {JmapperLog.ERROR(e);}
+		}catch (Exception e) {JmapperLog.error(e);}
 		return map;
 	}
 	
@@ -150,7 +150,7 @@ public final class XML {
 													
 					   map.put(xmlClass.name, attributes);
 					}
-		}catch (Exception e) {JmapperLog.ERROR(e);}
+		}catch (Exception e) {JmapperLog.error(e);}
 		return map;
 	}
 	
@@ -176,7 +176,7 @@ public final class XML {
 					   if(!conversions.isEmpty())
 						   map.put(xmlClass.name, conversions);
 					}
-		}catch (Exception e) {JmapperLog.ERROR(e);}
+		}catch (Exception e) {JmapperLog.error(e);}
 		return map;
 	}
 	
@@ -212,7 +212,7 @@ public final class XML {
 	 */
 	public XML write(){
 		try { FilesManager.write(xmlJmapper, xmlPath);
-		} catch (IOException e) {JmapperLog.ERROR(e);}
+		} catch (IOException e) {JmapperLog.error(e);}
 		return this;
 	}
 	

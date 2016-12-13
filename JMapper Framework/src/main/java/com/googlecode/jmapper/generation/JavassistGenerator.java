@@ -82,7 +82,6 @@ public class JavassistGenerator implements ICodeGenerator {
 					ctMethod.setBody(method.getBody());
 				
 				} catch (CannotCompileException e) {
-					System.out.println(method.getBody());
 					Error.bodyContainsIllegalCode(method,e); 
 				} 
 			}

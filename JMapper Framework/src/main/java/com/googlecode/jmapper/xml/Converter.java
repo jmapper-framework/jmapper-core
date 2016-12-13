@@ -332,7 +332,8 @@ public class Converter {
 		JMap jMap = field.getAnnotation(JMap.class);
 		SimplyAttribute[] targetAttributes = toTargetAttributes(jMap.attributes());
 		
-		String get = null, set = null;
+		String get = null;
+		String set = null;
 		JMapAccessor jMapAccessor = Annotation.getFieldAccessors(clazz,field);
 		if(!isNull(jMapAccessor)){
 			get = jMapAccessor.get();

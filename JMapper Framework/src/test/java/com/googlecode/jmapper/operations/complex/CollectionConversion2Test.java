@@ -37,7 +37,7 @@ public class CollectionConversion2Test extends AOperation<CollectionOperation>{
 	}
 	
 	@Override
-	protected void AllAll() {
+	protected void allAll() {
 		
 		expected = "   if(source.getASetInteger()!=null){"+
 		 newLine + "   Object[] collectionOfSource$i = source.getASetInteger().toArray();"+
@@ -94,7 +94,7 @@ public class CollectionConversion2Test extends AOperation<CollectionOperation>{
 	}
 
 	@Override
-	protected void AllValued() {
+	protected void allValued() {
 		
 		expected = "   if(source.getASetInteger()!=null){"+
  		 newLine + "   Object[] collectionOfSource$i = source.getASetInteger().toArray();"+
@@ -143,7 +143,7 @@ public class CollectionConversion2Test extends AOperation<CollectionOperation>{
 	}
 
 	@Override
-	protected void ValuedAll() {
+	protected void valuedAll() {
 		
 		expected = "   if(destination.getAListString()!=null){"+
 		 newLine + "   if(source.getASetInteger()!=null){"+
@@ -167,7 +167,7 @@ public class CollectionConversion2Test extends AOperation<CollectionOperation>{
 	}
 
 	@Override
-	protected void ValuedValued() {
+	protected void valuedValued() {
 
 		expected = "   if(destination.getAListString()!=null){"+
 		 newLine + "   if(source.getASetInteger()!=null){"+
@@ -189,7 +189,7 @@ public class CollectionConversion2Test extends AOperation<CollectionOperation>{
 	}
 
 	@Override
-	protected void ValuedNull() {
+	protected void valuedNull() {
 		
 		expected = "   if(destination.getAListString()!=null){"+
 	     newLine + "   if(source.getASetInteger()==null){"+
@@ -202,7 +202,7 @@ public class CollectionConversion2Test extends AOperation<CollectionOperation>{
 	}
 
 	@Override
-	protected void NullValued() {
+	protected void nullValued() {
 
 		expected = "   if(destination.getAListString()==null){"+
 		 newLine + "   if(source.getASetInteger()!=null){"+

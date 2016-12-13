@@ -32,6 +32,12 @@ import com.googlecode.jmapper.generation.MapperConstructor;
  */
 public class MappedArrayListOperation extends ARecursiveOperation {
 
+	/** the count is used to differentiate local variables in case of recursive mappings.
+	 *  Count is shared between all operation of this type, 
+	 *  it's static for ensure the uniqueness
+	 */ 
+	private static int count = 0;
+	
 	@Override
 	protected String getSourceConvertedName() {
 		return c("arrayListOfDestination");
@@ -95,12 +101,6 @@ public class MappedArrayListOperation extends ARecursiveOperation {
 				  + newLine + content + newLine,vars));	
 	}
 
-	/** the count is used to differentiate local variables in case of recursive mappings.
-	 *  Count is shared between all operation of this type, 
-	 *  it's static for ensure the uniqueness
-	 */ 
-	private static int count = 0;
-	
 	/**
 	 * Appends the count to string.
 	 * @param str

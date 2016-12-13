@@ -40,7 +40,7 @@ public class MapOperationTest extends AOperation<MapOperation>{
 	}
 	
 	@Override
-	protected void AllAll() {
+	protected void allAll() {
 		
 		expected = "   if(source.getASimpleMap2()!=null){"+
 		 newLine + "   destination.setASimpleMap(source.getASimpleMap2());"+
@@ -70,7 +70,7 @@ public class MapOperationTest extends AOperation<MapOperation>{
 	}
 
 	@Override
-	protected void AllValued() {
+	protected void allValued() {
 		
 		expected = "   if(source.getASimpleMap2()!=null){"+
 		 newLine + "   destination.setASimpleMap(source.getASimpleMap2());"+
@@ -92,7 +92,7 @@ public class MapOperationTest extends AOperation<MapOperation>{
 	}
 
 	@Override
-	protected void ValuedAll() {
+	protected void valuedAll() {
 		
 		expected = "   if(destination.getASimpleMap()!=null){"+
 		 newLine + "   if(source.getASimpleMap2()!=null){"+
@@ -107,7 +107,7 @@ public class MapOperationTest extends AOperation<MapOperation>{
 	}
 
 	@Override
-	protected void ValuedValued() {
+	protected void valuedValued() {
 
 		expected = "   if(destination.getASimpleMap()!=null){"+
 		 newLine + "   if(source.getASimpleMap2()!=null){"+
@@ -120,7 +120,7 @@ public class MapOperationTest extends AOperation<MapOperation>{
 	}
 
 	@Override
-	protected void ValuedNull() {
+	protected void valuedNull() {
 		
 		expected = "   if(destination.getASimpleMap()!=null){"+
 	     newLine + "   if(source.getASimpleMap2()==null){"+
@@ -133,7 +133,7 @@ public class MapOperationTest extends AOperation<MapOperation>{
 	}
 
 	@Override
-	protected void NullValued() {
+	protected void nullValued() {
 
 		expected = "   if(destination.getASimpleMap()==null){"+
 		 newLine + "   if(source.getASimpleMap2()!=null){"+

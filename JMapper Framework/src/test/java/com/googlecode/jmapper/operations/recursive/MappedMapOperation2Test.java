@@ -42,7 +42,7 @@ public class MappedMapOperation2Test extends AOperation<MappedMapOperation>{
 	
 
 	@Override
-	protected void AllAll() {
+	protected void allAll() {
 		
 		expected = "   if(source.getASMappedMap2()!=null){"+
 		 newLine + "   java.util.HashMap mapOfDestination$i = new java.util.HashMap();"+
@@ -123,7 +123,7 @@ newLine + "   destinationKeyObj$y.setField(sourceKeyObj$y.getField());"+
 	}
 
 	@Override
-	protected void AllValued() {
+	protected void allValued() {
 		
 		expected = "   if(source.getASMappedMap2()!=null){"+
 		 newLine + "   java.util.HashMap mapOfDestination$i = new java.util.HashMap();"+
@@ -202,7 +202,7 @@ newLine + "   if(sourceKeyObj$y.getField()!=null){"+
 	}
 
 	@Override
-	protected void ValuedAll() {
+	protected void valuedAll() {
 		
 		expected = "   if(destination.getADMappedMap2()!=null){"+
 		 newLine + "   if(source.getASMappedMap2()!=null){"+
@@ -234,7 +234,7 @@ newLine + "   destinationKeyObj$i.setField(sourceKeyObj$i.getField());"+
 	}
 
 	@Override
-	protected void ValuedValued() {
+	protected void valuedValued() {
 
 		expected = "   if(destination.getADMappedMap2()!=null){"+
 		 newLine + "   if(source.getASMappedMap2()!=null){"+
@@ -266,7 +266,7 @@ newLine + "   if(sourceKeyObj$i.getField()!=null){"+
 	}
 
 	@Override
-	protected void ValuedNull() {
+	protected void valuedNull() {
 		
 		expected = "   if(destination.getADMappedMap2()!=null){"+
 	     newLine + "   if(source.getASMappedMap2()==null){"+
@@ -279,7 +279,7 @@ newLine + "   if(sourceKeyObj$i.getField()!=null){"+
 	}
 
 	@Override
-	protected void NullValued() {
+	protected void nullValued() {
 
 		expected = "   if(destination.getADMappedMap2()==null){"+
 		 newLine + "   if(source.getASMappedMap2()!=null){"+

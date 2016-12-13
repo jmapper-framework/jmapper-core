@@ -97,7 +97,7 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
         try {
             return mapper.nullVSouAllAll(source);
         } catch (Exception e) {
-            JmapperLog.ERROR(e);
+            JmapperLog.error(e);
         }
         return null;
 	}
@@ -122,7 +122,7 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
         try {
             return mapper.nullVNotAllAll(source);
         } catch (Exception e) {
-            JmapperLog.ERROR(e);
+            JmapperLog.error(e);
         }
         return null;
 	}
@@ -149,7 +149,7 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
         try {
             return mapper.vVAllAllAll(destination, source);
         }catch (Exception e) { 
-        	JmapperLog.ERROR(e); 
+        	JmapperLog.error(e); 
         }
         return null;
 	}
@@ -176,7 +176,7 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
         try {
             return mapper.vVNotAllAll(destination, source);
         } catch (Exception e) { 
-        	JmapperLog.ERROR(e); 
+        	JmapperLog.error(e); 
         }
         return null;
 	}
@@ -236,7 +236,7 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
         							case ONLY_NULL_FIELDS:		return mapper.get(source);}}
 	       
 	       }catch (Exception e) { 
-	    	   JmapperLog.ERROR(e);
+	    	   JmapperLog.error(e);
 	       }
 	       return null;
 	}
@@ -344,7 +344,7 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
     														case ONLY_NULL_FIELDS:		return destination;}}
     		}
 	    }catch (Exception e) { 
-	    	JmapperLog.ERROR(e); 
+	    	JmapperLog.error(e); 
 	    }
 	    return null;
 	}
@@ -434,7 +434,7 @@ public final class JMapper<D,S> implements IJMapper<D, S>{
 					                        .presentIn(xml));  
 			
 		}catch (Throwable e) { 
-			JmapperLog.ERROR(e); 
+			JmapperLog.error(e); 
 		}
 	}
 	

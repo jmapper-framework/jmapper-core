@@ -37,7 +37,7 @@ public class CollectionConversionTest extends AOperation<CollectionOperation>{
 	}
 	
 	@Override
-	protected void AllAll() {
+	protected void allAll() {
 		
 		expected = "   if(source.getASet()!=null){"+
 		 newLine + "   java.util.ArrayList complexCollection$i = new java.util.ArrayList(source.getASet());"+
@@ -69,7 +69,7 @@ public class CollectionConversionTest extends AOperation<CollectionOperation>{
 	}
 
 	@Override
-	protected void AllValued() {
+	protected void allValued() {
 		
 		expected = "   if(source.getASet()!=null){"+
 		 newLine + "   java.util.ArrayList complexCollection$i = new java.util.ArrayList(source.getASet());"+
@@ -93,7 +93,7 @@ public class CollectionConversionTest extends AOperation<CollectionOperation>{
 	}
 
 	@Override
-	protected void ValuedAll() {
+	protected void valuedAll() {
 		
 		expected = "   if(destination.getAList()!=null){"+
 		 newLine + "   if(source.getASet()!=null){"+
@@ -108,7 +108,7 @@ public class CollectionConversionTest extends AOperation<CollectionOperation>{
 	}
 
 	@Override
-	protected void ValuedValued() {
+	protected void valuedValued() {
 
 		expected = "   if(destination.getAList()!=null){"+
 		 newLine + "   if(source.getASet()!=null){"+
@@ -121,7 +121,7 @@ public class CollectionConversionTest extends AOperation<CollectionOperation>{
 	}
 
 	@Override
-	protected void ValuedNull() {
+	protected void valuedNull() {
 		
 		expected = "   if(destination.getAList()!=null){"+
 	     newLine + "   if(source.getASet()==null){"+
@@ -134,7 +134,7 @@ public class CollectionConversionTest extends AOperation<CollectionOperation>{
 	}
 
 	@Override
-	protected void NullValued() {
+	protected void nullValued() {
 
 		
 		

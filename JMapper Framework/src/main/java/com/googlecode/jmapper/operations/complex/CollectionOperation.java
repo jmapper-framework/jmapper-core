@@ -31,6 +31,12 @@ import java.util.Map;
  *
  */
 public class CollectionOperation extends AComplexOperation {
+
+	/** the count is used to differentiate local variables in case of recursive mappings.
+	 *  Count is shared between all operation of this type, 
+	 *  it's static for ensure the uniqueness
+	 */ 
+	private static int count = 0;
 	
 	@Override
 	protected String getSourceConvertedName() {
@@ -109,12 +115,6 @@ public class CollectionOperation extends AComplexOperation {
 				  + newLine + "   }"
 				  + newLine + content + newLine,vars));
 	}
-	
-	/** the count is used to differentiate local variables in case of recursive mappings.
-	 *  Count is shared between all operation of this type, 
-	 *  it's static for ensure the uniqueness
-	 */ 
-	private static int count = 0;
 	
 	/**
 	 * Appends the count to string.

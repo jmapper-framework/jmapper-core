@@ -12,5 +12,4 @@ public class TargetObject {
 		this.field = field;
 	}
 	
-	public TargetObject() {}
 }

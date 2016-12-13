@@ -39,7 +39,7 @@ public class ListArrayOperationTest extends AOperation<ListArrayOperation> {
 	}
 	
 	@Override
-	protected void AllAll() {
+	protected void allAll() {
 		
 		expected = "   if(source.getStringArray()!=null){"+
 		 newLine + "   java.util.ArrayList listArrayOfDestination$i = new java.util.ArrayList(java.util.Arrays#asList(source.getStringArray()));"+
@@ -72,7 +72,7 @@ public class ListArrayOperationTest extends AOperation<ListArrayOperation> {
 	}
 
 	@Override
-	protected void AllValued() {
+	protected void allValued() {
 		
 		expected = "   if(source.getStringArray()!=null){"+
 		 newLine + "   java.util.ArrayList listArrayOfDestination$i = new java.util.ArrayList(java.util.Arrays#asList(source.getStringArray()));"+
@@ -97,7 +97,7 @@ public class ListArrayOperationTest extends AOperation<ListArrayOperation> {
 	}
 
 	@Override
-	protected void ValuedAll() {
+	protected void valuedAll() {
 		
 		expected = "   if(destination.getAStringList()!=null){"+
 		 newLine + "   if(source.getStringArray()!=null){"+
@@ -113,7 +113,7 @@ public class ListArrayOperationTest extends AOperation<ListArrayOperation> {
 	}
 
 	@Override
-	protected void ValuedValued() {
+	protected void valuedValued() {
 
 		expected = "   if(destination.getAStringList()!=null){"+
 		 newLine + "   if(source.getStringArray()!=null){"+
@@ -127,7 +127,7 @@ public class ListArrayOperationTest extends AOperation<ListArrayOperation> {
 	}
 
 	@Override
-	protected void ValuedNull() {
+	protected void valuedNull() {
 		
 		expected = "   if(destination.getAStringList()!=null){"+
 		 newLine + "   if(source.getStringArray()==null){"+
@@ -140,7 +140,7 @@ public class ListArrayOperationTest extends AOperation<ListArrayOperation> {
 	}
 
 	@Override
-	protected void NullValued() {
+	protected void nullValued() {
 
 		expected = "   if(destination.getAStringList()==null){"+
 		 newLine + "   if(source.getStringArray()!=null){"+
