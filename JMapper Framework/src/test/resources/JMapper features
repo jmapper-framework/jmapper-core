@@ -95,26 +95,27 @@ Versione 1.6.1.CR1 RILASCIATA:
  V - creare collection in destinazione della stessa grandezza del source
  V - immutable objects
 
- Versione 1.6.1.CR2
+ Versione 1.6.1.CR2 RILASCIATA:
+ 
+ V - adeguare il metodo targetClass di Global a quello di Attribute
+ V - fix del classLoader
+ V - MappingType perso in ricorsione
+ V - conversione primitivo a Enum
   
+ Versione 1.6.1.CR3
   - per il nested mapping bisogna considerare anche il MappingType!
   - completare safe navigation operator
   - completare ConfigHelper
   - aggiungere operazione del tipo set <-> Array
-? - aggiungere operazione del tipo List<primitivo[]> <-> primitivo[][]
-V - adeguare il metodo targetClass di Global a quello di Attribute
-  - permettere di definire un destination factory anche per le classi annidate
+  - permettere di definire un destination factory anche per le classi annidate oppure aggiungere un controllo sul tipo di classe
   - verificare che il destination factory in caso di nestedMapping sia chiamato almeno per la classe più esterna
- Versione 1.6.1
+ 
+ Versione 1.6.1.FINAL
   
   - sistemare exception XML (che sarebbero anche API ora)
   - ragionare sul fatto di utilizzare i nomi dei file xml oppure no
- 
- Versione 1.7.0
- 
-  - default values
-  	 
-2.0.0
+   	 
+ Versione 2.0.0
 
  - package rinaming da com.googlecode.jmapper.* a com.github.jmapper.*
  - annotation renaming:
@@ -127,7 +128,12 @@ V - adeguare il metodo targetClass di Global a quello di Attribute
      - in Global: attributes in localAttributes  
      - in Global: excluded in excludedAttributes
      
-     
+ Versione 2.1.0
+ 
+  - default values
+  
+ Versione 2.2.0
+ 
  - Multiple Mapping
    
   - Con la classe RelationalJMapper si ha la possibilità   di implementare una relazione 1 a N o N a 1 tra
@@ -183,7 +189,7 @@ V - adeguare il metodo targetClass di Global a quello di Attribute
 
 
    
-Versione 2.1.0
+Versione 2.3.0
 
  - la conversione List<wrapper> <-> List<bean> non è agevole, pensare ad una miglioria
  
@@ -231,7 +237,7 @@ Versione 2.1.0
   			interface jmapperMap{
   				
   			}
-2.2.0
+2.4.0
 
    - aggiunta dell'annotation @JMapPlaceHolder(key="",value="") sui campi e classe.
     questo permetterà   in fase di conversione DINAMICA di utilizzare i placeholder per funzioni particolari come:
@@ -264,7 +270,7 @@ Versione 2.1.0
 	ovvero ommettendo la key si intende che la chiave è il nome del campo stesso.
 
 
-2.3.0
+2.5.0
 - possibilità   di definire configurazioni xml generiche senza creare classi (template):
     
 	Possibilità   di definire N template sia in Annotation che in XML sulla stessa classe.
@@ -275,7 +281,7 @@ Versione 2.1.0
 		
 
 	
-4.0.0
+?.?.?
 
  - DEFAULT BEHAVIORs
   
