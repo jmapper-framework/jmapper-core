@@ -1,6 +1,6 @@
-#JMapper Framework [![Build Status](https://travis-ci.org/jmapper-framework/jmapper-core.svg?branch=master)](https://travis-ci.org/jmapper-framework/jmapper-core) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ab9b20d7580c4e5d852e6cbe1de509a2)](https://www.codacy.com/app/alessandro-vurro_2/jmapper-core?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jmapper-framework/jmapper-core&amp;utm_campaign=Badge_Grade)
+#JMapper Framework [![Build Status](https://travis-ci.org/jmapper-framework/jmapper-core.svg?branch=master)](https://travis-ci.org/jmapper-framework/jmapper-core) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ab9b20d7580c4e5d852e6cbe1de509a2)](https://www.codacy.com/app/alessandro-vurro_2/jmapper-core?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jmapper-framework/jmapper-core&amp;utm_campaign=Badge_Grade) [![Join the chat at https://gitter.im/jmapper-framework/jmapper-core](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/jmapper-framework/jmapper-core?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.googlecode.jmapper-framework/jmapper-core/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.googlecode.jmapper-framework/jmapper-core) [![Join the chat at https://gitter.im/jmapper-framework/jmapper-core](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/jmapper-framework/jmapper-core?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/avurro)
+[![Dependency Status] (https://www.versioneye.com/user/projects/5539172d1d2989cb78000002/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5539172d1d2989cb78000002) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.googlecode.jmapper-framework/jmapper-core/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.googlecode.jmapper-framework/jmapper-core) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/avurro)
 
 > Version 1.6.1.CR2 Released! You can check the [release notes](https://github.com/jmapper-framework/jmapper-core/wiki/Release-Notes) for more information.<br>
 
@@ -82,18 +82,7 @@ destination ["id", "sourceField", null]
 *With JMapper we have all the advantages of dynamic mapping with the performance of static code, with 0 memory consumption.*<br>
 **Required java 5+**<br>
 
-**Dependency information**
-<br>[![Dependency Status] (https://www.versioneye.com/user/projects/5539172d1d2989cb78000002/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5539172d1d2989cb78000002)<br>
-
-**Do you like the project? think it has good potential?**<br>
-Let us know any malfunctions, new features and more through the [JMapper Framework group](https://groups.google.com/forum/#!forum/jmapper-framework).<br>
-
 **Would you like to contribute to the development of JMapper?**<br> 
-There are many features to be implemented, such as:
-- Eclipse plugin
-- Integration with Hibernate, Apache Camel and other frameworks
-- and more..
-
 contact us (jmapper.framework@gmail.com) for more information.<br><br>
 
 **Follow us on twitter**<br>
