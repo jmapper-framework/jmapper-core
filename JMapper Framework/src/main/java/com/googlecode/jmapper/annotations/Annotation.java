@@ -170,10 +170,10 @@ public class Annotation {
 		for (Class<?> mappedClass : accessor.classes()) 
 			if(accessor.name().equals(fieldName))
 				if(isOpposite){
-					if(mappedClass != targetClass)
+					if(!mappedClass.equals(targetClass))
 						return true;
 				}else
-					if(mappedClass == targetClass)
+					if(mappedClass.equals(targetClass))
 						return true;
 		
 		return false;

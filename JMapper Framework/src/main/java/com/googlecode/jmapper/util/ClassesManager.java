@@ -344,10 +344,8 @@ public final class ClassesManager {
 			if(separatorIndex == -1)isFinished = true;
 		}
 		
-		for (String description : splitResult) {
-			if(isAccessModifier(description)) continue;
-			return description;
-		}
+		for (String description : splitResult)
+			if(!isAccessModifier(description)) return description;
 		
 		return null;
 	}
@@ -650,7 +648,7 @@ public final class ClassesManager {
 		if(internalGeneric != -1)
 			item = item.substring(0, internalGeneric);
 		
-		return item.equals("?")?"java.lang.Object":item;
+		return "?".equals(item)?"java.lang.Object":item;
 	}
 	
 	/**

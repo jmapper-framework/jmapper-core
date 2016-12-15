@@ -200,12 +200,12 @@ public final class OperationHandler {
 				isAvoidSet = conversionAnalyzer.getMethod().isAvoidSet();
 			
 			// verifies destination accessors only if isn't a nested field
-			if(!isNestedMapping || targetClass != destinationClass)
+			if(!isNestedMapping || !targetClass.equals(destinationClass))
 				if(isAvoidSet)	verifyGetterMethods(destinationClass,destinationMappedField);
 				else		verifiesAccessorMethods(destinationClass,destinationMappedField);
 			
 			// verifies source accessors only if isn't a nested field
-			if(!isNestedMapping || targetClass != sourceClass)
+			if(!isNestedMapping || !targetClass.equals(sourceClass))
 				verifyGetterMethods(sourceClass,sourceMappedField);
 				findSetterMethods(sourceClass,sourceMappedField);
 			
@@ -256,7 +256,7 @@ public final class OperationHandler {
 				// retrieves source interface
 				Class<?> sourceInterface = sourceClass.getInterfaces()[0];
 				// if the destination and source interfaces are equal
-				if(destinationClass == sourceInterface)
+				if(destinationClass.equals(sourceInterface))
 					// assigns implementation to destination
 					result = sourceClass;
 				// if they are different

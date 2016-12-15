@@ -298,9 +298,10 @@ public class XmlHandler {
 	}
 	
 	private Class<?> getMainClass(Class<?> clazz){
-		while(clazz.isMemberClass())
-			clazz = clazz.getDeclaringClass();
-		return clazz;
+		Class<?> result = clazz;
+		while(result.isMemberClass())
+			result = result.getDeclaringClass();
+		return result;
 	} 
 	
 	/**

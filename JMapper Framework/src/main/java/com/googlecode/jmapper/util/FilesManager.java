@@ -730,7 +730,7 @@ public class FilesManager {
 	 */
 	private static boolean existImport(List<String> lines, Class<?> aClass){
 		for (String line : lines) 
-			if(GeneralUtility.containsAll(line, "import",aClass.getName(),";")) return true;
+			if(containsAll(line, "import",aClass.getName(),";")) return true;
 		return false;
 	}
 
@@ -778,8 +778,7 @@ public class FilesManager {
 	 * @return true if the line contains the package declaration, false otherwise.
 	 */
 	private static boolean packageFound(String line,Class<?> aClass){
-		if(containsAll(line, "package",aClass.getPackage().getName(),";"))return true;
-		return false;
+		return containsAll(line, "package",aClass.getPackage().getName(),";");
 	}
 	/**
 	 * Method used to check the file existence, for test purpose.

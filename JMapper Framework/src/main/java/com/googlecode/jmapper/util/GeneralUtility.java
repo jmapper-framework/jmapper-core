@@ -397,10 +397,11 @@ public final class GeneralUtility {
 	 * @return the text resultant
 	 */
 	private  static String replace (String text, Map<String, String> vars, String prefix){
+		String result = text;
 		for (Entry<String, String> var : vars.entrySet())
-			text = text.replaceAll(Pattern.quote(prefix+var.getKey()), Matcher.quoteReplacement(var.getValue()));
+			result = result.replaceAll(Pattern.quote(prefix+var.getKey()), Matcher.quoteReplacement(var.getValue()));
 	
-		return text;
+		return result;
 	}
 	
 	/**
