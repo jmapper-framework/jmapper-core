@@ -126,12 +126,12 @@ public final class GeneralUtility {
 	 * @return returns true if str is an access modifier, false otherwise
 	 */
 	public static boolean isAccessModifier(String str){
-		return str.equals("static")    || 
-			   str.equals("public")    || 
-			   str.equals("protected") ||
-			   str.equals("private")   ||
-			   str.equals("final")     ||
-			   str.equals("transient");
+		return "static".equals(str)     || 
+				"public".equals(str)    || 
+				"protected".equals(str) ||
+				"private".equals(str)   ||
+				"final".equals(str)     ||
+				"transient".equals(str);
 	}
 	
 	/**

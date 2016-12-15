@@ -69,8 +69,7 @@ public class XmlClass {
 		if (this == obj)	 return true;
 		if (obj == null)	 return false;
 		if (getClass() != obj.getClass())			return false;
-		if(((XmlClass) obj).name.equals(this.name)) return true;
-		return false;
+		return ((XmlClass) obj).name.equals(this.name);
 		
 	}
 

@@ -586,9 +586,9 @@ public class FilesManager {
 	 * @return true if the line contains a JGlobalMap configuration, false otherwise
 	 */
 	private static boolean globalToClean(String line){
-		if(!line.contains("@"+JGlobalMap.class.getSimpleName()))return false;
-		return true;
+		return line.contains("@"+JGlobalMap.class.getSimpleName());
 	}
+	
 	/**
 	 * @param line
 	 * @return a String that contains "newLine" if annotation is written on more lines

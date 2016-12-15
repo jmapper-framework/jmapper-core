@@ -11,7 +11,7 @@ import junit.framework.TestCase;
 
 public class XmlUtilityTest extends TestCase {
 
-	FilesManager fm = new FilesManager();
+	public FilesManager fm = new FilesManager();
 	
 	@SuppressWarnings("unchecked")
 	public void testSubtractJMap(){
@@ -83,6 +83,6 @@ public class XmlUtilityTest extends TestCase {
 			assertEquals(false, newLine);
 			assertNull(line);
 			
-		} catch (Exception e) {assertTrue(false);e.printStackTrace();}
+		} catch (Exception e) {fail();e.printStackTrace();}
 	}
 }

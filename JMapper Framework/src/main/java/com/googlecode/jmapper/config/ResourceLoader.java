@@ -39,34 +39,34 @@ public class ResourceLoader {
 	 * @throws IOException if is impossible to open the stream
 	 */
 	public static InputStream loadResource(String resource) throws MalformedURLException, IOException{
-		resource = resource.trim();
+		String content = resource.trim();
 	    
 		// if resource is a content and not a path
-		if(!isPath(resource))
-			return new ByteArrayInputStream(resource.getBytes("UTF-8"));
+		if(!isPath(content))
+			return new ByteArrayInputStream(content.getBytes("UTF-8"));
 		
-	    URL result = Thread.currentThread().getContextClassLoader().getResource(resource);
+	    URL url = Thread.currentThread().getContextClassLoader().getResource(content);
 
 	    // Could not find resource. Try with the classloader that loaded this class.
-	    if (isNull(result)) {
+	    if (isNull(url)) {
 	      ClassLoader classLoader = ResourceLoader.class.getClassLoader();
 	      if (classLoader != null) 
-	        result = classLoader.getResource(resource);
+	        url = classLoader.getResource(content);
 	      
 	    }
 
 	    // Last ditch attempt searching classpath
-	    if (isNull(result)) 
-	      result = ClassLoader.getSystemResource(resource);
+	    if (isNull(url)) 
+	      url = ClassLoader.getSystemResource(content);
 	    
 	    // one more time
-	    if (isNull(result) && resource.contains(":")) 
-	        result = new URL(resource);
+	    if (isNull(url) && content.contains(":")) 
+	        url = new URL(content);
 	    
-	    if(isNull(result))
-	    	Error.xmlNotFound(resource);
+	    if(isNull(url))
+	    	Error.xmlNotFound(content);
 	    
-	    return result.openStream();
+	    return url.openStream();
 	}
 
 }

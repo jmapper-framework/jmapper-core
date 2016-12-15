@@ -152,8 +152,8 @@ public final class ClassesManager {
 				return functionsAreAllowed(isAddAllFunction, isPutAllFunction, classD, classS);
 				
 			else{
-				genericD = genericD.equals("?")?"java.lang.Object":genericD;
-				genericS = genericS.equals("?")?"java.lang.Object":genericS;
+				genericD = "?".equals(genericD)?"java.lang.Object":genericD;
+				genericS = "?".equals(genericS)?"java.lang.Object":genericS;
 				return isAssignableFrom(Class.forName(genericD),Class.forName(genericS));
 			}
 		
@@ -324,7 +324,7 @@ public final class ClassesManager {
 					String specialString = null;
 					try{
 						specialString = fieldDescription.substring(position - "extends".length(), position+1);
-						if(isNull(specialString) || !specialString.equals(" extends"))
+						if(isNull(specialString) || !" extends".equals(specialString))
 							isSpecialChar = false;
 					
 					}catch(IndexOutOfBoundsException e){

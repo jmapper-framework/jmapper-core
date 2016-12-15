@@ -151,9 +151,7 @@ public class ConversionMethod {
 			return false;
 		if (!Arrays.equals(to, other.to))
 			return false;
-		if (type != other.type)
-			return false;
-		return true;
+		return type == other.type;
 	}
 	@Override
 	public String toString() {
