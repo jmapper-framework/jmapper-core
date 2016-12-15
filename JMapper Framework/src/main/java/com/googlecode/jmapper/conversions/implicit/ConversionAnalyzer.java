@@ -155,6 +155,215 @@ public final class ConversionAnalyzer {
 		return UNDEFINED;
 	}
 	
+	private static ConversionType tointConversion(final Class<?> source){
+		if(source == String.class) return FromStringToint;
+		if(source == Byte.class) return FromByteToint;
+		if(source == byte.class) return FrombyteToint;
+		if(source == Short.class) return FromShortToint;
+		if(source == short.class) return FromshortToint;
+		if(source == Long.class) return FromLongToint;
+		if(source == long.class) return FromlongToint;
+		if(source == Float.class) return FromFloatToint;
+		if(source == float.class) return FromfloatToint;
+		if(source == Double.class) return FromDoubleToint;
+		if(source == double.class) return FromdoubleToint;
+		if(source == Character.class) return FromCharacterToint;
+		if(source == char.class) return FromcharToint;
+		if(source == Boolean.class) return FromBooleanToint;
+		if(source == boolean.class) return FrombooleanToint;
+		return UNDEFINED;
+	}
+	
+	private static ConversionType toLongConversion(final Class<?> source){
+		if(source == String.class) return FromStringToLong;
+		if(source == Byte.class) return FromByteToLong;
+		if(source == byte.class) return FrombyteToLong;
+		if(source == Short.class) return FromShortToLong;
+		if(source == short.class) return FromshortToLong;
+		if(source == Integer.class) return FromIntegerToLong;
+		if(source == int.class) return FromintToLong;
+		if(source == Float.class) return FromFloatToLong;
+		if(source == float.class) return FromfloatToLong;
+		if(source == Double.class) return FromDoubleToLong;
+		if(source == double.class) return FromdoubleToLong;
+		if(source == Character.class) return FromCharacterToLong;
+		if(source == char.class) return FromcharToLong;
+		if(source == Boolean.class) return FromBooleanToLong;
+		if(source == boolean.class) return FrombooleanToLong;
+		return UNDEFINED;
+	}
+	
+	private static ConversionType tolongConversion(final Class<?> source){
+		if(source == String.class) return FromStringTolong;
+		if(source == Byte.class) return FromByteTolong;
+		if(source == byte.class) return FrombyteTolong;
+		if(source == Short.class) return FromShortTolong;
+		if(source == short.class) return FromshortTolong;
+		if(source == Integer.class) return FromIntegerTolong;
+		if(source == int.class) return FromintTolong;
+		if(source == Float.class) return FromFloatTolong;
+		if(source == float.class) return FromfloatTolong;
+		if(source == Double.class) return FromDoubleTolong;
+		if(source == double.class) return FromdoubleTolong;
+		if(source == Character.class) return FromCharacterTolong;
+		if(source == char.class) return FromcharTolong;
+		if(source == Boolean.class) return FromBooleanTolong;
+		if(source == boolean.class) return FrombooleanTolong;
+		return UNDEFINED;
+	}
+	
+	private static ConversionType toFloatConversion(final Class<?> source){
+		if(source == String.class) return FromStringToFloat;
+		if(source == Byte.class) return FromByteToFloat;
+		if(source == byte.class) return FrombyteToFloat;
+		if(source == Short.class) return FromShortToFloat;
+		if(source == short.class) return FromshortToFloat;
+		if(source == Integer.class) return FromIntegerToFloat;
+		if(source == int.class) return FromintToFloat;
+		if(source == Long.class) return FromLongToFloat;
+		if(source == long.class) return FromlongToFloat;
+		if(source == Double.class) return FromDoubleToFloat;
+		if(source == double.class) return FromdoubleToFloat;
+		if(source == Character.class) return FromCharacterToFloat;
+		if(source == char.class) return FromcharToFloat;
+		if(source == Boolean.class) return FromBooleanToFloat;
+		if(source == boolean.class) return FrombooleanToFloat;
+		return UNDEFINED;
+	}
+	
+	private static ConversionType tofloatConversion(final Class<?> source){
+		if(source == String.class) return FromStringTofloat;
+		if(source == Byte.class) return FromByteTofloat;
+		if(source == byte.class) return FrombyteTofloat;
+		if(source == Short.class) return FromShortTofloat;
+		if(source == short.class) return FromshortTofloat;
+		if(source == Integer.class) return FromIntegerTofloat;
+		if(source == int.class) return FromintTofloat;
+		if(source == Long.class) return FromLongTofloat;
+		if(source == long.class) return FromlongTofloat;
+		if(source == Double.class) return FromDoubleTofloat;
+		if(source == double.class) return FromdoubleTofloat;
+		if(source == Character.class) return FromCharacterTofloat;
+		if(source == char.class) return FromcharTofloat;
+		if(source == Boolean.class) return FromBooleanTofloat;
+		if(source == boolean.class) return FrombooleanTofloat;
+		return UNDEFINED;
+	}
+	
+	private static ConversionType toDoubleConversion(final Class<?> source){
+		if(source == String.class) return FromStringToDouble;
+		if(source == Byte.class) return FromByteToDouble;
+		if(source == byte.class) return FrombyteToDouble;
+		if(source == Short.class) return FromShortToDouble;
+		if(source == short.class) return FromshortToDouble;
+		if(source == Integer.class) return FromIntegerToDouble;
+		if(source == int.class) return FromintToDouble;
+		if(source == Long.class) return FromLongToDouble;
+		if(source == long.class) return FromlongToDouble;
+		if(source == Float.class) return FromFloatToDouble;
+		if(source == float.class) return FromfloatToDouble;
+		if(source == Character.class) return FromCharacterToDouble;
+		if(source == char.class) return FromcharToDouble;
+		if(source == Boolean.class) return FromBooleanToDouble;
+		if(source == boolean.class) return FrombooleanToDouble;
+		return UNDEFINED;
+	}
+	
+	private static ConversionType todoubleConversion(final Class<?> source){
+		if(source == String.class) return FromStringTodouble;
+		if(source == Byte.class) return FromByteTodouble;
+		if(source == byte.class) return FrombyteTodouble;
+		if(source == Short.class) return FromShortTodouble;
+		if(source == short.class) return FromshortTodouble;
+		if(source == Integer.class) return FromIntegerTodouble;
+		if(source == int.class) return FromintTodouble;
+		if(source == Long.class) return FromLongTodouble;
+		if(source == long.class) return FromlongTodouble;
+		if(source == Float.class) return FromFloatTodouble;
+		if(source == float.class) return FromfloatTodouble;
+		if(source == Character.class) return FromCharacterTodouble;
+		if(source == char.class) return FromcharTodouble;
+		if(source == Boolean.class) return FromBooleanTodouble;
+		if(source == boolean.class) return FrombooleanTodouble;
+		return UNDEFINED;
+	}
+	
+	private static ConversionType toCharacterConversion(final Class<?> source){
+		if(source == String.class) return FromStringToCharacter;
+		if(source == Byte.class) return FromByteToCharacter;
+		if(source == byte.class) return FrombyteToCharacter;
+		if(source == Short.class) return FromShortToCharacter;
+		if(source == short.class) return FromshortToCharacter;
+		if(source == Integer.class) return FromIntegerToCharacter;
+		if(source == int.class) return FromintToCharacter;
+		if(source == Long.class) return FromLongToCharacter;
+		if(source == long.class) return FromlongToCharacter;
+		if(source == Float.class) return FromFloatToCharacter;
+		if(source == float.class) return FromfloatToCharacter;
+		if(source == Double.class) return FromDoubleToCharacter;
+		if(source == double.class) return FromdoubleToCharacter;
+		if(source == Boolean.class) return FromBooleanToCharacter;
+		if(source == boolean.class) return FrombooleanToCharacter;
+		return UNDEFINED;
+	}
+
+	private static ConversionType tocharConversion(final Class<?> source){
+		if(source == String.class) return FromStringTochar;
+		if(source == Byte.class) return FromByteTochar;
+		if(source == byte.class) return FrombyteTochar;
+		if(source == Short.class) return FromShortTochar;
+		if(source == short.class) return FromshortTochar;
+		if(source == Integer.class) return FromIntegerTochar;
+		if(source == int.class) return FromintTochar;
+		if(source == Long.class) return FromLongTochar;
+		if(source == long.class) return FromlongTochar;
+		if(source == Float.class) return FromFloatTochar;
+		if(source == float.class) return FromfloatTochar;
+		if(source == Double.class) return FromDoubleTochar;
+		if(source == double.class) return FromdoubleTochar;
+		if(source == Boolean.class) return FromBooleanTochar;
+		if(source == boolean.class) return FrombooleanTochar;
+		return UNDEFINED;
+	}
+	
+	private static ConversionType toBooleanConversion(final Class<?> source){
+		if(source == String.class) return FromStringToBoolean;
+		if(source == Byte.class) return FromByteToBoolean;
+		if(source == byte.class) return FrombyteToBoolean;
+		if(source == Short.class) return FromShortToBoolean;
+		if(source == short.class) return FromshortToBoolean;
+		if(source == Integer.class) return FromIntegerToBoolean;
+		if(source == int.class) return FromintToBoolean;
+		if(source == Long.class) return FromLongToBoolean;
+		if(source == long.class) return FromlongToBoolean;
+		if(source == Float.class) return FromFloatToBoolean;
+		if(source == float.class) return FromfloatToBoolean;
+		if(source == Double.class) return FromDoubleToBoolean;
+		if(source == double.class) return FromdoubleToBoolean;
+		if(source == Character.class) return FromCharacterToBoolean;
+		if(source == char.class) return FromcharToBoolean;
+		return UNDEFINED;
+	}
+	
+	private static ConversionType tobooleanConversion(final Class<?> source){
+		if(source == String.class) return FromStringToboolean;
+		if(source == Byte.class) return FromByteToboolean;
+		if(source == byte.class) return FrombyteToboolean;
+		if(source == Short.class) return FromShortToboolean;
+		if(source == short.class) return FromshortToboolean;
+		if(source == Integer.class) return FromIntegerToboolean;
+		if(source == int.class) return FromintToboolean;
+		if(source == Long.class) return FromLongToboolean;
+		if(source == long.class) return FromlongToboolean;
+		if(source == Float.class) return FromFloatToboolean;
+		if(source == float.class) return FromfloatToboolean;
+		if(source == Double.class) return FromDoubleToboolean;
+		if(source == double.class) return FromdoubleToboolean;
+		if(source == Character.class) return FromCharacterToboolean;
+		if(source == char.class) return FromcharToboolean;
+		return UNDEFINED;
+	}
+	
 	/**
 	 * Analyzes classes given as input and returns the type of conversion that has to be done.
 	 * @param destination class to analyze
@@ -169,205 +378,17 @@ public final class ConversionAnalyzer {
 		if(destination == Short.class)    return toShortConversion(source);
 		if(destination == short.class)    return toshortConversion(source);
 		if(destination == Integer.class)  return toIntegerConversion(source);
-		
-		if(destination == int.class){
-			if(source == String.class) return FromStringToint;
-			if(source == Byte.class) return FromByteToint;
-			if(source == byte.class) return FrombyteToint;
-			if(source == Short.class) return FromShortToint;
-			if(source == short.class) return FromshortToint;
-			if(source == Long.class) return FromLongToint;
-			if(source == long.class) return FromlongToint;
-			if(source == Float.class) return FromFloatToint;
-			if(source == float.class) return FromfloatToint;
-			if(source == Double.class) return FromDoubleToint;
-			if(source == double.class) return FromdoubleToint;
-			if(source == Character.class) return FromCharacterToint;
-			if(source == char.class) return FromcharToint;
-			if(source == Boolean.class) return FromBooleanToint;
-			if(source == boolean.class) return FrombooleanToint;
-		}
-		
-		if(destination == Long.class){
-			if(source == String.class) return FromStringToLong;
-			if(source == Byte.class) return FromByteToLong;
-			if(source == byte.class) return FrombyteToLong;
-			if(source == Short.class) return FromShortToLong;
-			if(source == short.class) return FromshortToLong;
-			if(source == Integer.class) return FromIntegerToLong;
-			if(source == int.class) return FromintToLong;
-			if(source == Float.class) return FromFloatToLong;
-			if(source == float.class) return FromfloatToLong;
-			if(source == Double.class) return FromDoubleToLong;
-			if(source == double.class) return FromdoubleToLong;
-			if(source == Character.class) return FromCharacterToLong;
-			if(source == char.class) return FromcharToLong;
-			if(source == Boolean.class) return FromBooleanToLong;
-			if(source == boolean.class) return FrombooleanToLong;
-		}
-		
-		if(destination == long.class){
-			if(source == String.class) return FromStringTolong;
-			if(source == Byte.class) return FromByteTolong;
-			if(source == byte.class) return FrombyteTolong;
-			if(source == Short.class) return FromShortTolong;
-			if(source == short.class) return FromshortTolong;
-			if(source == Integer.class) return FromIntegerTolong;
-			if(source == int.class) return FromintTolong;
-			if(source == Float.class) return FromFloatTolong;
-			if(source == float.class) return FromfloatTolong;
-			if(source == Double.class) return FromDoubleTolong;
-			if(source == double.class) return FromdoubleTolong;
-			if(source == Character.class) return FromCharacterTolong;
-			if(source == char.class) return FromcharTolong;
-			if(source == Boolean.class) return FromBooleanTolong;
-			if(source == boolean.class) return FrombooleanTolong;
-		}
-		
-		if(destination == Float.class){
-			if(source == String.class) return FromStringToFloat;
-			if(source == Byte.class) return FromByteToFloat;
-			if(source == byte.class) return FrombyteToFloat;
-			if(source == Short.class) return FromShortToFloat;
-			if(source == short.class) return FromshortToFloat;
-			if(source == Integer.class) return FromIntegerToFloat;
-			if(source == int.class) return FromintToFloat;
-			if(source == Long.class) return FromLongToFloat;
-			if(source == long.class) return FromlongToFloat;
-			if(source == Double.class) return FromDoubleToFloat;
-			if(source == double.class) return FromdoubleToFloat;
-			if(source == Character.class) return FromCharacterToFloat;
-			if(source == char.class) return FromcharToFloat;
-			if(source == Boolean.class) return FromBooleanToFloat;
-			if(source == boolean.class) return FrombooleanToFloat;
-		}
-		
-		if(destination == float.class){
-			if(source == String.class) return FromStringTofloat;
-			if(source == Byte.class) return FromByteTofloat;
-			if(source == byte.class) return FrombyteTofloat;
-			if(source == Short.class) return FromShortTofloat;
-			if(source == short.class) return FromshortTofloat;
-			if(source == Integer.class) return FromIntegerTofloat;
-			if(source == int.class) return FromintTofloat;
-			if(source == Long.class) return FromLongTofloat;
-			if(source == long.class) return FromlongTofloat;
-			if(source == Double.class) return FromDoubleTofloat;
-			if(source == double.class) return FromdoubleTofloat;
-			if(source == Character.class) return FromCharacterTofloat;
-			if(source == char.class) return FromcharTofloat;
-			if(source == Boolean.class) return FromBooleanTofloat;
-			if(source == boolean.class) return FrombooleanTofloat;
-		}
-		
-		if(destination == Double.class){
-			if(source == String.class) return FromStringToDouble;
-			if(source == Byte.class) return FromByteToDouble;
-			if(source == byte.class) return FrombyteToDouble;
-			if(source == Short.class) return FromShortToDouble;
-			if(source == short.class) return FromshortToDouble;
-			if(source == Integer.class) return FromIntegerToDouble;
-			if(source == int.class) return FromintToDouble;
-			if(source == Long.class) return FromLongToDouble;
-			if(source == long.class) return FromlongToDouble;
-			if(source == Float.class) return FromFloatToDouble;
-			if(source == float.class) return FromfloatToDouble;
-			if(source == Character.class) return FromCharacterToDouble;
-			if(source == char.class) return FromcharToDouble;
-			if(source == Boolean.class) return FromBooleanToDouble;
-			if(source == boolean.class) return FrombooleanToDouble;
-		}
-		
-		if(destination == double.class){
-			if(source == String.class) return FromStringTodouble;
-			if(source == Byte.class) return FromByteTodouble;
-			if(source == byte.class) return FrombyteTodouble;
-			if(source == Short.class) return FromShortTodouble;
-			if(source == short.class) return FromshortTodouble;
-			if(source == Integer.class) return FromIntegerTodouble;
-			if(source == int.class) return FromintTodouble;
-			if(source == Long.class) return FromLongTodouble;
-			if(source == long.class) return FromlongTodouble;
-			if(source == Float.class) return FromFloatTodouble;
-			if(source == float.class) return FromfloatTodouble;
-			if(source == Character.class) return FromCharacterTodouble;
-			if(source == char.class) return FromcharTodouble;
-			if(source == Boolean.class) return FromBooleanTodouble;
-			if(source == boolean.class) return FrombooleanTodouble;
-		}
-
-		if(destination == Character.class){
-			if(source == String.class) return FromStringToCharacter;
-			if(source == Byte.class) return FromByteToCharacter;
-			if(source == byte.class) return FrombyteToCharacter;
-			if(source == Short.class) return FromShortToCharacter;
-			if(source == short.class) return FromshortToCharacter;
-			if(source == Integer.class) return FromIntegerToCharacter;
-			if(source == int.class) return FromintToCharacter;
-			if(source == Long.class) return FromLongToCharacter;
-			if(source == long.class) return FromlongToCharacter;
-			if(source == Float.class) return FromFloatToCharacter;
-			if(source == float.class) return FromfloatToCharacter;
-			if(source == Double.class) return FromDoubleToCharacter;
-			if(source == double.class) return FromdoubleToCharacter;
-			if(source == Boolean.class) return FromBooleanToCharacter;
-			if(source == boolean.class) return FrombooleanToCharacter;
-		}
-		
-		if(destination == char.class){
-			if(source == String.class) return FromStringTochar;
-			if(source == Byte.class) return FromByteTochar;
-			if(source == byte.class) return FrombyteTochar;
-			if(source == Short.class) return FromShortTochar;
-			if(source == short.class) return FromshortTochar;
-			if(source == Integer.class) return FromIntegerTochar;
-			if(source == int.class) return FromintTochar;
-			if(source == Long.class) return FromLongTochar;
-			if(source == long.class) return FromlongTochar;
-			if(source == Float.class) return FromFloatTochar;
-			if(source == float.class) return FromfloatTochar;
-			if(source == Double.class) return FromDoubleTochar;
-			if(source == double.class) return FromdoubleTochar;
-			if(source == Boolean.class) return FromBooleanTochar;
-			if(source == boolean.class) return FrombooleanTochar;
-		}
-		
-		if(destination == Boolean.class){
-			if(source == String.class) return FromStringToBoolean;
-			if(source == Byte.class) return FromByteToBoolean;
-			if(source == byte.class) return FrombyteToBoolean;
-			if(source == Short.class) return FromShortToBoolean;
-			if(source == short.class) return FromshortToBoolean;
-			if(source == Integer.class) return FromIntegerToBoolean;
-			if(source == int.class) return FromintToBoolean;
-			if(source == Long.class) return FromLongToBoolean;
-			if(source == long.class) return FromlongToBoolean;
-			if(source == Float.class) return FromFloatToBoolean;
-			if(source == float.class) return FromfloatToBoolean;
-			if(source == Double.class) return FromDoubleToBoolean;
-			if(source == double.class) return FromdoubleToBoolean;
-			if(source == Character.class) return FromCharacterToBoolean;
-			if(source == char.class) return FromcharToBoolean;
-		}
-		
-		if(destination == boolean.class){
-			if(source == String.class) return FromStringToboolean;
-			if(source == Byte.class) return FromByteToboolean;
-			if(source == byte.class) return FrombyteToboolean;
-			if(source == Short.class) return FromShortToboolean;
-			if(source == short.class) return FromshortToboolean;
-			if(source == Integer.class) return FromIntegerToboolean;
-			if(source == int.class) return FromintToboolean;
-			if(source == Long.class) return FromLongToboolean;
-			if(source == long.class) return FromlongToboolean;
-			if(source == Float.class) return FromFloatToboolean;
-			if(source == float.class) return FromfloatToboolean;
-			if(source == Double.class) return FromDoubleToboolean;
-			if(source == double.class) return FromdoubleToboolean;
-			if(source == Character.class) return FromCharacterToboolean;
-			if(source == char.class) return FromcharToboolean;
-		}
-		
+		if(destination == int.class)      return tointConversion(source);
+		if(destination == Long.class)     return toLongConversion(source);
+		if(destination == long.class)     return tolongConversion(source);
+		if(destination == Float.class)    return toFloatConversion(source);
+		if(destination == float.class)    return tofloatConversion(source);
+		if(destination == Double.class)   return toDoubleConversion(source);
+		if(destination == double.class)   return todoubleConversion(source);
+		if(destination == Character.class)return toCharacterConversion(source);
+		if(destination == char.class)     return tocharConversion(source);
+		if(destination == Boolean.class)  return toBooleanConversion(source);
+		if(destination == boolean.class)  return tobooleanConversion(source);
 		return UNDEFINED;
 	}
 }

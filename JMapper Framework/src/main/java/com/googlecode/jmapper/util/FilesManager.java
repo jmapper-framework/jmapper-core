@@ -474,8 +474,7 @@ public class FilesManager {
 			
 			// if line contains JGlobalMap configuration or if this annotation is written on more lines
 			if(!globalToClean(line) && globalToClean(previousLine)){
-				if(moreLines){
-					if((cleanAll && classDefinitionFound) || classFound){
+				if(moreLines && ((cleanAll && classDefinitionFound) || classFound)){
 						HashMap<String,Object> cleanLine = cleanLine(previousLine,moreLines,JGlobalMap.class);
 						boolean newLine = (Boolean) cleanLine.get("newLine");
 						String result = (String) cleanLine.get("result");
@@ -489,7 +488,6 @@ public class FilesManager {
 							linesToWrite.add(line);
 						}
 						continue;
-					}
 				}
 				if(!classFound || (cleanAll && !classDefinitionFound)){
 					linesToWrite.add(previousLine);
@@ -509,9 +507,7 @@ public class FilesManager {
 			}
 			
 			// if line contains JMap configuration or if this annotation is written on more lines
-			if(attributeToClean(line) || moreLines){
-				
-				if(cleanAll || (classFound && annotatedFields > 0)){
+			if((attributeToClean(line) || moreLines) && (cleanAll || (classFound && annotatedFields > 0))){
 					
 					HashMap<String,Object> cleanLine = cleanLine(line,moreLines,JMapAccessors.class,JMapAccessor.class,JMap.class);
 					boolean newLine = (Boolean) cleanLine.get("newLine");
@@ -524,7 +520,6 @@ public class FilesManager {
 					// countdown is done when we need to clean specific fields
 					if(!cleanAll && !moreLines && !newLine)annotatedFields--;
 					continue;
-				}
 			}
 			
 			if(line.trim().equals("})"))

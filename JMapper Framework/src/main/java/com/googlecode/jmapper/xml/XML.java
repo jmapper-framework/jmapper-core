@@ -51,6 +51,11 @@ import com.googlecode.jmapper.xml.beans.XmlJmapper;
  */
 public final class XML {
 
+	/**  xml path */
+	private String xmlPath;
+	/**  xmlJmapper object */
+	private XmlJmapper xmlJmapper;
+	
 	/**
 	 * Xml file can be loaded in two ways: at runtime and development time.
 	 * @param atRuntime true if xml file must be loaded at runtime, false at development time
@@ -90,11 +95,6 @@ public final class XML {
 	public XmlJmapper toXStream(){
 		return xmlJmapper;
 	}
-	
-	/**  xml path */
-	private String xmlPath;
-	/**  xmlJmapper object */
-	private XmlJmapper xmlJmapper;
 	
 	/**
 	 * Returns the xml path of this object.

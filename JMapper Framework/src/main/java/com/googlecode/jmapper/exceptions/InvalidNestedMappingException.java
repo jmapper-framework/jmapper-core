@@ -23,24 +23,20 @@ import java.util.HashMap;
  *
  */
 public class InvalidNestedMappingException extends MappingException {
-
+	
+	private static final long serialVersionUID = -1394972573794535662L;
 	private HashMap<String, String> messages;
+	public static String REGEX = "REGEX";
+	public static String FIELD = "FIELD";
 	
 	public HashMap<String, String> getMessages() {
 		return messages;
 	}
 
-	public static String REGEX = "REGEX";
-	public static String FIELD = "FIELD";
 	
 	public InvalidNestedMappingException(String str) {
 		super(str);
 		messages = new HashMap<String, String>();
 	}
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -1394972573794535662L;
 
 }

@@ -118,11 +118,11 @@ public abstract class MapperConstructorAccessor {
 	 */
 	private ChooseConfig searchAnnotatedConfig(ChooseConfig cc) {
 		
-		if(isNull(cc)||cc == ChooseConfig.DESTINATION)
-			if(Annotation.isInheritedMapped(destination))	return ChooseConfig.DESTINATION;
+		if((isNull(cc)||cc == ChooseConfig.DESTINATION) && Annotation.isInheritedMapped(destination))	
+			return ChooseConfig.DESTINATION;
 	
-		if(isNull(cc)||cc == ChooseConfig.SOURCE)
-			if(Annotation.isInheritedMapped(source))			return  ChooseConfig.SOURCE;
+		if((isNull(cc)||cc == ChooseConfig.SOURCE) && Annotation.isInheritedMapped(source))			
+			return  ChooseConfig.SOURCE;
 		
 		return null;
 	}

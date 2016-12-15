@@ -47,7 +47,6 @@ import com.googlecode.jmapper.xml.SimplyAttribute;
  */
 public final class GeneralUtility {
 	
-	private GeneralUtility() { }
 
 	/** line separator of this operating system */
 	public static final String newLine = System.getProperty("line.separator");
@@ -61,6 +60,8 @@ public final class GeneralUtility {
 	/** basicTypes contains all the names of primitive and wrapper classes */
 	private static final ArrayList<String> basicTypes = new ArrayList<String>();
 	
+	private GeneralUtility() { }
+
 	static{
 		
 		implementationClass.put(Collection.class.getName(),	ArrayList.class);

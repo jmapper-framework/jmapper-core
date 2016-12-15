@@ -44,6 +44,15 @@ import com.googlecode.jmapper.generation.beans.Method;
 @SuppressWarnings("unchecked")
 public class MapperBuilder {
 
+	/** destination class */
+	private Class<?> destination;
+	/** source class */
+	private Class<?> source;
+	/** configuration chosen from user */
+	private ChooseConfig config;
+	/** path of the xml file */
+	private String path;
+
 	/** @return true if the mapper class exists, false otherwise */
 	public boolean exist() {
 		
@@ -98,15 +107,6 @@ public class MapperBuilder {
 		}
 		return mapperClass;
 	}
-
-	/** destination class */
-	private Class<?> destination;
-	/** source class */
-	private Class<?> source;
-	/** configuration chosen from user */
-	private ChooseConfig config;
-	/** path of the xml file */
-	private String path;
 
 	/**
 	 * Starting point for parameters setting. This method set the source

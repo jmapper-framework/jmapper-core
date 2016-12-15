@@ -25,7 +25,6 @@ import java.util.HashMap;
  */
 public final class AutoBoxing {
 
-	private AutoBoxing() { }
 	
 	/** boxingOperations contains all combinations of boxing operations.
 	 *  key = Wrapper Class name, value = primitive Class name */
@@ -35,6 +34,8 @@ public final class AutoBoxing {
 	 *  key = Wrapper Class name, value = primitive Class name */
 	public static final HashMap<String, String[]> unBoxingOperations = new HashMap<String, String[]>();
 	
+	private AutoBoxing() { }
+
 	static{
 			
 		boxingOperations.put(Byte.class.getName(),   	new String[]{byte.class.getName()});
