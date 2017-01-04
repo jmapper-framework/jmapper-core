@@ -11,11 +11,6 @@ _Fast as hand-written code with zero compromise._
 ## Support
 [![Join the chat at https://gitter.im/jmapper-framework/jmapper-core](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/jmapper-framework/jmapper-core?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/avurro) 
 
-
-> Version 1.6.1.CR2 Released! You can check the [release notes](https://github.com/jmapper-framework/jmapper-core/wiki/Release-Notes) for more information.<br>
-
-
-
 #####Write the configuration using what you prefer: Annotation, XML or API.
 Most relevant features:
 
