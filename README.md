@@ -1,4 +1,4 @@
-#JMapper Framework [![Join the chat at https://gitter.im/jmapper-framework/jmapper-core](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/jmapper-framework/jmapper-core?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/avurro) 
+# JMapper Framework [![Join the chat at https://gitter.im/jmapper-framework/jmapper-core](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/jmapper-framework/jmapper-core?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/avurro) 
 
 _Fast as hand-written code with zero compromise._
 
@@ -8,7 +8,7 @@ _Fast as hand-written code with zero compromise._
 ## Status
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ab9b20d7580c4e5d852e6cbe1de509a2)](https://www.codacy.com/app/alessandro-vurro_2/jmapper-core?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jmapper-framework/jmapper-core&amp;utm_campaign=Badge_Grade) [![Build Status](https://travis-ci.org/jmapper-framework/jmapper-core.svg?branch=master)](https://travis-ci.org/jmapper-framework/jmapper-core)
 
-#####Write the configuration using what you prefer: Annotation, XML or API.
+##### Write the configuration using what you prefer: Annotation, XML or API.
 Most relevant features:
 
   * [One to Many](https://github.com/jmapper-framework/jmapper-core/wiki/One-To-Many) and [Many to One](https://github.com/jmapper-framework/jmapper-core/wiki/Many-To-One) relationship
@@ -19,9 +19,9 @@ Most relevant features:
   
 **especially its use is intuitive**
 
-##Configuration
+## Configuration
 Below it is shown the same configuration in the three types allowed
-#####Annotation
+##### Annotation
 ```java
 class Destination{                      class Source{
     @JMap
@@ -33,7 +33,7 @@ class Destination{                      class Source{
     // getters and setters...               // getters and setters...
 }                                       }
 ```
-#####XML
+##### XML
 ```xml
 <jmapper>
   <class name="it.jmapper.bean.Destination">
@@ -46,7 +46,7 @@ class Destination{                      class Source{
   </class>
 </jmapper>
 ```
-#####API
+##### API
 ```java
 JMapperAPI jmapperAPI = new JMapperAPI()
     .add(mappedClass(Destination.class)
@@ -56,28 +56,28 @@ JMapperAPI jmapperAPI = new JMapperAPI()
                      .value("sourceField")));
 ```
 
-##Creation
+## Creation
 ```java
 JMapper<Destination, Source> mapper;
 ```
-#####Annotation
+##### Annotation
 ```java
 mapper = new JMapper<>(Destination.class, Source.class);
 ```
-#####XML
+##### XML
 ```java
 mapper = new JMapper<>(Destination.class, Source.class, xml);
 ```
-#####API
+##### API
 ```java
 mapper = new JMapper<>(Destination.class, Source.class, jmapperAPI);
 ```
-##Usage
+## Usage
 ```java
 Source source = new Source("id", "sourceField", "other");
 Destination destination = mapper.getDestination(source);
 ```
-##Result
+## Result
 ```java
 destination ["id", "sourceField", null]
 ```
