@@ -3,7 +3,7 @@
 _Fast as hand-written code with zero compromise._
 
 ## Artifact information 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.googlecode.jmapper-framework/jmapper-core/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.googlecode.jmapper-framework/jmapper-core) [![Javadocs](http://www.javadoc.io/badge/com.googlecode.jmapper-framework/jmapper-core.svg)](http://www.javadoc.io/doc/com.googlecode.jmapper-framework/jmapper-core) [![Dependency Status] (https://www.versioneye.com/user/projects/5539172d1d2989cb78000002/badge.svg?style=flat)] (https://www.versioneye.com/user/projects/5539172d1d2989cb78000002)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.googlecode.jmapper-framework/jmapper-core/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.googlecode.jmapper-framework/jmapper-core) [![Javadocs](http://www.javadoc.io/badge/com.googlecode.jmapper-framework/jmapper-core.svg)](http://www.javadoc.io/doc/com.googlecode.jmapper-framework/jmapper-core) [![Dependency Status](https://www.versioneye.com/user/projects/5539172d1d2989cb78000002/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5539172d1d2989cb78000002)
 
 ## Status
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ab9b20d7580c4e5d852e6cbe1de509a2)](https://www.codacy.com/app/alessandro-vurro_2/jmapper-core?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jmapper-framework/jmapper-core&amp;utm_campaign=Badge_Grade) [![Build Status](https://travis-ci.org/jmapper-framework/jmapper-core.svg?branch=master)](https://travis-ci.org/jmapper-framework/jmapper-core)
