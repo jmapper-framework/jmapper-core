@@ -1,0 +1,10 @@
+<jmapper>
+    <class name="it.jmapper.bean.Destination">
+        <attribute name="id">
+            <value name="id"/>
+        </attribute>
+        <attribute name="destinationField">
+            <value name="sourceField"/>
+        </attribute>
+    </class>
+</jmapper>
