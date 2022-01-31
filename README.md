@@ -91,4 +91,4 @@ contact us (jmapper.framework@gmail.com) for more information.<br><br>
 <a href="https://twitter.com/jmapper_av"><img src="http://www.teachthought.com/wp-content/uploads/2012/10/twitter-logo-break.png" width="120" height="120" /></a>
 
 **updated GroupId Name**
-com.github.jmapper-framework
+io.github.someshwar1 
