@@ -5,7 +5,7 @@
   </properties>
   
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.github.jmapper-framework</groupId>
+  <groupId>io.github.someshwar1</groupId>
   <artifactId>jmapper-core</artifactId>
   <packaging>jar</packaging>
   <name>JMapper Framework</name>
