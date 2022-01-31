@@ -5,7 +5,7 @@
   </properties>
   
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.googlecode.jmapper-framework</groupId>
+  <groupId>io.github.jmapper-framework</groupId>
   <artifactId>jmapper-core</artifactId>
   <packaging>jar</packaging>
   <name>JMapper Framework</name>
@@ -27,9 +27,9 @@
 	</licenses>
 	
 	<scm>
-		<connection>scm:git:git@github.com:jmapper-framework/jmapper-core.git</connection>
-		<developerConnection>scm:git:git@github.com:jmapper-framework/jmapper-core.git</developerConnection>
-		<url>git@github.com:jmapper-framework/jmapper-core.git</url>
+		<connection>scm:git:git@github.com:someshwar1/jmapper-core.git</connection>
+		<developerConnection>scm:git:git@github.com:someshwar1/jmapper-core.git</developerConnection>
+		<url>git@github.com:someshwar1/jmapper-core.git</url>
 	</scm>
   
   <developers>
@@ -38,6 +38,12 @@
   		<name>Alessandro Vurro</name>
   		<email>alessandro.vurro@gmail.com</email>
   		<roles><role>author</role></roles>
+  	</developer>
+	<developer>
+  		<id>someshwar1</id>
+  		<name>Someshwar Reddy</name>
+  		<email>amireddysomesher@gmail.com</email>
+  		<roles><role>developer</role></roles>
   	</developer>
   </developers>
   
