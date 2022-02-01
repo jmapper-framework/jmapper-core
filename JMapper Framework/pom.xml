@@ -31,11 +31,7 @@
 		<developerConnection>scm:git:git@github.com:someshwar1/jmapper-core.git</developerConnection>
 		<url>git@github.com:someshwar1/jmapper-core.git</url>
 	</scm>
-  <properties>
-  	<sonar.organization>someshwar1</sonar.organization>
-  	<sonar.host.url>https://sonarcloud.io</sonar.host.url>
-  </properties>
-  <developers>
+   <developers>
   	<developer>
   		<id>alessandro.vurro</id>
   		<name>Alessandro Vurro</name>
