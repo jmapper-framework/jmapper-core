@@ -29,7 +29,7 @@ jobs:
               ls
               cd JMapper\ Framework/
               pwd
-              mvn clean install -X
+              mvn clean install 
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
