@@ -4,8 +4,9 @@
 
 name: Publish package to the Maven Central Repository and GitHub Packages
 on:
-  release:
-    types: [edited]
+  push:
+    branches: 
+      - 'master'
 jobs:
   publish:
     runs-on: ubuntu-latest 
