@@ -27,7 +27,7 @@ jobs:
       - name : checking folder
         run : ls
       - name : github workspace  
-        run : cd ${{ github.workspace }}/JMapper Framework  
+        run : cd ${{ github.workspace }}/JMapper\ Framework/  
       - name : checking folder
         run : ls
       - name : path
