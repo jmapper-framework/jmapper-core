@@ -36,9 +36,9 @@ import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.collections.bidimap.DualHashBidiMap;
-
 import com.googlecode.jmapper.xml.SimplyAttribute;
+import org.apache.commons.collections4.bidimap.DualHashBidiMap;
+
 /**
  * Utility class that allows you to identify the type of classes given as input, 
  * to obtain name of methods starting from name of fields and more useful functions.

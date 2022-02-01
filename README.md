@@ -5,6 +5,9 @@ _Fast as hand-written code with zero compromise._
 ## Artifact information 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.googlecode.jmapper-framework/jmapper-core/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.googlecode.jmapper-framework/jmapper-core) [![Javadocs](http://www.javadoc.io/badge/com.googlecode.jmapper-framework/jmapper-core.svg)](http://www.javadoc.io/doc/com.googlecode.jmapper-framework/jmapper-core) [![Dependency Status](https://www.versioneye.com/user/projects/5539172d1d2989cb78000002/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5539172d1d2989cb78000002)
 
+**updated GroupId Name**
+``io.github.someshwar1 
+
 ## Status
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ab9b20d7580c4e5d852e6cbe1de509a2)](https://www.codacy.com/app/alessandro-vurro_2/jmapper-core?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jmapper-framework/jmapper-core&amp;utm_campaign=Badge_Grade) [![Build Status](https://travis-ci.org/jmapper-framework/jmapper-core.svg?branch=master)](https://travis-ci.org/jmapper-framework/jmapper-core)
 
@@ -82,11 +85,12 @@ Destination destination = mapper.getDestination(source);
 destination ["id", "sourceField", null]
 ```
 *With JMapper we have all the advantages of dynamic mapping with the performance of static code, with 0 memory consumption.*<br>
-**Required java 5+**<br>
+**Required java 8+**<br>
 
 **Would you like to contribute to the development of JMapper?**<br> 
 contact us (jmapper.framework@gmail.com) for more information.<br><br>
 
 **Follow us on twitter**<br>
 <a href="https://twitter.com/jmapper_av"><img src="http://www.teachthought.com/wp-content/uploads/2012/10/twitter-logo-break.png" width="120" height="120" /></a>
+
 

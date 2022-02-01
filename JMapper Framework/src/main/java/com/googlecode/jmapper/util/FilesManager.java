@@ -1000,6 +1000,9 @@ public class FilesManager {
 	 */
 	public static void write(XmlJmapper jmapper, String xmlPath) throws IOException{
 		XStream xstream = new XStream();
+		xstream.allowTypes(new Class[] {
+				com.googlecode.jmapper.xml.beans.XmlJmapper.class
+		});
 		xstream.processAnnotations(XmlJmapper.class);
 		writeFile(new File(xmlPath),list(xstream.toXML(jmapper)));
 	}
@@ -1038,6 +1041,9 @@ public class FilesManager {
 	 */
 	private static XmlJmapper toXmlJmapper(String path, InputStream is) throws FileNotFoundException{
 		XStream xstream = new XStream();
+		xstream.allowTypes(new Class[] {
+				com.googlecode.jmapper.xml.beans.XmlJmapper.class
+		});
 		xstream.processAnnotations(XmlJmapper.class);
 		if(is != null) return (XmlJmapper) xstream.fromXML(is);
 		Error.fileNotFound(path);
