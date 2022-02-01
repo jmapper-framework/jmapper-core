@@ -27,7 +27,9 @@ jobs:
       - name : github workspace
         env:
           github.workspace: ${{ github.workspace }}/JMapper\ Framework   
-        run : echo ${{ github.workspace }}
+        run : cd echo ${{ github.workspace }}
+      - name : checking folder
+        run : ls
       - name: Publish to the Maven Central Repository
         run: mvn clean install -X
         env:
