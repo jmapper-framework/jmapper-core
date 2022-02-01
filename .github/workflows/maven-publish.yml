@@ -25,6 +25,8 @@ jobs:
           server-username: MAVEN_USERNAME
           server-password: MAVEN_PASSWORD
       - name : github workspace
+        env:
+          github.workspace: ${{ github.workspace }}/JMapper\ Framework   
         run : echo ${{ github.workspace }}
       - name: Publish to the Maven Central Repository
         run: mvn clean install -X
