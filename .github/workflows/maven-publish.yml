@@ -26,8 +26,10 @@ jobs:
           server-password: MAVEN_PASSWORD
       - name : checking folder
         run : ls
-      - name : github workspace  
-        run : cd ${{ github.workspace }}/JMapper\ Framework/  
+      - name : github workspace
+        env:
+          PATH_POM: JMapper Framework
+        run : cd ${{ github.workspace }}/${{PATH_POM}}/  
       - name : checking folder
         run : ls
       - name : path
