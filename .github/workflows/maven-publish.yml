@@ -19,7 +19,7 @@ jobs:
       - name: Set up Java for publishing to Maven Central Repository
         uses: actions/setup-java@v2
         with:
-          java-version: '1.8'
+          java-version: '8'
           distribution: 'adopt'
           server-id: ossrh
           server-username: MAVEN_USERNAME
@@ -36,7 +36,7 @@ jobs:
       - name: Set up Java for publishing to GitHub Packages
         uses: actions/setup-java@v2
         with:
-          java-version: '1.8'
+          java-version: '8'
           distribution: 'adopt'
       - name: Publish to GitHub Packages
         run: |
