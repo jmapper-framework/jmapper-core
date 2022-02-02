@@ -29,20 +29,7 @@ jobs:
               ls
               cd JMapper\ Framework/
               pwd
-              mvn clean install 
+              mvn --batch-mode deploy 
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
-      - name: Set up Java for publishing to GitHub Packages
-        uses: actions/setup-java@v2
-        with:
-          java-version: '8'
-          distribution: 'adopt'
-      - name: Publish to GitHub Packages
-        run: |
-              ls
-              cd JMapper\ Framework/
-              pwd
-              mvn clean install 
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
