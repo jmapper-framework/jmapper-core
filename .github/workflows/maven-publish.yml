@@ -25,13 +25,12 @@ jobs:
           server-username: MAVEN_USERNAME
           server-password: MAVEN_PASSWORD
           gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
-          gpg-passphrase: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
       - name: Publish to the Maven Central Repository
         run: |
               ls
               cd JMapper\ Framework/
               pwd
-              mvn --batch-mode deploy -Dgpg.passphrase=gpg-passphrase -Pci-cd
+              mvn --batch-mode deploy -Dgpg.passphrase=${{ secrets.MAVEN_GPG_PASSPHRASE }} -Pci-cd
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }} 
