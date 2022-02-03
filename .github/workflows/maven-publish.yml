@@ -31,7 +31,7 @@ jobs:
               ls
               cd JMapper\ Framework/
               pwd
-              mvn --batch-mode deploy 
+              mvn --batch-mode deploy -Dgpg.passphrase=gpg-passphrase -Pci-cd
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }} 
