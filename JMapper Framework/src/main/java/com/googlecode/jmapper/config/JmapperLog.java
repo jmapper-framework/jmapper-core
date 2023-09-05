@@ -17,11 +17,9 @@
 package com.googlecode.jmapper.config;
 
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.googlecode.jmapper.JMapper;
 import com.googlecode.jmapper.exceptions.JMapperException;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Custom logger to semplify exceptions handling.
@@ -29,10 +27,8 @@ import com.googlecode.jmapper.exceptions.JMapperException;
  * @author Alessandro Vurro
  *
  */
+@Slf4j
 public class JmapperLog {
-
-	/** logger */
-	private static final Logger logger = LoggerFactory.getLogger(JMapper.class);
 	
 	private JmapperLog(){}
 	
@@ -42,7 +38,7 @@ public class JmapperLog {
 	 * @param e exception to handle
 	 */
 	public static void error(Throwable e) throws JMapperException{
-		logger.error("{}: {}",e.getClass().getSimpleName(),e.getMessage());
+		log.error("{}: {}",e.getClass().getSimpleName(),e.getMessage());
 		throw new JMapperException(e);
 	}
 }

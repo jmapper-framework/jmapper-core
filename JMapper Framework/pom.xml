@@ -2,6 +2,8 @@
   
   <properties>
     <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+    <lombok.version>1.18.26</lombok.version>
+    <javassist.version>3.29.2-GA</javassist.version>
   </properties>
   
   <modelVersion>4.0.0</modelVersion>
@@ -30,11 +32,7 @@
 		<connection>scm:git:git@github.com:someshwar1/jmapper-core.git</connection>
 		<developerConnection>scm:git:git@github.com:someshwar1/jmapper-core.git</developerConnection>
 		<url>git@github.com:someshwar1/jmapper-core.git</url>
-	</scm>
-  <properties>
-  	<sonar.organization>someshwar1</sonar.organization>
-  	<sonar.host.url>https://sonarcloud.io</sonar.host.url>
-  </properties>
+	</scm>  
   <developers>
   	<developer>
   		<id>alessandro.vurro</id>
@@ -46,6 +44,12 @@
   		<id>someshwar1</id>
   		<name>Someshwar Reddy</name>
   		<email>amireddysomesher@gmail.com</email>
+  		<roles><role>developer</role></roles>
+  	</developer>
+  	<developer>
+  		<id>mksbtech</id>
+  		<name>Milan Sonkar</name>
+  		<email>mksbtech@gmail.com</email>
   		<roles><role>developer</role></roles>
   	</developer>
   </developers>
@@ -93,8 +97,15 @@
 			  <artifactId>maven-compiler-plugin</artifactId>
 			  <version>3.6.1</version>
 			  <configuration>
-			     <source>1.8</source>
-			     <target>1.8</target>
+			     <source>11</source>
+			     <target>11</target>
+			     <annotationProcessorPaths>
+                    <path>
+                        <groupId>org.projectlombok</groupId>
+                        <artifactId>lombok</artifactId>
+                        <version>${lombok.version}</version>
+                    </path>                         
+                </annotationProcessorPaths>
 			  </configuration>
 		    </plugin>
 			<plugin>
@@ -173,7 +184,7 @@
  	<dependency>
 		<groupId>org.javassist</groupId>
 		<artifactId>javassist</artifactId>
-		<version>3.22.0-CR1</version>
+		<version>${javassist.version}</version>
 	</dependency>
 	
 	<dependency>
@@ -193,6 +204,13 @@
 		<artifactId>kxml2</artifactId>
 		<version>2.3.0</version>
 	</dependency>
+	<dependency>
+		<groupId>org.projectlombok</groupId>
+		<artifactId>lombok</artifactId>
+		<version>${lombok.version}</version>
+		<scope>provided</scope>
+	</dependency>
+	
   </dependencies>
    
 </project>  

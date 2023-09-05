@@ -42,7 +42,8 @@ public interface IMapper<D, S> {
 	
 	/**
 	 * This Method returns a new instance of &lt;D&gt; type applying these criteria:<br><br>
-	 *<table summary="">
+	 *<table>
+	 *<caption>Summary</caption>
 	 *<tr><td><code>NullPointerControl.SOURCE</code></td><td>only source is controlled</td></tr>
 	 *<tr><td><code>MappingType.ALL_FIELDS</code></td><td>mapping type applied to destination</td></tr>
 	 *<tr><td><code>MappingType.ALL_FIELDS</code></td><td>mapping type applied to source</td></tr>
@@ -55,7 +56,8 @@ public interface IMapper<D, S> {
 	
 	/**
 	 * This Method returns a new instance of &lt;D&gt; type applying these criteria:<br><br>
-	 *<table summary="">
+	 *<table>
+	 *<caption>Summary</caption>
 	 *<tr><td><code>NullPointerControl.SOURCE</code></td><td>only source is controlled</td></tr>
 	 *<tr><td><code>MappingType.ALL_FIELDS</code></td><td>mapping type applied to destination</td></tr>
 	 *<tr><td><code>MappingType.ONLY_VALUED_FIELDS</code></td><td>mapping type applied to source</td></tr>
@@ -68,7 +70,8 @@ public interface IMapper<D, S> {
 	
 	/**
 	 * This Method returns a new instance of &lt;D&gt; type applying these criteria:<br><br>
-	 *<table summary="">
+	 *<table>
+	 *<caption>Summary</caption>
 	 *<tr><td><code>NullPointerControl.NOT_ANY</code></td><td>no instance is controlled</td></tr>
 	 *<tr><td><code>MappingType.ALL_FIELDS</code></td><td>mapping type applied to destination</td></tr>
 	 *<tr><td><code>MappingType.ALL_FIELDS</code></td><td>mapping type applied to source</td></tr>
@@ -81,7 +84,8 @@ public interface IMapper<D, S> {
 	
 	/**
 	 * This Method returns a new instance of &lt;D&gt; type applying these criteria:<br><br>
-	 *<table summary="">
+	 *<table>
+	 *<caption>Summary</caption>
 	 *<tr><td><code>NullPointerControl.NOT_ANY</code></td><td>no instance is controlled</td></tr>
 	 *<tr><td><code>MappingType.ALL_FIELDS</code></td><td>mapping type applied to destination</td></tr>
 	 *<tr><td><code>MappingType.ONLY_VALUED_FIELDS</code></td><td>mapping type applied to source</td></tr>
@@ -98,7 +102,8 @@ public interface IMapper<D, S> {
 	/**
 	 * This Method returns the destination given in input enriched with data contained in source given in input<br>
 	 * applying these criteria:<br><br>
-	 *<table summary="">
+	 *<table>
+	 *<caption>Summary</caption>
 	 *<tr><td><code>NullPointerControl.ALL</code></td><td>both instances are controlled</td></tr>
 	 *<tr><td><code>MappingType.ALL_FIELDS</code></td><td>mapping type applied to destination</td></tr>
 	 *<tr><td><code>MappingType.ALL_FIELDS</code></td><td>mapping type applied to source</td></tr>
@@ -113,7 +118,8 @@ public interface IMapper<D, S> {
 	/**
 	 * This Method returns the destination given in input enriched with data contained in source given in input<br>
 	 * applying these criteria:<br><br>
-	 *<table summary="">
+	 *<table>
+	 *<caption>Summary</caption>
 	 *<tr><td><code>NullPointerControl.ALL</code></td><td>both instances are controlled</td></tr>
 	 *<tr><td><code>MappingType.ALL_FIELDS</code></td><td>mapping type applied to destination</td></tr>
 	 *<tr><td><code>MappingType.ONLY_VALUED_FIELDS</code></td><td>mapping type applied to source</td></tr>
@@ -128,7 +134,8 @@ public interface IMapper<D, S> {
 	/**
 	 * This Method returns the destination given in input enriched with data contained in source given in input<br>
 	 * applying these criteria:<br><br>
-	 *<table summary="">
+	 *<table>
+	 *<caption>Summary</caption>
 	 *<tr><td><code>NullPointerControl.ALL</code></td><td>both instances are controlled</td></tr>
 	 *<tr><td><code>MappingType.ONLY_VALUED_FIELDS</code></td><td>mapping type applied to destination</td></tr>
 	 *<tr><td><code>MappingType.ALL_FIELDS</code></td><td>mapping type applied to source</td></tr>
@@ -143,7 +150,8 @@ public interface IMapper<D, S> {
 	/**
 	 * This Method returns the destination given in input enriched with data contained in source given in input<br>
 	 * applying these criteria:<br><br>
-	 *<table summary="">
+	 *<table>
+	 *<caption>Summary</caption>
 	 *<tr><td><code>NullPointerControl.ALL</code></td><td>both instances are controlled</td></tr>
 	 *<tr><td><code>MappingType.ONLY_VALUED_FIELDS</code></td><td>mapping type applied to destination</td></tr>
 	 *<tr><td><code>MappingType.ONLY_VALUED_FIELDS</code></td><td>mapping type applied to source</td></tr>
@@ -158,7 +166,8 @@ public interface IMapper<D, S> {
 	/**
 	 * This Method returns the destination given in input enriched with data contained in source given in input<br>
 	 * applying these criteria:<br><br>
-	 *<table summary="">
+	 *<table>
+	 *<caption>Summary</caption>
 	 *<tr><td><code>NullPointerControl.ALL</code></td><td>both instances are controlled</td></tr>
 	 *<tr><td><code>MappingType.ONLY_VALUED_FIELDS</code></td><td>mapping type applied to destination</td></tr>
 	 *<tr><td><code>MappingType.ONLY_NULL_FIELDS</code></td><td>mapping type applied to source</td></tr>
@@ -173,7 +182,8 @@ public interface IMapper<D, S> {
 	/**
 	 * This Method returns the destination given in input enriched with data contained in source given in input<br>
 	 * applying these criteria:<br><br>
-	 *<table summary="">
+	 *<table>
+	 *<caption>Summary</caption>
 	 *<tr><td><code>NullPointerControl.ALL</code></td><td>both instances are controlled</td></tr>
 	 *<tr><td><code>MappingType.ONLY_NULL_FIELDS</code></td><td>mapping type applied to destination</td></tr>
 	 *<tr><td><code>MappingType.ONLY_VALUED_FIELDS</code></td><td>mapping type applied to source</td></tr>
@@ -191,7 +201,8 @@ public interface IMapper<D, S> {
 	/**
 	 * This Method returns the destination given in input enriched with data contained in source given in input<br>
 	 * applying these criteria:<br><br>
-	 *<table summary="">
+	 *<table>
+	 *<caption>Summary</caption>
 	 *<tr><td><code>NullPointerControl.DESTINATION</code></td><td>only destination is controlled</td></tr>
 	 *<tr><td><code>MappingType.ALL_FIELDS</code></td><td>mapping type applied to destination</td></tr>
 	 *<tr><td><code>MappingType.ALL_FIELDS</code></td><td>mapping type applied to source</td></tr>
@@ -206,7 +217,8 @@ public interface IMapper<D, S> {
 	/**
 	 * This Method returns the destination given in input enriched with data contained in source given in input<br>
 	 * applying these criteria:<br><br>
-	 *<table summary="">
+	 *<table>
+	 *<caption>Summary</caption>
 	 *<tr><td><code>NullPointerControl.DESTINATION</code></td><td>only destination is controlled</td></tr>
 	 *<tr><td><code>MappingType.ALL_FIELDS</code></td><td>mapping type applied to destination</td></tr>
 	 *<tr><td><code>MappingType.ONLY_VALUED_FIELDS</code></td><td>mapping type applied to source</td></tr>
@@ -221,7 +233,8 @@ public interface IMapper<D, S> {
 	/**
 	 * This Method returns the destination given in input enriched with data contained in source given in input<br>
 	 * applying these criteria:<br><br>
-	 *<table summary="">
+	 *<table>
+	 *<caption>Summary</caption>
 	 *<tr><td><code>NullPointerControl.DESTINATION</code></td><td>only destination is controlled</td></tr>
 	 *<tr><td><code>MappingType.ONLY_VALUED_FIELDS</code></td><td>mapping type applied to destination</td></tr>
 	 *<tr><td><code>MappingType.ALL_FIELDS</code></td><td>mapping type applied to source</td></tr>
@@ -236,7 +249,8 @@ public interface IMapper<D, S> {
 	/**
 	 * This Method returns the destination given in input enriched with data contained in source given in input<br>
 	 * applying these criteria:<br><br>
-	 *<table summary="">
+	 *<table>
+	 *<caption>Summary</caption>
 	 *<tr><td><code>NullPointerControl.DESTINATION</code></td><td>only destination is controlled</td></tr>
 	 *<tr><td><code>MappingType.ONLY_VALUED_FIELDS</code></td><td>mapping type applied to destination</td></tr>
 	 *<tr><td><code>MappingType.ONLY_VALUED_FIELDS</code></td><td>mapping type applied to source</td></tr>
@@ -251,7 +265,8 @@ public interface IMapper<D, S> {
 	/**
 	 * This Method returns the destination given in input enriched with data contained in source given in input<br>
 	 * applying these criteria:<br><br>
-	 *<table summary="">
+	 *<table>
+	 *<caption>Summary</caption>
 	 *<tr><td><code>NullPointerControl.DESTINATION</code></td><td>only destination is controlled</td></tr>
 	 *<tr><td><code>MappingType.ONLY_VALUED_FIELDS</code></td><td>mapping type applied to destination</td></tr>
 	 *<tr><td><code>MappingType.ONLY_NULL_FIELDS</code></td><td>mapping type applied to source</td></tr>
@@ -266,7 +281,8 @@ public interface IMapper<D, S> {
 	/**
 	 * This Method returns the destination given in input enriched with data contained in source given in input<br>
 	 * applying these criteria:<br><br>
-	 *<table summary="">
+	 *<table>
+	 *<caption>Summary</caption>
 	 *<tr><td><code>NullPointerControl.DESTINATION</code></td><td>only destination is controlled</td></tr>
 	 *<tr><td><code>MappingType.ONLY_NULL_FIELDS</code></td><td>mapping type applied to destination</td></tr>
 	 *<tr><td><code>MappingType.ONLY_VALUED_FIELDS</code></td><td>mapping type applied to source</td></tr>
@@ -284,7 +300,8 @@ public interface IMapper<D, S> {
 	/**
 	 * This Method returns the destination given in input enriched with data contained in source given in input<br>
 	 * applying these criteria:<br><br>
-	 *<table summary="">
+	 *<table>
+	 *<caption>Summary</caption>
 	 *<tr><td><code>NullPointerControl.SOURCE</code></td><td>only source is controlled</td></tr>
 	 *<tr><td><code>MappingType.ALL_FIELDS</code></td><td>mapping type applied to destination</td></tr>
 	 *<tr><td><code>MappingType.ALL_FIELDS</code></td><td>mapping type applied to source</td></tr>
@@ -299,7 +316,8 @@ public interface IMapper<D, S> {
 	/**
 	 * This Method returns the destination given in input enriched with data contained in source given in input<br>
 	 * applying these criteria:<br><br>
-	 *<table summary="">
+	 *<table>
+	 *<caption>Summary</caption>
 	 *<tr><td><code>NullPointerControl.SOURCE</code></td><td>only source is controlled</td></tr>
 	 *<tr><td><code>MappingType.ALL_FIELDS</code></td><td>mapping type applied to destination</td></tr>
 	 *<tr><td><code>MappingType.ONLY_VALUED_FIELDS</code></td><td>mapping type applied to source</td></tr>
@@ -314,7 +332,8 @@ public interface IMapper<D, S> {
 	/**
 	 * This Method returns the destination given in input enriched with data contained in source given in input<br>
 	 * applying these criteria:<br><br>
-	 *<table summary="">
+	 *<table>
+	 *<caption>Summary</caption>
 	 *<tr><td><code>NullPointerControl.SOURCE</code></td><td>only source is controlled</td></tr>
 	 *<tr><td><code>MappingType.ONLY_VALUED_FIELDS</code></td><td>mapping type applied to destination</td></tr>
 	 *<tr><td><code>MappingType.ALL_FIELDS</code></td><td>mapping type applied to source</td></tr>
@@ -329,7 +348,8 @@ public interface IMapper<D, S> {
 	/**
 	 * This Method returns the destination given in input enriched with data contained in source given in input<br>
 	 * applying these criteria:<br><br>
-	 *<table summary="">
+	 *<table>
+	 *<caption>Summary</caption>
 	 *<tr><td><code>NullPointerControl.SOURCE</code></td><td>only source is controlled</td></tr>
 	 *<tr><td><code>MappingType.ONLY_VALUED_FIELDS</code></td><td>mapping type applied to destination</td></tr>
 	 *<tr><td><code>MappingType.ONLY_VALUED_FIELDS</code></td><td>mapping type applied to source</td></tr>
@@ -344,7 +364,8 @@ public interface IMapper<D, S> {
 	/**
 	 * This Method returns the destination given in input enriched with data contained in source given in input<br>
 	 * applying these criteria:<br><br>
-	 *<table summary="">
+	 *<table>
+	 *<caption>Summary</caption>
 	 *<tr><td><code>NullPointerControl.SOURCE</code></td><td>only source is controlled</td></tr>
 	 *<tr><td><code>MappingType.ONLY_VALUED_FIELDS</code></td><td>mapping type applied to destination</td></tr>
 	 *<tr><td><code>MappingType.ONLY_NULL_FIELDS</code></td><td>mapping type applied to source</td></tr>
@@ -359,7 +380,8 @@ public interface IMapper<D, S> {
 	/**
 	 * This Method returns the destination given in input enriched with data contained in source given in input<br>
 	 * applying these criteria:<br><br>
-	 *<table summary="">
+	 *<table>
+	 *<caption>Summary</caption>
 	 *<tr><td><code>NullPointerControl.SOURCE</code></td><td>only source is controlled</td></tr>
 	 *<tr><td><code>MappingType.ONLY_NULL_FIELDS</code></td><td>mapping type applied to destination</td></tr>
 	 *<tr><td><code>MappingType.ONLY_VALUED_FIELDS</code></td><td>mapping type applied to source</td></tr>
@@ -377,7 +399,8 @@ public interface IMapper<D, S> {
 	/**
 	 * This Method returns the destination given in input enriched with data contained in source given in input<br>
 	 * applying these criteria:<br><br>
-	 *<table summary="">
+	 *<table>
+	 *<caption>Summary</caption>
 	 *<tr><td><code>NullPointerControl.NOT_ANY</code></td><td>no instance is controlled</td></tr>
 	 *<tr><td><code>MappingType.ALL_FIELDS</code></td><td>mapping type applied to destination</td></tr>
 	 *<tr><td><code>MappingType.ALL_FIELDS</code></td><td>mapping type applied to source</td></tr>
@@ -392,7 +415,8 @@ public interface IMapper<D, S> {
 	/**
 	 * This Method returns the destination given in input enriched with data contained in source given in input<br>
 	 * applying these criteria:<br><br>
-	 *<table summary="">
+	 *<table>
+	 *<caption>Summary</caption>
 	 *<tr><td><code>NullPointerControl.NOT_ANY</code></td><td>no instance is controlled</td></tr>
 	 *<tr><td><code>MappingType.ALL_FIELDS</code></td><td>mapping type applied to destination</td></tr>
 	 *<tr><td><code>MappingType.ONLY_VALUED_FIELDS</code></td><td>mapping type applied to source</td></tr>
@@ -407,7 +431,8 @@ public interface IMapper<D, S> {
 	/**
 	 * This Method returns the destination given in input enriched with data contained in source given in input<br>
 	 * applying these criteria:<br><br>
-	 *<table summary="">
+	 *<table>
+	 *<caption>Summary</caption>
 	 *<tr><td><code>NullPointerControl.NOT_ANY</code></td><td>no instance is controlled</td></tr>
 	 *<tr><td><code>MappingType.ONLY_VALUED_FIELDS</code></td><td>mapping type applied to destination</td></tr>
 	 *<tr><td><code>MappingType.ALL_FIELDS</code></td><td>mapping type applied to source</td></tr>
@@ -422,7 +447,8 @@ public interface IMapper<D, S> {
 	/**
 	 * This Method returns the destination given in input enriched with data contained in source given in input<br>
 	 * applying these criteria:<br><br>
-	 *<table summary="">
+	 *<table>
+	 *<caption>Summary</caption>
 	 *<tr><td><code>NullPointerControl.NOT_ANY</code></td><td>no instance is controlled</td></tr>
 	 *<tr><td><code>MappingType.ONLY_VALUED_FIELDS</code></td><td>mapping type applied to destination</td></tr>
 	 *<tr><td><code>MappingType.ONLY_VALUED_FIELDS</code></td><td>mapping type applied to source</td></tr>
@@ -437,7 +463,8 @@ public interface IMapper<D, S> {
 	/**
 	 * This Method returns the destination given in input enriched with data contained in source given in input<br>
 	 * applying these criteria:<br><br>
-	 *<table summary="">
+	 *<table>
+	 *<caption>Summary</caption>
 	 *<tr><td><code>NullPointerControl.NOT_ANY</code></td><td>no instance is controlled</td></tr>
 	 *<tr><td><code>MappingType.ONLY_VALUED_FIELDS</code></td><td>mapping type applied to destination</td></tr>
 	 *<tr><td><code>MappingType.ONLY_NULL_FIELDS</code></td><td>mapping type applied to source</td></tr>
@@ -452,7 +479,8 @@ public interface IMapper<D, S> {
 	/**
 	 * This Method returns the destination given in input enriched with data contained in source given in input<br>
 	 * applying these criteria:<br><br>
-	 *<table summary="">
+	 *<table>
+	 *<caption>Summary</caption>
 	 *<tr><td><code>NullPointerControl.NOT_ANY</code></td><td>no instance is controlled</td></tr>
 	 *<tr><td><code>MappingType.ONLY_NULL_FIELDS</code></td><td>mapping type applied to destination</td></tr>
 	 *<tr><td><code>MappingType.ONLY_VALUED_FIELDS</code></td><td>mapping type applied to source</td></tr>

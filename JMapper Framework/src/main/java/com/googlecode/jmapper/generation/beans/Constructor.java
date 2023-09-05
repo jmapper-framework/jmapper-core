@@ -16,39 +16,21 @@
 
 package com.googlecode.jmapper.generation.beans;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  * This bean represents the constructor of a specific class.
  * @author Alessandro Vurro
  *
  */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Constructor {
 
 	private Class<?>[] parameters;
-	private String body;
-	
-	public Class<?>[] getParameters() {
-		return parameters;
-	}
-
-	public void setParameters(Class<?>[] parameters) {
-		this.parameters = parameters;
-	}
-	public String getBody() {
-		return body;
-	}
-	public void setBody(String body) {
-		this.body = body;
-	}
-	
-	public Constructor() {
-		this.parameters = new Class[]{};
-		this.body = ";";
-	}
-	
-	public Constructor(Class<?>[] parameters, String body) {
-		super();
-		this.parameters = parameters;
-		this.body = body;
-	}
+	private String body;		
 	
 }

@@ -333,7 +333,8 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 
 	/**
 	 * This method returns a new instance of Configured Class with this setting:
-	 * <table summary ="">
+	 * <table>
+	 * <caption>Summary</caption>
 	 * <tr>
 	 * <td><code>NullPointerControl</code></td><td><code>SOURCE</code></td>
 	 * </tr><tr>
@@ -354,7 +355,8 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	
 	/**
 	 * This method returns a new instance of Configured Class with this setting:
-	 * <table summary ="">
+	 * <table>
+	 * <caption>Summary</caption>
 	 * <tr>
 	 * <td><code>NullPointerControl</code></td><td><code>NOT_ANY</code></td>
 	 * </tr><tr>
@@ -376,7 +378,8 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	/**
 	 * This Method returns the configured instance given in input enriched with data contained in source given in input<br>
 	 * with this setting:
-	 * <table summary ="">
+	 * <table>
+	 * <caption>Summary</caption>
 	 * <tr>
 	 * <td><code>NullPointerControl</code></td><td><code>ALL</code></td>
 	 * </tr><tr>
@@ -399,7 +402,8 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	/**
 	 * This Method returns the configured instance given in input enriched with data contained in source given in input<br>
 	 * with this setting:
-	 * <table summary ="">
+	 * <table>
+	 * <caption>Summary</caption>
 	 * <tr>
 	 * <td><code>NullPointerControl</code></td><td><code>NOT_ANY</code></td>
 	 * </tr><tr>
@@ -421,7 +425,8 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 
 	/**
 	 * This method returns a new instance of Configured Class with this setting:
-	 * <table summary ="">
+	 * <table>
+	 * <caption>Summary</caption>
 	 * <tr>
 	 * <td><code>NullPointerControl</code></td><td><code>SOURCE</code></td>
 	 * </tr><tr>
@@ -443,7 +448,8 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	
 	/**
 	 * This method returns a new instance of Configured Class with this setting:
-	 * <table summary ="">
+	 * <table>
+	 * <caption>Summary</caption>
 	 * <tr>
 	 * <td><code>NullPointerControl</code></td><td>nullPointerControl</td>
 	 * </tr><tr>
@@ -467,7 +473,8 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	/**
 	 * This Method returns the configured instance given in input enriched with data contained in source given in input<br>
 	 * with this setting:
-	 * <table summary ="">
+	 * <table>
+	 * <caption>Summary</caption>
 	 * <tr>
 	 * <td><code>NullPointerControl</code></td><td><code>ALL</code></td>
 	 * </tr><tr>
@@ -492,7 +499,8 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	/**
 	 * This Method returns the configured instance given in input enriched with data contained in source given in input<br>
 	 * with this setting:
-	 * <table summary ="">
+	 * <table>
+	 * <caption>Summary</caption>
 	 * <tr>
 	 * <td><code>NullPointerControl</code></td><td>nullPointerControl</td>
 	 * </tr><tr>
@@ -517,7 +525,8 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	
 	/**
 	 * This method returns a new instance of Target Class with this setting:
-	 * <table summary ="">
+	 * <table>
+	 * <caption>Summary</caption>
 	 * <tr>
 	 * <td><code>NullPointerControl</code></td><td><code>SOURCE</code></td>
 	 * </tr><tr>
@@ -540,7 +549,8 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	
 	/**
 	 * This method returns a new instance of Target Class with this setting:
-	 * <table summary ="">
+	 * <table>
+	 * <caption>Summary</caption>
 	 * <tr>
 	 * <td><code>NullPointerControl</code></td><td><code>NOT_ANY</code></td>
 	 * </tr><tr>
@@ -562,7 +572,8 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	/**
 	 * This Method returns the destination given in input enriched with data contained in source given in input<br>
 	 * with this setting:
-	 * <table summary ="">
+	 * <table>
+	 * <caption>Summary</caption>
 	 * <tr>
 	 * <td><code>NullPointerControl</code></td><td><code>ALL</code></td>
 	 * </tr><tr>
@@ -585,7 +596,8 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	/**
 	 * This Method returns the destination given in input enriched with data contained in source given in input<br>
 	 * with this setting:
-	 * <table summary ="">
+	 * <table>
+	 * <caption>Summary</caption>
 	 * <tr>
 	 * <td><code>NullPointerControl</code></td><td><code>NOT_ANY</code></td>
 	 * </tr><tr>
@@ -607,7 +619,8 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 
 	/**
 	 * This method returns a new instance of Target Class with this setting:
-	 * <table summary ="">
+	 * <table>
+	 * <caption>Summary</caption>
 	 * <tr>
 	 * <td><code>NullPointerControl</code></td><td><code>SOURCE</code></td>
 	 * </tr><tr>
@@ -630,7 +643,8 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	
 	/**
 	 * This method returns a new instance of Target Class with this setting:
-	 * <table summary ="">
+	 * <table>
+	 * <caption>Summary</caption>
 	 * <tr>
 	 * <td><code>NullPointerControl</code></td><td>nullPointerControl</td>
 	 * </tr><tr>
@@ -654,7 +668,8 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	/**
 	 * This Method returns the destination given in input enriched with data contained in source given in input<br>
 	 * with this setting:
-	 * <table summary ="">
+	 * <table>
+	 * <caption>Summary</caption>
 	 * <tr>
 	 * <td><code>NullPointerControl</code></td><td><code>ALL</code></td>
 	 * </tr><tr>
@@ -679,7 +694,8 @@ public final class RelationalJMapper<T> implements IRelationalJMapper<T>{
 	/**
 	 * This Method returns the destination given in input enriched with data contained in source given in input<br>
 	 * with this setting:
-	 * <table summary ="">
+	 * <table>
+	 * <caption>Summary</caption>
 	 * <tr>
 	 * <td><code>NullPointerControl</code></td><td>nullPointerControl</td>
 	 * </tr><tr>
