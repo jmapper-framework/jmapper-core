@@ -16,38 +16,23 @@
 
 package com.googlecode.jmapper.generation.beans;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 /**
  * This bean represents the field of a specific class.
  * @author Alessandro Vurro
  *
  */
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class Field {
 
 	private String name;
 	private Class<?> type;
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public Class<?> getType() {
-		return type;
-	}
-	public void setType(Class<?> type) {
-		this.type = type;
-	}
 	
-	public Field() {}
-	
-	public Field(String name, Class<?> type) {
-		super();
-		this.name = name;
-		this.type = type;
-	}
-	@Override
-	public String toString() {
-		return "Field [name=" + name + ", type=" + type + "]";
-	}
 
 }

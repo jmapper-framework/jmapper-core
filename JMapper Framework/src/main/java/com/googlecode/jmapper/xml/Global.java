@@ -17,12 +17,17 @@ package com.googlecode.jmapper.xml;
 
 import java.util.Arrays;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  * This Class is a java bean that represents the JGlobalMap annotation.
  * 
  * @author Alessandro Vurro
  *
  */
+@Data
+@NoArgsConstructor
 public class Global {
 
 	private String value;
@@ -32,45 +37,7 @@ public class Global {
 	private SimplyAttribute[] attributes;
 	private Class<?>[] classes;
 	private String[] excluded;
-	
-	public String getValue() {
-		return value;
-	}
-	public void setValue(String value) {
-		this.value = value;
-	}
-	public String getGet() {
-		return get;
-	}
-	public void setGet(String get) {
-		this.get = get;
-	}
-	public String getSet() {
-		return set;
-	}
-	public void setSet(String set) {
-		this.set = set;
-	}
-	public SimplyAttribute[] getAttributes() {
-		return attributes;
-	}
-	public void setAttributes(SimplyAttribute[] attributes) {
-		this.attributes = attributes;
-	}
-	public Class<?>[] getClasses() {
-		return classes;
-	}
-	public void setClasses(Class<?>[] classes) {
-		this.classes = classes;
-	}
-	public String[] getExcluded() {
-		return excluded;
-	}
-	public void setExcluded(String[] excluded) {
-		this.excluded = excluded;
-	}
-	
-	public Global() {}
+		
 	
 	
 	public Global(String value) {
